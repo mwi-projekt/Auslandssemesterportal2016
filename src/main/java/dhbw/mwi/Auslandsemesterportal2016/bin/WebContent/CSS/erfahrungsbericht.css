@@ -1,0 +1,197 @@
+
+
+html,body {
+	
+   font-family: 'Roboto', sans-serif;
+   color: #404040;
+   background-color: #C8C8C8;
+}
+ 
+h1,h2{
+	
+  font-family:areal;
+  color:#4169E1;
+  text-align:center;
+  font-size: 30px;
+}
+
+p{
+	
+  font-family:areal;
+  font-size: 30px;
+
+  	
+}
+
+.firs{
+	
+background-color:#F5F5F5;	
+ border-style:solid;
+ border-radius:10px;
+ border-color:white;
+ text-align:center;
+	
+}
+.over{
+	
+  border-style:solid;
+  border-radius:10px;
+  border-color:#C8C8C8;
+  margin-top: 10px;	
+  margin-bottom:10px;	
+	
+}
+.nav a {
+  
+  font-size: 20px;
+ 
+}
+
+
+.dat{
+	
+	margin-top:60px;
+ }
+	
+
+
+.second{
+	
+  background:#C3BAC5; 	
+  box-shadow: 10px 20px 30px grey;
+  
+}
+  
+.item {
+  cursor: pointer;
+  padding-top: 7px;
+  padding-bottom: 7px;	
+}
+
+.underText>li {
+	
+  display: inline;
+  padding-left: 0px;
+  padding-right:0px;
+ 
+}
+
+
+.selected{
+	
+  background: rgba(206,220,206,.9);	
+	
+}
+
+
+
+.articles {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.container {
+  width:relativ ;
+  height:relativ;
+  background-color:#F0F0F0;
+   
+}
+
+.button-group {
+  margin-bottom: 20px;
+}
+
+.counter{
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+.posts {
+  clear: both;
+  list-style: none;
+  padding-left: 0;
+  width: 100%;
+}
+
+.star_off, .star_on {
+	list-style-type: none;
+}
+	
+
+	
+.article .star.empty {
+  height: 42px;
+  width:  42px;
+  display: inline-block;
+  background: url("../images/star_p.png") no-repeat;
+}
+	
+.article .star {
+  height: 47px;
+  width:  47px;
+  display: inline-block;
+  background: url("../images/star_k.png") no-repeat;
+	}
+	
+#infoBewertung {
+	display: inline-block;
+	margin: 0; padding: 0;
+	height: 25px;
+  	width:  auto;
+  	font-size: 0.7em;
+  	font-family: serif;
+  	padding-bottom: 5px;
+}
+
+.title{
+
+  border-style:solid;
+  background: #C8C8C8;
+  border-radius: 10px;
+  border-color:white;
+  text-align:center;
+  box-shadow: 10px 20px 30px grey;
+ 
+ 
+}
+.current .item {
+  background: #F5F5F5;
+  border-style:solid;
+  border-radius: 5px;
+  
+  
+}
+
+
+.nav {
+  text-align:center;
+  margin-top: 25px;
+ 
+  
+}
+
+#rating {
+  margin:0 auto;
+  display:block;
+ 
+}
+#rating li {
+  float:left;
+}
+#rating .star_off {
+   background: url("../images/star_off_48.png") no-repeat;
+}
+#rating .star_on {
+  background: url("../images/star_48.png") no-repeat;
+}
+#rating a {
+  display:block;
+  font-size:0px;
+  width:48px;
+  height:48px;
+}
+
+
+}

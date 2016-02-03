@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+	
+	<title>Bewerbungsformular</title>
+	
+	<head>
+
+		<meta charset="UTF-8">
+		<meta charset="UTF-8" />
+
+		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+		<link rel="stylesheet" href="CSS/bewerbungsformular.css">
+		<link rel="stylesheet" href="CSS/InfoBox.css">
+		<link rel="stylesheet" href="CSS/main.css">
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="JS/bewerbungsformular.js"></script>
+
+	</head>
+	
+	<body>
+		<div class="header1">
+			<h2>Bewerbungsformular</h2>
+		</div>
+
+		<div style="margin-top: 100px;" class="container">
+			<form role="form" id="frmContact">
+				<div class="row dat">
+
+					<div class="col-xs-3">&nbsp;</div>
+					<div class="col-xs-6">
+						<h3>Info zum Bewerbungsformular</h3>
+						<p>Hier kommt die Beschreibung hin ...</p><br/><br/>
+
+						<div class="input-group">
+						<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+							<p> Allgemeine Daten <a class="infobox" href="#INFO"> 
+								<img id="in" src="images/Information 1.png"> 
+								<span id="textbox">
+								<b>Allgemeine Daten:</b><br /> 
+									Tragen Sie hier bitte Ihre Daten ein, um Ihre Bewerbung personalisiert 
+									abspeichern zu können. Ihre Daten werden vertraulich behandelt und 
+									nicht an Dritte weitergeleitet.
+								</span></a>
+							</p>
+						<!-- E-------------  Infobox Ende --------------------------------------------- -->
+							<input type="text" id="bewVorname" class="form-control" placeholder="Vorname" required>
+							<input type="text" id="bewNachname" class="form-control" placeholder="Nachname" required>
+							<input type="email" id="bewEmail" class="form-control" 	placeholder="E-Mail-Adresse" required>
+							<input type="text" id="bewTelefon" class="form-control"	placeholder="Telefon">
+							<input type="text" id="bewMobil" class="form-control" placeholder="Mobil">
+							<input type="text" id="bewStudiengang" class="form-control" placeholder="Studiengang" required>
+							<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+							<a class="infobox" href="#INFO"> 
+							<img style="right: -30px; bottom: 40px;" id="in" src="images/Information 1.png">
+							<span id="textbox" class="infobox2" style="bottom: 40px;"> <b>Studiengang:</b><br />
+								Bitte tragen Sie hier Ihren Studiengang ein, wie z.B.: <strong>Wirtschaftsinformatik</strong>
+							</span></a>
+							<!-- E-------------  Infobox Ende --------------------------------------------- -->
+							<input type="text" id="bewKurs" class="form-control semester"
+								placeholder="Kurs" required>
+							<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+							<a class="infobox" href="#INFO"> 
+							<img style="right: -30px; bottom: 5px;" id="in" src="images/Information 1.png"> 
+							<span id="textbox" class="infobox2" style="bottom: 5px;"><b>Kurs:</b><br />
+								Bitte tragen Sie hier Ihren Kurs ein, wie z.B.: <strong>WWI12B4</strong>
+							</span></a>
+							<!-- E-------------  Infobox Ende --------------------------------------------- -->
+						</div>
+
+						<div class="input-group">
+							<input id="boxx" type="text" class="form-control pr" class="upload" placeholder="Englisch Punkte Abitur " required>
+							<a class="infobox2" href="#INFO"> 
+							<img style="margin-top: 10px;" id="in" src="images/Information 1.png"> 
+							<span id="textbox" class="infobox2"> <b>Englisch Note Abitur:</b><br />
+								Tragen Sie hier bitte Ihre Englisch-Note aus Ihrem Abschluss
+								Zeugnis als Punkte ein und klicken Sie auf prüfen.
+							</span></a>
+							<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+							<p><button style="margin-top: 10px;" class="btn" id="btnNotePruef" type="button">Prüfen</button>
+								
+							</p>
+							<!-- E-------------  Infobox Ende --------------------------------------------- -->
+						</div>
+					</div>
+				</div>
+
+				<div class=" item row">
+					<div class="col-xs-3">&nbsp;</div>
+
+					<div class="sprachnachweis col-xs-4">
+						<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+						<p>Sprachnachweis <a class="infobox3" href="#INFO"> 
+						<img id="in" src="images/Information 1.png"> 
+						<span id="textbox"> <b>Sprachnachweis:</b><br /> 
+							Laden Sie hier bitte einen
+							Sprachnachweis als PDF-Datei hoch. Sprachnachweis:
+							BEC-Vantage-Test, TOEFEL-Test oder Ähnliches.
+						</span></a>
+						</p>
+						<!-- E-------------  Infobox Ende --------------------------------------------- -->
+						<label class="btn" style="margin-bottom: 10px; width: 130px;">Durchsuchen
+						<input type="file" title="Sprachnachweis hochladen" class="upload"></label>
+					</div>
+				</div>
+				<div class="col-xs-4">&nbsp;</div>
+
+				<div class="row dat ">
+					<div class="col-xs-3">&nbsp;</div>
+					<div class="col-xs-6">
+						<div class="input-group">
+							<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+							<p>Adresse Praxisphase <a class="infobox" href="#INFO"> 
+								<img id="in" src="images/Information 1.png"> 
+								<span id="textbox"> <b>Adresse Praxisphase:</b><br /> 
+									Tragen Sie hier bitte Ihre Wohnadresse während der Praxisphase ein.
+								</span></a>
+							</p>
+							<!-- E-------------  Infobox Ende --------------------------------------------- -->
+							<input id="boxx" type="text" class="form-control b7" 
+								placeholder="Strasse" required> 
+							<input id="boxx" type="text" class="form-control b8"
+								placeholder="Hausnumer" required> 
+							<input id="boxx" type="text" class="form-control b9" 
+								placeholder="PLZ" pattern="^[0-9]{5}$" required> 
+							<input id="boxx" type="text" class="form-control b10"
+								placeholder="Ort" required>
+						</div>
+					</div>
+					<div class="col-xs-4">&nbsp;</div>
+				</div>
+				
+				<div class="row dat">
+					<div class="col-xs-3">&nbsp;</div>
+					<div class="col-xs-6">
+						<div class="input-group">
+							<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+							<p>Adresse Theoriephase <a class="infobox" href="#INFO"> 
+							<img id="in" src="images/Information 1.png"> 
+								<span id="textbox"><b>Adresse Theoriephase:</b><br/> 
+									Tragen Sie hier bitte Ihre Wohnadresse während der Theoriephase ein. 
+									(Wenn sich diese von der der Praxisphase unterscheidet)
+								</span></a>
+							</p>
+							<!-- E-------------  Infobox Ende --------------------------------------------- -->
+							<input id="boxx" type="text" class="form-control b11" 
+								placeholder="Strasse">
+							<input id="boxx" type="text" class="form-control b12"
+								placeholder="Hausnumer"> 
+							<input id="boxx" type="text" class="form-control b13" 
+								placeholder="PLZ"> 
+							<input id="boxx" type="text" class="form-control b14" 
+								placeholder="Ort">
+
+						<!--            	<div style="float:left;" class="checkbox c1"> -->
+						<!--            	 <input type="checkbox" id="checkbox1"> -->
+						<!--             	<label for="checkbox1">Adresse wie in Praxisphase  -->
+						<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+						<!-- 		      	<a id="check" class="infobox" href="#INFO">  -->
+						<!-- 		      	<img style="right: -110px;" id="in" src="images/Information 1.png">  -->
+						<!-- 		      	<span id="infoCheck"> <b>CheckBox:</b><br/> -->
+						<!-- 					Klicken Sie diese CheckBox an, wenn Ihre Adresse gleich bleibt.</span></a>  -->
+						<!-- E-------------  Infobox Ende --------------------------------------------- -->
+						<!-- 	      		</label> -->
+						<!--         	</div> -->
+
+						</div>
+					</div>
+					<div class="col-xs-4">&nbsp;</div>
+				</div>
+
+				<div class="row dat">
+					<div class="col-xs-3">&nbsp;</div>
+					<div class="col-xs-6">
+						<div class="input-group">
+							<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+							<p>Partnerunternehmen <a class="infobox" href="#INFO"> 
+								<img id="in" src="images/Information 1.png"> 
+								<span id="textbox"> <b>Partnerunternehmen:</b><br /> 
+									Tragen Sie hier bitte die Adresse Ihres Partnerunternehmens ein.
+								</span></a	>
+							</p>
+							<!-- E-------------  Infobox Ende --------------------------------------------- -->
+							<input id="boxx" type="text" class="form-control b15"
+								placeholder="Firma / Name" required> 
+							<input id="boxx" type="text" class="form-control b16" 
+								placeholder="Straße" required> 
+							<input id="boxx" type="text" class="form-control b17" 
+								placeholder="Hausnummer" required> 
+							<input id="boxx" type="text" class="form-control b18"
+								placeholder="PLZ" required> 
+							<input id="boxx" type="text" class="form-control b19" 
+								placeholder="Ort" required>
+
+						</div>
+					</div>
+					<div class="col-xs-4">&nbsp;</div>
+				</div>
+
+				<div class="row dat">
+					<div class="col-xs-3">&nbsp;</div>
+					<div class="col-xs-6">
+						<div class="input-group">
+							<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+							<p>Ansprechpartner Unternehmen <a class="infobox" href="#INFO">
+								<img id="in" src="images/Information 1.png"> 
+								<span id="textbox"> <b>Ansprechpartner:</b><br /> 
+									Tragen Sie hier bitte die Daten des für die DHBW zuständigen
+									Ansprechpartners Ihres Partnerunternehmens ein.
+								</span></a>
+							</p>
+							<!-- E-------------  Infobox Ende --------------------------------------------- -->
+							<input id="boxx" type="text" class="form-control b20" 
+								placeholder="Name" required> 
+							<input id="boxx" type="text" class="form-control b21"
+								placeholder="Vorname"> 
+							<input id="boxx" type="text" class="form-control b22" 
+								placeholder="Telefon"> 
+							<input id="boxx" type="email" class="form-control b23" 
+								placeholder="@" required>
+						</div>
+					</div>
+					<div class="col-xs-4">&nbsp;</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-7">&nbsp;</div>
+				</div>
+				<div class="row nav ">
+					<div class="col-xs-4">&nbsp;</div>
+					<div class="col-xs-4">&nbsp;</div>
+					<div class="col-xs-3">
+						<div class="form-group text-right">
+							<button type="submit" id="submitBtn" id="new_bewerbung" class="btn btn-primary btn-lg">Daten prüfen</button>
+						</div>
+<!-- 						<a href="#" class="btn btn-primary sent dat" type="button">Eingaben überprüfen und abschicken</a> -->
+<!--      					<a class="btn btn-primary bu1 dat" type="button" href="dokumente.html">Weiter</a> -->
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-7">&nbsp;</div>
+				</div>
+			</form>
+		</div>
+
+	</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>DHBW Auslandsportal</title>
+    
+		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+		<link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+		<link rel="stylesheet" href="CSS/main.css">
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="JS/main.js"></script>
+		<script src="JS/faq.js"></script>
+	</head>
+
+	<body>  
+		<!--  PopupFeld für Registrierung -->
+		<div class="popUpBack"></div>
+		<div class="popUpFeld">
+			<a href="#" id="close"><img src="images/Button Delete.png" id="smallImg"></a>
+			<h3>Registrieren</h3>
+			<p>*Pflichtfelder.</p>
+			<input type="text" placeholder="Vorname" class="inBox" id="inVorname">
+			<input type="text" placeholder="Nachname" class="inBox" id="inNachname">
+			<input type="text" placeholder="Matrikelnummer" class="inBox" id="inMatrikel">
+			<select class="inBox" id="inStudiengang">
+				<option>Studiengang</option>
+				<option>Wirtschaftsinformatik</option>
+				<option>Wirtschaftsingenieurwesen</option>
+			</select>
+			<input type="text" placeholder="E-Mail Adresse" class="inBox" id="inMail">
+			<input type="password" placeholder="Passwort 1. Mal" class="inBox" id="inPw1">
+			<input type="password" placeholder="Passwort 2. Mal" class="inBox" id="inPw2">
+			<label class="btn" id="btnReg">Registrieren</label>
+		</div>
+		<!-- Navigationsleiste -->
+		<div class="header">
+			<div class="row">
+			<div class="col-md-2"></div>
+				<div class="col-md-1">
+					<a class="pull-left" href="index.html"><img id="logo" src="images/DHBW.jpg" /></a>
+				</div>
+					<div class="col-md-4">
+					<br><br>
+						<h3 class="ueberschrift">Auslandsportal DHBW Karlsruhe</h3>
+				</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-2">
+					<div class="loginFenster pull-right">
+						<a href="#" id="loginClose"><img src="images/Button Delete.png" id="smallImg"></a>
+						<br><br>
+						<input type="text" placeholder="Name" id="inName" class=" inBox"/>
+  						<input type="password" placeholder="Passwort" id="inPasswort" class=" inBox"/><br>
+  						<label class=" btn" id="btnLogin">Login</label><br>
+  						<div>
+  						<p class="loginShow">Login <b class="caret"></b></p>
+  						<p class="regShow linkReg">Registrieren</p>
+  						</div>
+					</div>
+					<div class="logoutFenster pull-right">
+						<p class="logged">Eingeloggt als <b class="nutzerName"></b> <u class="pull-right" id="logout">Logout</u></p>
+					</div>
+					<br><br><br><br>
+					<a class="pull-right" href="http://www.dhbw-karlsruhe.de" style="font-size:medium ">www.dhbw-karlsruhe.de</a>
+				</div>
+			</div>
+    	</div>
+
+		<!-- Mittlerer Teil -->
+  		<div class="inhalt">
+  			<!-- 
+  			<div class="row navBar" style="text-align: center">
+  				<label class="btn inline"><a href="#portalInfo">Was ist das?</a></label>
+  				<label class="btn inline"><a href="#auslandsAngebote">Auslandsangebote</a></label>
+  				<label class="btn inline"><a href="#erfahrungsBerichte">Erfahrungsberichte</a></label>
+  				<label class="btn inline"><a href="#infoMaterial">Infomaterial</a></label>
+  			</div>
+  			-->
+  			<div class="container">
+	  			<div class="inhaltBox show">
+	  				<h3>Wer darf sich für ein Auslandsstudium bewerben?<b class="caret"></b></h3>
+	  				<p class="weg">Grundsätzlich ist für alle Studierenden der DHBW Karlsruhe ein Auslandssemester an einer der Partneruniversitäten der DHBW möglich. Notwendig dazu sind die Zustimmung der Ausbildungsfirma und die Zustimmung des Studiengangsleiters.</p>
+	  			</div>
+	  			<div class="inhaltBox show">
+	  				<h3>In welchem Studiensemester sollte ich mich für ein Auslandsaufenthalt bewerben?<b class="caret"></b></h3>
+	  				<p class="weg">Das Studium an der Dualen Hochschule ist kurz. Die Planung eines Auslandsaufenthalts nimmt jedoch
+						viel Zeit in Anspruch. Es ist also wichtig, den Auslandsaufenthalt möglichst früh zu planen – schon im 1. Semester sollte man wissen, wohin die Reise gehen soll und das Unternehmen sollte um Zustimmung gebeten werden.
+	  				</p>
+	  			</div>
+	  			<div class="inhaltBox show">
+	  				<h3>In welchem Studiensemester sollte das Auslandssemester vollzogen werden?<b class="caret"></b></h3>
+	  				<p class="weg">Das Auslandssemester sollte idealerweise im 4. Semester absolviert werden. Der Zeitraum, in dem die Vorlesungen, Seminare und Prüfungen an der ausländischen Hochschule stattfinden, stimmt in der Regel nicht vollständig mit der Theoriephase an der DHBW überein. In der Regel dauert das Theoriesemester an der ausländischen Hochschule – wie auch an den deutschen Universitäten – länger. Das heißt, das Auslandssemester reicht in der Regel in die Praxisphase hinein und
+					die DHBW-Studierenden müssen sich mit ihren Ausbildungsunternehmen auch in Bezug auf die Semesterzeiten abstimmen. 
+	  				</p>
+	  			</div>
+	  			<div class="inhaltBox show">
+	  				<h3>Wie viel würde ein Auslandssemester kosten?<b class="caret"></b></h3>
+	  				<p class="weg">Die Kosten für ein Auslandssemester variieren stark vom jeweiligen Standort der Partneruniversität. Genauere Informationen zu den Kosten entnehmen Sie bitte dem Dokument <a href="https://www.dhbw-karlsruhe.de/fileadmin/user_upload/dokumente/Auslandsamt/Infobrochuere/InfobroschuereAusland2014_QuadratFinal_Druck_29.01.13.pdf">„mitDerWeltImAustausch.pdf“</a>.</p>
+	  			</div>
+	  			<div class="inhaltBox show">
+	  				<h3>Besteht die Möglichkeit, finanzielle Hilfe zu beantragen?<b class="caret"></b></h3>
+	  				<p class="weg">Zur finanziellen Unterstützung des Auslandsaufenthaltes kann die Beantragung eines  Sokrates/Erasmus-Stipendiums im Auslandsamt (Höhe ca. 200 Euro monatlich) oder eines Stipendiums der Landesstiftung Baden-Württemberg (Höhe ca. 100-300 Euro monatlich) beantragt werden. Weitere Details zu Finanzierungsmöglichkeiten können im Dokument <a href="https://www.dhbw-karlsruhe.de/fileadmin/user_upload/dokumente/Auslandsamt/Infobrochuere/InfobroschuereAusland2014_QuadratFinal_Druck_29.01.13.pdf">„mitDerWeltImAustausch.pdf“</a> eingesehen werden. Des Weiteren bieten viele Partnerunternehmen ihren Studierenden weitere Finanzierungsmöglichkeiten an.</p>
+	  			</div>
+	  			<div class="inhaltBox show">
+	  				<h3>Welche Partneruniversitäten stehen zur Verfügung?<b class="caret"></b></h3>
+	  				<p class="weg">Wir bieten zahlreiche Universitäten in den unterschiedlichsten Ecken der Welt. Das Angebot erstreckt sich von Australien bis USA. Alle Angebote sind in dem Dokument <a href="https://www.dhbw-karlsruhe.de/fileadmin/user_upload/dokumente/Auslandsamt/Infobrochuere/InfobroschuereAusland2014_QuadratFinal_Druck_29.01.13.pdf">„mitDerWeltImAustausch.pdf“</a> aufgelistet.</p>
+	  			</div>
+  			</div>
+  		</div>
+		<!-- FuÃŸzeile -->
+		<div class="footer">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="pull-right">
+						<p>
+							<a href="index.html">Startseite</a>
+							|
+							<a href="impressum.html">Impressum</a>
+							|
+							<a href="faq.html">FAQs</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>DHBW Auslandsportal</title>
+    
+		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+		<link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+		<link rel="stylesheet" href="CSS/main.css">
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="JS/main.js"></script>
+		<script src="JS/faq.js"></script>
+	</head>
+
+	<body>  
+		<!--  PopupFeld für Registrierung -->
+		<div class="popUpBack"></div>
+		<div class="popUpFeld">
+			<a href="#" id="close"><img src="images/Button Delete.png" id="smallImg"></a>
+			<h3>Registrieren</h3>
+			<p>*Pflichtfelder.</p>
+			<input type="text" placeholder="Vorname" class="inBox" id="inVorname">
+			<input type="text" placeholder="Nachname" class="inBox" id="inNachname">
+			<input type="text" placeholder="Matrikelnummer" class="inBox" id="inMatrikel">
+			<select class="inBox" id="inStudiengang">
+				<option>Studiengang</option>
+				<option>Wirtschaftsinformatik</option>
+				<option>Wirtschaftsingenieurwesen</option>
+			</select>
+			<input type="text" placeholder="E-Mail Adresse" class="inBox" id="inMail">
+			<input type="password" placeholder="Passwort 1. Mal" class="inBox" id="inPw1">
+			<input type="password" placeholder="Passwort 2. Mal" class="inBox" id="inPw2">
+			<label class="btn" id="btnReg">Registrieren</label>
+		</div>
+		<!-- Navigationsleiste -->
+		<div class="header">
+			<div class="row">
+			<div class="col-md-2"></div>
+				<div class="col-md-1">
+					<a class="pull-left" href="index.html"><img id="logo" src="images/DHBW.jpg" /></a>
+				</div>
+					<div class="col-md-4">
+					<br><br>
+						<h3 class="ueberschrift">Auslandsportal DHBW Karlsruhe</h3>
+				</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-2">
+					<div class="loginFenster pull-right">
+						<a href="#" id="loginClose"><img src="images/Button Delete.png" id="smallImg"></a>
+						<br><br>
+						<input type="text" placeholder="Name" id="inName" class=" inBox"/>
+  						<input type="password" placeholder="Passwort" id="inPasswort" class=" inBox"/><br>
+  						<label class=" btn" id="btnLogin">Login</label><br>
+  						<div>
+  						<p class="loginShow">Login <b class="caret"></b></p>
+  						<p class="regShow linkReg">Registrieren</p>
+  						</div>
+					</div>
+					<div class="logoutFenster pull-right">
+						<p class="logged">Eingeloggt als <b class="nutzerName"></b> <u class="pull-right" id="logout">Logout</u></p>
+					</div>
+					<br><br><br><br>
+					<a class="pull-right" href="http://www.dhbw-karlsruhe.de" style="font-size:medium ">www.dhbw-karlsruhe.de</a>
+				</div>
+			</div>
+    	</div>
+
+		<!-- Mittlerer Teil -->
+  		<div class="inhalt">
+  			<!-- 
+  			<div class="row navBar" style="text-align: center">
+  				<label class="btn inline"><a href="#portalInfo">Was ist das?</a></label>
+  				<label class="btn inline"><a href="#auslandsAngebote">Auslandsangebote</a></label>
+  				<label class="btn inline"><a href="#erfahrungsBerichte">Erfahrungsberichte</a></label>
+  				<label class="btn inline"><a href="#infoMaterial">Infomaterial</a></label>
+  			</div>
+  			-->
+  			<div class="container">
+	  			<div class="inhaltBox">
+	  				<h3>Impressum</h3>
+	  				<p><br>Duale Hochschule Baden-Württemberg Karlsruhe<br>
+					Baden-Wuerttemberg Cooperative State University Karlsruhe<br>
+					Erzbergerstraße 121 · 76133 Karlsruhe<br>
+					Postfach 10 01 36 · 76231 Karlsruhe<br>
+					<br>
+					Telefon +49 (0)721 97 35 - 5<br>
+					Fax +49 (0)721 97 35 - 600<br>
+					<br>
+					Umsatzsteuer-Identifikationsnummer gemäß § 5 Telemediengesetz: DE287664832<br>
+					<br>
+					Anschriftsdaten für o.g. Umsatzsteuer-Identifikationsnummer:<br>
+					<br>
+					Duale Hochschule<br>
+					Baden-Württemberg<br>
+					Präsidium<br>
+					Friedrichstr. 14<br>
+					70174 Stuttgart<br>
+					<br>
+					<a href="info@dhbw-karlsruhe.de">info@dhbw-karlsruhe.de</a><br>
+					<a href="http://www.dhbw-karlsruhe.de">http://www.dhbw-karlsruhe.de</a><br>
+					<br>
+					Redaktion und Verantwortung für die Homepage:<br>
+					Duale Hochschule Baden-Württemberg Karlsruhe<br>
+					<br>
+					Haftungsausschluss<br>
+					<br>
+					1. Inhalt des Onlineangebotes<br>
+					Die Duale Hochschule Baden-Württemberg Karlsruhe übernimmt keinerlei Gewähr für die Aktualität, Korrektheit, Vollständigkeit oder Qualität der bereitgestellten Informationen. Haftungsansprüche gegen den Autor, welche sich auf Schäden materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollständiger Informationen verursacht wurden, sind grundsätzlich ausgeschlossen, sofern seitens der Dualen Hochschule Baden-Württemberg Karlsruhe kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden vorliegt.
+					Alle Angebote sind freibleibend und unverbindlich. Die Duale Hochschule Baden-Württemberg Karlsruhe behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.<br>
+					<br>
+					2. Verweise und Links<br>
+					Bei direkten oder indirekten Verweisen auf fremde Internetseiten ("Links"), die außerhalb des Verantwortungsbereiches der Dualen Hochschule Baden-Württemberg Karlsruhe liegen, würde eine Haftungsverpflichtung ausschließlich in dem Fall in Kraft treten, in dem die Duale Hochschule Baden-Württemberg Karlsruhe von den Inhalten Kenntnis hat und es ihr technisch möglich und zumutbar wäre, die Nutzung im Falle rechtswidriger Inhalte zu verhindern.
+					Die Duale Hochschule Baden-Württemberg Karlsruhe erklärt hiermit ausdrücklich, dass zum Zeitpunkt der Linksetzung keine illegalen Inhalte auf den zu verlinkenden Seiten erkennbar waren. Auf die aktuelle und zukünftige Gestaltung, die Inhalte oder die Urheberschaft der gelinkten/verknüpften Seiten hat die Duale Hochschule Baden-Württemberg Karlsruhe keinerlei Einfluss. Deshalb distanziert sie sich hiermit ausdrücklich von allen Inhalten aller gelinkten/verknüpften Seiten, die nach der Linksetzung verändert wurden. Diese Feststellung gilt für alle innerhalb des eigenen Internetangebotes gesetzten Links und Verweise. Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über Links auf die jeweilige Veröffentlichung lediglich verweist.<br>
+					<br>
+					3. Urheber- und Kennzeichenrecht<br>
+					Die Duale Hochschule Baden-Württemberg Karlsruhe ist bestrebt, in allen Publikationen die Urheberrechte der verwendeten Grafiken, Tondokumente, Videosequenzen und Texte zu beachten, von ihr selbst erstellte Grafiken, Tondokumente, Videosequenzen und Texte zu nutzen oder auf lizenzfreie Grafiken, Tondokumente, Videosequenzen und Texte zurückzugreifen.
+					Alle innerhalb des Internetangebotes genannten und ggf. durch Dritte geschützten Marken- und Warenzeichen unterliegen uneingeschränkt den Bestimmungen des jeweils gültigen Kennzeichenrechts und den Besitzrechten der jeweiligen eingetragenen Eigentümer. Allein aufgrund der bloßen Nennung ist nicht der Schluss zu ziehen, dass Markenzeichen nicht durch Rechte Dritter geschützt sind.
+					Das Copyright für veröffentlichte, von der Duale Hochschule Baden-Württemberg Karlsruhe selbst erstellte Objekte bleibt allein bei der Dualen Hochschule Baden-Württemberg Karlsruhe. Eine Vervielfältigung oder Verwendung solcher Grafiken, Tondokumente, Videosequenzen und Texte in anderen elektronischen oder gedruckten Publikationen ist ohne ausdrückliche Zustimmung der Dualen Hochschule Baden-Württemberg Karlsruhe nicht gestattet.<br>
+					<br>
+					4. Datenschutz<br>
+					Sofern innerhalb des Internetangebotes die Möglichkeit zur Eingabe persönlicher oder geschäftlicher Daten (Emailadressen, Namen, Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des Nutzers auf ausdrücklich freiwilliger Basis.<br>
+					<br>
+					5. Rechtswirksamkeit dieses Haftungsausschlusses<br>
+					Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile des Dokumentes in ihrem Inhalt und ihrer Gültigkeit davon unberührt !<br>
+					</p>
+	  			</div>
+  		</div>
+		<!-- FuÃŸzeile -->
+		<div class="footer">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="pull-right">
+						<p>
+							<a href="index.html">Startseite</a>
+							|
+							<a href="impressum.html">Impressum</a>
+							|
+							<a href="faq.html">FAQs</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

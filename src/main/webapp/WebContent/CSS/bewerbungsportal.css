@@ -1,0 +1,315 @@
+.header {
+	
+}
+
+.nav {
+	margin-bottom: 20px;
+	background: white;
+	border-bottom: 1px solid #D60000;
+}
+
+
+.nav .col-md-2 {
+	background: #BDBDBD;
+	margin-top: -15px;
+	margin-left: -5px;
+	height: 75px;
+}
+
+.navEl {
+	display: inline;
+	background: #BDBDBD;
+	padding: 10px;
+	border: 1px solid #D60000;
+	margin-right: 0px;
+	margin-left: 2px;
+	color: white;
+	font-size: large;
+	font-weight: bold;
+	cursor: pointer;
+	float: left;
+	border: 1px solid #D60000;
+	border-bottom: none;
+	transition: background-color 0.5s;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+.navEl:hover {
+	background: #D60000;
+	color: white;
+}
+
+.current {
+	background: #D60000;
+	color: white;
+}
+
+.aufgaben {
+	background: white;
+	margin-top: 5px;
+}
+/* Die Vertikale Navigationsleiste auf der linken Seite */
+.navVer h3 {
+	display: none;
+	color: #D60000;
+	cursor: pointer;
+}
+
+.navVer h3:hover {
+	text-decoration: underline;
+}
+
+.Angebote {
+	display: none;
+}
+
+.Bewerben {
+	display: none;
+	width: 100%;
+}
+
+.Berichte {
+	display: none;
+}
+
+.aktiv {
+	background: white;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.nav {
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+	padding-left: 2px;
+}
+
+.nav-tabs {
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.nav li {
+	background: #dee;
+	color: black;
+	padding: 10px;
+	font-weight: bold;
+	font-size: medium;
+	cursor: pointer;
+}
+
+
+
+iframe {
+	border-top: none;
+	border-left: none;
+	display: none;
+}
+
+#smallImg {
+	width: 30px;
+	height: 30px;
+	padding-top: 1px;
+	border: 1px solid transparent;
+	border-radius: 50px;
+	position: absolute;
+	top: 5px !important;
+	right: 5px !important;
+	cursor: pointer;
+}
+.smallImg {
+	width: 30px;
+	height: 30px;
+	padding-top: 1px;
+	border: 1px solid transparent;
+	border-radius: 50px;
+	position: absolute;
+	top: 5px !important;
+	right: 5px !important;
+	cursor: pointer;
+}
+
+.iFenster {
+	display: none;
+	text-align: center;
+}
+
+#bewFormular {
+	overflow-y: scroll;
+	color: black;
+	text-align: center;
+}
+
+.input-group {
+	width: 100%;
+	left: 50%;
+	margin-left: -50%;
+	text-align: center;
+}
+
+.form-control {
+	max-width: 70%;
+	float: none !important;
+}
+
+.navVer {
+	text-align: center;
+	background: white;
+	min-height: 700px;
+	max-height: 750px;
+	padding-left: 30px;
+	-webkit-box-shadow: 6px 3px 6px rgba(0, 0, 0, .5);
+	box-shadow: 6px 3px 6px rgba(0, 0, 0, .5);
+	margin-right: 5px;
+	margin-top: 0px;
+}
+
+.navVer h2 {
+	color: #D60000;
+	cursor: pointer;
+}
+
+.navVer h2:hover {
+	text-decoration: underline;
+}
+
+.inhalt {
+	display: none;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.inhaltBox {
+	margin-left: 10px;
+	margin-top: 10px;
+	color: #BDBDBD;
+	background: white;
+}
+
+.fortschritt {
+	width: auto;
+}
+
+.ui-widget-header {
+	background: green;
+	border-color: green;
+}
+
+#prozent {
+	margin-left: 5px;
+	margin-bottom: 10px;
+}
+
+#titleRow td {
+	font-weight: bold;
+	color: black;
+}
+
+td {
+	color: black;
+}
+
+.backToBewView {
+	cursor: pointer;
+}
+
+#nichtBeworben {
+	color: black;
+	margin-left: 10px;
+	display: none;
+}
+
+#textbox {
+    border:1px solid black;
+    border-radius: 5px; 
+    color:black; 
+    background-color: white;
+    z-index: 99;
+	overflow: auto;
+	min-width: 20%;
+	max-width: 80%;
+	left: 50%;
+	margin-left: -40%;
+	right: 0px;
+    position:absolute; 
+    margin-top: 3em; 
+    padding:0.4em; 
+    text-decoration:none;
+} 
+
+.navBarAng {
+	background: #eee;
+	color: black;
+	margin-bottom: 0px;
+}
+
+.navelAng {
+	display: inline-block;
+	padding: 5px;
+	font-size: medium;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.contentAng {
+	display: none;
+	margin-top: 0px;
+	padding: 5px;
+	width: 100%;
+	color: black;
+}
+
+.active {
+	background: #C8C8C8 !important;
+	display: inline-block;
+}
+
+.zweiD {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+#titleRow {
+	border-bottom: 1px solid black;
+}
+
+.odd {
+	background: #ddd;
+}
+
+#bewBundesland {
+	display: none;
+}
+
+.popUpBewerber {
+	display: none;
+	position: absolute;
+	top: 10%;
+	width: 50%;
+	margin-left: 25%;
+	z-index: 105;
+	background-color: white;
+	-webkit-box-shadow: 6px 3px 6px rgba(0, 0, 0, .5);
+	box-shadow: 6px 3px 6px rgba(0, 0, 0, .5);
+	max-height: 80%;
+	overflow-y: scroll;
+	padding: 5px;
+}
+
+.popUpBewerber h2 {
+	font-weight: 500;
+	font-size: 30px !important;
+	margin-bottom: 30px !important;
+}
+
+.popUpBewerber p {
+	font-size: 14px !important;
+	margin-left: 20%;
+}
+
+#closeBewerber {
+	background-color: red;
+}

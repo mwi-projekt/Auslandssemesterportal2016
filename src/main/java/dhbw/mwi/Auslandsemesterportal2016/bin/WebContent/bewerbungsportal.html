@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>DHBW Auslandsportal</title>
+    
+		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+		<link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+		<link rel="stylesheet" href="CSS/main.css">
+		<link rel="stylesheet" href="CSS/bewerbungsportal.css">
+		<link rel="stylesheet" href="CSS/bewerbungsformular.css">
+		<link rel="stylesheet" href="CSS/InfoBox.css">
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		<script src="JS/bewerbungsformular.js"></script>
+		<script src="JS/bewerbungsportal.js"></script>
+	</head>
+
+	<body>  
+		<!--  PopupFeld für Registrierung -->
+		<div class="erfolgreich"></div>
+		<div class="popUpBack"></div>
+		<div class="popUpBewerber">
+			<img class="smallImg" id="closeBewerber" src="images/Button Delete.png" />
+			<h2>Allgemeine Daten</h2>
+			<p>Vorname: <b id="formVorname"></b></p>
+			<p>Nachname: <b id="formNachname"></b></p>
+			<p>Matrikelnummer: <b id="formMatrikelnummer"></b></p>
+			<p>Email: <b id="formEmail"></b></p>
+			<p>Telefon: <b id="formTel"></b></p>
+			<p>Mobil: <b id="formMobil"></b></p>
+			<p>Standort: <b id="formStandort"></b></p>
+			<p>Studiengang: <b id="formStudiengang"></b></p>
+			<p>Kurs: <b id="formKurs"></b></p>
+			<br>
+			<h2>Englischnote</h2>
+			<p>Punkte Abitur: <b id="formEnglisch"></b></p>
+			<br>
+			<h2>Adresse Praxisphase</h2>
+			<p>Land: <b id="formPrLand"></b></p>
+			<p>Bundesland: <b id="formPrBundesland"></b></p>
+			<p>Straße: <b id="formPrStraße"></b></p>
+			<p>PLZ: <b id="formPrPlz"></b></p>
+			<p>Stadt: <b id="formPrStadt"></b></p>
+			<br>
+			<h2>Adresse Theoriephase</h2>
+			<p>Land: <b id="formThLand"></b></p>
+			<p>Bundesland: <b id="formThBundesland"></b></p>
+			<p>Straße: <b id="formThStraße"></b></p>
+			<p>PLZ: <b id="formThPlz"></b></p>
+			<p>Stadt: <b id="formThStadt"></b></p>
+			<br>
+			<h2>Partnerunternehmen</h2>
+			<p>Firmenname: <b id="formFirmenname"></b></p>
+			<p>Ansprechpartner: <b id="formAnsprechpartner"></b></p>
+			<p>Email Ansprechpartner: <b id="formEmailAnsprech"></b></p>
+			<p>Straße: <b id="formParStraße"></b></p>
+			<p>PLZ: <b id="formParPlz"></b></p>
+			<p>Stadt: <b id="formParStadt"></b></p>
+		</div>
+		<div class="popUpFeld">
+			
+		</div>
+		<div class="header">
+			<div class="row">
+			<div class="col-md-2"></div>
+				<div class="col-md-1">
+					<a class="pull-left" href="index.html"><img id="logo" src="images/DHBW.jpg" /></a>
+				</div>
+					<div class="col-md-4">
+					<br><br>
+						<h2 class="ueberschrift">Auslandsportal DHBW Karlsruhe</h2>
+				</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-2">
+					<div class="loginFenster pull-right">
+						<a href="#" id="loginClose"><img src="images/Button Delete.png" id="smallImg"></a>
+						<br><br>
+						<input type="text" placeholder="Name" id="inName" class=" inBox"/>
+  						<input type="password" placeholder="Passwort" id="inPasswort" class=" inBox"/><br>
+  						<label class=" btn" id="btnLogin">Login</label><br>
+  						<div>
+  						<p class="loginShow">Login <b class="caret"></b></p>
+  						<p class="regShow linkReg">Registrieren</p>
+  						</div>
+					</div>
+					<div class="logoutFenster pull-right">
+						<p class="logged">Eingeloggt als <b class="nutzerName"></b> <u class="pull-right" id="logout">Logout</u></p>
+					</div>
+					<br><br><br><br>
+					<a class="pull-right" href="http://www.dhbw-karlsruhe.de" style="font-size:medium; margin-bottom: 10px">www.dhbw-karlsruhe.de</a>
+				</div>
+			</div>
+			
+    	</div>
+
+		<!-- Mittlerer Teil -->
+		<div class="row aufgaben">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="nav">
+					<div class="navEl current nonCms" id="nav1">Home</div>
+					<div class="navEl nonCms" id="nav2">Angebote</div>
+					<div class="navEl nonCms" id="nav3">Bewerben</div>
+					<div class="navEl nonCms" id="nav4">Berichte</div>
+					<div class="navEl cms" id="nav5">Home</div>
+					<div class="navEl cms" id="nav6">Bewerber</div>
+					<div class="navEl cms" id="nav7">Bewerbungsprozesse bearbeiten</div>
+					<div class="navEl cms" id="nav8">Prozess Server</div>
+					<div class="navEl cms"><a href="index.html" style="color: white; text-decoration: none">Zurück zur Startseite</a></div>
+				</div>
+				<div class="inhalt nonCms" id="in1">
+					<div class="col-md-12 inhaltBox">
+						<h2>Herzlich willkommen im Bewerbungsportal</h2>
+						<p>Hier kannst du dir noch einmal alle Auslandsuniversitäten ansehen, die für die einzelnen Studiengänge zur Verfügung stehen.</p>
+						<p>Im Reiter "Bewerben" ist bereits eine Vorauswahl für dich getroffen. Hier kannst du dich nur noch auf Univerisäten bewerben, die für deinen Studiengang verfügbar sind.</p>
+						<p><i>Das Auslandsportal-Team wünscht dir viel Erfolg bei deiner Bewerbung und eine tolle Zeit im Ausland!!!</i></p>
+					</div>
+				</div>
+				<div class="inhalt nonCms" id="in2">
+					<div class="col-md-8 inhaltBox" style="width: 99%">
+						<div class="pull-right"><p>Es wird nichts angezeigt? Bitte aktualisieren sie die Seite.</p></div>
+						<p class="inline">Sortieren nach Studiengang:</p>
+						<select class="inBox inline zweiD" id="selStudiengang">
+							
+						</select>
+						
+					</div>
+				</div>
+				<div class="inhalt nonCms" id="in3">
+					<div class="col-md-8 inhaltBox" style="width: 99%">
+						<div class="" id="bewProzess">
+							<table class="table" id="tableBewProzess">
+								<thead>
+									<tr id="titleRow"> 
+										<td class="tableStudiengang">Studiengang</td>
+										<td class="tableUniversität">Universität</td>
+										<td class="tableStartdatum">Begonnen am</td>
+										<td class="tableStatus">Status</td>
+										<td class="tableAktionen">Aktionen</td>
+									</tr>
+								</thead>
+								<tbody id="tableBewProzessBody">
+									
+								</tbody>
+							</table>
+							<p id="nichtBeworben">Sie haben sich bisher noch für kein Auslandssemester beworben.</p>
+							<label class="btn" id="newBewProzess">Neue Bewerbung starten</label>
+							<label class="btn" id="newErfahrungsbericht">Neuen Erfahrungsbericht verfassen</label>
+						</div>
+						<div class="iFenster iF1 col-xs-6" id="bewFormular" style="width: 100%; height: 450px;">
+							<div style="width: 100%; margin-top: 0px;"class="container">
+								<form role="form" id="frmContact">
+									<div class="row">
+										<div class="col-xs-12">
+										<div class="pull-left">
+											<i style="color: #D60000"><u>Bewerbung für:</u> <i id="aktuelleUni"> </i></i>
+										</div>
+											<div class="pull-right">
+												<a class="backToBewView">Zurück zur Prozessübersicht</a>
+											</div>
+										</div>
+									</div>
+									<div class="row dat" id="bewFormular1">
+										<div class="col-xs-3">&nbsp;</div>
+										<div class="col-xs-6">					
+											<div class="input-group">
+											<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+												<br><p> Allgemeine Daten <a class="infobox" href="#INFO"> 
+													<img id="in" src="images/Information 1.png"> 
+													<span id="textbox">
+													<b>Allgemeine Daten:</b><br /> 
+														Tragen Sie hier bitte Ihre Daten ein, um Ihre Bewerbung personalisiert 
+														abspeichern zu können. Ihre Daten werden vertraulich behandelt und 
+														nicht an Dritte weitergeleitet.
+													</span></a>
+												</p>
+											<!-- E-------------  Infobox Ende --------------------------------------------- -->
+												<input type="text" id="bewVorname" class="form-control vorname" placeholder="Vorname" required>
+												<input type="text" id="bewNachname" class="form-control nachname" placeholder="Nachname" required>
+												<input type="email" id="bewEmail" class="form-control email" placeholder="E-Mail-Adresse" required>
+												<input type="text" id="bewTelefon" class="form-control telefon"	placeholder="Telefon">
+												<input type="text" id="bewMobil" class="form-control mobil" placeholder="Mobil">
+												<input type= text" id="bewStandort" class="form-control standort" placholder="DHBW Standort" required>
+												<input type="text" id="bewStudiengang" class="form-control" placeholder="Studiengang" required>
+												<input type="text" id="bewKurs" class="form-control semester" placeholder="Kurs" required>
+											</div>
+					
+											<div class="input-group">
+												<input id="bewEnglischAbi" type="text" class="form-control pr" class="upload" placeholder="Englisch Punkte Abi" style="max-width: 40%" required>
+												<a class="infobox" href="#INFO"> 
+												<img id="in" src="images/Information 1.png"> 
+												<span id="textbox" class="infobox2"> <b>Englisch Note Abitur:</b><br />
+													Tragen Sie hier bitte Ihre Englisch-Note aus Ihrem Abschluss
+													Zeugnis als Punkte ein und klicken Sie auf prüfen.
+												</span></a>
+												<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+												<button style="margin-left: 40px;" class="btn inline " id="btnNotePruef" type="button">Prüfen</button>
+												<!-- E-------------  Infobox Ende --------------------------------------------- -->
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<label class="btn btnBewFormular" id="btnBewFormular1" style="float: right; bottom: 0px">Speichern und weiter</label>
+										</div>
+									</div>
+					
+									<div class="item row ">
+										<div class="col-xs-3">&nbsp;</div>
+					
+										<div class="sprachnachweis col-xs-4">
+											<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+											<p>Sprachnachweis <a class="infobox3" href="#INFO"> 
+											<img id="in" src="images/Information 1.png"> 
+											<span id="textbox"> <b>Sprachnachweis:</b><br /> 
+												Laden Sie hier bitte einen
+												Sprachnachweis als PDF-Datei hoch. Sprachnachweis:
+												BEC-Vantage-Test, TOEFEL-Test oder Ähnliches.
+											</span></a>
+											</p>
+											<!-- E-------------  Infobox Ende --------------------------------------------- -->
+											<label class="btn" style="margin-bottom: 10px; width: 130px;">Durchsuchen
+											<input type="file" title="Sprachnachweis hochladen" class="upload"></label>
+										</div>
+									</div>
+					
+									<div class="row dat " id="bewFormular2">
+										<div class="col-xs-3">&nbsp;</div>
+										<div class="col-xs-6">
+											<div class="input-group">
+												<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+												<p>Adresse Praxisphase <a class="infobox" href="#INFO"> 
+													<img id="in" src="images/Information 1.png"> 
+													<span id="textbox"> <b>Adresse Praxisphase:</b><br /> 
+														Tragen Sie hier bitte Ihre Wohnadresse während der Praxisphase ein.
+													</span></a>
+												</p>
+												<!-- E-------------  Infobox Ende --------------------------------------------- -->
+												<input id="bewLand" type="text" class="form-control b7" 
+													placeholder="Land" required>
+												<script>
+												$('#bewLand').on('keydown', function(event) {
+													if ($('#bewLand').val() === "Deutschlan" || $('#bewLand').val() === "deutschlan" || $('#bewLand').val() === "German") {
+														$('#bewBundesland').show();
+													} else {
+														$('#bewBundesland').hide();
+													}
+												});
+												</script>
+													<select id="bewBundesland" class="form-control b7">
+														<option select disabled>Bundesland</option>
+														<option>Baden-Württemberg</option>
+														<option>Bayern</option>
+														<option>Berlin</option>
+														<option>Brandenburg</option>
+														<option>Bremen</option>
+														<option>Hamburg</option>
+														<option>Hessen</option>
+														<option>Mecklenburg-Vorpommern</option>
+														<option>Niedersachsen</option>
+														<option>Nordrhein-Westfalen</option>
+														<option>Rheinland-Pfalz</option>
+														<option>Saarland</option>
+														<option>Sachsen</option>
+														<option>Sachsen-Anhalt</option>
+														<option>Schleswig-Holstein</option>
+														<option>Thüringen</option>
+													</select>
+												<input id="bewStrasse" type="text" class="form-control b7" 
+													placeholder="Strasse" required> 
+												<input id="bewHausnummer" type="text" class="form-control b8"
+													placeholder="Hausnummer" required> 
+												<input id="bewPlz" type="text" class="form-control b9" 
+													placeholder="PLZ" pattern="^[0-9]{5}$" required> 
+												<input id="bewStadt" type="text" class="form-control b10"
+													placeholder="Stadt" required>
+											</div>
+										</div>
+										<div class="col-xs-4">&nbsp;</div>
+										<div class="col-xs-12">
+											<label class="btn btnBewBack" id="btnBewBack2" style="float: left; bottom: 0px">Zurück</label>
+											<label class="btn btnBewFormular" id="btnBewFormular2" style="float: right; bottom: 0px">Speichern und weiter</label>
+										</div>
+									</div>
+									
+									<div class="row dat" id="bewFormular3">
+										<div class="col-xs-3">&nbsp;</div>
+										<div class="col-xs-6">
+											<div class="input-group">
+												<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+												<p>Adresse Theoriephase <a class="infobox" href="#INFO"> 
+												<img id="in" src="images/Information 1.png"> 
+													<span id="textbox"><b>Adresse Theoriephase:</b><br/> 
+														Tragen Sie hier bitte Ihre Wohnadresse während der Theoriephase ein. 
+														(Wenn sich diese von der der Praxisphase unterscheidet)
+													</span></a>
+												</p>
+												<!-- E-------------  Infobox Ende --------------------------------------------- -->
+												<p><p class="inline" style="font-size:medium">Gleiche Adresse wie in Praxisphase</p><label class="btn inline" style="margin-left: 5px; margin-bottom: 20px"id="btnSameAdress">Bestätigen</label></p>
+												<input id="bewThLand" type="text" class="form-control b7" 
+													placeholder="Land" required>
+												<script>
+												$('#bewThLand').on('keydown', function(event) {
+													if ($('#bewThLand').val() === "Deutschlan" || $('#bewRhLand').val() === "deutschlan" || $('#bewRhLand').val() === "German") {
+														$('#bewThBundesland').show();
+													} else {
+														$('#bewThBundesland').hide();
+													}
+												});
+												</script>
+													<select id="bewThBundesland" class="form-control b7">
+														<option select disabled>Bundesland</option>
+														<option>Baden-Württemberg</option>
+														<option>Bayern</option>
+														<option>Berlin</option>
+														<option>Brandenburg</option>
+														<option>Bremen</option>
+														<option>Hamburg</option>
+														<option>Hessen</option>
+														<option>Mecklenburg-Vorpommern</option>
+														<option>Niedersachsen</option>
+														<option>Nordrhein-Westfalen</option>
+														<option>Rheinland-Pfalz</option>
+														<option>Saarland</option>
+														<option>Sachsen</option>
+														<option>Sachsen-Anhalt</option>
+														<option>Schleswig-Holstein</option>
+														<option>Thüringen</option>
+													</select>
+												<input id="bewThStrasse" type="text" class="form-control b7" 
+													placeholder="Strasse" required> 
+												<input id="bewThHausnummer" type="text" class="form-control b8"
+													placeholder="Hausnummer" required> 
+												<input id="bewThPlz" type="text" class="form-control b9" 
+													placeholder="PLZ" pattern="^[0-9]{5}$" required> 
+												<input id="bewThStadt" type="text" class="form-control b10"
+													placeholder="Stadt" required>
+					
+											<!--            	<div style="float:left;" class="checkbox c1"> -->
+											<!--            	 <input type="checkbox" id="checkbox1"> -->
+											<!--             	<label for="checkbox1">Adresse wie in Praxisphase  -->
+											<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+											<!-- 		      	<a id="check" class="infobox" href="#INFO">  -->
+											<!-- 		      	<img style="right: -110px;" id="in" src="images/Information 1.png">  -->
+											<!-- 		      	<span id="infoCheck"> <b>CheckBox:</b><br/> -->
+											<!-- 					Klicken Sie diese CheckBox an, wenn Ihre Adresse gleich bleibt.</span></a>  -->
+											<!-- E-------------  Infobox Ende --------------------------------------------- -->
+											<!-- 	      		</label> -->
+											<!--         	</div> -->
+					
+											</div>
+										</div>
+										<div class="col-xs-4">&nbsp;</div>
+										<div class="col-xs-12">
+											<label class="btn btnBewBack" id="btnBewBack3" style="float: left; bottom: 0px">Zurück</label>
+											<label class="btn btnBewFormular" id="btnBewFormular3" style="float: right; bottom: 0px">Speichern und weiter</label>
+										</div>
+									</div>
+					
+									<div class="row dat" id="bewFormular4">
+										<div class="col-xs-3">&nbsp;</div>
+										<div class="col-xs-6">
+											<div class="input-group">
+												<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+												<p>Partnerunternehmen <a class="infobox" href="#INFO"> 
+													<img id="in" src="images/Information 1.png"> 
+													<span id="textbox"> <b>Partnerunternehmen:</b><br /> 
+														Tragen Sie hier bitte die Adresse Ihres Partnerunternehmens ein.
+													</span></a	>
+												</p>
+												<!-- E-------------  Infobox Ende --------------------------------------------- -->
+												<input id="bewPartnerName" type="text" class="form-control b15"
+													placeholder="Firma" required> 
+												<input id="bewPartnerAnsprech" type="text" class="form-control b16" 
+													placeholder="Ansprechpartner" required>
+												<input id="bewPartnerEmail" type="text" class="form-control b16" 
+													placeholder="Email Ansprechpartner" required>  
+												<input id="bewPartnerStrasse" type="text" class="form-control b17" 
+													placeholder="Straße" required> 
+												<input id="bewPartnerHausnummer" type="text" class="form-control b18"
+													placeholder="Hausnummer" required> 
+												<input id="bewPartnerPlz" type="text" class="form-control b19" 
+													placeholder="PLZ" required>
+												<input id="bewPartnerStadt" type="text" class="form-control b19" 
+													placeholder="Stadt" required>
+											</div>
+										</div>
+										<div class="col-xs-4">&nbsp;</div>
+										<div class="col-xs-12">
+											<label class="btn btnBewBack" id="btnBewBack4" style="float: left; bottom: 0px">Zurück</label>
+											<label class="btn btnBewFormular" id="btnBewFormular4" style="float: right; bottom: 0px">Speichern und weiter</label>
+										</div>
+									</div>
+					
+									<div class="row dat">
+										<div class="col-xs-3">&nbsp;</div>
+										<div class="col-xs-6">
+											<div class="input-group">
+												<!-- A-------------  Infobox Anfang --------------------------------------------- -->
+												<p>Ansprechpartner Unternehmen <a class="infobox" href="#INFO">
+													<img id="in" src="images/Information 1.png"> 
+													<span id="textbox"> <b>Ansprechpartner:</b><br /> 
+														Tragen Sie hier bitte die Daten des für die DHBW zuständigen
+														Ansprechpartners Ihres Partnerunternehmens ein.
+													</span></a>
+												</p>
+												<!-- E-------------  Infobox Ende --------------------------------------------- -->
+												<input id="boxx" type="text" class="form-control b20" 
+													placeholder="Name" required> 
+												<input id="boxx" type="text" class="form-control b21"
+													placeholder="Vorname"> 
+												<input id="boxx" type="text" class="form-control b22" 
+													placeholder="Telefon"> 
+												<input id="boxx" type="email" class="form-control b23" 
+													placeholder="@" required>
+											</div>
+										</div>
+										<div class="col-xs-4">&nbsp;</div>
+									</div>
+					
+								 	<!-- <div class="row">
+										<div class="col-xs-4">&nbsp;</div>
+										<div class="col-xs-4">&nbsp;</div>
+										<div class="col-xs-3">
+											<div class="form-group text-right">
+												<button type="submit" id="submitBtn" id="new_bewerbung" class="btn btn-primary btn-lg">Daten prüfen</button>
+											</div>
+											<a href="#" class="btn btn-primary sent dat" type="button">Eingaben überprüfen und abschicken</a>
+					     					<a class="btn btn-primary bu1 dat" type="button" href="dokumente.html">Weiter</a>
+										</div>
+									</div> -->
+								</form>
+							</div>
+							<div id="einschreibungsProzess"></div>
+						</div>						
+						<ul class="nav nav-tabs iFenster iF2">
+							<li class="active" id="li1">Vorbereitung</li>
+							<li id="li2">Studium</li>
+							<li id="li3">Leben</li>
+							<li id="li4">Fazit</li>
+						</ul> 
+						<iframe class="iFenster iF2" src="erfahrungsbericht1.html" style="width: 100%; height: 500px;"></iframe>
+						
+					</div>
+				</div>
+				<div class="inhalt nonCms" id="in4">
+					<div class="col-md-8 inhaltBox" style="width: 99%">
+						<h2>Erfahrungsberichte</h2>
+						<select class="inBox zweiD" id="selBerichte">
+							<option>Gesamtbewertung</option>
+							<option>Einzelbewertungen</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="inhalt cms" id="in5">
+					<div class="inhaltBox col-md-12">
+						Das ist die Startseite. Hier muss noch Fülltext zur Beschreibung der möglichen Funktionen rein.
+					</div>
+				</div>
+				<div class="inhalt cms" id="in6">
+					<h3>Folgende Studierende haben bereits einen Bewerbungsprozess begonnen:</h3>
+					<table class="table" id="tableBewerber">
+								<thead>
+									<tr id="titleRow"> 
+										<td class="tableVorname">Vorname</td>
+										<td class="tableNachname">Nachname</td>
+										<td class="tableEmail">Email</td>
+										<td class="tableMatrikelnummer">Matrikelnummer</td>
+										<td class="tableStKurs">Kurs</td>
+										<td class="tableUniversität">Auslandsuniversität</td>
+										<td class="tableStatus">Status</td>
+										<td class="tableAktionen">Aktionen</td>
+									</tr>
+								</thead>
+								<tbody id="tableBewerberBody">
+									
+								</tbody>
+							</table>
+				</div>
+				<div class="inhalt cms" id="in7">
+					<div class="col-md-12 inhaltBox">
+						
+					</div>
+				</div>
+				<div class="inhalt cms" id="in8">
+					<div class="col-md-12 inhaltBox">
+					</div>
+				</div>
+			</div>
+		</div>
+  		
+		<!-- FuÃŸzeile -->
+		<div class="footer">
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="pull-right">
+						<p>
+							<a href="index.html">Startseite</a>
+							|
+							<a href="impressum.html">Impressum</a>
+							|
+							<a href="faq.html">FAQs</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
