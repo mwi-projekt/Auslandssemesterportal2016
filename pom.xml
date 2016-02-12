@@ -149,6 +149,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.tomcat.maven</groupId>
+			<artifactId>tomcat7-maven-plugin</artifactId>
+			<version>2.2</version>
+			<type>maven-plugin</type>
+		</dependency>
+
 		<!-- Add your own dependencies here, if in compile scope, they are added 
 			to the war -->
 
