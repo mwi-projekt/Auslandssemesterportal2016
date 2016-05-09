@@ -1,4 +1,4 @@
-package src.DB;
+package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -189,11 +189,11 @@ public class prozessInhalt_db extends HttpServlet {
 			String sql = "";
 			System.out.println("doPost called: " + request);
 			
-			//Timestamp variable für eine nicht markierte Checkbox
+			//Timestamp variable fï¿½r eine nicht markierte Checkbox
 			Timestamp theTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
 			Timestamp noTimeAtAll = new Timestamp(1L);
 			
-			//Hier werden die übergebenen Daten der Checkbox (on/off) in einen Int-Wert (1/0) gewandelt
+			//Hier werden die ï¿½bergebenen Daten der Checkbox (on/off) in einen Int-Wert (1/0) gewandelt
 			int checkboxAutoHochgeladen = Integer.parseInt(request.getParameter("checkboxAutoHochgeladen"));
 			Timestamp timeStampAutoHochgeladen = (checkboxAutoHochgeladen==1)?theTime:noTimeAtAll;
 			int checkboxAuslandsamtDokumenteKorrekt = Integer.parseInt(request.getParameter("checkboxAuslandsamtDokumenteKorrekt"));

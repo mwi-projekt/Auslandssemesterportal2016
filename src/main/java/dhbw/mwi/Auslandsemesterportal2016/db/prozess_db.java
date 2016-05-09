@@ -1,4 +1,4 @@
-package src.DB;
+package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -154,7 +154,7 @@ public class prozess_db extends HttpServlet {
 				  request.getParameter("send_data") +"'";
 			proz_id = dbupdate(sql);
 			if ( proz_id.isEmpty() ){
-				System.out.println("Kein Eintrag Gefunden für diese UNI");
+				System.out.println("Kein Eintrag Gefunden fï¿½r diese UNI");
 				sql = "INSERT INTO prozess ( name ) VALUES ('" + request.getParameter("send_data") + "')";
 				dbupdate(sql);
 				proz_id = dbupdate("SELECT id FROM prozess ORDER BY modified DESC LIMIT 1 ");

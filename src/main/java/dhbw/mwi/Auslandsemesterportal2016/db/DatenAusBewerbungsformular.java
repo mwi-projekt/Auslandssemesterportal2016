@@ -1,4 +1,4 @@
-package src.DB;
+package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -113,7 +113,7 @@ public class DatenAusBewerbungsformular extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			//String action = request.getParameter("action");
 			String sql = "";
-			//Überschreibe Daten aus den Datenbanken...
+			//ï¿½berschreibe Daten aus den Datenbanken...
 				sql = "UPDATE TABELLE (Attribut1, "
 							+ " Attribut2, "
 							+ " Attribut3 ";
