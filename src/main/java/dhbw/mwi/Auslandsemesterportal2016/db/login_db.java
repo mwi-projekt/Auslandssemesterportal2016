@@ -1,4 +1,4 @@
-package src.DB;
+package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -129,10 +129,10 @@ public class login_db extends HttpServlet {
 //			                               new InternetAddress(to));
 //
 //			      // Set Subject: header field
-//			      message.setSubject("Bewerbung für " + request.getParameter("uni"));
+//			      message.setSubject("Bewerbung fï¿½r " + request.getParameter("uni"));
 //
 //			      // Now set the actual message
-//			      message.setText("Hallo Frau Dreischer, der Student " + request.getParameter("name") + " mit der Matrikelnummer " + request.getParameter("matrikelnummer") + " hat das Bewerbungsfomular für die Universität " + request.getParameter("uni") + " abgeschlossen. Sie können seine Daten im Auslandsportal unter dem Reiter Bewerber abfragen. Der Student wartet jetzt auf Meldung von Ihnen. Bitte senden sie ihm eine Email, welche Schritte er weiter durchführen muss. MfG Das Auslandsportalteam.");
+//			      message.setText("Hallo Frau Dreischer, der Student " + request.getParameter("name") + " mit der Matrikelnummer " + request.getParameter("matrikelnummer") + " hat das Bewerbungsfomular fï¿½r die Universitï¿½t " + request.getParameter("uni") + " abgeschlossen. Sie kï¿½nnen seine Daten im Auslandsportal unter dem Reiter Bewerber abfragen. Der Student wartet jetzt auf Meldung von Ihnen. Bitte senden sie ihm eine Email, welche Schritte er weiter durchfï¿½hren muss. MfG Das Auslandsportalteam.");
 //
 //			      // Send message
 //			      Transport.send(message);

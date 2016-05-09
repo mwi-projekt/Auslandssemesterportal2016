@@ -1,4 +1,4 @@
-package src.DB;
+package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -104,14 +104,14 @@ public class erfahrungsberichtInhalt_db extends HttpServlet {
 						
 			   }
 			
-			  // Wenn  Button mit ID== X1(Erfarungsbericht schließen) gedrückt wird, wird flag auf true gesetzt und
+			  // Wenn  Button mit ID== X1(Erfarungsbericht schlieï¿½en) gedrï¿½ckt wird, wird flag auf true gesetzt und
 			 //Erfahrunsbericht wird nicht mehr aktiv
 			
 			 /* else if( action.equals("flag_post") ) {
 		    	 
 					System.out.println("post_flag == action.");
 		    		
-					insertSql = "INSERT INTO erfahrungsberichtAbschluß (matrikelnummer, flag) "
+					insertSql = "INSERT INTO erfahrungsberichtAbschluï¿½ (matrikelnummer, flag) "
 								+ "VALUES ('"	+ matrikelnummer +"','" 
 												+ flag + "')";
 			   }*/

@@ -1,4 +1,4 @@
-package src.DB;
+package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
