@@ -1,29 +1,36 @@
 package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
+import java.io.*;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Properties;
+import java.sql.*;
+import java.sql.Connection;
+import java.*;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
+
+import org.assertj.core.groups.Properties;
+import org.eclipse.jdt.internal.compiler.ast.Statement;
+
+
 
 /**
  * Servlet implementation class prozess_db
  */
 @MultipartConfig(maxFileSize = 16177215) //file size up to 16MB
-@WebServlet(description = "connection to DB for the prozess.jsp", urlPatterns = { "/login_db" })
+@WebServlet(name="login_db", description = "connection to DB for the prozess.jsp", urlPatterns = { "/WebContent/login_db"})
 
 public class login_db extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -34,7 +41,7 @@ public class login_db extends HttpServlet {
     final String USER = "mwi";
     final String PASS = "mwi2014";
     Connection conn;
-    Statement stmt;
+    java.sql.Statement stmt;
     ResultSet rs;
     int rsupd;
 	
@@ -54,9 +61,9 @@ public class login_db extends HttpServlet {
 		String action = request.getParameter("action");
 		String sql = "";
 		
-		if ( action.equals("get_files") ){
-			sql = "SELECT id, name, comment FROM prozess_files";
-		}
+//		if (action.equals("get_files") ){
+//			sql = "SELECT id, name, comment FROM prozess_files";
+//		}
 
 	    try{
 	    	// Register JDBC driver
@@ -109,6 +116,7 @@ public class login_db extends HttpServlet {
 		String sqlupd = "leer";
 		int uid = 0;
 		int rolle = 0;
+		System.out.println("Post empfangen");
 		if (action.equals("sendmail")) {
 //			   String to = "patrick.julius@web.de";
 //			   String from = request.getParameter("name");
@@ -153,63 +161,64 @@ public class login_db extends HttpServlet {
 				} else if (request.getParameter("rolle").equals("Auslandsmitarbeiter")) {
 					rolle = 2;
 				}
+				
 				sqlupd = "INSERT INTO user (vorname, nachname, passwort, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort) VALUES ('" + request.getParameter("vorname") + "', '" + request.getParameter("nachname") + "', '" + request.getParameter("passwort") + "', '" + rolle + "', '" + request.getParameter("email") + "', '" + request.getParameter("studiengang") + "', '" + request.getParameter("kurs") + "', '" + request.getParameter("matrikelnummer") + "', '" + request.getParameter("tel") + "', '" + request.getParameter("mobil") + "', '" + request.getParameter("standort") + "')";
 				 
 				// registrierungsemail senden
 				// Recipient's email ID needs to be mentioned.
-			      String to = request.getParameter("email");//change accordingly
-
-			      // Sender's email ID needs to be mentioned
-			      String from = "mwiausland@gmail.com";//change accordingly
-			      final String username = "mwiausland@gmail.com";//change accordingly
-			      final String password = "MWIAusland1";//change accordingly
-
-			      // Assuming you are sending email through relay.jangosmtp.net
-			      String host = "smtp.gmail.com";
-
-			      Properties props = new Properties();
-			      props.put("mail.smtp.auth", "true");
-			      props.put("mail.smtp.starttls.enable", "true");
-			      props.put("mail.smtp.host", host);
-			      props.put("mail.smtp.port", "587");
-
-			      // Get the Session object.
-			      Session session = Session.getInstance(props,
-			      new javax.mail.Authenticator() {
-			         protected PasswordAuthentication getPasswordAuthentication() {
-			            return new PasswordAuthentication(username, password);
-			         }
-			      });
-
-			      try {
-			         // Create a default MimeMessage object.
-			         Message message = new MimeMessage(session);
-
-			         // Set From: header field of the header.
-			         message.setFrom(new InternetAddress(from));
-
-			         // Set To: header field of the header.
-			         message.setRecipients(Message.RecipientType.TO,
-			         InternetAddress.parse(to));
-
-			         // Set Subject: header field
-			         message.setSubject("Akademisches Auslandsamt Registrierung");
-
-			         // Now set the actual message
-			         /*message.setText("Hello, this is sample for to check send "
-			            + "email using JavaMailAPI ");*/
-			         message.setContent("<h1>Hallo " + request.getParameter("vorname")+ ",</h1> du hast dich auf der Seite des Auslandsportals registriert. "
-			         		+ "Um deine Regisitierung abzuschlie&szlig;en klicke bitte auf folgenden Link. <br><br> "
-			         		+ "<a href=http://193.196.7.215:8080/Auslandsportal/>Anmeldung best&auml;tigen</a>", "text/html");
-
-			         // Send message
-			         Transport.send(message);
-
-			         
-
-			      } catch (MessagingException e) {
-			            throw new RuntimeException(e);
-			      }
+//			      String to = request.getParameter("email");//change accordingly
+//
+//			      // Sender's email ID needs to be mentioned
+//			      String from = "mwiausland@gmail.com";//change accordingly
+//			      final String username = "mwiausland@gmail.com";//change accordingly
+//			      final String password = "MWIAusland1";//change accordingly
+//
+//			      // Assuming you are sending email through relay.jangosmtp.net
+//			      String host = "smtp.gmail.com";
+//
+//			      Properties props = new Properties();
+//			      props.put("mail.smtp.auth", "true");
+//			      props.put("mail.smtp.starttls.enable", "true");
+//			      props.put("mail.smtp.host", host);
+//			      props.put("mail.smtp.port", "587");
+//
+//			      // Get the Session object.
+//			      Session session = Session.getInstance(props,
+//			      new javax.mail.Authenticator() {
+//			         protected PasswordAuthentication getPasswordAuthentication() {
+//			            return new PasswordAuthentication(username, password);
+//			         }
+//			      });
+//
+//			      try {
+//			         // Create a default MimeMessage object.
+//			         Message message = new MimeMessage(session);
+//
+//			         // Set From: header field of the header.
+//			         message.setFrom(new InternetAddress(from));
+//
+//			         // Set To: header field of the header.
+//			         message.setRecipients(Message.RecipientType.TO,
+//			         InternetAddress.parse(to));
+//
+//			         // Set Subject: header field
+//			         message.setSubject("Akademisches Auslandsamt Registrierung");
+//
+//			         // Now set the actual message
+//			         /*message.setText("Hello, this is sample for to check send "
+//			            + "email using JavaMailAPI ");*/
+//			         message.setContent("<h1>Hallo " + request.getParameter("vorname")+ ",</h1> du hast dich auf der Seite des Auslandsportals registriert. "
+//			         		+ "Um deine Regisitierung abzuschlie&szlig;en klicke bitte auf folgenden Link. <br><br> "
+//			         		+ "<a href=http://193.196.7.215:8080/Auslandsportal/>Anmeldung best&auml;tigen</a>", "text/html");
+//
+//			         // Send message
+//			         Transport.send(message);
+//
+//			         
+//
+//			      } catch (MessagingException e) {
+//			            throw new RuntimeException(e);
+//			      }
 			} else if(action.equals("get_portalInfo")) {
 				sql = "SELECT titel, listelement1, listelement2, listelement3, listelement4, listelement5, listelement6, listelement7 FROM cms_portalInfo";
 			} else if (action.equals("post_portalInfo")) {
@@ -217,6 +226,7 @@ public class login_db extends HttpServlet {
 				System.out.println(sqlupd);
 			} else if (action.equals("get_User")) {
 				sql = "SELECT nachname, vorname, email, tel, mobil, studiengang, kurs, matrikelnummer, standort FROM user WHERE rolle ='" + request.getParameter("rolle") + "' ";
+				System.out.println("HIER");
 			} else if (action.equals("get_Auslandsangebote")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote WHERE ID > 0";
 			} else if (action.equals("get_AuslandsangeboteInhalt")) {
@@ -266,6 +276,7 @@ public class login_db extends HttpServlet {
 			} else if (action.equals("update_BewProzess1")) {
 				sqlupd = "UPDATE bewerbungsprozess SET schritt_1 = 1 WHERE matrikelnummer = '" + request.getParameter("matrikelnummer") + "' AND uniName = '" + request.getParameter("uni") + "' ";
 			}
+			
 			try{
 				// Register JDBC driver
 		          Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -273,6 +284,7 @@ public class login_db extends HttpServlet {
 		          conn = DriverManager.getConnection(DB_URL,USER,PASS);
 		          // Execute SQL query
 		          stmt = conn.createStatement();
+		          System.out.println("Connect");
 		          if (sql != "leer") {
 		        	  rs = stmt.executeQuery(sql);
 		        	  int spalten = rs.getMetaData().getColumnCount(); 

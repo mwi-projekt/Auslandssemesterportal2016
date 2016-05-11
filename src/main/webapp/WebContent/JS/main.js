@@ -5,7 +5,7 @@ var main = function() {
 	$('.imgSlider').css('background-image', 'url(images/pan' + back + '.jpg)');
 	loadPortalInfo();
 	loop();
-	// Überprüfen ob jemand eingeloggt ist
+	// ï¿½berprï¿½fen ob jemand eingeloggt ist
 	if (isEmpty(sessionStorage['User']) === true  || sessionStorage['User'] === 'undefined'){
 	} else {
 		$('.loginFenster').hide();
@@ -45,7 +45,7 @@ var main = function() {
 		$('.popUpBack').show();
 		$('.popUpFeld').show();
 	});
-	//Schließen Kreuz im PopUpFeld wurde geklickt, PopUp wird geschlossen
+	//Schlieï¿½en Kreuz im PopUpFeld wurde geklickt, PopUp wird geschlossen
 	$('#close').on('click', function() {
 		$('.popUpBack').hide();
 		$('.popUpFeld').hide();
@@ -99,7 +99,7 @@ var main = function() {
 			$('#askAdmin').show();
 		}
 	});
-	//Click-Listener für Registrieren-Button
+	//Click-Listener fï¿½r Registrieren-Button
 	$('.btnReg').on('click', function() {
 		
 		var telefon, mobil, matrikelnummer, studiengang, kurs, pw1, pw2, standort;
@@ -128,16 +128,16 @@ var main = function() {
 			mobil = $('#inMobil').val();
 		}
 		if (pw1 != pw2) {
-			$('.falsch').html("Die Passwörter stimmen nicht überein.");
+			$('.falsch').html("Die Passwï¿½rter stimmen nicht ï¿½berein.");
 			$('.falsch').show();
 		} else {
 			var vorname = $('#inVorname').val();
 			var nachname = $('#inNachname').val();
 			var email = $('#inMail').val();
 			if (rolle === 'Auslandsmitarbeiter' && email.match('dhbw-karlsruhe.de') !=  'dhbw-karlsruhe.de') {
-				$('.falsch').html("Bitte wählen sie nur Auslandsmitarbeiter, wenn sie einer sind.");
+				$('.falsch').html("Bitte wï¿½hlen sie nur Auslandsmitarbeiter, wenn sie einer sind.");
 			} else if (studiengang === "Studiengang*") {
-				$('.falsch').html("Bitte wählen Deinen Studiengang aus.");
+				$('.falsch').html("Bitte wï¿½hlen Deinen Studiengang aus.");
 			} else if (vorname === "") {
 				$('.falsch').html("Bitte gebe einen Vornamen ein.");
 			} else if (nachname === "") {
@@ -149,7 +149,7 @@ var main = function() {
 			} else if (kurs === "") {
 				$('.falsch').html("Bitte gebe deinen Kurs ein.");
 			} else if(pw1.length<7){
-				$('.falsch').html("Bitte gebe ein längeres Passwort ein.");
+				$('.falsch').html("Bitte gebe ein lï¿½ngeres Passwort ein.");
 			}
 			else { 
 				$.ajax({
@@ -177,14 +177,14 @@ var main = function() {
 						$('.popUpFeld').fadeOut();
 					}, 
 					error: function(result) {
-						
+						alert("Fehler beim Registrieren");
 					}
 				});
 			}
 		}
 		
 	});
-	//Click-Listener für Login-Button
+	//Click-Listener fï¿½r Login-Button
 	$('#btnLogin').on('click', function() {
 		var user = $('#inName').val();
 		var pw = $('#inPasswort').val();
@@ -279,7 +279,7 @@ var main = function() {
 		$('#kb' + id).addClass('zeig');
 	});
 // -------------------------------------------------------- CMS ------------------------------------------------------------------------------
-	//Click-Listener für CMS bearbeiten Buttons
+	//Click-Listener fï¿½r CMS bearbeiten Buttons
 	$('.cmsBtn').on('click', function() {
 		if ($(this).text() === "Bearbeiten" || $(this).text() === "Abbrechen") {
 			var id = $(this).parent().parent().attr('id');
@@ -385,7 +385,7 @@ var main = function() {
 				}
 				break;
 			}
-		} else if ($(this).text() === "Änderungen speichern") {
+		} else if ($(this).text() === "ï¿½nderungen speichern") {
 			var klasse = $(this).attr('class');
 			klasse = klasse.replace('btn', "");
 			klasse = klasse.replace('cmsBtn', "");
@@ -433,7 +433,7 @@ var main = function() {
 						listelement6: listelement6,
 						listelement7: listelement7,
 					}, success: function(result) {
-						$('.erfolgreich').html("Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+						$('.erfolgreich').html("Ihre ï¿½nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 						$('.erfolgreich').show();
 						$('.erfolgreich').fadeOut(7000);
 					}, error: function(result) {
@@ -443,7 +443,7 @@ var main = function() {
 				break;
 			case ('cmsAngebote'):
 				if ($(this).parent().attr('id') === "angebotNeu") {
-					if ($('#inStudiengangNeuAngebot').val() != "Studiengang wählen*" && isEmpty($('#inNeuAngebot').val()) != true && isEmpty($('#inNeuAngebotInfo').val()) != true && isEmpty($('#inMaps1').val()) != true && isEmpty($('#inMaps2').val()) != true && isEmpty($('#inMaps3').val()) != true) {
+					if ($('#inStudiengangNeuAngebot').val() != "Studiengang wï¿½hlen*" && isEmpty($('#inNeuAngebot').val()) != true && isEmpty($('#inNeuAngebotInfo').val()) != true && isEmpty($('#inMaps1').val()) != true && isEmpty($('#inMaps2').val()) != true && isEmpty($('#inMaps3').val()) != true) {
 						var faqs = '';
 						for (var i = 1; isEmpty($('#inNeuFaqFr' + i).val()) != true; i++) {
 							faqs = faqs + '<b>' + $('#inNeuFaqFr' + i).val() + '</b><br>' + $('#inNeuFaqAn' + i).val() + '<br>';
@@ -462,7 +462,7 @@ var main = function() {
 								erfahrungsbericht: erfahrungsbericht,
 								maps: maps,
 							}, success: function(event) {
-								$('.erfolgreich').html("Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+								$('.erfolgreich').html("Ihre ï¿½nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 								$('.erfolgreich').show();
 								$('.erfolgreich').fadeOut(7000);
 							}, error: function(event) {
@@ -492,7 +492,7 @@ var main = function() {
 								erfahrungsbericht: erfahrungsbericht,
 								maps: maps,
 							}, success: function(event) {
-								$('.erfolgreich').html("Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+								$('.erfolgreich').html("Ihre ï¿½nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 								$('.erfolgreich').show();
 								$('.erfolgreich').fadeOut(7000);
 							}
@@ -532,7 +532,7 @@ var main = function() {
 						listelement7: $('#inInfoLi7').val(),
 						link7: $('#inInfoLink7').val(),
 					}, success: function(event) {
-						$('.erfolgreich').html("Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+						$('.erfolgreich').html("Ihre ï¿½nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 						$('.erfolgreich').show();
 						$('.erfolgreich').fadeOut(7000);
 					}, error: function(event) {
@@ -543,13 +543,13 @@ var main = function() {
 			}
 		}
 	});
-	//Click Listener für die Bild ändern Buttons
+	//Click Listener fï¿½r die Bild ï¿½ndern Buttons
 	$('.upload').on('click', function() {
 		var id = $(this).attr('id');
 		id = id.trim();
 		loop1(id);
 	});
-	//Click-Listener für neues Infoselement in Box PortalInfo
+	//Click-Listener fï¿½r neues Infoselement in Box PortalInfo
 	$('#cmsBtnInfoNeu').on('click', function() {
 		var count = 0;
 		for (var i = 1; $('#li' + i).text() != ""; i++) {
@@ -560,17 +560,17 @@ var main = function() {
 			$('#inli' + i).val($('#li' + i).text());
 		}
 	});
-	//Click-Listener für neuen Erfahrungsbericht in Box Erfahrungsbericht
+	//Click-Listener fï¿½r neuen Erfahrungsbericht in Box Erfahrungsbericht
 	$('#cmsBtnBerichtNeu').on('click', function() {
 		var count = 0;
 		for (var i= 1; $('#kb' + i).html() !== undefined; i++) {
 			count = i;
 		}
-		$('.berichte').append('<div class="row kurzbericht" id="kb' + (count+1) + '"><div class="col-md-6"><img src="images/noimg.jpg" id="imgWorld" /><label class="btn cmsBtn cmsBerichte btnBild" id="btnberichtBild' + (count+1) + '" style="float: right">Bild Ändern<input class="upload" type="file" id="berichtBild' + (count+1) + '" /></label></div><div class="col-md-6 cmsBerichte"><textarea class="inBox" style="width: 100%; height: 250px"></textarea></div>');
+		$('.berichte').append('<div class="row kurzbericht" id="kb' + (count+1) + '"><div class="col-md-6"><img src="images/noimg.jpg" id="imgWorld" /><label class="btn cmsBtn cmsBerichte btnBild" id="btnberichtBild' + (count+1) + '" style="float: right">Bild ï¿½ndern<input class="upload" type="file" id="berichtBild' + (count+1) + '" /></label></div><div class="col-md-6 cmsBerichte"><textarea class="inBox" style="width: 100%; height: 250px"></textarea></div>');
 		$('.kurzbericht').show();
 		$('.cmsBerichte').show();
 	});
-	//Click-Listener für neuen Link in Box InfoMaterial
+	//Click-Listener fï¿½r neuen Link in Box InfoMaterial
 	$('#cmsBtnLinkNeu').on('click', function() {
 		var count = 0;
 		for (var j = 1; isEmpty($('#infoli' + j).children('a').text()) != true; j++) {
@@ -579,7 +579,7 @@ var main = function() {
 		$('.inputsInfo').html($('.inputsInfo').html() + '<input class="inBox" id="inInfoLi' + (count+1) + '" value="" /><img class="small" id="delInLi' + (count+1) + '" src="images/Button Delete.png" /><br><b style="margin-right: 5px">Link</b><input class="inBox infoLink" id="inInfoLink' + (count+1) +'" value=""><img class="small" id="delLink' + (count+1) +'" src="images/Button Delete.png" />');
 		$('#cmsBtnLinkNeu').hide();
 	});
-	//Click-Listener für alle Images mit der class small
+	//Click-Listener fï¿½r alle Images mit der class small
 	$('.small').on('click', function() {
 		var id = $(this).attr('id');
 		if (id.substring(0, 7) === "delInLi") {
@@ -590,7 +590,7 @@ var main = function() {
 			$('#inInfoLink' + id).val('');
 		}
 	});
-	//Click Listener für die Tiles im AdminBereich
+	//Click Listener fï¿½r die Tiles im AdminBereich
 	$('.tile').on('click', function() {
 		var id = $(this).attr('id');
 		if (id === 'verwaltungIndex') {
@@ -607,7 +607,7 @@ var main = function() {
 			sessionStorage['verwaltung'] === 3;
 		}
 	});
-	//Click-Listener für Link zurück zum Admin-Hauptmenü
+	//Click-Listener fï¿½r Link zurï¿½ck zum Admin-Hauptmenï¿½
 	$('.backAdmin').on('click', function() {
 		$('#nutzerVerwaltung').hide();
 		$('#adminBereich').show();
@@ -615,7 +615,7 @@ var main = function() {
 		$('.Admin').hide();
 		sessionStorage['verwaltung'] = 0;
 	});
-	//Click-Listener für Userverwaltung User anzeigen lassen
+	//Click-Listener fï¿½r Userverwaltung User anzeigen lassen
 	$('.btnUser').on('click', function() {
 		var id = $(this).attr('id');
 		if (id === 'userNeu') {
@@ -707,16 +707,16 @@ var main = function() {
 			});
 		}
 	});
-	//Click-Listener für Schließenbild im Bearbeiten PopUp
+	//Click-Listener fï¿½r Schlieï¿½enbild im Bearbeiten PopUp
 	$('#closeBearb').on('click', function() {
 		$('.nutzerBearbeiten').hide();
 		$('.popUpBack').hide();
 	});
-	//Click-Listener für Änderungen speichern Button im Nutzer Bearbeiten PopUp
+	//Click-Listener fï¿½r ï¿½nderungen speichern Button im Nutzer Bearbeiten PopUp
 	$('#btnUserEditSave').on('click', function() {
 		alert("Hier passiert noch nichts.");
 	});
-	//Auswahlmöglichkeit auf der Startseite zur Sortierung der Angebote
+	//Auswahlmï¿½glichkeit auf der Startseite zur Sortierung der Angebote
 	$('#selStudiengang').on('click', function(event) {
 		if ($('#selStudiengang').val() != "Alle Angebote") {
 			$('.angebote').hide();
@@ -725,7 +725,7 @@ var main = function() {
 			$('.angebote').show();
 		}
 	});
-	//Click-Listener für CMS Buttons im Bereich Auslandsangebote
+	//Click-Listener fï¿½r CMS Buttons im Bereich Auslandsangebote
 	$('.btnAngebote').on('click', function(event) {
 		if ($(this).attr('id') === "btnAddStudgang") {
 			$('#cmsAddStudgang').show();
@@ -735,7 +735,7 @@ var main = function() {
 			$('#cmsAddStudgang').hide();
 			$('#cmsAddAngebot').show();
 			$('#cmsEditAngebot').hide();
-			$('#inStudiengangNeuAngebot').html($('#selStudiengang').html().replace("Alle Angebote", "Studiengang wählen*"));
+			$('#inStudiengangNeuAngebot').html($('#selStudiengang').html().replace("Alle Angebote", "Studiengang wï¿½hlen*"));
 			for (var i = 1; i <= 1; i++) {
 				for (var j = 1; j <= 4; j++) {
 					document.getElementById('nNeu' + i + j).addEventListener('click', function(event) {
@@ -752,7 +752,7 @@ var main = function() {
 			$('#cmsAddStudgang').hide();
 			$('#cmsAddAngebot').hide();
 			$('#cmsEditAngebot').show();
-			var options = '<option>Angebot wählen</option>';
+			var options = '<option>Angebot wï¿½hlen</option>';
 			for (var i = 1; isEmpty($('#angebot' + i).children().children('.uniName').text()) != true; i++) {
 				options = options + '<option>' + $('#angebot' + i).children().children('.uniName').text() + '</option>';
 			}
@@ -771,7 +771,7 @@ var main = function() {
 			}
 		}
 	});
-	//Click Listener für neuen Studiengang anlegen
+	//Click Listener fï¿½r neuen Studiengang anlegen
 	$('#btnSaveNewStudiengang').on('click', function(event) {
 		if (isEmpty($('#inNewStudiengang').val()) != true) {
 			$.ajax({
@@ -781,7 +781,7 @@ var main = function() {
 					action: "post_newStudiengang",
 					studiengang: $('#inNewStudiengang').val(),
 				}, success: function(result) {
-					$('.erfolgreich').html("Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+					$('.erfolgreich').html("Ihre ï¿½nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 					$('.erfolgreich').show();
 					$('.erfolgreich').fadeOut(7000);
 				}, error: function(result) {
@@ -789,10 +789,10 @@ var main = function() {
 				}
 			});
 		} else {
-			alert("Sie dürfen das Feld nicht leer lassen.");
+			alert("Sie dï¿½rfen das Feld nicht leer lassen.");
 		}
 	});
-	//Click-Listener für ein Angebot bearbeiten
+	//Click-Listener fï¿½r ein Angebot bearbeiten
 	$('#selEditAngebot').on('click', function(event) {
 		for (var i = 1; isEmpty($('#angebot' + i)) != true; i++) {
 			if ($('#angebot' + i).children().children('.uniName').text().trim() === $(this).val()) {
@@ -824,7 +824,7 @@ var main = function() {
 					$('#inEditAngebotErfahrungsbericht').val('');
 					$('#inEditAngebotErfAutor').val('');
 				}
-				//FAQs in InputFelder übernehmen
+				//FAQs in InputFelder ï¿½bernehmen
 				if (isEmpty($('#angebot' + i).children().children('#c' + i +  '2').html()) != true) {
 					var faqs = $('#angebot' + i).children().children('#c' + i +  '2').html().replace(/<b>/g, ';');
 					faqs = faqs.replace(/<br>/g, '');
@@ -907,7 +907,7 @@ function loop1(id) {
 			loop1(id);
 		} else {
 			var text = $('#btn' + id).html();
-			text = text.replace('Ändern', 'Gewählt');
+			text = text.replace('ï¿½ndern', 'Gewï¿½hlt');
 			$('#btn' + id).html(text);
 			$('#btn' + id).css('background', 'rgb(48, 192, 192)');
 		}
@@ -944,7 +944,7 @@ function loadPortalInfo() {
 		}
 	});
 }
-//Lädt die Daten zu den Auslandsangeboten aus der Datenbank
+//Lï¿½dt die Daten zu den Auslandsangeboten aus der Datenbank
 function loadAuslandsangebote() {
 	var angeboteInhalt = '<option>Alle Angebote</option>';
 	$.ajax({
@@ -967,7 +967,7 @@ function loadAuslandsangebote() {
 	});
 }
 
-//Läd die Auslandsangebote auf die Seite
+//Lï¿½d die Auslandsangebote auf die Seite
 function loadAuslandsangeboteInhalt() {
 	$.ajax({
 		type: "POST",
@@ -1030,7 +1030,7 @@ function loadAuslandsangeboteInhalt() {
 		}
 	});
 }
-//Läd die Daten für die Infomaterialien auf die Seite
+//Lï¿½d die Daten fï¿½r die Infomaterialien auf die Seite
 function loadInfoMaterial() {
 	$.ajax({
 		type: "POST",
