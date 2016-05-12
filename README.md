@@ -1,3 +1,6 @@
+Die URL zum Aufruf der Startseite lautet (Port kann abweichen)
+http://localhost:8395/Auslandsemesterportal2016/WebContent/index.html
+
 # Camunda BPM Process Application
 A Process Application for [Camunda BPM](http://docs.camunda.org).
 
