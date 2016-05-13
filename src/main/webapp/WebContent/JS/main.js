@@ -918,14 +918,28 @@ function loop1(id) {
 function isEmpty(str) {
 	return (!str || 0 === str.length);
 }
-
+$.urlParam = function(name){
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	
+	if(results==null){
+		return " ";
+	}else{
+		return results[1] || 0;
+	}
+	
+}
 //Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
+	var link = "";
+	if($.urlParam('confirm')!=null){
+		link=$.urlParam('confirm');
+	}
 	$.ajax({
 		type: "POST",
 		url: "login_db",
 		data: {
 			action: "get_portalInfo",
+			confirm: link
 		}, success: function(result) {
 			var auslesen = result.split(';');
 			for (var i = 0; i < auslesen.length; i++) {
@@ -944,6 +958,7 @@ function loadPortalInfo() {
 		}
 	});
 }
+
 //L�dt die Daten zu den Auslandsangeboten aus der Datenbank
 function loadAuslandsangebote() {
 	var angeboteInhalt = '<option>Alle Angebote</option>';
