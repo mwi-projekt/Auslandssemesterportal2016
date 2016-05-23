@@ -228,12 +228,12 @@ public class login_db extends HttpServlet {
 							+ "', '" + request.getParameter("matrikelnummer") + "', '" + request.getParameter("tel")
 							+ "', '" + request.getParameter("mobil") + "', '" + request.getParameter("standort")
 							+ "', '" + id + "')";
-					String link = "http://http://193.196.7.215:8395/Auslandsemesterportal2016/WebContent/index.html?confirm=" + id;
+					String link = "193.196.7.215:8080/Auslandsemesterportal2016/WebContent/index.html?confirm=" + id;
 					
 
-					message.setContent("<h1>Hallo " + request.getParameter("vorname")
-							+ ",</h1> du hast dich auf der Seite des Auslandsportals registriert. "
-							+ "Um deine Regisitierung abzuschlie&szlig;en klicke bitte auf folgenden Link. <br><br> "
+					message.setContent("<h2>Hallo " + request.getParameter("vorname")
+							+ ",</h2> du hast dich auf der Seite des Auslandsportals registriert. "
+							+ "Um deine Registrierung abzuschlie&szlig;en klicke bitte auf folgenden Link. <br><br> "
 							+ "<a href=" + link + ">Anmeldung best&auml;tigen</a>", "text/html");
 
 					// Send message

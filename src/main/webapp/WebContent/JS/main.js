@@ -5,7 +5,7 @@ var main = function() {
 	$('.imgSlider').css('background-image', 'url(images/pan' + back + '.jpg)');
 	loadPortalInfo();
 	loop();
-	// �berpr�fen ob jemand eingeloggt ist
+	// Überprüfen ob jemand eingeloggt ist
 	if (isEmpty(sessionStorage['User']) === true  || sessionStorage['User'] === 'undefined'){
 	} else {
 		$('.loginFenster').hide();
@@ -128,28 +128,30 @@ var main = function() {
 			mobil = $('#inMobil').val();
 		}
 		if (pw1 != pw2) {
-			$('.falsch').html("Die Passw�rter stimmen nicht �berein.");
+			$('.falsch').html(unescape("Die Passw%F6rter stimmen nicht %FCberein."));
 			$('.falsch').show();
 		} else {
 			var vorname = $('#inVorname').val();
 			var nachname = $('#inNachname').val();
 			var email = $('#inMail').val();
 			if (rolle === 'Auslandsmitarbeiter' && email.match('dhbw-karlsruhe.de') !=  'dhbw-karlsruhe.de') {
-				$('.falsch').html("Bitte w�hlen sie nur Auslandsmitarbeiter, wenn sie einer sind.");
+				$('.falsch').html(unescape("Bitte w%E4hlen sie nur Auslandsmitarbeiter, wenn sie einer sind."));
 			} else if (studiengang === "Studiengang*") {
-				$('.falsch').html("Bitte w�hlen Deinen Studiengang aus.");
+				$('.falsch').html(unescape("Bitte w%E4hlen Deinen Studiengang aus."));
 			} else if (vorname === "") {
-				$('.falsch').html("Bitte gebe einen Vornamen ein.");
+				$('.falsch').html("Bitte gebe deinen Vornamen ein.");
 			} else if (nachname === "") {
-				$('.falsch').html("Bitte gebe einen Nachnamen ein.");
+				$('.falsch').html("Bitte gebe deinen Nachnamen ein.");
 			} else if (email === "") {
-				$('.falsch').html("Bitte gebe eine E-Mail ein.");
+				$('.falsch').html("Bitte gebe deine E-Mail ein.");
 			} else if (matrikelnummer === "") {
 				$('.falsch').html("Bitte gebe deine Matrikelnummer ein.");
 			} else if (kurs === "") {
 				$('.falsch').html("Bitte gebe deinen Kurs ein.");
+			} else if (pw1 === "") {
+				$('.falsch').html("Bitte gebe ein Passwort ein.");
 			} else if(pw1.length<7){
-				$('.falsch').html("Bitte gebe ein l�ngeres Passwort ein.");
+				$('.falsch').html(unescape("Bitte gebe ein l%E4ngeres Passwort ein."));
 			}
 			else { 
 				$.ajax({
