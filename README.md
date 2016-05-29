@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/mwi-projekt/Auslandssemesterportal2016.svg?branch=master)](https://travis-ci.org/mwi-projekt/Auslandssemesterportal2016)
 
 # Camunda BPM Process Application
 A Process Application for [Camunda BPM](http://docs.camunda.org).
