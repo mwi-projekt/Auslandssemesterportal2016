@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
   <bpmn:collaboration id="Collaboration_1cl2lu7">
-    <bpmn:participant id="Participant_00ci3jw" name="DHBW" processRef="Process_1" />
+    <bpmn:participant id="Participant_00ci3jw" name="DHBW" processRef="studentBewerben" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1" name="Student bewerben" isExecutable="true">
+  <bpmn:process id="studentBewerben" name="Student bewerben" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_07n76w6" name="Mitarbeiter AAA">
         <bpmn:flowNodeRef>ExclusiveGateway_1mtx0ph</bpmn:flowNodeRef>
@@ -39,7 +39,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_094sdpj" sourceRef="ServiceTask_1rmo0is" targetRef="EndEvent_0b01b6y" />
     <bpmn:sequenceFlow id="SequenceFlow_0ld8234" sourceRef="SendTask_1k50kdr" targetRef="UserTask_03enxy9" />
     <bpmn:sequenceFlow id="SequenceFlow_1uulx5l" sourceRef="SendTask_1536vi5" targetRef="UserTask_1crqg1b" />
-    <bpmn:startEvent id="StartEvent_1" name="Bewerbung starten" camunda:formKey="../../../../Auslandsemesterportal2016/start-form.html">
+    <bpmn:startEvent id="StartEvent_1" name="Bewerbung starten">
       <bpmn:documentation><![CDATA[Auf Front-End ist ein "Bewerbung"-Button hinterlegt.]]></bpmn:documentation>
       <bpmn:outgoing>SequenceFlow_1tuvr31</bpmn:outgoing>
     </bpmn:startEvent>
@@ -64,7 +64,7 @@
       <bpmn:incoming>SequenceFlow_16svqgm</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ld8234</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:userTask id="UserTask_1crqg1b" name="Daten eingeben " camunda:assignee="john">
+    <bpmn:userTask id="UserTask_1crqg1b" name="Daten eingeben " camunda:formKey="app:start-form.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1uulx5l</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_1tuvr31</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_16svqgm</bpmn:outgoing>
