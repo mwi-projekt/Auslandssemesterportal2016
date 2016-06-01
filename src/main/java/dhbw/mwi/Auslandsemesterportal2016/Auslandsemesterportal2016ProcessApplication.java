@@ -17,7 +17,7 @@ public class Auslandsemesterportal2016ProcessApplication extends ServletProcessA
    * In a @PostDeploy Hook you can interact with the process engine and access 
    * the processes the application has deployed. 
    */
-  @PostDeploy
+  //@PostDeploy
   public void onDeploymentFinished(ProcessEngine processEngine) {
 
     // start an initial process instance
