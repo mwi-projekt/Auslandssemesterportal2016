@@ -634,17 +634,17 @@ i {
 }
 
 .navBarAng {
-	background: #eee;
+	background: rgba(238, 238, 238, 0.2);
 	color: black;
 	margin-bottom: 0px;
 }
 
 .navelAng {
 	display: inline-block;
-	padding: 5px;
-	font-size: medium;
+	padding: 10px;
+	font-size: large;
 	cursor: pointer;
-	font-weight: bold;
+	
 }
 
 .contentAng {
@@ -661,9 +661,9 @@ i {
 }
 
 .active {
-	background: #AFEEEE !important;
+	background: #f1f3f3!important;
 	display: inline-block;
-	color: #005353;
+	color: #000000;
 }
 
 .zweiD {
@@ -683,4 +683,22 @@ i {
 
 .eingeloggt {
 	display: none;
+}
+.navMargin {
+	margin: 10px 10px 10px 10px;
+}
+.dhbwLogo {
+    width: 100%;
+    height: auto;
+}
+.headerWebsite {
+	text-align: center;
+}
+.logFenster {
+	text-algin: center;	
+    visibility: visible;
+}
+.logoFenster {
+	visibility:hidden;
+}
 }
