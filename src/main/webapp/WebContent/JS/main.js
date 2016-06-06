@@ -206,9 +206,10 @@ var main = function() {
 												$('.popUpBack').hide();
 												$('.popUpFeld').fadeOut();
 												alert("Fertig");
-												$('#register').fadeOut();
-												$('#register').hide();
+												//$('#register').fadeOut();
+												//$('#register').hide();
 												$('.modal').fadeOut();
+												$('.modal').modal('hide');
 
 											},
 											error : function(result) {
@@ -219,6 +220,25 @@ var main = function() {
 						}
 
 					});
+	
+	//Check ob Passwörter übereinstimmen
+	$('#inPwSt2').keyup(function(){
+		var inPwSt1 = document.getElementById("inPwSt1")
+		  , inPwSt2 = document.getElementById("inPwSt2");
+		
+		if(inPwSt1.value != inPwSt2.value) {
+			inPwSt2.setCustomValidity("Die Passwörter stimmen nicht überein");
+		} else {
+			inPwSt2.setCustomValidity('');
+		}
+		
+	});
+	
+	//Kein Reload der Modal-Boxen
+	$("form").submit(function () {
+		return false;
+	});
+	
 	// Click-Listener f�r Login-Button
 	$('#btnLogin').on(
 			'click',
@@ -252,6 +272,7 @@ var main = function() {
 							$('.logoutFenster').show();
 							$('.weg').css('display', 'inline');
 							$('.nutzerName').html(name[1]);
+							location.reload();
 
 						} else if (sessionStorage['rolle'] === '3') {
 							location.replace('index.html');
@@ -261,6 +282,7 @@ var main = function() {
 							$('.weg').css('display', 'inline');
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
+							location.reload(); 
 							
 						} else if (sessionStorage['rolle'] === '1') {
 							$('#normalBereich').hide();
@@ -268,6 +290,8 @@ var main = function() {
 							$('.nutzerName').html(name[1]);
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
+							location.reload();
+							
 						} else if (sessionStorage['rolle'] === "") {
 							$('#inName').css('color', 'red');
 							$('#inPasswort').css('color', 'red');
@@ -278,7 +302,6 @@ var main = function() {
 					},
 					error : function(data) {
 						alert("Fehler");
-
 					}
 				});
 			});
