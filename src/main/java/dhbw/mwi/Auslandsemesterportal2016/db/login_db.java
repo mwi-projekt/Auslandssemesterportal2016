@@ -26,6 +26,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
+
+import dhbw.mwi.Auslandsemesterportal2016.Auslandsemesterportal2016ProcessApplication;
+
 /**
  * Servlet implementation class prozess_db
  */
@@ -366,6 +371,9 @@ public class login_db extends HttpServlet {
 				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnr") + "' ";
 			} else if (action.equals("get_Unis")) {
+				ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+				Auslandsemesterportal2016ProcessApplication test = new Auslandsemesterportal2016ProcessApplication();
+				test.onDeploymentFinished(processEngine);
 				sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
 			} else if (action.equals("post_prozessStart")) {
