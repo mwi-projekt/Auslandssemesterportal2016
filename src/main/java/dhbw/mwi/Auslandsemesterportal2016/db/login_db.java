@@ -1,12 +1,9 @@
 package dhbw.mwi.Auslandsemesterportal2016.db;
 
-import java.io.IOException;
 import java.io.*;
 import java.util.Properties;
 import java.util.UUID;
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -28,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 import dhbw.mwi.Auslandsemesterportal2016.Auslandsemesterportal2016ProcessApplication;
 
@@ -373,7 +371,8 @@ public class login_db extends HttpServlet {
 			} else if (action.equals("get_Unis")) {
 				ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 				Auslandsemesterportal2016ProcessApplication test = new Auslandsemesterportal2016ProcessApplication();
-				test.onDeploymentFinished(processEngine);
+				ProcessInstance pI = test.bewerbungStarten(processEngine);
+				
 				sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
 			} else if (action.equals("post_prozessStart")) {

@@ -4,6 +4,7 @@ import org.camunda.bpm.application.PostDeploy;
 import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.application.impl.ServletProcessApplication;
 import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 /**
  * Process Application exposing this application's resources the process engine. 
@@ -14,14 +15,13 @@ public class Auslandsemesterportal2016ProcessApplication extends ServletProcessA
  // private static final String PROCESS_DEFINITION_KEY = "Auslandsemesterportal2016";
 
   /**
-   * In a @PostDeploy Hook you can interact with the process engine and access 
-   * the processes the application has deployed. 
+   * Innerhalb dieser Methode wird der Prozess "studentBewerben.bpmn" angestoßen.
    */
-  //@PostDeploy
-  public void onDeploymentFinished(ProcessEngine processEngine) {
+  
+  public ProcessInstance bewerbungStarten(ProcessEngine processEngine) {
 
     // start an initial process instance
-	 processEngine.getRuntimeService().startProcessInstanceByKey("studentBewerben");
+	return processEngine.getRuntimeService().startProcessInstanceByKey("studentBewerben");
   }
 
 }
