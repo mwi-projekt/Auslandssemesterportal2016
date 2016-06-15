@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016;
+	package dhbw.mwi.Auslandsemesterportal2016;
 
 import org.camunda.bpm.application.PostDeploy;
 import org.camunda.bpm.application.ProcessApplication;
