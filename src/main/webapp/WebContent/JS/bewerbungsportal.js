@@ -4,7 +4,7 @@ var main = function() {
 		value: 20
 	});
 	getStudiengaenge();
-	// Überprüfen, was der User für einen Status hat
+	// ï¿½berprï¿½fen, was der User fï¿½r einen Status hat
 	if (isEmpty(sessionStorage['User']) === true){
 		location.replace("index.html");
 	} else {
@@ -100,7 +100,7 @@ var main = function() {
 							$('.popUpBack').html('<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
 							$('.popUpBack').show();
 							setTimeout(closeLoading, 1000);
-							//Ermittlung des Fortschritts für die weiteren Bewerbungsschritte
+							//Ermittlung des Fortschritts fï¿½r die weiteren Bewerbungsschritte
 							var uni = $('#uni' + id).text();
 							schritt1(uni);
 
@@ -142,9 +142,9 @@ var main = function() {
 		id = id.substring(3, 4);
 		$('#in' + id).show();
 	});
-	//Click-Listener für neuen Bewerbungsprozess starten Button
+	//Click-Listener fï¿½r neuen Bewerbungsprozess starten Button
 	$('#newBewProzess').on('click', function() {
-		var popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Bitte wähle die Uni aus.</p><select class="inBox" id="selectUni">';
+		var popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Bitte wï¿½hle die Uni aus.</p><select class="inBox" id="selectUni">';
 		$.ajax({
 			type: "POST",
 			url: "login_db",
@@ -165,7 +165,7 @@ var main = function() {
 					for (var i = 0; i < auslesen.length - 1; i++) {
 						for (var k = 0; k < splitUni.length; k++) {
 							auslesen[i] = auslesen[i].trim();
-							// Diese Abfrage verhindert, dass Unis für die der Student sich beworben hat in der Auswahl angezeigt werden
+							// Diese Abfrage verhindert, dass Unis fï¿½r die der Student sich beworben hat in der Auswahl angezeigt werden
 							if (splitUni[k] === auslesen[i]) {
 								pruefen = "ja";
 							} else {
@@ -198,9 +198,9 @@ var main = function() {
 						popUpHtml = popUpHtml + '<option>' + auslesen[l] + '</option>';
 					}
 				}
-				popUpHtml = popUpHtml + '</select><label class="btn" id="newBewProzessWahl" style="margin-left: 10px;">Bestätigen</label>';
+				popUpHtml = popUpHtml + '</select><label class="btn" id="newBewProzessWahl" style="margin-left: 10px;">BestÃ¤tigen</label>';
 				if (popUpHtml.match('<option>') != '<option>') {
-					popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
+					popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits fÃ¼r alle verfÃ¼gbaren Auslandsuniversitï¿½ten fÃ¼r ihren Studiengang beworben.</p>';
 				}
 				$('.popUpFeld').html(popUpHtml);
 				$('.popUpFeld').show();
@@ -253,7 +253,7 @@ var main = function() {
 				
 	});
 
-	//Click-Listener für neuen Erfahrungbericht starten Button
+	//Click-Listener fÃ¼r neuen Erfahrungbericht starten Button
 	$('#newErfahrungsbericht').on('click', function() {
 		$('.iFenster').hide();
 		$('.iF2').show();
@@ -269,9 +269,9 @@ var main = function() {
 	$('.btn').on('mouseover', function() {
 		var id = $(this).attr('id');
 		if (id === "btnBewSave") {
-			$('#textbox').text("Wenn du noch nicht alle Felder ausgefüllt hast, kannst du so deine Daten zwischenspeichern, um später weiterzumachen.");
+			$('#textbox').text("Wenn du noch nicht alle Felder ausgefÃ¼llt hast, kannst du so deine Daten zwischenspeichern, um spÃ¤ter weiterzumachen.");
 		} else if (id === "btnBewWeiter") {
-			$('#textbox').text("Alle Felder ausgefüllt und überprüft? Super, dann geht's hier weiter.");
+			$('#textbox').text("Alle Felder ausgefÃ¼llt und Ã¼berprÃ¼ft? Super, dann geht's hier weiter.");
 		}
 		$('#textbox').show();
 	});
@@ -287,7 +287,7 @@ var main = function() {
 			//Hier muss rein, wie die eingegebenen Daten in die Datenbank gespeichert werden
 		}
 	});
-	// Wenn der auf logout geklickt wird.
+	// Wenn der User auf logout geklickt wird.
 	$('#logout').on('click', function() {
 		sessionStorage.clear();
 		//Herausfinden auf welcher Seite ich mich gerade befinde
@@ -304,14 +304,14 @@ var main = function() {
 			$('#'+ i + '5').addClass("hidden");
 		}*/
 	});
-	//Wenn während des Bewerbungsprozess auf Zurück zur Übersicht geklickt wird
+	//Wenn wÃ¤hrend des Bewerbungsprozess auf "ZurÃ¼ck" zur Ãœbersicht geklickt wird
 	$('.backToBewView').on('click', function() {
 		$('.iFenster').hide();
 		$('.iF1').hide();
 		$('.iF2').hide();
 		$('#bewProzess').show();
 	});
-	//Auswahlmöglichkeit im Bewerbungsportal zur Sortierung der Angebote
+	//AuswahlmÃ¶glichkeit im Bewerbungsportal zur Sortierung der Angebote
 	$('#selStudiengang').on('click', function(event) {
 		if ($('#selStudiengang').val() != "Alle Angebote") {
 			$('.angebote').hide();
@@ -320,7 +320,7 @@ var main = function() {
 			$('.angebote').show();
 		}
 	});
-	//Blabla
+	//Blabla !!!!!!! 
 	$('#closeBewerber').on('click', function(event) {
 		$('.popUpBewerber').hide();
 		$('.popUpBewerber').children().children('b').html('');
@@ -426,7 +426,7 @@ var main = function() {
 			$('#bewFormular2').show();
 		} else if (id === '2') {
 			if (isEmpty($('#bewLand').val()) === true || isEmpty($('#bewBundesland').val()) === true || isEmpty($('#bewStrasse').val()) === true || isEmpty($('#bewHausnummer').val()) === true || isEmpty($('#bewPlz').val()) === true || isEmpty($('#bewStadt').val()) === true) {
-				alert("Bitte fülle alle Felder aus.");
+				alert("Bitte fÃ¼lle alle Felder aus.");
 			}
 			if (sessionStorage['adresseOkay'] === 'true') {
 				$.ajax({
@@ -616,7 +616,7 @@ var main = function() {
 			if (sessionStorage['partnerUnternhmenOkay'] === false) {
 			// Abfrage zum Insert oder Updaten
 				if (isEmpty($('#bewPartnerName').val()) === true || isEmpty($('#bewPartnerAnsprech').val()) === true || isEmpty($('#bewPartnerEmail').val()) === true || isEmpty($('#bewPartnerStrasse').val()) === true || isEmpty($('#bewPartnerHausnummer').val()) === true || isEmpty($('#bewPartnerPlz').val()) === true || isEmpty($('#bewPartnerStadt').val()) === true) {
-					alert("Bitte fülle alle Felder aus.");
+					alert("Bitte fï¿½lle alle Felder aus.");
 				} else {
 					$.ajax({
 						type: "POST",
@@ -638,7 +638,7 @@ var main = function() {
 						}
 					});
 					$('.dat').hide();
-					$('.erfolgreich').html('<p>Du hat alle Daten benötigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
+					$('.erfolgreich').html('<p>Du hat alle Daten benï¿½tigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
 					$('.erfolgreich').show();
 					$('.erfolgreich').fadeOut(7000);
 				}
@@ -663,7 +663,7 @@ var main = function() {
 					}
 				});
 				$('.dat').hide();
-				$('.erfolgreich').html('<p>Du hat alle Daten benötigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
+				$('.erfolgreich').html('<p>Du hat alle Daten benï¿½tigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
 				$('.erfolgreich').show();
 				$('.erfolgreich').fadeOut(7000);
 				var name = $('#bewVorname').val() + ' ' + $('bewNachname').val();
@@ -717,7 +717,7 @@ var main = function() {
 			});
 		}
 	});
-	//Bewerbungsformular zurück buttons
+	//Bewerbungsformular zurï¿½ck buttons
 	$('.btnBewBack').on('click', function(event) {
 		var id = event.target.id.substring(10, 11);
 		if (id === '2') {
@@ -878,9 +878,9 @@ function loadBewerber(auslesen, zaehler, tabelle, count, even) {
 		}
 		var btn = '';
 		if (status === 0 || status % 20 === 0) {
-			btn = "Ausgefüllte Daten";
+			btn = "Ausgefï¿½llte Daten";
 		} else {
-			btn = "Eingaben überprüfen";
+			btn = "Eingaben ï¿½berprï¿½fen";
 		}
 		if ((zaehler - count) === 1) {
 			l = 0;
@@ -965,7 +965,7 @@ function addListener(zaehler) {
 								}, success: function(result) {
 									auslesen = [];
 									auslesen = result.split(';');
-									$('#formPrStraße').html(auslesen[0] + ' ' + auslesen[1]);
+									$('#formPrStraï¿½e').html(auslesen[0] + ' ' + auslesen[1]);
 									$('#formPrPlz').html(auslesen[2]);
 									$('#formPrStadt').html(auslesen[3]);
 									$('#formPrBundesland').html(auslesen[4]);
@@ -980,7 +980,7 @@ function addListener(zaehler) {
 										}, success: function(result) {
 											auslesen = [];
 											auslesen = result.split(';');
-											$('#formThStraße').html(auslesen[0] + ' ' + auslesen[1]);
+											$('#formThStraï¿½e').html(auslesen[0] + ' ' + auslesen[1]);
 											$('#formThPlz').html(auslesen[2]);
 											$('#formThStadt').html(auslesen[3]);
 											$('#formThBundesland').html(auslesen[4]);
@@ -997,7 +997,7 @@ function addListener(zaehler) {
 													$('#formFirmenname').html(auslesen[0]);
 													$('#formAnsprechpartner').html(auslesen[1]);
 													$('#formEmailAnsprech').html(auslesen[2]);
-													$('#formParStraße').html(auslesen[3] + auslesen[4]);
+													$('#formParStraï¿½e').html(auslesen[3] + auslesen[4]);
 													$('#formParPlz').html(auslesen[5]);
 													$('#formParStadt').html(auslesen[6]);
 													$('.popUpBack').hide();

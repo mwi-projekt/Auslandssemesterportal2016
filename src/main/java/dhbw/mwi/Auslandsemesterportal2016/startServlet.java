@@ -65,15 +65,13 @@ public class startServlet extends HttpServlet{
 		
 		
 		if (activityIds.isEmpty() == true){
+			
 			System.out.println("Alter die Kacke ist leer");
 			
-		}else{
-			//User Task beenden
-			System.out.print("Task Id: " + activityIds.get(0));
-			
-			processEngine.getTaskService().complete(processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId(),inputVariablen);
-			
-			System.out.print("Nach Task!");
+		}else{			
+			processEngine.getTaskService().complete(
+									processEngine.getTaskService().createTaskQuery().
+												processInstanceId(id).singleResult().getId(),inputVariablen);
 		}
 		
 		int nr = 0;

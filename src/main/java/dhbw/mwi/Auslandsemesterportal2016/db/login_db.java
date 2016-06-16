@@ -1,6 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import java.io.*;
+import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 import java.sql.*;
@@ -49,6 +50,9 @@ public class login_db extends HttpServlet {
 	ResultSet rs;
 	int rsupd;
 	String uuidCode;
+	
+	ProcessInstance pI;
+	ProcessEngine processEngine;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -346,6 +350,7 @@ public class login_db extends HttpServlet {
 				
 				
 				sql = "SELECT titel, listelement1, listelement2, listelement3, listelement4, listelement5, listelement6, listelement7 FROM cms_portalInfo";
+				
 			} else if (action.equals("post_portalInfo")) {
 				sqlupd = "UPDATE cms_portalInfo SET titel = '" + request.getParameter("titel") + "', listelement1 = '"
 						+ request.getParameter("listelement1") + "' , listelement2 = '"
@@ -356,55 +361,70 @@ public class login_db extends HttpServlet {
 						+ request.getParameter("listelement6") + "' , listelement7 = '"
 						+ request.getParameter("listelement7") + "'";
 				System.out.println(sqlupd);
+				
 			} else if (action.equals("get_User")) {
 				sql = "SELECT nachname, vorname, email, tel, mobil, studiengang, kurs, matrikelnummer, standort FROM user WHERE rolle ='"
 						+ request.getParameter("rolle") + "' ";
 				System.out.println("HIER");
+				
 			} else if (action.equals("get_Auslandsangebote")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote WHERE ID > 0";
+				
 			} else if (action.equals("get_AuslandsangeboteInhalt")) {
 				sql = "SELECT uniTitel, allgemeineInfos, faq, erfahrungsbericht, bilder, bewerben FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
+				
 			} else if (action.equals("get_userDaten")) {
 				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnr") + "' ";
+				
 			} else if (action.equals("get_Unis")) {
 				
 				/*Prozess studentBewerben wird gestartet*/
-				
-				ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-				Auslandsemesterportal2016ProcessApplication test = new Auslandsemesterportal2016ProcessApplication();
-				ProcessInstance pI = test.bewerbungStarten(processEngine);
+				processEngine = ProcessEngines.getDefaultProcessEngine();
+				pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);
 				
 				sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
+				
 			} else if (action.equals("post_prozessStart")) {
+				
+				/* Complete Task "Downloads anbieten" */
+				completeTask();
+				
 				sqlupd = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("uni") + "', '"
 						+ request.getParameter("datum") + "', '" + request.getParameter("schritt1") + "', '"
 						+ request.getParameter("schritt2") + "', '" + request.getParameter("schritt3") + "', '"
 						+ request.getParameter("schritt4") + "', '" + request.getParameter("schritt5") + "')";
+				
 			} else if (action.equals("get_prozessStatus")) {
 				sql = "SELECT uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
+				
 			} else if (action.equals("get_Studiengaenge")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote";
+				
 			} else if (action.equals("get_angeboteDaten")) {
 				sql = "SELECT studiengang, uniTitel, allgemeineInfos, faq, erfahrungsbericht, maps FROM cms_auslandsAngeboteInhalt";
+				
 			} else if (action.equals("post_newStudiengang")) {
 				sqlupd = "INSERT INTO cms_auslandsAngebote (studiengang) VALUES ('"
 						+ request.getParameter("studiengang") + "') ";
+				
 			} else if (action.equals("post_newAuslandsangebot")) {
 				sqlupd = "INSERT INTO cms_auslandsAngeboteInhalt (studiengang, uniTitel, allgemeineInfos, faq, erfahrungsbericht, maps) VALUES ('"
 						+ request.getParameter("studiengang") + "', '" + request.getParameter("uniTitel") + "', '"
 						+ request.getParameter("allgemeineInfos") + "', '" + request.getParameter("faq") + "', '"
 						+ request.getParameter("erfahrungsbericht") + "', '" + request.getParameter("maps") + "')";
+				
 			} else if (action.equals("post_editAuslandsangebot")) {
 				sqlupd = "UPDATE cms_auslandsAngeboteInhalt SET allgemeineInfos = '"
 						+ request.getParameter("allgemeineInfos") + "' , faq = '" + request.getParameter("faq")
 						+ "', erfahrungsbericht = '" + request.getParameter("erfahrungsbericht") + "' , maps = '"
 						+ request.getParameter("maps") + "' WHERE uniTitel ='" + request.getParameter("uniTitel")
 						+ "' ";
+				
 			} else if (action.equals("post_infoMaterial")) {
 				sqlupd = "UPDATE cms_infoMaterial SET titel = '" + request.getParameter("titel")
 						+ "' , listelement1 = '" + request.getParameter("listelement1") + "' , link1 = '"
@@ -417,42 +437,56 @@ public class login_db extends HttpServlet {
 						+ request.getParameter("listelement6") + "' , link6 = '" + request.getParameter("link6")
 						+ "' , listelement7 = '" + request.getParameter("listelement7") + "' , link7 = '"
 						+ request.getParameter("link7") + "' ";
+				
 			} else if (action.equals("get_infoMaterial")) {
 				sql = "SELECT titel, listelement1, link1, listelement2, link2, listelement3, link3, listelement4, link4, listelement5, link5, listelement6, link6, listelement7, link7 FROM cms_infoMaterial";
+				
 			} else if (action.equals("get_bewerber")) {
 				sql = "SELECT matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess";
+				
 			} else if (action.equals("update_User")) {
+				
+				/* Complete Task "Daten eingeben" */
+				completeTask();
+				
 				sqlupd = "UPDATE user SET vorname = '" + request.getParameter("vorname") + "' , nachname = '"
 						+ request.getParameter("nachname") + "' , email = '" + request.getParameter("email")
 						+ "' , tel = '" + request.getParameter("telefon") + "' , mobil = '"
 						+ request.getParameter("mobil") + "' , studiengang = '" + request.getParameter("studiengang")
 						+ "' , kurs = '" + request.getParameter("kurs") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
+				
 			} else if (action.equals("insert_EnglischAbi")) {
 				sqlupd = "INSERT INTO englischnote (matrikelnummer, englischAbi) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("abinote") + "') ";
+				
 			} else if (action.equals("get_Note")) {
 				sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
+				
 			} else if (action.equals("insert_Adresse")) {
 				sqlupd = "INSERT INTO adresse (matrikelnummer, phase, strasse, hausnummer, plz, ort, bundesland, land) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("phase") + "', '"
 						+ request.getParameter("strasse") + "', '" + request.getParameter("hausnummer") + "', '"
 						+ request.getParameter("plz") + "', '" + request.getParameter("stadt") + "', '"
 						+ request.getParameter("bundesland") + "', '" + request.getParameter("land") + "') ";
+				
 			} else if (action.equals("get_Adresse")) {
 				sql = "SELECT strasse, hausnummer, plz, ort, bundesland, land FROM adresse WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND phase = '" + request.getParameter("phase")
 						+ "' ";
+				
 			} else if (action.equals("get_Partnerunternehmen")) {
 				sql = "SELECT firma, ansprechpartner, email, strasse, hausnummer, plz, stadt FROM partnerunternehmen WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
+				
 			} else if (action.equals("insert_Partnerunternehmen")) {
 				sqlupd = " INSERT INTO partnerunternehmen (firma, ansprechpartner, email, strasse, hausnummer, plz, stadt, matrikelnummer) VALUES ('"
 						+ request.getParameter("firma") + "', '" + request.getParameter("email") + "', '"
 						+ request.getParameter("ansprechpartner") + "', '" + request.getParameter("strasse") + "', '"
 						+ request.getParameter("hausnummer") + "', '" + request.getParameter("plz") + "', '"
 						+ request.getParameter("stadt") + "', '" + request.getParameter("matrikelnummer") + "') ";
+				
 			} else if (action.equals("update_Adresse")) {
 				sqlupd = "UPDATE adresse SET strasse = '" + request.getParameter("strasse") + "', hausnummer = '"
 						+ request.getParameter("hausnummer") + "', plz = '" + request.getParameter("plz") + "', ort = '"
@@ -460,6 +494,7 @@ public class login_db extends HttpServlet {
 						+ "', land = '" + request.getParameter("land") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND phase = '" + request.getParameter("phase")
 						+ "' ";
+				
 			} else if (action.equals("update_Partnerunternehmen")) {
 				sqlupd = "UPDATE partnerunternehmen SET ansprechpartner = '" + request.getParameter("ansprechpartner")
 						+ "', strasse = '" + request.getParameter("strasse") + "', hausnummer = '"
@@ -467,6 +502,7 @@ public class login_db extends HttpServlet {
 						+ "', stadt = '" + request.getParameter("stadt") + "', email = '"
 						+ request.getParameter("email") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
+				
 			} else if (action.equals("update_BewProzess1")) {
 				sqlupd = "UPDATE bewerbungsprozess SET schritt_1 = 1 WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND uniName = '" + request.getParameter("uni")
@@ -517,6 +553,16 @@ public class login_db extends HttpServlet {
 				}
 			}
 		}
+	}
+	
+	/** Diese Methode komplettiert den jeweiligen Task*/
+	public void completeTask(){
+		/* Hier muss noch die Prozessinstanz-ID des jeweiligen Studenten als Parameter mitgegeben werden. pI.getId() muss
+		 * entsprechend geändert werden. */
+		
+		processEngine.getTaskService().complete(
+								processEngine.getTaskService().createTaskQuery().
+													processInstanceId(pI.getId()).singleResult().getId());
 	}
 
 	public void confirm(String code) {
