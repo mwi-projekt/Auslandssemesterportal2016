@@ -382,12 +382,18 @@ public class login_db extends HttpServlet {
 				
 				/*Prozess studentBewerben wird gestartet*/
 				processEngine = ProcessEngines.getDefaultProcessEngine();
-				pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);
+				pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);	
 				
 				sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
 				
+				/*SQL-Befehl für das Mapping von User und Prozessinstanz: !!!!! ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
+				 * "INSERT INTO MapUserInstanz (email, processInstance, status) VALUES ('" + request.getParameter("bewerberEmail") + "', '" + pI.getId() + "', '" + 1 + "')"; */
+				
 			} else if (action.equals("post_prozessStart")) {
+				
+				/*SQL-Befehl für das Auslesen der Prozessinstanz des Users: !!!!! ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
+				 * "SELECT processInstance FROM MapUserInstanz WHERE studiengang ='" + request.getParameter("bewerberEmail") + "' "; */
 				
 				/* Complete Task "Downloads anbieten" */
 				completeTask();

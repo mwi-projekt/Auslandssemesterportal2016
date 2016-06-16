@@ -144,7 +144,7 @@ var main = function() {
 	});
 	//Click-Listener f�r neuen Bewerbungsprozess starten Button
 	$('#newBewProzess').on('click', function() {
-		var popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Bitte w�hle die Uni aus.</p><select class="inBox" id="selectUni">';
+		var popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Bitte wähle die Uni aus.</p><select class="inBox" id="selectUni">';
 		$.ajax({
 			type: "POST",
 			url: "login_db",
