@@ -369,6 +369,9 @@ public class login_db extends HttpServlet {
 				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnr") + "' ";
 			} else if (action.equals("get_Unis")) {
+				
+				/*Prozess studentBewerben wird gestartet*/
+				
 				ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 				Auslandsemesterportal2016ProcessApplication test = new Auslandsemesterportal2016ProcessApplication();
 				ProcessInstance pI = test.bewerbungStarten(processEngine);
