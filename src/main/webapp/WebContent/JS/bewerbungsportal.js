@@ -102,7 +102,7 @@ var main = function() {
 							setTimeout(closeLoading, 1000);
 							//Ermittlung des Fortschritts f�r die weiteren Bewerbungsschritte
 							var uni = $('#uni' + id).text();
-							schritt1(uni);
+							schritt0(uni);
 
 						}); //Bitte nichts hinter diese Klammer schreiben, durch den AJAX request kommt es hin und wieder zu Fehlern, die den weiteren Prozess aber nicht beeinflussen
 					} 
@@ -199,6 +199,7 @@ var main = function() {
 					}
 				}
 				popUpHtml = popUpHtml + '</select><label class="btn" id="newBewProzessWahl" style="margin-left: 10px;">Bestätigen</label>';
+				
 				if (popUpHtml.match('<option>') != '<option>') {
 					popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversit�ten für ihren Studiengang beworben.</p>';
 				}
@@ -238,7 +239,7 @@ var main = function() {
 							schritt5: "0",
 						}, success: function(result) {
 							var uni = $('#selectUni').val();
-							schritt1(uni);
+							schritt0(uni);
 						}, error: function(result) {
 							
 						}
@@ -632,15 +633,19 @@ var main = function() {
 							plz: $('#bewPartnerPlz').val(),
 							stadt: $('#bewPartnerStadt').val(),
 						}, success: function(result) {
-							
+							$('.iFenster').hide();
+							$('.iF1').show();
+							$('.dat').hide();
+							$('#input-group').hide();
+							$('#bewFormular5').show();
+							$('#bewFormular1').hide();
+							$('#bewProzess').hide();
+							$('#aktuelleUni').html(uni);
 						}, error: function(result) {
 							
 						}
 					});
-					$('.dat').hide();
-					$('.erfolgreich').html('<p>Du hat alle Daten ben�tigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
-					$('.erfolgreich').show();
-					$('.erfolgreich').fadeOut(7000);
+					
 				}
 			} else {
 				$.ajax({
@@ -657,33 +662,68 @@ var main = function() {
 						plz: $('#bewPartnerPlz').val(),
 						stadt: $('#bewPartnerStadt').val(),
 					}, success: function(result) {
+						$('.iFenster').hide();
+						$('.iF1').show();
+						$('.dat').hide();
+						$('#bewFormular5').show();
+						$('#input-group').hide();
+						$('#bewFormular1').hide();
+						$('#bewProzess').hide();
+						$('#aktuelleUni').html(uni);
 						
 					}, error: function(result) {
 						
 					}
 				});
-				$('.dat').hide();
-				$('.erfolgreich').html('<p>Du hat alle Daten ben�tigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
-				$('.erfolgreich').show();
-				$('.erfolgreich').fadeOut(7000);
-				var name = $('#bewVorname').val() + ' ' + $('bewNachname').val();
-				var uni = $('#aktuelleUni').html();
-				var matrikelnummer = sessionStorage['matrikelnr'];
-				$.ajax({
-					type: "POST",
-					url: "login_db",
-					data: {
-						action: "sendmail",
-						name: name,
-						uni: uni,
-						matrikelnummer: matrikelnummer,
-					}, success: function(result) {
-						
-					}, error: function(result) {
-						
-					}
-				});
+				
+				
 			}
+		}else if (id==5){
+			$.ajax({
+				type: "POST",
+				url: "login_db",
+				data: {
+					action: "nach_Upload",
+					matrikelnummer: sessionStorage['matrikelnr'],
+					firma: $('#bewPartnerName').val(),
+					ansprechpartner: $('#bewPartnerAnsprech').val(),
+					email: $('#bewPartnerEmail').val(),
+					strasse: $('#bewPartnerStrasse').val(),
+					hausnummer: $('#bewPartnerHausnummer').val(),
+					plz: $('#bewPartnerPlz').val(),
+					stadt: $('#bewPartnerStadt').val()
+					
+				}, success: function(result) {
+					$('.dat').hide();
+					$('.erfolgreich').html('<p>Du hat alle Daten ben�tigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
+					$('.erfolgreich').show();
+					$('.erfolgreich').fadeOut(7000);
+					$('.iFenster').hide();
+					$('.iF1').hide();
+					$('.iF2').hide();
+					$('#bewProzess').show();
+					
+					var name = $('#bewVorname').val() + ' ' + $('bewNachname').val();
+					var uni = $('#aktuelleUni').html();
+					var matrikelnummer = sessionStorage['matrikelnr'];
+					$.ajax({
+						type: "POST",
+						url: "login_db",
+						data: {
+							action: "sendmail",
+							name: name,
+							uni: uni,
+							matrikelnummer: matrikelnummer,
+						}, success: function(result) {
+
+						}, error: function(result) {
+							
+						}
+					});
+				}, error: function(result) {
+					
+				}
+			});
 		}
 	});
 	//Theorieadresse ist die gleiche wie die PRaxisadresse
@@ -731,6 +771,22 @@ var main = function() {
 			$('#bewFormular3').show();
 		}
 	});
+	// nach downloads weiter gedrückt
+	$('#bewFormular0').on('click', function(event) {
+		$.ajax({
+			type: "POST",
+			url: "login_db",
+			data: {
+				action: "weiter_nach_downloads_anzeige",
+				
+			}, success: function(result) {
+				var uni = $('#selectUni').val();
+				schritt1(uni)
+			}, error: function(result) {
+				
+			}
+		});
+	});
 };
 
 $(document).ready(main);
@@ -738,7 +794,31 @@ $(document).ready(main);
 function isEmpty(str) {
 	return (!str || 0 === str.length);
 }
-
+//downloads Anzeigen
+function schritt0 (uni) {
+	$.ajax({
+		type: "POST",
+		url: "login_db",
+		data: {
+			action: "get_downloads",
+			matrikelnr: sessionStorage['matrikelnr'],
+		}, success: function(result) {
+			$('.iFenster').hide();
+			$('.iF1').show();
+			$('.dat').hide();
+			$('#bewFormular0').show();
+			$('#bewFormular1').hide();
+			$('#bewProzess').hide();
+			$('#aktuelleUni').html(uni);
+			
+			
+			}
+			
+		, error: function(result) {
+			
+		}
+	});
+}
 function schritt1 (uni) {
 	$.ajax({
 		type: "POST",
@@ -750,6 +830,7 @@ function schritt1 (uni) {
 			$('.iFenster').hide();
 			$('.iF1').show();
 			$('.dat').hide();
+			$('#bewFormular0').hide();
 			$('#bewFormular1').show();
 			$('#bewProzess').hide();
 			$('#aktuelleUni').html(uni);

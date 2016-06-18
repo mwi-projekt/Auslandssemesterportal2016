@@ -50,7 +50,7 @@ public class login_db extends HttpServlet {
 	ResultSet rs;
 	int rsupd;
 	String uuidCode;
-	
+
 	ProcessInstance pI;
 	ProcessEngine processEngine;
 
@@ -71,7 +71,6 @@ public class login_db extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");
 		String sql = "";
-		
 
 		// if (action.equals("get_files") ){
 		// sql = "SELECT id, name, comment FROM prozess_files";
@@ -113,40 +112,41 @@ public class login_db extends HttpServlet {
 		}
 
 	}
-	
-	protected static String HashSha256(String input) {
-        
-        String result = null;
-         
-        if(null == input) return null;
-         
-        try {
-             
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-		
-            md.update(input.getBytes());
 
-            byte[] hash = md.digest();
-            
-            result = javax.xml.bind.DatatypeConverter.printHexBinary(hash).toLowerCase();
-             
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-	
+	protected static String HashSha256(String input) {
+
+		String result = null;
+
+		if (null == input)
+			return null;
+
+		try {
+
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+			md.update(input.getBytes());
+
+			byte[] hash = md.digest();
+
+			result = javax.xml.bind.DatatypeConverter.printHexBinary(hash).toLowerCase();
+
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	protected static String generateSalt() {
-		
-        SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[32];
-        random.nextBytes(bytes);
-		
+
+		SecureRandom random = new SecureRandom();
+		byte bytes[] = new byte[32];
+		random.nextBytes(bytes);
+
 		String result = javax.xml.bind.DatatypeConverter.printHexBinary(bytes).toLowerCase();
-		
-        return result;
-		
-    }
+
+		return result;
+
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -208,13 +208,13 @@ public class login_db extends HttpServlet {
 				// parsing from the date and time is within the SQL-Statment.
 				// For the DATE the
 				// form is YYYY-MM-DD. For TIME it is HH:MM:SS
-				
-				//SQL-Statement für Salt vorbereiten
-				sqlsalt = "SELECT salt FROM user WHERE '" + request.getParameter("vorname")
-				+ "'= vorname AND '" + request.getParameter("nachname") + "' = nachname";
+
+				// SQL-Statement für Salt vorbereiten
+				sqlsalt = "SELECT salt FROM user WHERE '" + request.getParameter("vorname") + "'= vorname AND '"
+						+ request.getParameter("nachname") + "' = nachname";
 				String salt = null;
-				
-				//Verbindung zur DB um Salt abzurufen
+
+				// Verbindung zur DB um Salt abzurufen
 				try {
 					// Register JDBC driver
 					Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -228,7 +228,7 @@ public class login_db extends HttpServlet {
 						int spalten = rs.getMetaData().getColumnCount();
 						while (rs.next()) {
 							for (int k = 1; k <= spalten; k++) {
-								//Salt abrufen
+								// Salt abrufen
 								salt = rs.getString(k);
 							}
 						}
@@ -254,14 +254,15 @@ public class login_db extends HttpServlet {
 						System.out.println("Exception : " + ex.getMessage());
 					}
 				}
-				
-				//Berechnung des Passworthashes aus gehashtem Eingabewert und Salt
-				String pw = HashSha256( HashSha256(request.getParameter("pw")) + salt );
-				
-				//SQL-Statement für die Anmeldung
+
+				// Berechnung des Passworthashes aus gehashtem Eingabewert und
+				// Salt
+				String pw = HashSha256(HashSha256(request.getParameter("pw")) + salt);
+
+				// SQL-Statement für die Anmeldung
 				sql = "SELECT rolle, matrikelnummer, studiengang FROM user WHERE '" + request.getParameter("vorname")
-						+ "'= vorname AND '" + request.getParameter("nachname") + "' = nachname AND '"
-						+ pw + "' = passwort";
+						+ "'= vorname AND '" + request.getParameter("nachname") + "' = nachname AND '" + pw
+						+ "' = passwort";
 				System.out.println(sql);
 			} else if (action.equals("post_register")) {
 				if (request.getParameter("rolle").equals("Studierender")) {
@@ -317,21 +318,20 @@ public class login_db extends HttpServlet {
 					 */
 					UUID id = UUID.randomUUID();
 					System.out.println(id);
-					
-					//Zufälliges Salt generieren und Passwort hashen
+
+					// Zufälliges Salt generieren und Passwort hashen
 					String salt = generateSalt();
-					String pw = HashSha256( HashSha256(request.getParameter("passwort")) + salt );					
-					
+					String pw = HashSha256(HashSha256(request.getParameter("passwort")) + salt);
+
 					sqlupd = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert) VALUES ('"
-							+ request.getParameter("vorname") + "', '" + request.getParameter("nachname") + "', '"
-							+ pw + "', '" + salt + "', '" + rolle + "', '" + request.getParameter("email")
-							+ "', '" + request.getParameter("studiengang") + "', '" + request.getParameter("kurs")
-							+ "', '" + request.getParameter("matrikelnummer") + "', '" + request.getParameter("tel")
-							+ "', '" + request.getParameter("mobil") + "', '" + request.getParameter("standort")
-							+ "', '" + id + "')";
+							+ request.getParameter("vorname") + "', '" + request.getParameter("nachname") + "', '" + pw
+							+ "', '" + salt + "', '" + rolle + "', '" + request.getParameter("email") + "', '"
+							+ request.getParameter("studiengang") + "', '" + request.getParameter("kurs") + "', '"
+							+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("tel") + "', '"
+							+ request.getParameter("mobil") + "', '" + request.getParameter("standort") + "', '" + id
+							+ "')";
 					System.out.println(sqlupd);
 					String link = "193.196.7.215:8080/Auslandsemesterportal2016/WebContent/index.html?confirm=" + id;
-					
 
 					message.setContent("<h2>Hallo " + request.getParameter("vorname")
 							+ ",</h2> du hast dich auf der Seite des Auslandsportals registriert. "
@@ -344,13 +344,13 @@ public class login_db extends HttpServlet {
 				} catch (MessagingException e) {
 					throw new RuntimeException(e);
 				}
-				//wird am anfang immer aufgerufen k.A. weshalb deshalb wird hier überprüft, ob verifizierungsversuch
+				// wird am anfang immer aufgerufen k.A. weshalb deshalb wird
+				// hier überprüft, ob verifizierungsversuch
 			} else if (action.equals("get_portalInfo")) {
 				confirm(request.getParameter("confirm"));
-				
-				
+
 				sql = "SELECT titel, listelement1, listelement2, listelement3, listelement4, listelement5, listelement6, listelement7 FROM cms_portalInfo";
-				
+
 			} else if (action.equals("post_portalInfo")) {
 				sqlupd = "UPDATE cms_portalInfo SET titel = '" + request.getParameter("titel") + "', listelement1 = '"
 						+ request.getParameter("listelement1") + "' , listelement2 = '"
@@ -361,76 +361,85 @@ public class login_db extends HttpServlet {
 						+ request.getParameter("listelement6") + "' , listelement7 = '"
 						+ request.getParameter("listelement7") + "'";
 				System.out.println(sqlupd);
-				
+
 			} else if (action.equals("get_User")) {
 				sql = "SELECT nachname, vorname, email, tel, mobil, studiengang, kurs, matrikelnummer, standort FROM user WHERE rolle ='"
 						+ request.getParameter("rolle") + "' ";
 				System.out.println("HIER");
-				
+
 			} else if (action.equals("get_Auslandsangebote")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote WHERE ID > 0";
-				
+
 			} else if (action.equals("get_AuslandsangeboteInhalt")) {
 				sql = "SELECT uniTitel, allgemeineInfos, faq, erfahrungsbericht, bilder, bewerben FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
-				
+
 			} else if (action.equals("get_userDaten")) {
 				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnr") + "' ";
-				
+
 			} else if (action.equals("get_Unis")) {
-				
-				/*Prozess studentBewerben wird gestartet*/
+
+				/* Prozess studentBewerben wird gestartet */
 				processEngine = ProcessEngines.getDefaultProcessEngine();
-				pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);	
-				
+				pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);
+
 				sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
-				
-				/*SQL-Befehl für das Mapping von User und Prozessinstanz: !!!!! ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
-				 * "INSERT INTO MapUserInstanz (email, processInstance, status) VALUES ('" + request.getParameter("bewerberEmail") + "', '" + pI.getId() + "', '" + 1 + "')"; */
-				
+
+				/*
+				 * SQL-Befehl für das Mapping von User und Prozessinstanz: !!!!!
+				 * ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
+				 * "INSERT INTO MapUserInstanz (email, processInstance, status) VALUES ('"
+				 * + request.getParameter("bewerberEmail") + "', '" + pI.getId()
+				 * + "', '" + 1 + "')";
+				 */
+
 			} else if (action.equals("post_prozessStart")) {
-				
-				/*SQL-Befehl für das Auslesen der Prozessinstanz des Users: !!!!! ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
-				 * "SELECT processInstance FROM MapUserInstanz WHERE studiengang ='" + request.getParameter("bewerberEmail") + "' "; */
-				
+
+				/*
+				 * SQL-Befehl für das Auslesen der Prozessinstanz des Users:
+				 * !!!!! ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
+				 * "SELECT processInstance FROM MapUserInstanz WHERE studiengang ='"
+				 * + request.getParameter("bewerberEmail") + "' ";
+				 */
+
 				/* Complete Task "Downloads anbieten" */
 				completeTask();
-				
+
 				sqlupd = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("uni") + "', '"
 						+ request.getParameter("datum") + "', '" + request.getParameter("schritt1") + "', '"
 						+ request.getParameter("schritt2") + "', '" + request.getParameter("schritt3") + "', '"
 						+ request.getParameter("schritt4") + "', '" + request.getParameter("schritt5") + "')";
-				
+
 			} else if (action.equals("get_prozessStatus")) {
 				sql = "SELECT uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
-				
+
 			} else if (action.equals("get_Studiengaenge")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote";
-				
+
 			} else if (action.equals("get_angeboteDaten")) {
 				sql = "SELECT studiengang, uniTitel, allgemeineInfos, faq, erfahrungsbericht, maps FROM cms_auslandsAngeboteInhalt";
-				
+
 			} else if (action.equals("post_newStudiengang")) {
 				sqlupd = "INSERT INTO cms_auslandsAngebote (studiengang) VALUES ('"
 						+ request.getParameter("studiengang") + "') ";
-				
+
 			} else if (action.equals("post_newAuslandsangebot")) {
 				sqlupd = "INSERT INTO cms_auslandsAngeboteInhalt (studiengang, uniTitel, allgemeineInfos, faq, erfahrungsbericht, maps) VALUES ('"
 						+ request.getParameter("studiengang") + "', '" + request.getParameter("uniTitel") + "', '"
 						+ request.getParameter("allgemeineInfos") + "', '" + request.getParameter("faq") + "', '"
 						+ request.getParameter("erfahrungsbericht") + "', '" + request.getParameter("maps") + "')";
-				
+
 			} else if (action.equals("post_editAuslandsangebot")) {
 				sqlupd = "UPDATE cms_auslandsAngeboteInhalt SET allgemeineInfos = '"
 						+ request.getParameter("allgemeineInfos") + "' , faq = '" + request.getParameter("faq")
 						+ "', erfahrungsbericht = '" + request.getParameter("erfahrungsbericht") + "' , maps = '"
 						+ request.getParameter("maps") + "' WHERE uniTitel ='" + request.getParameter("uniTitel")
 						+ "' ";
-				
+
 			} else if (action.equals("post_infoMaterial")) {
 				sqlupd = "UPDATE cms_infoMaterial SET titel = '" + request.getParameter("titel")
 						+ "' , listelement1 = '" + request.getParameter("listelement1") + "' , link1 = '"
@@ -443,56 +452,62 @@ public class login_db extends HttpServlet {
 						+ request.getParameter("listelement6") + "' , link6 = '" + request.getParameter("link6")
 						+ "' , listelement7 = '" + request.getParameter("listelement7") + "' , link7 = '"
 						+ request.getParameter("link7") + "' ";
-				
+
 			} else if (action.equals("get_infoMaterial")) {
 				sql = "SELECT titel, listelement1, link1, listelement2, link2, listelement3, link3, listelement4, link4, listelement5, link5, listelement6, link6, listelement7, link7 FROM cms_infoMaterial";
-				
+
 			} else if (action.equals("get_bewerber")) {
 				sql = "SELECT matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess";
-				
-			} else if (action.equals("update_User")) {
-				
+
+			} else if (action.equals("get_downloads")) {
+				//Button "Weiter" nach darstellen der downloads wurde gedrückt
+
+			} else if (action.equals("nach_Upload")) {
+				//Button "Weiter" nach uploads wurde gedrückt
+
+			}else if (action.equals("update_User")) {
+
 				/* Complete Task "Daten eingeben" */
 				completeTask();
-				
+
 				sqlupd = "UPDATE user SET vorname = '" + request.getParameter("vorname") + "' , nachname = '"
 						+ request.getParameter("nachname") + "' , email = '" + request.getParameter("email")
 						+ "' , tel = '" + request.getParameter("telefon") + "' , mobil = '"
 						+ request.getParameter("mobil") + "' , studiengang = '" + request.getParameter("studiengang")
 						+ "' , kurs = '" + request.getParameter("kurs") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
-				
+
 			} else if (action.equals("insert_EnglischAbi")) {
 				sqlupd = "INSERT INTO englischnote (matrikelnummer, englischAbi) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("abinote") + "') ";
-				
+
 			} else if (action.equals("get_Note")) {
 				sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
-				
+
 			} else if (action.equals("insert_Adresse")) {
 				sqlupd = "INSERT INTO adresse (matrikelnummer, phase, strasse, hausnummer, plz, ort, bundesland, land) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("phase") + "', '"
 						+ request.getParameter("strasse") + "', '" + request.getParameter("hausnummer") + "', '"
 						+ request.getParameter("plz") + "', '" + request.getParameter("stadt") + "', '"
 						+ request.getParameter("bundesland") + "', '" + request.getParameter("land") + "') ";
-				
+
 			} else if (action.equals("get_Adresse")) {
 				sql = "SELECT strasse, hausnummer, plz, ort, bundesland, land FROM adresse WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND phase = '" + request.getParameter("phase")
 						+ "' ";
-				
+
 			} else if (action.equals("get_Partnerunternehmen")) {
 				sql = "SELECT firma, ansprechpartner, email, strasse, hausnummer, plz, stadt FROM partnerunternehmen WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
-				
+
 			} else if (action.equals("insert_Partnerunternehmen")) {
 				sqlupd = " INSERT INTO partnerunternehmen (firma, ansprechpartner, email, strasse, hausnummer, plz, stadt, matrikelnummer) VALUES ('"
 						+ request.getParameter("firma") + "', '" + request.getParameter("email") + "', '"
 						+ request.getParameter("ansprechpartner") + "', '" + request.getParameter("strasse") + "', '"
 						+ request.getParameter("hausnummer") + "', '" + request.getParameter("plz") + "', '"
 						+ request.getParameter("stadt") + "', '" + request.getParameter("matrikelnummer") + "') ";
-				
+
 			} else if (action.equals("update_Adresse")) {
 				sqlupd = "UPDATE adresse SET strasse = '" + request.getParameter("strasse") + "', hausnummer = '"
 						+ request.getParameter("hausnummer") + "', plz = '" + request.getParameter("plz") + "', ort = '"
@@ -500,7 +515,7 @@ public class login_db extends HttpServlet {
 						+ "', land = '" + request.getParameter("land") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND phase = '" + request.getParameter("phase")
 						+ "' ";
-				
+
 			} else if (action.equals("update_Partnerunternehmen")) {
 				sqlupd = "UPDATE partnerunternehmen SET ansprechpartner = '" + request.getParameter("ansprechpartner")
 						+ "', strasse = '" + request.getParameter("strasse") + "', hausnummer = '"
@@ -508,7 +523,7 @@ public class login_db extends HttpServlet {
 						+ "', stadt = '" + request.getParameter("stadt") + "', email = '"
 						+ request.getParameter("email") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
-				
+
 			} else if (action.equals("update_BewProzess1")) {
 				sqlupd = "UPDATE bewerbungsprozess SET schritt_1 = 1 WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND uniName = '" + request.getParameter("uni")
@@ -560,22 +575,24 @@ public class login_db extends HttpServlet {
 			}
 		}
 	}
-	
-	/** Diese Methode komplettiert den jeweiligen Task*/
-	public void completeTask(){
-		/* Hier muss noch die Prozessinstanz-ID des jeweiligen Studenten als Parameter mitgegeben werden. pI.getId() muss
-		 * entsprechend geändert werden. */
-		
+
+	/** Diese Methode komplettiert den jeweiligen Task */
+	public void completeTask() {
+		/*
+		 * Hier muss noch die Prozessinstanz-ID des jeweiligen Studenten als
+		 * Parameter mitgegeben werden. pI.getId() muss entsprechend geändert
+		 * werden.
+		 */
+
 		processEngine.getTaskService().complete(
-								processEngine.getTaskService().createTaskQuery().
-													processInstanceId(pI.getId()).singleResult().getId());
+				processEngine.getTaskService().createTaskQuery().processInstanceId(pI.getId()).singleResult().getId());
 	}
 
 	public void confirm(String code) {
-		
-		String userId="_";
+
+		String userId = "_";
 		if (code != null) {
-			
+
 			try {
 				String sql = "SELECT userID FROM user WHERE verifiziert='" + code + "'";
 				System.out.println(sql);
@@ -591,19 +608,19 @@ public class login_db extends HttpServlet {
 					int spalten = rs.getMetaData().getColumnCount();
 					while (rs.next()) {
 						for (int k = 1; k <= spalten; k++) {
-							
+
 							System.out.println(rs.getString(k) + ";");
-							userId=rs.getString(k);
+							userId = rs.getString(k);
 						}
 					}
 					sql = "leer";
-					
+
 				}
-			 if(userId!="_"){
-				 String query = "UPDATE user SET verifiziert = 1 WHERE userID=" + userId;
-				 rsupd = stmt.executeUpdate(query);
-				 
-			 }
+				if (userId != "_") {
+					String query = "UPDATE user SET verifiziert = 1 WHERE userID=" + userId;
+					rsupd = stmt.executeUpdate(query);
+
+				}
 			} catch (SQLException se) {
 				// Handle errors for JDBC
 				se.printStackTrace();
