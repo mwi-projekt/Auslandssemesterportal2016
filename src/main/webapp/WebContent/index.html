@@ -42,7 +42,7 @@
 					<h4 class="modal-title">Registrieren</h4>
 				</div>
 				<div class="modal-body">
-					<form action="">
+					<form action="" id="regForm">
 						<select class="rolleWahl inBox inline" required>
 							<option>Ich bin...</option>
 							<option>Studierender</option>
@@ -61,7 +61,7 @@
 										<input type="text" placeholder="Nachname*" class="inBox form-control" id="inNachname" required>
 									</div>
 								</div>
-								<input type="email" placeholder="E-Mail Adresse*" class="inBox form-control" id="inMail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="E-Mail Adresse">
+								<input type="email" placeholder="E-Mail Adresse / Nutzername*" class="inBox form-control" id="inMail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="E-Mail Adresse">
 							</div>
 						</div>
 						<div class="student">
@@ -122,7 +122,7 @@
 								<input type="text" placeholder="Mobilfunknummer" class="inBox" id="inMobil">
 								<input type="password" placeholder="Passwort 1. Mal*" class="inBox" id="inPwAu1">
 								<input type="password" placeholder="Passwort 2. Mal*" class="inBox" id="inPwAu2">
-								<label class="btn btnReg">Registrieren</label>
+								<input type="submit" class="btn btnReg" value="Registrieren" style="width: auto;">
 							</div>
 						</div>
 						<p class="falsch"></p>
@@ -168,7 +168,7 @@
 				</div>
 				<div class="modal-body">
 					<form action="">
-						<input type="text" placeholder="Nachname.Vorname" id="inName" class=" inBox" required>
+						<input type="email" placeholder="E-Mail Adresse" id="inEmail" class=" inBox" required>
 						<input type="password" placeholder="Passwort" id="inPasswort" class=" inBox" required>
 						<p id="falschLogin" style="color: red; margin-bottom: 0px; display: none">Falsche Eingabe. Bitte versuchen sie es erneut.</p>
 						<br>

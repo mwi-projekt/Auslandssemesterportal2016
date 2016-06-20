@@ -210,9 +210,9 @@ public class login_db extends HttpServlet {
 				// form is YYYY-MM-DD. For TIME it is HH:MM:SS
 
 				// SQL-Statement für Salt vorbereiten
-				sqlsalt = "SELECT salt FROM user WHERE '" + request.getParameter("vorname") + "'= vorname AND '"
-						+ request.getParameter("nachname") + "' = nachname";
+				sqlsalt = "SELECT salt FROM user WHERE '" + request.getParameter("email") + "'= email";
 				String salt = null;
+				System.out.println(sqlsalt);
 
 				// Verbindung zur DB um Salt abzurufen
 				try {
@@ -255,14 +255,12 @@ public class login_db extends HttpServlet {
 					}
 				}
 
-				// Berechnung des Passworthashes aus gehashtem Eingabewert und
-				// Salt
+				// Berechnung des Passworthashes aus gehashtem Eingabewert und Salt
 				String pw = HashSha256(HashSha256(request.getParameter("pw")) + salt);
 
 				// SQL-Statement für die Anmeldung
-				sql = "SELECT rolle, matrikelnummer, studiengang FROM user WHERE '" + request.getParameter("vorname")
-						+ "'= vorname AND '" + request.getParameter("nachname") + "' = nachname AND '" + pw
-						+ "' = passwort";
+				sql = "SELECT rolle, matrikelnummer, studiengang FROM user WHERE '" + request.getParameter("email")
+						+ "'= email AND '" + pw	+ "' = passwort";
 				System.out.println(sql);
 			} else if (action.equals("post_register")) {
 				if (request.getParameter("rolle").equals("Studierender")) {

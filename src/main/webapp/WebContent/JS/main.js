@@ -104,10 +104,7 @@ var main = function() {
 		}
 	});
 	// Click-Listener f�r Registrieren-Button
-	$('.btnReg')
-			.on(
-					'click',
-					function() {
+	$('#regForm').submit(function() {
 
 						var telefon, mobil, matrikelnummer, studiengang, kurs, pw1, pw2, standort;
 						telefon = '';
@@ -134,12 +131,7 @@ var main = function() {
 							telefon = $('#inTel').val();
 							mobil = $('#inMobil').val();
 						}
-						if (pw1 != pw2) {
-							$('.falsch')
-									.html(
-											unescape("Die Passw%F6rter stimmen nicht %FCberein."));
-							$('.falsch').show();
-						} else {
+						if (pw1 === pw2) {
 							var vorname = $('#inVorname').val();
 							var nachname = $('#inNachname').val();
 							var email = $('#inMail').val();
@@ -152,29 +144,7 @@ var main = function() {
 								$('.falsch')
 										.html(
 												unescape("Bitte w%E4hlen Deinen Studiengang aus."));
-							} else if (vorname === "") {
-								$('.falsch').html(
-										"Bitte gebe deinen Vornamen ein.");
-							} else if (nachname === "") {
-								$('.falsch').html(
-										"Bitte gebe deinen Nachnamen ein.");
-							} else if (email === "") {
-								$('.falsch').html(
-										"Bitte gebe deine E-Mail ein.");
-							} else if (matrikelnummer === "") {
-								$('.falsch').html(
-										"Bitte gebe deine Matrikelnummer ein.");
-							} else if (kurs === "") {
-								$('.falsch')
-										.html("Bitte gebe deinen Kurs ein.");
-							} else if (pw1 === "") {
-								$('.falsch').html(
-										"Bitte gebe ein Passwort ein.");
-							} else if (pw1.length < 7) {
-								$('.falsch')
-										.html(
-												unescape("Bitte gebe ein l%E4ngeres Passwort ein."));
-							} else {
+							} else if (vorname != "" && nachname != "" && email != "" && matrikelnummer != "" && kurs != "" && pw1 != "") {
 								$
 										.ajax({
 											type : "POST",
@@ -197,9 +167,7 @@ var main = function() {
 												$('.erfolgreich')
 														.html(
 																'Registrierung erfolgreich. <br> Bitte logge dich ein um fortzufahren. <br> Dein Nutzername lautet '
-																		+ nachname
-																		+ '.'
-																		+ vorname);
+																		+ email);
 												$('.erfolgreich').show();
 												$('.erfolgreich')
 														.fadeOut(10000);
@@ -243,16 +211,14 @@ var main = function() {
 	$('#btnLogin').on(
 			'click',
 			function() {
-				var user = $('#inName').val();
+				var email = $('#inEmail').val();
 				var pw = $('#inPasswort').val();
-				var name = user.split('.');
 				$.ajax({
 					type : "POST",
 					url : "login_db",
 					data : {
 						action : "post_login",
-						vorname : name[1],
-						nachname : name[0],
+						email : email,
 						pw : pw,
 					},
 					success : function(data) {
@@ -263,7 +229,7 @@ var main = function() {
 						}
 						sessionStorage['matrikelnr'] = auslesen[1].trim();
 						sessionStorage['studiengang'] = auslesen[2].trim();
-						sessionStorage['User'] = name[1];
+						sessionStorage['User'] = email;
 
 						if (sessionStorage['rolle'] === '2') {
 							$('.cms').show();
@@ -271,12 +237,12 @@ var main = function() {
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
 							$('.weg').css('display', 'inline');
-							$('.nutzerName').html(name[1]);
+							$('.nutzerName').html(email);
 							location.reload();
 
 						} else if (sessionStorage['rolle'] === '3') {
 							location.replace('index.html');
-							$('.nutzerName').html(name[1]);
+							$('.nutzerName').html(email);
 							$('.cms').hide();
 							$('.nonCms').show();
 							$('.weg').css('display', 'inline');
@@ -287,7 +253,7 @@ var main = function() {
 						} else if (sessionStorage['rolle'] === '1') {
 							$('#normalBereich').hide();
 							$('#adminBereich').show();
-							$('.nutzerName').html(name[1]);
+							$('.nutzerName').html(email);
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
 							location.reload();
