@@ -386,26 +386,49 @@ public class login_db extends HttpServlet {
 
 				sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
-
-				/*
-				 * SQL-Befehl für das Mapping von User und Prozessinstanz: !!!!!
-				 * ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
-				 * "INSERT INTO MapUserInstanz (email, processInstance, status) VALUES ('"
-				 * + request.getParameter("bewerberEmail") + "', '" + pI.getId()
-				 * + "', '" + 1 + "')";
-				 */
+				
+				//SQL-Befehl für das Mapping von User und Prozessinstanz
+				/* ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!! */
+				
+				String setId = "INSERT INTO MapUserInstanz (email, uni, processInstance, status) VALUES ('"
+						  		+ request.getParameter("bewerberEmail") + "', '" + request.getParameter("uni") + "', '" + pI.getId()
+						  		+ "', '" + 1 + "')";
+				
+				try {
+					// Register JDBC driver
+					Class.forName("com.mysql.jdbc.Driver").newInstance();
+					// Open a connection
+					conn = DriverManager.getConnection(DB_URL, USER, PASS);
+					// Execute SQL query
+					stmt = conn.createStatement();
+					stmt.executeUpdate(setId);
+					
+				} catch (SQLException se) {
+					// Handle errors for JDBC
+					se.printStackTrace();
+					System.out.println("Fehler setID");
+				} catch (Exception e) {
+					// Handle errors for Class.forName
+					e.printStackTrace();
+					System.out.println("Fehler setID");
+				}	
 
 			} else if (action.equals("post_prozessStart")) {
 
-				/*
-				 * SQL-Befehl für das Auslesen der Prozessinstanz des Users:
-				 * !!!!! ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
-				 * "SELECT processInstance FROM MapUserInstanz WHERE studiengang ='"
-				 * + request.getParameter("bewerberEmail") + "' ";
-				 */
+				String id = "leer";
+				/* Prozessinstanz-ID auslesen */
+				try {
+					id = getProcessId(request.getParameter("bewerberEmail"), request.getParameter("uni"));
+				} catch (SQLException e) {
+					e.printStackTrace();
+					System.out.println("Fehler getID");
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Fehler getID");
+				}
 
 				/* Complete Task "Downloads anbieten" */
-				completeTask();
+				completeTask(id);
 
 				sqlupd = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("uni") + "', '"
@@ -460,15 +483,55 @@ public class login_db extends HttpServlet {
 				sql = "SELECT matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess";
 
 			} else if (action.equals("get_downloads")) {
+				
+				String id = "leer";
+				/* Prozessinstanz-ID auslesen */
+				try {
+					id = getProcessId(request.getParameter("bewerberEmail"), request.getParameter("uni"));
+				} catch (SQLException e) {
+					e.printStackTrace();
+					System.out.println("Fehler getID");
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Fehler getID");
+				}
+				
 				//Button "Weiter" nach darstellen der downloads wurde gedrückt
+				completeTask(id);
 
 			} else if (action.equals("nach_Upload")) {
+				
+				String id = "leer";
+				/* Prozessinstanz-ID auslesen */
+				try {
+					id = getProcessId(request.getParameter("bewerberEmail"), request.getParameter("uni"));
+				} catch (SQLException e) {
+					e.printStackTrace();
+					System.out.println("Fehler getID");
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Fehler getID");
+				}
+				
 				//Button "Weiter" nach uploads wurde gedrückt
+				completeTask(id);
 
 			}else if (action.equals("update_User")) {
+				
+				String id = "leer";
+				/* Prozessinstanz-ID auslesen */
+				try {
+					id = getProcessId(request.getParameter("bewerberEmail"), request.getParameter("uni"));
+				} catch (SQLException e) {
+					e.printStackTrace();
+					System.out.println("Fehler getID");
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("Fehler getID");
+				}
 
 				/* Complete Task "Daten eingeben" */
-				completeTask();
+				completeTask(id);
 
 				sqlupd = "UPDATE user SET vorname = '" + request.getParameter("vorname") + "' , nachname = '"
 						+ request.getParameter("nachname") + "' , email = '" + request.getParameter("email")
@@ -575,17 +638,38 @@ public class login_db extends HttpServlet {
 			}
 		}
 	}
+	
+	/** Methode zum Auslesen der Prozessinstanz-ID */
+	public String getProcessId(String email, String uni) throws SQLException, Exception{
+		String sql = "SELECT processInstance FROM MapUserInstanz WHERE email ='" + email + "' AND uni ='" + uni + "'";
+		
+		// Register JDBC driver
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		
+		// Open a connection
+		conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		
+		// Execute SQL query
+		stmt = conn.createStatement();
+		System.out.println("Connect");
+		
+		rs = stmt.executeQuery(sql);
+		int spalten = rs.getMetaData().getColumnCount();
+		String result = "leer";
+		
+		while (rs.next()) {
+			for (int k = 1; k <= spalten; k++) {
+				result = rs.getString(k);
+			}
+		}
+		
+		return result;
+	}
 
 	/** Diese Methode komplettiert den jeweiligen Task */
-	public void completeTask() {
-		/*
-		 * Hier muss noch die Prozessinstanz-ID des jeweiligen Studenten als
-		 * Parameter mitgegeben werden. pI.getId() muss entsprechend geändert
-		 * werden.
-		 */
-
+	public void completeTask(String id) {
 		processEngine.getTaskService().complete(
-				processEngine.getTaskService().createTaskQuery().processInstanceId(pI.getId()).singleResult().getId());
+				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId());
 	}
 
 	public void confirm(String code) {
