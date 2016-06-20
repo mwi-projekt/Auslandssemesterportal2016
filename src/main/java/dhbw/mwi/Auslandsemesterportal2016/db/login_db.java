@@ -51,8 +51,7 @@ public class login_db extends HttpServlet {
 	int rsupd;
 	String uuidCode;
 
-	ProcessInstance pI;
-	ProcessEngine processEngine;
+	ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -378,32 +377,59 @@ public class login_db extends HttpServlet {
 
 			} else if (action.equals("get_Unis")) {
 
-				/* Prozess studentBewerben wird gestartet */
-				processEngine = ProcessEngines.getDefaultProcessEngine();
-				pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);
+				/* Prozess studentBewerben wird gestartet */				
+				ProcessInstance pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);
 
 				sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
 
 				/*
-				 * SQL-Befehl für das Mapping von User und Prozessinstanz: !!!!!
-				 * ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
-				 * "INSERT INTO MapUserInstanz (email, processInstance, status) VALUES ('"
-				 * + request.getParameter("bewerberEmail") + "', '" + pI.getId()
-				 * + "', '" + 1 + "')";
-				 */
+				 * SQL-Befehl für das Mapping von User und Prozessinstanz */
+				String mapUserInstance = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status) VALUES ('"+ 
+												request.getParameter("matrikelnummer") + "', '" + 
+													request.getParameter("uni") + "', '" +
+														pI.getId() + "', '" +
+															1 + "')";
+				
+				try {
+					// Register JDBC driver
+					Class.forName("com.mysql.jdbc.Driver").newInstance();
+					
+					// Open a connection
+					
+					conn = DriverManager.getConnection(DB_URL, USER, PASS);
+					
+					// Execute SQL query
+					stmt = conn.createStatement();
+					
+					stmt.executeUpdate(mapUserInstance);
+
+				} catch (SQLException se) {
+					// Handle errors for JDBC
+					se.printStackTrace();
+					System.out.println("Fehler se");
+				} catch (Exception e) {
+					// Handle errors for Class.forName
+					e.printStackTrace();
+					System.out.println("Fehler e");
+				}
 
 			} else if (action.equals("post_prozessStart")) {
 
-				/*
-				 * SQL-Befehl für das Auslesen der Prozessinstanz des Users:
-				 * !!!!! ANPASSUNG DER BEWERBUNGSPORTAL.JS-DATEI FEHLT!!!!!!
-				 * "SELECT processInstance FROM MapUserInstanz WHERE studiengang ='"
-				 * + request.getParameter("bewerberEmail") + "' ";
-				 */
+				//Prozessinstanz-ID auslesen
+				String id = "leer";
+				try {
+					id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				} catch (SQLException e) {
+					System.out.println("Fehler SQL (post_prozessStart)");
+					e.printStackTrace();
+				} catch (Exception e) {
+					System.out.println("Fehler (post_prozessStart)");
+					e.printStackTrace();
+				}
 
 				/* Complete Task "Downloads anbieten" */
-				completeTask();
+				completeTask(id);
 
 				sqlupd = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("uni") + "', '"
@@ -458,15 +484,55 @@ public class login_db extends HttpServlet {
 				sql = "SELECT matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess";
 
 			} else if (action.equals("get_downloads")) {
-				//Button "Weiter" nach darstellen der downloads wurde gedrückt
+				
+				//Prozessinstanz-ID auslesen
+				String id = "leer";
+				try {
+					id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				} catch (SQLException e) {
+					System.out.println("Fehler SQL (get_downloads)");
+					e.printStackTrace();
+				} catch (Exception e) {
+					System.out.println("Fehler (get_downloads)");
+					e.printStackTrace();
+				}
 
+				//Button "Weiter" nach darstellen der downloads wurde gedrückt
+				completeTask(id);
+				
 			} else if (action.equals("nach_Upload")) {
+				
+				//Prozessinstanz-ID auslesen
+				String id = "leer";
+				try {
+					id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				} catch (SQLException e) {
+					System.out.println("Fehler SQL (nach_Upload)");
+					e.printStackTrace();
+				} catch (Exception e) {
+					System.out.println("Fehler (nach_Upload)");
+					e.printStackTrace();
+				}
+
 				//Button "Weiter" nach uploads wurde gedrückt
+				completeTask(id);
 
 			}else if (action.equals("update_User")) {
+				
+				//Prozessinstanz-ID auslesen
+				String id = "leer";
+				try {
+					id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				} catch (SQLException e) {
+					System.out.println("Fehler SQL (update_User)");
+					e.printStackTrace();
+				} catch (Exception e) {
+					System.out.println("Fehler (update_User)");
+					e.printStackTrace();
+				}
 
 				/* Complete Task "Daten eingeben" */
-				completeTask();
+				completeTask(id);
 
 				sqlupd = "UPDATE user SET vorname = '" + request.getParameter("vorname") + "' , nachname = '"
 						+ request.getParameter("nachname") + "' , email = '" + request.getParameter("email")
@@ -573,17 +639,39 @@ public class login_db extends HttpServlet {
 			}
 		}
 	}
+	
+	/** Methode zum Auslesen der Prozessinstanz-ID */
+	public String getProcessId(String matrikelnummer, String uni) throws SQLException, Exception{
+		String sql = "SELECT processInstance FROM MapUserInstanz WHERE matrikelnummer ='" + matrikelnummer + "' AND uni ='" + uni + "'";
+		
+		// Register JDBC driver
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		
+		// Open a connection
+		conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		
+		// Execute SQL query
+		stmt = conn.createStatement();
+		System.out.println("Connect");
+		
+		rs = stmt.executeQuery(sql);
+		int spalten = rs.getMetaData().getColumnCount();
+		String result = "leer";
+		
+		while (rs.next()) {
+			for (int k = 1; k <= spalten; k++) {
+				result = rs.getString(k);
+			}
+		}
+		
+		return result;
+	}
+
 
 	/** Diese Methode komplettiert den jeweiligen Task */
-	public void completeTask() {
-		/*
-		 * Hier muss noch die Prozessinstanz-ID des jeweiligen Studenten als
-		 * Parameter mitgegeben werden. pI.getId() muss entsprechend geändert
-		 * werden.
-		 */
-
+	public void completeTask(String id) {
 		processEngine.getTaskService().complete(
-				processEngine.getTaskService().createTaskQuery().processInstanceId(pI.getId()).singleResult().getId());
+				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId());
 	}
 
 	public void confirm(String code) {
