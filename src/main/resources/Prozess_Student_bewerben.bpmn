@@ -115,7 +115,9 @@
       <bpmn:outgoing>SequenceFlow_18l1kqf</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_06jsa12</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_18l1kqf" name="Nein" sourceRef="ExclusiveGateway_EnglischStart" targetRef="daadHochladen" />
+    <bpmn:sequenceFlow id="SequenceFlow_18l1kqf" name="Nein" sourceRef="ExclusiveGateway_EnglischStart" targetRef="daadHochladen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_06jsa12" name="Ja" sourceRef="ExclusiveGateway_EnglischStart" targetRef="ExclusiveGateway_EnglischEnd">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>

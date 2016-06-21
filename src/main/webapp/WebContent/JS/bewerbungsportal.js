@@ -339,6 +339,7 @@ var main = function() {
 				data: {
 					action: "update_User",
 					matrikelnummer: sessionStorage['matrikelnr'],
+					uni: $('#selectUni').val(),
 					vorname: $('#bewVorname').val(),
 					nachname: $('#bewNachname').val(),
 					email: $('#bewEmail').val(),
@@ -625,6 +626,7 @@ var main = function() {
 						data: {
 							action: "insert_Partnerunternehmen",
 							matrikelnummer: sessionStorage['matrikelnr'],
+							uni: $('#selectUni').val(),
 							firma: $('#bewPartnerName').val(),
 							ansprechpartner: $('#bewPartnerAnsprech').val(),
 							email: $('#bewPartnerEmail').val(),
@@ -654,6 +656,7 @@ var main = function() {
 					data: {
 						action: "update_Partnerunternehmen",
 						matrikelnummer: sessionStorage['matrikelnr'],
+						uni: $('#selectUni').val(),
 						firma: $('#bewPartnerName').val(),
 						ansprechpartner: $('#bewPartnerAnsprech').val(),
 						email: $('#bewPartnerEmail').val(),
@@ -685,6 +688,7 @@ var main = function() {
 				data: {
 					action: "nach_Upload",
 					matrikelnummer: sessionStorage['matrikelnr'],
+					uni: $('#selectUni').val(),
 					firma: $('#bewPartnerName').val(),
 					ansprechpartner: $('#bewPartnerAnsprech').val(),
 					email: $('#bewPartnerEmail').val(),
@@ -801,7 +805,8 @@ function schritt0 (uni) {
 		url: "login_db",
 		data: {
 			action: "get_downloads",
-			matrikelnr: sessionStorage['matrikelnr'],
+			uni: $('#selectUni').val(),
+			matrikelnummer: sessionStorage['matrikelnr'],
 		}, success: function(result) {
 			$('.iFenster').hide();
 			$('.iF1').show();
@@ -825,6 +830,7 @@ function schritt1 (uni) {
 		url: "login_db",
 		data: {
 			action: "get_userDaten",
+			uni: $('#selectUni').val(),
 			matrikelnr: sessionStorage['matrikelnr'],
 		}, success: function(result) {
 			$('.iFenster').hide();
