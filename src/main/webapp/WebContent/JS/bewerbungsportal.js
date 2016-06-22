@@ -686,9 +686,118 @@ var main = function() {
 				type: "POST",
 				url: "login_db",
 				data: {
-					action: "nach_Upload",
+					action: "nach_DAAD_Upload",
 					matrikelnummer: sessionStorage['matrikelnr'],
-					uni: $('#selectUni').val(),
+					firma: $('#bewPartnerName').val(),
+					ansprechpartner: $('#bewPartnerAnsprech').val(),
+					email: $('#bewPartnerEmail').val(),
+					strasse: $('#bewPartnerStrasse').val(),
+					hausnummer: $('#bewPartnerHausnummer').val(),
+					plz: $('#bewPartnerPlz').val(),
+					stadt: $('#bewPartnerStadt').val()
+					
+				}, success: function(result) {
+					$('#bewFormular6').show();
+					$('#bewFormular5').hide();
+					
+					var name = $('#bewVorname').val() + ' ' + $('bewNachname').val();
+					var uni = $('#aktuelleUni').html();
+					var matrikelnummer = sessionStorage['matrikelnr'];
+					
+				}, error: function(result) {
+					
+				}
+			});
+		}else if (id==6){
+			$.ajax({
+				type: "POST",
+				url: "login_db",
+				data: {
+					action: "nach_Abitur_Upload",
+					matrikelnummer: sessionStorage['matrikelnr'],
+					firma: $('#bewPartnerName').val(),
+					ansprechpartner: $('#bewPartnerAnsprech').val(),
+					email: $('#bewPartnerEmail').val(),
+					strasse: $('#bewPartnerStrasse').val(),
+					hausnummer: $('#bewPartnerHausnummer').val(),
+					plz: $('#bewPartnerPlz').val(),
+					stadt: $('#bewPartnerStadt').val()
+					
+				}, success: function(result) {
+					$('#bewFormular7').show();
+					$('#bewFormular6').hide();
+					
+					var name = $('#bewVorname').val() + ' ' + $('bewNachname').val();
+					var uni = $('#aktuelleUni').html();
+					var matrikelnummer = sessionStorage['matrikelnr'];
+					
+				}, error: function(result) {
+					
+				}
+			});
+		}else if (id==7){
+			$.ajax({
+				type: "POST",
+				url: "login_db",
+				data: {
+					action: "nach_Dualis_Upload",
+					matrikelnummer: sessionStorage['matrikelnr'],
+					firma: $('#bewPartnerName').val(),
+					ansprechpartner: $('#bewPartnerAnsprech').val(),
+					email: $('#bewPartnerEmail').val(),
+					strasse: $('#bewPartnerStrasse').val(),
+					hausnummer: $('#bewPartnerHausnummer').val(),
+					plz: $('#bewPartnerPlz').val(),
+					stadt: $('#bewPartnerStadt').val()
+					
+				}, success: function(result) {
+					$('#bewFormular8').show();
+					$('#bewFormular7').hide();
+					
+					var name = $('#bewVorname').val() + ' ' + $('bewNachname').val();
+					var uni = $('#aktuelleUni').html();
+					var matrikelnummer = sessionStorage['matrikelnr'];
+					
+				}, error: function(result) {
+					
+				}
+			});
+		}else if (id==8){
+			$.ajax({
+				type: "POST",
+				url: "login_db",
+				data: {
+					action: "nach_Motivation_Upload",
+					matrikelnummer: sessionStorage['matrikelnr'],
+					firma: $('#bewPartnerName').val(),
+					ansprechpartner: $('#bewPartnerAnsprech').val(),
+					email: $('#bewPartnerEmail').val(),
+					strasse: $('#bewPartnerStrasse').val(),
+					hausnummer: $('#bewPartnerHausnummer').val(),
+					plz: $('#bewPartnerPlz').val(),
+					stadt: $('#bewPartnerStadt').val()
+					
+				}, success: function(result) {
+					$('#bewFormular9').show();
+					$('#bewFormular8').hide();
+					
+					var name = $('#bewVorname').val() + ' ' + $('bewNachname').val();
+					var uni = $('#aktuelleUni').html();
+					var matrikelnummer = sessionStorage['matrikelnr'];
+					
+				}, error: function(result) {
+					
+				}
+			});
+		}
+		
+		else if (id==9){
+			$.ajax({
+				type: "POST",
+				url: "login_db",
+				data: {
+					action: "nach_Zustimmung_Upload",
+					matrikelnummer: sessionStorage['matrikelnr'],
 					firma: $('#bewPartnerName').val(),
 					ansprechpartner: $('#bewPartnerAnsprech').val(),
 					email: $('#bewPartnerEmail').val(),
@@ -728,7 +837,7 @@ var main = function() {
 					
 				}
 			});
-		}
+}
 	});
 	//Theorieadresse ist die gleiche wie die PRaxisadresse
 	$('#btnSameAdress').on('click', function(event) {

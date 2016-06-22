@@ -375,9 +375,9 @@ public class login_db extends HttpServlet {
 				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnr") + "' ";
 				
-				//Downloads Task beenden
-				String id = getProcessId(request.getParameter("matrikelnr"), request.getParameter("uni"));
-				completeTask(id);
+//				//Downloads Task beenden
+//				String id = getProcessId(request.getParameter("matrikelnr"), request.getParameter("uni"));
+//				completeTask(id);
 
 			} else if (action.equals("get_Unis")) {
 
@@ -386,25 +386,25 @@ public class login_db extends HttpServlet {
 
 			} else if (action.equals("post_prozessStart")) {
 				
-				/* Prozess studentBewerben wird gestartet */
-				ProcessInstance pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);
-
-
-				/* SQL-Befehl für das Mapping von User und Prozessinstanz */
-				String mapUserInstance = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status) VALUES ('"+ 
-												request.getParameter("matrikelnummer") + "', '" + 
-													request.getParameter("uni") + "', '" +
-														pI.getId() + "', '" +
-															1 + "')";
-				
-				/* SQL-Befehl ausführen*/
-				updateProcess(mapUserInstance);
-
-				sqlupd = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5) VALUES ('"
-						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("uni") + "', '"
-						+ request.getParameter("datum") + "', '" + request.getParameter("schritt1") + "', '"
-						+ request.getParameter("schritt2") + "', '" + request.getParameter("schritt3") + "', '"
-						+ request.getParameter("schritt4") + "', '" + request.getParameter("schritt5") + "')";
+//				/* Prozess studentBewerben wird gestartet */
+//				ProcessInstance pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);
+//
+//
+//				/* SQL-Befehl für das Mapping von User und Prozessinstanz */
+//				String mapUserInstance = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status) VALUES ('"+ 
+//												request.getParameter("matrikelnummer") + "', '" + 
+//													request.getParameter("uni") + "', '" +
+//														pI.getId() + "', '" +
+//															1 + "')";
+//				
+//				/* SQL-Befehl ausführen*/
+//				updateProcess(mapUserInstance);
+//
+//				sqlupd = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5) VALUES ('"
+//						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("uni") + "', '"
+//						+ request.getParameter("datum") + "', '" + request.getParameter("schritt1") + "', '"
+//						+ request.getParameter("schritt2") + "', '" + request.getParameter("schritt3") + "', '"
+//						+ request.getParameter("schritt4") + "', '" + request.getParameter("schritt5") + "')";
 
 			} else if (action.equals("get_prozessStatus")) {
 				sql = "SELECT uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess WHERE matrikelnummer = '"
@@ -521,8 +521,8 @@ public class login_db extends HttpServlet {
 						+ request.getParameter("matrikelnummer") + "' ";
 				
 				//"Daten eingeben" Task beenden
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				completeTask(id);
+//				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+//				completeTask(id);
 
 			} else if (action.equals("update_BewProzess1")) {
 				sqlupd = "UPDATE bewerbungsprozess SET schritt_1 = 1 WHERE matrikelnummer = '"
