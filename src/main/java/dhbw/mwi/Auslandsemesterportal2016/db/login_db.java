@@ -1,6 +1,8 @@
 package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 import java.sql.*;
@@ -517,10 +519,18 @@ public class login_db extends HttpServlet {
 						+ "', stadt = '" + request.getParameter("stadt") + "', email = '"
 						+ request.getParameter("email") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
+				
+				//Englisch-Note abfragen
+				boolean result = getEnglischNote(request.getParameter("matrikelnummer"));
+				
+				//Variable setzen für weiteren Verlauf von Prozess
+			    Map<String, Object> variables = new HashMap<String, Object>();
+			    
+			    variables.put("bestanden", result);
 
 				// "Daten eingeben" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				completeTask(id);
+				completeTask(id, variables);
 
 			} else if (action.equals("update_BewProzess1")) {
 				sqlupd = "UPDATE bewerbungsprozess SET schritt_1 = 1 WHERE matrikelnummer = '"
@@ -542,7 +552,15 @@ public class login_db extends HttpServlet {
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
 				
-			}  else if (action.equals("nach_Motivation_Upload")){
+			} else if (action.equals("nach_Dualis_Upload")){
+				
+				//Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder MySQL?
+				
+				// "Motivationsschreiben hochladen" Task beenden
+				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				completeTask(id);
+				
+			} else if (action.equals("nach_Motivation_Upload")){
 				
 				//Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder MySQL?
 				
@@ -660,7 +678,6 @@ public class login_db extends HttpServlet {
 		Connection connection = null;
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
-		int spalten = 0;
 		String result = "leer";
 
 		String sql = "SELECT processInstance FROM MapUserInstanz WHERE matrikelnummer ='" + matrikelnummer
@@ -681,12 +698,10 @@ public class login_db extends HttpServlet {
 			statement = connection.createStatement();
 
 			resultSet = statement.executeQuery(sql);
-			spalten = resultSet.getMetaData().getColumnCount();
 
-			while (resultSet.next()) {
-				for (int k = 1; k <= spalten; k++) {
-					result = resultSet.getString(k);
-				}
+			//ID auslesen
+			while (resultSet.next()){
+				result = resultSet.getString(1);
 			}
 
 		} catch (InstantiationException e) {
@@ -720,6 +735,12 @@ public class login_db extends HttpServlet {
 	public void completeTask(String id) {
 		processEngine.getTaskService().complete(
 				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId());
+	}
+	
+	/** Diese Methode komplettiert den jeweiligen Task und setzt entsprechende Variablen*/
+	public void completeTask(String id, Map<String, Object> variables) {
+		processEngine.getTaskService().complete(
+				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId(), variables);
 	}
 	
 	/** Methode zum Löschen der entsprechenden ProzessInstanz bzw. Bewerbung*/
@@ -767,6 +788,64 @@ public class login_db extends HttpServlet {
 				System.out.println("Exception : " + ex.getMessage());
 			}
 		}
+	}
+	
+	public boolean getEnglischNote(String matrikelnummer){
+		Connection connection = null;
+		java.sql.Statement statement = null;
+		ResultSet resultSet = null;
+		boolean result = false;
+		
+		String sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '"
+							+ matrikelnummer + "' ";
+		
+		try {
+			// Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+			// Open a connection
+			connection = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// Execute SQL query
+			statement = connection.createStatement();
+
+			resultSet = statement.executeQuery(sql);
+
+			int note = 0;
+			//Note auslesen
+			while(resultSet.next()){
+				note = Integer.parseInt(resultSet.getString(1));
+			}
+			
+			
+			if(note >= 11){
+				result = true;
+			}
+
+		} catch (InstantiationException e) {
+			System.out.print("ERROR - getProcessId - InstantiationException");
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			System.out.print("ERROR - getProcessId - IllegalAccessException");
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.print("ERROR - getProcessId - ClassNotFoundException");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.print("ERROR - getProcessId -SQLException");
+			e.printStackTrace();
+		} finally {
+			try {
+				// Clean-up environment
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (Exception ex) {
+				System.out.println("Exception : " + ex.getMessage());
+			}
+		}
+		
+		return result;	
 	}
 
 	public void confirm(String code) {

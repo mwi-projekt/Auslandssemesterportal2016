@@ -116,10 +116,10 @@
       <bpmn:outgoing>SequenceFlow_06jsa12</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_18l1kqf" name="Nein" sourceRef="ExclusiveGateway_EnglischStart" targetRef="daadHochladen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!bestanden}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_06jsa12" name="Ja" sourceRef="ExclusiveGateway_EnglischStart" targetRef="ExclusiveGateway_EnglischEnd">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${bestanden}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1tpgdb5" sourceRef="daadHochladen" targetRef="ExclusiveGateway_EnglischEnd" />
     <bpmn:userTask id="abiturHochladen" name="Abiturzeugnis hochladen">
