@@ -17,6 +17,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.delegate.DelegateTask;
+import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 import dhbw.mwi.Auslandsemesterportal2016.Auslandsemesterportal2016ProcessApplication;
@@ -37,7 +40,7 @@ import dhbw.mwi.Auslandsemesterportal2016.Auslandsemesterportal2016ProcessApplic
 @WebServlet(name = "login_db", description = "connection to DB for the prozess.jsp", urlPatterns = {
 		"/WebContent/login_db" })
 
-public class login_db extends HttpServlet {
+public class login_db extends HttpServlet implements TaskListener{
 	private static final long serialVersionUID = 1L;
 
 	// JDBC driver name and database URL
@@ -45,6 +48,7 @@ public class login_db extends HttpServlet {
 	// Database account
 	final String USER = "mwi";
 	final String PASS = "mwi2014";
+	
 	Connection conn;
 	java.sql.Statement stmt;
 	ResultSet rs;
@@ -161,6 +165,7 @@ public class login_db extends HttpServlet {
 		
 		int rolle = 0;
 		System.out.println("Post empfangen");
+		
 		if (action.equals("sendmail")) {
 			// String to = "patrick.julius@web.de";
 			// String from = request.getParameter("name");
@@ -201,6 +206,7 @@ public class login_db extends HttpServlet {
 			// }catch (MessagingException mex) {
 			// mex.printStackTrace();
 			// }
+			
 		} else {
 			if (action.equals("post_login")) {
 				// parsing from the date and time is within the SQL-Statment.
@@ -388,7 +394,6 @@ public class login_db extends HttpServlet {
 																			 pI.getId() + "', '" +
 																			 		1 + "')";
 				
-				 /* SQL-Befehl ausführen*/
 				 updateProcess(mapUserInstance);
 				
 				sqlupd = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5) VALUES ('"
@@ -411,13 +416,8 @@ public class login_db extends HttpServlet {
 
 			} else if (action.equals("get_Studiengaenge")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote";
-			} else if (action.equals("note_ueberelf")) {
 				
-			} else if (action.equals("note_unterelf")) {
-			
-			}
-
-			else if (action.equals("get_angeboteDaten")) {
+			} else if (action.equals("get_angeboteDaten")) {
 				sql = "SELECT studiengang, uniTitel, allgemeineInfos, faq, erfahrungsbericht, maps FROM cms_auslandsAngeboteInhalt";
 
 			} else if (action.equals("post_newStudiengang")) {
@@ -520,13 +520,11 @@ public class login_db extends HttpServlet {
 						+ request.getParameter("email") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
 				
-				//Englisch-Note abfragen
-				boolean result = getEnglischNote(request.getParameter("matrikelnummer"));
+				boolean resultNote = getEnglischNote(request.getParameter("matrikelnummer"));
 				
 				//Variable setzen für weiteren Verlauf von Prozess
 			    Map<String, Object> variables = new HashMap<String, Object>();
-			    
-			    variables.put("bestanden", result);
+			    variables.put("bestanden", resultNote);
 
 				// "Daten eingeben" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
@@ -536,6 +534,7 @@ public class login_db extends HttpServlet {
 				sqlupd = "UPDATE bewerbungsprozess SET schritt_1 = 1 WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND uniName = '" + request.getParameter("uni")
 						+ "' ";
+				
 			} else if (action.equals("nach_DAAD_Upload")){
 				
 				//Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder MySQL?
@@ -588,7 +587,7 @@ public class login_db extends HttpServlet {
 				// "Bewerbung löschen" Task beenden
 				deleteBewerbung(getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni")),
 																						request.getParameter("matrikelnummer"), 
-																							request.getParameter("uni"));	
+																						   request.getParameter("uni"));	
 			}
 
 			try {
@@ -678,7 +677,7 @@ public class login_db extends HttpServlet {
 		Connection connection = null;
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
-		String result = "leer";
+		String id = "leer";
 
 		String sql = "SELECT processInstance FROM MapUserInstanz WHERE matrikelnummer ='" + matrikelnummer
 				+ "' AND uni ='" + uni + "'";
@@ -701,7 +700,7 @@ public class login_db extends HttpServlet {
 
 			//ID auslesen
 			while (resultSet.next()){
-				result = resultSet.getString(1);
+				id = resultSet.getString(1);
 			}
 
 		} catch (InstantiationException e) {
@@ -727,8 +726,7 @@ public class login_db extends HttpServlet {
 			}
 		}
 
-		// Rückgabe der ID
-		return result;
+		return id;
 	}
 
 	/** Diese Methode komplettiert den jeweiligen Task */
@@ -901,6 +899,50 @@ public class login_db extends HttpServlet {
 				}
 			}
 
+		}
+	}
+
+	
+	/**Methode dient zum Benachrichtigen des Auslandsmitarbeiter*/
+	@Override
+	public void notify(DelegateTask delegateTask) {
+		//Mail Server Properties
+		//email.setHostName("mail.dhbw-karlsruhe.de");
+		
+		final String username = "mwiausland@gmail.com";
+		final String password = "MWIAusland1";
+		String host = "smtp.gmail.com";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", "587");
+
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+														return new PasswordAuthentication(username, password);
+			}
+		});
+
+		try {
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("montes@onlinehome.de"));
+			message.setSubject(MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester", "utf-8", "B"));
+			message.setContent("Sehr geehrte Frau Dreischer,"  + "\n" + "\n" +
+					 " ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n" +
+					 "  Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n" +
+					 "http://localhost:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(), "text/html; charset=UTF-8");
+
+			Transport.send(message);
+
+		} catch (MessagingException e) {
+			System.out.print("Could not send email!");
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }
