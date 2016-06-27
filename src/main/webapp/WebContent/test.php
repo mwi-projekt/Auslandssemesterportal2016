@@ -1,8 +1,12 @@
+<!DOCTYPE html>
 <html>
- <head>
-  <title>PHP-Test</title>
- </head>
- <body>
- <?php echo '<p>Hallo Welt</p>'; ?>
- </body>
+<body>
+
+<h1>My first PHP page</h1>
+
+<?php
+echo "Hello World!";
+?>
+
+</body>
 </html>
