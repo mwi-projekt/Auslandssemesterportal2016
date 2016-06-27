@@ -52,7 +52,7 @@ var main = function() {
 					url : "login_db",
 					data : {
 					    action : "get_prozessStatus",
-					    matrikelnummer : sessionStorage['matrikelnr'],
+					    matrikelnummer : sessionStorage['matrikelnr']
 					},
 					success : function(result) {
 					    sessionStorage['beworbeneUnis'] = '';
@@ -173,10 +173,11 @@ var main = function() {
 								    setTimeout(
 									    closeLoading,
 									    1000);
+
 								    // Ermittlung
 								    // des
 								    // Fortschritts
-								    // f�r die
+								    // für die
 								    // weiteren
 								    // Bewerbungsschritte
 								    var uni = $(
@@ -418,7 +419,6 @@ var main = function() {
 									},
 									error : function(
 										result) {
-
 									}
 								    });
 
@@ -1488,7 +1488,7 @@ function schritt0(uni) {
 	url : "login_db",
 	data : {
 	    action : "get_downloads",
-	    uni : $('#selectUni').val(),
+	    uni : uni,
 	    matrikelnummer : sessionStorage['matrikelnr'],
 	},
 	success : function(result) {
@@ -1508,13 +1508,14 @@ function schritt0(uni) {
 	}
     });
 }
+
 function schritt1(uni) {
     $.ajax({
 	type : "POST",
 	url : "login_db",
 	data : {
 	    action : "get_userDaten",
-	    uni : $('#selectUni').val(),
+	    uni : uni,
 	    matrikelnr : sessionStorage['matrikelnr'],
 	},
 	success : function(result) {

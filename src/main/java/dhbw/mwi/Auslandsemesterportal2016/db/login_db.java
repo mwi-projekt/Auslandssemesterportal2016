@@ -741,6 +741,12 @@ public class login_db extends HttpServlet implements TaskListener{
 				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId(), variables);
 	}
 	
+	/** Diese Methode komplettiert den jeweiligen Task und setzt entsprechende Variablen*/
+	public void getTaskName(String id) {
+		processEngine.getTaskService().complete(
+				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getName());
+	}
+	
 	/** Methode zum Löschen der entsprechenden ProzessInstanz bzw. Bewerbung*/
 	public void deleteBewerbung(String id, String matrikelnummer, String uni) {
 		Connection connection = null;
@@ -902,7 +908,6 @@ public class login_db extends HttpServlet implements TaskListener{
 		}
 	}
 
-	
 	/**Methode dient zum Benachrichtigen des Auslandsmitarbeiter*/
 	@Override
 	public void notify(DelegateTask delegateTask) {
@@ -931,9 +936,9 @@ public class login_db extends HttpServlet implements TaskListener{
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("montes@onlinehome.de"));
 			message.setSubject(MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester", "utf-8", "B"));
 			message.setContent("Sehr geehrte Frau Dreischer,"  + "\n" + "\n" +
-					 " ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n" +
-					 "  Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n" +
-					 "http://localhost:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(), "text/html; charset=UTF-8");
+					 "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n" +
+					 "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n" +
+					 "http://localhost:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(), "text/plain; charset=UTF-8");
 
 			Transport.send(message);
 
