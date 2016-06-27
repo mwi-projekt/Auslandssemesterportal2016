@@ -933,7 +933,7 @@ public class login_db extends HttpServlet implements TaskListener{
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("montes@onlinehome.de"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mwiausland@gmail.com"));
 			message.setSubject(MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester", "utf-8", "B"));
 			message.setContent("Sehr geehrte Frau Dreischer,"  + "\n" + "\n" +
 					 "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n" +
