@@ -730,20 +730,19 @@ public class login_db extends HttpServlet implements TaskListener{
 	}
 
 	/** Diese Methode komplettiert den jeweiligen Task */
-	public void completeTask(String id) {
+	public void completeTask(String instanceId) {
 		processEngine.getTaskService().complete(
-				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId());
+				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId());
 	}
 	
 	/** Diese Methode komplettiert den jeweiligen Task und setzt entsprechende Variablen*/
-	public void completeTask(String id, Map<String, Object> variables) {
+	public void completeTask(String instanceId, Map<String, Object> variables) {
 		processEngine.getTaskService().complete(
-				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId(), variables);
+				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId(), variables);
 	}
 	
-	/** Diese Methode komplettiert den jeweiligen Task und setzt entsprechende Variablen*/
-	public void getTaskName(String id) {
-		processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getName();
+	public void getTaskId(String instanceId) {
+		processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId();
 	}
 	
 	/** Methode zum Löschen der entsprechenden ProzessInstanz bzw. Bewerbung*/
