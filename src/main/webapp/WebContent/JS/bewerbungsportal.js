@@ -482,9 +482,9 @@ var main = function() {
 	if (title === "DHBW Auslandsinfo") {
 
 	} else /*
-		 * if (title === "DHBW Auslandsportal" || title === "DHBW
-		 * Auslandsportalprozess")
-		 */{
+			 * if (title === "DHBW Auslandsportal" || title === "DHBW
+			 * Auslandsportalprozess")
+			 */{
 	    location.replace("index.html");
 	}
 	$('#inName').val('');
@@ -1191,64 +1191,82 @@ var main = function() {
 
 			    }
 			} else if (id == 5) {
-			    $
-				    .ajax({
-					type : "POST",
-					url : "login_db",
-					data : {
-					    action : "nach_DAAD_Upload",
-					    matrikelnummer : sessionStorage['matrikelnr'],
-					    uni : $('#selectUni').val(),
-					    firma : $('#bewPartnerName').val(),
-					    ansprechpartner : $(
-						    '#bewPartnerAnsprech')
-						    .val(),
-					    email : $('#bewPartnerEmail').val(),
-					    strasse : $('#bewPartnerStrasse')
-						    .val(),
-					    hausnummer : $(
-						    '#bewPartnerHausnummer')
-						    .val(),
-					    plz : $('#bewPartnerPlz').val(),
-					    stadt : $('#bewPartnerStadt').val()
+				var file = $("input[name=daad_file]")[0].files[0];
+				var r = new FileReader();
+				r.onload = function(t) {
+					try {
+						const text = r.result;
+						$
+					    .ajax({
+						type : "POST",
+						url : "login_db",
+						data : {
+						    action : "nach_DAAD_Upload",
+						    matrikelnummer : sessionStorage['matrikelnr'],
+						    uni : $('#selectUni').val(),
+						    firma : $('#bewPartnerName').val(),
+						    ansprechpartner : $(
+							    '#bewPartnerAnsprech')
+							    .val(),
+						    email : $('#bewPartnerEmail').val(),
+						    strasse : $('#bewPartnerStrasse')
+							    .val(),
+						    hausnummer : $(
+							    '#bewPartnerHausnummer')
+							    .val(),
+						    plz : $('#bewPartnerPlz').val(),
+						    stadt : $('#bewPartnerStadt').val(),
+						    daad_file: text
 
-					},
-					success : function(result) {
-					    $('#bewFormular6').show();
-					    $('#bewFormular5').hide();
+						},
+						success : function(result) {
+						    $('#bewFormular6').show();
+						    $('#bewFormular5').hide();
 
-					    var name = $('#bewVorname').val()
-						    + ' '
-						    + $('bewNachname').val();
-					    var uni = $('#aktuelleUni').html();
-					    var matrikelnummer = sessionStorage['matrikelnr'];
+						    var name = $('#bewVorname').val()
+							    + ' '
+							    + $('bewNachname').val();
+						    var uni = $('#aktuelleUni').html();
+						    var matrikelnummer = sessionStorage['matrikelnr'];
 
-					},
-					error : function(result) {
+						},
+						error : function(result) {
 
+						}
+					    });
+					} catch (e) {
+						this.addIOError("Error while reading " + file.name + ": " + e);
 					}
-				    });
+				}
+				r.readAsDataURL(file);
+			    
 			} else if (id == 6) {
-			    $
-				    .ajax({
-					type : "POST",
-					url : "login_db",
-					data : {
-					    action : "nach_Abitur_Upload",
-					    matrikelnummer : sessionStorage['matrikelnr'],
-					    uni : $('#selectUni').val(),
-					    firma : $('#bewPartnerName').val(),
-					    ansprechpartner : $(
-						    '#bewPartnerAnsprech')
-						    .val(),
-					    email : $('#bewPartnerEmail').val(),
-					    strasse : $('#bewPartnerStrasse')
-						    .val(),
-					    hausnummer : $(
-						    '#bewPartnerHausnummer')
-						    .val(),
-					    plz : $('#bewPartnerPlz').val(),
-					    stadt : $('#bewPartnerStadt').val()
+				var file = $("input[name=abitur_file]")[0].files[0];
+				var r = new FileReader();
+				r.onload = function(t) {
+					try{
+						const text = r.result;
+						$
+						.ajax({
+						type : "POST",
+						url : "login_db",
+						data : {
+							action : "nach_Abitur_Upload",
+							matrikelnummer : sessionStorage['matrikelnr'],
+							uni : $('#selectUni').val(),
+							firma : $('#bewPartnerName').val(),
+								ansprechpartner : $(
+								'#bewPartnerAnsprech')
+								.val(),
+							email : $('#bewPartnerEmail').val(),
+							strasse : $('#bewPartnerStrasse')
+						    	.val(),
+						    hausnummer : $(
+						    	'#bewPartnerHausnummer')
+						    	.val(),
+						   	plz : $('#bewPartnerPlz').val(),
+						    stadt : $('#bewPartnerStadt').val(),
+						    abitur_file : text
 
 					},
 					success : function(result) {
@@ -1266,27 +1284,39 @@ var main = function() {
 
 					}
 				    });
+				}catch (e){
+					this.addIOError("Error while reading " + file.name + ": " + e);
+					}
+				}
+				r.readAsDataURL(file);
+			    
 			} else if (id == 7) {
-			    $
-				    .ajax({
-					type : "POST",
-					url : "login_db",
-					data : {
-					    action : "nach_Dualis_Upload",
-					    matrikelnummer : sessionStorage['matrikelnr'],
-					    uni : $('#selectUni').val(),
-					    firma : $('#bewPartnerName').val(),
-					    ansprechpartner : $(
-						    '#bewPartnerAnsprech')
-						    .val(),
-					    email : $('#bewPartnerEmail').val(),
-					    strasse : $('#bewPartnerStrasse')
-						    .val(),
-					    hausnummer : $(
-						    '#bewPartnerHausnummer')
-						    .val(),
-					    plz : $('#bewPartnerPlz').val(),
-					    stadt : $('#bewPartnerStadt').val()
+				var file = $("input[name=dualis_file]")[0].files[0];
+				var r = new FileReader();
+				r.onload = function(t) {
+					try{
+						const text = r.result;
+						$
+						.ajax({
+						type : "POST",
+						url : "login_db",
+						data : {
+							action : "nach_Dualis_Upload",
+							matrikelnummer : sessionStorage['matrikelnr'],
+							uni : $('#selectUni').val(),
+							firma : $('#bewPartnerName').val(),
+							ansprechpartner : $(
+								'#bewPartnerAnsprech')
+								.val(),
+							email : $('#bewPartnerEmail').val(),
+							strasse : $('#bewPartnerStrasse')
+						    	.val(),
+						    hausnummer : $(
+						    	'#bewPartnerHausnummer')
+						    	.val(),
+						    plz : $('#bewPartnerPlz').val(),
+						    stadt : $('#bewPartnerStadt').val(),
+						    dualis_file: text
 
 					},
 					success : function(result) {
@@ -1304,27 +1334,39 @@ var main = function() {
 
 					}
 				    });
-			} else if (id == 8) {
-			    $
-				    .ajax({
-					type : "POST",
-					url : "login_db",
-					data : {
-					    action : "nach_Motivation_Upload",
-					    matrikelnummer : sessionStorage['matrikelnr'],
-					    uni : $('#selectUni').val(),
-					    firma : $('#bewPartnerName').val(),
-					    ansprechpartner : $(
-						    '#bewPartnerAnsprech')
-						    .val(),
-					    email : $('#bewPartnerEmail').val(),
-					    strasse : $('#bewPartnerStrasse')
-						    .val(),
-					    hausnummer : $(
-						    '#bewPartnerHausnummer')
-						    .val(),
-					    plz : $('#bewPartnerPlz').val(),
-					    stadt : $('#bewPartnerStadt').val()
+					}catch (e){
+						this.addIOError("Error while reading " + file.name + ": " + e);
+						}
+					}
+					r.readAsDataURL(file);
+						
+			} else if (id == 8){
+				var file = $("input[name=motivation_file]")[0].files[0];
+				var r = new FileReader();
+				r.onload = function(t) {
+					try{
+						const text = r.result;
+						$
+						.ajax({
+						type : "POST",
+						url : "login_db",
+						data : {
+							action : "nach_Motivation_Upload",
+							matrikelnummer : sessionStorage['matrikelnr'],
+							uni : $('#selectUni').val(),
+							firma : $('#bewPartnerName').val(),
+							ansprechpartner : $(
+								'#bewPartnerAnsprech')
+								.val(),
+							email : $('#bewPartnerEmail').val(),
+							strasse : $('#bewPartnerStrasse')
+						    	.val(),
+						    hausnummer : $(
+						    	'#bewPartnerHausnummer')
+						    	.val(),
+						    plz : $('#bewPartnerPlz').val(),
+						    stadt : $('#bewPartnerStadt').val(),
+						    motivation_file : text
 
 					},
 					success : function(result) {
@@ -1342,30 +1384,40 @@ var main = function() {
 
 					}
 				    });
-			}
+					}catch (e){
+						this.addIOError("Error while reading " + file.name + ": " + e);
+						}
+					}
+					r.readAsDataURL(file);
 
-			else if (id == 9) {
-			    $
-				    .ajax({
-					type : "POST",
-					url : "login_db",
-					data : {
-					    action : "nach_Zustimmung_Upload",
-					    matrikelnummer : sessionStorage['matrikelnr'],
-					    uni : $('#selectUni').val(),
-					    firma : $('#bewPartnerName').val(),
-					    ansprechpartner : $(
-						    '#bewPartnerAnsprech')
-						    .val(),
-					    email : $('#bewPartnerEmail').val(),
-					    strasse : $('#bewPartnerStrasse')
-						    .val(),
-					    hausnummer : $(
-						    '#bewPartnerHausnummer')
-						    .val(),
-					    plz : $('#bewPartnerPlz').val(),
-					    stadt : $('#bewPartnerStadt').val()
-
+			}else if (id == 9) {
+				var file = $("input[name=zustimmungsformular_file]")[0].files[0];
+				var r = new FileReader();
+				r.onload = function(t) {
+					try{
+						const text = r.result;
+						$
+							.ajax({
+								type : "POST",
+								url : "login_db",
+								data : {
+									action : "nach_Zustimmung_Upload",
+									matrikelnummer : sessionStorage['matrikelnr'],
+									uni : $('#selectUni').val(),
+									firma : $('#bewPartnerName').val(),
+									ansprechpartner : $(
+										'#bewPartnerAnsprech')
+										.val(),
+						    		email : $('#bewPartnerEmail').val(),
+						    		strasse : $('#bewPartnerStrasse')
+						    			.val(),
+						    		hausnummer : $(
+						    			'#bewPartnerHausnummer')
+						    			.val(),
+						    		plz : $('#bewPartnerPlz').val(),
+						    		stadt : $('#bewPartnerStadt').val(),
+						    		zustimmungsformular_file : text
+						    		
 					},
 					success : function(result) {
 					    $('.dat').hide();
@@ -1407,6 +1459,11 @@ var main = function() {
 
 					}
 				    });
+					}catch (e){
+						this.addIOError("Error while reading " + file.name + ": " + e);
+						}
+					}
+					r.readAsDataURL(file);
 			}
 		    });
     // Theorieadresse ist die gleiche wie die PRaxisadresse

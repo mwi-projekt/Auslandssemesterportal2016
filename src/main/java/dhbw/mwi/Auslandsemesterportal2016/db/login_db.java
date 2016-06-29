@@ -24,12 +24,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
+import org.apache.commons.codec.binary.Base64;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.FileValue;
+
 
 import dhbw.mwi.Auslandsemesterportal2016.Auslandsemesterportal2016ProcessApplication;
 
@@ -459,6 +464,24 @@ public class login_db extends HttpServlet implements TaskListener{
 			} else if (action.equals("nach_Upload")) {
 				// Button "Weiter" nach Uploads wurde gedrückt
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				
+			
+				//String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				//String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
+			    Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
+			    String fileName = "DAAD_Formular.pdf";
+			    InputStream fileContent = filePart.getInputStream();
+			    
+			    //ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+	
+				// ... (do your job here)
+			    FileValue typedFileValue = Variables
+						  .fileValue(fileName)
+						  .file(fileContent)
+						  //.mimeType("text/plain")
+						  //.encoding("UTF-8")
+						  .create();
+				processEngine.getRuntimeService().setVariable(id, "fileVariable", typedFileValue);
 				completeTask(id);
 
 			} else if (action.equals("update_User")) {
@@ -536,43 +559,81 @@ public class login_db extends HttpServlet implements TaskListener{
 						+ "' ";
 				
 			} else if (action.equals("nach_DAAD_Upload")){
-				
-				//Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder MySQL?
-				
-				// "DAAD-Formular hochladen" Task beenden
+				// "DAAD-Formular hochladen" + Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				
+				byte[] filePart = Base64.decodeBase64(request.getParameter("daad_file").substring(23)); // Retrieves <input type="file" name="file">
+			    String fileName = "DAAD_Formular.pdf";
+			    
+			    FileValue typedFileValue = Variables
+						  .fileValue(fileName)
+						  .file(filePart)
+						  .create();
+				processEngine.getRuntimeService().setVariable(id, "DAAD-Formular", typedFileValue);
+				
 				completeTask(id);
 				
 			} else if (action.equals("nach_Abitur_Upload")){
-				
-				//Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder MySQL?
-				
-				// "Abiturzeugnis hochladen" Task beenden
+				// "Abiturzeugnis hochladen" + Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				
+				byte[] filePart = Base64.decodeBase64(request.getParameter("abitur_file").substring(23)); // Retrieves <input type="file" name="file">
+			    String fileName = "Abiturzeugnis.pdf";
+			    
+			    FileValue typedFileValue = Variables
+						  .fileValue(fileName)
+						  .file(filePart)
+						  .create();
+				processEngine.getRuntimeService().setVariable(id, "Abiturzeugnis", typedFileValue);
+				
 				completeTask(id);
 				
 			} else if (action.equals("nach_Dualis_Upload")){
 				
-				//Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder MySQL?
-				
 				// "Motivationsschreiben hochladen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				completeTask(id);
 				
+				byte[] filePart = Base64.decodeBase64(request.getParameter("dualis_file").substring(23)); // Retrieves <input type="file" name="file">
+			    String fileName = "Dualis_Dokumente.pdf";
+			    
+			    FileValue typedFileValue = Variables
+						  .fileValue(fileName)
+						  .file(filePart)
+						  .create();
+				processEngine.getRuntimeService().setVariable(id, "Dualis-Dokumente", typedFileValue);
+				
+				completeTask(id);
+								
 			} else if (action.equals("nach_Motivation_Upload")){
 				
-				//Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder MySQL?
-				
 				// "Motivationsschreiben hochladen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				
+				byte[] filePart = Base64.decodeBase64(request.getParameter("motivation_file").substring(23)); // Retrieves <input type="file" name="file">
+			    String fileName = "Motivationsschreiben.pdf";
+			    
+			    FileValue typedFileValue = Variables
+						  .fileValue(fileName)
+						  .file(filePart)
+						  .create();
+				processEngine.getRuntimeService().setVariable(id, "Motivationsschreiben", typedFileValue);
+				
 				completeTask(id);
 				
 			} else if (action.equals("nach_Zustimmung_Upload")){
 				
-				//Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder MySQL?
-				
 				// "Zustimmungsformular hochladen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				
+				byte[] filePart = Base64.decodeBase64(request.getParameter("zustimmungsformular_file").substring(23)); // Retrieves <input type="file" name="file">
+			    String fileName = "Zustimmungsfomular.pdf";
+			    
+			    FileValue typedFileValue = Variables
+						  .fileValue(fileName)
+						  .file(filePart)
+						  .create();
+				processEngine.getRuntimeService().setVariable(id, "Zustimmungsformular", typedFileValue);
+				
 				completeTask(id);
 				
 			} else if (action.equals("nach_Daten_pruefen")){
