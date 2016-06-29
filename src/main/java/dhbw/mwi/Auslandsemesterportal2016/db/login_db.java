@@ -791,15 +791,19 @@ public class login_db extends HttpServlet implements TaskListener{
 	}
 
 	/** Diese Methode komplettiert den jeweiligen Task */
-	public void completeTask(String id) {
+	public void completeTask(String instanceId) {
 		processEngine.getTaskService().complete(
-				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId());
+				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId());
 	}
 	
 	/** Diese Methode komplettiert den jeweiligen Task und setzt entsprechende Variablen*/
-	public void completeTask(String id, Map<String, Object> variables) {
+	public void completeTask(String instanceId, Map<String, Object> variables) {
 		processEngine.getTaskService().complete(
-				processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId(), variables);
+				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId(), variables);
+	}
+	
+	public void getTaskId(String instanceId) {
+		processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId();
 	}
 	
 	/** Methode zum Löschen der entsprechenden ProzessInstanz bzw. Bewerbung*/
@@ -963,7 +967,6 @@ public class login_db extends HttpServlet implements TaskListener{
 		}
 	}
 
-	
 	/**Methode dient zum Benachrichtigen des Auslandsmitarbeiter*/
 	@Override
 	public void notify(DelegateTask delegateTask) {
@@ -989,12 +992,12 @@ public class login_db extends HttpServlet implements TaskListener{
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("montes@onlinehome.de"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mwiausland@gmail.com"));
 			message.setSubject(MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester", "utf-8", "B"));
 			message.setContent("Sehr geehrte Frau Dreischer,"  + "\n" + "\n" +
-					 " ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n" +
-					 "  Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n" +
-					 "http://localhost:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(), "text/html; charset=UTF-8");
+					 "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n" +
+					 "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n" +
+					 "http://localhost:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(), "text/plain; charset=UTF-8");
 
 			Transport.send(message);
 
