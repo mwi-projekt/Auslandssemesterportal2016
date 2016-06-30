@@ -346,7 +346,7 @@ var main = function() {
 												+ '</select><label class="btn" id="newBewProzessWahl" style="margin-left: 10px;">Bestätigen</label>';
 
 										if (popUpHtml.match('<option>') != '<option>') {
-											popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversit�ten für ihren Studiengang beworben.</p>';
+											popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
 										}
 										$('.popUpFeld').html(popUpHtml);
 										$('.popUpFeld').show();
@@ -1596,7 +1596,7 @@ var main = function() {
 											$('.dat').hide();
 											$('.erfolgreich')
 													.html(
-															'<p>Du hat alle Daten ben�tigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
+															'<p>Du hat alle Daten benötigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
 											$('.erfolgreich').show();
 											$('.erfolgreich').fadeOut(7000);
 											$('.iFenster').hide();
@@ -1714,7 +1714,7 @@ var main = function() {
 										$('.dat').hide();
 										$('.erfolgreich')
 												.html(
-														'<p>Du hat alle Daten ben�tigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
+														'<p>Du hat alle Daten benötigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
 										$('.erfolgreich').show();
 										$('.erfolgreich').fadeOut(7000);
 										$('.iFenster').hide();

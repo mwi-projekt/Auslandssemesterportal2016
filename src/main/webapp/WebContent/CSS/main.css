@@ -39,6 +39,10 @@ input {
 	
 }
 
+.navbar-brand{
+	line-height: 28px;
+}
+
 .red {
 	color: #e2001d;
 }
@@ -123,14 +127,15 @@ input {
 	border-top-right-radius: 0px;
 	border-top-left-radius: 0px;
 	top: 0%;
-	margin-top: -5px;
+	margin-top: 57px;
 	color: black;
-	padding: 10px;
+	padding: 0px;
 	position: absolute;
 	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5);
-	box-shadow: 0 6px 12px rgba(0, 0, 0, .5);
+	box-shadow: 0 3px 3px rgba(0, 0, 0, .5);
 	z-index: 102;
-	padding-bottom: 2px;
+	padding-left: 4px;
+	right: 1em;
 }
 
 .loginShow {

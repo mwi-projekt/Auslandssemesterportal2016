@@ -24,9 +24,11 @@ p {
 	border-radius: 10px;
 	border-color: #F0F0F0;
 	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 /* 	background-color: #F0F0F0; */
 	background-color: white;
+	margin-left: -15px;
+}
 }
 
 #boxx {
