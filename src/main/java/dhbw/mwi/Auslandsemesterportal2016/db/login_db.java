@@ -408,18 +408,45 @@ public class login_db extends HttpServlet implements TaskListener{
 						+ request.getParameter("schritt4") + "', '" + request.getParameter("schritt5") + "')";
 
 			} else if (action.equals("get_userDaten")) {
-				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer = '"
-						+ request.getParameter("matrikelnr") + "' ";
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer ="
+						+ request.getParameter("matrikelnr");
 
 				//Downloads Task beenden
-				String id = getProcessId(request.getParameter("matrikelnr"), request.getParameter("uni"));
-				completeTask(id);
+//				String id = getProcessId(request.getParameter("matrikelnr"), request.getParameter("uni"));
+//				completeTask(id);
 
+			}else if (action.equals("weiter_nach_downloads_anzeige")) {
+	
+						
+				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				completeTask(id);
 			} else if (action.equals("get_prozessStatus")) {
 				sql = "SELECT uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
 
-			} else if (action.equals("get_Studiengaenge")) {
+			}else if (action.equals("get_next_Page")) {
+				System.out.println("get_next_page");
+				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String antwort = getTaskName(id);
+				antwort.replaceAll("\\s+","");
+				antwort.replaceAll(" ", "");
+				String res = antwort.replaceAll(" ", "");
+				System.out.println("Antwort: " + res);
+				out.println(res);
+
+
+			}else if (action.equals("weiter_nach_downloads_anzeige")) {
+	
+						
+				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				completeTask(id);
+			}else if (action.equals("get_Studiengaenge")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote";
 				
 			} else if (action.equals("get_angeboteDaten")) {
@@ -484,6 +511,9 @@ public class login_db extends HttpServlet implements TaskListener{
 				processEngine.getRuntimeService().setVariable(id, "fileVariable", typedFileValue);
 				completeTask(id);
 
+			}else if (action.equals("nach_pruef")) {
+				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				completeTask(id);
 			} else if (action.equals("update_User")) {
 				sqlupd = "UPDATE user SET vorname = '" + request.getParameter("vorname") + "' , nachname = '"
 						+ request.getParameter("nachname") + "' , email = '" + request.getParameter("email")
@@ -558,6 +588,33 @@ public class login_db extends HttpServlet implements TaskListener{
 						+ request.getParameter("matrikelnummer") + "' AND uniName = '" + request.getParameter("uni")
 						+ "' ";
 				
+			}else if (action.equals("get_Adresse_Data_Pruef_Praxis")) {
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				sql = "Select * FROM adresse WHERE phase='Praxis' AND matrikelnummer="
+						+ request.getParameter("matrikelnummer");
+				System.out.println(sql);
+
+			} else if (action.equals("get_Adresse_Data_Pruef_Theorie")) {
+
+				sql = "Select * FROM adresse WHERE phase='Theorie' AND matrikelnummer="
+						+ request.getParameter("matrikelnummer");
+				System.out.println(sql);
+
+			} else if (action.equals("get_Data_Pruef")) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer ="
+						+ request.getParameter("matrikelnummer");
+
 			} else if (action.equals("nach_DAAD_Upload")){
 				// "DAAD-Formular hochladen" + Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
@@ -802,8 +859,8 @@ public class login_db extends HttpServlet implements TaskListener{
 				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId(), variables);
 	}
 	
-	public void getTaskId(String instanceId) {
-		processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId();
+	public String getTaskName(String instanceId) {
+		return processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getName();
 	}
 	
 	/** Methode zum Löschen der entsprechenden ProzessInstanz bzw. Bewerbung*/
