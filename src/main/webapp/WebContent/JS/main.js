@@ -8,9 +8,12 @@ var main = function() {
 	// Überprüfen ob jemand eingeloggt ist
 	if (isEmpty(sessionStorage['User']) === true
 			|| sessionStorage['User'] === 'undefined') {
+		$('.logoutFenster').hide();
 	} else {
 		$('.loginFenster').hide();
 		$('.logFenster').hide();
+		$('.loginButton').hide();
+		$('.regButton').hide();
 		$('.logoFenster').show();
 		$('.logoutFenster').show();
 		$('.nutzerName').text(sessionStorage['User']);
@@ -278,10 +281,10 @@ var main = function() {
 		if (title === "DHBW Auslandsinfo") {
 
 		} else if (title === "DHBW Auslandsportal") {
-			location.replace("index.html");
+			location.replace("indexMockup.html");
 		}
 		sessionStorage.clear();
-		location.replace("index.html");
+		location.replace("indexMockup.html");
 		$('.logFenster').show();
 		/*
 		 * for (var i = 1; i <= 10; i++) { $('#'+ i + '5').addClass("hidden"); }

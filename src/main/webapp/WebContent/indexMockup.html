@@ -41,9 +41,13 @@
 						
 <li><a href="#portalInfo" style="padding-left: 30px;">Infos</a></li>
 <li><a href="faq.html" style="padding-left: 30px;">FAQ</a></li>
-<li><a href="#" data-toggle="modal" data-target="#register" style="padding-left: 30px;">Registrieren</a></li>
+<li class="regButton"><a href="#" data-toggle="modal" data-target="#register" style="padding-left: 30px;">Registrieren</a></li>
 <li class="divider-vertical"></li>
-<li><a href="#" data-toggle="modal" data-target="#login" style="padding-left: 30px;">Login</a></li>
+<li class="loginButton"><a href="#" data-toggle="modal" data-target="#login" style="padding-left: 30px;">Login</a></li>
+<li class="logoutFenster">Eingeloggt als <b class="nutzerName"></b>
+					
+						<button type="button" class="btn btn-default navMargin logoutButton"
+					 id="logout" data-target="#logout">Logout</button></li>
 
 
 
@@ -86,7 +90,7 @@
 					<h4 class="modal-title">Registrieren</h4>
 				</div>
 				<div class="modal-body">
-					<form action="">
+					<form action="" id="regForm">
 						<select class="rolleWahl inBox inline" required="">
 							<option>Ich bin...</option>
 							<option>Studierender</option>
@@ -274,14 +278,14 @@
 	</div>
 	<!-- Navigationsleiste-------------------------------------------------------------------- -->
 			
-			<div class="logoutFenster">
+		<!--	<div class="logoutFenster">
 			
 					
 						Eingeloggt als <b class="nutzerName"></b>
 					
 						<button type="button" class="btn btn-default navMargin"
 					 id="logout" data-target="#logout">Logout</button>
-			</div>
+			</div>-->
 			
 			
 
