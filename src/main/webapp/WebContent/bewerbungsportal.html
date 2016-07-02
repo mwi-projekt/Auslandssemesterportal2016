@@ -117,42 +117,32 @@
 	</div>
 	<div class="popUpFeld"></div>
 	<div class="header">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-1">
-				<a class="pull-left" href="index.html"><img id="logo"
-					src="images/DHBW.jpg" /></a>
-			</div>
-			<div class="col-md-4">
-				<br> <br>
-				<h2 class="ueberschrift">Auslandsportal DHBW Karlsruhe</h2>
-			</div>
-			<div class="col-md-1"></div>
-			<div class="col-md-2">
-				<div class="loginFenster pull-right">
-					<a href="#" id="loginClose"><img src="images/Button Delete.png"
-						id="smallImg"></a> <br> <br> <input type="text"
-						placeholder="Name" id="inName" class=" inBox" /> <input
-						type="password" placeholder="Passwort" id="inPasswort"
-						class=" inBox" /><br> <label class=" btn" id="btnLogin">Login</label><br>
-					<div>
-						<p class="loginShow">
-							Login <b class="caret"></b>
-						</p>
-						<p class="regShow linkReg">Registrieren</p>
-					</div>
+		
+		<!-- Navigationsleiste -->
+		<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+		<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header page-scroll">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="indexMockup.html"><img src="images/DHBW.png" class="pull-left" style="height: 1.5em;" alt="">&nbsp;DHBW Auslandsstudienportal</a>
 				</div>
-				<div class="logoutFenster pull-right">
-					<p class="logged">
-						Eingeloggt als <b class="nutzerName"></b> <u class="pull-right"
-							id="logout">Logout</u>
-					</p>
-				</div>
-				<br> <br> <br> <br> <a class="pull-right"
-					href="http://www.dhbw-karlsruhe.de"
-					style="font-size: medium; margin-bottom: 10px">www.dhbw-karlsruhe.de</a>
-			</div>
-		</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-1" aria-expanded="true">
+						<ul class="nav navbar-nav navbar-right">
+						
+<li><a href="indexMockup.html#portalInfo" style="padding-left: 30px;">Infos</a></li>
+<li><a href="faq.html" style="padding-left: 30px;">FAQ</a></li> 
+<li class="logoutFenster">Eingeloggt als <b class="nutzerName"></b>
+					
+						<button type="button" class="btn btn-default navMargin logoutButton"
+					 id="logout" data-target="#logout">Logout</button></li> 
+</ul></div></div></nav>
 
 	</div>
 
@@ -160,7 +150,7 @@
 	<div class="row aufgaben">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<div class="nav">
+			<div class="nav2">
 				<div class="navEl current nonCms" id="nav1">Home</div>
 				<div class="navEl nonCms" id="nav2">Angebote</div>
 				<div class="navEl nonCms" id="nav3">Bewerben</div>
@@ -242,8 +232,9 @@
 						</div>
 						<div class="row dat" id="bewFormular0">
 
-Herzlichen Glückwunsch! Durch die Entscheidung für eine Partneruniversität hat Du den ersten Schritt zur Bewerbung 
-							<br>für ein Auslandssemester erfolgreich abgeschlossen.<br><br>
+		Herzlichen Glückwunsch! 
+		Durch die Entscheidung für eine Partneruniversität hast Du den ersten Schritt zur Bewerbung 
+		<br>für ein Auslandssemester erfolgreich abgeschlossen.<br><br>
 
 Die nachfolgenden Schritte werden Dich nun Schritt für Schritt durch den weiteren Bewerbungsprozess führen.<br>
 Auf der ersten Seite, den <b>Downloads</b>, befindest du dich bereits.
@@ -258,11 +249,14 @@ Auf der ersten Seite, den <b>Downloads</b>, befindest du dich bereits.
 
 						</div>
 						<div class="row dat" id="bewFormular1">
+						<div style="width: 50em; padding-left: 30px;"> In diesem Schritt bitten wir Dich deine <b>Allgemeinen Daten</b> noch einmal zu überprüfen und zu ergänzen. Die Daten, die du bei der Registrierung eingegeben hast, wurden bereits für dich hinterlegt.<br><br><b><u>WICHTIGER HINWEIS:</u></b> Sollte deine Abitur-Note in Englisch bei <u>unter 11 Punkten</u> liegen, ist es zusätzlich notwendig, dass Du einen Sprachnachweis (BEC-Vantage-Test, TOEFEL-Test oder Ähnliches) als PDF-Datei hochlädst.<br><br><br></div>
+									
 							<div class="col-xs-3">&nbsp;</div>
 							<div class="col-xs-6">
 								<div class="input-group">
 									<!-- A-------------  Infobox Anfang --------------------------------------------- -->
-									<br>
+								
+									
 									<p>
 										Allgemeine Daten <a class="infobox" href="#INFO"> <img
 											id="in" src="images/Information 1.png"> <span
@@ -332,6 +326,9 @@ Auf der ersten Seite, den <b>Downloads</b>, befindest du dich bereits.
 						</div>
 
 						<div class="row dat " id="bewFormular2">
+						<div style="width: 50em; padding-left: 30px;"> In diesem Schritt bitten wir Dich deine <b>Wohnadresse während der Praxisphase</b> einzugeben.<br><br><br></div>
+							
+						
 							<div class="col-xs-3">&nbsp;</div>
 							<div class="col-xs-6">
 								<div class="input-group">
@@ -420,6 +417,10 @@ Auf der ersten Seite, den <b>Downloads</b>, befindest du dich bereits.
 						</div>
 
 						<div class="row dat" id="bewFormular3">
+						
+							<div style="width: 50em; padding-left: 30px;"> In diesem Schritt bitten wir Dich deine <b>Wohnadresse während der Theoriephase</b> einzugeben.<br><br><br></div>
+							
+						
 							<div class="col-xs-3">&nbsp;</div>
 							<div class="col-xs-6">
 								<div class="input-group">
@@ -531,6 +532,10 @@ Auf der ersten Seite, den <b>Downloads</b>, befindest du dich bereits.
 						</div>
 
 						<div class="row dat" id="bewFormular4">
+						
+							<div style="width: 50em; padding-left: 30px;"> In diesem Schritt bitten wir Dich die <b>Adresse deines Partnerunternehmens</b> einzugeben.<br><br><br></div>
+							
+						
 							<div class="col-xs-3">&nbsp;</div>
 							<div class="col-xs-6">
 								<div class="input-group">
@@ -656,23 +661,39 @@ Auf der ersten Seite, den <b>Downloads</b>, befindest du dich bereits.
 						</div>
 						
 						<div class="row dat" id="bewFormular10">
-							Allgemeine Daten:<br> Nachname <label id="nachnamePruef"></label><br>
-							Vorname <label id="vornamePruef"></label><br> email <label
-								id="emailPruef"></label><br> studiengang <label
-								id="studiengangPruef"></label><br> kurs <label
-								id="kursPruef"></label><br> matrikelnummer <label
-								id="matrikelPruef"></label><br> tel <label id="telPruef"></label><br>
-							mobil <label id="mobilPruef"></label><br> Adresse Praxis <br>
-							Stra�e <label id="bewStrassePruefPrax"></label> <br>
-							Hausnummer <label id="bewHausnummerPruefPrax"></label> <br>
-							PLZ <label id="bewPlzPruefPrax"></label><br> Stadt <label
-								id="bewStadtPruefPrax"></label> <br> <br> <br>
-							Theorie<br> Stra�e <label id="bewStrassePruefTheo"></label>
-							<br> Hausnummer <label id="bewHausnummerPruefTheo"></label>
-							<br> PLZ <label id="bewPlzPruefTheo"></label><br> Stadt
-							<label id="bewStadtPruefTheo"></label> <br> <br> <br>
-							<label class="btn btnBewFormular" id="btnBewFormular20"
-								style="float: right; bottom: 0px">Abschließen</label> 
+							
+				<b>Allgemeine Daten:</b><br> 
+				<table>
+				<tr><td>Nachname</td>		<td style="padding-top: 7px; padding-left: 20px"> <label id="nachnamePruef"></label></td></tr>
+				<tr><td>Vorname</td>		<td style="padding-top: 7px; padding-left: 20px"> <label id="vornamePruef"></label></td></tr>
+				<tr><td>E-Mail</td>			<td style="padding-top: 7px; padding-left: 20px"> <label id="emailPruef"></label></td></tr>
+				<tr><td>Studiengang</td>	<td style="padding-top: 7px; padding-left: 20px"> <label id="studiengangPruef"></label></td></tr>
+				<tr><td>Kurs</td>			<td style="padding-top: 7px; padding-left: 20px"> <label id="kursPruef"></label></td></tr>
+				<tr><td>Matrikelnummer</td>	<td style="padding-top: 7px; padding-left: 20px"> <label id="matrikelPruef"></label></td></tr>
+				<tr><td>Telefon</td>		<td style="padding-top: 7px; padding-left: 20px"> <label id="telPruef"></label></td></tr>
+				<tr><td>Mobil</td>			<td style="padding-top: 7px; padding-left: 20px"> <label id="mobilPruef"></label></td></tr>
+				</table><br><br><br>
+					
+				<b>Adresse Praxisphase</b><br>
+				<table>
+				<tr><td>Straße</td>			<td style="padding-top: 7px; padding-left: 34px"> <label id="bewStrassePruefPrax"></label></td></tr>
+				<tr><td>Hausnummer</td>		<td style="padding-top: 7px; padding-left: 34px"> <label id="bewHausnummerPruefPrax"></label></td></tr>
+				<tr><td>PLZ</td>			<td style="padding-top: 7px; padding-left: 34px"> <label id="bewPlzPruefPrax"></label></td></tr>
+				<tr><td>Stadt</td>			<td style="padding-top: 7px; padding-left: 34px"> <label id="bewStadtPruefPrax"></label></td></tr>
+				</table><br><br><br>
+			
+				
+				<b>Adress Theoriephase</b><br>
+				<table>
+				<tr><td>Straße</td>			<td style="padding-top: 7px; padding-left: 34px"> <label id="bewStrassePruefTheo"></label></td></tr>
+				<tr><td>Hausnummer</td>		<td style="padding-top: 7px; padding-left: 34px"> <label id="bewHausnummerPruefTheo"></label></td></tr>
+				<tr><td>PLZ</td>			<td style="padding-top: 7px; padding-left: 34px"> <label id="bewPlzPruefTheo"></label></td></tr>
+				<tr><td>Stadt</td>			<td style="padding-top: 7px; padding-left: 34px"> <label id="bewStadtPruefTheo"></label></td></tr>
+				</table>
+		
+							
+					<label class="btn btnBewFormular" id="btnBewFormular20"
+						style="float: right; bottom: 0px">Abschließen</label> 
 						</div>
 
 						<!-- <div class="row">
@@ -752,7 +773,7 @@ Auf der ersten Seite, den <b>Downloads</b>, befindest du dich bereits.
 			<div class="col-md-8">
 				<div class="pull-right">
 					<p>
-						<a href="index.html">Startseite</a> | <a href="impressum.html">Impressum</a>
+						<a href="indexMockup.html">Startseite</a> | <a href="impressum.html">Impressum</a>
 						| <a href="faq.html">FAQs</a>
 					</p>
 				</div>

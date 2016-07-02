@@ -2,12 +2,11 @@
 	
 }
 
-.nav {
-	margin-bottom: 20px;
-	background: white;
-	border-bottom: 1px solid #D60000;
-}
 
+.nav2 {
+	border-bottom: 1px solid #D60000;
+	padding-bottom: 47px;
+}
 
 .nav .col-md-2 {
 	background: #BDBDBD;
@@ -47,7 +46,7 @@
 
 .aufgaben {
 	background: white;
-	margin-top: 5px;
+	margin-top: 75px;
 }
 /* Die Vertikale Navigationsleiste auf der linken Seite */
 .navVer h3 {
@@ -83,6 +82,8 @@
 	margin-bottom: 0px;
 	padding-bottom: 0px;
 	padding-left: 2px;
+	padding-top: 0px;
+padding-bottom: 0px;
 }
 
 .nav-tabs {
@@ -91,12 +92,9 @@
 }
 
 .nav li {
-	background: #dee;
-	color: black;
-	padding: 10px;
-	font-weight: bold;
-	font-size: medium;
-	cursor: pointer;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
 }
 
 
