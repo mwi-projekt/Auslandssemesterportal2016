@@ -375,40 +375,19 @@ var main = function() {
 															$('.iF1').show();
 															$('#bewProzess')
 																	.hide();
-															var datum = new Date;
-															if (datum
-																	.getMonth() < 10
-																	&& datum
-																			.getDate() < 10) {
-																var heute = (datum
-																		.getYear() + 1900)
-																		+ '-0'
-																		+ datum
-																				.getMonth()
-																		+ '-0'
-																		+ datum
-																				.getDate();
-															} else if (datum
-																	.getMonth() < 10) {
-																var heute = (datum
-																		.getYear() + 1900)
-																		+ '-0'
-																		+ datum
-																				.getMonth()
-																		+ '-'
-																		+ datum
-																				.getDate();
-															} else if (datum
-																	.getDate() < 10) {
-																var heute = (datum
-																		.getYear() + 1900)
-																		+ '-'
-																		+ datum
-																				.getMonth()
-																		+ '-0'
-																		+ datum
-																				.getDate();
-															}
+															var datum = new Date();
+														    var dd = datum.getDate();
+														    var mm = datum.getMonth()+1; //January is 0!
+
+														    var yyyy = datum.getFullYear();
+														    if(dd<10){
+														        dd='0'+dd
+														    } 
+														    if(mm<10){
+														        mm='0'+mm
+														    } 
+														    var heute = yyyy+'-'+mm+'-'+dd;
+														    
 															sessionStorage['uni'] = $(
 																	'#selectUni')
 																	.val();
@@ -1235,352 +1214,32 @@ var main = function() {
 
 							}
 							$('#bewFormular4').hide();
+							
 						} else if (id == '15') {
-							var file = $("input[name=daad_file]")[0].files[0];
-							var r = new FileReader();
-							r.onload = function(t) {
-								try {
-									const
-									text = r.result;
-									$
-											.ajax({
-												type : "POST",
-												url : "login_db",
-												data : {
-													action : "nach_DAAD_Upload",
-													matrikelnummer : sessionStorage['matrikelnr'],
-													uni : sessionStorage['uni'],
-													firma : $('#bewPartnerName')
-															.val(),
-													ansprechpartner : $(
-															'#bewPartnerAnsprech')
-															.val(),
-													email : $(
-															'#bewPartnerEmail')
-															.val(),
-													strasse : $(
-															'#bewPartnerStrasse')
-															.val(),
-													hausnummer : $(
-															'#bewPartnerHausnummer')
-															.val(),
-													plz : $('#bewPartnerPlz')
-															.val(),
-													stadt : $(
-															'#bewPartnerStadt')
-															.val(),
-													daad_file : text
-
-												},
-												success : function(result) {
-													// $('#bewFormular6').show();
-													// $('#bewFormular5').hide();
-													askNextStep(sessionStorage['uni']);
-													var name = $('#bewVorname')
-															.val()
-															+ ' '
-															+ $('bewNachname')
-																	.val();
-													var uni = $('#aktuelleUni')
-															.html();
-													var matrikelnummer = sessionStorage['matrikelnr'];
-
-												},
-												error : function(result) {
-
-												}
-											});
-								} catch (e) {
-									this.addIOError("Error while reading "
-											+ file.name + ": " + e);
-								}
-							}
-							r.readAsDataURL(file);
+							var filenameHTML = "daad_file";
+							var actionString = "nach_DAAD_Upload";
+							uploadFile(filenameHTML, actionString);
 
 						} else if (id == '16') {
-							var file = $("input[name=abitur_file]")[0].files[0];
-							var r = new FileReader();
-							r.onload = function(t) {
-								try {
-									const
-									text = r.result;
-									$
-											.ajax({
-												type : "POST",
-												url : "login_db",
-												data : {
-													action : "nach_Abitur_Upload",
-													matrikelnummer : sessionStorage['matrikelnr'],
-													uni : sessionStorage['uni'],
-													firma : $('#bewPartnerName')
-															.val(),
-													ansprechpartner : $(
-															'#bewPartnerAnsprech')
-															.val(),
-													email : $(
-															'#bewPartnerEmail')
-															.val(),
-													strasse : $(
-															'#bewPartnerStrasse')
-															.val(),
-													hausnummer : $(
-															'#bewPartnerHausnummer')
-															.val(),
-													plz : $('#bewPartnerPlz')
-															.val(),
-													stadt : $(
-															'#bewPartnerStadt')
-															.val(),
-													abitur_file : text
-
-												},
-												success : function(result) {
-													// $('#bewFormular7').show();
-													// $('#bewFormular6').hide();
-
-													var name = $('#bewVorname')
-															.val()
-															+ ' '
-															+ $('bewNachname')
-																	.val();
-													var uni = $('#aktuelleUni')
-															.html();
-													var matrikelnummer = sessionStorage['matrikelnr'];
-													askNextStep($('#selectUni')
-															.val());
-												},
-												error : function(result) {
-
-												}
-											});
-								} catch (e) {
-									this.addIOError("Error while reading "
-											+ file.name + ": " + e);
-								}
-							}
-							r.readAsDataURL(file);
+							var filenameHTML = "abitur_file";
+							var actionString = "nach_Abitur_Upload";
+							uploadFile(filenameHTML, actionString);
 
 						} else if (id == 17) {
-							var file = $("input[name=dualis_file]")[0].files[0];
-							var r = new FileReader();
-							r.onload = function(t) {
-								try {
-									const
-									text = r.result;
-									$
-											.ajax({
-												type : "POST",
-												url : "login_db",
-												data : {
-													action : "nach_Dualis_Upload",
-													matrikelnummer : sessionStorage['matrikelnr'],
-													uni : sessionStorage['uni'],
-													firma : $('#bewPartnerName')
-															.val(),
-													ansprechpartner : $(
-															'#bewPartnerAnsprech')
-															.val(),
-													email : $(
-															'#bewPartnerEmail')
-															.val(),
-													strasse : $(
-															'#bewPartnerStrasse')
-															.val(),
-													hausnummer : $(
-															'#bewPartnerHausnummer')
-															.val(),
-													plz : $('#bewPartnerPlz')
-															.val(),
-													stadt : $(
-															'#bewPartnerStadt')
-															.val(),
-													dualis_file : text
-
-												},
-												success : function(result) {
-													// $('#bewFormular8').show();
-													// $('#bewFormular7').hide();
-
-													var name = $('#bewVorname')
-															.val()
-															+ ' '
-															+ $('bewNachname')
-																	.val();
-													var uni = $('#aktuelleUni')
-															.html();
-													var matrikelnummer = sessionStorage['matrikelnr'];
-													askNextStep($('#selectUni')
-															.val());
-												},
-												error : function(result) {
-
-												}
-											});
-								} catch (e) {
-									this.addIOError("Error while reading "
-											+ file.name + ": " + e);
-								}
-							}
-							r.readAsDataURL(file);
+							var filenameHTML = "dualis_file";
+							var actionString = "nach_Dualis_Upload";
+							uploadFile(filenameHTML, actionString);
 
 						} else if (id == 18) {
-							var file = $("input[name=motivation_file]")[0].files[0];
-							var r = new FileReader();
-							r.onload = function(t) {
-								try {
-									const
-									text = r.result;
-									$
-											.ajax({
-												type : "POST",
-												url : "login_db",
-												data : {
-													action : "nach_Motivation_Upload",
-													matrikelnummer : sessionStorage['matrikelnr'],
-													uni : sessionStorage['uni'],
-													firma : $('#bewPartnerName')
-															.val(),
-													ansprechpartner : $(
-															'#bewPartnerAnsprech')
-															.val(),
-													email : $(
-															'#bewPartnerEmail')
-															.val(),
-													strasse : $(
-															'#bewPartnerStrasse')
-															.val(),
-													hausnummer : $(
-															'#bewPartnerHausnummer')
-															.val(),
-													plz : $('#bewPartnerPlz')
-															.val(),
-													stadt : $(
-															'#bewPartnerStadt')
-															.val(),
-													motivation_file : text
-
-												},
-												success : function(result) {
-													// $('#bewFormular9').show();
-													// $('#bewFormular8').hide();
-
-													var name = $('#bewVorname')
-															.val()
-															+ ' '
-															+ $('bewNachname')
-																	.val();
-													var uni = $('#aktuelleUni')
-															.html();
-													var matrikelnummer = sessionStorage['matrikelnr'];
-													askNextStep($('#selectUni')
-															.val());
-												},
-												error : function(result) {
-
-												}
-											});
-								} catch (e) {
-									this.addIOError("Error while reading "
-											+ file.name + ": " + e);
-								}
-							}
-							r.readAsDataURL(file);
+							var filenameHTML = "motivation_file";
+							var actionString = "nach_Motivation_Upload";
+							uploadFile(filenameHTML, actionString);
 
 						} else if (id == 19) {
-							var file = $("input[name=zustimmungsformular_file]")[0].files[0];
-							var r = new FileReader();
-							r.onload = function(t) {
-								try {
-									const
-									text = r.result;
-									$
-											.ajax({
-												type : "POST",
-												url : "login_db",
-												data : {
-													action : "nach_Zustimmung_Upload",
-													matrikelnummer : sessionStorage['matrikelnr'],
-													uni : sessionStorage['uni'],
-													firma : $('#bewPartnerName')
-															.val(),
-													ansprechpartner : $(
-															'#bewPartnerAnsprech')
-															.val(),
-													email : $(
-															'#bewPartnerEmail')
-															.val(),
-													strasse : $(
-															'#bewPartnerStrasse')
-															.val(),
-													hausnummer : $(
-															'#bewPartnerHausnummer')
-															.val(),
-													plz : $('#bewPartnerPlz')
-															.val(),
-													stadt : $(
-															'#bewPartnerStadt')
-															.val(),
-													zustimmungsformular_file : text
-
-												},
-												success : function(result) {
-													askNextStep(sessionStorage['uni']);
-
-													// $('.dat').hide();
-													// $('.erfolgreich')
-													// .html(
-													// '<p>Du hat alle Daten
-													// ben�tigten Daten
-													// eingetragen. Frau
-													// Dreischer wird sich bei
-													// dir melden!</p>');
-													// $('.erfolgreich').show();
-													// $('.erfolgreich').fadeOut(7000);
-													// $('.iFenster').hide();
-													// $('.iF1').hide();
-													// $('.iF2').hide();
-													// $('#bewProzess').show();
-													//
-													// var name =
-													// $('#bewVorname').val()
-													// + ' '
-													// + $('bewNachname').val();
-													// var uni =
-													// $('#aktuelleUni').html();
-													// var matrikelnummer =
-													// sessionStorage['matrikelnr'];
-													// $
-													// .ajax({
-													// type : "POST",
-													// url : "login_db",
-													// data : {
-													// action : "sendmail",
-													// name : name,
-													// uni : uni,
-													// matrikelnummer :
-													// matrikelnummer,
-													// },
-													// success : function(
-													// result) {
-													//
-													// },
-													// error : function(result)
-													// {
-													//
-													// }
-													// });
-												},
-												error : function(result) {
-
-												}
-											});
-
-								} catch (e) {
-									this.addIOError("Error while reading "
-											+ file.name + ": " + e);
-								}
-							}
-							r.readAsDataURL(file);
+							var filenameHTML = "zustimmungsformular_file";
+							var actionString = "nach_Zustimmung_Upload";
+							uploadFile(filenameHTML, actionString);
+							
 						} else if (id === '20') {
 							$
 									.ajax({
@@ -1756,6 +1415,77 @@ $(document).ready(main);
 
 function isEmpty(str) {
 	return (!str || 0 === str.length);
+}
+
+function uploadFile(filenameHTML, actionString){
+	var inputString = "input[name=" + filenameHTML + "]";
+	var file = $(inputString)[0].files[0];
+	var r = new FileReader();
+	r.onload = function(t) {
+		try {
+			const
+			text = r.result;
+			$
+					.ajax({
+						type : "POST",
+						url : "login_db",
+						data : {
+							action : actionString,
+							matrikelnummer : sessionStorage['matrikelnr'],
+							uni : sessionStorage['uni'],
+							firma : $('#bewPartnerName')
+									.val(),
+							ansprechpartner : $(
+									'#bewPartnerAnsprech')
+									.val(),
+							email : $(
+									'#bewPartnerEmail')
+									.val(),
+							strasse : $(
+									'#bewPartnerStrasse')
+									.val(),
+							hausnummer : $(
+									'#bewPartnerHausnummer')
+									.val(),
+							plz : $('#bewPartnerPlz')
+									.val(),
+							stadt : $(
+									'#bewPartnerStadt')
+									.val(),
+							inputFile : text
+
+						},
+						success : function(result) {
+							// $('#bewFormular9').show();
+							// $('#bewFormular8').hide();
+							if(filenameHTML = "zustimmungsformular_file"){
+								askNextStep(sessionStorage['uni']);
+							}
+							else{
+
+							var name = $('#bewVorname')
+									.val()
+									+ ' '
+									+ $('bewNachname')
+											.val();
+							var uni = $('#aktuelleUni')
+									.html();
+							var matrikelnummer = sessionStorage['matrikelnr'];
+							askNextStep($('#selectUni')
+									.val());
+							}
+						},
+						error : function(result) {
+
+						}
+					});
+		} catch (e) {
+			this.addIOError("Error while reading "
+					+ file.name + ": " + e);
+		}
+	}
+	r.readAsDataURL(file);
+	
 }
 // downloads Anzeigen
 function schritt0(uni) {

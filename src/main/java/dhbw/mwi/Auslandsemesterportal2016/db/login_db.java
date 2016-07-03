@@ -619,7 +619,7 @@ public class login_db extends HttpServlet implements TaskListener{
 				// "DAAD-Formular hochladen" + Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("daad_file").substring(23)); // Retrieves <input type="file" name="file">
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
 			    String fileName = "DAAD_Formular.pdf";
 			    
 			    FileValue typedFileValue = Variables
@@ -634,7 +634,7 @@ public class login_db extends HttpServlet implements TaskListener{
 				// "Abiturzeugnis hochladen" + Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("abitur_file").substring(23)); // Retrieves <input type="file" name="file">
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
 			    String fileName = "Abiturzeugnis.pdf";
 			    
 			    FileValue typedFileValue = Variables
@@ -650,7 +650,7 @@ public class login_db extends HttpServlet implements TaskListener{
 				// "Motivationsschreiben hochladen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("dualis_file").substring(23)); // Retrieves <input type="file" name="file">
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
 			    String fileName = "Dualis_Dokumente.pdf";
 			    
 			    FileValue typedFileValue = Variables
@@ -666,7 +666,7 @@ public class login_db extends HttpServlet implements TaskListener{
 				// "Motivationsschreiben hochladen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("motivation_file").substring(23)); // Retrieves <input type="file" name="file">
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
 			    String fileName = "Motivationsschreiben.pdf";
 			    
 			    FileValue typedFileValue = Variables
@@ -682,7 +682,7 @@ public class login_db extends HttpServlet implements TaskListener{
 				// "Zustimmungsformular hochladen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("zustimmungsformular_file").substring(23)); // Retrieves <input type="file" name="file">
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
 			    String fileName = "Zustimmungsfomular.pdf";
 			    
 			    FileValue typedFileValue = Variables
