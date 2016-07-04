@@ -176,7 +176,6 @@ var main = function() {
 														.fadeOut(10000);
 												$('.popUpBack').hide();
 												$('.popUpFeld').fadeOut();
-												alert("Fertig");
 												//$('#register').fadeOut();
 												//$('#register').hide();
 												$('.modal').fadeOut();
