@@ -380,8 +380,8 @@ var main = function() {
 								    .getDate();
 							    var mm = datum
 								    .getMonth() + 1; // January
-											// is
-											// 0!
+							    // is
+							    // 0!
 
 							    var yyyy = datum
 								    .getFullYear();
@@ -762,6 +762,7 @@ var main = function() {
 			    // $('#bewFormular2').show();
 			} else if (id === '12') {
 			    if (isEmpty($('#bewLand').val()) === true
+				    || isEmpty($('#bewBundesland').val()) === true
 				    || isEmpty($('#bewStrasse').val()) === true
 				    || isEmpty($('#bewHausnummer').val()) === true
 				    || isEmpty($('#bewPlz').val()) === true
@@ -776,6 +777,7 @@ var main = function() {
 					    data : {
 						action : "update_Adresse",
 						matrikelnummer : sessionStorage['matrikelnr'],
+						uni : sessionStorage['uni'],
 						phase : "Praxis",
 						land : $('#bewLand').val(),
 						bundesland : $('#bewBundesland')
@@ -861,6 +863,7 @@ var main = function() {
 					    url : "login_db",
 					    data : {
 						action : "insert_Adresse",
+						uni : sessionStorage['uni'],
 						matrikelnummer : sessionStorage['matrikelnr'],
 						phase : "Praxis",
 						land : $('#bewLand').val(),
@@ -953,6 +956,7 @@ var main = function() {
 					    data : {
 						action : "insert_Adresse",
 						matrikelnummer : sessionStorage['matrikelnr'],
+						uni : sessionStorage['uni'],
 						phase : "Theorie",
 						land : $('#bewThLand').val(),
 						bundesland : $(
@@ -1040,6 +1044,7 @@ var main = function() {
 					    data : {
 						action : "update_Adresse",
 						matrikelnummer : sessionStorage['matrikelnr'],
+						uni : sessionStorage['uni'],
 						phase : "Theorie",
 						land : $('#bewThLand').val(),
 						bundesland : $(
@@ -1310,6 +1315,7 @@ var main = function() {
 		data : {
 		    action : "insert_Adresse",
 		    matrikelnummer : sessionStorage['matrikelnr'],
+		    uni : sessionStorage['uni'],
 		    phase : "Theorie",
 		    land : $('#bewLand').val(),
 		    bundesland : $('#bewBundesland').val(),
@@ -1351,7 +1357,69 @@ var main = function() {
 
     });
 
-    
+    $('#bewFormular10')
+	    .on(
+		    'click',
+		    function(event) {
+			$
+				.ajax({
+				    type : "POST",
+				    url : "login_db",
+				    data : {
+					action : "nach_pruef",
+					matrikelnummer : sessionStorage['matrikelnr'],
+					uni : sessionStorage['uni'],
+					firma : $('#bewPartnerName').val(),
+					ansprechpartner : $(
+						'#bewPartnerAnsprech').val(),
+					email : $('#bewPartnerEmail').val(),
+					strasse : $('#bewPartnerStrasse').val(),
+					hausnummer : $('#bewPartnerHausnummer')
+						.val(),
+					plz : $('#bewPartnerPlz').val(),
+					stadt : $('#bewPartnerStadt').val()
+
+				    },
+				    success : function(result) {
+					$('.dat').hide();
+					$('.erfolgreich')
+						.html(
+							'<p>Du hat alle Daten benötigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
+					$('.erfolgreich').show();
+					$('.erfolgreich').fadeOut(7000);
+					$('.iFenster').hide();
+					$('.iF1').hide();
+					$('.iF2').hide();
+					$('#bewProzess').show();
+
+					var name = $('#bewVorname').val() + ' '
+						+ $('bewNachname').val();
+					var uni = $('#aktuelleUni').html();
+					var matrikelnummer = sessionStorage['matrikelnr'];
+					$
+						.ajax({
+						    type : "POST",
+						    url : "login_db",
+						    data : {
+							action : "sendmail",
+							name : name,
+							uni : uni,
+							matrikelnummer : matrikelnummer,
+						    },
+						    success : function(result) {
+
+						    },
+						    error : function(result) {
+
+						    }
+						});
+				    },
+				    error : function(result) {
+
+				    }
+				});
+		    });
+
 };
 
 $(document).ready(main);
@@ -2012,24 +2080,6 @@ function onClickAllgemeineDatenWeiter(uni) {
     $('.dat').hide();
     $('#bewFormular1').hide();
     $('#bewFormular2').show();
-    
-    $.ajax({
-	     type : "POST",
-	     url : "login_db",
-	     data : {
-	     action : "insert_EnglischAbi",
-	     matrikelnummer : sessionStorage['matrikelnr'],
-	     abinote : $(
-	     '#bewEnglischAbi')
-	     .val(),
-	     },
-	     success : function(result) {},
-			error : function(result) {
-			    alert(result.message);
-			}
-		});
-	     
-    
     $
 	    .ajax({
 		type : "POST",
