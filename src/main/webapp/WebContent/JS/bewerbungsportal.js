@@ -2087,7 +2087,7 @@ function onClickAllgemeineDatenWeiter(uni) {
 		data : {
 		    action : "update_User",
 		    matrikelnummer : sessionStorage['matrikelnr'],
-		    uni : sessionStorage['matrikelnr'],
+		    uni : sessionStorage['uni'],
 		    vorname : $('#bewVorname').val(),
 		    nachname : $('#bewNachname').val(),
 		    email : $('#bewEmail').val(),
