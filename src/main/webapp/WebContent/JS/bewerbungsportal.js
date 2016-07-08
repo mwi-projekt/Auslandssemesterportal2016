@@ -948,6 +948,70 @@ var main = function() {
 			    // Hier fehlt noch die Abfrage zum Updaten oder
 			    // Inserten
 			    if (sessionStorage['adressThOkay'] === false) {
+			    	
+			    	$
+					.ajax({
+					    type : "POST",
+					    url : "login_db",
+					    data : {
+						action : "get_Partnerunternehmen",
+						matrikelnummer : sessionStorage['matrikelnr'],
+					    },
+					    success : function(
+						    result) {
+						var auslesen = result
+							.split(';');
+						$(
+							'#bewPartnerName')
+							.val(
+								auslesen[0]
+									.trim());
+						$(
+							'#bewPartnerAnsprech')
+							.val(
+								auslesen[1]
+									.trim());
+						$(
+							'#bewPartnerEmail')
+							.val(
+								auslesen[2]
+									.trim());
+						$(
+							'#bewPartnerStrasse')
+							.val(
+								auslesen[3]
+									.trim());
+						$(
+							'#bewPartnerHausnummer')
+							.val(
+								auslesen[4]
+									.trim());
+						$(
+							'#bewPartnerPlz')
+							.val(
+								auslesen[5]
+									.trim());
+						$(
+							'#bewPartnerStadt')
+							.val(
+								auslesen[6]
+									.trim());
+						if (isEmpty($(
+							'#bewPartnerStrasse')
+							.val()) != true) {
+						    sessionStorage['partnerUnternehmenOkay'] = true;
+						} else {
+						    sessionStorage['partnerUnternehmenOkay'] = false;
+						}
+					    },
+					    error : function(
+						    result) {
+
+					    }
+					});
+			    	
+			    	
+			    	
 				$
 					.ajax({
 					    type : "POST",
@@ -970,66 +1034,7 @@ var main = function() {
 						stadt : $('#bewThStadt').val(),
 					    },
 					    success : function(result) {
-						$
-							.ajax({
-							    type : "POST",
-							    url : "login_db",
-							    data : {
-								action : "get_Partnerunternehmen",
-								matrikelnummer : sessionStorage['matrikelnr'],
-							    },
-							    success : function(
-								    result) {
-								var auslesen = result
-									.split(';');
-								$(
-									'#bewPartnerName')
-									.val(
-										auslesen[0]
-											.trim());
-								$(
-									'#bewPartnerAnsprech')
-									.val(
-										auslesen[1]
-											.trim());
-								$(
-									'#bewPartnerEmail')
-									.val(
-										auslesen[2]
-											.trim());
-								$(
-									'#bewPartnerStrasse')
-									.val(
-										auslesen[3]
-											.trim());
-								$(
-									'#bewPartnerHausnummer')
-									.val(
-										auslesen[4]
-											.trim());
-								$(
-									'#bewPartnerPlz')
-									.val(
-										auslesen[5]
-											.trim());
-								$(
-									'#bewPartnerStadt')
-									.val(
-										auslesen[6]
-											.trim());
-								if (isEmpty($(
-									'#bewPartnerStrasse')
-									.val()) != true) {
-								    sessionStorage['partnerUnternehmenOkay'] = true;
-								} else {
-								    sessionStorage['partnerUnternehmenOkay'] = false;
-								}
-							    },
-							    error : function(
-								    result) {
-
-							    }
-							});
+						
 					    },
 					    error : function(result) {
 
@@ -2348,6 +2353,7 @@ function defineNextStep(nextStepString, uni) {
 
 	break;
     case "Datenvalidieren":
+    alert("Die Bewerbung befindet sich gerade in der Überprüfung");
 	$('.iFenster').hide();
 	$('.iF1').hide();
 	$('.iF2').hide();
