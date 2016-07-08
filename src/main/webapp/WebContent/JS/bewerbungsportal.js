@@ -2075,24 +2075,6 @@ function onClickAllgemeineDatenWeiter(uni) {
     $('.dat').hide();
     $('#bewFormular1').hide();
     $('#bewFormular2').show();
-    
-    $.ajax({
-	     type : "POST",
-	     url : "login_db",
-	     data : {
-	     action : "insert_EnglischAbi",
-	     matrikelnummer : sessionStorage['matrikelnr'],
-	     abinote : $(
-	     '#bewEnglischAbi')
-	     .val(),
-	     },
-	     success : function(result) {},
-			error : function(result) {
-			    alert(result.message);
-			}
-		});
-	     
-    
     $
 	    .ajax({
 		type : "POST",
