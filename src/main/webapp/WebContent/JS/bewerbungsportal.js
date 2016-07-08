@@ -762,7 +762,6 @@ var main = function() {
 			    // $('#bewFormular2').show();
 			} else if (id === '12') {
 			    if (isEmpty($('#bewLand').val()) === true
-				    || isEmpty($('#bewBundesland').val()) === true
 				    || isEmpty($('#bewStrasse').val()) === true
 				    || isEmpty($('#bewHausnummer').val()) === true
 				    || isEmpty($('#bewPlz').val()) === true
@@ -1352,69 +1351,7 @@ var main = function() {
 
     });
 
-    $('#bewFormular10')
-	    .on(
-		    'click',
-		    function(event) {
-			$
-				.ajax({
-				    type : "POST",
-				    url : "login_db",
-				    data : {
-					action : "nach_pruef",
-					matrikelnummer : sessionStorage['matrikelnr'],
-					uni : sessionStorage['uni'],
-					firma : $('#bewPartnerName').val(),
-					ansprechpartner : $(
-						'#bewPartnerAnsprech').val(),
-					email : $('#bewPartnerEmail').val(),
-					strasse : $('#bewPartnerStrasse').val(),
-					hausnummer : $('#bewPartnerHausnummer')
-						.val(),
-					plz : $('#bewPartnerPlz').val(),
-					stadt : $('#bewPartnerStadt').val()
-
-				    },
-				    success : function(result) {
-					$('.dat').hide();
-					$('.erfolgreich')
-						.html(
-							'<p>Du hat alle Daten benötigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
-					$('.erfolgreich').show();
-					$('.erfolgreich').fadeOut(7000);
-					$('.iFenster').hide();
-					$('.iF1').hide();
-					$('.iF2').hide();
-					$('#bewProzess').show();
-
-					var name = $('#bewVorname').val() + ' '
-						+ $('bewNachname').val();
-					var uni = $('#aktuelleUni').html();
-					var matrikelnummer = sessionStorage['matrikelnr'];
-					$
-						.ajax({
-						    type : "POST",
-						    url : "login_db",
-						    data : {
-							action : "sendmail",
-							name : name,
-							uni : uni,
-							matrikelnummer : matrikelnummer,
-						    },
-						    success : function(result) {
-
-						    },
-						    error : function(result) {
-
-						    }
-						});
-				    },
-				    error : function(result) {
-
-				    }
-				});
-		    });
-
+    
 };
 
 $(document).ready(main);
@@ -2100,7 +2037,7 @@ function onClickAllgemeineDatenWeiter(uni) {
 		data : {
 		    action : "update_User",
 		    matrikelnummer : sessionStorage['matrikelnr'],
-		    uni : sessionStorage['matrikelnr'],
+		    uni : sessionStorage['uni'],
 		    vorname : $('#bewVorname').val(),
 		    nachname : $('#bewNachname').val(),
 		    email : $('#bewEmail').val(),
