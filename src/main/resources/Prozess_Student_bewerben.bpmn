@@ -86,7 +86,7 @@
       <bpmn:incoming>SequenceFlow_1idui8b</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0yksv3e</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="datenValidieren" name="Daten validieren" camunda:assignee="mitarbeiterAAA">
+    <bpmn:userTask id="datenValidieren" name="Daten validieren" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="mitarbeiterAAA">
       <bpmn:extensionElements>
         <camunda:taskListener class="dhbw.mwi.Auslandsemesterportal2016.db.login_db" event="assignment" />
       </bpmn:extensionElements>
