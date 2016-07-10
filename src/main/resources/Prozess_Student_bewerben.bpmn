@@ -98,7 +98,7 @@
       <bpmn:outgoing>SequenceFlow_19mks64</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_03x4egt</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sendTask id="bestaetigungVersenden" name="Bestätigungs-email versenden" camunda:expression="${true}">
+    <bpmn:sendTask id="bestaetigungVersenden" name="Bestätigungs-email versenden" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
       <bpmn:documentation>Student wird über Annahme bestätigt.</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_03x4egt</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_094sdpj</bpmn:outgoing>
@@ -106,16 +106,16 @@
     <bpmn:endEvent id="EndEvent_0b01b6y" name="Bewerbung abgeschlossen">
       <bpmn:incoming>SequenceFlow_094sdpj</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sendTask id="studentBenachrichtigen" name="Student benachrichtigen" camunda:expression="${true}">
+    <bpmn:sendTask id="studentBenachrichtigen" name="Student benachrichtigen" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
       <bpmn:documentation>Student wird über Ablehnung informiert.</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_19mks64</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1lh0fqr</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="SequenceFlow_19mks64" name="Nein" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="studentBenachrichtigen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${false}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_03x4egt" name="Ja" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="bestaetigungVersenden">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_094sdpj" sourceRef="bestaetigungVersenden" targetRef="EndEvent_0b01b6y" />
     <bpmn:userTask id="datenPruefen" name="Daten prüfen">

@@ -1151,31 +1151,34 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				return new PasswordAuthentication(username, password);
 			}
 		});
-		//Map<String, Object> variables = execution.getVariables();
 		
-		String email = "softwharmankardon@web.de";
-				//(String) execution.getVariable("Email");
-		String nachname = "lala";
-		String uni = "lulu";
-				//(String) execution.getVariable("Student-Email");
-		//String nachname = (String) execution.getVariable("Student-Nachname");
-		//String uni = (String) execution.getVariable("Uni");
-
-		/*System.out.println("Email: " + email);
-		System.out.println("Nachname: " + nachname);
-		System.out.println("Uni: " + uni);*/
+		String email = (String) execution.getVariable("studentEmail");
+		String nachname = (String) execution.getVariable("studentNachname");;
+		String uni = "muss noch verändert werden!!!";
+		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
 
 		try {
 			Message message = new MimeMessage(session);
 
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("testwitz123@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			message.setSubject(
 					MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester validiert", "utf-8", "B"));
-			message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + "\n" + "\n"
+			if(erfolgreich){
+				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + "\n" + "\n"
 					+ "Ihre eingereichte Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
 					+ uni + " ist vollständig validiert." + "\n"
+					+ "Die Validierung war erfolgreich. Alle Daten sind vollständig und korrekt. Nun steht die Berwerberauswahl an." + "\n"
 					+ "Ein Mitarbeiter wird sich mit Ihnen bald in Kontakt setzen." + "Mit freundlichen Grüßen," + "\n"
 					+ "\n" + "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
+			}
+			else{
+				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + "\n" + "\n"
+						+ "Ihre eingereichte Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
+						+ uni + " ist vollständig validiert." + "\n"
+						+ "Die Validierung war leider nicht erfolgreich. Es sind nicht alle Daten vollständig und korrekt." + "\n"
+						+ "Ein Mitarbeiter wird sich mit Ihnen bald in Kontakt setzen." + "Mit freundlichen Grüßen," + "\n"
+						+ "\n" + "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
+			}
 
 			Transport.send(message);
 
