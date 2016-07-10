@@ -600,12 +600,12 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 				// Variable setzen für weiteren Verlauf von Prozess
 				variables.put("Firma", request.getParameter("Firma"));
-				variables.put("Email", request.getParameter("email"));
-				variables.put("Ansprechpartner", request.getParameter("ansprechpartner"));
-				variables.put("Straße", request.getParameter("strasse"));
-				variables.put("Hausnummer", request.getParameter("hausnummer"));
-				variables.put("PLZ", request.getParameter("plz"));
-				variables.put("Stadt", request.getParameter("stadt"));
+				variables.put("unternehmenAnsprechpartner",  request.getParameter("ansprechpartner"));
+			    variables.put("unternehmenStrasse",  request.getParameter("strasse"));
+			    variables.put("unternehmenHausnummer",  request.getParameter("hausnummer"));
+			    variables.put("unternehmenPLZ",  request.getParameter("plz"));
+			    variables.put("unternehmenStadt",  request.getParameter("stadt"));
+			    variables.put("unternehmenEmail",  request.getParameter("email"));
 
 				// "Daten eingeben" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
@@ -751,6 +751,12 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				completeTask(id);
 				
 			} else if (action.equals("nach_Daten_pruefen")){
+
+
+			} else if (action.equals("nach_Daten_pruefen")) {
+
+				// Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder
+				// MySQL?
 
 				// "Daten prüfen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
