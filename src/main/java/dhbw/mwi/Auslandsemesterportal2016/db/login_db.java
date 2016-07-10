@@ -1215,20 +1215,29 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			message.setSubject(
 					MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester validiert", "utf-8", "B"));
 			if(erfolgreich){
-				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + "\n" + "\n"
-					+ "Ihre eingereichte Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
-					+ uni + " ist vollständig validiert." + "\n"
-					+ "Die Validierung war erfolgreich. Alle Daten sind vollständig und korrekt. Nun steht die Berwerberauswahl an." + "\n"
-					+ "Ein Mitarbeiter wird sich mit Ihnen bald in Kontakt setzen." + "Mit freundlichen Grüßen," + "\n"
-					+ "\n" + "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
-			}
-			else{
-				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + "\n" + "\n"
-						+ "Ihre eingereichte Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
-						+ uni + " ist vollständig validiert." + "\n"
-						+ "Die Validierung war leider nicht erfolgreich. Es sind nicht alle Daten vollständig und korrekt." + "\n"
-						+ "Ein Mitarbeiter wird sich mit Ihnen bald in Kontakt setzen." + "Mit freundlichen Grüßen," + "\n"
-						+ "\n" + "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
+				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
+				"\n"+ 
+				"\n"+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "+ uni +" wurde erfolgreich an das Akademisches Auslandsamt versendet."+
+				"\n"+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnahe um die Bearbeitung Ihrer Bewerbung kümmern und entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen"+ 
+				"\n"+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren." +  
+				"\n"+ 
+				"\n"+ "Mit freundlichen Grüßen," + 
+				"\n"+ 
+				"\n"+ "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
+							
+				}
+				else{
+				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
+				"\n"+ 
+				"\n"+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: "+ uni + 
+				"\n"+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + 
+				"\n"+		 
+				"\n"+ "Ein Mitarbeiter wird sich daher bald mit Ihnen in Verbindung setzen." +
+				"\n"+ "Wir bitten um Ihr Verständnis." +
+				"\n"+ 
+				"\n"+ "Mit freundlichen Grüßen," + 
+				"\n"+ 
+				"\n"+ "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
 			}
 
 			Transport.send(message);
