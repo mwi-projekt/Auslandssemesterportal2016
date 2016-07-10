@@ -519,6 +519,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			    variables.put("studentStudiengang",  request.getParameter("studiengang"));
 			    variables.put("studentKurs",  request.getParameter("kurs"));
 			    variables.put("studentMatrikelnummer",  request.getParameter("matrikelnummer"));
+			    variables.put("uni", request.getParameter("uni"));
 			    
 			    String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
@@ -1165,7 +1166,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			message.setContent("Sehr geehrte Frau Dreischer," + "\n" + "\n"
 					+ "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n"
 					+ "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n"
-					+ "http://localhost:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(),
+					+ "http://193.196.7.215:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(),
 					"text/plain; charset=UTF-8");
 
 			Transport.send(message);
@@ -1202,8 +1203,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		});
 		
 		String email = (String) execution.getVariable("studentEmail");
-		String nachname = (String) execution.getVariable("studentNachname");;
-		String uni = "muss noch verändert werden!!!";
+		String nachname = (String) execution.getVariable("studentNachname");
+		String uni = (String) execution.getVariable("uni");
 		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
 
 		try {
