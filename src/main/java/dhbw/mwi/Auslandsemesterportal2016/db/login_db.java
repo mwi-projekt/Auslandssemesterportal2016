@@ -516,14 +516,14 @@ public class login_db extends HttpServlet implements TaskListener{
 				
 				//Variable setzen für weiteren Verlauf von Prozess
 			    Map<String, Object> variables = new HashMap<String, Object>();
-			    variables.put("Student-Vorname",   request.getParameter("vorname"));
-			    variables.put("Student-Nachname",  request.getParameter("nachname"));
-			    variables.put("Student-Email",  request.getParameter("email"));
-			    variables.put("Student-Telefon",  request.getParameter("telefon"));
-			    variables.put("Student-Handy",  request.getParameter("mobil"));
-			    variables.put("Student-Studiengang",  request.getParameter("studiengang"));
-			    variables.put("Student-Kurs",  request.getParameter("kurs"));
-			    variables.put("Student-Matrikelnummer",  request.getParameter("matrikelnummer"));
+			    variables.put("studentVorname",   request.getParameter("vorname"));
+			    variables.put("studentNachname",  request.getParameter("nachname"));
+			    variables.put("studentEmail",  request.getParameter("email"));
+			    variables.put("studentTelefon",  request.getParameter("telefon"));
+			    variables.put("studentHandy",  request.getParameter("mobil"));
+			    variables.put("studentStudiengang",  request.getParameter("studiengang"));
+			    variables.put("studentKurs",  request.getParameter("kurs"));
+			    variables.put("studentMatrikelnummer",  request.getParameter("matrikelnummer"));
 			    
 			    String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
@@ -532,6 +532,10 @@ public class login_db extends HttpServlet implements TaskListener{
 			} else if (action.equals("insert_EnglischAbi")) {
 				sqlupd = "INSERT INTO englischnote (matrikelnummer, englischAbi) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("abinote") + "') ";
+				
+				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				
+				processEngine.getRuntimeService().setVariable(id, "englischNote", request.getParameter("abinote"));
 
 			} else if (action.equals("get_Note")) {
 				sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '"
@@ -546,13 +550,13 @@ public class login_db extends HttpServlet implements TaskListener{
 				
 				//Variable setzen für weiteren Verlauf von Prozess
 			    Map<String, Object> variables = new HashMap<String, Object>();
-			    variables.put("Student-Adresse",  request.getParameter("strasse"));
-			    variables.put("Student-Hausnummer",  request.getParameter("hausnummer"));
-			    variables.put("Student-PLZ",  request.getParameter("plz"));
-			    variables.put("Student-Stadt",  request.getParameter("stadt"));
-			    variables.put("Student-Bundesland",  request.getParameter("bundesland"));
-			    variables.put("Student-Land",  request.getParameter("land"));
-			    variables.put("Student-Phase",  request.getParameter("phase"));
+			    variables.put("studentAdresse",  request.getParameter("strasse"));
+			    variables.put("studentHausnummer",  request.getParameter("hausnummer"));
+			    variables.put("studentPLZ",  request.getParameter("plz"));
+			    variables.put("studentStadt",  request.getParameter("stadt"));
+			    variables.put("studentBundesland",  "Baden-Württemberg" /*request.getParameter("bundesland")*/);
+			    variables.put("studentLand",  request.getParameter("land"));
+			    variables.put("studentPhase",  request.getParameter("phase"));
 			    
 			    String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
@@ -574,13 +578,13 @@ public class login_db extends HttpServlet implements TaskListener{
 
 				//Variable setzen für weiteren Verlauf von Prozess
 			    Map<String, Object> variables = new HashMap<String, Object>();
-			    variables.put("Student-Adresse",  request.getParameter("strasse"));
-			    variables.put("Student-Hausnummer",  request.getParameter("hausnummer"));
-			    variables.put("Student-PLZ",  request.getParameter("plz"));
-			    variables.put("Student-Stadt",  request.getParameter("stadt"));
-			    variables.put("Student-Bundesland",  request.getParameter("bundesland"));
-			    variables.put("Student-Land",  request.getParameter("land"));
-			    variables.put("Student-Phase",  request.getParameter("phase"));
+			    variables.put("studentAdresse",  request.getParameter("strasse"));
+			    variables.put("studentHausnummer",  request.getParameter("hausnummer"));
+			    variables.put("studentPLZ",  request.getParameter("plz"));
+			    variables.put("studentStadt",  request.getParameter("stadt"));
+			    variables.put("studentBundesland",   "Baden-Württemberg" /*request.getParameter("bundesland")*/);
+			    variables.put("studentLand",  request.getParameter("land"));
+			    variables.put("studentPhase",  request.getParameter("phase"));
 				
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
@@ -604,13 +608,13 @@ public class login_db extends HttpServlet implements TaskListener{
 			    variables.put("bestanden", resultNote);
 				
 				//Variable setzen für weiteren Verlauf von Prozess
-			    variables.put("Firma",  request.getParameter("Firma"));
-			    variables.put("Email",  request.getParameter("email"));
-			    variables.put("Ansprechpartner",  request.getParameter("ansprechpartner"));
-			    variables.put("Straße",  request.getParameter("strasse"));
-			    variables.put("Hausnummer",  request.getParameter("hausnummer"));
-			    variables.put("PLZ",  request.getParameter("plz"));
-			    variables.put("Stadt",  request.getParameter("stadt"));
+			    variables.put("firma", request.getParameter("firma"));
+			    variables.put("unternehmenAnsprechpartner",  request.getParameter("ansprechpartner"));
+			    variables.put("unternehmenStrasse",  request.getParameter("strasse"));
+			    variables.put("unternehmenHausnummer",  request.getParameter("hausnummer"));
+			    variables.put("unternehmenPLZ",  request.getParameter("plz"));
+			    variables.put("unternehmenStadt",  request.getParameter("stadt"));
+			    variables.put("unternehmenEmail",  request.getParameter("email"));
 				
 				// "Daten eingeben" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
@@ -633,12 +637,13 @@ public class login_db extends HttpServlet implements TaskListener{
 			    //Default: Variable für Datenvalidierung von Mitarbeiter
 			    variables.put("validierungErfolgreich", true);
 			    
-			    variables.put("Unternehmen-Ansprechpartner",  request.getParameter("ansprechpartner"));
-			    variables.put("Unternehmen-Straße",  request.getParameter("strasse"));
-			    variables.put("Unternehmen-Hausnummer",  request.getParameter("hausnummer"));
-			    variables.put("Unternehmen-PLZ",  request.getParameter("plz"));
-			    variables.put("Unternehmen-Stadt",  request.getParameter("stadt"));
-			    variables.put("Unternehmen-Email",  request.getParameter("email"));
+			    variables.put("firma", request.getParameter("firma"));
+			    variables.put("unternehmenAnsprechpartner",  request.getParameter("ansprechpartner"));
+			    variables.put("unternehmenStrasse",  request.getParameter("strasse"));
+			    variables.put("unternehmenHausnummer",  request.getParameter("hausnummer"));
+			    variables.put("unternehmenPLZ",  request.getParameter("plz"));
+			    variables.put("unternehmenStadt",  request.getParameter("stadt"));
+			    variables.put("unternehmenEmail",  request.getParameter("email"));
 
 				// "Daten eingeben" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
@@ -755,8 +760,6 @@ public class login_db extends HttpServlet implements TaskListener{
 				completeTask(id);
 				
 			} else if (action.equals("nach_Daten_pruefen")){
-				
-				//Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder MySQL?
 				
 				// "Daten prüfen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));

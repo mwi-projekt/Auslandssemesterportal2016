@@ -948,8 +948,8 @@ var main = function() {
 			    // Hier fehlt noch die Abfrage zum Updaten oder
 			    // Inserten
 			    if (sessionStorage['adressThOkay'] === false) {
-			    	
-			    	$
+
+				$
 					.ajax({
 					    type : "POST",
 					    url : "login_db",
@@ -957,45 +957,23 @@ var main = function() {
 						action : "get_Partnerunternehmen",
 						matrikelnummer : sessionStorage['matrikelnr'],
 					    },
-					    success : function(
-						    result) {
+					    success : function(result) {
 						var auslesen = result
 							.split(';');
-						$(
-							'#bewPartnerName')
-							.val(
-								auslesen[0]
-									.trim());
-						$(
-							'#bewPartnerAnsprech')
-							.val(
-								auslesen[1]
-									.trim());
-						$(
-							'#bewPartnerEmail')
-							.val(
-								auslesen[2]
-									.trim());
-						$(
-							'#bewPartnerStrasse')
-							.val(
-								auslesen[3]
-									.trim());
-						$(
-							'#bewPartnerHausnummer')
-							.val(
-								auslesen[4]
-									.trim());
-						$(
-							'#bewPartnerPlz')
-							.val(
-								auslesen[5]
-									.trim());
-						$(
-							'#bewPartnerStadt')
-							.val(
-								auslesen[6]
-									.trim());
+						$('#bewPartnerName').val(
+							auslesen[0].trim());
+						$('#bewPartnerAnsprech').val(
+							auslesen[1].trim());
+						$('#bewPartnerEmail').val(
+							auslesen[2].trim());
+						$('#bewPartnerStrasse').val(
+							auslesen[3].trim());
+						$('#bewPartnerHausnummer').val(
+							auslesen[4].trim());
+						$('#bewPartnerPlz').val(
+							auslesen[5].trim());
+						$('#bewPartnerStadt').val(
+							auslesen[6].trim());
 						if (isEmpty($(
 							'#bewPartnerStrasse')
 							.val()) != true) {
@@ -1004,14 +982,11 @@ var main = function() {
 						    sessionStorage['partnerUnternehmenOkay'] = false;
 						}
 					    },
-					    error : function(
-						    result) {
+					    error : function(result) {
 
 					    }
 					});
-			    	
-			    	
-			    	
+
 				$
 					.ajax({
 					    type : "POST",
@@ -1034,7 +1009,7 @@ var main = function() {
 						stadt : $('#bewThStadt').val(),
 					    },
 					    success : function(result) {
-						
+
 					    },
 					    error : function(result) {
 
@@ -1360,8 +1335,6 @@ var main = function() {
     $('#btnbewFormular10').on('click', function(event) {
 
     });
-
-    
 
 };
 
@@ -2082,6 +2055,7 @@ function onClickAllgemeineDatenWeiter(uni) {
 				    data : {
 					action : "insert_EnglischAbi",
 					matrikelnummer : sessionStorage['matrikelnr'],
+					uni : sessionsStorage['uni'],
 					abinote : $('#bewEnglischAbi').val(),
 				    },
 				    success : function(result) {
@@ -2353,7 +2327,7 @@ function defineNextStep(nextStepString, uni) {
 
 	break;
     case "Datenvalidieren":
-    alert("Die Bewerbung befindet sich gerade in der Überprüfung");
+	alert("Die Bewerbung befindet sich gerade in der Überprüfung");
 	$('.iFenster').hide();
 	$('.iF1').hide();
 	$('.iF2').hide();
