@@ -2055,7 +2055,6 @@ function onClickAllgemeineDatenWeiter(uni) {
 				    data : {
 					action : "insert_EnglischAbi",
 					matrikelnummer : sessionStorage['matrikelnr'],
-					uni : sessionsStorage['uni'],
 					abinote : $('#bewEnglischAbi').val(),
 				    },
 				    success : function(result) {

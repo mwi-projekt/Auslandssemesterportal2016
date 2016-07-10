@@ -526,10 +526,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			} else if (action.equals("insert_EnglischAbi")) {
 				sqlupd = "INSERT INTO englischnote (matrikelnummer, englischAbi) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("abinote") + "') ";
-				
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				
-				processEngine.getRuntimeService().setVariable(id, "englischNote", request.getParameter("abinote"));
 
 			} else if (action.equals("get_Note")) {
 				sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '"
@@ -592,11 +588,13 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 						+ request.getParameter("hausnummer") + "', '" + request.getParameter("plz") + "', '"
 						+ request.getParameter("stadt") + "', '" + request.getParameter("matrikelnummer") + "') ";
 
-				boolean resultNote = getEnglischNote(request.getParameter("matrikelnummer"));
-
-				// Variable setzen für weiteren Verlauf von Prozess
-				Map<String, Object> variables = new HashMap<String, Object>();
-				variables.put("bestanden", resultNote);
+				boolean resultNote = getEnglischBoolean(request.getParameter("matrikelnummer"));
+				String englischNote = getEnglischNote(request.getParameter("matrikelnummer"));
+				
+				//Variable setzen für weiteren Verlauf von Prozess
+			    Map<String, Object> variables = new HashMap<String, Object>();
+			    variables.put("bestanden", resultNote);
+			    variables.put("englischNote", englischNote);
 
 				// Variable setzen für weiteren Verlauf von Prozess
 				variables.put("Firma", request.getParameter("Firma"));
@@ -619,11 +617,13 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 						+ request.getParameter("email") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
 
-				boolean resultNote = getEnglischNote(request.getParameter("matrikelnummer"));
+				boolean resultNote = getEnglischBoolean(request.getParameter("matrikelnummer"));
+				String englischNote = getEnglischNote(request.getParameter("matrikelnummer"));
 				
 				//Variable setzen für weiteren Verlauf von Prozess
 			    Map<String, Object> variables = new HashMap<String, Object>();
 			    variables.put("bestanden", resultNote);
+			    variables.put("englischNote", englischNote);
 			    
 			    //Default: Variable für Datenvalidierung von Mitarbeiter
 			    variables.put("validierungErfolgreich", true);
@@ -754,9 +754,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 
 			} else if (action.equals("nach_Daten_pruefen")) {
-
-				// Wo wird Dokument hinterlegt?!?!?!?!?!?!?!?!?!?!? Camunda oder
-				// MySQL?
 
 				// "Daten prüfen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
@@ -974,7 +971,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		}
 	}
 
-	public boolean getEnglischNote(String matrikelnummer) {
+	public boolean getEnglischBoolean(String matrikelnummer) {
 		Connection connection = null;
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
@@ -1028,6 +1025,58 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		}
 
 		return result;
+	}
+	
+	public String getEnglischNote(String matrikelnummer) {
+		Connection connection = null;
+		java.sql.Statement statement = null;
+		ResultSet resultSet = null;
+		String note = "leer";
+
+		String sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '" + matrikelnummer + "' ";
+
+		try {
+			// Register JDBC driver
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+			// Open a connection
+			connection = DriverManager.getConnection(DB_URL, USER, PASS);
+
+			// Execute SQL query
+			statement = connection.createStatement();
+
+			resultSet = statement.executeQuery(sql);
+
+			
+			// Note auslesen
+			while (resultSet.next()) {
+				note = resultSet.getString(1);
+			}
+
+		} catch (InstantiationException e) {
+			System.out.print("ERROR - getProcessId - InstantiationException");
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			System.out.print("ERROR - getProcessId - IllegalAccessException");
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.print("ERROR - getProcessId - ClassNotFoundException");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.print("ERROR - getProcessId -SQLException");
+			e.printStackTrace();
+		} finally {
+			try {
+				// Clean-up environment
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (Exception ex) {
+				System.out.println("Exception : " + ex.getMessage());
+			}
+		}
+		
+		return note;
 	}
 
 	public void confirm(String code) {
