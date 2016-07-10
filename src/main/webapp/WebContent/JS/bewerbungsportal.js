@@ -312,7 +312,6 @@ var main = function() {
 						    }
 						}
 						if (isEmpty(index) != true) {
-						    alert(index);
 						    var ausgelesen = index
 							    .split(';');
 						    for (var m = 1; m < ausgelesen.length; m++) {
@@ -766,7 +765,7 @@ var main = function() {
 				    || isEmpty($('#bewHausnummer').val()) === true
 				    || isEmpty($('#bewPlz').val()) === true
 				    || isEmpty($('#bewStadt').val()) === true) {
-				alert("Bitte fülle alle Felder aus.");
+				alert("Bitte f&uuml;lle alle Felder aus.");
 			    }
 			    if (sessionStorage['adresseOkay'] === 'true') {
 				$
@@ -1112,7 +1111,7 @@ var main = function() {
 						.val()) === true
 					|| isEmpty($('#bewPartnerPlz').val()) === true
 					|| isEmpty($('#bewPartnerStadt').val()) === true) {
-				    alert("Bitte f�lle alle Felder aus.");
+				    alert("Bitte f&uuml;lle alle Felder aus.");
 				} else {
 				    $
 					    .ajax({
@@ -2113,14 +2112,12 @@ function onClickAllgemeineDatenWeiter(uni) {
 						});
 				    },
 				    error : function(result) {
-					alert(result.message);
 				    }
 				});
 		    }
 
 		},
 		error : function(result) {
-		    alert(result.message);
 		}
 	    });
 
