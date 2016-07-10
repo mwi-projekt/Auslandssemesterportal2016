@@ -29,12 +29,13 @@ import javax.servlet.http.Part;
 import org.apache.commons.codec.binary.Base64;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.DelegateTask;
+import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.delegate.TaskListener;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.value.FileValue;
-
 
 import dhbw.mwi.Auslandsemesterportal2016.Auslandsemesterportal2016ProcessApplication;
 
@@ -45,7 +46,7 @@ import dhbw.mwi.Auslandsemesterportal2016.Auslandsemesterportal2016ProcessApplic
 @WebServlet(name = "login_db", description = "connection to DB for the prozess.jsp", urlPatterns = {
 		"/WebContent/login_db" })
 
-public class login_db extends HttpServlet implements TaskListener{
+public class login_db extends HttpServlet implements TaskListener, JavaDelegate {
 	private static final long serialVersionUID = 1L;
 
 	// JDBC driver name and database URL
@@ -53,7 +54,7 @@ public class login_db extends HttpServlet implements TaskListener{
 	// Database account
 	final String USER = "mwi";
 	final String PASS = "mwi2014";
-	
+
 	Connection conn;
 	java.sql.Statement stmt;
 	ResultSet rs;
@@ -167,10 +168,10 @@ public class login_db extends HttpServlet implements TaskListener{
 		String sql = "leer";
 		String sqlsalt = "leer";
 		String sqlupd = "leer";
-		
+
 		int rolle = 0;
 		System.out.println("Post empfangen");
-		
+
 		if (action.equals("sendmail")) {
 			// String to = "patrick.julius@web.de";
 			// String from = request.getParameter("name");
@@ -211,7 +212,7 @@ public class login_db extends HttpServlet implements TaskListener{
 			// }catch (MessagingException mex) {
 			// mex.printStackTrace();
 			// }
-			
+
 		} else {
 			if (action.equals("post_login")) {
 				// parsing from the date and time is within the SQL-Statment.
@@ -391,16 +392,14 @@ public class login_db extends HttpServlet implements TaskListener{
 
 				/* Prozess studentBewerben wird gestartet */
 				ProcessInstance pI = new Auslandsemesterportal2016ProcessApplication().bewerbungStarten(processEngine);
-				
+
 				/* SQL-Befehl für das Mapping von User und Prozessinstanz */
-				 String mapUserInstance = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status) VALUES ('"+
-																	 request.getParameter("matrikelnummer") + "', '" +
-																		 request.getParameter("uni") + "', '" +
-																			 pI.getId() + "', '" +
-																			 		1 + "')";
-				
-				 updateProcess(mapUserInstance);
-				
+				String mapUserInstance = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status) VALUES ('"
+						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("uni") + "', '"
+						+ pI.getId() + "', '" + 1 + "')";
+
+				updateProcess(mapUserInstance);
+
 				sqlupd = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("uni") + "', '"
 						+ request.getParameter("datum") + "', '" + request.getParameter("schritt1") + "', '"
@@ -417,34 +416,31 @@ public class login_db extends HttpServlet implements TaskListener{
 				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer ="
 						+ request.getParameter("matrikelnr");
 
-			}else if (action.equals("weiter_nach_downloads_anzeige")) {
-	
-						
+			} else if (action.equals("weiter_nach_downloads_anzeige")) {
+
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
 			} else if (action.equals("get_prozessStatus")) {
 				sql = "SELECT uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
 
-			}else if (action.equals("get_next_Page")) {
+			} else if (action.equals("get_next_Page")) {
 				System.out.println("get_next_page");
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				String antwort = getTaskName(id);
-				antwort.replaceAll("\\s+","");
+				antwort.replaceAll("\\s+", "");
 				antwort.replaceAll(" ", "");
 				String res = antwort.replaceAll(" ", "");
 				System.out.println("Antwort: " + res);
 				out.println(res);
 
+			} else if (action.equals("weiter_nach_downloads_anzeige")) {
 
-			}else if (action.equals("weiter_nach_downloads_anzeige")) {
-	
-						
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
-			}else if (action.equals("get_Studiengaenge")) {
+			} else if (action.equals("get_Studiengaenge")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote";
-				
+
 			} else if (action.equals("get_angeboteDaten")) {
 				sql = "SELECT studiengang, uniTitel, allgemeineInfos, faq, erfahrungsbericht, maps FROM cms_auslandsAngeboteInhalt";
 
@@ -487,23 +483,22 @@ public class login_db extends HttpServlet implements TaskListener{
 			} else if (action.equals("nach_Upload")) {
 				// Button "Weiter" nach Uploads wurde gedrückt
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				
-			
-			    Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-			    String fileName = "DAAD_Formular.pdf";
-			    InputStream fileContent = filePart.getInputStream();
-	
+
+				Part filePart = request.getPart("file"); // Retrieves <input
+															// type="file"
+															// name="file">
+				String fileName = "DAAD_Formular.pdf";
+				InputStream fileContent = filePart.getInputStream();
+
 				// ... (do your job here)
-			    FileValue typedFileValue = Variables
-						  .fileValue(fileName)
-						  .file(fileContent)
-						  //.mimeType("text/plain")
-						  //.encoding("UTF-8")
-						  .create();
+				FileValue typedFileValue = Variables.fileValue(fileName).file(fileContent)
+						// .mimeType("text/plain")
+						// .encoding("UTF-8")
+						.create();
 				processEngine.getRuntimeService().setVariable(id, "fileVariable", typedFileValue);
 				completeTask(id);
 
-			}else if (action.equals("nach_pruef")) {
+			} else if (action.equals("nach_pruef")) {
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
 			} else if (action.equals("update_User")) {
@@ -528,7 +523,6 @@ public class login_db extends HttpServlet implements TaskListener{
 			    String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
 
-
 			} else if (action.equals("insert_EnglischAbi")) {
 				sqlupd = "INSERT INTO englischnote (matrikelnummer, englischAbi) VALUES ('"
 						+ request.getParameter("matrikelnummer") + "', '" + request.getParameter("abinote") + "') ";
@@ -547,7 +541,7 @@ public class login_db extends HttpServlet implements TaskListener{
 						+ request.getParameter("strasse") + "', '" + request.getParameter("hausnummer") + "', '"
 						+ request.getParameter("plz") + "', '" + request.getParameter("stadt") + "', '"
 						+ request.getParameter("bundesland") + "', '" + request.getParameter("land") + "') ";
-				
+	
 				//Variable setzen für weiteren Verlauf von Prozess
 			    Map<String, Object> variables = new HashMap<String, Object>();
 			    variables.put("studentAdresse",  request.getParameter("strasse"));
@@ -561,7 +555,6 @@ public class login_db extends HttpServlet implements TaskListener{
 			    String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
 
-
 			} else if (action.equals("get_Adresse")) {
 				sql = "SELECT strasse, hausnummer, plz, ort, bundesland, land FROM adresse WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND phase = '" + request.getParameter("phase")
@@ -574,7 +567,6 @@ public class login_db extends HttpServlet implements TaskListener{
 						+ "', land = '" + request.getParameter("land") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND phase = '" + request.getParameter("phase")
 						+ "' ";
-				
 
 				//Variable setzen für weiteren Verlauf von Prozess
 			    Map<String, Object> variables = new HashMap<String, Object>();
@@ -585,10 +577,9 @@ public class login_db extends HttpServlet implements TaskListener{
 			    variables.put("studentBundesland",   "Baden-Württemberg" /*request.getParameter("bundesland")*/);
 			    variables.put("studentLand",  request.getParameter("land"));
 			    variables.put("studentPhase",  request.getParameter("phase"));
-				
+
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
-
 
 			} else if (action.equals("get_Partnerunternehmen")) {
 				sql = "SELECT firma, ansprechpartner, email, strasse, hausnummer, plz, stadt FROM partnerunternehmen WHERE matrikelnummer = '"
@@ -600,22 +591,22 @@ public class login_db extends HttpServlet implements TaskListener{
 						+ request.getParameter("ansprechpartner") + "', '" + request.getParameter("strasse") + "', '"
 						+ request.getParameter("hausnummer") + "', '" + request.getParameter("plz") + "', '"
 						+ request.getParameter("stadt") + "', '" + request.getParameter("matrikelnummer") + "') ";
-				
+
 				boolean resultNote = getEnglischNote(request.getParameter("matrikelnummer"));
-				
-				//Variable setzen für weiteren Verlauf von Prozess
-			    Map<String, Object> variables = new HashMap<String, Object>();
-			    variables.put("bestanden", resultNote);
-				
-				//Variable setzen für weiteren Verlauf von Prozess
-			    variables.put("firma", request.getParameter("firma"));
-			    variables.put("unternehmenAnsprechpartner",  request.getParameter("ansprechpartner"));
-			    variables.put("unternehmenStrasse",  request.getParameter("strasse"));
-			    variables.put("unternehmenHausnummer",  request.getParameter("hausnummer"));
-			    variables.put("unternehmenPLZ",  request.getParameter("plz"));
-			    variables.put("unternehmenStadt",  request.getParameter("stadt"));
-			    variables.put("unternehmenEmail",  request.getParameter("email"));
-				
+
+				// Variable setzen für weiteren Verlauf von Prozess
+				Map<String, Object> variables = new HashMap<String, Object>();
+				variables.put("bestanden", resultNote);
+
+				// Variable setzen für weiteren Verlauf von Prozess
+				variables.put("Firma", request.getParameter("Firma"));
+				variables.put("Email", request.getParameter("email"));
+				variables.put("Ansprechpartner", request.getParameter("ansprechpartner"));
+				variables.put("Straße", request.getParameter("strasse"));
+				variables.put("Hausnummer", request.getParameter("hausnummer"));
+				variables.put("PLZ", request.getParameter("plz"));
+				variables.put("Stadt", request.getParameter("stadt"));
+
 				// "Daten eingeben" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id, variables);
@@ -627,7 +618,7 @@ public class login_db extends HttpServlet implements TaskListener{
 						+ "', stadt = '" + request.getParameter("stadt") + "', email = '"
 						+ request.getParameter("email") + "' WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' ";
-				
+
 				boolean resultNote = getEnglischNote(request.getParameter("matrikelnummer"));
 				
 				//Variable setzen für weiteren Verlauf von Prozess
@@ -653,8 +644,8 @@ public class login_db extends HttpServlet implements TaskListener{
 				sqlupd = "UPDATE bewerbungsprozess SET schritt_1 = 1 WHERE matrikelnummer = '"
 						+ request.getParameter("matrikelnummer") + "' AND uniName = '" + request.getParameter("uni")
 						+ "' ";
-				
-			}else if (action.equals("get_Adresse_Data_Pruef_Praxis")) {
+
+			} else if (action.equals("get_Adresse_Data_Pruef_Praxis")) {
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
@@ -681,95 +672,94 @@ public class login_db extends HttpServlet implements TaskListener{
 				sql = "SELECT nachname, vorname, email, studiengang, kurs, standort, tel, mobil FROM user WHERE matrikelnummer ="
 						+ request.getParameter("matrikelnummer");
 
-			} else if (action.equals("nach_DAAD_Upload")){
+			} else if (action.equals("nach_DAAD_Upload")) {
 				// "DAAD-Formular hochladen" + Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
-			    String fileName = "DAAD_Formular.pdf";
-			    
-			    FileValue typedFileValue = Variables
-						  .fileValue(fileName)
-						  .file(filePart)
-						  .create();
+
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
+																										// <input
+																										// type="file"
+																										// name="file">
+				String fileName = "DAAD_Formular.pdf";
+
+				FileValue typedFileValue = Variables.fileValue(fileName).file(filePart).create();
 				processEngine.getRuntimeService().setVariable(id, "DAAD-Formular", typedFileValue);
-				
+
 				completeTask(id);
-				
-			} else if (action.equals("nach_Abitur_Upload")){
+
+			} else if (action.equals("nach_Abitur_Upload")) {
 				// "Abiturzeugnis hochladen" + Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
-			    String fileName = "Abiturzeugnis.pdf";
-			    
-			    FileValue typedFileValue = Variables
-						  .fileValue(fileName)
-						  .file(filePart)
-						  .create();
+
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
+																										// <input
+																										// type="file"
+																										// name="file">
+				String fileName = "Abiturzeugnis.pdf";
+
+				FileValue typedFileValue = Variables.fileValue(fileName).file(filePart).create();
 				processEngine.getRuntimeService().setVariable(id, "Abiturzeugnis", typedFileValue);
-				
+
 				completeTask(id);
-				
-			} else if (action.equals("nach_Dualis_Upload")){
-				
+
+			} else if (action.equals("nach_Dualis_Upload")) {
+
 				// "Motivationsschreiben hochladen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
-			    String fileName = "Dualis_Dokumente.pdf";
-			    
-			    FileValue typedFileValue = Variables
-						  .fileValue(fileName)
-						  .file(filePart)
-						  .create();
+
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
+																										// <input
+																										// type="file"
+																										// name="file">
+				String fileName = "Dualis_Dokumente.pdf";
+
+				FileValue typedFileValue = Variables.fileValue(fileName).file(filePart).create();
 				processEngine.getRuntimeService().setVariable(id, "Dualis-Dokumente", typedFileValue);
-				
+
 				completeTask(id);
-								
-			} else if (action.equals("nach_Motivation_Upload")){
-				
+
+			} else if (action.equals("nach_Motivation_Upload")) {
+
 				// "Motivationsschreiben hochladen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
-			    String fileName = "Motivationsschreiben.pdf";
-			    
-			    FileValue typedFileValue = Variables
-						  .fileValue(fileName)
-						  .file(filePart)
-						  .create();
+
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
+																										// <input
+																										// type="file"
+																										// name="file">
+				String fileName = "Motivationsschreiben.pdf";
+
+				FileValue typedFileValue = Variables.fileValue(fileName).file(filePart).create();
 				processEngine.getRuntimeService().setVariable(id, "Motivationsschreiben", typedFileValue);
-				
+
 				completeTask(id);
-				
-			} else if (action.equals("nach_Zustimmung_Upload")){
-				
+
+			} else if (action.equals("nach_Zustimmung_Upload")) {
+
 				// "Zustimmungsformular hochladen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-				
-				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves <input type="file" name="file">
-			    String fileName = "Zustimmungsfomular.pdf";
-			    
-			    FileValue typedFileValue = Variables
-						  .fileValue(fileName)
-						  .file(filePart)
-						  .create();
+
+				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
+																										// <input
+																										// type="file"
+																										// name="file">
+				String fileName = "Zustimmungsfomular.pdf";
+
+				FileValue typedFileValue = Variables.fileValue(fileName).file(filePart).create();
 				processEngine.getRuntimeService().setVariable(id, "Zustimmungsformular", typedFileValue);
-				
+
 				completeTask(id);
 				
 			} else if (action.equals("nach_Daten_pruefen")){
-				
+
 				// "Daten prüfen" Task beenden
 				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
-				
-			} else if (action.equals("delete_Bewerbung")){
+
+			} else if (action.equals("delete_Bewerbung")) {
 				// "Bewerbung löschen" Task beenden
 				deleteBewerbung(getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni")),
-																						request.getParameter("matrikelnummer"), 
-																						   request.getParameter("uni"));	
+						request.getParameter("matrikelnummer"), request.getParameter("uni"));
 			}
 
 			try {
@@ -863,8 +853,8 @@ public class login_db extends HttpServlet implements TaskListener{
 
 		String sql = "SELECT processInstance FROM MapUserInstanz WHERE matrikelnummer ='" + matrikelnummer
 				+ "' AND uni ='" + uni + "'";
-		
-		//Test
+
+		// Test
 		System.out.println("Matrikelnummer: " + matrikelnummer);
 		System.out.println("Uni: " + uni);
 
@@ -880,8 +870,8 @@ public class login_db extends HttpServlet implements TaskListener{
 
 			resultSet = statement.executeQuery(sql);
 
-			//ID auslesen
-			while (resultSet.next()){
+			// ID auslesen
+			while (resultSet.next()) {
 				id = resultSet.getString(1);
 			}
 
@@ -916,29 +906,33 @@ public class login_db extends HttpServlet implements TaskListener{
 		processEngine.getTaskService().complete(
 				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId());
 	}
-	
-	/** Diese Methode komplettiert den jeweiligen Task und setzt entsprechende Variablen*/
+
+	/**
+	 * Diese Methode komplettiert den jeweiligen Task und setzt entsprechende
+	 * Variablen
+	 */
 	public void completeTask(String instanceId, Map<String, Object> variables) {
 		processEngine.getTaskService().complete(
-				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId(), variables);
+				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId(),
+				variables);
 	}
-	
+
 	public String getTaskName(String instanceId) {
 		return processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getName();
 	}
-	
-	/** Methode zum Löschen der entsprechenden ProzessInstanz bzw. Bewerbung*/
+
+	/** Methode zum Löschen der entsprechenden ProzessInstanz bzw. Bewerbung */
 	public void deleteBewerbung(String id, String matrikelnummer, String uni) {
 		Connection connection = null;
 		java.sql.Statement statement = null;
-		
-		//ProzessInstanz löschen
+
+		// ProzessInstanz löschen
 		processEngine.getRuntimeService().deleteProcessInstance(id, "Bewerbung wurde von Studenten beendet");
-		
-		//SQL-Befehl für das Löschen der Bewerbung aus der MySQL-DB
-		String deleteStatement = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + matrikelnummer +
-																				"' AND uniName = '" + uni + "' ";
-		
+
+		// SQL-Befehl für das Löschen der Bewerbung aus der MySQL-DB
+		String deleteStatement = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + matrikelnummer
+				+ "' AND uniName = '" + uni + "' ";
+
 		try {
 			// Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -950,7 +944,7 @@ public class login_db extends HttpServlet implements TaskListener{
 			statement = connection.createStatement();
 
 			statement.executeUpdate(deleteStatement);
-			
+
 		} catch (InstantiationException e) {
 			System.out.print("ERROR - getProcessId - InstantiationException");
 			e.printStackTrace();
@@ -973,16 +967,15 @@ public class login_db extends HttpServlet implements TaskListener{
 			}
 		}
 	}
-	
-	public boolean getEnglischNote(String matrikelnummer){
+
+	public boolean getEnglischNote(String matrikelnummer) {
 		Connection connection = null;
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
 		boolean result = false;
-		
-		String sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '"
-							+ matrikelnummer + "' ";
-		
+
+		String sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '" + matrikelnummer + "' ";
+
 		try {
 			// Register JDBC driver
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -996,13 +989,12 @@ public class login_db extends HttpServlet implements TaskListener{
 			resultSet = statement.executeQuery(sql);
 
 			int note = 0;
-			//Note auslesen
-			while(resultSet.next()){
+			// Note auslesen
+			while (resultSet.next()) {
 				note = Integer.parseInt(resultSet.getString(1));
 			}
-			
-			
-			if(note >= 11){
+
+			if (note >= 11) {
 				result = true;
 			}
 
@@ -1028,8 +1020,8 @@ public class login_db extends HttpServlet implements TaskListener{
 				System.out.println("Exception : " + ex.getMessage());
 			}
 		}
-		
-		return result;	
+
+		return result;
 	}
 
 	public void confirm(String code) {
@@ -1088,12 +1080,12 @@ public class login_db extends HttpServlet implements TaskListener{
 		}
 	}
 
-	/**Methode dient zum Benachrichtigen des Auslandsmitarbeiter*/
+	/** Methode dient zum Benachrichtigen des Auslandsmitarbeiter */
 	@Override
 	public void notify(DelegateTask delegateTask) {
-		//Mail Server Properties
-		//email.setHostName("mail.dhbw-karlsruhe.de");
-		
+		// Mail Server Properties
+		// email.setHostName("mail.dhbw-karlsruhe.de");
+
 		final String username = "mwiausland@gmail.com";
 		final String password = "MWIAusland1";
 		String host = "smtp.gmail.com";
@@ -1106,7 +1098,7 @@ public class login_db extends HttpServlet implements TaskListener{
 
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-														return new PasswordAuthentication(username, password);
+				return new PasswordAuthentication(username, password);
 			}
 		});
 
@@ -1115,10 +1107,69 @@ public class login_db extends HttpServlet implements TaskListener{
 			message.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mwiausland@gmail.com"));
 			message.setSubject(MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester", "utf-8", "B"));
-			message.setContent("Sehr geehrte Frau Dreischer,"  + "\n" + "\n" +
-					 "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n" +
-					 "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n" +
-					 "http://localhost:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(), "text/plain; charset=UTF-8");
+			message.setContent("Sehr geehrte Frau Dreischer," + "\n" + "\n"
+					+ "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n"
+					+ "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n"
+					+ "http://localhost:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(),
+					"text/plain; charset=UTF-8");
+
+			Transport.send(message);
+
+		} catch (MessagingException e) {
+			System.out.print("Could not send email!");
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// Methode dient zum Versenden von Email an Student nach erfolgreicher
+	// Validierung
+
+	@Override
+	public void execute(DelegateExecution execution) throws Exception {
+
+		final String username = "mwiausland@gmail.com";
+		final String password = "MWIAusland1";
+		String host = "smtp.gmail.com";
+
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", "587");
+
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+		//Map<String, Object> variables = execution.getVariables();
+		
+		String email = "softwharmankardon@web.de";
+				//(String) execution.getVariable("Email");
+		String nachname = "lala";
+		String uni = "lulu";
+				//(String) execution.getVariable("Student-Email");
+		//String nachname = (String) execution.getVariable("Student-Nachname");
+		//String uni = (String) execution.getVariable("Uni");
+
+		/*System.out.println("Email: " + email);
+		System.out.println("Nachname: " + nachname);
+		System.out.println("Uni: " + uni);*/
+
+		try {
+			Message message = new MimeMessage(session);
+
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("testwitz123@gmail.com"));
+			message.setSubject(
+					MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester validiert", "utf-8", "B"));
+			message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + "\n" + "\n"
+					+ "Ihre eingereichte Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
+					+ uni + " ist vollständig validiert." + "\n"
+					+ "Ein Mitarbeiter wird sich mit Ihnen bald in Kontakt setzen." + "Mit freundlichen Grüßen," + "\n"
+					+ "\n" + "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
 
 			Transport.send(message);
 
