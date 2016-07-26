@@ -340,8 +340,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 							+ request.getParameter("mobil") + "', '" + request.getParameter("standort") + "', '" + id
 							+ "')";
 					System.out.println(sqlupd);
-					//String link = "193.196.7.215:8080/Auslandsemesterportal2016/WebContent/index.html?confirm=" + id;
-					String link = "http://193.196.7.215:8080/Auslandsemesterportal2016/WebContent/index.html?confirm=" + id;
+					//String link = "193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?confirm=" + id;
+					String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?confirm=" + id;
 
 					message.setContent("<h2>Hallo " + request.getParameter("vorname")
 							+ ",</h2> du hast dich auf der Seite des Auslandsportals registriert. "
