@@ -419,7 +419,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 			} else if (action.equals("weiter_nach_downloads_anzeige")) {
 
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
 			} else if (action.equals("get_prozessStatus")) {
 				sql = "SELECT uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess WHERE matrikelnummer = '"
@@ -427,7 +427,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 			} else if (action.equals("get_next_Page")) {
 				System.out.println("get_next_page");
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				String antwort = getTaskName(id);
 				antwort.replaceAll("\\s+", "");
 				antwort.replaceAll(" ", "");
@@ -437,7 +437,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 			} else if (action.equals("weiter_nach_downloads_anzeige")) {
 
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
 			} else if (action.equals("get_Studiengaenge")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote";
@@ -483,7 +483,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 			} else if (action.equals("nach_Upload")) {
 				// Button "Weiter" nach Uploads wurde gedrückt
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 
 				Part filePart = request.getPart("file"); // Retrieves <input
 															// type="file"
@@ -500,7 +500,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				completeTask(id);
 
 			} else if (action.equals("nach_pruef")) {
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
 			} else if (action.equals("update_User")) {
 				sqlupd = "UPDATE user SET vorname = '" + request.getParameter("vorname") + "' , nachname = '"
@@ -522,7 +522,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			    variables.put("studentMatrikelnummer",  request.getParameter("matrikelnummer"));
 			    variables.put("uni", request.getParameter("uni"));
 			    
-			    String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+			    String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
 
 			} else if (action.equals("insert_EnglischAbi")) {
@@ -550,7 +550,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			    variables.put("studentLand",  request.getParameter("land"));
 			    variables.put("studentPhase",  request.getParameter("phase"));
 			    
-			    String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+			    String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
 
 			} else if (action.equals("get_Adresse")) {
@@ -576,7 +576,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			    variables.put("studentLand",  request.getParameter("land"));
 			    variables.put("studentPhase",  request.getParameter("phase"));
 
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				processEngine.getRuntimeService().setVariables(id, variables);
 
 			} else if (action.equals("get_Partnerunternehmen")) {
@@ -608,7 +608,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			    variables.put("unternehmenEmail",  request.getParameter("email"));
 
 				// "Daten eingeben" Task beenden
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id, variables);
 
 			} else if (action.equals("update_Partnerunternehmen")) {
@@ -639,7 +639,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			    variables.put("unternehmenEmail",  request.getParameter("email"));
 
 				// "Daten eingeben" Task beenden
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id, variables);
 
 			} else if (action.equals("update_BewProzess1")) {
@@ -676,7 +676,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 			} else if (action.equals("nach_DAAD_Upload")) {
 				// "DAAD-Formular hochladen" + Task beenden
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 
 				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
 																										// <input
@@ -691,7 +691,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 			} else if (action.equals("nach_Abitur_Upload")) {
 				// "Abiturzeugnis hochladen" + Task beenden
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 
 				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
 																										// <input
@@ -707,7 +707,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			} else if (action.equals("nach_Dualis_Upload")) {
 
 				// "Motivationsschreiben hochladen" Task beenden
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 
 				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
 																										// <input
@@ -723,7 +723,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			} else if (action.equals("nach_Motivation_Upload")) {
 
 				// "Motivationsschreiben hochladen" Task beenden
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 
 				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
 																										// <input
@@ -739,7 +739,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			} else if (action.equals("nach_Zustimmung_Upload")) {
 
 				// "Zustimmungsformular hochladen" Task beenden
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 
 				byte[] filePart = Base64.decodeBase64(request.getParameter("inputFile").substring(23)); // Retrieves
 																										// <input
@@ -758,13 +758,9 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			} else if (action.equals("nach_Daten_pruefen")) {
 
 				// "Daten prüfen" Task beenden
-				String id = getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
 
-			} else if (action.equals("delete_Bewerbung")) {
-				// "Bewerbung löschen" Task beenden
-				deleteBewerbung(getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni")),
-						request.getParameter("matrikelnummer"), request.getParameter("uni"));
 			}
 
 			try {
@@ -849,63 +845,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 	}
 
-	/** Methode zum Auslesen der Prozessinstanz-ID */
-	public String getProcessId(String matrikelnummer, String uni) {
-		Connection connection = null;
-		java.sql.Statement statement = null;
-		ResultSet resultSet = null;
-		String id = "leer";
-
-		String sql = "SELECT processInstance FROM MapUserInstanz WHERE matrikelnummer ='" + matrikelnummer
-				+ "' AND uni ='" + uni + "'";
-
-		// Test
-		System.out.println("Matrikelnummer: " + matrikelnummer);
-		System.out.println("Uni: " + uni);
-
-		try {
-			// Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-
-			// Open a connection
-			connection = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			// Execute SQL query
-			statement = connection.createStatement();
-
-			resultSet = statement.executeQuery(sql);
-
-			// ID auslesen
-			while (resultSet.next()) {
-				id = resultSet.getString(1);
-			}
-
-		} catch (InstantiationException e) {
-			System.out.print("ERROR - getProcessId - InstantiationException");
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			System.out.print("ERROR - getProcessId - IllegalAccessException");
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.out.print("ERROR - getProcessId - ClassNotFoundException");
-			e.printStackTrace();
-		} catch (SQLException e) {
-			System.out.print("ERROR - getProcessId -SQLException");
-			e.printStackTrace();
-		} finally {
-			try {
-				// Clean-up environment
-				resultSet.close();
-				statement.close();
-				connection.close();
-			} catch (Exception ex) {
-				System.out.println("Exception : " + ex.getMessage());
-			}
-		}
-
-		return id;
-	}
-
 	/** Diese Methode komplettiert den jeweiligen Task */
 	public void completeTask(String instanceId) {
 		processEngine.getTaskService().complete(
@@ -924,53 +863,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 	public String getTaskName(String instanceId) {
 		return processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getName();
-	}
-
-	/** Methode zum Löschen der entsprechenden ProzessInstanz bzw. Bewerbung */
-	public void deleteBewerbung(String id, String matrikelnummer, String uni) {
-		Connection connection = null;
-		java.sql.Statement statement = null;
-
-		// ProzessInstanz löschen
-		processEngine.getRuntimeService().deleteProcessInstance(id, "Bewerbung wurde von Studenten beendet");
-
-		// SQL-Befehl für das Löschen der Bewerbung aus der MySQL-DB
-		String deleteStatement = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + matrikelnummer
-				+ "' AND uniName = '" + uni + "' ";
-
-		try {
-			// Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-
-			// Open a connection
-			connection = DriverManager.getConnection(DB_URL, USER, PASS);
-
-			// Execute SQL query
-			statement = connection.createStatement();
-
-			statement.executeUpdate(deleteStatement);
-
-		} catch (InstantiationException e) {
-			System.out.print("ERROR - getProcessId - InstantiationException");
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			System.out.print("ERROR - getProcessId - IllegalAccessException");
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.out.print("ERROR - getProcessId - ClassNotFoundException");
-			e.printStackTrace();
-		} catch (SQLException e) {
-			System.out.print("ERROR - getProcessId -SQLException");
-			e.printStackTrace();
-		} finally {
-			try {
-				// Clean-up environment
-				statement.close();
-				connection.close();
-			} catch (Exception ex) {
-				System.out.println("Exception : " + ex.getMessage());
-			}
-		}
 	}
 
 	public boolean getEnglischBoolean(String matrikelnummer) {
@@ -1004,16 +896,16 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			}
 
 		} catch (InstantiationException e) {
-			System.out.print("ERROR - getProcessId - InstantiationException");
+			System.out.print("ERROR - ProcessService.getProcessId - InstantiationException");
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			System.out.print("ERROR - getProcessId - IllegalAccessException");
+			System.out.print("ERROR - ProcessService.getProcessId - IllegalAccessException");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			System.out.print("ERROR - getProcessId - ClassNotFoundException");
+			System.out.print("ERROR - ProcessService.getProcessId - ClassNotFoundException");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.print("ERROR - getProcessId -SQLException");
+			System.out.print("ERROR - ProcessService.getProcessId -SQLException");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -1056,16 +948,16 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			}
 
 		} catch (InstantiationException e) {
-			System.out.print("ERROR - getProcessId - InstantiationException");
+			System.out.print("ERROR - ProcessService.getProcessId - InstantiationException");
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			System.out.print("ERROR - getProcessId - IllegalAccessException");
+			System.out.print("ERROR - ProcessService.getProcessId - IllegalAccessException");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			System.out.print("ERROR - getProcessId - ClassNotFoundException");
+			System.out.print("ERROR - ProcessService.getProcessId - ClassNotFoundException");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			System.out.print("ERROR - getProcessId -SQLException");
+			System.out.print("ERROR - ProcessService.getProcessId -SQLException");
 			e.printStackTrace();
 		} finally {
 			try {
