@@ -16,8 +16,6 @@ import java.sql.*;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/WebContent/login"})
 public class LoginServlet extends HttpServlet {
 
-    ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Connection connection = DB.getInstance();

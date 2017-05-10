@@ -151,9 +151,8 @@ var main = function() {
 								$
 										.ajax({
 											type : "POST",
-											url : "login_db",
+											url : "register",
 											data : {
-												action : "post_register",
 												rolle : rolle,
 												passwort : pw1,
 												vorname : vorname,

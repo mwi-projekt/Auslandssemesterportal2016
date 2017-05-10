@@ -28,7 +28,7 @@ public class Util {
         return result;
     }
 
-    protected static String generateSalt() {
+    public static String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[32];
         random.nextBytes(bytes);
