@@ -121,41 +121,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 	}
 
-	protected static String HashSha256(String input) {
-
-		String result = null;
-
-		if (null == input)
-			return null;
-
-		try {
-
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-			md.update(input.getBytes());
-
-			byte[] hash = md.digest();
-
-			result = javax.xml.bind.DatatypeConverter.printHexBinary(hash).toLowerCase();
-
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	protected static String generateSalt() {
-
-		SecureRandom random = new SecureRandom();
-		byte bytes[] = new byte[32];
-		random.nextBytes(bytes);
-
-		String result = javax.xml.bind.DatatypeConverter.printHexBinary(bytes).toLowerCase();
-
-		return result;
-
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -214,66 +179,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			// }
 
 		} else {
-			if (action.equals("post_login")) {
-				// parsing from the date and time is within the SQL-Statment.
-				// For the DATE the
-				// form is YYYY-MM-DD. For TIME it is HH:MM:SS
-
-				// SQL-Statement für Salt vorbereiten
-				sqlsalt = "SELECT salt FROM user WHERE '" + request.getParameter("email") + "'= email";
-				String salt = null;
-				System.out.println(sqlsalt);
-
-				// Verbindung zur DB um Salt abzurufen
-				try {
-					// Register JDBC driver
-					Class.forName("com.mysql.jdbc.Driver").newInstance();
-					// Open a connection
-					conn = DriverManager.getConnection(DB_URL, USER, PASS);
-					// Execute SQL query
-					stmt = conn.createStatement();
-					System.out.println("Connect");
-					if (sqlsalt != "leer") {
-						rs = stmt.executeQuery(sqlsalt);
-						int spalten = rs.getMetaData().getColumnCount();
-						while (rs.next()) {
-							for (int k = 1; k <= spalten; k++) {
-								// Salt abrufen
-								salt = rs.getString(k);
-							}
-						}
-						sqlsalt = "leer";
-					}
-
-				} catch (SQLException se) {
-					// Handle errors for JDBC
-					se.printStackTrace();
-					System.out.println("Fehler se");
-				} catch (Exception e) {
-					// Handle errors for Class.forName
-					e.printStackTrace();
-					System.out.println("Fehler e");
-				} finally {
-					System.out.println("Done salt");
-					try {
-						// Clean-up environment
-						rs.close();
-						stmt.close();
-						conn.close();
-					} catch (Exception ex) {
-						System.out.println("Exception : " + ex.getMessage());
-					}
-				}
-
-				// Berechnung des Passworthashes aus gehashtem Eingabewert und
-				// Salt
-				String pw = HashSha256(HashSha256(request.getParameter("pw")) + salt);
-
-				// SQL-Statement für die Anmeldung
-				sql = "SELECT rolle, matrikelnummer, studiengang FROM user WHERE '" + request.getParameter("email")
-						+ "'= email AND '" + pw + "' = passwort";
-				System.out.println(sql);
-			} else if (action.equals("post_register")) {
+			if (action.equals("post_register")) {
 				if (request.getParameter("rolle").equals("Studierender")) {
 					rolle = 3;
 				} else if (request.getParameter("rolle").equals("Auslandsmitarbeiter")) {
@@ -329,8 +235,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 					System.out.println(id);
 
 					// Zufälliges Salt generieren und Passwort hashen
-					String salt = generateSalt();
-					String pw = HashSha256(HashSha256(request.getParameter("passwort")) + salt);
+					String salt = Util.generateSalt();
+					String pw = Util.HashSha256(Util.HashSha256(request.getParameter("passwort")) + salt);
 
 					sqlupd = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert) VALUES ('"
 							+ request.getParameter("vorname") + "', '" + request.getParameter("nachname") + "', '" + pw
