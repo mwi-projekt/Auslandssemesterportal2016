@@ -40,7 +40,7 @@ public boolean isMatnrUsed(int matNr){ //Prüft ob Matrikelnummer bereits verwen
 }
 
 public boolean isEmailUsed(String mail){ //Prüft ob Mailadresse bereits verwendet wird
-	String queryString = "SELECT 1 FROM user WHERE email = " + mail + ";";
+	String queryString = "SELECT 1 FROM user WHERE email = '" + mail + "';";
 	boolean resultExists = true;
 	ResultSet ergebnis = executeQuery(queryString);
 	try{
@@ -54,7 +54,7 @@ public boolean isEmailUsed(String mail){ //Prüft ob Mailadresse bereits verwend
 }
 
 public boolean isUserValidated(String mail){ //Prüft ob Nutzer die Mailadresse bestätigt hat
-	String queryString = "SELECT 1 FROM user WHERE email = " + mail + " AND verifiziert = '1';";
+	String queryString = "SELECT 1 FROM user WHERE email = '" + mail + "' AND verifiziert = '1';";
 	boolean resultExists = false;
 	ResultSet ergebnis = executeQuery(queryString);
 	try{
@@ -65,6 +65,39 @@ public boolean isUserValidated(String mail){ //Prüft ob Nutzer die Mailadresse 
 		e.printStackTrace();
 	}
 	return resultExists;
+}
+
+public String getSalt(String mail){//Ermittelt das zur Mailadresse hinterlegte Salt
+	String queryString = "SELECT salt FROM user WHERE email = '" + mail + "';";
+	String salt = "";
+	ResultSet ergebnis = executeQuery(queryString);
+	try{
+		if (ergebnis.next()){
+			salt = ergebnis.getString(1);
+		}
+		ergebnis.close();
+	}
+	catch (Exception e){
+		e.printStackTrace();
+	}
+	return salt;
+}
+
+public int userLogin(String mail, String salt, String pw){//Prüft Login. Gibt Rolle des Users zurück, 0 bei Fehler
+	String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);
+	String query = "SELECT rolle FROM user WHERE email = '" + mail + "' AND passwort = '" + hashedPw + "';";
+	int loginCode = 0;
+	ResultSet ergebnis = executeQuery(query);
+	try{
+		if (ergebnis.next()){
+			loginCode = ergebnis.getInt(1);
+		}
+		ergebnis.close();
+	}
+	catch (Exception e){
+		e.printStackTrace();
+	}
+	return loginCode;
 }
 
 }
