@@ -53,19 +53,6 @@ public static boolean isEmailUsed(String mail){ //Prüft ob Mailadresse bereits 
 	return resultExists;
 }
 
-public static boolean isUserValidated(String mail){ //Prüft ob Nutzer die Mailadresse bestätigt hat
-	String queryString = "SELECT 1 FROM user WHERE email = '" + mail + "' AND verifiziert = '1';";
-	boolean resultExists = false;
-	ResultSet ergebnis = executeQuery(queryString);
-	try{
-		resultExists = ergebnis.next();
-		ergebnis.close();
-	}
-	catch (Exception e){
-		e.printStackTrace();
-	}
-	return resultExists;
-}
 
 public static String getSalt(String mail){//Ermittelt das zur Mailadresse hinterlegte Salt
 	String queryString = "SELECT salt FROM user WHERE email = '" + mail + "';";
@@ -86,7 +73,7 @@ public static String getSalt(String mail){//Ermittelt das zur Mailadresse hinter
 public static ResultSet userLogin(String mail, String salt, String pw){//Prüft Logindaten. Gibt ResultSet zurück
 	String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);
 	String query = "SELECT rolle, matrikelnummer, studiengang FROM user WHERE email = '" + mail + 
-	"' AND passwort = '" + hashedPw + "';";
+	"' AND passwort = '" + hashedPw + "' AND verifiziert = '1';";
 	ResultSet ergebnis = executeQuery(query);
 	return ergebnis;
 }

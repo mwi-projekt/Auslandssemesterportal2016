@@ -2,6 +2,7 @@ package dhbw.mwi.Auslandsemesterportal2016.servlets;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -28,7 +29,19 @@ public class RegisterServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         int rolle = 0;
+        
+        if (SQL_queries.isEmailUsed(request.getParameter("email"))){
+        	out.println(". E-Mailadresse wird bereits von einem anderen Account verwendet");
+        	out.flush();
+        	throw new RuntimeException("Mailadresse bereits verwendet");
+        } else if (SQL_queries.isMatnrUsed(Integer.parseInt(request.getParameter("matrikelnummer")))){
+        	out.println(". Matrikelnummer wird bereits von einem anderen Account verwendet");
+        	out.flush();
+        	throw new RuntimeException("Matrikelnummer bereits verwendet");
+        } else{
 
+        	
+        	
         if (request.getParameter("rolle").equals("Studierender")) {
             rolle = 3;
         } else if (request.getParameter("rolle").equals("Auslandsmitarbeiter")) {
@@ -107,7 +120,7 @@ public class RegisterServlet extends HttpServlet {
             Transport.send(message);
 
 
-            // Verbindung zur DB um Salt abzurufen
+            // Verbindung zur DB um neuen Nutzer zu speichern
             Statement statement = connection.createStatement();
             int rsupd = statement.executeUpdate(sqlupd);
             out.println(rsupd);
@@ -120,6 +133,7 @@ public class RegisterServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+    }
     }
 
 }
