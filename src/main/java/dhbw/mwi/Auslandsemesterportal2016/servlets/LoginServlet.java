@@ -1,7 +1,9 @@
 package dhbw.mwi.Auslandsemesterportal2016.servlets;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 
@@ -18,9 +20,12 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Connection connection = DB.getInstance();
+    	//Connection connection = DB.getInstance();
         PrintWriter out = response.getWriter();
-
+        String salt = "";
+        String mail = "";
+        int spalten = 0;
+/*
         // SQL-Statement für Salt vorbereiten
         String sqlsalt = "SELECT salt FROM user WHERE '" + request.getParameter("email") + "'= email";
         String salt = "";
@@ -42,22 +47,29 @@ public class LoginServlet extends HttpServlet {
 
             // SQL-Statement für die Anmeldung
             String sql = "SELECT rolle, matrikelnummer, studiengang FROM user WHERE '" + request.getParameter("email")
-                    + "'= email AND '" + pw + "' = passwort";
+                    + "'= email AND '" + pw + "' = passwort"; */
+        	mail = request.getParameter("email");
+        	salt = SQL_queries.getSalt(mail);
+        	ResultSet rs = SQL_queries.userLogin(mail, salt, request.getParameter("pw"));
+            //rs = statement.executeQuery(sql);
+        	try{
+        		spalten = rs.getMetaData().getColumnCount();
+        		while (rs.next()) {
+        			for (int k = 1; k <= spalten; k++) {
+        				out.println(rs.getString(k) + ";");
+        				System.out.println(rs.getString(k) + ";");
+        			}
+        		}
+        	}
+        	catch (Exception e){
+        		e.printStackTrace();
+        	}
 
-            rs = statement.executeQuery(sql);
-            spalten = rs.getMetaData().getColumnCount();
-            while (rs.next()) {
-                for (int k = 1; k <= spalten; k++) {
-                    out.println(rs.getString(k) + ";");
-                    System.out.println(rs.getString(k) + ";");
-                }
-            }
-
-            statement.close();
-        } catch (SQLException e) {
+        /*} catch (SQLException e) {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
+}
 }

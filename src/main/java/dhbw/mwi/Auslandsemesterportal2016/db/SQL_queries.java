@@ -12,7 +12,7 @@ import java.sql.*;
 
 public class SQL_queries {
 	
-private ResultSet executeQuery(String query){ //Führt Query auf Datenbankanbindung aus DB.java aus
+private static ResultSet executeQuery(String query){ //Führt Query auf Datenbankanbindung aus DB.java aus
 Connection connection = DB.getInstance();
 ResultSet rs = null;
 try{
@@ -25,7 +25,7 @@ catch (Exception e){
 return rs;
 }
 
-public boolean isMatnrUsed(int matNr){ //Prüft ob Matrikelnummer bereits verwendet wird
+public static boolean isMatnrUsed(int matNr){ //Prüft ob Matrikelnummer bereits verwendet wird
 	String queryString = "SELECT 1 FROM user WHERE matrikelnummer = " + matNr + ";";
 	boolean resultExists = true;
 	ResultSet ergebnis = executeQuery(queryString);
@@ -39,7 +39,7 @@ public boolean isMatnrUsed(int matNr){ //Prüft ob Matrikelnummer bereits verwen
 	return resultExists;
 }
 
-public boolean isEmailUsed(String mail){ //Prüft ob Mailadresse bereits verwendet wird
+public static boolean isEmailUsed(String mail){ //Prüft ob Mailadresse bereits verwendet wird
 	String queryString = "SELECT 1 FROM user WHERE email = '" + mail + "';";
 	boolean resultExists = true;
 	ResultSet ergebnis = executeQuery(queryString);
@@ -53,7 +53,7 @@ public boolean isEmailUsed(String mail){ //Prüft ob Mailadresse bereits verwend
 	return resultExists;
 }
 
-public boolean isUserValidated(String mail){ //Prüft ob Nutzer die Mailadresse bestätigt hat
+public static boolean isUserValidated(String mail){ //Prüft ob Nutzer die Mailadresse bestätigt hat
 	String queryString = "SELECT 1 FROM user WHERE email = '" + mail + "' AND verifiziert = '1';";
 	boolean resultExists = false;
 	ResultSet ergebnis = executeQuery(queryString);
@@ -67,7 +67,7 @@ public boolean isUserValidated(String mail){ //Prüft ob Nutzer die Mailadresse 
 	return resultExists;
 }
 
-public String getSalt(String mail){//Ermittelt das zur Mailadresse hinterlegte Salt
+public static String getSalt(String mail){//Ermittelt das zur Mailadresse hinterlegte Salt
 	String queryString = "SELECT salt FROM user WHERE email = '" + mail + "';";
 	String salt = "";
 	ResultSet ergebnis = executeQuery(queryString);
@@ -83,21 +83,12 @@ public String getSalt(String mail){//Ermittelt das zur Mailadresse hinterlegte S
 	return salt;
 }
 
-public int userLogin(String mail, String salt, String pw){//Prüft Login. Gibt Rolle des Users zurück, 0 bei Fehler
+public static ResultSet userLogin(String mail, String salt, String pw){//Prüft Logindaten. Gibt ResultSet zurück
 	String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);
-	String query = "SELECT rolle FROM user WHERE email = '" + mail + "' AND passwort = '" + hashedPw + "';";
-	int loginCode = 0;
+	String query = "SELECT rolle, matrikelnummer, studiengang FROM user WHERE email = '" + mail + 
+	"' AND passwort = '" + hashedPw + "';";
 	ResultSet ergebnis = executeQuery(query);
-	try{
-		if (ergebnis.next()){
-			loginCode = ergebnis.getInt(1);
-		}
-		ergebnis.close();
-	}
-	catch (Exception e){
-		e.printStackTrace();
-	}
-	return loginCode;
+	return ergebnis;
 }
 
 }
