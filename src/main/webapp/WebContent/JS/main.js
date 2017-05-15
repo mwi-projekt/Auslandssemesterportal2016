@@ -183,7 +183,7 @@ var main = function() {
 
 											},
 											error : function(result) {
-												alert("Fehler beim Registrieren");
+												alert("Fehler beim Registrieren" + result);
 											}
 										});
 							}
