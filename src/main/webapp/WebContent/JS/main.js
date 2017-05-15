@@ -503,7 +503,7 @@ var main = function() {
 								}
 								break;
 							}
-						} else if ($(this).text() === "�nderungen speichern") {
+						} else if ($(this).text() === "&aumlnderungen speichern") {
 							var klasse = $(this).attr('class');
 							klasse = klasse.replace('btn', "");
 							klasse = klasse.replace('cmsBtn', "");
