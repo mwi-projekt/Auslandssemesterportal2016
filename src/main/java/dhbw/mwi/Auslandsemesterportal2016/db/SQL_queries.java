@@ -84,7 +84,7 @@ public static String userLogin(String mail, String salt, String pw){//Prüft Log
 			studiengang = ergebnis.getString("studiengang");
 			matrikelnummer = ergebnis.getString("matrikelnummer");
 			rolle = ergebnis.getString("rolle");
-			if (ergebnis.getString("verifiziert") == "1"){
+			if (ergebnis.getString("verifiziert").equals("1")){
 				resultCode = 1;
 			} else {
 				resultCode = 3;
