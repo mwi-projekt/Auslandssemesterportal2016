@@ -206,14 +206,18 @@ var main = function() {
 							var matrikelnummer = sessionStorage['matrikelnr'];
 
                             $.ajax({
-								type : "POST",
+								type : "GET",
 								url : "process/delete",
 								data : {
 									matrikelnummer : matrikelnummer,
 									uni: uni
 								}
 							}).done(function(data) {
-								console.log(data);
+								$('#tableBewProzessBody tr[data-rid='+ id +']').remove();
+								alert('Der Prozess wurde erfolgreich gelöscht');
+                            }).error(function (error) {
+								console.error(error);
+								alert('Der Prozess konnte nicht gelöscht werden');
                             })
 						});
 					},

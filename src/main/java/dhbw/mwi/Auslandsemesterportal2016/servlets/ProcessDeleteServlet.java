@@ -52,15 +52,18 @@ public class ProcessDeleteServlet extends HttpServlet {
                     statement.executeUpdate(deleteStatement2);
                     statement.close();
                 } catch (SQLException e) {
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     e.printStackTrace();
                 }
 
                 toClient.println(id);
 
             } else {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 toClient.println("Error: can not find process");
             }
         } else {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             toClient.println("Error: parameter are missing");
         }
     }
