@@ -259,7 +259,7 @@ var main = function() {
 							$('.weg').css('display', 'inline');
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
-							location.reload(); 
+							window.location.reload(); 
 							
 						} else if (sessionStorage['rolle'] === '1') {
 							$('#normalBereich').hide();
