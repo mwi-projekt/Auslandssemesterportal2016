@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@WebServlet(name = "ProcessDeleteServlet", urlPatterns = {"/process/delete"})
+@WebServlet(name = "ProcessDeleteServlet", urlPatterns = {"/WebContent/process/delete"})
 public class ProcessDeleteServlet extends HttpServlet {
 
     ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();

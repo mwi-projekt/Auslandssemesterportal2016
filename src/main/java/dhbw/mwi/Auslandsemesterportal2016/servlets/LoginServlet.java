@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String salt = "";
         String mail = "";
-        int spalten = 0;
+        
 /*
         // SQL-Statement für Salt vorbereiten
         String sqlsalt = "SELECT salt FROM user WHERE '" + request.getParameter("email") + "'= email";
@@ -50,21 +50,11 @@ public class LoginServlet extends HttpServlet {
                     + "'= email AND '" + pw + "' = passwort"; */
         	mail = request.getParameter("email");
         	salt = SQL_queries.getSalt(mail);
-        	ResultSet rs = SQL_queries.userLogin(mail, salt, request.getParameter("pw"));
+        	String result = SQL_queries.userLogin(mail, salt, request.getParameter("pw"));
             //rs = statement.executeQuery(sql);
-        	try{
-        		spalten = rs.getMetaData().getColumnCount();
-        		while (rs.next()) {
-        			for (int k = 1; k <= spalten; k++) {
-        				out.println(rs.getString(k) + ";");
-        				System.out.println(rs.getString(k) + ";");
-        			}
-        		}
-        	}
-        	catch (Exception e){
-        		e.printStackTrace();
-        	}
-
+        	out.println(result);
+        	out.flush();
+        	out.close();
         /*} catch (SQLException e) {
             e.printStackTrace();
         }

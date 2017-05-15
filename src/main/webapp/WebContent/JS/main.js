@@ -142,11 +142,11 @@ var main = function() {
 									&& email.match('dhbw-karlsruhe.de') != 'dhbw-karlsruhe.de') {
 								$('.falsch')
 										.html(
-												unescape("Bitte w%E4hlen sie nur Auslandsmitarbeiter, wenn sie einer sind."));
+												unescape("Bitte wählen Sie nur Auslandsmitarbeiter, wenn Sie einer sind."));
 							} else if (studiengang === "Studiengang*") {
 								$('.falsch')
 										.html(
-												unescape("Bitte w%E4hlen Deinen Studiengang aus."));
+												unescape("Bitte wähle deinen Studiengang aus."));
 							} else if (vorname != "" && nachname != "" && email != "" && matrikelnummer != "" && kurs != "" && pw1 != "") {
 								$
 										.ajax({
@@ -166,6 +166,11 @@ var main = function() {
 												standort : standort,
 											},
 											success : function(result) {
+												if (result == 'mailError'){
+													alert("Die verwendete Mailadresse wird bereits von einem Account verwendet.");
+												} else if (result == 'matnrError'){
+													alert("Die verwendete Matrikelnummer wird bereits von einem Account verwendet.")
+												} else {
 												$('.erfolgreich')
 														.html(
 																'Registrierung erfolgreich. <br> Bitte logge dich ein um fortzufahren. <br> Dein Nutzername lautet '
@@ -180,10 +185,11 @@ var main = function() {
 												//$('#register').hide();
 												$('.modal').fadeOut();
 												$('.modal').modal('hide');
+												}
 
 											},
 											error : function(result) {
-												alert("Fehler beim Registrieren" + result);
+												alert("Fehler beim Registrieren");
 											}
 										});
 							}
@@ -224,12 +230,16 @@ var main = function() {
 					},
 					success : function(data) {
 						var auslesen = data.split(';');
-						sessionStorage['rolle'] = auslesen[0];
-						if (auslesen[1] === undefined) {
-							alert("Falsche Eingabe")
-						}
-						sessionStorage['matrikelnr'] = auslesen[1].trim();
-						sessionStorage['studiengang'] = auslesen[2].trim();
+						if (auslesen[0] == "2"){
+							alert("Nutzername oder Passwort falsch");
+						} else if (auslesen[0] == "3"){
+							alert("Dieser Nutzer ist nicht aktiviert. Bitte best&auml;tigen Sie zuerst ihre Mailadresse");
+						} else if (auslesen[0] == "4"){
+							alert("Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuchen Sie es sp&auml;ter erneut");
+						} else {
+						sessionStorage['rolle'] = auslesen[3];
+						sessionStorage['matrikelnr'] = auslesen[2].trim();
+						sessionStorage['studiengang'] = auslesen[1].trim();
 						sessionStorage['User'] = email;
 
 						if (sessionStorage['rolle'] === '2') {
@@ -265,6 +275,7 @@ var main = function() {
 							$('#falschLogin').show();
 						}
 						$('.logoFenster').show();
+						}
 
 					},
 					error : function(data) {

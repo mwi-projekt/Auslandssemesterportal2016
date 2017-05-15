@@ -70,12 +70,33 @@ public static String getSalt(String mail){//Ermittelt das zur Mailadresse hinter
 	return salt;
 }
 
-public static ResultSet userLogin(String mail, String salt, String pw){//Prüft Logindaten. Gibt ResultSet zurück
+public static String userLogin(String mail, String salt, String pw){//Prüft Logindaten. Gibt Code zurück: 1 = Erfolgreich, 2 = Falsche Daten, 3 = nicht aktiviert, 4 = Datenbankfehler
 	String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);
-	String query = "SELECT rolle, matrikelnummer, studiengang FROM user WHERE email = '" + mail + 
-	"' AND passwort = '" + hashedPw + "' AND verifiziert = '1';";
+	int resultCode = 4;
+	String studiengang = "";
+	String matrikelnummer = "";
+	String rolle = "";
+	String query = "SELECT verifiziert, matrikelnummer, studiengang, rolle FROM user WHERE email = '" + mail + 
+	"' AND passwort = '" + hashedPw + "';";
 	ResultSet ergebnis = executeQuery(query);
-	return ergebnis;
+	try{
+		if (ergebnis.next()){
+			studiengang = ergebnis.getString("studiengang");
+			matrikelnummer = ergebnis.getString("matrikelnummer");
+			rolle = ergebnis.getString("rolle");
+			if (ergebnis.getString("verifiziert") == "1"){
+				resultCode = 1;
+			} else {
+				resultCode = 3;
+			}
+		} else {
+			resultCode = 2;
+		}
+	} catch (Exception e){
+	 e.printStackTrace();
+	}
+	return "" + resultCode + ";" + studiengang + ";" + matrikelnummer + ";" + rolle;
+	
 }
 
 }
