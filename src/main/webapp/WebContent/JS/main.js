@@ -233,9 +233,9 @@ var main = function() {
 						if (auslesen[0] == "2"){
 							alert("Nutzername oder Passwort falsch");
 						} else if (auslesen[0] == "3"){
-							alert("Dieser Nutzer ist nicht aktiviert. Bitte best&auml;tigen Sie zuerst ihre Mailadresse");
+							alert("Dieser Nutzer ist nicht aktiviert. Bitte bestätigen Sie zuerst ihre Mailadresse");
 						} else if (auslesen[0] == "4"){
-							alert("Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuchen Sie es sp&auml;ter erneut");
+							alert("Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut");
 						} else {
 						sessionStorage['rolle'] = auslesen[3];
 						sessionStorage['matrikelnr'] = auslesen[2].trim();
