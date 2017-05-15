@@ -142,11 +142,11 @@ var main = function() {
 									&& email.match('dhbw-karlsruhe.de') != 'dhbw-karlsruhe.de') {
 								$('.falsch')
 										.html(
-												unescape("Bitte w%E4hlen sie nur Auslandsmitarbeiter, wenn sie einer sind."));
+												unescape("Bitte wählen Sie nur Auslandsmitarbeiter, wenn Sie einer sind."));
 							} else if (studiengang === "Studiengang*") {
 								$('.falsch')
 										.html(
-												unescape("Bitte w%E4hlen Deinen Studiengang aus."));
+												unescape("Bitte wähle deinen Studiengang aus."));
 							} else if (vorname != "" && nachname != "" && email != "" && matrikelnummer != "" && kurs != "" && pw1 != "") {
 								$
 										.ajax({
@@ -166,6 +166,11 @@ var main = function() {
 												standort : standort,
 											},
 											success : function(result) {
+												if (result == 'mailError'){
+													alert("Die verwendete Mailadresse wird bereits von einem Account verwendet.");
+												} else if (result == 'matnrError'){
+													alert("Die verwendete Matrikelnummer wird bereits von einem Account verwendet.")
+												} else {
 												$('.erfolgreich')
 														.html(
 																'Registrierung erfolgreich. <br> Bitte logge dich ein um fortzufahren. <br> Dein Nutzername lautet '
@@ -180,10 +185,11 @@ var main = function() {
 												//$('#register').hide();
 												$('.modal').fadeOut();
 												$('.modal').modal('hide');
+												}
 
 											},
 											error : function(result) {
-												alert("Fehler beim Registrieren" + result);
+												alert("Fehler beim Registrieren");
 											}
 										});
 							}
