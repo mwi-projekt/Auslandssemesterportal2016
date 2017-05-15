@@ -19,40 +19,71 @@ public class validationFailure implements JavaDelegate{
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-				
+
 		final String username = "mwiausland@gmail.com";
 		final String password = "MWIAusland1";
 		String host = "smtp.gmail.com";
-	
+
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.port", "587");
-	
+
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-														return new PasswordAuthentication(username, password);
+				return new PasswordAuthentication(username, password);
 			}
 		});
-	
+		
+		String email = (String) execution.getVariable("studentEmail");
+		String nachname = (String) execution.getVariable("studentNachname");
+		String uni = (String) execution.getVariable("uni");
+		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
+		String fehlerUrsache = (String) execution.getVariable("fehlerUrsache");
+
 		try {
-			
-			String email = (String) execution.getVariable("Student-Email");
-			String nachname = (String) execution.getVariable("Student-Nachname");
-			String uni = (String) execution.getVariable("Uni");
-			
 			Message message = new MimeMessage(session);
+
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-			message.setSubject(MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester fehlerhaft/unvollständig", "utf-8", "B"));
-			message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",")  + "\n" + "\n" +
-					 "Ihre eingereichte Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: " + uni + " konnte nicht vollständig validiert werden." + "\n" + 
-						"Wir bitten Sie, dass Sie Ihre Eingaben erneut im Auslandssemesterportal überprüfen." + "\n" +
-						"Vielen Dank für Ihr Verständnis." + "\n" + "\n" +
-						"Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
-	
+			
+			//Bei erfolgreicher Validierung
+			if(erfolgreich){
+				message.setSubject(
+						MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester validiert", "utf-8", "B"));
+				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
+				"\n"+ 
+				"\n"+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "+ uni +" wurde erfolgreich an das Akademisches Auslandsamt versendet."+
+				"\n"+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnahe um die Bearbeitung Ihrer Bewerbung kümmern und entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen"+ 
+				"\n"+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren." +  
+				"\n"+ 
+				"\n"+ "Mit freundlichen Grüßen," + 
+				"\n"+ 
+				"\n"+ "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
+							
+				}
+			//wenn Validierung fehlgeschlagen
+				else{
+					message.setSubject(
+							MimeUtility.encodeText("Bei der Validierung Ihrer Bewerbung ist ein Fehler aufgetreten", "utf-8", "B"));
+				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
+				"\n"+ 
+				"\n"+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: "+ uni + 
+				"\n"+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + 
+				"\n"+		
+				"\n"+ "Die Fehlerursache beträgt:" +
+				"\n"+ fehlerUrsache +
+				"\n"+
+				"\n"+ "Ein Mitarbeiter wird sich daher bald mit Ihnen in Verbindung setzen." +
+				"\n"+ "Wir bitten um Ihr Verständnis." +
+				"\n"+ 
+				"\n"+ "Mit freundlichen Grüßen," + 
+				"\n"+ 
+				"\n"+ "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
+			}
+
 			Transport.send(message);
-	
+
 		} catch (MessagingException e) {
 			System.out.print("Could not send email!");
 			e.printStackTrace();
@@ -60,6 +91,5 @@ public class validationFailure implements JavaDelegate{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 }

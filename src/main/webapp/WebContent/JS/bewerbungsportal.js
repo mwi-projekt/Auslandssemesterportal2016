@@ -91,7 +91,7 @@ var main = function() {
 								+ even
 								+ '" id="row'
 								+ (zaehler)
-								+ '"><td>'
+                                + '" data-rid="'+zaehler+'"><td>'
 								+ sessionStorage["studiengang"]
 								+ '</td><td id="uni'
 								+ zaehler
@@ -105,14 +105,14 @@ var main = function() {
 								+ status
 								+ '%</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
-								+ '">Fortsetzen</td>';
+								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td>';
 						    } else {
 							tabelle = tabelle
 								+ '<tr class="'
 								+ even
 								+ '" id="row'
 								+ (zaehler)
-								+ '"><td>'
+								+ '" data-rid="'+zaehler+'"><td>'
 								+ sessionStorage["studiengang"]
 								+ '</td><td id="uni'
 								+ zaehler
@@ -126,7 +126,7 @@ var main = function() {
 								+ status
 								+ '%</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
-								+ '">Fortsetzen</td>';
+								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td>';
 						    }
 						    sessionStorage['beworbeneUnis'] = sessionStorage['beworbeneUnis']
 							    + auslesen[((7 * zaehler) - 7)]
@@ -202,26 +202,26 @@ var main = function() {
 								    sessionStorage['uni'] = uni;
 								    askNextStep(uni);
 
-								}); // Bitte
-						// nichts
-						// hinter
-						// diese
-						// Klammer
-						// schreiben,
-						// durch den
-						// AJAX
-						// request
-						// kommt es
-						// hin und
-						// wieder zu
-						// Fehlern,
-						// die den
-						// weiteren
-						// Prozess
-						// aber
-						// nicht
-						// beeinflussen
+								});
 					    }
+
+					    $('.btnProcessDelete').on('click', function() {
+					    	var id = $(this).data('rid');
+                            var uni = $('#uni' + id).text();
+							var matrikelnummer = sessionStorage['matrikelnr'];
+
+                            $.ajax({
+								type : "POST",
+								url : "process/delete",
+								data : {
+									action : "post_dokument",
+									matrikelnummer : matrikelnummer,
+									uni: uni
+								}
+							}).done(function(data) {
+								console.log(data);
+                            })
+						});
 					},
 					error : function(result) {
 
