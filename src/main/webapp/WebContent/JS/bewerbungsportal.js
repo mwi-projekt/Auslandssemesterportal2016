@@ -105,7 +105,7 @@ var main = function() {
 								+ status
 								+ '%</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
-								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td>';
+								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    } else {
 							tabelle = tabelle
 								+ '<tr class="'
@@ -126,7 +126,7 @@ var main = function() {
 								+ status
 								+ '%</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
-								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td>';
+								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    }
 						    sessionStorage['beworbeneUnis'] = sessionStorage['beworbeneUnis']
 							    + auslesen[((7 * zaehler) - 7)]
@@ -143,21 +143,16 @@ var main = function() {
 						}
 					    }
 					    if (isEmpty(tabelle) === true) {
-						$('#tableBewProzess').hide();
-						$('#nichtBeworben').show();
+							$('#tableBewProzess').hide();
+							$('#nichtBeworben').show();
 					    } else {
-						$('#tableBewProzess').show();
-						$('#nichtBeworben').hide();
+							$('#tableBewProzess').show();
+							$('#nichtBeworben').hide();
 					    }
 					    $('#tableBewProzessBody').html(
 						    tabelle);
-					    for (var i = 1; i <= zaehler; i++) {
-						document
-							.getElementById(
-								'btnProzessFortfahren'
-									+ i)
-							.addEventListener(
-								'click',
+					    for (var i = 1; i < zaehler; i++) {
+							$('#btnProzessFortfahren'+ i).on('click',
 								function(event) {
 								    var id = event.target.id
 									    .replace(
@@ -206,7 +201,7 @@ var main = function() {
 					    }
 
 					    $('.btnProcessDelete').on('click', function() {
-					    	var id = $(this).data('rid');
+					    	var id = $(this).closest('tr').data('rid');
                             var uni = $('#uni' + id).text();
 							var matrikelnummer = sessionStorage['matrikelnr'];
 
@@ -214,7 +209,6 @@ var main = function() {
 								type : "POST",
 								url : "process/delete",
 								data : {
-									action : "post_dokument",
 									matrikelnummer : matrikelnummer,
 									uni: uni
 								}
