@@ -5,6 +5,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="java-output-path" value="/Auslandssemesterportal/target/classes"/>
-        <property name="context-root" value="Auslandsemesterportal2016"/>
+        <property name="context-root" value="Auslandssemesterportal"/>
     </wb-module>
 </project-modules>

@@ -252,14 +252,14 @@ var main = function() {
 							location.reload();
 
 						} else if (sessionStorage['rolle'] === '3') {
-							location.replace('index.html');
+							//location.replace('index.html');
 							$('.nutzerName').html(email);
 							$('.cms').hide();
 							$('.nonCms').show();
 							$('.weg').css('display', 'inline');
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
-							location.reload(); 
+							window.location.reload(); 
 							
 						} else if (sessionStorage['rolle'] === '1') {
 							$('#normalBereich').hide();
@@ -275,6 +275,7 @@ var main = function() {
 							$('#falschLogin').show();
 						}
 						$('.logoFenster').show();
+						location.reload();
 						}
 
 					},
