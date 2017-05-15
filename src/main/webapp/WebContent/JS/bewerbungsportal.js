@@ -1,3 +1,9 @@
+$(document).ready(function() {
+    $.validate({
+        lang: 'de'
+    });
+});
+
 var main = function() {
     sessionStorage['nichtBeworben'] = false;
     $('#progressbar').progressbar({
