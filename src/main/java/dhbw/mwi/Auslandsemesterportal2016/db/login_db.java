@@ -896,8 +896,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		}
 	}
 
-	// Methode dient zum Versenden von Email an Student nach erfolgreicher
-	// Validierung
+	// Methode dient zum Versenden von Email an Student nach
+	// Validierung der getätigten Eingaben
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
@@ -922,14 +922,17 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		String nachname = (String) execution.getVariable("studentNachname");
 		String uni = (String) execution.getVariable("uni");
 		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
+		String fehlerUrsache = (String) execution.getVariable("fehlerUrsache");
 
 		try {
 			Message message = new MimeMessage(session);
 
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-			message.setSubject(
-					MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester validiert", "utf-8", "B"));
+			
+			//Bei erfolgreicher Validierung
 			if(erfolgreich){
+				message.setSubject(
+						MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester validiert", "utf-8", "B"));
 				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
 				"\n"+ 
 				"\n"+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "+ uni +" wurde erfolgreich an das Akademisches Auslandsamt versendet."+
@@ -941,12 +944,18 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				"\n"+ "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
 							
 				}
+			//wenn Validierung fehlgeschlagen
 				else{
+					message.setSubject(
+							MimeUtility.encodeText("Bei der Validierung Ihrer Bewerbung ist ein Fehler aufgetreten", "utf-8", "B"));
 				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
 				"\n"+ 
 				"\n"+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: "+ uni + 
 				"\n"+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + 
-				"\n"+		 
+				"\n"+		
+				"\n"+ "Die Fehlerursache beträgt:" +
+				"\n"+ fehlerUrsache +
+				"\n"+
 				"\n"+ "Ein Mitarbeiter wird sich daher bald mit Ihnen in Verbindung setzen." +
 				"\n"+ "Wir bitten um Ihr Verständnis." +
 				"\n"+ 
