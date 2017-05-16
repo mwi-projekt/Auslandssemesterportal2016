@@ -25,10 +25,34 @@ catch (Exception e){
 return rs;
 }
 
+private static ResultSet executeStatement (String query, String[] data, String[] types){
+	Connection connection = DB.getInstance();
+	ResultSet rs = null;
+	int parCount = data.length;
+	
+	try{
+		PreparedStatement statement = connection.prepareStatement(query);
+		for (int i = 0; i < parCount; i++){
+			if (types[i] == "String"){
+				statement.setString(i+1, data[i]);
+			} else if (types[i] == "int"){
+				statement.setInt(i+1, Integer.parseInt(data[i]));
+			}
+			}
+		rs = statement.executeQuery();
+		} 
+	    catch (Exception e){
+		e.printStackTrace();
+	    }
+	return rs;
+}
+
 public static boolean isMatnrUsed(int matNr){ //Prüft ob Matrikelnummer bereits verwendet wird
-	String queryString = "SELECT 1 FROM user WHERE matrikelnummer = " + matNr + ";";
+	String queryString = "SELECT 1 FROM user WHERE matrikelnummer = ?;";
+	String[] params = new String[]{""+matNr};
+	String[] types = new String[]{"int"};
 	boolean resultExists = true;
-	ResultSet ergebnis = executeQuery(queryString);
+	ResultSet ergebnis = executeStatement(queryString,params,types);
 	try{
 		resultExists = ergebnis.next();
 		ergebnis.close();
