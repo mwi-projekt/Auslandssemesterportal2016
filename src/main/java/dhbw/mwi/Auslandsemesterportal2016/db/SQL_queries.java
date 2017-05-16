@@ -50,6 +50,27 @@ private static ResultSet executeStatement (String query, String[] data, String[]
 	return rs;
 }
 
+private static int executeUpdate (String query, String[] data, String[] types){//Führt UPDATE mit Hilfe von PreparedStatements aus
+	Connection connection = DB.getInstance();
+	int parCount = data.length;
+	int result = 0;
+	try{
+		PreparedStatement statement = connection.prepareStatement(query);
+		for (int i = 0; i < parCount; i++){
+			if (types[i] == "String"){
+				statement.setString(i+1, data[i]);
+			} else if (types[i] == "int"){
+				statement.setInt(i+1, Integer.parseInt(data[i]));
+			}
+			}
+		result = statement.executeUpdate();
+		}
+	    catch (Exception e){
+		e.printStackTrace();
+	    }
+	return result;
+}
+
 public static boolean isMatnrUsed(int matNr){ //Prüft ob Matrikelnummer bereits verwendet wird
 	String queryString = "SELECT 1 FROM user WHERE matrikelnummer = ?;";
 	String[] params = new String[]{""+matNr};
@@ -129,8 +150,16 @@ public static String userLogin(String mail, String salt, String pw){
 	} catch (Exception e){
 	 e.printStackTrace();
 	}
-	return "" + resultCode + ";" + studiengang + ";" + matrikelnummer + ";" + rolle;
-	
+	return "" + resultCode + ";" + studiengang + ";" + matrikelnummer + ";" + rolle;	
+}
+
+public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle, String email, String studiengang, 
+		String kurs, int matrikelnummer, String tel, String mobil, String standort, String verifiziert){
+	String query = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert) VALUES " + 
+			"(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	String[] args = new String[]{vorname,nachname,passwort,salt,""+rolle,email,studiengang,kurs,""+matrikelnummer,tel,mobil,standort,verifiziert};
+	String[] types = new String[]{"String","String","String","String","int","String","String","String","int","String","String","String","String"};
+	return executeUpdate(query,args,types);
 }
 
 }

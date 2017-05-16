@@ -99,7 +99,7 @@ public class RegisterServlet extends HttpServlet {
             // Zufälliges Salt generieren und Passwort hashen
             String salt = Util.generateSalt();
             String pw = Util.HashSha256(Util.HashSha256(request.getParameter("passwort")) + salt);
-
+            /*
             String sqlupd = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert) VALUES ('"
                     + request.getParameter("vorname") + "', '" + request.getParameter("nachname") + "', '" + pw
                     + "', '" + salt + "', '" + rolle + "', '" + request.getParameter("email") + "', '"
@@ -107,6 +107,7 @@ public class RegisterServlet extends HttpServlet {
                     + request.getParameter("matrikelnummer") + "', '" + request.getParameter("tel") + "', '"
                     + request.getParameter("mobil") + "', '" + request.getParameter("standort") + "', '" + id
                     + "')";
+                    */
 
             //String link = "193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?confirm=" + id;
             String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?confirm=" + id;
@@ -121,19 +122,23 @@ public class RegisterServlet extends HttpServlet {
 
 
             // Verbindung zur DB um neuen Nutzer zu speichern
-            Statement statement = connection.createStatement();
-            int rsupd = statement.executeUpdate(sqlupd);
+            //Statement statement = connection.createStatement();
+            //int rsupd = statement.executeUpdate(sqlupd);
+            int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),request.getParameter("nachname"),pw,
+                    salt,rolle,request.getParameter("email"),request.getParameter("studiengang"),request.getParameter("kurs"),
+                    Integer.parseInt(request.getParameter("matrikelnummer")),request.getParameter("tel"),request.getParameter("mobil"),request.getParameter("standort"),""+id);
             out.println(rsupd);
-            statement.close();
+            //statement.close();
 
         } catch (MessagingException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        //} catch (SQLException e) {
+        //    e.printStackTrace();
+        //}
 
     }
     }
 
+}
 }
