@@ -1,4 +1,8 @@
-
+.help-block {
+	margin-left: 7px;
+	margin-top: -5px;
+	font-size: 12px;
+}
 
 h1,h2,h3 {
 	color: black;
@@ -17,9 +21,15 @@ p {
 /* 	border-bottom: 1px solid #aaa; */
 }
 
+table td {
+	vertical-align: top;
+}
+
+.input-group td .form-control {
+	margin-bottom: 10px;
+}
+
 .container {
-	width: relativ;
-	height: relativ;
 	border-style: solid;
 	border-radius: 10px;
 	border-color: #F0F0F0;
@@ -28,7 +38,6 @@ p {
 /* 	background-color: #F0F0F0; */
 	background-color: white;
 	margin-left: -15px;
-}
 }
 
 #boxx {

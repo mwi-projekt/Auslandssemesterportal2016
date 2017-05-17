@@ -1,9 +1,3 @@
-$(document).ready(function() {
-    $.validate({
-        lang: 'de'
-    });
-});
-
 var main = function() {
     sessionStorage['nichtBeworben'] = false;
     $('#progressbar').progressbar({
@@ -12,26 +6,26 @@ var main = function() {
     getStudiengaenge();
     // �berpr�fen, was der User f�r einen Status hat
     if (isEmpty(sessionStorage['User']) === true) {
-	location.replace("index.html");
+		location.replace("index.html");
     } else {
-	$('.loginFenster').hide();
-	$('.logoutFenster').show();
-	$('.nutzerName').text(sessionStorage['User']);
-	if (sessionStorage['rolle'] === "2") {
-	    $('#in1').hide();
-	    $('#in5').show();
-	    $('.nonCms').hide();
-	    $('#in7').children('.inhaltBox').load('create_prozess.jsp');
-	    $('#in8').children('.inhaltBox').load('server_control.jsp');
-	} else {
-	    $('.cms').hide();
-	    $('.nonCms').show();
-	    $('.inhalt').hide();
-	    $('.iFenster').show();
-	    $('.iFenster1').hide();
-	    $('#in1').show();
-	    $('#prozent').text($('#progressbar').attr('aria-valuenow') + '%');
-	}
+		$('.loginFenster').hide();
+		$('.logoutFenster').show();
+		$('.nutzerName').text(sessionStorage['User']);
+		if (sessionStorage['rolle'] === "2") {
+			$('#in1').hide();
+			$('#in5').show();
+			$('.nonCms').hide();
+			$('#in7').children('.inhaltBox').load('create_prozess.jsp');
+			$('#in8').children('.inhaltBox').load('server_control.jsp');
+		} else {
+			$('.cms').hide();
+			$('.nonCms').show();
+			$('.inhalt').hide();
+			$('.iFenster').show();
+			$('.iFenster1').hide();
+			$('#in1').show();
+			$('#prozent').text($('#progressbar').attr('aria-valuenow') + '%');
+		}
     }
 
     $('.navEl')
@@ -559,10 +553,15 @@ var main = function() {
     });
 
     // Bewerbungsfomularbuttons
-    $('.btnBewFormular')
-	    .on(
-		    'click',
-		    function(event) {
+    $('.btnBewFormular').on('click', function(event) {
+
+    		var form = $(this).closest('form');
+
+    		if (form && !form.isValid()) {
+				alert('Bitte füllen sie alle Felder korrekt aus.');
+				return;
+			}
+
 			var id = event.target.id.substring(14, 16);
 			$('.popUpBack')
 				.html(
@@ -571,6 +570,7 @@ var main = function() {
 			setTimeout(closeLoading, 1000);
 
 			if (id === '10') {
+
 			    $
 				    .ajax({
 					type : "POST",
@@ -1896,23 +1896,23 @@ function closeLoading() {
 
 function askNextStep(uni) {
     $.ajax({
-	type : "POST",
-	url : "login_db",
-	data : {
-	    action : "get_next_Page",
-	    uni : sessionStorage['uni'],
-	    matrikelnummer : sessionStorage['matrikelnr'],
-	},
-	success : function(result) {
-	    var nextStep = result;
-	    defineNextStep(nextStep, $('#selectUni').val())
-	    return nextStep;
-	}
+		type : "POST",
+		url : "login_db",
+		data : {
+			action : "get_next_Page",
+			uni : sessionStorage['uni'],
+			matrikelnummer : sessionStorage['matrikelnr'],
+		},
+		success : function(result) {
+			var nextStep = result;
+			defineNextStep(nextStep, $('#selectUni').val())
+			return nextStep;
+		}
 
-	,
-	error : function(result) {
+		,
+		error : function(result) {
 
-	}
+		}
     });
 }
 
@@ -2202,139 +2202,58 @@ function getDataAllPruef() {
 }
 
 function defineNextStep(nextStepString, uni) {
-    $('#bewFormular0').hide();
-    $('#bewFormular1').hide();
-    $('#bewFormular2').hide();
-    $('#bewFormular3').hide();
-    $('#bewFormular4').hide();
-    $('#bewFormular5').hide();
-    $('#bewFormular6').hide();
-    $('#bewFormular7').hide();
-    $('#bewFormular8').hide();
-    $('#bewFormular9').hide();
-    $('#bewFormular10').hide();
+
+    $.validate({
+        form : '#bewFormular0, #bewFormular1, #bewFormular2, #bewFormular3, #bewFormular4, #bewFormular5, #bewFormular6, #bewFormular7, #bewFormular8, #bewFormular9, #bewFormular10',
+        lang : 'de',
+        modules : 'html5'
+    });
+
+    $('#bewFormular0, #bewFormular1, #bewFormular2, #bewFormular3, #bewFormular4, #bewFormular5, #bewFormular6, #bewFormular7, #bewFormular8, #bewFormular9, #bewFormular10').hide();
 
     switch (nextStepString.trim()) {
-    case 'Downloadsanbieten':
+		case 'Downloadsanbieten':
+			$('#bewFormular0').show();
+			showDownloads(uni);
+			break;
 
-	$('#bewFormular0').show();
-	$('#bewFormular1').hide();
-	$('#bewFormular2').hide();
-	$('#bewFormular3').hide();
-	$('#bewFormular4').hide();
-	$('#bewFormular5').hide();
-	$('#bewFormular6').hide();
-	$('#bewFormular7').hide();
-	$('#bewFormular8').hide();
-	$('#bewFormular9').hide();
-	$('#bewFormular10').hide();
-	showDownloads(uni);
-	break;
+		case "Dateneingeben":
+			$('#bewFormular1').show();
+			getUserData(uni);
+			break;
 
-    case "Dateneingeben":
-	$('#bewFormular0').hide();
-	$('#bewFormular1').show();
-	$('#bewFormular2').hide();
-	$('#bewFormular3').hide();
-	$('#bewFormular4').hide();
-	$('#bewFormular5').hide();
-	$('#bewFormular6').hide();
-	$('#bewFormular7').hide();
-	$('#bewFormular8').hide();
-	$('#bewFormular9').hide();
-	$('#bewFormular10').hide();
+		case "DAAD-Formularhochladen":
+			$('#bewFormular5').show();
+			break;
 
-	getUserData(uni);
-	break;
-    case "DAAD-Formularhochladen":
-	$('#bewFormular0').hide();
-	$('#bewFormular1').hide();
-	$('#bewFormular2').hide();
-	$('#bewFormular3').hide();
-	$('#bewFormular4').hide();
-	$('#bewFormular5').show();
-	$('#bewFormular6').hide();
-	$('#bewFormular7').hide();
-	$('#bewFormular8').hide();
-	$('#bewFormular9').hide();
-	$('#bewFormular10').hide();
-	break;
-    case "Abiturzeugnishochladen":
-	$('#bewFormular0').hide();
-	$('#bewFormular1').hide();
-	$('#bewFormular2').hide();
-	$('#bewFormular3').hide();
-	$('#bewFormular4').hide();
-	$('#bewFormular5').hide();
-	$('#bewFormular6').show();
-	$('#bewFormular7').hide();
-	$('#bewFormular8').hide();
-	$('#bewFormular9').hide();
-	$('#bewFormular10').hide();
-	break;
-    case "Dualisauszughochladen":
-	$('#bewFormular0').hide();
-	$('#bewFormular1').hide();
-	$('#bewFormular2').hide();
-	$('#bewFormular3').hide();
-	$('#bewFormular4').hide();
-	$('#bewFormular5').hide();
-	$('#bewFormular6').hide();
-	$('#bewFormular7').show();
-	$('#bewFormular8').hide();
-	$('#bewFormular9').hide();
-	$('#bewFormular10').hide();
-	break;
-    case "Motivations-schreibenhochladen":
-	$('#bewFormular0').hide();
-	$('#bewFormular1').hide();
-	$('#bewFormular2').hide();
-	$('#bewFormular3').hide();
-	$('#bewFormular4').hide();
-	$('#bewFormular5').hide();
-	$('#bewFormular6').hide();
-	$('#bewFormular7').hide();
-	$('#bewFormular8').show();
-	$('#bewFormular9').hide();
-	$('#bewFormular10').hide();
-	break;
-    case "Zustimmungs-formularhochladen":
-	$('#bewFormular0').hide();
-	$('#bewFormular1').hide();
-	$('#bewFormular2').hide();
-	$('#bewFormular3').hide();
-	$('#bewFormular4').hide();
-	$('#bewFormular5').hide();
-	$('#bewFormular6').hide();
-	$('#bewFormular7').hide();
-	$('#bewFormular8').hide();
-	$('#bewFormular9').show();
-	$('#bewFormular10').hide();
-	break;
-    case "Datenprüfen":
-	getDataAllPruef();
-	$('#bewFormular0').hide();
-	$('#bewFormular1').hide();
-	$('#bewFormular2').hide();
-	$('#bewFormular3').hide();
-	$('#bewFormular4').hide();
-	$('#bewFormular5').hide();
-	$('#bewFormular6').hide();
-	$('#bewFormular7').hide();
-	$('#bewFormular8').hide();
-	$('#bewFormular9').hide();
-	$('#bewFormular10').show();
+		case "Abiturzeugnishochladen":
+			$('#bewFormular6').show();
+			break;
 
-	break;
-    case "Datenvalidieren":
-	alert("Die Bewerbung befindet sich gerade in der Überprüfung");
-	$('.iFenster').hide();
-	$('.iF1').hide();
-	$('.iF2').hide();
-	$('#bewProzess').show();
+		case "Dualisauszughochladen":
+			$('#bewFormular7').show();
+			break;
 
-	break;
+		case "Motivations-schreibenhochladen":
+			$('#bewFormular8').show();
+			break;
 
+		case "Zustimmungs-formularhochladen":
+			$('#bewFormular9').show();
+			break;
+
+		case "Datenprüfen":
+			getDataAllPruef();
+			$('#bewFormular10').show();
+			break;
+
+		case "Datenvalidieren":
+			alert("Die Bewerbung befindet sich gerade in der Überprüfung");
+			$('.iFenster').hide();
+			$('.iF1').hide();
+			$('.iF2').hide();
+			$('#bewProzess').show();
+			break;
     }
 
 }
