@@ -31,11 +31,11 @@ public class RegisterServlet extends HttpServlet {
         int rolle = 0;
         
         if (SQL_queries.isEmailUsed(request.getParameter("email"))){
-        	out.println("mailError");
+        	out.print("mailError");
         	out.flush();
         	throw new RuntimeException("Mailadresse bereits verwendet");
         } else if (SQL_queries.isMatnrUsed(Integer.parseInt(request.getParameter("matrikelnummer")))){
-        	out.println("matnrError");
+        	out.print("matnrError");
         	out.flush();
         	throw new RuntimeException("Matrikelnummer bereits verwendet");
         } else{
