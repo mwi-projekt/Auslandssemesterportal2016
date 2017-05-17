@@ -166,10 +166,10 @@ var main = function() {
 												standort : standort,
 											},
 											success : function(result) {
-												if (result == 'mailError'){
-													alert("Die verwendete Mailadresse wird bereits von einem Account verwendet.");
-												} else if (result == 'matnrError'){
-													alert("Die verwendete Matrikelnummer wird bereits von einem Account verwendet.")
+												if (result == "mailError"){
+													alert("Die eingetragene Mailadresse wird bereits von einem Account verwendet.");
+												} else if (result == "matnrError"){
+													alert("Die eingetragene Matrikelnummer wird bereits von einem Account verwendet.")
 												} else {
 												$('.erfolgreich')
 														.html(
