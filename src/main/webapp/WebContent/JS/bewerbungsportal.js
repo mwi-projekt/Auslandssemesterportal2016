@@ -1,3 +1,11 @@
+Dropzone.options.acceptedFiles = 'application/pdf';
+Dropzone.options.maxFilesize = 16;
+
+
+Dropzone.options.abiturForm = {
+    paramName: "abitur_file"
+}
+
 var main = function() {
     sessionStorage['nichtBeworben'] = false;
     $('#progressbar').progressbar({
@@ -1153,7 +1161,7 @@ var main = function() {
 						    // $('#bewFormular5').show();
 						    $('#bewFormular1').hide();
 						    $('#bewProzess').hide();
-						    $('#aktuelleUni').html(uni);
+						    $('#aktuelleUni').html($('#selectUni').val());
 						},
 						error : function(result) {
 

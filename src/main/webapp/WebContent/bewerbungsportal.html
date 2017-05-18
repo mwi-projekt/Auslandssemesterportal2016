@@ -8,6 +8,7 @@
     <link rel="stylesheet"
           href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
     <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="CSS/dropzone.css">
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/bewerbungsportal.css">
     <link rel="stylesheet" href="CSS/bewerbungsformular.css">
@@ -17,6 +18,7 @@
             src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script src="external/dropzone.js"></script>
     <script src="JS/bewerbungsformular.js"></script>
     <script src="JS/bewerbungsportal.js"></script>
 </head>
@@ -514,7 +516,7 @@
 
                                 <table>
                                     <tr>
-                                        <td>Land</td>
+                                        <td>Land*</td>
                                         <td>
                                             <input id="bewThLand" type="text" class="form-control b7"
                                                    placeholder="Land" required></td>
@@ -543,7 +545,7 @@
                                                 });
                                     </script>
                                     <tr>
-                                        <td>Bundesland</td>
+                                        <td>Bundesland*</td>
                                         <td><select id="bewThBundesland" class="form-control b7">
                                             <option select disabled>Bundesland</option>
                                             <option>Baden-Württemberg</option>
@@ -566,30 +568,30 @@
                                     </tr>
 
                                     <tr>
-                                        <td>Straße</td>
+                                        <td>Straße*</td>
                                         <td>
                                             <input id="bewThStrasse" type="text" class="form-control b7"
                                                    placeholder="Strasse" required></td>
                                     </tr>
 
                                     <tr>
-                                        <td>Hausnummer</td>
+                                        <td>Hausnummer*</td>
                                         <td>
                                             <input
-                                                    id="bewThHausnummer" type="text" class="form-control b8"
+                                                    id="bewThHausnummer" type="number" class="form-control b8"
                                                     placeholder="Hausnummer" required></td>
                                     </tr>
 
                                     <tr>
-                                        <td>PLZ</td>
+                                        <td>PLZ*</td>
                                         <td>
                                             <input
-                                                    id="bewThPlz" type="text" class="form-control b9"
-                                                    placeholder="PLZ" pattern="^[0-9]{5}$" required></td>
+                                                    id="bewThPlz" type="number" class="form-control b9"
+                                                    placeholder="PLZ" required></td>
                                     </tr>
 
                                     <tr>
-                                        <td>Stadt</td>
+                                        <td>Stadt*</td>
                                         <td>
                                             <input
                                                     id="bewThStadt" type="text" class="form-control b10"
@@ -659,7 +661,7 @@
                                         <td>E-Mail</td>
                                         <td>
                                             <input
-                                                    id="bewPartnerEmail" type="text" class="form-control b16"
+                                                    id="bewPartnerEmail" type="email" class="form-control b16"
                                                     placeholder="Email Ansprechpartner" required></td>
                                     </tr>
 
@@ -675,7 +677,7 @@
                                         <td>Hausnummer</td>
                                         <td>
                                             <input
-                                                    id="bewPartnerHausnummer" type="text" class="form-control b18"
+                                                    id="bewPartnerHausnummer" type="number" class="form-control b18"
                                                     placeholder="Hausnummer" required></td>
                                     </tr>
 
@@ -683,7 +685,7 @@
                                         <td>PLZ</td>
                                         <td>
                                             <input
-                                                    id="bewPartnerPlz" type="text" class="form-control b19"
+                                                    id="bewPartnerPlz" type="number" class="form-control b19"
                                                     placeholder="PLZ" required></td>
                                     </tr>
 
@@ -733,46 +735,48 @@
                         </div>
                         <div class="col-xs-4">&nbsp;</div>
                     </div>
-                    <form class="row dat" id="bewFormular5">
+                    <div class="row dat" id="bewFormular5">
                         Laden Sie hier die DAAD-Dokumente hoch <label
                             class="btn btnBewFormular" id="btnBewFormular15"
                             style="float: right; bottom: 0px">Weiter</label>
+
                         <form action="upload" name="upload" method="post" enctype="multipart/form-data">
                             <input type="file" name="daad_file"/>
                         </form>
-                    </form>
-                    <form class="row dat" id="bewFormular6">
+                    </div>
+                    <div class="row dat" id="bewFormular6">
                         Laden Sie hier die Abitur-Dokumente hoch <label
                             class="btn btnBewFormular" id="btnBewFormular16"
                             style="float: right; bottom: 0px">Weiter</label>
+
                         <form action="upload" name="upload" method="post" enctype="multipart/form-data">
                             <input type="file" name="abitur_file"/>
                         </form>
-                    </form>
-                    <form class="row dat" id="bewFormular7">
+                    </div>
+                    <div class="row dat" id="bewFormular7">
                         Laden Sie hier die Dualis-Dokumente hoch <label
                             class="btn btnBewFormular" id="btnBewFormular17"
                             style="float: right; bottom: 0px">Weiter</label>
                         <form action="upload" name="upload" method="post" enctype="multipart/form-data">
                             <input type="file" name="dualis_file"/>
                         </form>
-                    </form>
-                    <form class="row dat" id="bewFormular8">
+                    </div>
+                    <div class="row dat" id="bewFormular8">
                         Laden Sie hier die Motivations-Dokumente hoch <label
                             class="btn btnBewFormular" id="btnBewFormular18"
                             style="float: right; bottom: 0px">Weiter</label>
                         <form action="upload" name="upload" method="post" enctype="multipart/form-data">
                             <input type="file" name="motivation_file"/>
                         </form>
-                    </form>
-                    <form class="row dat" id="bewFormular9">
+                    </div>
+                    <div class="row dat" id="bewFormular9">
                         Laden Sie hier die Zustimmungsformular-Dokumente hoch <label
                             class="btn btnBewFormular" id="btnBewFormular19"
                             style="float: right; bottom: 0px">Weiter</label>
                         <form action="upload" name="upload" method="post" enctype="multipart/form-data">
                             <input type="file" name="zustimmungsformular_file"/>
                         </form>
-                    </form>
+                    </div>
 
                     <form class="row dat" id="bewFormular10">
 
