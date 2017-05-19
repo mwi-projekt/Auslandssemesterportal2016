@@ -1,10 +1,20 @@
-Dropzone.options.acceptedFiles = 'application/pdf';
-Dropzone.options.maxFilesize = 16;
-
-
-Dropzone.options.abiturForm = {
-    paramName: "abitur_file"
+function getDropzoneOptions(action) {
+    return {
+        acceptedFiles: 'application/pdf',
+		maxFilesize: 16,
+		sending: function(file, xhr, formData){
+			formData.append('action', action);
+			formData.append('matrikelnummer', sessionStorage['matrikelnr']);
+			formData.append('uni', sessionStorage['uni']);
+		}
+    }
 }
+
+Dropzone.options.daadForm = getDropzoneOptions('DAAD_Formular');
+Dropzone.options.abiturForm = getDropzoneOptions('Abiturzeugnis');
+Dropzone.options.motivationForm = getDropzoneOptions('Motivationsschreiben');
+Dropzone.options.dualisForm = getDropzoneOptions('Dualis_Dokumente');
+Dropzone.options.zustimmungForm = getDropzoneOptions('Zustimmungsfomular');
 
 var main = function() {
     sessionStorage['nichtBeworben'] = false;
@@ -223,6 +233,7 @@ var main = function() {
 							}).done(function(data) {
 								$('#tableBewProzessBody tr[data-rid='+ id +']').remove();
 								alert('Der Prozess wurde erfolgreich gelöscht');
+                                sessionStorage['beworbeneUnis'].split(';');
                             }).error(function (error) {
 								console.error(error);
 								alert('Der Prozess konnte nicht gelöscht werden');
@@ -1215,31 +1226,34 @@ var main = function() {
 			    }
 			    $('#bewFormular4').hide();
 
-			} else if (id == '15') {
-			    var filenameHTML = "daad_file";
-			    var actionString = "nach_DAAD_Upload";
-			    uploadFile(filenameHTML, actionString);
+			} else if (id == '15' || id == '16' || id == '17' || id == '18' || id == '19') {
+                if (id == '15') {
+                    var dropzoneForm = $('#daad-form')[0].dropzone;
+				} else if (id == '16') {
+                    var dropzoneForm = $('#abitur-form')[0].dropzone;
+                } else if (id == '17') {
+                    var dropzoneForm = $('#dualis-form')[0].dropzone;
+                } else if (id == '18') {
+                    var dropzoneForm = $('#motivation-form')[0].dropzone;
+                } else if (id == '19') {
+                    var dropzoneForm = $('#zustimmung-form')[0].dropzone;
+                }
 
-			} else if (id == '16') {
-			    var filenameHTML = "abitur_file";
-			    var actionString = "nach_Abitur_Upload";
-			    uploadFile(filenameHTML, actionString);
-
-			} else if (id == 17) {
-			    var filenameHTML = "dualis_file";
-			    var actionString = "nach_Dualis_Upload";
-			    uploadFile(filenameHTML, actionString);
-
-			} else if (id == 18) {
-			    var filenameHTML = "motivation_file";
-			    var actionString = "nach_Motivation_Upload";
-			    uploadFile(filenameHTML, actionString);
-
-			} else if (id == 19) {
-			    var filenameHTML = "zustimmungsformular_file";
-			    var actionString = "nach_Zustimmung_Upload";
-			    uploadFile(filenameHTML, actionString);
-
+				if (dropzoneForm.files && dropzoneForm.files.length > 0) {
+                    $.ajax({
+						type : "POST",
+						url : "process/complete",
+						data : {
+							matrikelnummer : sessionStorage['matrikelnr'],
+							uni : sessionStorage['uni']
+						},
+						success : function(result) {
+                            askNextStep(sessionStorage['uni']);
+                        }
+                    });
+                } else {
+                    alert('Bitte laden Sie zunächst eine Datei hoch');
+                }
 			} else if (id === '20') {
 			    $
 				    .ajax({
@@ -1355,56 +1369,6 @@ function isEmpty(str) {
     return (!str || 0 === str.length);
 }
 
-function uploadFile(filenameHTML, actionString) {
-    var inputString = "input[name=" + filenameHTML + "]";
-    var file = $(inputString)[0].files[0];
-    var r = new FileReader();
-    r.onload = function(t) {
-	try {
-	    const
-	    text = r.result;
-	    $.ajax({
-		type : "POST",
-		url : "login_db",
-		data : {
-		    action : actionString,
-		    matrikelnummer : sessionStorage['matrikelnr'],
-		    uni : sessionStorage['uni'],
-		    firma : $('#bewPartnerName').val(),
-		    ansprechpartner : $('#bewPartnerAnsprech').val(),
-		    email : $('#bewPartnerEmail').val(),
-		    strasse : $('#bewPartnerStrasse').val(),
-		    hausnummer : $('#bewPartnerHausnummer').val(),
-		    plz : $('#bewPartnerPlz').val(),
-		    stadt : $('#bewPartnerStadt').val(),
-		    inputFile : text
-
-		},
-		success : function(result) {
-		    // $('#bewFormular9').show();
-		    // $('#bewFormular8').hide();
-		    if (filenameHTML = "zustimmungsformular_file") {
-			askNextStep(sessionStorage['uni']);
-		    } else {
-
-			var name = $('#bewVorname').val() + ' '
-				+ $('bewNachname').val();
-			var uni = $('#aktuelleUni').html();
-			var matrikelnummer = sessionStorage['matrikelnr'];
-			askNextStep($('#selectUni').val());
-		    }
-		},
-		error : function(result) {
-
-		}
-	    });
-	} catch (e) {
-	    this.addIOError("Error while reading " + file.name + ": " + e);
-	}
-    }
-    r.readAsDataURL(file);
-
-}
 // downloads Anzeigen
 function schritt0(uni) {
     // $.ajax({

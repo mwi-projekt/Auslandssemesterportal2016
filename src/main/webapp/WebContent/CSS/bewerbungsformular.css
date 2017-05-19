@@ -4,6 +4,10 @@
 	font-size: 12px;
 }
 
+.dropzone {
+	margin-bottom: 20px;
+}
+
 h1,h2,h3 {
 	color: black;
 	text-align: center;

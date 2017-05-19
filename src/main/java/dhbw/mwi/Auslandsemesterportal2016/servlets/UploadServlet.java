@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 
-@WebServlet(name = "UploadServlet", urlPatterns = {"/WebContent/upload"})
+@WebServlet(name = "UploadServlet", urlPatterns = {"/WebContent/upload_new"})
 @MultipartConfig(maxFileSize = 16177215) // 16MB
 public class UploadServlet extends HttpServlet {
 
@@ -33,23 +33,15 @@ public class UploadServlet extends HttpServlet {
 
         if (id.equals("leer")) {
             out.print("Error: can not find process id");
+            out.flush();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return;
         }
 
-        if (action.equals("nach_Abitur_Upload")) {
-            key = "Abiturzeugnis";
-        } else if (action.equals("nach_DAAD_Upload")) {
-            key = "DAAD_Formular";
-        } else if (action.equals("nach_Dualis_Upload")) {
-            key = "Dualis_Dokumente";
-        } else if (action.equals("nach_Motivation_Upload")) {
-            key = "Motivationsschreiben";
-        } else if (action.equals("nach_Zustimmung_Upload")) {
-            key = "Zustimmungsfomular";
-        } else {
+        if (action == null || action.equals("")) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             out.print("Error: wrong action");
+            out.flush();
             return;
         }
 
@@ -57,23 +49,23 @@ public class UploadServlet extends HttpServlet {
             filePart = request.getPart("file");
 
             if (filePart != null){
-                FileValue typedFileValue = Variables.fileValue(key + ".pdf").file(filePart.getInputStream()).create();
-                processEngine.getRuntimeService().setVariable(id, key, typedFileValue);
-
-                completeTask(id);
+                FileValue typedFileValue = Variables.fileValue(action + ".pdf").file(filePart.getInputStream()).create();
+                processEngine.getRuntimeService().setVariable(id, action, typedFileValue);
+                out.print("jop");
+                out.flush();
+            } else {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                out.print("Error: wrong file");
+                out.flush();
             }
 
-        } catch (ServletException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             out.print("Error: wrong file");
+            out.flush();
         }
 
-    }
-
-    public void completeTask(String instanceId) {
-        processEngine.getTaskService().complete(
-                processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId());
     }
 
 }
