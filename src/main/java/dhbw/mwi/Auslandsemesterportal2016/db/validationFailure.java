@@ -71,7 +71,7 @@ public class validationFailure implements JavaDelegate{
 				"\n"+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: "+ uni + 
 				"\n"+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + 
 				"\n"+		
-				"\n"+ "Die Fehlerursache beträgt:" +
+				"\n"+ "Die Fehlerursache lautet wie folgt:" +
 				"\n"+ fehlerUrsache +
 				"\n"+
 				"\n"+ "Ein Mitarbeiter wird sich daher bald mit Ihnen in Verbindung setzen." +
