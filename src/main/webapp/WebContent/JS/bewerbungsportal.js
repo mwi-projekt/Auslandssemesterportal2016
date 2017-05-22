@@ -111,7 +111,7 @@ var main = function() {
 							status = 111;
 						}
 						
-						if (i === (7 * zaehler)) {
+						if (i === (4 * zaehler)) {
 						    if (zaehler === 1) {
 							tabelle = tabelle
 								+ '<tr class="'
@@ -144,9 +144,9 @@ var main = function() {
 								+ '</td><td id="uni'
 								+ zaehler
 								+ '">'
-								+ auslesen[((7 * zaehler) - 7)]
+								+ auslesen[((4 * zaehler) - 4)]
 								+ '</td><td>'
-								+ auslesen[((7 * zaehler) - 6)]
+								+ auslesen[((4 * zaehler) - 3)]
 								+ '</td><td id="status'
 								+ zaehler
 								+ '">'
@@ -156,7 +156,7 @@ var main = function() {
 								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    }
 						    sessionStorage['beworbeneUnis'] = sessionStorage['beworbeneUnis']
-							    + auslesen[((7 * zaehler) - 7)]
+							    + auslesen[((4 * zaehler) - 4)]
 							    + ';';
 						    zaehler++; // Muss am Ende
 						    // dieses
