@@ -76,7 +76,9 @@ var main = function() {
 					    sessionStorage['beworbeneUnis'] = '';
 					    var even = "odd";
 					    var tabelle = '';
-					    var status = 0;
+					    var schritt_gesamt = 0;
+					    var schritt_aktuell = 0;
+					    var status = schritt_aktuell + ' von ' + schritt_gesamt;
 					    var zaehler = 1;
 					    var auslesen = result.split(';');
 					    for (var i = 0; i < auslesen.length; i++) {
@@ -84,7 +86,7 @@ var main = function() {
 							.trim();
 						// Das muss noch dynamisch
 						// gemacht werden
-						if (auslesen[(2 * zaehler)] === "0") {
+						/*if (auslesen[(2 * zaehler)] === "0") {
 						    status = 0;
 						} else if (auslesen[(3 * zaehler)] === "0") {
 						    status = 20;
@@ -101,7 +103,14 @@ var main = function() {
 							|| auslesen[(5 * zaehler)] === "1"
 							|| auslesen[(6 * zaehler)] === "1") {
 						    // status = status + 10;
+						}*/
+						schritt_aktuell = auslesen[(2 * zaehler)];
+						schritt_gesamt 	= auslesen[(3 * zaehler)];
+						
+						if (schritt_aktuell > schritt_gesamt) {
+							status = 111;
 						}
+						
 						if (i === (7 * zaehler)) {
 						    if (zaehler === 1) {
 							tabelle = tabelle
@@ -121,7 +130,7 @@ var main = function() {
 								+ zaehler
 								+ '">'
 								+ status
-								+ '%</td><td class="btn" id="btnProzessFortfahren'
+								+ ' Schritte</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
 								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    } else {
@@ -142,7 +151,7 @@ var main = function() {
 								+ zaehler
 								+ '">'
 								+ status
-								+ '%</td><td class="btn" id="btnProzessFortfahren'
+								+ ' Schritte</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
 								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    }
@@ -430,6 +439,8 @@ var main = function() {
 									    schritt3 : "0",
 									    schritt4 : "0",
 									    schritt5 : "0",
+									    Schritte_aktuell : "0",
+									    Schritte_gesamt : "8" //Hier die Dynamisierung 
 									},
 									success : function(
 										result) {
@@ -1878,6 +1889,20 @@ function askNextStep(uni) {
 		success : function(result) {
 			var nextStep = result;
 			defineNextStep(nextStep, $('#selectUni').val())
+							$.ajax({
+						type : "POST",
+						url : "login_db",
+						data : {
+							action : "post_prozessWeiter",
+							uni : sessionStorage['uni'],
+							matrikelnummer : sessionStorage['matrikelnr'],
+						},
+						success : function(result) {
+								//Hier könnte später noch die Aktualisierung der sessionStorage eingebunden werden.
+						}
+						,
+						error : function(result) {}
+					});
 			return nextStep;
 		}
 
