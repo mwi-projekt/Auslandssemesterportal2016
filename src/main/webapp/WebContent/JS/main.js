@@ -137,7 +137,9 @@ var main = function() {
 								$('.falsch')
 										.html(
 												unescape("Bitte wählen Sie nur Auslandsmitarbeiter, wenn Sie einer sind.")); */
-							} else if (studiengang === "Studiengang*") {
+							
+							
+							if (studiengang === "Studiengang*") {
 								/*$('.falsch')
 										.html(
 												unescape("Bitte wähle deinen Studiengang aus."));*/
@@ -195,7 +197,7 @@ var main = function() {
 														  text: "Bitte bestätigen deine Mailadresse (" + email + "), damit du dich im Portal einloggen kannst",
 														  type: "success",
 														  confirmButtonText: "OK",
-														  timer: 2000
+														  timer: 8000
 														});
 												$('.popUpBack').hide();
 												$('.popUpFeld').fadeOut();
@@ -218,6 +220,7 @@ var main = function() {
 										});
 							}
 						}
+	}
 
 	);
 	
