@@ -231,7 +231,13 @@ var main = function() {
 					success : function(data) {
 						var auslesen = data.split(';');
 						if (auslesen[0] == "2"){
-							alert("Nutzername oder Passwort falsch");
+							//Nutzername oder Passwort falsch"
+							swal({
+								  title: "Fehler!",
+								  text: "Nutzername oder Passwort falsch",
+								  type: "error",
+								  confirmButtonText: "Erneut versuchen"
+								});
 						} else if (auslesen[0] == "3"){
 							alert("Dieser Nutzer ist nicht aktiviert. Bitte bestätigen Sie zuerst ihre Mailadresse");
 						} else if (auslesen[0] == "4"){
