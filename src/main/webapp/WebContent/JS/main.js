@@ -1480,6 +1480,12 @@ function loadPortalInfo() {
 	var link = "";
 	if ($.urlParam('confirm') != null) {
 		link = $.urlParam('confirm');
+		swal({
+			  title: "Nutzeraccount besätigt",
+			  text: "Ihre Mailadresse wurde bestätigt. Sie können sich jetzt einloggen",
+			  type: "success",
+			  confirmButtonText: "OK"
+			});
 	}
 	$
 			.ajax({
