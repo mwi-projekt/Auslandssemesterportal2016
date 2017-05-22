@@ -78,7 +78,7 @@ var main = function() {
 					    var tabelle = '';
 					    var schritt_gesamt = 0;
 					    var schritt_aktuell = 0;
-					    var status = schritt_aktuell + ' von ' + schritt_gesamt;
+					    var status = 0;
 					    var zaehler = 1;
 					    var auslesen = result.split(';');
 					    for (var i = 0; i < auslesen.length; i++) {
@@ -104,11 +104,16 @@ var main = function() {
 							|| auslesen[(6 * zaehler)] === "1") {
 						    // status = status + 10;
 						}*/
-						schritt_aktuell = auslesen[(2 * zaehler)];
-						schritt_gesamt 	= auslesen[(3 * zaehler)];
-						
+					    schritt_aktuell = auslesen[(2 * zaehler)];
+					    schritt_gesamt = auslesen[(3 * zaehler)];
+					    
+					    status = schritt_aktuell + ' von ' + schritt_gesamt + ' Schritte';
+					    
 						if (schritt_aktuell > schritt_gesamt) {
-							status = 111;
+							status = status + "FEHLER";
+						}
+						if (schritt_aktuell == schritt_gesamt) {
+							status = "abgeschlossen";
 						}
 						
 						if (i === (4 * zaehler)) {
@@ -130,7 +135,7 @@ var main = function() {
 								+ zaehler
 								+ '">'
 								+ status
-								+ ' Schritte</td><td class="btn" id="btnProzessFortfahren'
+								+ '</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
 								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    } else {
@@ -151,7 +156,7 @@ var main = function() {
 								+ zaehler
 								+ '">'
 								+ status
-								+ ' Schritte</td><td class="btn" id="btnProzessFortfahren'
+								+ '</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
 								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    }
