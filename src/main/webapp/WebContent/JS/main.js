@@ -94,19 +94,13 @@ var main = function() {
 			$('.auslandsmitarbeiter').hide();
 			$('.student').show();
 			$('#askAdmin').hide();
-		} else if ($('.rolleWahl').val() === "Unternehmen") {
-			$('.auslandsmitarbeiter').hide();
-			$('.student').hide();
-			$('#askAdmin').hide();
-			alert('hier fehlt noch was!');
-			$('#askAdmin').hide();
 		} else if ($('.rolleWahl').val() === "Auslandsmitarbeiter") {
 			$('.auslandsmitarbeiter').hide();
 			$('.student').hide();
 			$('#askAdmin').show();
 		}
 	});
-	// Click-Listener f�r Registrieren-Button
+	// Click-Listener fuer Registrieren-Button
 	$('#regForm').submit(function() {
 
 						var telefon, mobil, matrikelnummer, studiengang, kurs, pw1, pw2, standort;
@@ -138,15 +132,21 @@ var main = function() {
 							var vorname = $('#inVorname').val();
 							var nachname = $('#inNachname').val();
 							var email = $('#inMail').val();
-							if (rolle === 'Auslandsmitarbeiter'
+							/*if (rolle === 'Auslandsmitarbeiter'
 									&& email.match('dhbw-karlsruhe.de') != 'dhbw-karlsruhe.de') {
 								$('.falsch')
 										.html(
-												unescape("Bitte wählen Sie nur Auslandsmitarbeiter, wenn Sie einer sind."));
+												unescape("Bitte wählen Sie nur Auslandsmitarbeiter, wenn Sie einer sind.")); */
 							} else if (studiengang === "Studiengang*") {
-								$('.falsch')
+								/*$('.falsch')
 										.html(
-												unescape("Bitte wähle deinen Studiengang aus."));
+												unescape("Bitte wähle deinen Studiengang aus."));*/
+								swal({
+									  title: "Studiengang auswählen",
+									  text: "Bitte einen Studiengang aus der Liste auswählen",
+									  type: "error",
+									  confirmButtonText: "OK"
+									});
 							} else if (vorname != "" && nachname != "" && email != "" && matrikelnummer != "" && kurs != "" && pw1 != "") {
 								$
 										.ajax({
@@ -167,17 +167,36 @@ var main = function() {
 											},
 											success : function(result) {
 												if (result == "mailError"){
-													alert("Die eingetragene Mailadresse wird bereits von einem Account verwendet.");
+													//alert("Die eingetragene Mailadresse wird bereits von einem Account verwendet.");
+													swal({
+														  title: "Mailadresse belegt",
+														  text: "Die eingetragene Mailadresse wird bereits von einem Account verwendet",
+														  type: "error",
+														  confirmButtonText: "OK"
+														});
 												} else if (result == "matnrError"){
-													alert("Die eingetragene Matrikelnummer wird bereits von einem Account verwendet.")
+													//alert("Die eingetragene Matrikelnummer wird bereits von einem Account verwendet.")
+													swal({
+														  title: "Matrikelnummer belegt",
+														  text: "Die eingetragene Matrikelnummer wird bereits von einem Account verwendet",
+														  type: "error",
+														  confirmButtonText: "OK"
+														});
 												} else {
-												$('.erfolgreich')
+												/*$('.erfolgreich')
 														.html(
 																'Registrierung erfolgreich. <br> Bitte logge dich ein um fortzufahren. <br> Dein Nutzername lautet '
 																		+ email);
 												$('.erfolgreich').show();
 												$('.erfolgreich')
-														.fadeOut(10000);
+														.fadeOut(10000);*/
+													swal({
+														  title: "Registrierung erfolgreich",
+														  text: "Bitte bestätigen deine Mailadresse (" + email + "), damit du dich im Portal einloggen kannst",
+														  type: "success",
+														  confirmButtonText: "OK",
+														  timer: 2000
+														});
 												$('.popUpBack').hide();
 												$('.popUpFeld').fadeOut();
 											
@@ -189,13 +208,18 @@ var main = function() {
 
 											},
 											error : function(result) {
-												alert("Fehler beim Registrieren");
+												swal({
+													  title: "Fehler!",
+													  text: "Bei der Registrierung ist ein Fehler aufgetreten",
+													  type: "error",
+													  confirmButtonText: "OK"
+													});
 											}
 										});
 							}
 						}
 
-					});
+	);
 	
 	//Check ob Passwörter übereinstimmen
 	$('#inPwSt2').keyup(function(){
@@ -215,7 +239,7 @@ var main = function() {
 		return false;
 	});
 	
-	// Click-Listener f�r Login-Button
+	// Click-Listener fuer Login-Button
 	$('#btnLogin').on(
 			'click',
 			function() {
@@ -239,9 +263,21 @@ var main = function() {
 								  confirmButtonText: "Erneut versuchen"
 								});
 						} else if (auslesen[0] == "3"){
-							alert("Dieser Nutzer ist nicht aktiviert. Bitte bestätigen Sie zuerst ihre Mailadresse");
+							//alert("Dieser Nutzer ist nicht aktiviert. Bitte bestätigen Sie zuerst ihre Mailadresse");
+							swal({
+								  title: "Mailadresse bestätigen",
+								  text: "Dieser Nutzer ist nicht aktiviert. Bitte bestätige zuerst deine Mailadresse",
+								  type: "error",
+								  confirmButtonText: "OK"
+								});
 						} else if (auslesen[0] == "4"){
-							alert("Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut");
+							//alert("Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut");
+							swal({
+								  title: "Serverfehler",
+								  text: "Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuche es später erneut",
+								  type: "error",
+								  confirmButtonText: "OK"
+								});
 						} else {
 						sessionStorage['rolle'] = auslesen[3];
 						sessionStorage['matrikelnr'] = auslesen[2].trim();
@@ -649,7 +685,14 @@ var main = function() {
 													}
 												});
 									} else {
-										alert("Bitte tragen sie in alle mit * gekennzeichneten Feldern etwas ein.");
+										//alert("Bitte tragen sie in alle mit * gekennzeichneten Feldern etwas ein.");
+										swal({
+											  title: "Fehlende Angaben",
+											  text: "Bitte tragen Sie in alle mit * gekennzeichneten Feldern etwas ein",
+											  type: "error",
+											  confirmButtonText: "OK"
+											});
+										
 									}
 								} else if ($(this).parent().attr('id') === 'angebotEdit') {
 									if (isEmpty($('#EditAngebot').text().trim()) != true
@@ -713,7 +756,12 @@ var main = function() {
 													}
 												});
 									} else {
-										alert("Bitte tragen sie in alle mit * gekennzeichneten Feldern etwas ein.");
+										swal({
+											  title: "Fehlende Angaben",
+											  text: "Bitte tragen Sie in alle mit * gekennzeichneten Feldern etwas ein",
+											  type: "error",
+											  confirmButtonText: "OK"
+											});
 									}
 								}
 								break;
@@ -1081,7 +1129,13 @@ var main = function() {
 											}
 										},
 										error : function(result) {
-											alert("Die Verbindung zur DB wurde unterbrochen. Bitte laden Sie die Seite erneut.");
+											//alert("Die Verbindung zur DB wurde unterbrochen. Bitte laden Sie die Seite erneut.");
+											swal({
+												  title: "Serverfehler",
+												  text: "Die Serververbindung wurde unterbrochen. Bitte laden Sie die Seite erneut",
+												  type: "error",
+												  confirmButtonText: "OK"
+												});
 										}
 									});
 						}
@@ -1455,7 +1509,12 @@ function loadPortalInfo() {
 					loadAuslandsangebote();
 				},
 				error : function(result) {
-					alert("Die Verbindung zur DB wurde unterbrochen. Bitte laden Sie die Seite erneut.");
+					swal({
+						  title: "Serverfehler",
+						  text: "Die Serververbindung wurde unterbrochen. Bitte laden Sie die Seite erneut",
+						  type: "error",
+						  confirmButtonText: "OK"
+						});
 				}
 			});
 }
