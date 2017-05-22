@@ -294,7 +294,7 @@ var main = function() {
 							location.reload();
 
 						} else if (sessionStorage['rolle'] === '3') {
-							//location.replace('index.html');
+							location.href('http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html');
 							$('.nutzerName').html(email);
 							$('.cms').hide();
 							$('.nonCms').show();
@@ -1478,10 +1478,10 @@ $.urlParam = function(name) {
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
 	var link = "";
-	if ($.urlParam('confirm') != null) {
+	if ($.urlParam('confirm') != null && $.urlParam('confirm').trim() != '') {
 		link = $.urlParam('confirm');
 		swal({
-			  title: "Nutzeraccount besätigt",
+			  title: "Nutzeraccount bestätigt",
 			  text: "Ihre Mailadresse wurde bestätigt. Sie können sich jetzt einloggen",
 			  type: "success",
 			  confirmButtonText: "OK"
