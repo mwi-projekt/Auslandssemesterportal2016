@@ -3,12 +3,10 @@ function getDropzoneOptions(action) {
         acceptedFiles: 'application/pdf',
 		maxFilesize: 16,
 		addRemoveLinks: true,
-		accept: function(file, done){
+		error: function(file){
 			if(file.size >= this.options.maxFilesize || !this.options.acceptedFiles.eq('application/pdf')){
 				swal('falsch', 'wird gelöscht', 'error');
-				removeFile(file);
-			}else{
-				done();
+				this.removeFile(file);
 			}
 		},
 		sending: function(file, xhr, formData){
