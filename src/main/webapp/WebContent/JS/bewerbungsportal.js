@@ -261,7 +261,7 @@ var main = function() {
 					    			sessionStorage['beworbeneUnis'].split(';');
 					    		}).error(function (error) {
 					    			console.error(error);
-					    			swall('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+					    			swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
 					    		})
 					    	});
 						});
