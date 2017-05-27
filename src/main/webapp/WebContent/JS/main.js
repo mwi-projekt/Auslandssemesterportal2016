@@ -297,7 +297,7 @@ var main = function() {
 							location.reload();
 
 						} else if (sessionStorage['rolle'] === '3') {
-							location.href('http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html');
+							location.href = 'index.html';
 							$('.nutzerName').html(email);
 							$('.cms').hide();
 							$('.nonCms').show();
