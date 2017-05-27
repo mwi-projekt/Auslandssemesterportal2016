@@ -3,12 +3,15 @@ function getDropzoneOptions(action) {
         acceptedFiles: 'application/pdf',
 		maxFilesize: 16,
 		addRemoveLinks: true,
-		error: function(file){
-			if(file.size >= this.options.maxFilesize || !this.options.acceptedFiles.eq('application/pdf')){
+		error: function(file, response){
+			if($.type(response) === "string"){
+				var message = response;
+			} else {
+				var message = response.message;
+			}
 				swal('falsch', 'wird gelöscht', 'error');
 				this.removeFile(file);
-			}
-		},
+			},
 		sending: function(file, xhr, formData){
 			formData.append('action', action);
 			formData.append('matrikelnummer', sessionStorage['matrikelnr']);
