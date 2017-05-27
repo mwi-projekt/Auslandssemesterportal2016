@@ -233,25 +233,37 @@ var main = function() {
 					    }
 
 					    $('.btnProcessDelete').on('click', function() {
-					    	var id = $(this).closest('tr').data('rid');
-                            var uni = $('#uni' + id).text();
-							var matrikelnummer = sessionStorage['matrikelnr'];
+					    	swal({
+					    		  title: "Bist du sicher?",
+					    		  text: "Der Prozess kann nicht wiederhergestellt werden!",
+					    		  type: "warning",
+					    		  showCancelButton: true,
+					    		  confirmButtonColor: "#DD6B55",
+					    		  confirmButtonText: "Löschen!",
+					    		  closeOnConfirm: false
+					    		},
+					    	function(){
+					    		
+					    		var id = $(this).closest('tr').data('rid');
+					    		var uni = $('#uni' + id).text();
+					    		var matrikelnummer = sessionStorage['matrikelnr'];
 
-                            $.ajax({
-								type : "GET",
-								url : "process/delete",
-								data : {
-									matrikelnummer : matrikelnummer,
-									uni: uni
-								}
-							}).done(function(data) {
-								$('#tableBewProzessBody tr[data-rid='+ id +']').remove();
-								alert('Der Prozess wurde erfolgreich gelöscht');
-                                sessionStorage['beworbeneUnis'].split(';');
-                            }).error(function (error) {
-								console.error(error);
-								alert('Der Prozess konnte nicht gelöscht werden');
-                            })
+					    		$.ajax({
+					    			type : "GET",
+					    			url : "process/delete",
+					    			data : {
+					    				matrikelnummer : matrikelnummer,
+					    				uni: uni
+					    			}
+					    		}).done(function(data) {
+					    			$('#tableBewProzessBody tr[data-rid='+ id +']').remove();
+					    			swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+					    			sessionStorage['beworbeneUnis'].split(';');
+					    		}).error(function (error) {
+					    			console.error(error);
+					    			swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+					    		})
+					    	});
 						});
 					},
 					error : function(result) {
