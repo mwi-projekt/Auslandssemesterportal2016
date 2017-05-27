@@ -282,7 +282,7 @@ var main = function() {
 								  confirmButtonText: "OK"
 								});
 						} else {
-						sessionStorage['rolle'] = auslesen[3];
+						sessionStorage['rolle'] = auslesen[3].trim();
 						sessionStorage['matrikelnr'] = auslesen[2].trim();
 						sessionStorage['studiengang'] = auslesen[1].trim();
 						sessionStorage['User'] = email;
@@ -915,7 +915,7 @@ var main = function() {
 			$('#nutzerVerwaltung').show();
 			sessionStorage['verwaltung'] = 2;
 		} else if (id === 'verwaltungPortal') {
-			sessionStorage['verwaltung'] === 3;
+			location.href = 'admin-process.html';
 		}
 	});
 	// Click-Listener f�r Link zur�ck zum Admin-Hauptmen�
