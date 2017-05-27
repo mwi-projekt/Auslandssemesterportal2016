@@ -244,7 +244,7 @@ var main = function() {
 					    		},
 					    	function(){
 					    		
-					    		var id = $(this).closest('tr').data('rid');
+					    		var id = $('.btnProcessDelete').closest('tr').data('rid');
 					    		var uni = $('#uni' + id).text();
 					    		var matrikelnummer = sessionStorage['matrikelnr'];
 
