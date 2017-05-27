@@ -3,6 +3,11 @@ function getDropzoneOptions(action) {
         acceptedFiles: 'application/pdf',
 		maxFilesize: 16,
 		addRemoveLinks: true,
+		sending: function(file, xhr, formData){
+			formData.append('action', action);
+			formData.append('matrikelnummer', sessionStorage['matrikelnr']);
+			formData.append('uni', sessionStorage['uni']);
+		},
 		error: function(file, response){
 			if($.type(response) === "string"){
 				var message = response;
@@ -11,12 +16,7 @@ function getDropzoneOptions(action) {
 			}
 				swal('falsch', 'wird gelöscht', 'error');
 				this.removeFile(file);
-			},
-		sending: function(file, xhr, formData){
-			formData.append('action', action);
-			formData.append('matrikelnummer', sessionStorage['matrikelnr']);
-			formData.append('uni', sessionStorage['uni']);
-		}
+			}
     }
 }
 
