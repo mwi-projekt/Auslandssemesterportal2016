@@ -28,7 +28,7 @@ return rs;
 }
 */
 
-private static ResultSet executeStatement (String query, String[] data, String[] types){//Führt Query mit Hilfe von PreparedStatements aus
+public static ResultSet executeStatement (String query, String[] data, String[] types){//Führt Query mit Hilfe von PreparedStatements aus
 	Connection connection = DB.getInstance();
 	ResultSet rs = null;
 	int parCount = data.length;
@@ -50,7 +50,7 @@ private static ResultSet executeStatement (String query, String[] data, String[]
 	return rs;
 }
 
-private static int executeUpdate (String query, String[] data, String[] types){//Führt UPDATE mit Hilfe von PreparedStatements aus
+public static int executeUpdate (String query, String[] data, String[] types){//Führt UPDATE mit Hilfe von PreparedStatements aus
 	Connection connection = DB.getInstance();
 	int parCount = data.length;
 	int result = 0;
