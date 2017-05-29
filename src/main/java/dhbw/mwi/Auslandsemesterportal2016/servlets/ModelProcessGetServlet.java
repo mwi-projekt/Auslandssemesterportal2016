@@ -1,6 +1,5 @@
 package dhbw.mwi.Auslandsemesterportal2016.servlets;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
@@ -11,41 +10,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
-@WebServlet(name = "ModelProcessSaveServlet", urlPatterns = {"/WebContent/processmodel/save"})
-public class ModelProcessSaveServlet extends HttpServlet {
+@WebServlet(name = "ModelProcessGetServlet", urlPatterns = {"/WebContent/processmodel/get"})
+public class ModelProcessGetServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter toClient = response.getWriter();
 
         String model = request.getParameter("model");
         String step = request.getParameter("step");
-        String json = request.getParameter("json");
 
-        if (model != null && step != null && json != null) {
+        if (model != null && step != null) {
 
-            String query = "SELECT * FROM processModel WHERE model = ? AND step = ?";
+            String query = "SELECT json FROM processModel WHERE model = ? AND step = ?";
             String[] args = new String[]{model, step};
             String[] types = new String[]{"String","String"};
             ResultSet rs = SQL_queries.executeStatement(query,args,types);
             try{
                 if (rs.next()) {
-                    String id = rs.getString("id");
-                    query = "UPDATE processModel SET model = ?, step = ?, json = ? WHERE id = ?";
-                    args = new String[]{model, step, json, id};
-                    types = new String[]{"String","String","String", "int"};
-                    SQL_queries.executeUpdate(query,args,types);
+                    toClient.print(rs.getString("json"));
                 } else {
-                    query = "INSERT INTO processModel (model, step, json) VALUES " +
-                            "(?,?,?)";
-                    args = new String[]{model, step, json};
-                    types = new String[]{"String","String","String"};
-                    SQL_queries.executeUpdate(query,args,types);
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    toClient.println("Error: can not find entry");
                 }
             }
             catch (Exception e){

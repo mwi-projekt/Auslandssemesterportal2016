@@ -19,8 +19,6 @@ public class Auslandsemesterportal2016ProcessApplication extends ServletProcessA
    */
   
   public ProcessInstance bewerbungStarten(ProcessEngine processEngine) {
-	  
-    // start an initial process instance
 	return processEngine.getRuntimeService().startProcessInstanceByKey("studentBewerben");
   }
 
