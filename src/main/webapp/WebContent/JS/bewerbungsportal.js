@@ -14,9 +14,10 @@ function getDropzoneOptions(action) {
 			} else {
 				var message = response.message;
 			}
-				swal('falsch', 'wird gelöscht', 'error');
-				this.removeFile(file);
-			}
+
+			swal('Fehler', message, 'error');
+			this.removeFile(file);
+		}
     }
 }
 
