@@ -19,10 +19,15 @@ input {
 .btn-primary {
 	    background-color: #d3d3d3;
 }
-
+.btn-success {
+	color: #fff;
+}
 .btn:hover {
 	background: #D60000;
 	color: white;
+}
+.btn-success:hover {
+	background-color: #47a447;
 }
 
 .inBox {

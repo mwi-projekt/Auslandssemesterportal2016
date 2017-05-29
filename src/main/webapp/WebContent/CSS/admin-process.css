@@ -1,3 +1,69 @@
 .admin-process {
     padding-top: 63px;
 }
+
+#diagram {
+    height: 400px;
+    border: 1px solid #888;
+    border-radius: 10px; }
+
+#processSteps {
+    margin-top: 30px; }
+#processSteps td {
+    vertical-align: middle; }
+#processSteps td:last-child {
+    text-align: right; }
+#processSteps td button {
+    width: 140px; }
+
+.btn-sq-lg {
+    width: 150px !important;
+    height: 150px !important;
+    margin-right: 10px; }
+.btn-sq-lg .fa {
+    margin-bottom: 10px; }
+
+.user-task:not(.djs-connection) .djs-visual > :nth-child(1) {
+    fill: rgba(28, 141, 217, 0.2) !important;
+    /* color elements as green */ }
+
+.user-task-new:not(.djs-connection) .djs-visual > :nth-child(1) {
+    fill: rgba(92, 184, 92, 0.3) !important;
+    /* color elements as green */ }
+
+.user-task:not(.djs-connection) .djs-visual,
+.user-task-new:not(.djs-connection) .djs-visual {
+    cursor: pointer; }
+
+.bootstrap-switch {
+    border: 1px solid rgba(0, 0, 0, 0.2); }
+
+.popup-no-margin {
+    margin: -32px -36px; }
+.popup-no-margin > div {
+    padding: 32px 36px; }
+.popup-no-margin > div .form-group:last-child {
+    margin-bottom: 0; }
+
+.grey-box {
+    background: rgba(0, 0, 0, 0.07); }
+.grey-box h4 {
+    margin-bottom: 30px; }
+
+.select-group {
+    margin-bottom: 20px; }
+.select-group input, .select-group .btn {
+    border-radius: 0.25rem 0.25rem 0 0; }
+.select-group .list-group-item:first-child {
+    border-radius: 0; }
+.select-group .list-group-item {
+    margin-top: -1px;
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+    background-color: #f7f7f7;
+    color: #555; }
+.select-group .list-group-item .fa-close {
+    float: right;
+    color: #d9534f;
+    font-weight: bold;
+    cursor: pointer; }
