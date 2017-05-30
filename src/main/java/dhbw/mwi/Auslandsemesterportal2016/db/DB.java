@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DB {
 
-    static final String DB_URL="jdbc:mysql://193.196.7.215:3306/mwi";
+    static final String DB_URL="jdbc:mysql://193.196.7.215:3306/mwi?autoReconnect=true";
     static final String USER = "mwi";
     static final String PASS = "mwi2014";
     static Connection conn;
