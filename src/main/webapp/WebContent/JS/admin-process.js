@@ -78,17 +78,17 @@ $(document).ready(function () {
             content: '<div class="row">' +
             '<div class="col-lg-12">' +
             '<p>Bitte wählen Sie eine Vorlage für die Modellierung des Prozessschrittes aus:</p>' +
-            '<a href="#" id="newFormBtn" class="btn btn-sq-lg btn-primary">' +
+            '<a href="#" id="newFormBtn" class="btn btn-sq-lg btn-primary btn-red">' +
             '<i class="fa fa-edit fa-4x"></i><br/>' +
             'Formular<br />' +
             'Vorlage' +
             '</a>' +
-            '<a href="#" id="newDownloadBtn" class="btn btn-sq-lg btn-primary">' +
+            '<a href="#" id="newDownloadBtn" class="btn btn-sq-lg btn-primary btn-red">' +
             '<i class="fa fa-download fa-4x"></i><br/>' +
             'Download<br />' +
             'Vorlage' +
             '</a>' +
-            '<a href="#" id="newUploadBtn" class="btn btn-sq-lg btn-primary">' +
+            '<a href="#" id="newUploadBtn" class="btn btn-sq-lg btn-primary btn-red">' +
             '<i class="fa fa-cloud-upload fa-4x"></i><br/>' +
             'Upload<br />' +
             'Vorlage' +
@@ -96,6 +96,7 @@ $(document).ready(function () {
             '</div>' +
             '</div>',
             blocking: true,
+            width: '600px',
             onOpen: function () {
                 $('#newFormBtn').click(function () {
                     location.href = 'admin-process-modeler.html?id=' + id + '&type=form';
