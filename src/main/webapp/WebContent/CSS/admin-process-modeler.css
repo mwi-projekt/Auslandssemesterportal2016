@@ -1,3 +1,226 @@
 .admin-process {
     padding-top: 63px;
 }
+
+.popup-no-margin {
+    margin: -32px -36px; }
+.popup-no-margin > div {
+    padding: 32px 36px; }
+.popup-no-margin > div .form-group:last-child {
+    margin-bottom: 0; }
+
+.grey-box {
+    background: rgba(0, 0, 0, 0.07); }
+.grey-box h4 {
+    margin-bottom: 30px; }
+
+.select-group {
+    margin-bottom: 20px; }
+.select-group input, .select-group .btn {
+    border-radius: 0.25rem 0.25rem 0 0; }
+.select-group .list-group-item:first-child {
+    border-radius: 0; }
+.select-group .list-group-item {
+    margin-top: -1px;
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+    background-color: #f7f7f7;
+    color: #555; }
+.select-group .list-group-item .fa-close {
+    float: right;
+    color: #d9534f;
+    font-weight: bold;
+    cursor: pointer; }
+
+body {
+    min-width: 1200px; }
+
+body, html, .my-container {
+    min-height: 100%;
+    height: 100%; }
+
+.clearfix, .browser-window > .title-bar {
+    *zoom: 1; }
+.clearfix:before, .browser-window > .title-bar:before, .clearfix:after, .browser-window > .title-bar:after {
+    content: ' ';
+    display: table; }
+.clearfix:after, .browser-window > .title-bar:after {
+    clear: both; }
+
+/*
+ * Browser Window Design, mac flat style
+ */
+.browser-window .h1, .browser-window .h2, .browser-window .h3, .browser-window .h4, .browser-window .h5 {
+    margin: 0;
+    margin-bottom: 20px;
+}
+.browser-window {
+    display: inline-block;
+    width: 100%;
+    margin-top: 15px;
+    max-width: 100%;
+    border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+.browser-window > .title-bar {
+    background: #dbdbdb;
+    width: 100%;
+    padding: 10px 10px; }
+.browser-window > .title-bar .red, .browser-window > .title-bar .yellow, .browser-window > .title-bar .green {
+    width: 15px;
+    height: 15px;
+    margin: 0 5px;
+    border-radius: 50%;
+    display: inline-block;
+    float: left; }
+.browser-window > .title-bar .red {
+    background: #c74e4a; }
+.browser-window > .title-bar .yellow {
+    background: #d39a3e; }
+.browser-window > .title-bar .green {
+    background: #64a734; }
+.browser-window > .content {
+    text-align: left;
+    min-height: 500px; }
+
+#output {
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    background: #fff;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
+    background: #ccc;
+    text-align: left;
+    padding: 20px;
+    overflow: scroll; }
+
+/*
+ * Layout Styling
+ */
+.my-container {
+    display: table;
+    width: 100%; }
+
+#content, #sidebar {
+    display: table-cell;
+    vertical-align: top; }
+
+#content {
+    text-align: center; }
+#content .browser-window > .content {
+    padding: 20px; }
+#content .browser-window > .content .gridster ul {
+    list-style: none; }
+#content .browser-window > .content .gridster ul li {
+    background: #f00; }
+
+#sidebar {
+    text-align: right;
+}
+#sidebar .square {
+    background: #fff;
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0px 0px 4px rgba(0,0,0,.3);
+    display: block;
+    float: left;
+    font-size: 13px;
+    margin-bottom: 15px; }
+#sidebar .square:nth-child(odd) {
+    margin-right: 15px;
+}
+#sidebar .square i {
+    font-size: 30px; }
+#sidebar .square b {
+    display: block;
+    padding-top: 5px; }
+#sidebar .square.ui-draggable-disabled {
+    opacity: .2;
+    cursor: not-allowed; }
+
+#cardSlots > div.item {
+    width: 100%;
+    border: 2px dashed #1C8DD9;
+    border-radius: 10px;
+    background: #fff;
+    display: block;
+    margin-bottom: 20px;
+    position: relative; }
+#cardSlots > div.item.ui-state-disabled {
+    color: #1C8DD9;
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px; }
+#cardSlots > div.item.ui-state-disabled:first-child {
+    margin-top: 0; }
+#cardSlots > div.item .content {
+    padding: 15px; margin: 0; }
+#cardSlots > div.item .content h1:first-child, #cardSlots > div.item .content h2:first-child, #cardSlots > div.item .content h3:first-child, #cardSlots > div.item .content h4:first-child, #cardSlots > div.item .content h5:first-child, #cardSlots > div.item .content h6:first-child, #cardSlots > div.item .content p:first-child {
+    margin-top: 0; }
+#cardSlots > div.item .content h1:last-child, #cardSlots > div.item .content h2:last-child, #cardSlots > div.item .content h3:last-child, #cardSlots > div.item .content h4:last-child, #cardSlots > div.item .content h5:last-child, #cardSlots > div.item .content h6:last-child, #cardSlots > div.item .content p:last-child {
+    margin-bottom: 0; }
+#cardSlots > div.item.hovered {
+    border-style: solid;
+    background: rgba(28, 141, 217, 0.2); }
+#cardSlots > div.item.active {
+    background: #fff !important;
+    border: 1px solid #ccc !important; }
+#cardSlots > div.item.active .actions {
+    display: block; }
+#cardSlots > div.item.active.hovered .hover {
+    display: block; }
+#cardSlots > div.item .actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    border-radius: 0 10px 0 0;
+    overflow: hidden;
+    font-size: 1rem; }
+#cardSlots > div.item .actions i {
+    display: inline-block;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px; }
+#cardSlots > div.item .actions i.fa-trash:hover {
+    background: #D44137; }
+#cardSlots > div.item .actions i.fa-arrows:hover {
+    background: #007FD4; }
+#cardSlots > div.item .actions i.fa-pencil:hover {
+    background: #64a734; }
+#cardSlots > div.item .actions i.hidden {
+    display: none; }
+#cardSlots > div.item .hover {
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    left: 0;
+    top: -13px;
+    font-size: 1rem;
+    line-height: 1;
+    background: #1C8DD9;
+    display: none;
+    text-align: center; }
+#cardSlots > div.item .hover:before {
+    content: 'Drag it here';
+    background: #1C8DD9;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    display: inline-block;
+    padding: 0 10px;
+    border-radius: 20px;
+    position: relative;
+    top: -10px; }
+
+.square.ui-draggable-dragging {
+    -moz-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.8);
+    -webkit-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.8); }
