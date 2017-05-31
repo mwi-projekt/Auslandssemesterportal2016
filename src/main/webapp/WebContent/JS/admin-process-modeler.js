@@ -11,6 +11,18 @@ $(document).ready(function () {
        });
     }
 
+    $.urlParam = function(name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+            .exec(window.location.href);
+
+        if (results == null) {
+            return " ";
+        } else {
+            return results[1] || 0;
+        }
+
+    }
+
     // init & logout
     $('.nutzerName').text(sessionStorage['User']);
     $('#logout').on('click', function() {
@@ -61,12 +73,16 @@ $(document).ready(function () {
     }
 
     $('#save').click(function () {
-        $.get('processmodel/save', {
+        $.post('processmodel/save', {
             model: 'studentBewerben',
             step: id,
-            json: json
+            json: JSON.stringify(json)
         }, function (data) {
-            init(JSON.parse(data));
+            swal(
+                'Gespeichert!',
+                'Der Prozessschritt wurde erfolgreich abgespeichert.',
+                'success'
+            )
         });
     });
 
