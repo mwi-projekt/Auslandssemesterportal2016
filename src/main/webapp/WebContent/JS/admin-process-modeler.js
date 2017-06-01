@@ -35,7 +35,12 @@ $(document).ready(function () {
     var type = $.urlParam('type').trim();
     var json = {};
 
-    if (type != null && type != '') {
+    $.get('processmodel/get', {
+        model: 'studentBewerben',
+        step: id
+    }, function (data) {
+        init(JSON.parse(data));
+    }).fail(function () {
         if (type == 'upload') {
             init([
                 {
@@ -63,14 +68,7 @@ $(document).ready(function () {
                 }
             ]);
         }
-    } else {
-        $.get('processmodel/get', {
-            model: 'studentBewerben',
-            step: id
-        }, function (data) {
-            init(JSON.parse(data));
-        });
-    }
+    });
 
     $('#save').click(function () {
         $.post('processmodel/save', {
