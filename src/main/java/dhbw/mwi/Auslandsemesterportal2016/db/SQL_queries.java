@@ -162,4 +162,22 @@ public static int userRegister(String vorname, String nachname, String passwort,
 	return executeUpdate(query,args,types);
 }
 
+public static String getJson(String step_id){
+	//Gibt JSON-Dokument für die Eingabemaske zurück
+	String query = "SELECT JSON FROM json WHERE STEP_ID = ?;";
+	String[] params = new String[]{step_id};
+	String[] types = new String[]{"String"};
+	ResultSet ergebnis = executeStatement(query,params,types);
+	try{
+		if (ergebnis.next()){
+			return ergebnis.getString("JSON");
+		} else {
+			return "stepNotFound";
+		}
+	} catch (Exception e){
+	 e.printStackTrace();
+	 return "databaseError";
+	}	
+}
+
 }
