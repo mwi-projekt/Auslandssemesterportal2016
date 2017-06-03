@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-@WebServlet(name = "JsonServlet", urlPatterns = {"/WebContent/getJson"})
+@WebServlet(name = "JsonServlet", urlPatterns = {"/WebContent/get_json"})
 public class JsonServlet extends HttpServlet {
 
     @Override

@@ -18,7 +18,7 @@ function parse(){
 			stepid : step_id,
 		},
 		success : function(result) {
-			alert(result);
+			//alert(result);
 			if (result == "stepNotFound"){
 				alert("Der angegebene Schritt wurde nicht gefunden.");
 			} else if (result == "databaseError"){
@@ -40,6 +40,8 @@ function parse(){
 						break;
 					}
 				}
+				//alert (output);
+				document.getElementById("results").innerHTML = output;
 			}
 			
 		},
@@ -47,5 +49,4 @@ function parse(){
 			alert('Ein Fehler ist aufgetreten.');
 		}
 	});
-	document.getElementById("results").innerHTML = output;
 }
