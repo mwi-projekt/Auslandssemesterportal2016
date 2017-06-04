@@ -111,8 +111,8 @@ public class RegisterServlet extends HttpServlet {
             String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?confirm=" + id;
 
             message.setContent("<h2>Hallo " + request.getParameter("vorname")
-                    + ",</h2> du hast dich auf der Seite des Auslandsportals registriert. "
-                    + "Um deine Registrierung abzuschlie&szlig;en klicke bitte auf folgenden Link. <br><br> "
+                    + ",</h2> Du hast Dich auf der Seite des Auslandsportals registriert. "
+                    + "Um Deine Registrierung abzuschlie&szlig;en, klicke bitte auf folgenden Link. <br><br> "
                     + "<a href=\"" + link + "\" target=\"new\">Anmeldung best&auml;tigen</a>", "text/html");
 
             // Send message
