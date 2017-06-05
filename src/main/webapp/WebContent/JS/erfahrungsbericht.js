@@ -3,7 +3,7 @@
   $(document).ready(function() {
 	
 	
-	// hier wird der Anzahl der Sternen ausgewählt
+	// hier wird der Anzahl der Sternen ausgewï¿½hlt
 	  
 	$('#rating a').hover(function(){
 	    $('.star_off').mouseover(function(){
@@ -17,7 +17,7 @@
 	    
 	    
 	   
-	//frageID, Anzahl der Sternen, Matrikelnummer, Frage,  Antwort und Bildern von HTML speichern und  an erfahrungsberichtInhalt_db.java übergeben
+	//frageID, Anzahl der Sternen, Matrikelnummer, Frage,  Antwort und Bildern von HTML speichern und  an erfahrungsberichtInhalt_db.java ï¿½bergeben
 	
 	$('.btn').on('click', function() {
 		
@@ -26,8 +26,8 @@
 		matrikelnummer = $('#matrikelnummer').val();
 		
 	 
-		//ID X1 gehört zu Button: " Erfaruhngsbericht abschlißen" und wird nur dann ausgeführt, wenn
-		//dann dieser Button bei Erfahrungsbericht4.html gedrückt wird.
+		//ID X1 gehï¿½rt zu Button: " Erfaruhngsbericht abschliï¿½en" und wird nur dann ausgefï¿½hrt, wenn
+		//dann dieser Button bei Erfahrungsbericht4.html gedrï¿½ckt wird.
 		/* if(id == x1){
 			
 		flag = 1;	
@@ -47,11 +47,11 @@
 				}})
 				.done(function(data) {
 					    
-						alert("Ihre Antworten wurde erfolgreich gespeichert");
+						swal("Ihre Antworten wurde erfolgreich gespeichert");
 				})
 		
 				.fail(function(data) {
-					alert( "error" + data );
+					swal( "error" + data );
 				});
 		
 			

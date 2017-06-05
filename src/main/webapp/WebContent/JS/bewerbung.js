@@ -28,17 +28,17 @@ function new_Bewerbung() {
 								checkboxDokumentePostalischKorrekt : checkboxDokumentePostalischKorrekt
 							}
 						})	.done(function(data) {
-								alert("Dokument hochgeladen mit der ID = "+ data + " Dokument ausgewählt: " + name_dok1);
+								swal("Dokument hochgeladen mit der ID = "+ data + " Dokument ausgewï¿½hlt: " + name_dok1);
 							})
 							.done(function() {
-								alert( "success" );
+								swal( "success" );
 							})
 							.fail(function() {
-								alert( "error" );
+								swal( "error" );
 							});
 
 	} else {
-		alert("Bitte Dokument hinzufügen!");
+		swal("Bitte Dokument hinzufï¿½gen!");
 	}
 }
 

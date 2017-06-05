@@ -124,7 +124,7 @@ var main = function() {
 						} else if (rolle === "Auslandsmitarbeiter") {
 							pw1 = $('#inPwAu1').val();
 							pw2 = $('#inPwAu2').val();
-							alert($('#inTel').val());
+							swal($('#inTel').val());
 							telefon = $('#inTel').val();
 							mobil = $('#inMobil').val();
 						}
@@ -169,7 +169,6 @@ var main = function() {
 											},
 											success : function(result) {
 												if (result == "mailError"){
-													//alert("Die eingetragene Mailadresse wird bereits von einem Account verwendet.");
 													swal({
 														  title: "Mailadresse belegt",
 														  text: "Die eingetragene Mailadresse wird bereits von einem Account verwendet",
@@ -177,7 +176,6 @@ var main = function() {
 														  confirmButtonText: "OK"
 														});
 												} else if (result == "matnrError"){
-													//alert("Die eingetragene Matrikelnummer wird bereits von einem Account verwendet.")
 													swal({
 														  title: "Matrikelnummer belegt",
 														  text: "Die eingetragene Matrikelnummer wird bereits von einem Account verwendet",
@@ -266,7 +264,6 @@ var main = function() {
 								  confirmButtonText: "Erneut versuchen"
 								});
 						} else if (auslesen[0] == "3"){
-							//alert("Dieser Nutzer ist nicht aktiviert. Bitte bestätigen Sie zuerst ihre Mailadresse");
 							swal({
 								  title: "Mailadresse bestätigen",
 								  text: "Dieser Nutzer ist nicht aktiviert. Bitte bestätige zuerst deine Mailadresse",
@@ -274,7 +271,6 @@ var main = function() {
 								  confirmButtonText: "OK"
 								});
 						} else if (auslesen[0] == "4"){
-							//alert("Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut");
 							swal({
 								  title: "Serverfehler",
 								  text: "Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuche es später erneut",
@@ -325,7 +321,7 @@ var main = function() {
 
 					},
 					error : function(data) {
-						alert("Fehler");
+						swal("Fehler");
 					}
 				});
 			});
@@ -446,7 +442,7 @@ var main = function() {
 								}
 								break;
 							case 'erfahrungsBerichte':
-								alert('Dieser Bereich kann noch nicht bearbeitet werden.');
+								swal('Dieser Bereich kann noch nicht bearbeitet werden.');
 								/*
 								 * if ($(this).text() === "Bearbeiten") {
 								 * $('.kurzbericht').show();
@@ -617,7 +613,7 @@ var main = function() {
 												$('.erfolgreich').fadeOut(7000);
 											},
 											error : function(result) {
-												alert('Fehler');
+												swal('Fehler');
 											}
 										});
 								break;
@@ -688,7 +684,6 @@ var main = function() {
 													}
 												});
 									} else {
-										//alert("Bitte tragen sie in alle mit * gekennzeichneten Feldern etwas ein.");
 										swal({
 											  title: "Fehlende Angaben",
 											  text: "Bitte tragen Sie in alle mit * gekennzeichneten Feldern etwas ein",
@@ -1132,7 +1127,6 @@ var main = function() {
 											}
 										},
 										error : function(result) {
-											//alert("Die Verbindung zur DB wurde unterbrochen. Bitte laden Sie die Seite erneut.");
 											swal({
 												  title: "Serverfehler",
 												  text: "Die Serververbindung wurde unterbrochen. Bitte laden Sie die Seite erneut",
@@ -1150,7 +1144,7 @@ var main = function() {
 	});
 	// Click-Listener f�r �nderungen speichern Button im Nutzer Bearbeiten PopUp
 	$('#btnUserEditSave').on('click', function() {
-		alert("Hier passiert noch nichts.");
+		swal("Hier passiert noch nichts.");
 	});
 	// Auswahlm�glichkeit auf der Startseite zur Sortierung der Angebote
 	$('#selStudiengang').on('click', function(event) {
@@ -1296,7 +1290,7 @@ var main = function() {
 										}
 									});
 						} else {
-							alert("Sie d�rfen das Feld nicht leer lassen.");
+							swal("Sie d�rfen das Feld nicht leer lassen.");
 						}
 					});
 	// Click-Listener f�r ein Angebot bearbeiten

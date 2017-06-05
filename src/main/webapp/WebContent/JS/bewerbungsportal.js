@@ -616,7 +616,7 @@ var main = function() {
     		var form = $(this).closest('form');
 
     		if (form && !form.isValid()) {
-				alert('Bitte füllen sie alle Felder korrekt aus.');
+				swal('Bitte füllen sie alle Felder korrekt aus.');
 				return;
 			}
 
@@ -809,14 +809,14 @@ var main = function() {
 			    // },
 			    // error : function(
 			    // result) {
-			    // alert(result.message);
+			    // swal(result.message);
 			    // }
 			    // });
 			    // }
 			    //
 			    // },
 			    // error : function(result) {
-			    // alert(result.message);
+			    // swal(result.message);
 			    // }
 			    // });
 			    // $('.dat').hide();
@@ -827,7 +827,7 @@ var main = function() {
 				    || isEmpty($('#bewHausnummer').val()) === true
 				    || isEmpty($('#bewPlz').val()) === true
 				    || isEmpty($('#bewStadt').val()) === true) {
-				alert("Bitte f&uuml;lle alle Felder aus.");
+				swal("Bitte f&uuml;lle alle Felder aus.");
 			    }
 			    if (sessionStorage['adresseOkay'] === 'true') {
 				$
@@ -1173,7 +1173,7 @@ var main = function() {
 						.val()) === true
 					|| isEmpty($('#bewPartnerPlz').val()) === true
 					|| isEmpty($('#bewPartnerStadt').val()) === true) {
-				    alert("Bitte f&uuml;lle alle Felder aus.");
+				    swal("Bitte f&uuml;lle alle Felder aus.");
 				} else {
 				    $
 					    .ajax({
@@ -1291,7 +1291,7 @@ var main = function() {
                         }
                     });
                 } else {
-                    alert('Bitte laden Sie zunächst eine Datei hoch');
+                    swal('Bitte laden Sie zunächst eine Datei hoch');
                 }
 			} else if (id === '20') {
 			    $
@@ -2273,7 +2273,7 @@ function defineNextStep(nextStepString, uni) {
 			break;
 
 		case "Datenvalidieren":
-			alert("Die Bewerbung befindet sich gerade in der Überprüfung");
+			swal("Die Bewerbung befindet sich gerade in der Überprüfung");
 			$('.iFenster').hide();
 			$('.iF1').hide();
 			$('.iF2').hide();

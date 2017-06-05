@@ -2,32 +2,33 @@
     pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title></title>
-	<script src="external/jquery-ui/jquery-ui.js"></script>
-	<script src="external/jquery-ui/jquery-ui.min.js"></script>
-	<script src="external/jquery/jquery.js"></script>
-	
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title></title>
+		<script src="external/jquery-ui/jquery-ui.js"></script>
+		<script src="external/jquery-ui/jquery-ui.min.js"></script>
+		<script src="external/jquery/jquery.js"></script>
 		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-
-<style type="text/css">
-	@charset "utf-8";
-	body {color: black; }
-	
-	#serv_status_out {}
-</style>
-
-</head>
-<body>
-	<fieldset id="server_control">
+		<script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
 		
-		<input type="button" id="pserv_start" value="Server Start" onclick="psrv_start();">
-		<input type="button" id="pserv_stop" value="Server Stop" onclick="psrv_stop();">
-		<div id="serv_status_out"></div>
+		<style type="text/css">
+			@charset "utf-8";
+			body {color: black; }
+			
+			#serv_status_out {}
+		</style>
 		
-	</fieldset>
-</body>
+	</head>
+	<body>
+		<fieldset id="server_control">
+			
+			<input type="button" id="pserv_start" value="Server Start" onclick="psrv_start();">
+			<input type="button" id="pserv_stop" value="Server Stop" onclick="psrv_stop();">
+			<div id="serv_status_out"></div>
+			
+		</fieldset>
+	</body>
 	<script type="text/javascript">
 	$('#pserv_start').hide();
 	$('#pserv_stop').hide();
@@ -62,11 +63,10 @@
 				  }
 		})
 	  	.success(function(data) {
-			//alert("erfolgreich");
 			location.reload();
 	  	})
 	  	.fail(function(data){
-			alert("fehler");
+			swal("fehler");
 	  	});
 	}
 	
@@ -78,11 +78,10 @@
 				  }
 			})
 	  	.success(function(data) {
-			//alert("erfolgreich");
 			location.reload();
 	  	})
 	 	.fail(function(data){
-			alert("fehler");
+			swal("fehler");
 	  	});
 	}
 	</script>

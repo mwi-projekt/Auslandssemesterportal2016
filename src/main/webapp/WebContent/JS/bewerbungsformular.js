@@ -12,7 +12,7 @@ var main = function() {
 					$(".sprachnachweis").show();
 				} else {
 					$('.sprachnachweis').hide();
-					$('.erfolgreich').html('<p>Du hast die Mindestanforderungen mit deiner Abiturnote erfüllt.</p>');
+					$('.erfolgreich').html('<p>Du hast die Mindestanforderungen mit deiner Abiturnote erfï¿½llt.</p>');
 					$('.erfolgreich').show();
 					$('.erfolgreich').fadeOut(10000);
 					$('.popUpBack').hide();
@@ -20,7 +20,7 @@ var main = function() {
 				}
 			
 			} else {
-				alert("Bitte Note in Punkten eintragen!");
+				swal("Bitte Note in Punkten eintragen!");
 			}
 		
 		});

@@ -8,8 +8,9 @@
 	<script src="external/jquery-ui/jquery-ui.js"></script>
 	<script src="external/jquery-ui/jquery-ui.min.js"></script>
 	<script src="external/jquery/jquery.js"></script>
-	
-		<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
 
 <style type="text/css">
 	@charset "utf-8";
@@ -134,7 +135,7 @@ fill_doc();
 			$('#new_prozess').show();		
 			$('#new_prozess_in').hide();
 		}
-		else alert("Bitte Namen eingeben !");
+		else swal("Bitte Namen eingeben !");
 		
 	}
 	//*******************************************
@@ -204,7 +205,7 @@ fill_doc();
 						send_terms.push( "false" );
 				}
 				else{
-					alert("Element im Prozess enthalten !");	
+					swal("Element im Prozess enthalten !");	
 				}
 			}
 		}).sortable({
@@ -351,10 +352,10 @@ fill_doc();
 					send_sort : ""+send_sort.join(";")
 				},
 			success: function(data) {
-				alert("OK");
+				swal("OK");
 			},
 			error: function(data) {
-				alert("Fehler bei Prozess sicherung !");
+				swal("Fehler bei Prozess sicherung !");
 			}
 		});					
 		
@@ -376,7 +377,7 @@ fill_doc();
 					$( "#out_box" ).slideDown( "slow" );
 			},
 			error: function(data) {
-				alert("Datei nicht gefunden !");
+				swal("Datei nicht gefunden !");
 			}			
 		});
 	}
@@ -395,11 +396,11 @@ fill_doc();
 			contentType: false,
 			processData: false,
 			success: function(data) {
-				alert(data);
+				swal(data);
 				fill_doc();
 			},
 			error: function(data) {
-				alert("Upload ist fehlgeschlagen");
+				swal("Upload ist fehlgeschlagen");
 			}			
 		});
 	}
@@ -416,7 +417,7 @@ fill_doc();
 				fill_doc();
 			},
 			error: function(data) {
-				alert("Prozess nicht gefunden !");
+				swal("Prozess nicht gefunden !");
 			}			
 		});		
 	}
@@ -462,7 +463,7 @@ fill_doc();
 
 			},
 			error: function(data) {
-				alert("Prozess nicht gefunden !");
+				swal("Prozess nicht gefunden !");
 			}			
 		});
 	

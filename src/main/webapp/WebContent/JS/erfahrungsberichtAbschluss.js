@@ -26,11 +26,11 @@
 				}})
 				.done(function(data) {
 					    
-						alert("");
+						swal("Fertig");
 				})
 		
 				.fail(function(data) {
-					alert( "error" + data );
+					swal( "error" + data );
 				});
 		
 			

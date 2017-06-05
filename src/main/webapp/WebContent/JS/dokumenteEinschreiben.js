@@ -28,17 +28,17 @@ function new_dokument_AtS() {
 								checkboxDokumentePostalischKorrekt : checkboxDokumentePostalischKorrekt
 							}
 						})	.done(function(data) {
-								alert("Dokument hochgeladen mit der ID = "+ data + " Dokument ausgewählt: " + name_dok1);
+								swal("Dokument hochgeladen mit der ID = "+ data + " Dokument ausgewï¿½hlt: " + name_dok1);
 							})
 //							.done(function() {
-//								alert( "success" );
+//								swal( "success" );
 //							})
 							.fail(function() {
-								alert( "error" );
+								swal( "error" );
 							});
 
 	} else {
-		alert("Bitte Dokument hinzufügen!");
+		swal("Bitte Dokument hinzufï¿½gen!");
 	}
 }
 
@@ -48,7 +48,7 @@ function new_dokument_NotenEng() {
 	var matrikelnummer = document.getElementById("matrikelnummer").value;
 	// .getElementById '= id des html Elements
 	var name_dok2 = document.getElementById("name_dok2").value;
-	alert("Dokument ausgewählt: " + name_dok2);
+	swal("Dokument ausgewï¿½hlt: " + name_dok2);
 	var dokument = document.getElementById("dokument").value;
 	var checkboxAutoHochgeladen = document.getElementById("checkboxAutoHochgeladen_02").checked ? 1 : 0;
 	var checkboxAuslandsamtDokumenteKorrekt = document.getElementById("checkboxAuslandsamtDokumenteKorrekt_02").checked ? 1 : 0;
@@ -71,17 +71,17 @@ function new_dokument_NotenEng() {
 								checkboxDokumentePostalischKorrekt : checkboxDokumentePostalischKorrekt
 							}
 						})	.done(function(data) {
-								alert("Dokument hochgeladen mit der ID = "+ data);
+								swal("Dokument hochgeladen mit der ID = "+ data);
 							})
 							.done(function() {
-								alert( "success" );
+								swal( "success" );
 							})
 							.fail(function() {
-								alert( "error" );
+								swal( "error" );
 							});
 
 	} else {
-		alert("Bitte Dokument hinzufügen!");
+		swal("Bitte Dokument hinzufï¿½gen!");
 	}
 }
 
@@ -91,7 +91,7 @@ function new_dokument_KontoEng() {
 	var matrikelnummer = document.getElementById("matrikelnummer").value;
 	// .getElementById '= id des html Elements
 	var name_dok3 = document.getElementById("name_dok3").value;
-	alert("Dokument ausgewählt: " + name_dok3);
+	swal("Dokument ausgewï¿½hlt: " + name_dok3);
 	var dokument = document.getElementById("dokument").value;
 	var checkboxAutoHochgeladen = document.getElementById("checkboxAutoHochgeladen_03").checked ? 1 : 0;
 	var checkboxAuslandsamtDokumenteKorrekt = document.getElementById("checkboxAuslandsamtDokumenteKorrekt_03").checked ? 1 : 0;
@@ -114,17 +114,17 @@ function new_dokument_KontoEng() {
 								checkboxDokumentePostalischKorrekt : checkboxDokumentePostalischKorrekt
 							}
 						})	.done(function(data) {
-								alert("Dokument hochgeladen mit der ID = "+ data);
+								swal("Dokument hochgeladen mit der ID = "+ data);
 							})
 							.done(function() {
-								alert( "success" );
+								swal( "success" );
 							})
 							.fail(function() {
-								alert( "error" );
+								swal( "error" );
 							});
 
 	} else {
-		alert("Bitte Dokument hinzufügen!");
+		swal("Bitte Dokument hinzufï¿½gen!");
 	}
 }
 
@@ -134,14 +134,14 @@ function new_dokument_KopieReisepass() {
 	var matrikelnummer = document.getElementById("matrikelnummer").value;
 	// .getElementById '= id des html Elements
 	var name_dok4 = document.getElementById("name_dok4").value;
-	alert("Dokument ausgewählt: " + name_dok4);
+	swal("Dokument ausgewï¿½hlt: " + name_dok4);
 	var dokument = document.getElementById("dokument").value;
 	var gueltig = document.getElementById("gueltig").value;
 	var checkboxAutoHochgeladen = document.getElementById("checkboxAutoHochgeladen_04").checked ? 1 : 0;
 	var checkboxAuslandsamtDokumenteKorrekt = document.getElementById("checkboxAuslandsamtDokumenteKorrekt_04").checked ? 1 : 0;
 	var checkboxDokumentePostalischVersendet = document.getElementById("checkboxDokumentePostalischVersendet_04").checked ? 1 : 0;
 	var checkboxDokumentePostalischKorrekt = document.getElementById("checkboxDokumentePostalischKorrekt_04").checked ? 1 : 0;
-	alert("matrikelnummer: " + matrikelnummer + ", Name: "+name_dok4+", Dokumet: " +dokument+", gueltig: "+gueltig);
+	swal("matrikelnummer: " + matrikelnummer + ", Name: "+name_dok4+", Dokumet: " +dokument+", gueltig: "+gueltig);
 	if ("" != dokument) {
 		$
 				.ajax(
@@ -160,17 +160,17 @@ function new_dokument_KopieReisepass() {
 								checkboxDokumentePostalischKorrekt : checkboxDokumentePostalischKorrekt
 							}
 						})	.done(function(data) {
-								alert("Dokument hochgeladen mit der ID = "+ data);
+								swal("Dokument hochgeladen mit der ID = "+ data);
 							})
 							.done(function() {
-								alert( "success" );
+								swal( "success" );
 							})
 							.fail(function() {
-								alert( "error" );
+								swal( "error" );
 							});
 
 	} else {
-		alert("Bitte Dokument hinzufügen!");
+		swal("Bitte Dokument hinzufï¿½gen!");
 	}
 }
 //*************************************************************************************************************************
@@ -179,7 +179,7 @@ function new_dokument_default1() {
 	var matrikelnummer = document.getElementById("matrikelnummer").value;
 	// .getElementById '= id des html Elements
 	var name_dok5 = document.getElementById("name_dok5").value;
-	alert("Dokument ausgewählt: " + name_dok4);
+	swal("Dokument ausgewï¿½hlt: " + name_dok4);
 	var dokument = document.getElementById("dokument").value;
 	var checkboxAutoHochgeladen = document.getElementById("checkboxAutoHochgeladen_04").checked ? 1 : 0;
 	var checkboxAuslandsamtDokumenteKorrekt = document.getElementById("checkboxAuslandsamtDokumenteKorrekt_04").checked ? 1 : 0;
@@ -202,17 +202,17 @@ function new_dokument_default1() {
 								checkboxDokumentePostalischKorrekt : checkboxDokumentePostalischKorrekt
 							}
 						})	.done(function(data) {
-								alert("Dokument hochgeladen mit der ID = "+ data);
+								swal("Dokument hochgeladen mit der ID = "+ data);
 							})
 							.done(function() {
-								alert( "success" );
+								swal( "success" );
 							})
 							.fail(function() {
-								alert( "error" );
+								swal( "error" );
 							});
 
 	} else {
-		alert("Bitte Dokument hinzufügen!");
+		swal("Bitte Dokument hinzufï¿½gen!");
 	}
 }
 //*************************************************************************************************************************
@@ -221,7 +221,7 @@ function new_dokument_default2() {
 	var matrikelnummer = document.getElementById("matrikelnummer").value;
 	// .getElementById '= id des html Elements
 	var name_dok6 = document.getElementById("name_dok6").value;
-	alert("Dokument ausgewählt: " + name_dok4);
+	swal("Dokument ausgewï¿½hlt: " + name_dok4);
 	var dokument = document.getElementById("dokument").value;
 	var checkboxAutoHochgeladen = document.getElementById("checkboxAutoHochgeladen_04").checked ? 1 : 0;
 	var checkboxAuslandsamtDokumenteKorrekt = document.getElementById("checkboxAuslandsamtDokumenteKorrekt_04").checked ? 1 : 0;
@@ -244,16 +244,16 @@ function new_dokument_default2() {
 								checkboxDokumentePostalischKorrekt : checkboxDokumentePostalischKorrekt
 							}
 						})	.done(function(data) {
-								alert("Dokument hochgeladen mit der ID = "+ data);
+								swal("Dokument hochgeladen mit der ID = "+ data);
 							})
 							.done(function() {
-								alert( "success" );
+								swal( "success" );
 							})
 							.fail(function() {
-								alert( "error" );
+								swal( "error" );
 							});
 
 	} else {
-		alert("Bitte Dokument hinzufügen!");
+		swal("Bitte Dokument hinzufï¿½gen!");
 	}
 }
