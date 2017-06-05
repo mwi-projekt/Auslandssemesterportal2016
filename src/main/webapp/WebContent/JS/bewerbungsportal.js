@@ -10,10 +10,10 @@ function getDropzoneOptions(action) {
 		},
 		accept: function(file, done){
 			if(file.name != "DAAD_Formular.pdf" 
-					|| file.name != "Abitur_Zeugnis"
-					|| file.name != "Dualis_Auszug"
-					|| file.name != "Motivations_Schreiben"
-					|| file.name != "Zustimmungs_Formular"){
+					&& file.name != "Abitur_Zeugnis"
+					&& file.name != "Dualis_Auszug"
+					&& file.name != "Motivations_Schreiben"
+					&& file.name != "Zustimmungs_Formular"){
 				
 				swal("Fehler", "Bitte beachte die Syntax zur Benennung des Dokuments", "error");
 				this.removeFile(file);
