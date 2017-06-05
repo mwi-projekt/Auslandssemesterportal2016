@@ -8,6 +8,19 @@ function getDropzoneOptions(action) {
 			formData.append('matrikelnummer', sessionStorage['matrikelnr']);
 			formData.append('uni', sessionStorage['uni']);
 		},
+		accept: function(file, done){
+			if(file.name != "DAAD_Formular.pdf" 
+					|| file.name != "Abitur_Zeugnis.pdf"
+					|| file.name != "Dualis_Auszug.pdf"
+					|| file.name != "Motivations_Schreiben.pdf"
+					|| file.name != "Zustimmungs_Formular.pdf"){
+				
+				swal("Fehler", "Bitte beachte die Syntax zur Benennung des Dokuments", "error");
+				this.removeFile(file);
+			}else{
+				done();
+			}
+		},
 		error: function(file, response){
 			if($.type(response) === "string"){
 				var message = response;
