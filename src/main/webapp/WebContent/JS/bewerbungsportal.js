@@ -83,10 +83,10 @@ var main = function() {
 			$('.' + titel).show();
 			if (titel === "Bewerben") {
 			    $('.iFenster').hide();
-			    $('.popUpBack')
+			    /*$('.popUpBack')
 				    .html(
 					    '<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
-			    $('.popUpBack').show();
+			    $('.popUpBack').show();*/
 			    setTimeout(closeLoading, 1500);
 			    $
 				    .ajax({
@@ -128,13 +128,13 @@ var main = function() {
 							|| auslesen[(6 * zaehler)] === "1") {
 						    // status = status + 10;
 						}*/
-					    schritt_aktuell = auslesen[(2 * zaehler)];
-					    schritt_gesamt = auslesen[(3 * zaehler)];
+					    schritt_aktuell = auslesen[((2 * zaehler) + (i * 2))];
+					    schritt_gesamt = auslesen[((3 * zaehler) + i)];
 					    
 					    status = schritt_aktuell + ' von ' + schritt_gesamt + ' Schritte';
 					    
 						if (schritt_aktuell > schritt_gesamt) {
-							status = status + "FEHLER";
+							status = result + "FEHLER";
 						}
 						if (schritt_aktuell == schritt_gesamt) {
 							status = "abgeschlossen";
@@ -481,7 +481,7 @@ var main = function() {
 									    schritt4 : "0",
 									    schritt5 : "0",
 									    Schritte_aktuell : "0",
-									    Schritte_gesamt : "8" //Hier die Dynamisierung 
+									    Schritte_gesamt : "10" //Hier fehlt die Dynamisierung 
 									},
 									success : function(
 										result) {
@@ -1321,7 +1321,7 @@ var main = function() {
 					    $('.dat').hide();
 					    $('.erfolgreich')
 						    .html(
-							    '<p>Du hat alle Daten benötigten Daten eingetragen. Frau Dreischer wird sich bei dir melden!</p>');
+							    '<p>Du hat alle Daten benötigten Daten eingetragen. Warte auf die Validierung und eine Bestätigungsmail.</p>');
 					    $('.erfolgreich').show();
 					    $('.erfolgreich').fadeOut(7000);
 					    $('.iFenster').hide();
@@ -1358,7 +1358,7 @@ var main = function() {
 					}
 				    });
 			}
-
+			zaehlweiter(sessionStorage['uni']);
 		    });
     // Theorieadresse ist die gleiche wie die PRaxisadresse
     $('#btnSameAdress').on('click', function(event) {
@@ -1407,6 +1407,7 @@ var main = function() {
 	    $('.dat').hide();
 	    $('#bewFormular3').show();
 	}
+	zaehlzurueck(sessionStorage['uni']);
     });
     // nach downloads weiter gedrückt
     $('#btnbewFormular10').on('click', function(event) {
@@ -1421,6 +1422,57 @@ function isEmpty(str) {
     return (!str || 0 === str.length);
 }
 
+function zaehlweiter(uni){
+	$.ajax({
+		type : "POST",
+		url : "login_db",
+		data : {
+			action : "post_prozessWeiter",
+			uni : uni,
+			matrikelnummer : sessionStorage['matrikelnr'],
+		},
+		success : function(result) {
+				//Hier könnte später noch die Aktualisierung der sessionStorage eingebunden werden.
+		}
+		,
+		error : function(result) {}
+	});
+}
+
+function zaehlzurueck(uni){
+	$.ajax({
+		type : "POST",
+		url : "login_db",
+		data : {
+			action : "post_prozessZurueck",
+			uni : uni,
+			matrikelnummer : sessionStorage['matrikelnr'],
+		},
+		success : function(result) {
+				//Hier könnte später noch die Aktualisierung der sessionStorage eingebunden werden.
+		}
+		,
+		error : function(result) {}
+	});
+}
+
+function zaehlupdate(zahl){
+	$.ajax({
+		type : "POST",
+		url : "login_db",
+		data : {
+			action : "update_prozessStatus",
+			uni : sessionStorage['uni'],
+			matrikelnummer : sessionStorage['matrikelnr'],
+			zahl : zahl,
+		},
+		success : function(result) {
+				//Hier könnte später noch die Aktualisierung der sessionStorage eingebunden werden.
+		}
+		,
+		error : function(result) {}
+	});
+}
 // downloads Anzeigen
 function schritt0(uni) {
     // $.ajax({
@@ -1929,21 +1981,7 @@ function askNextStep(uni) {
 		},
 		success : function(result) {
 			var nextStep = result;
-			defineNextStep(nextStep, $('#selectUni').val())
-							$.ajax({
-						type : "POST",
-						url : "login_db",
-						data : {
-							action : "post_prozessWeiter",
-							uni : sessionStorage['uni'],
-							matrikelnummer : sessionStorage['matrikelnr'],
-						},
-						success : function(result) {
-								//Hier könnte später noch die Aktualisierung der sessionStorage eingebunden werden.
-						}
-						,
-						error : function(result) {}
-					});
+			defineNextStep(nextStep, $('#selectUni').val());
 			return nextStep;
 		}
 
@@ -2258,10 +2296,12 @@ function defineNextStep(nextStepString, uni) {
 		case "Dateneingeben":
 			$('#bewFormular1').show();
 			getUserData(uni);
+			zaehlupdate(1);
 			break;
 
 		case "DAAD-Formularhochladen":
 			$('#bewFormular5').show();
+			zaehlupdate(5);
 			break;
 
 		case "Abiturzeugnishochladen":

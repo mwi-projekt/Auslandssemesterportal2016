@@ -134,7 +134,7 @@ iframe {
 }
 
 #bewFormular {
-	overflow-y: scroll;
+	overflow-y: hide;
 	color: black;
 	text-align: left;
 }
