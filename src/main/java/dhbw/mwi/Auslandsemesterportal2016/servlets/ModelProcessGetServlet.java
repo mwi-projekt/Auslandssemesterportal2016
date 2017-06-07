@@ -24,10 +24,12 @@ public class ModelProcessGetServlet extends HttpServlet {
 
         if (model != null && step != null) {
 
-            String query = "SELECT json FROM processModel WHERE model = ? AND step = ?";
+           /* String query = "SELECT json FROM processModel WHERE model = ? AND step = ?";
             String[] args = new String[]{model, step};
             String[] types = new String[]{"String","String"};
-            ResultSet rs = SQL_queries.executeStatement(query,args,types);
+            ResultSet rs = SQL_queries.executeStatement(query,args,types); */
+        	ResultSet rs = SQL_queries.getJson(step, model);
+        	
             try{
                 if (rs.next()) {
                     toClient.print(rs.getString("json"));
