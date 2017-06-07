@@ -1,4 +1,4 @@
-function getDropzoneOptions(action) {
+function getDropzoneOptions(action, fileName) {
     return {
         acceptedFiles: 'application/pdf',
 		maxFilesize: 16,
@@ -9,13 +9,8 @@ function getDropzoneOptions(action) {
 			formData.append('uni', sessionStorage['uni']);
 		},
 		accept: function(file, done){
-			if(file.name != "DAAD_Formular.pdf" 
-					&& file.name != "Abitur_Zeugnis.pdf"
-					&& file.name != "Dualis_Auszug.pdf"
-					&& file.name != "Motivations_Schreiben.pdf"
-					&& file.name != "Zustimmungs_Formular.pdf"){
-				
-				swal("Fehler", "Bitte beachte die Syntax zur Benennung des Dokuments", "error");
+			if(file.name != fileName) {
+				swal("Fehler", "Bitte beachte die Syntax zur Benennung des Dokuments: " + fileName, "error");
 				this.removeFile(file);
 			}else{
 				done();
@@ -34,11 +29,11 @@ function getDropzoneOptions(action) {
     }
 }
 
-Dropzone.options.daadForm = getDropzoneOptions('DAAD_Formular');
-Dropzone.options.abiturForm = getDropzoneOptions('Abiturzeugnis');
-Dropzone.options.motivationForm = getDropzoneOptions('Motivationsschreiben');
-Dropzone.options.dualisForm = getDropzoneOptions('Dualis_Dokumente');
-Dropzone.options.zustimmungForm = getDropzoneOptions('Zustimmungsfomular');
+Dropzone.options.daadForm = getDropzoneOptions('DAAD_Formular', "DAAD_Formular.pdf");
+Dropzone.options.abiturForm = getDropzoneOptions('Abiturzeugnis', "Abitur_Zeugnis.pdf");
+Dropzone.options.motivationForm = getDropzoneOptions('Motivationsschreiben', "Motivations_Schreiben.pdf");
+Dropzone.options.dualisForm = getDropzoneOptions('Dualis_Dokumente', "Dualis_Auszug.pdf");
+Dropzone.options.zustimmungForm = getDropzoneOptions('Zustimmungsfomular', "Zustimmungs_Formular.pdf");
 
 var main = function() {
     sessionStorage['nichtBeworben'] = false;
