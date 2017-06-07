@@ -35,6 +35,18 @@ function parse(){
 					case "paragraph":
 						output = output + '<p>' + json[i]["content"]+ '</p><br>';
 						break;
+					case "form-select":
+						var req = "";
+						if (json[i]["data"]["required"] == "true"){
+							req = "required";
+						}
+						output = output + '<form><label>' + json[i]["data"]["label"] + '<select' + req +'>';
+						for (var j = 0; j < json[i]["data"]["values"].length; j++){
+							output = output + '<option>' + json[i]["data"]["values"][j] + '</option>';
+							//alert ("Option hinzugefügt: " + json[i]["data"]["values"][j]);
+						}
+						output = output + '</label></form>';
+						break;
 					}
 				
 				//alert (output);
