@@ -12,18 +12,15 @@ function parse(){
 	var output = "";
 	$
 	.ajax({
-		type : "POST",
-		url : "get_json",
+		type : "GET",
+		url : "processmodel/get",
 		data : {
-			stepid : step_id,
+			model: 'studentBewerben',
+			step : step_id
 		},
 		success : function(result) {
 			//alert(result);
-			if (result == "stepNotFound"){
-				alert("Der angegebene Schritt wurde nicht gefunden.");
-			} else if (result == "databaseError"){
-				alert("Ein Datenbankfehler ist aufgetreten.");
-			} else{
+			
 				var json = JSON.parse(result);
 				for (var i = 0; i < json.length; i++){
 					var type = json[i]["type"];
@@ -39,14 +36,14 @@ function parse(){
 						output = output + '<p>' + json[i]["content"]+ '</p><br>';
 						break;
 					}
-				}
+				
 				//alert (output);
 				document.getElementById("results").innerHTML = output;
 			}
 			
 		},
 		error : function(result) {
-			alert('Ein Fehler ist aufgetreten.');
+			alert('Ein Fehler ist aufgetreten: '. result);
 		}
 	});
 }
