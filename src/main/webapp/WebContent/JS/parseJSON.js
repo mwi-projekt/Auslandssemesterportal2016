@@ -38,15 +38,21 @@ function parse(){
 					case "form-select":
 						var req = "";
 						if (json[i]["data"]["required"] == "true"){
-							req = "required";
+							req = " required";
 						}
-						output = output + '<form><label>' + json[i]["data"]["label"] + '<select' + req +'>';
+						output = output + '<form><label>' + json[i]["data"]["label"] + ' <select id="' + step_id + i +'"' + req +'>';
 						for (var j = 0; j < json[i]["data"]["values"].length; j++){
 							output = output + '<option>' + json[i]["data"]["values"][j] + '</option>';
 							//alert ("Option hinzugefügt: " + json[i]["data"]["values"][j]);
 						}
-						output = output + '</label></form>';
+						output = output + '</select></label></form><br>';
 						break;
+					case "form-text":
+						var req = "";
+						if (json[i]["data"]["required"] == "true"){
+							req = " required";
+						}
+						output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + step_id + i +'"' + req + '>';
 					}
 				
 				//alert (output);
