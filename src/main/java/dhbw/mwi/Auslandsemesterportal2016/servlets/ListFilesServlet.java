@@ -24,7 +24,7 @@ public class ListFilesServlet extends HttpServlet {
         outp.println("{");
         outp.println("\"name\": \"files\",");
         outp.println("\"type\": \"folder\",");
-        outp.println("\"path\": \""+ folder.getPath() +"\",");
+        outp.println("\"path\": \"http://193.196.7.215/files/\",");
         outp.println("\"items\":[");
         boolean first = true;
 
@@ -35,14 +35,11 @@ public class ListFilesServlet extends HttpServlet {
                 }
                 outp.println("{");
                 outp.println("\"name\": \""+ listOfFiles[i].getName() +"\",");
-                outp.println("\"path\": \""+ listOfFiles[i].getPath() +"\",");
-                outp.println("\"size\": 0");
+                outp.println("\"type\": \"file\",");
+                outp.println("\"path\": \"http://193.196.7.215/files/"+ listOfFiles[i].getName() +"\",");
+                outp.println("\"size\": " + listOfFiles[i].length());
                 outp.println("}");
                 first = false;
-               /* "name" => $f,
-                        "type" => "file",
-                        "path" => $dir . '/' . $f,
-                        "size" => filesize($dir . '/' . $f)*/
             }
         }
 
