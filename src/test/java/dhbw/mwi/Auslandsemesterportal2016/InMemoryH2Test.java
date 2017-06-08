@@ -35,7 +35,7 @@ public class InMemoryH2Test {
   /**
    * Just tests if the process definition is deployable.
    */
-  @Test
+  /*@Test
   @Deployment(resources = "Prozess_Student_bewerben.bpmn")
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
@@ -50,7 +50,7 @@ public class InMemoryH2Test {
 	  
 	  // To generate the coverage report for a single tests add this line as the last line of your test method:
 	  //ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
-  }
+  }*/
 
   @After
   public void calculateCoverageForAllTests() throws Exception {
