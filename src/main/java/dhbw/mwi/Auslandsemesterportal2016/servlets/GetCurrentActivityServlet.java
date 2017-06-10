@@ -13,28 +13,28 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.util.List;
 
-@WebServlet(name = "UpdateInstanceServlet", urlPatterns = {"/WebContent/setVariable"})
-public class UpdateInstanceServlet extends HttpServlet {
+@WebServlet(name = "GetCurrentActivityServlet", urlPatterns = {"/WebContent/currentActivity"})
+public class GetCurrentActivityServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter toClient = response.getWriter();
 
         String instanceID = request.getParameter("instance_id");
-        String key = request.getParameter("key");
-        String val = request.getParameter("value");
-        String[] keys = key.split("\\|", -1);
-        String[] vals = val.split("\\|", -1);
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtime = engine.getRuntimeService();
         ProcessInstance instance = runtime.createProcessInstanceQuery().processInstanceId(instanceID).singleResult();
    
-        if (key != null && val != null) {
-        	for (int i = 0; i < keys.length; i++){
-        		runtime.setVariable(instance.getId(), keys[i], vals[i]);
-        		}
-        	toClient.write("Success");
+        if (instanceID != null) {
+        	List<String> activitiesList = runtime.getActiveActivityIds(instanceID);
+        	String activeActivity = "";
+        	//Da wir auf Java 6 laufen, existiert der Befehl String.join leider nicht. Also hier manuell...
+        	for (int i = 0; i < activitiesList.size(); i++){
+        		activeActivity = activeActivity + activitiesList.get(i); 
+        	}
+        	toClient.write(activeActivity);
         }
     }
 }
