@@ -19,8 +19,7 @@ function parse(){
 			step : step_id
 		},
 		success : function(result) {
-			//alert(result);
-			
+			//TODO: required-Attribut korrekt übergeben
 				var json = JSON.parse(result);
 				for (var i = 0; i < json.length; i++){
 					var type = json[i]["type"];
@@ -37,8 +36,8 @@ function parse(){
 						break;
 					case "form-select":
 						var req = "";
-						if (json[i]["data"]["required"] == "true"){
-							req = " required";
+						if (json[i]["data"]["required"] == true){
+							req = ' required="required"';
 						}
 						output = output + '<form><label>' + json[i]["data"]["label"] + ' <select id="' + step_id + i +'"' + req +'>';
 						for (var j = 0; j < json[i]["data"]["values"].length; j++){
@@ -49,8 +48,8 @@ function parse(){
 						break;
 					case "form-text":
 						var req = "";
-						if (json[i]["data"]["required"] == "true"){
-							req = " required";
+						if (json[i]["data"]["required"] == true){
+							req = ' required="required"';
 						}
 						output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + step_id + i +'"' + req + '>';
 					}
