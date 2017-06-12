@@ -1,7 +1,9 @@
-var idList = [];
-var url = new URL(window.location.href);
-var instanceID = url.searchParams.get("instance_id");
-parse();
+$(document).ready(function() {
+	var idList = [];
+	var url = new URL(window.location.href);
+	var instanceID = url.searchParams.get("instance_id");
+	parse();
+});
 
 function parse(){
 	var step_id = "";
@@ -97,7 +99,8 @@ function saveData(){
 			key : keyString,
 			value: valString
 		},
-		success : function(result) {			
+		success : function(result) {
+			location.reload();
 		},
 		error : function(result) {
 			alert('Ein Fehler ist aufgetreten');
