@@ -110,7 +110,8 @@ $(document).ready(function () {
                 $('#field-save').on('click', function () {
                     var data = {
                         data: {
-                            label: $('#field-label').val()
+                            label: $('#field-label').val(),
+                            id: $('#field-id').val(),
                         }
                     };
                     success = true;
@@ -196,6 +197,7 @@ $(document).ready(function () {
                         data: {
                             values: values,
                             label: $('#field-label').val(),
+                            id: $('#field-id').val(),
                             required: $('#field-req')[0].checked
                         },
                         content: $('#demo').html()
@@ -243,6 +245,7 @@ $(document).ready(function () {
                         data: {
                             label: $('#field-label').val(),
                             type: $('#field-type').val(),
+                            id: $('#field-id').val(),
                             required: $('#field-req')[0].checked
                         }
                     };
