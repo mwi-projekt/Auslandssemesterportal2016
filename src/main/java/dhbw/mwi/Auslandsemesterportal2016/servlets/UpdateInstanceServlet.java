@@ -38,6 +38,7 @@ public class UpdateInstanceServlet extends HttpServlet {
         		//runtime.setVariable(instance.getId(), keys[i], vals[i]);
         		vars.put(keys[i], vals[i]);	
         	}
+        runtime.setVariable(instanceID, "bestanden", true);
         	engine.getTaskService().complete(engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(), vars);	
     		toClient.write("Saved");
         } else {

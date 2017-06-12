@@ -48,7 +48,7 @@ function parse(){
 									//alert ("Option hinzugefügt: " + json[i]["data"]["values"][j]);
 								}
 								output = output + '</select></label></form><br>';
-								idList.put(step_id + i);
+								idList.push(step_id + i);
 								break;
 							case "form-text":
 								var req = "";
@@ -56,6 +56,7 @@ function parse(){
 									req = ' required="required"';
 								}
 								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + step_id + i +'"' + req + '>';
+								idList.push(step_id + i);
 							}
 						
 
@@ -76,13 +77,14 @@ function parse(){
 
 function saveData(){
 	var keyString = "";
-	var valStirng = "";
+	var valString = "";
 	for (var j = 0; j < idList.length;j++){
 		keyString = keyString + idList[j] + "|";
 		valString = valString + document.getElementById(idList[j]).value + "|";
 	}
-	
-	
+	keyString = keyString.substr(0,keyString.length-1);
+	valString = valString.substr(0,valString.length-1);
+		
 	$
 	.ajax({
 		type : "POST",
@@ -95,7 +97,7 @@ function saveData(){
 		success : function(result) {			
 		},
 		error : function(result) {
-			alert('Ein Fehler ist aufgetreten: ' + result);
+			alert('Ein Fehler ist aufgetreten');
 		}
-	});
+	}); 
 };
