@@ -22,7 +22,7 @@ CKEDITOR.editorConfig = function( config ) {
     ];
 
     config.filebrowserBrowseUrl = 'modals/file-browser.html';
-    //config.filebrowserUploadUrl = '/uploader/upload.php?type=Files';
+    config.filebrowserUploadUrl = 'model/upload';
 
     //config.extraPlugins = 'forms';
 

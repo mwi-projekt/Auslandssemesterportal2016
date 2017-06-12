@@ -24,12 +24,15 @@ public class ModelUploadServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Part filePart = null;
 
+        out.println("{");
+
         try {
-            filePart = request.getPart("file");
+            filePart = request.getPart("upload");
 
             if (filePart != null){
                 System.out.println(getFileName(filePart));
-                OutputStream outs = new FileOutputStream(new File("/var/www/files/"+getFileName(filePart)));
+                String fileName = getFileName(filePart);
+                OutputStream outs = new FileOutputStream(new File("/var/www/files/"+fileName));
                 byte[] buf = new byte[1024];
                 int len;
                 InputStream is = filePart.getInputStream();
@@ -39,20 +42,27 @@ public class ModelUploadServlet extends HttpServlet {
                 outs.close();
                 is.close();
 
-                out.print("jop");
-                out.flush();
+                out.println("\"uploaded\": 1,");
+                out.println("\"fileName\": \""+ fileName +"\",");
+                out.println("\"url\": \"http://193.196.7.215/files/"+fileName+"\"");
             } else {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                out.print("Error: wrong file");
-                out.flush();
+                out.println("\"uploaded\": 0,");
+                out.println("\"error\": {");
+                out.println("\"message\": \"File is missing\"");
+                out.println("}");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("Error: wrong file");
-            out.flush();
+            out.println("\"uploaded\": 0,");
+            out.println("\"error\": {");
+            out.println("\"message\": \"Server error\"");
+            out.println("}");
         }
+
+        out.println("}");
 
     }
 
