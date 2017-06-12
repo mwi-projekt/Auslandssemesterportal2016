@@ -26,8 +26,10 @@ public class UpdateInstanceServlet extends HttpServlet {
         String instanceID = request.getParameter("instance_id");
         String key = request.getParameter("key");
         String val = request.getParameter("value");
+        String type = request.getParameter("type");
         String[] keys = key.split("\\|", -1);
         String[] vals = val.split("\\|", -1);
+        String[] types = type.split("\\|", -1);
         Map<String,Object> vars = new HashMap<String,Object>();
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtime = engine.getRuntimeService();
@@ -36,8 +38,12 @@ public class UpdateInstanceServlet extends HttpServlet {
         if (key != null && val != null) {
         	for (int i = 0; i < keys.length; i++){
         		//runtime.setVariable(instance.getId(), keys[i], vals[i]);
-        		vars.put(keys[i], vals[i]);	
-        	}
+        		if (types[i] == "text"){
+        		vars.put(keys[i], vals[i]);
+        		} else if (types[i] == "number"){
+            		vars.put(keys[i], Integer.parseInt(vals[i]));
+        		}
+        	}	
         runtime.setVariable(instanceID, "bestanden", true);
         	engine.getTaskService().complete(engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(), vars);	
     		toClient.write("Saved");
