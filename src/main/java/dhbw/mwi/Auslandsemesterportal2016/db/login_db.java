@@ -245,27 +245,31 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
 				completeTask(id);
+				
 			} else if (action.equals("get_prozessStatus")) {
-				/*sql = "SELECT uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess WHERE matrikelnummer = '"
-						+ request.getParameter("matrikelnummer") + "' ";*/
 				sql = "SELECT uniName, startDatum, Schritte_aktuell, Schritte_gesamt FROM bewerbungsprozess WHERE matrikelnummer = "
 				+ request.getParameter("matrikelnummer");
+				
+			} else if (action.equals("get_SchrittAktuell")) {
+				sql = "SELECT Schritte_aktuell FROM bewerbungsprozess WHERE matrikelnummer = '"
+						+ request.getParameter("matrikelnummer")
+						+ "' AND uniName = '" + request.getParameter("uni") + "' ";
+				
 			} else if (action.equals("post_prozessWeiter")) {
-				sql = "UPDATE bewerbungsprozess SET Schritte_aktuell = Schritte_aktuell + 1"
-						+ " WHERE matrikelnummer = " + request.getParameter("matrikelnummer")
-						+ " AND uniName = " + request.getParameter("uni");
+				sqlupd = "UPDATE bewerbungsprozess SET Schritte_aktuell = Schritte_aktuell + '" + request.getParameter("i")
+						+ "' WHERE matrikelnummer = '" + request.getParameter("matrikelnummer")
+						+ "' AND uniName = '" + request.getParameter("uni") + "' ";
+				
 			} else if (action.equals("post_prozessZurueck")) {
-				sql = "UPDATE bewerbungsprozess SET Schritte_aktuell = Schritte_aktuell - 1"
-						+ " WHERE matrikelnummer = " + request.getParameter("matrikelnummer")
-						+ " AND uniName = " + request.getParameter("uni");
-			/*} else if (action.equals("post_prozessStatReset")) {
-				sql = "UPDATE bewerbungsprozess SET Schritte_aktuell = 0"
-						+ "WHERE matrikelnummer ='" + request.getParameter("matrikelnummer")
-						+ "AND uniName = '" + request.getParameter("uni");	*/
+				sqlupd = "UPDATE bewerbungsprozess SET Schritte_aktuell = Schritte_aktuell + '" + request.getParameter("i")
+						+ "' WHERE matrikelnummer = '" + request.getParameter("matrikelnummer")
+						+ "' AND uniName = '" + request.getParameter("uni") + "' ";
+				
 			} else if (action.equals("update_prozessStatus")) {
-				sql = "UPDATE bewerbungsprozess SET Schritte_aktuell = " + request.getParameter("zahl")
-						+ " WHERE matrikelnummer = " + request.getParameter("matrikelnummer")
-						+ " AND uniName = " + request.getParameter("uni");
+				sqlupd = "UPDATE bewerbungsprozess SET Schritte_aktuell = '" + request.getParameter("zahl")
+						+ "' WHERE matrikelnummer = '" + request.getParameter("matrikelnummer")
+						+ "' AND uniName = '" + request.getParameter("uni") + "' ";
+				
 			} else if (action.equals("get_next_Page")) {
 				System.out.println("get_next_page");
 				String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));

@@ -37,6 +37,7 @@ Dropzone.options.zustimmungForm = getDropzoneOptions('Zustimmungsfomular', "Zust
 
 var main = function() {
     sessionStorage['nichtBeworben'] = false;
+    sessionStorage['SchrittAktuell'] = 0;
     $('#progressbar').progressbar({
 	value : 20
     });
@@ -92,45 +93,27 @@ var main = function() {
 					    matrikelnummer : sessionStorage['matrikelnr']
 					},
 					success : function(result) {
-					    sessionStorage['beworbeneUnis'] = '';
+						sessionStorage['beworbeneUnis'] = '';
 					    var even = "odd";
 					    var tabelle = '';
 					    var schritt_gesamt = 0;
 					    var schritt_aktuell = 0;
-					    var status = 0;
+					    var status = '';
 					    var zaehler = 1;
 					    var auslesen = result.split(';');
+					    
 					    for (var i = 0; i < auslesen.length; i++) {
 						auslesen[i] = auslesen[i]
 							.trim();
-						// Das muss noch dynamisch
-						// gemacht werden
-						/*if (auslesen[(2 * zaehler)] === "0") {
-						    status = 0;
-						} else if (auslesen[(3 * zaehler)] === "0") {
-						    status = 20;
-						} else if (auslesen[(4 * zaehler)] === "0") {
-						    status = 40;
-						} else if (auslesen[(5 * zaehler)] === "0") {
-						    status = 60;
-						} else if (auslesen[(6 * zaehler)] === "0") {
-						    status = 80;
-						}
-						if (auslesen[(2 * zaehler)] === "1"
-							|| auslesen[(3 * zaehler)] === "1"
-							|| auslesen[(4 * zaehler)] === "1"
-							|| auslesen[(5 * zaehler)] === "1"
-							|| auslesen[(6 * zaehler)] === "1") {
-						    // status = status + 10;
-						}*/
-					    schritt_aktuell = auslesen[((2 * zaehler) + (i * 2))];
-					    schritt_gesamt = auslesen[((3 * zaehler) + i)];
+
+					    schritt_aktuell = auslesen[((2 * zaehler) + ((zaehler-1) * 2))];
+					    schritt_gesamt = auslesen[((3 * zaehler) + (zaehler-1))];
 					    
 					    status = schritt_aktuell + ' von ' + schritt_gesamt + ' Schritte';
 					    
-						if (schritt_aktuell > schritt_gesamt) {
-							status = result + "FEHLER";
-						}
+						/*if (schritt_aktuell > schritt_gesamt) {
+							status = status + "FEHLER" + result;
+						}*/
 						if (schritt_aktuell == schritt_gesamt) {
 							status = "abgeschlossen";
 						}
@@ -193,6 +176,7 @@ var main = function() {
 						    even === "odd";
 						}
 					    }
+					    // ANZEIGE NICHT BEWORBEN
 					    if (isEmpty(tabelle) === true) {
 							$('#tableBewProzess').hide();
 							$('#nichtBeworben').show();
@@ -200,8 +184,11 @@ var main = function() {
 							$('#tableBewProzess').show();
 							$('#nichtBeworben').hide();
 					    }
+					    // GENERIERUNG TABELLE 
 					    $('#tableBewProzessBody').html(
 						    tabelle);
+					    // *** ENDE TABELLE ***//
+					    
 					    for (var i = 1; i < zaehler; i++) {
 							$('#btnProzessFortfahren'+ i).on('click',
 								function(event) {
@@ -246,6 +233,7 @@ var main = function() {
 									    .html(
 										    uni);
 								    sessionStorage['uni'] = uni;
+								    SchrittReq(uni);
 								    askNextStep(uni);
 
 								});
@@ -464,7 +452,8 @@ var main = function() {
 									type : "POST",
 									url : "login_db",
 									data : {
-									    action : "post_prozessStart",
+									    //NEUE DB-EINTRAG
+										action : "post_prozessStart",
 									    matrikelnummer : sessionStorage['matrikelnr'],
 									    uni : $(
 										    '#selectUni')
@@ -483,6 +472,7 @@ var main = function() {
 									    var uni = $(
 										    '#selectUni')
 										    .val();
+									    zaehlupdate(0);
 									    askNextStep(uni);
 									},
 									error : function(
@@ -650,6 +640,7 @@ var main = function() {
 					success : function(result) {
 					    var uni = $('#selectUni').val();
 					    askNextStep(sessionStorage['uni']);
+					    
 					},
 					error : function(result) {
 
@@ -1351,9 +1342,10 @@ var main = function() {
 					error : function(result) {
 
 					}
+					
 				    });
 			}
-			zaehlweiter(sessionStorage['uni']);
+			zaehlweiter();
 		    });
     // Theorieadresse ist die gleiche wie die PRaxisadresse
     $('#btnSameAdress').on('click', function(event) {
@@ -1402,7 +1394,7 @@ var main = function() {
 	    $('.dat').hide();
 	    $('#bewFormular3').show();
 	}
-	zaehlzurueck(sessionStorage['uni']);
+	zaehlzurueck();
     });
     // nach downloads weiter gedrückt
     $('#btnbewFormular10').on('click', function(event) {
@@ -1417,34 +1409,38 @@ function isEmpty(str) {
     return (!str || 0 === str.length);
 }
 
-function zaehlweiter(uni){
+function zaehlweiter(){
 	$.ajax({
 		type : "POST",
 		url : "login_db",
 		data : {
 			action : "post_prozessWeiter",
-			uni : uni,
+			uni : sessionStorage['uni'],
 			matrikelnummer : sessionStorage['matrikelnr'],
+			i : "1",
 		},
 		success : function(result) {
-				//Hier könnte später noch die Aktualisierung der sessionStorage eingebunden werden.
+			sessionStorage['SchrittAktuell']++;
+			zaehlupdate(sessionStorage['SchrittAktuell']);
 		}
 		,
 		error : function(result) {}
 	});
 }
 
-function zaehlzurueck(uni){
+function zaehlzurueck(){
 	$.ajax({
 		type : "POST",
 		url : "login_db",
 		data : {
 			action : "post_prozessZurueck",
-			uni : uni,
+			uni : sessionStorage['uni'],
 			matrikelnummer : sessionStorage['matrikelnr'],
+			i : "1",
 		},
 		success : function(result) {
-				//Hier könnte später noch die Aktualisierung der sessionStorage eingebunden werden.
+			sessionStorage['SchrittAktuell']--;
+			zaehlupdate(sessionStorage['SchrittAktuell']);
 		}
 		,
 		error : function(result) {}
@@ -1462,7 +1458,25 @@ function zaehlupdate(zahl){
 			zahl : zahl,
 		},
 		success : function(result) {
-				//Hier könnte später noch die Aktualisierung der sessionStorage eingebunden werden.
+			sessionStorage['SchrittAktuell'] = zahl;
+		}
+		,
+		error : function(result) {}
+	});
+}
+
+function SchrittReq(uni){
+	$.ajax({
+		type : "POST",
+		url : "login_db",
+		data : {
+			action : "get_SchrittAktuell",
+			uni : uni,
+			matrikelnummer : sessionStorage['matrikelnr'],
+		},
+		success : function(result) {
+			a = result.split(";");
+			sessionStorage['SchrittAktuell'] = a[0];
 		}
 		,
 		error : function(result) {}
@@ -2281,22 +2295,20 @@ function defineNextStep(nextStepString, uni) {
     });
 
     $('#bewFormular0, #bewFormular1, #bewFormular2, #bewFormular3, #bewFormular4, #bewFormular5, #bewFormular6, #bewFormular7, #bewFormular8, #bewFormular9, #bewFormular10').hide();
-
+    var i = sessionStorage['SchrittAktuell'];
+    
     switch (nextStepString.trim()) {
 		case 'Downloadsanbieten':
 			$('#bewFormular0').show();
 			showDownloads(uni);
 			break;
 
-		case "Dateneingeben":
-			$('#bewFormular1').show();
-			getUserData(uni);
-			zaehlupdate(1);
+		case "Dateneingeben": 
+			DateneingebenStep(i, uni);
 			break;
-
+			
 		case "DAAD-Formularhochladen":
 			$('#bewFormular5').show();
-			zaehlupdate(5);
 			break;
 
 		case "Abiturzeugnishochladen":
@@ -2329,4 +2341,28 @@ function defineNextStep(nextStepString, uni) {
 			break;
     }
 
+}
+
+function DateneingebenStep(i, uni) {
+	switch (i){
+	case '1':
+		$('#bewFormular1').show();
+		getUserData(uni);
+		break;
+	
+	case '2':
+		$('#bewFormular2').show();
+		getDataAllPruef();
+		break;
+	
+	case '3':
+		$('#bewFormular3').show();
+		getDataAllPruef();
+		break;
+	
+	case '4':
+		$('#bewFormular4').show();
+		break;
+
+	}
 }
