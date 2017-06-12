@@ -790,8 +790,10 @@
 
                     <form class="row dat" id="bewFormular10">
 
-                        <b>Allgemeine Daten:</b><br>
-                        <table>
+                        <button class="accordion">Allgemeine Daten</button>
+<div class="panel">
+  <p>
+  <table>
                             <tr>
                                 <td>Nachname</td>
                                 <td style="padding-top: 7px; padding-left: 20px"><label id="nachnamePruef"></label></td>
@@ -826,9 +828,13 @@
                                 <td style="padding-top: 7px; padding-left: 20px"><label id="mobilPruef"></label></td>
                             </tr>
                         </table>
-                        <br><br><br>
+  </p>
+</div>
 
-                        <b>Adresse Praxisphase</b><br>
+<button class="accordion">Adresse Theorie- und Praxisphase</button>
+<div class="panel">
+  <p>
+  <b>Adresse Praxisphase</b><br>
                         <table>
                             <tr>
                                 <td>Straße</td>
@@ -854,7 +860,7 @@
                         <br><br><br>
 
 
-                        <b>Adress Theoriephase</b><br>
+                        <b>Adresse Theoriephase</b><br>
                         <table>
                             <tr>
                                 <td>Straße</td>
@@ -877,7 +883,24 @@
                                 </td>
                             </tr>
                         </table>
+  
+  
+  </p>
+</div>
 
+<button class="accordion">Gastuniversität</button>
+<div class="panel">
+  <p>Lorem ipsum...</p>
+</div>
+
+<button class="accordion">Dokumente</button>
+<div class="panel">
+  <p>Anbei befinden sich Deine hochgeladenen PDFs. <br>
+  Bitte prüfen Sie, ob alles soweit stimmt. Wenn nicht, klicken Sie auf "editieren".</p>
+</div>
+                        
+                        
+                        
 
                         <label class="btn btnBewFormular" id="btnBewFormular20"
                                style="float: right; bottom: 0px">Abschließen</label>
