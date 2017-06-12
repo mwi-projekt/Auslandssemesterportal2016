@@ -102,6 +102,10 @@ $(document).ready(function () {
                     $('#demo-label').text(data.label);
                 }
 
+                if (data.id) {
+                    $('#field-id').val(data.id);
+                }
+
 
                 $('#field-label').on('change keydown', function () {
                     $('#demo-label').text($(this).val());
@@ -165,6 +169,10 @@ $(document).ready(function () {
                     offText: 'Nein'
                 });
 
+                if (data.id) {
+                    $('#field-id').val(data.id);
+                }
+
                 $('#field-label').on('change keydown', function () {
                     $('#demo-label').text($(this).val());
                 });
@@ -222,6 +230,10 @@ $(document).ready(function () {
             },
             onOpen: function () {
 
+                if (data.id) {
+                    $('#field-id').val(data.id);
+                }
+
                 if (data.label) {
                     $('#field-label').val(data.label);
                     $('#demo-label').text(data.label);
@@ -269,7 +281,7 @@ $(document).ready(function () {
     });
 
     var checkboxForm = '';
-    $.get('checkbox-form.html', {}, function (data) {
+    $.get('modals/checkbox-form.html', {}, function (data) {
         checkboxForm = data;
     });
 
