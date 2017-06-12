@@ -1,4 +1,7 @@
 var idList = [];
+var url = new URL(window.location.href);
+var instanceID = url.searchParams.get("instance_id");
+parse();
 
 function parse(){
 	var step_id = "";
@@ -8,7 +11,7 @@ function parse(){
 		type : "GET",
 		url : "currentActivity",
 		data : {
-			instance_id: '4431ccda-4df5-11e7-a496-005056940bc2'
+			instance_id: instanceID
 		},
 		success : function(result) {
 			//alert('Aktiver Schritt: ' + result);
@@ -42,7 +45,7 @@ function parse(){
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<form><label>' + json[i]["data"]["label"] + ' <select id="' + step_id + i +'"' + req +'>';
+								output = output + '<form><label>' + json[i]["data"]["label"] + ' <select id="' + json[i]["data"]["id"] +'"' + req +'>';
 								for (var j = 0; j < json[i]["data"]["values"].length; j++){
 									output = output + '<option>' + json[i]["data"]["values"][j] + '</option>';
 									//alert ("Option hinzugefügt: " + json[i]["data"]["values"][j]);
@@ -55,7 +58,7 @@ function parse(){
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + step_id + i +'"' + req + '>';
+								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '>';
 								idList.push(step_id + i);
 							}
 						
@@ -90,7 +93,7 @@ function saveData(){
 		type : "POST",
 		url : "setVariable",
 		data : {
-			instance_id: '4431ccda-4df5-11e7-a496-005056940bc2',
+			instance_id: instanceID,
 			key : keyString,
 			value: valString
 		},
