@@ -106,8 +106,8 @@ var main = function() {
 						auslesen[i] = auslesen[i]
 							.trim();
 
-					    schritt_aktuell = auslesen[((2 * zaehler) + ((zaehler-1) * 2))];
-					    schritt_gesamt = auslesen[((3 * zaehler) + (zaehler-1))];
+					    schritt_aktuell = Number(auslesen[((2 * zaehler) + ((zaehler-1) * 2))]);
+					    schritt_gesamt = Number(auslesen[((3 * zaehler) + (zaehler-1))]);
 					    
 					    status = schritt_aktuell + ' von ' + schritt_gesamt + ' Schritte';
 					    
@@ -140,6 +140,24 @@ var main = function() {
 								+ '</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
 								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
+						    } else if (status == "abgeschlossen") {
+						    	+ '<tr class="'
+								+ even
+								+ '" id="row'
+								+ (zaehler)
+                                + '" data-rid="'+zaehler+'"><td>'
+								+ sessionStorage["studiengang"]
+								+ '</td><td id="uni'
+								+ zaehler
+								+ '">'
+								+ auslesen[(0)]
+								+ '</td><td>'
+								+ auslesen[1]
+								+ '</td><td id="status'
+								+ zaehler
+								+ '">'
+								+ status
+								+ '</td><td class="btn" id="btnZusammenfassung">Zusammenfassung</td></tr>';
 						    } else {
 							tabelle = tabelle
 								+ '<tr class="'
@@ -236,6 +254,15 @@ var main = function() {
 								    SchrittReq(uni);
 								    askNextStep(uni);
 
+								});
+							
+								$('#btnZusammenfassung'+ i).on('click',
+									function(event) {
+									var uni = $('#uni'+ id).text();
+									sessionStorage['uni'] = uni;
+									$('#bewProzess').hide();
+									getDataAllPruef();
+									$('#bewFormular10').show();
 								});
 					    }
 
@@ -1401,7 +1428,10 @@ var main = function() {
 
     });
     
-    var acc = document.getElementsByClassName("accordion");
+    //Accordion Button
+    $('#accordion').on('click', function(event) {
+    	var acc = document.getElementsByClassName("accordion");
+
 
     for (i = 0; i < acc.length; i++) {
         acc[i].onclick = function(){
@@ -1419,6 +1449,8 @@ var main = function() {
             }
         }
     }
+    });
+    
 };
 
 $(document).ready(main);
@@ -1499,83 +1531,6 @@ function SchrittReq(uni){
 		,
 		error : function(result) {}
 	});
-}
-// downloads Anzeigen
-function schritt0(uni) {
-    // $.ajax({
-    // type : "POST",
-    // url : "login_db",
-    // data : {
-    // action : "get_downloads",
-    // uni : uni,
-    // matrikelnummer : sessionStorage['matrikelnr'],
-    // },
-    // success : function(result) {
-    // $('.iFenster').hide();
-    // $('.iF1').show();
-    // $('.dat').hide();
-    // $('#bewFormular0').show();
-    // $('#bewFormular1').hide();
-    // $('#bewProzess').hide();
-    // $('#aktuelleUni').html(uni);
-    //
-    // }
-    //
-    // ,
-    // error : function(result) {
-    //
-    // }
-    // });
-}
-
-function schritt1(uni) {
-    // $.ajax({
-    // type : "POST",
-    // url : "login_db",
-    // data : {
-    // action : "get_userDaten",
-    // uni : uni,
-    // matrikelnr : sessionStorage['matrikelnr'],
-    // },
-    // success : function(result) {
-    // $('.iFenster').hide();
-    // $('.iF1').show();
-    // $('.dat').hide();
-    // $('#bewFormular0').hide();
-    // $('#bewFormular1').show();
-    // $('#bewProzess').hide();
-    // $('#aktuelleUni').html(uni);
-    // var auslesen = result.split(';');
-    // for (var i = 0; i < auslesen.length - 1; i++) {
-    // auslesen[i] = auslesen[i].trim();
-    // }
-    // fillBewForm(auslesen[1], auslesen[0], auslesen[2], auslesen[3],
-    // auslesen[4], auslesen[5], auslesen[6], auslesen[7]);
-    // $.ajax({
-    // type : "POST",
-    // url : "login_db",
-    // data : {
-    // action : "get_Note",
-    // matrikelnummer : sessionStorage['matrikelnr'],
-    // },
-    // success : function(result) {
-    // auslesen = result.split(';');
-    // if (isEmpty(auslesen[0]) != true) {
-    // sessionStorage['noteOkay'] = true;
-    // } else {
-    // sessionStorage['noteOkay'] = false;
-    // }
-    // $('#bewEnglischAbi').val(auslesen[0]);
-    // },
-    // error : function(result) {
-    //
-    // }
-    // });
-    // },
-    // error : function(result) {
-    //
-    // }
-    // });
 }
 
 function getStudiengaenge() {
@@ -1704,7 +1659,7 @@ function getAngebotsDaten() {
 	    });
 }
 
-function loadBewerber(auslesen, zaehler, tabelle, count, even) {
+/*function loadBewerber(auslesen, zaehler, tabelle, count, even) {
     if (count != -1) {
 	var status = 0;
 	if (auslesen[(2 * (zaehler - count))] === "0") {
@@ -1785,7 +1740,7 @@ function loadBewerber(auslesen, zaehler, tabelle, count, even) {
 
     }
 
-}
+}*/
 
 function addListener(zaehler) {
     for (var i = 1; i <= zaehler; i++) {
