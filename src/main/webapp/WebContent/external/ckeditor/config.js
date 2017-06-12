@@ -25,6 +25,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.filebrowserUploadUrl = 'model/upload';
 
     //config.extraPlugins = 'forms';
+    config.extraPlugins = 'uploadimage';
 
     config.removeButtons = 'NewPage,Preview,Print,Save,Templates,Source,SelectAll,Scayt,BidiRtl,BidiLtr,Language,Table,PageBreak,SpecialChar,Iframe,Anchor,Styles,BGColor,ShowBlocks,Subscript,Superscript,Strike,Outdent,Indent,Cut,Copy,PasteText,Find,Replace,HorizontalRule,CreateDiv,Font,Maximize';
 };
