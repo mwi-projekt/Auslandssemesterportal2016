@@ -119,7 +119,7 @@ var main = function() {
 						}
 						
 						if (i === (4 * zaehler)) {
-						    if (zaehler === 1) {
+						    /*if (zaehler === 1) {
 							tabelle = tabelle
 								+ '<tr class="'
 								+ even
@@ -140,7 +140,7 @@ var main = function() {
 								+ '</td><td class="btn" id="btnProzessFortfahren'
 								+ zaehler
 								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
-						    } else if (status === "abgeschlossen") {
+						    } else */if (status === "abgeschlossen") {
 							tabelle = tabelle
 								+ '<tr class="'
 								+ even
@@ -151,9 +151,9 @@ var main = function() {
 								+ '</td><td id="uni'
 								+ zaehler
 								+ '">'
-								+ auslesen[(0)]
+								+ auslesen[((4 * zaehler) - 4)]
 								+ '</td><td>'
-								+ auslesen[1]
+								+ auslesen[((4 * zaehler) - 3)]
 								+ '</td><td id="status'
 								+ zaehler
 								+ '">'
@@ -212,45 +212,19 @@ var main = function() {
 							$('#btnProzessFortfahren'+ i).on('click',
 								function(event) {
 								    var id = event.target.id
-									    .replace(
-										    'btnProzessFortfahren',
-										    '');
-								    /*$(
-									    '.popUpBack')
-									    .html(
-										    '<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
-								    $(
-									    '.popUpBack')
-									    .show();
-								    setTimeout(
-									    closeLoading,
-									    1000);*/
-
-								    // Ermittlung
-								    // des
-								    // Fortschritts
-								    // für die
-								    // weiteren
-								    // Bewerbungsschritte
-								    var uni = $(
-									    '#uni'
-										    + id)
-									    .text();
-								    $(
-									    '.iFenster')
-									    .hide();
-								    $('.iF1')
-									    .show();
-								    $('.dat')
-									    .hide();
+									    .replace('btnProzessFortfahren','');
+								    /*$('.popUpBack').html('<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
+								    $('.popUpBack').show();
+								    setTimeout(closeLoading,1000);*/
+								    
+								    // Ermittlung des Fortschritts für die weiteren Bewerbungsschritte
+								    var uni = $('#uni'+ id).text();
+								    $('.iFenster').hide();
+								    $('.iF1').show();
+								    $('.dat').hide();
 								    sessionStorage['uni'] = uni;
-								    $(
-									    '#bewProzess')
-									    .hide();
-								    $(
-									    '#aktuelleUni')
-									    .html(
-										    uni);
+								    $('#bewProzess').hide();
+								    $('#aktuelleUni').html(uni);
 								    sessionStorage['uni'] = uni;
 								    SchrittReq(uni);
 								    askNextStep(uni);
@@ -259,9 +233,15 @@ var main = function() {
 							
 								$('#btnZusammenfassung'+ i).on('click',
 									function(event) {
+									var id = event.target.id
+								    	.replace('btnZusammenfassung','');
 									var uni = $('#uni'+ id).text();
+								    $('.iFenster').hide();
+								    $('.iF1').show();
+								    $('.dat').hide();
 									sessionStorage['uni'] = uni;
 									$('#bewProzess').hide();
+									$('#aktuelleUni').html(uni);
 									getDataAllPruef();
 									$('#bewFormular10').show();
 								});
