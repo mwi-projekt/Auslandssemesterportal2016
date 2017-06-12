@@ -39,7 +39,7 @@ $(document).ready(function () {
         model: 'studentBewerben',
         step: id
     }, function (data) {
-        init(JSON.parse(data));
+        init(JSON.parse(decodeURI(data)));
     }).fail(function () {
         if (type == 'upload') {
             init([
@@ -74,7 +74,7 @@ $(document).ready(function () {
         $.post('processmodel/save', {
             model: 'studentBewerben',
             step: id,
-            json: JSON.stringify(json)
+            json: encodeURI(JSON.stringify(json))
         }, function (data) {
             swal(
                 'Gespeichert!',

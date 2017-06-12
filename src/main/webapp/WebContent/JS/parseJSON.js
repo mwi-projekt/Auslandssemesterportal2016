@@ -33,7 +33,7 @@ function parse(){
 					step : step_id
 				},
 				success : function(result) {
-						var json = JSON.parse(result);
+						var json = JSON.parse(decodeURI(result));
 						for (var i = 0; i < json.length; i++){
 							var type = json[i]["type"];
 							//alert (type);
