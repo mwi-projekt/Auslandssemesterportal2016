@@ -21,7 +21,10 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'about', groups: [ 'about' ] }
     ];
 
-    config.extraPlugins = 'uploadimage';
+    config.extraPlugins = 'uploadimage,entities';
+
+    config.entities_latin = true;
+    config.entities = true;
 
     config.filebrowserBrowseUrl = 'modals/file-browser.html';
     config.filebrowserUploadUrl = 'model/upload';
