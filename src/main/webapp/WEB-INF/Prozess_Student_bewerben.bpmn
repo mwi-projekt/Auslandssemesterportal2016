@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.1.1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.8.2">
   <bpmn:collaboration id="Collaboration_1cl2lu7">
     <bpmn:participant id="Participant_00ci3jw" name="DHBW" processRef="studentBewerben" />
   </bpmn:collaboration>
@@ -76,10 +76,10 @@
       <bpmn:outgoing>SequenceFlow_06jsa12</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_18l1kqf" name="Nein" sourceRef="ExclusiveGateway_EnglischStart" targetRef="daadHochladen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!bestanden}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${englischNote<11}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_06jsa12" name="Ja" sourceRef="ExclusiveGateway_EnglischStart" targetRef="ExclusiveGateway_EnglischEnd">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${bestanden}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${englischNote>=11}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1tpgdb5" sourceRef="daadHochladen" targetRef="ExclusiveGateway_EnglischEnd" />
     <bpmn:userTask id="abiturHochladen" name="Abiturzeugnis hochladen">
@@ -183,7 +183,7 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_175drvz_di" bpmnElement="ExclusiveGateway_EnglischStart" isMarkerVisible="true">
         <dc:Bounds x="1644" y="103" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1624" y="66" width="90" height="20" />
+          <dc:Bounds x="1630" y="64" width="77" height="24" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0yksv3e_di" bpmnElement="SequenceFlow_0yksv3e">
