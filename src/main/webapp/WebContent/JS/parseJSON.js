@@ -1,8 +1,12 @@
+var instanceID;
+var url;
+var typeList;
+var idList;
 $(document).ready(function() {
-	var idList = [];
-	var typeList = [];
-	var url = new URL(window.location.href);
-	var instanceID = url.searchParams.get("instance_id");
+	idList = [];
+	typeList = [];
+	url = new URL(window.location.href);
+	instanceID = url.searchParams.get("instance_id");
 	parse();
 });
 
