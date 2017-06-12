@@ -38,18 +38,15 @@ public class UpdateInstanceServlet extends HttpServlet {
         if (key != null && val != null) {
         	for (int i = 0; i < keys.length; i++){
         		//runtime.setVariable(instance.getId(), keys[i], vals[i]);
-        		if (types[i].equals("text")){
+        		if (types[i] == "text"){
         		vars.put(keys[i], vals[i]);
-        		//toClient.println("Added text: " + keys[i] + " : " + vals[i]);
-        		} else if (types[i].equals("number")){
-        		if (vals[i].equals("")) {
-        			vals[i] = "0";
-        			}
+        		toClient.println("Added text: " + keys[i] + " : " + vals[i]);
+        		} else if (types[i] == "number"){
             	vars.put(keys[i], Integer.parseInt(vals[i]));
-            	//toClient.println("Added number: " + keys[i] + " : " + vals[i]);
-        		} else if (types[i].equals("email")){
+            	toClient.println("Added number: " + keys[i] + " : " + vals[i]);
+        		} else if (types[i] == "email"){
                 vars.put(keys[i], vals[i]);
-                //toClient.println("Added email: " + keys[i] + " : " + vals[i]);
+                toClient.println("Added email: " + keys[i] + " : " + vals[i]);
             	}
         	}	
         runtime.setVariable(instanceID, "bestanden", true);
