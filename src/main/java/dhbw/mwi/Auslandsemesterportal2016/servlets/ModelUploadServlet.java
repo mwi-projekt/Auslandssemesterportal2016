@@ -24,6 +24,7 @@ public class ModelUploadServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Part filePart = null;
 
+        response.setContentType("application/json");
         out.println("{");
 
         try {
