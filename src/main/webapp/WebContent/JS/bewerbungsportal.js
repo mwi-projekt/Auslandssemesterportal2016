@@ -119,28 +119,7 @@ var main = function() {
 						}
 						
 						if (i === (4 * zaehler)) {
-						    /*if (zaehler === 1) {
-							tabelle = tabelle
-								+ '<tr class="'
-								+ even
-								+ '" id="row'
-								+ (zaehler)
-                                + '" data-rid="'+zaehler+'"><td>'
-								+ sessionStorage["studiengang"]
-								+ '</td><td id="uni'
-								+ zaehler
-								+ '">'
-								+ auslesen[(0)]
-								+ '</td><td>'
-								+ auslesen[1]
-								+ '</td><td id="status'
-								+ zaehler
-								+ '">'
-								+ status
-								+ '</td><td class="btn" id="btnProzessFortfahren'
-								+ zaehler
-								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
-						    } else */if (status === "abgeschlossen") {
+							if (status === "abgeschlossen") {
 							tabelle = tabelle
 								+ '<tr class="'
 								+ even
@@ -158,7 +137,9 @@ var main = function() {
 								+ zaehler
 								+ '">'
 								+ status
-								+ '</td><td class="btn" id="btnZusammenfassung">Zusammenfassung</td></tr>';
+								+ '</td><td class="btn" id="btnZusammenfassung'
+								+ zaehler
+								+ '">Zusammenfassung</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    } else {
 							tabelle = tabelle
 								+ '<tr class="'
@@ -231,7 +212,7 @@ var main = function() {
 
 								});
 							
-								$('#btnZusammenfassung'+ i).on('click',
+							$('#btnZusammenfassung'+ i).on('click',
 									function(event) {
 									var id = event.target.id
 								    	.replace('btnZusammenfassung','');

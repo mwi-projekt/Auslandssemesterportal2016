@@ -51,7 +51,7 @@ public class UpdateInstanceServlet extends HttpServlet {
         	}	
         runtime.setVariable(instanceID, "bestanden", true);
         	engine.getTaskService().complete(engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(), vars);	
-    		toClient.write("Saved");
+    		toClient.println("Saved");
         } else {
         	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         	toClient.print("Variables not set");
