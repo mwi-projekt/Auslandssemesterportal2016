@@ -66,7 +66,7 @@ function parse(){
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '>';
+								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '><br>';
 								idList.push(json[i]["data"]["id"]);
 								typeList.push(json[i]["data"]["type"]);
 							}
