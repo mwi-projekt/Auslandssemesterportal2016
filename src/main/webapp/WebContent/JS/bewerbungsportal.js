@@ -575,7 +575,7 @@ var main = function() {
 	$('.popUpBewerber').children().children('b').html('');
     });
     $('#btnNotePruef').on('click', function(event) {
-	var note = $('#bewEnglischAbi').val(auslesen[0]);
+	var note = $('#bewEnglischAbi').val();
 	if (note >= 11) {
 	    $.ajax({
 		type : "POST",
