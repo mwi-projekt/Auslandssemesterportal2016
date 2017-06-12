@@ -141,7 +141,8 @@ var main = function() {
 								+ zaehler
 								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    } else if (status === "abgeschlossen") {
-						    	+ '<tr class="'
+							tabelle = tabelle
+								+ '<tr class="'
 								+ even
 								+ '" id="row'
 								+ (zaehler)
@@ -214,7 +215,7 @@ var main = function() {
 									    .replace(
 										    'btnProzessFortfahren',
 										    '');
-								    $(
+								    /*$(
 									    '.popUpBack')
 									    .html(
 										    '<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
@@ -223,7 +224,7 @@ var main = function() {
 									    .show();
 								    setTimeout(
 									    closeLoading,
-									    1000);
+									    1000);*/
 
 								    // Ermittlung
 								    // des
