@@ -99,9 +99,9 @@ function saveData(){
 	keyString = keyString.substr(0,keyString.length-1);
 	valString = valString.substr(0,valString.length-1);
 	typeString = typeString.substr(0,typeString.length-1);
-	alert(keyString);
-	alert(valString);
-	alert(typeString);
+	//alert(keyString);
+	//alert(valString);
+	//alert(typeString);
 	$
 	.ajax({
 		type : "POST",
