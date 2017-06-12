@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	var idList = [];
+	var typeList = [];
 	var url = new URL(window.location.href);
 	var instanceID = url.searchParams.get("instance_id");
 	parse();
@@ -53,7 +54,8 @@ function parse(){
 									//alert ("Option hinzugefügt: " + json[i]["data"]["values"][j]);
 								}
 								output = output + '</select></label></form><br>';
-								idList.push(step_id + i);
+								idList.push(json[i]["data"]["id"]);
+								typeList.push("text");
 								break;
 							case "form-text":
 								var req = "";
@@ -61,7 +63,8 @@ function parse(){
 									req = ' required="required"';
 								}
 								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '>';
-								idList.push(step_id + i);
+								idList.push(json[i]["data"]["id"]);
+								typeList.push(json[i]["data"]["type"]);
 							}
 						
 
@@ -83,13 +86,15 @@ function parse(){
 function saveData(){
 	var keyString = "";
 	var valString = "";
+	var typeString = "";
 	for (var j = 0; j < idList.length;j++){
 		keyString = keyString + idList[j] + "|";
 		valString = valString + document.getElementById(idList[j]).value + "|";
+		typeString = typeString + typeList[j] + "|";
 	}
 	keyString = keyString.substr(0,keyString.length-1);
 	valString = valString.substr(0,valString.length-1);
-		
+	typeString = typeString.substr(0,typeString.length-1);	
 	$
 	.ajax({
 		type : "POST",
@@ -97,7 +102,8 @@ function saveData(){
 		data : {
 			instance_id: instanceID,
 			key : keyString,
-			value: valString
+			value: valString,
+			type: typeString
 		},
 		success : function(result) {
 			location.reload();
