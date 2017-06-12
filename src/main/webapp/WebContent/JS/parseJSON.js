@@ -1,8 +1,12 @@
+var instanceID;
+var url;
+var typeList;
+var idList;
 $(document).ready(function() {
-	var idList = [];
-	var typeList = [];
-	var url = new URL(window.location.href);
-	var instanceID = url.searchParams.get("instance_id");
+	idList = [];
+	typeList = [];
+	url = new URL(window.location.href);
+	instanceID = url.searchParams.get("instance_id");
 	parse();
 });
 
@@ -62,7 +66,7 @@ function parse(){
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '>';
+								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '><br>';
 								idList.push(json[i]["data"]["id"]);
 								typeList.push(json[i]["data"]["type"]);
 							}
