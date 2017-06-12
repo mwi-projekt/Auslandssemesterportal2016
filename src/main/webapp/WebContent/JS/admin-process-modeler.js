@@ -86,6 +86,42 @@ $(document).ready(function () {
 
     // @TODO: implement document upload, upload-element, import
 
+    function openCheckboxPopup(data, cb, cbClose) {
+        var success = false;
+        $.sweetModal({
+            title: 'Checkbox hinzufügen',
+            content: checkboxForm,
+            blocking: true,
+            onClose: function () {
+                if (!success) cbClose();
+            },
+            onOpen: function () {
+
+                if (data.label) {
+                    $('#field-label').val(data.label);
+                    $('#demo-label').text(data.label);
+                }
+
+
+                $('#field-label').on('change keydown', function () {
+                    $('#demo-label').text($(this).val());
+                });
+
+                $('#field-save').on('click', function () {
+                    var data = {
+                        data: {
+                            label: $('#field-label').val()
+                        }
+                    };
+                    success = true;
+                    cb(data);
+                    $('.sweet-modal-close-link').trigger('click');
+                });
+            },
+            //theme: $.sweetModal.THEME_DARK
+        });
+    }
+
     function openSelectFormPopup(data, cb, cbClose) {
         var success = false;
         $.sweetModal({
@@ -229,6 +265,11 @@ $(document).ready(function () {
         textForm = data;
     });
 
+    var checkboxForm = '';
+    $.get('checkbox-form.html', {}, function (data) {
+        checkboxForm = data;
+    });
+
     function init(data) {
         $('#cardSlots').dynamicdom({
 
@@ -254,6 +295,13 @@ $(document).ready(function () {
                     openTextInputPopup($elm.data('cdata'), function (data) {
                         data.content = '<div class="form-group"><label>'+ data.data.label +'</label><br />' +
                             '<input class="form-control" /></div>';
+                        data.editor = false;
+                        cb(self, $elm, data);
+                    }, function () {
+                    });
+                } else if (type == 'form-checkbox') {
+                    openCheckboxPopup($elm.data('cdata'), function (data) {
+                        data.content = '<div class="form-group"><label><input type="checkbox" /> '+ data.data.label +'</label></div>';
                         data.editor = false;
                         cb(self, $elm, data);
                     }, function () {
@@ -311,6 +359,18 @@ $(document).ready(function () {
                         openTextInputPopup({}, function (data) {
                             data.content = '<div class="form-group"><label>'+ data.data.label +'</label><br />' +
                                 '<input class="form-control" /></div>';
+                            data.editor = false;
+                            cb(self, elm, data);
+                        }, function () {
+                            elm.parent().find('.actions .fa-trash').trigger('click');
+                        });
+                    };
+                } else if (type == 'form-checkbox') {
+                    enableEdit = true;
+                    con = function (elm, outp, cb, self) {
+                        outp.content = 'Hallo Welt';
+                        openCheckboxPopup({}, function (data) {
+                            data.content = '<div class="checkbox"><label><input type="checkbox" /> '+ data.data.label +'</label></div>';
                             data.editor = false;
                             cb(self, elm, data);
                         }, function () {

@@ -1,11 +1,4 @@
-/* window.onload = function() {
-	//Lese JSON-Datei ein
-	var jsonString = '[{"type": "title","content": "Page Title"},{"type": "paragraph","content": "Bla"}]';
-	var json = JSON.parse(jsonString);
-	for (var i = 0;i < json.length; i++){
-		alert (json[i][type]);
-	}
-}; */
+var idList = [];
 
 function parse(){
 	var step_id = "";
@@ -55,6 +48,7 @@ function parse(){
 									//alert ("Option hinzugefügt: " + json[i]["data"]["values"][j]);
 								}
 								output = output + '</select></label></form><br>';
+								idList.push(step_id + i);
 								break;
 							case "form-text":
 								var req = "";
@@ -62,12 +56,12 @@ function parse(){
 									req = ' required="required"';
 								}
 								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + step_id + i +'"' + req + '>';
+								idList.push(step_id + i);
 							}
 						
-						//alert (output);
-						document.getElementById("results").innerHTML = output;
+
 					}
-					
+						document.getElementById("results").innerHTML = output;
 				},
 				error : function(result) {
 					alert('Ein Fehler ist aufgetreten: ' + result);
@@ -78,8 +72,32 @@ function parse(){
 		error : function(result) {
 			alert('Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.');
 		}
-	});
-	
-	
-	
+	});	
 }
+
+function saveData(){
+	var keyString = "";
+	var valString = "";
+	for (var j = 0; j < idList.length;j++){
+		keyString = keyString + idList[j] + "|";
+		valString = valString + document.getElementById(idList[j]).value + "|";
+	}
+	keyString = keyString.substr(0,keyString.length-1);
+	valString = valString.substr(0,valString.length-1);
+		
+	$
+	.ajax({
+		type : "POST",
+		url : "setVariable",
+		data : {
+			instance_id: '4431ccda-4df5-11e7-a496-005056940bc2',
+			key : keyString,
+			value: valString
+		},
+		success : function(result) {			
+		},
+		error : function(result) {
+			alert('Ein Fehler ist aufgetreten');
+		}
+	}); 
+};
