@@ -40,19 +40,15 @@ public class UpdateInstanceServlet extends HttpServlet {
         		//runtime.setVariable(instance.getId(), keys[i], vals[i]);
         		if (types[i].equals("text")){
         		vars.put(keys[i], vals[i]);
-        		toClient.println("Added text: " + keys[i] + " : " + vals[i]);
         		} else if (types[i].equals("number")){
         			if (vals[i].equals("")){
         				vals[i]= "0";
         			}
             	vars.put(keys[i], Integer.parseInt(vals[i]));
-            	toClient.println("Added number: " + keys[i] + " : " + vals[i]);
         		} else if (types[i].equals("email")){
                 vars.put(keys[i], vals[i]);
-                toClient.println("Added email: " + keys[i] + " : " + vals[i]);
             	}
         	}	
-        runtime.setVariable(instanceID, "bestanden", true);
         	engine.getTaskService().complete(engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(), vars);	
     		toClient.println("Saved");
         } else {
