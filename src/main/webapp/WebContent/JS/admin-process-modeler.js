@@ -300,18 +300,12 @@ $(document).ready(function () {
             onedit: function ($elm, type, cb, self) {
                 if (type == 'form-select') {
                     openSelectFormPopup($elm.data('cdata'), function (data) {
-                        data.content = '<div class="form-group"><label>'+ data.label +'</label><br />' +
-                            '<select class="form-control">'+ data.content +'</select></div>';
-                        data.editor = false;
-                        cb(self, $elm, data);
+                        self.settings.oninit($elm, data, data.data, cb, self);
                     }, function () {
                     });
                 } else if (type == 'form-text') {
                     openTextInputPopup($elm.data('cdata'), function (data) {
-                        data.content = '<div class="form-group"><label>'+ data.data.label +'</label><br />' +
-                            '<input class="form-control" /></div>';
-                        data.editor = false;
-                        cb(self, $elm, data);
+                        self.settings.oninit($elm, data, data.data, cb, self);
                     }, function () {
                     });
                 } else if (type == 'form-checkbox') {
@@ -321,6 +315,27 @@ $(document).ready(function () {
                         cb(self, $elm, data);
                     }, function () {
                     });
+                }
+            },
+
+            oninit: function ($elm, outp, data, cb, self) {
+                var type = $elm.data('type');
+                if (type == 'form-select') {
+                    var con = '';
+                    $.each(data.values, function () {
+                        con += '<option>'+this+'</option>';
+                    });
+                    outp.content = '<div class="form-group"><label>'+ data.label +'</label><br />' +
+                        '<select class="form-control">'+ con +'</select></div>';
+                    outp.editor = false;
+                    cb(self, $elm, outp);
+                } else if (type == 'form-text') {
+                    outp.content = '<div class="form-group"><label>'+ data.label +'</label><br />' +
+                        '<input class="form-control" /></div>';
+                    outp.editor = false;
+                    cb(self, $elm, outp);
+                } else {
+                    cb(self, $elm, outp);
                 }
             },
 
@@ -359,10 +374,7 @@ $(document).ready(function () {
                     con = function (elm, outp, cb, self) {
                         outp.content = 'Hallo Welt';
                         openSelectFormPopup({}, function (data) {
-                            data.content = '<div class="form-group"><label>'+ data.data.label +'</label><br />' +
-                                '<select class="form-control">'+ data.content +'</select></div>';
-                            data.editor = false;
-                            cb(self, elm, data);
+                            self.settings.oninit(elm, data, data.data, cb, self);
                         }, function () {
                             elm.parent().find('.actions .fa-trash').trigger('click');
                         });
@@ -372,10 +384,7 @@ $(document).ready(function () {
                     con = function (elm, outp, cb, self) {
                         outp.content = 'Hallo Welt';
                         openTextInputPopup({}, function (data) {
-                            data.content = '<div class="form-group"><label>'+ data.data.label +'</label><br />' +
-                                '<input class="form-control" /></div>';
-                            data.editor = false;
-                            cb(self, elm, data);
+                            self.settings.oninit(elm, data, data.data, cb, self);
                         }, function () {
                             elm.parent().find('.actions .fa-trash').trigger('click');
                         });
