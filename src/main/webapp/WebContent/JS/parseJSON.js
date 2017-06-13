@@ -113,7 +113,7 @@ function saveData(){
 			type: typeString
 		},
 		success : function(result) {
-			//location.reload();
+			location.reload();
 		},
 		error : function(result) {
 			alert('Ein Fehler ist aufgetreten');
