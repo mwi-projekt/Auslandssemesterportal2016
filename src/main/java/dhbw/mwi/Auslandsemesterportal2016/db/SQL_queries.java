@@ -176,4 +176,21 @@ public static ResultSet getJson(String step, String model){
 	}	
 }
 
+public static String getInstanceId(int matNr, String uni){
+	String query = "SELECT processInstance FROM MapUserInstanz WHERE matrikelnummer = ? AND uni = ?";
+	String[] params = new String[]{""+matNr,uni};
+	String[] types = new String[]{"int","String"};
+	ResultSet ergebnis = executeStatement(query,params,types);
+	try{
+		if (ergebnis.next()){
+			return ergebnis.getString("processInstance");
+		} else {
+			return "";
+		}
+	} catch (Exception e){
+		e.printStackTrace();
+		return "";
+	}
+}
+
 }

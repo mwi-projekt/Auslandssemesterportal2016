@@ -2206,7 +2206,7 @@ function defineNextStep(nextStepString, uni) {
         modules : 'html5'
     });
 
-    $('#bewFormular0, #bewFormular1, #bewFormular2, #bewFormular3, #bewFormular4, #bewFormular5, #bewFormular6, #bewFormular7, #bewFormular8, #bewFormular9, #bewFormular10').hide();
+    $('#bewFormular0 , #bewFormular1, #bewFormular2, #bewFormular3, #bewFormular4, #bewFormular5, #bewFormular6, #bewFormular7, #bewFormular8, #bewFormular9, #bewFormular10').hide();
     var i = sessionStorage['SchrittAktuell'];
     
     switch (nextStepString.trim()) {
