@@ -23,14 +23,19 @@ public class GetInstanceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter toClient = response.getWriter();
+        
+        int matnr = Integer.parseInt(request.getParameter("matnr"));
+        String uni = request.getParameter("uni");
 
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtime = engine.getRuntimeService();
-        
-        String instance_id = SQL_queries.getInstanceId(Integer.parseInt(request.getParameter("matnr")), request.getParameter("uni"));
+        //Holt instanceId aus DB
+        String instance_id = SQL_queries.getInstanceId(matnr, uni);
         if (instance_id == ""){
+        	//Lege neue Instanz an
         	ProcessInstance instance = runtime.startProcessInstanceById("studentBewerben");
         	instance_id = instance.getId();
+        	SQL_queries.createInstance(instance_id, uni, matnr, 10);
         }
         toClient.print(instance_id);
     }

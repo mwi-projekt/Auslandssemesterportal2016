@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SQL_queries {
 
@@ -191,6 +194,22 @@ public static String getInstanceId(int matNr, String uni){
 		e.printStackTrace();
 		return "";
 	}
+}
+
+public static void createInstance(String instanceID, String uni, int matNr, int stepCount){
+	//Nutzerinstanz eintragen}
+	String query = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status) VALUES (?,?,?,?)";
+	String[] params = new String[]{""+matNr,uni,instanceID,"1"};
+	String[] types = new String[]{"int","String","String","String"};
+	executeUpdate(query,params,types);
+	//Bewerbungsprozess eintragen
+	DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+	Date date = new Date();
+	String dateString = dateFormat.format(date);
+	query = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, Schritte_aktuell, Schritte_gesamt) VALUES (?,?,?,?,?)";
+	params = new String[]{""+matNr,uni,dateString,"0",""+stepCount};
+	types = new String[]{"int","String","String","int","int"};
+	executeUpdate(query,params,types);
 }
 
 }
