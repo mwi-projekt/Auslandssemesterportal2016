@@ -33,7 +33,7 @@ public class GetInstanceServlet extends HttpServlet {
         String instance_id = SQL_queries.getInstanceId(matnr, uni);
         if (instance_id == ""){
         	//Lege neue Instanz an
-        	ProcessInstance instance = runtime.startProcessInstanceById("studentBewerben");
+        	ProcessInstance instance = runtime.startProcessInstanceByKey("studentBewerben");
         	instance_id = instance.getId();
         	SQL_queries.createInstance(instance_id, uni, matnr, 10);
         }

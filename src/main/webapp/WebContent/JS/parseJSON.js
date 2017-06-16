@@ -7,7 +7,6 @@ $(document).ready(function() {
 	typeList = [];
 	url = new URL(window.location.href);
 	instanceID = url.searchParams.get("instance_id");
-	
 	parse();
 });
 

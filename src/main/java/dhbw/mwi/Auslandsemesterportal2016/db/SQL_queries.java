@@ -64,6 +64,9 @@ public static int executeUpdate (String query, String[] data, String[] types){//
 				statement.setString(i+1, data[i]);
 			} else if (types[i] == "int"){
 				statement.setInt(i+1, Integer.parseInt(data[i]));
+			} else if (types[i] == "date"){
+				java.sql.Date date = java.sql.Date.valueOf(data[i]);
+				statement.setDate(i+1,  date);
 			}
 			}
 		result = statement.executeUpdate();
@@ -203,12 +206,13 @@ public static void createInstance(String instanceID, String uni, int matNr, int 
 	String[] types = new String[]{"int","String","String","String"};
 	executeUpdate(query,params,types);
 	//Bewerbungsprozess eintragen
-	DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
+	System.out.println("InsertIntoBewerbungsprozess");
+	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	Date date = new Date();
 	String dateString = dateFormat.format(date);
 	query = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, Schritte_aktuell, Schritte_gesamt) VALUES (?,?,?,?,?)";
 	params = new String[]{""+matNr,uni,dateString,"0",""+stepCount};
-	types = new String[]{"int","String","String","int","int"};
+	types = new String[]{"int","String","date","int","int"};
 	executeUpdate(query,params,types);
 }
 
