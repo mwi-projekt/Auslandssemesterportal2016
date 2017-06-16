@@ -200,7 +200,7 @@ var main = function() {
 								    
 								    // Ermittlung des Fortschritts für die weiteren Bewerbungsschritte
 								    var uni = $('#uni'+ id).text();
-								    $('.iFenster').hide();
+								    /*$('.iFenster').hide();
 								    $('.iF1').show();
 								    $('.dat').hide();
 								    sessionStorage['uni'] = uni;
@@ -208,7 +208,25 @@ var main = function() {
 								    $('#aktuelleUni').html(uni);
 								    sessionStorage['uni'] = uni;
 								    SchrittReq(uni);
-								    askNextStep(uni);
+								    askNextStep(uni);*/
+								    $
+								    .ajax({
+									type : "GET",
+									url : "getInstance",
+									data : {
+									    //NEUE DB-EINTRAG
+									    matnr : sessionStorage['matrikelnr'],
+									    uni : uni 
+									},
+									success : function(
+										result) {
+									    location.replace("http://193.196.7.215:8080/Auslandssemesterportal/WebContent/bewerben.html?instance_id="+result);
+									},
+									error : function(
+										result) {
+									}
+								    });
+
 
 								});
 							
@@ -413,7 +431,7 @@ var main = function() {
 							    $('.iF1').show();
 							    $('#bewProzess')
 								    .hide();
-							    var datum = new Date();
+							    /*var datum = new Date();
 							    var dd = datum
 								    .getDate();
 							    var mm = datum
@@ -435,7 +453,7 @@ var main = function() {
 
 							    sessionStorage['uni'] = $(
 								    '#selectUni')
-								    .val();
+								    .val(); */
 							    $
 								    .ajax({
 									type : "GET",

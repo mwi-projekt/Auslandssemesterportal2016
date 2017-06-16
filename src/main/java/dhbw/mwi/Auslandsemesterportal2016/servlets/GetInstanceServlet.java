@@ -35,7 +35,8 @@ public class GetInstanceServlet extends HttpServlet {
         	//Lege neue Instanz an
         	ProcessInstance instance = runtime.startProcessInstanceByKey("studentBewerben");
         	instance_id = instance.getId();
-        	SQL_queries.createInstance(instance_id, uni, matnr, 10);
+        	long stepcount = engine.getTaskService().createTaskQuery().caseInstanceId(instance_id).count();
+        	SQL_queries.createInstance(instance_id, uni, matnr, (int) stepcount);
         }
         toClient.print(instance_id);
     }

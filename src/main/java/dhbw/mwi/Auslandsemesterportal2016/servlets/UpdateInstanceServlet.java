@@ -32,8 +32,6 @@ public class UpdateInstanceServlet extends HttpServlet {
         String[] types = type.split("\\|", -1);
         Map<String,Object> vars = new HashMap<String,Object>();
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        RuntimeService runtime = engine.getRuntimeService();
-        ProcessInstance instance = runtime.createProcessInstanceQuery().processInstanceId(instanceID).singleResult();
    
         if (key != null && val != null) {
         	for (int i = 0; i < keys.length; i++){
