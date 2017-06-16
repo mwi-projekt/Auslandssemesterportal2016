@@ -73,7 +73,7 @@ function parse(){
 						
 
 					}
-						document.getElementById("results").innerHTML = output;
+						document.getElementById("formular").innerHTML = output;
 				},
 				error : function(result) {
 					alert('Ein Fehler ist aufgetreten: ' + result);

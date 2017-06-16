@@ -438,31 +438,23 @@ var main = function() {
 								    .val();
 							    $
 								    .ajax({
-									type : "POST",
-									url : "login_db",
+									type : "GET",
+									url : "getInstance",
 									data : {
 									    //NEUE DB-EINTRAG
-										action : "post_prozessStart",
-									    matrikelnummer : sessionStorage['matrikelnr'],
+									    matnr : sessionStorage['matrikelnr'],
 									    uni : $(
 										    '#selectUni')
-										    .val(),
-									    datum : heute,
-									    schritt1 : "0",
-									    schritt2 : "0",
-									    schritt3 : "0",
-									    schritt4 : "0",
-									    schritt5 : "0",
-									    Schritte_aktuell : "0",
-									    Schritte_gesamt : "10" //Hier fehlt die Dynamisierung 
+										    .val(), 
 									},
 									success : function(
 										result) {
-									    var uni = $(
+									    /*var uni = $(
 										    '#selectUni')
 										    .val();
 									    zaehlupdate(0);
-									    askNextStep(uni);
+									    askNextStep(uni); */
+									    location.replace("http://193.196.7.215:8080/Auslandssemesterportal/WebContent/bewerben.html?instance_id="+result);
 									},
 									error : function(
 										result) {
