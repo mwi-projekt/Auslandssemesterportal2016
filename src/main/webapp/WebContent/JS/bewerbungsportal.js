@@ -1517,6 +1517,9 @@ function getAngebotsDaten() {
 		    var zaehler = 1;
 		    var htmlText = '';
 		    var auslesen = result.split(';');
+		    if (result == ''){
+		    	$('.keininhalt').show();
+		    };
 		    for (var i = 0; i < auslesen.length; i++) {
 			auslesen[i] = auslesen[i].trim();
 			if (i = (6 * zaehler)) {
@@ -1603,7 +1606,6 @@ function getAngebotsDaten() {
 					    });
 			}
 		    }
-		    $('.keininhalt').hide();
 		},
 		error : function(result) {
 		}
