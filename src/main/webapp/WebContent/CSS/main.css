@@ -611,6 +611,7 @@ i {
 	background: #D60000;
 	float: left;
 	margin-bottom: 10px;
+	font-color: white;
 }
 
 .cmsBtn:hover {
