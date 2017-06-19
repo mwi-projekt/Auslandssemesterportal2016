@@ -69,7 +69,15 @@ function parse(){
 								output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + ' </label><div class="col-sm-10"><input class="form-control" type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
 								idList.push(json[i]["data"]["id"]);
 								typeList.push(json[i]["data"]["type"]);
-							}
+								break;
+							case "form-checkbox":
+								output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox	" id="' + json[i]["data"]["id"] + '"> ' + json[i]["data"]["label"] + ' </label></div></div></div>';
+								idList.push(json[i]["data"]["id"]);
+								typeList.push("boolean");
+								break;
+							case "form-upload":
+								break;
+						}
 						
 
 					}
@@ -92,9 +100,17 @@ function saveData(){
 	var valString = "";
 	var typeString = "";
 	for (var j = 0; j < idList.length;j++){
-		keyString = keyString + idList[j] + "|";
-		valString = valString + document.getElementById(idList[j]).value + "|";
-		typeString = typeString + typeList[j] + "|";
+
+		if ($('#'+idList[j]).attr('type') == 'checkbox') {
+			var checkedString = (document.getElementById(idList[j]).checked) ? 'true' : 'false';
+            keyString = keyString + idList[j] + "|";
+            valString = valString + checkedString + "|";
+            typeString = typeString + typeList[j] + "|";
+		} else {
+            keyString = keyString + idList[j] + "|";
+            valString = valString + document.getElementById(idList[j]).value + "|";
+            typeString = typeString + typeList[j] + "|";
+		}
 	}
 	keyString = keyString.substr(0,keyString.length-1);
 	valString = valString.substr(0,valString.length-1);
