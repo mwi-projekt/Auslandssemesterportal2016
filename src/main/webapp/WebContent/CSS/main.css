@@ -286,13 +286,20 @@ input {
 
 
 /* imgSlider */
+@media screen and (max-width: 800px) {
+    // this css will only be used when the screen size is max 800px
+	.imgSlider {
+	display: none;
+	}
+}
+
 .imgSlider {
-	width: 970px;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	height: 250px;
-	display: inline-block;
+width: 970px;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+height: 250px;
+display: inline-block;
 }
 
 .pfeil {
