@@ -52,12 +52,12 @@ function parse(){
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<form><label>' + json[i]["data"]["label"] + ' <select id="' + json[i]["data"]["id"] +'"' + req +'>';
+								output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + '</label><div class="col-sm-10"><select class="form-control" id="' + json[i]["data"]["id"] +'"' + req +'>';
 								for (var j = 0; j < json[i]["data"]["values"].length; j++){
 									output = output + '<option>' + json[i]["data"]["values"][j] + '</option>';
 									//alert ("Option hinzugefügt: " + json[i]["data"]["values"][j]);
 								}
-								output = output + '</select></label></form><br>';
+								output = output + '</select></div></div>';
 								idList.push(json[i]["data"]["id"]);
 								typeList.push("text");
 								break;
@@ -66,7 +66,7 @@ function parse(){
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '><br>';
+								output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + ' </label><div class="col-sm-10"><input class="form-control" type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
 								idList.push(json[i]["data"]["id"]);
 								typeList.push(json[i]["data"]["type"]);
 							}
