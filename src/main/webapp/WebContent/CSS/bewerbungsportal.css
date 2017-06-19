@@ -310,3 +310,7 @@ td {
 #closeBewerber {
 	background-color: red;
 }
+
+.keininhalt{
+	display: none;
+}
