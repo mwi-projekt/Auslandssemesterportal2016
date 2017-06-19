@@ -10,6 +10,37 @@ $(document).ready(function() {
 	parse();
 });
 
+function getDropzoneOptions(action, fileName) {
+    return {
+        acceptedFiles: 'application/pdf',
+        maxFilesize: 16,
+        addRemoveLinks: true,
+        sending: function(file, xhr, formData){
+            formData.append('action', action);
+            formData.append('matrikelnummer', sessionStorage['matrikelnr']);
+            formData.append('uni', sessionStorage['uni']);
+        },
+        accept: function(file, done){
+            if(file.name != fileName) {
+                swal("Fehler", "Bitte beachte die Syntax zur Benennung des Dokuments: " + fileName, "error");
+                this.removeFile(file);
+            }else{
+                done();
+            }
+        },
+        error: function(file, response){
+            if($.type(response) === "string"){
+                var message = response;
+            } else {
+                var message = response.message;
+            }
+
+            swal('Fehler', message, 'error');
+            this.removeFile(file);
+        }
+    }
+}
+
 function parse(){
 	var step_id = "";
 	var output = "";
@@ -71,11 +102,13 @@ function parse(){
 								typeList.push(json[i]["data"]["type"]);
 								break;
 							case "form-checkbox":
-								output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox	" id="' + json[i]["data"]["id"] + '"> ' + json[i]["data"]["label"] + ' </label></div></div></div>';
+								output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' + json[i]["data"]["id"] + '"> ' + json[i]["data"]["label"] + ' </label></div></div></div>';
 								idList.push(json[i]["data"]["id"]);
 								typeList.push("boolean");
 								break;
 							case "form-upload":
+                                output = output + '<form action="upload_new" class="dropzone" id="'+json[i]["data"]["id"]+'"></form>';
+                                Dropzone.options[json[i]["data"]["id"]] = getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]);
 								break;
 						}
 						
