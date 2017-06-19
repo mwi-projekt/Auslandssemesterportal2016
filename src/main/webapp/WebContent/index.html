@@ -603,13 +603,36 @@
 										style="float: right" />
 								</div>
 								<div class="contentAng" id="cEdit14">
-									<b>Der Upload von Bildern funktioniert noch nicht!!!</b> <input
-										type="file" class="inBox" id="inEditAngebotBild1"
-										style="color: white" /> <input type="file" class="inBox"
-										id="inEditAngebotBild2" style="color: white" /> <input
-										type="file" class="inBox" id="inEditAngebotBild3"
-										style="color: white" /> <input type="file" class="inBox"
-										id="inEditAngebotBild4" style="color: white" />
+									<b>Hier können Bilder hochgeladen werden.</b> 
+
+	<p>Es wird ein Eingabefeld erzeugt, das Attribut multiple sorgt dafür, dass im Auswahldialog
+		mehrere Dateien ausgewählt werden können </p>
+	<p>
+		<input type="file" id="files" name="files[]" multiple />
+	</p>
+	<p>Hier werden ausgewählte Dateien angezeigt.</p> 
+	<output id="list"></output>
+<script>
+	function dateiauswahl(evt) {
+			var files = evt.target.files; // FileList object
+			//Deklarierung eines Array Objekts mit Namen "output" Speicherung von Eigenschaften
+			var output = [];
+			//Zählschleife, bei jedem Durchgang den Namen, Typ und die Dateigröße der ausgewählten Dateien zum Array hinzufügen
+			for (var i = 0, f; f = files[i]; i++) {
+				output.push('<li><strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
+					f.size, ' bytes</li>');
+			}
+			//Auf das Ausgabefeld zugreifen, unsortierte Liste erstellen und das oben erstellte Array auslesen lassen
+			document.getElementById('list')
+				.innerHTML = '<ul>' + output.join('') + '</ul>';
+		}
+		//Falls neue Eingabe, neuer Aufruf der Auswahlfunktion
+	document.getElementById('files')
+		.addEventListener('change', dateiauswahl, false);
+
+</script>
+									
+									
 								</div>
 							</div>
 							<p class="cmsAngebote cmsBtn btn" id="cmsBtnSave"

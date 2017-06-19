@@ -1,3 +1,21 @@
+function dateiauswahl(evt) {
+		var files = evt.target.files; // FileList object
+		//Deklarierung eines Array Objekts mit Namen "output" Speicherung von Eigenschaften
+		var output = [];
+		//Zählschleife, bei jedem Durchgang den Namen, Typ und die Dateigröße der ausgewählten Dateien zum Array hinzufügen
+		for (var i = 0, f; f = files[i]; i++) {
+			output.push('<li><strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
+				f.size, ' bytes</li>');
+		}
+		//Auf das Ausgabefeld zugreifen, unsortierte Liste erstellen und das oben erstellte Array auslesen lassen
+		document.getElementById('list')
+			.innerHTML = '<ul>' + output.join('') + '</ul>';
+	}
+	//Falls neue Eingabe, neuer Aufruf der Auswahlfunktion
+document.getElementById('files')
+	.addEventListener('change', dateiauswahl, false);
+
+
 var imgCount = 1;
 var back = 1;
 var angeboteNavBar = '<div class="navBar"><p class="navel current" id="l1">Allgemeine Infos</p><p class="navel" id="l2">FAQs</p><p class="navel" id="l3">Erfahrungsbericht</p><p class="navel" id="l4">Bilder</p><p class="navel" id="l5">Bewerben</p></div>';
@@ -54,7 +72,7 @@ var main = function() {
 		$('.popUpBack').show();
 		$('.popUpFeld').show();
 	});
-	// Schlie�en Kreuz im PopUpFeld wurde geklickt, PopUp wird geschlossen
+	// Schließen Kreuz im PopUpFeld wurde geklickt, PopUp wird geschlossen
 	$('#close').on('click', function() {
 		$('.popUpBack').hide();
 		$('.popUpFeld').hide();
@@ -374,7 +392,7 @@ var main = function() {
 	});
 	// -------------------------------------------------------- CMS
 	// ------------------------------------------------------------------------------
-	// Click-Listener f�r CMS bearbeiten Buttons
+	// Click-Listener für CMS bearbeiten Buttons
 	$('.cmsBtn')
 			.on(
 					'click',
@@ -610,7 +628,7 @@ var main = function() {
 											success : function(result) {
 												$('.erfolgreich')
 														.html(
-																"Ihre �nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+																"Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 												$('.erfolgreich').show();
 												$('.erfolgreich').fadeOut(7000);
 											},
@@ -621,7 +639,7 @@ var main = function() {
 								break;
 							case ('cmsAngebote'):
 								if ($(this).parent().attr('id') === "angebotNeu") {
-									if ($('#inStudiengangNeuAngebot').val() != "Studiengang w�hlen*"
+									if ($('#inStudiengangNeuAngebot').val() != "Studiengang wählen*"
 											&& isEmpty($('#inNeuAngebot').val()) != true
 											&& isEmpty($('#inNeuAngebotInfo')
 													.val()) != true
@@ -675,7 +693,7 @@ var main = function() {
 													success : function(event) {
 														$('.erfolgreich')
 																.html(
-																		"Ihre �nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+																		"Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 														$('.erfolgreich')
 																.show();
 														$('.erfolgreich')
@@ -748,7 +766,7 @@ var main = function() {
 													success : function(event) {
 														$('.erfolgreich')
 																.html(
-																		"Ihre �nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+																		"Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 														$('.erfolgreich')
 																.show();
 														$('.erfolgreich')
@@ -806,7 +824,7 @@ var main = function() {
 											success : function(event) {
 												$('.erfolgreich')
 														.html(
-																"Ihre �nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+																"Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 												$('.erfolgreich').show();
 												$('.erfolgreich').fadeOut(7000);
 											},
@@ -818,13 +836,13 @@ var main = function() {
 							}
 						}
 					});
-	// Click Listener f�r die Bild �ndern Buttons
+	// Click Listener für die Bild ändern Buttons
 	$('.upload').on('click', function() {
 		var id = $(this).attr('id');
 		id = id.trim();
 		loop1(id);
 	});
-	// Click-Listener f�r neues Infoselement in Box PortalInfo
+	// Click-Listener für neues Infoselement in Box PortalInfo
 	$('#cmsBtnInfoNeu').on(
 			'click',
 			function() {
@@ -842,7 +860,7 @@ var main = function() {
 					$('#inli' + i).val($('#li' + i).text());
 				}
 			});
-	// Click-Listener f�r neuen Erfahrungsbericht in Box Erfahrungsbericht
+	// Click-Listener für neuen Erfahrungsbericht in Box Erfahrungsbericht
 	$('#cmsBtnBerichtNeu')
 			.on(
 					'click',
@@ -857,13 +875,13 @@ var main = function() {
 												+ (count + 1)
 												+ '"><div class="col-md-6"><img src="images/noimg.jpg" id="imgWorld" /><label class="btn cmsBtn cmsBerichte btnBild" id="btnberichtBild'
 												+ (count + 1)
-												+ '" style="float: right">Bild �ndern<input class="upload" type="file" id="berichtBild'
+												+ '" style="float: right">Bild ändern<input class="upload" type="file" id="berichtBild'
 												+ (count + 1)
 												+ '" /></label></div><div class="col-md-6 cmsBerichte"><textarea class="inBox" style="width: 100%; height: 250px"></textarea></div>');
 						$('.kurzbericht').show();
 						$('.cmsBerichte').show();
 					});
-	// Click-Listener f�r neuen Link in Box InfoMaterial
+	// Click-Listener für neuen Link in Box InfoMaterial
 	$('#cmsBtnLinkNeu')
 			.on(
 					'click',
@@ -887,7 +905,7 @@ var main = function() {
 												+ '" src="images/Button Delete.png" />');
 						$('#cmsBtnLinkNeu').hide();
 					});
-	// Click-Listener f�r alle Images mit der class small
+	// Click-Listener für alle Images mit der class small
 	$('.small').on('click', function() {
 		var id = $(this).attr('id');
 		if (id.substring(0, 7) === "delInLi") {
@@ -898,7 +916,7 @@ var main = function() {
 			$('#inInfoLink' + id).val('');
 		}
 	});
-	// Click Listener f�r die Tiles im AdminBereich
+	// Click Listener für die Tiles im AdminBereich
 	$('.tile').on('click', function() {
 		var id = $(this).attr('id');
 		if (id === 'verwaltungIndex') {
@@ -915,7 +933,7 @@ var main = function() {
 			location.href = 'admin-process.html';
 		}
 	});
-	// Click-Listener f�r Link zur�ck zum Admin-Hauptmen�
+	// Click-Listener für Link zurück zum Admin-Hauptmenü
 	$('.backAdmin').on('click', function() {
 		$('#nutzerVerwaltung').hide();
 		$('#adminBereich').show();
@@ -923,7 +941,7 @@ var main = function() {
 		$('.Admin').hide();
 		sessionStorage['verwaltung'] = 0;
 	});
-	// Click-Listener f�r Userverwaltung User anzeigen lassen
+	// Click-Listener für Userverwaltung User anzeigen lassen
 	$('.btnUser')
 			.on(
 					'click',
@@ -1173,7 +1191,7 @@ var main = function() {
 							$('#inStudiengangNeuAngebot').html(
 									$('#selStudiengang').html().replace(
 											"Alle Angebote",
-											"Studiengang w�hlen*"));
+											"Studiengang wählen*"));
 							for (var i = 1; i <= 1; i++) {
 								for (var j = 1; j <= 4; j++) {
 									document
@@ -1215,7 +1233,7 @@ var main = function() {
 							$('#cmsAddStudgang').hide();
 							$('#cmsAddAngebot').hide();
 							$('#cmsEditAngebot').show();
-							var options = '<option>Angebot w�hlen</option>';
+							var options = '<option>Angebot wählen</option>';
 							for (var i = 1; isEmpty($('#angebot' + i)
 									.children().children('.uniName').text()) != true; i++) {
 								options = options
@@ -1283,7 +1301,7 @@ var main = function() {
 										success : function(result) {
 											$('.erfolgreich')
 													.html(
-															"Ihre �nderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
+															"Ihre Änderungen wurden erfolgreich in die Datenbank gespeichert. <br> Bitte laden sie die Seite erneut.");
 											$('.erfolgreich').show();
 											$('.erfolgreich').fadeOut(7000);
 										},
@@ -1292,10 +1310,10 @@ var main = function() {
 										}
 									});
 						} else {
-							swal("Sie d�rfen das Feld nicht leer lassen.");
+							swal("Sie dürfen das Feld nicht leer lassen.");
 						}
 					});
-	// Click-Listener f�r ein Angebot bearbeiten
+	// Click-Listener für ein Angebot bearbeiten
 	$('#selEditAngebot')
 			.on(
 					'click',
@@ -1452,7 +1470,7 @@ function loop1(id) {
 			loop1(id);
 		} else {
 			var text = $('#btn' + id).html();
-			text = text.replace('�ndern', 'Gew�hlt');
+			text = text.replace('ändern', 'Gewählt');
 			$('#btn' + id).html(text);
 			$('#btn' + id).css('background', 'rgb(48, 192, 192)');
 		}
