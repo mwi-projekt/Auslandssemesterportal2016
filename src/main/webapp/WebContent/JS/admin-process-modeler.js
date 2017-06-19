@@ -7,7 +7,7 @@ $(document).ready(function () {
            type: "error",
            confirmButtonText: "Ok"
        }, function () {
-           location.href = 'indexMockup.html';
+           location.href = 'index.html';
        });
     }
 
