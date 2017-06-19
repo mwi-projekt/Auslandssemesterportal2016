@@ -7,7 +7,7 @@ $(document).ready(function () {
            type: "error",
            confirmButtonText: "Ok"
        }, function () {
-           location.href = 'indexMockup.html';
+           location.href = 'index.html';
        });
     }
 
@@ -83,8 +83,6 @@ $(document).ready(function () {
             )
         });
     });
-
-    // @TODO: implement document upload, upload-element, import
 
     function openCheckboxPopup(data, cb, cbClose) {
         var success = false;
@@ -219,6 +217,42 @@ $(document).ready(function () {
         });
     }
 
+    function openUploadPopup(data, cb, cbClose) {
+        var success = false;
+        $.sweetModal({
+            title: 'Upload hinzufügen',
+            content: uploadForm,
+            blocking: true,
+            onClose: function () {
+                if (!success) cbClose();
+            },
+            onOpen: function () {
+
+                if (data.filename) {
+                    $('#field-filename').val(data.filename);
+                }
+
+                if (data.id) {
+                    $('#field-id').val(data.id);
+                }
+
+                $('#field-save').on('click', function () {
+                    var data = {
+                        data: {
+                            filename: $('#field-filename').val(),
+                            id: $('#field-id').val()
+                        },
+                        content: $('#demo').html()
+                    };
+                    success = true;
+                    cb(data);
+                    $('.sweet-modal-close-link').trigger('click');
+                });
+            },
+            //theme: $.sweetModal.THEME_DARK
+        });
+    }
+
     function openTextInputPopup(data, cb, cbClose) {
         var success = false;
         $.sweetModal({
@@ -285,6 +319,11 @@ $(document).ready(function () {
         checkboxForm = data;
     });
 
+    var uploadForm = '';
+    $.get('modals/upload-form.html', {}, function (data) {
+        uploadForm = data;
+    });
+
     function init(data) {
         $('#cardSlots').dynamicdom({
 
@@ -315,6 +354,11 @@ $(document).ready(function () {
                         cb(self, $elm, data);
                     }, function () {
                     });
+                } else if (type == 'form-upload') {
+                    openUploadPopup($elm.data('cdata'), function (data) {
+                        self.settings.oninit($elm, data, data.data, cb, self);
+                    }, function () {
+                    });
                 }
             },
 
@@ -334,7 +378,11 @@ $(document).ready(function () {
                         '<input class="form-control" /></div>';
                     outp.editor = false;
                     cb(self, $elm, outp);
-                } else {
+                } else if (type == 'form-upload') {
+                    outp.content = '<div class="form-group"><i class="fa fa-upload"></i></div>';
+                    outp.editor = false;
+                    cb(self, $elm, outp);
+                }  else {
                     cb(self, $elm, outp);
                 }
             },
@@ -397,6 +445,16 @@ $(document).ready(function () {
                             data.content = '<div class="checkbox"><label><input type="checkbox" /> '+ data.data.label +'</label></div>';
                             data.editor = false;
                             cb(self, elm, data);
+                        }, function () {
+                            elm.parent().find('.actions .fa-trash').trigger('click');
+                        });
+                    };
+                } else if (type == 'form-upload') {
+                    enableEdit = true;
+                    con = function (elm, outp, cb, self) {
+                        outp.content = 'Hallo Welt';
+                        openUploadPopup({}, function (data) {
+                            self.settings.oninit(elm, data, data.data, cb, self);
                         }, function () {
                             elm.parent().find('.actions .fa-trash').trigger('click');
                         });

@@ -14,6 +14,7 @@ var main = function() {
 		$('.logFenster').hide();
 		$('.loginButton').hide();
 		$('.regButton').hide();
+		$('.portalInfo').hide();
 		$('.logoFenster').show();
 		$('.logoutFenster').show();
 		$('.nutzerName').text(sessionStorage['User']);
@@ -30,6 +31,7 @@ var main = function() {
 				$('.cms').show();
 				$('#adminBereich').hide();
 				$('.Admin').show();
+				$('.portalInfo').show();
 			} else if (sessionStorage['verwaltung'] === "2") {
 				$('#adminBereich').hide();
 				$('#nutzerVerwaltung').show();
@@ -332,10 +334,10 @@ var main = function() {
 		if (title === "DHBW Auslandsinfo") {
 
 		} else if (title === "DHBW Auslandsportal") {
-			location.replace("indexMockup.html");
+			location.replace("index.html");
 		}
 		sessionStorage.clear();
-		location.replace("indexMockup.html");
+		location.replace("index.html");
 		$('.logFenster').show();
 		/*
 		 * for (var i = 1; i <= 10; i++) { $('#'+ i + '5').addClass("hidden"); }

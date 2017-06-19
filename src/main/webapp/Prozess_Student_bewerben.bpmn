@@ -5,6 +5,7 @@
   </bpmn:collaboration>
   <bpmn:process id="studentBewerben" name="Student bewerben" isExecutable="true">
     <bpmn:laneSet>
+    
       <bpmn:lane id="Lane_07n76w6" name="Student">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>downloadsAnbieten</bpmn:flowNodeRef>

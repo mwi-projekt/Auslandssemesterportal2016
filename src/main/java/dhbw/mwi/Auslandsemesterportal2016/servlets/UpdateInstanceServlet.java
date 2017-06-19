@@ -45,7 +45,9 @@ public class UpdateInstanceServlet extends HttpServlet {
             	vars.put(keys[i], Integer.parseInt(vals[i]));
         		} else if (types[i].equals("email")){
                 vars.put(keys[i], vals[i]);
-            	}
+            	} else if (types[i].equals("boolean")){
+                vars.put(keys[i], Boolean.parseBoolean(vals[i]));
+                } 
         	}	
         	engine.getTaskService().complete(engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(), vars);	
     		toClient.println("Saved");
