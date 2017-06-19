@@ -200,13 +200,13 @@ var main = function() {
 								    
 								    // Ermittlung des Fortschritts für die weiteren Bewerbungsschritte
 								    var uni = $('#uni'+ id).text();
+                                    sessionStorage['uni'] = uni;
 								    /*$('.iFenster').hide();
 								    $('.iF1').show();
 								    $('.dat').hide();
 								    sessionStorage['uni'] = uni;
 								    $('#bewProzess').hide();
 								    $('#aktuelleUni').html(uni);
-								    sessionStorage['uni'] = uni;
 								    SchrittReq(uni);
 								    askNextStep(uni);*/
 								    $
@@ -451,9 +451,10 @@ var main = function() {
 								    + '-' + mm
 								    + '-' + dd;
 
-							    sessionStorage['uni'] = $(
-								    '#selectUni')
-								    .val(); */
+							     */
+                                sessionStorage['uni'] = $(
+                                    '#selectUni')
+                                    .val();
 							    $
 								    .ajax({
 									type : "GET",

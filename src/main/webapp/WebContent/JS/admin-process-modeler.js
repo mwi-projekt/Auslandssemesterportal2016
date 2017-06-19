@@ -273,6 +273,10 @@ $(document).ready(function () {
                     $('#demo-label').text(data.label);
                 }
 
+                if (data.type) {
+                    $('#field-type').val(data.type);
+                }
+
                 if (data.required) {
                     $('#field-req')[0].checked = data.required;
                 }

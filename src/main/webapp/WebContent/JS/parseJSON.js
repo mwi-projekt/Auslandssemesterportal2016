@@ -108,13 +108,18 @@ function parse(){
 								break;
 							case "form-upload":
                                 output = output + '<form action="upload_new" class="dropzone" id="'+json[i]["data"]["id"]+'"></form>';
-                                Dropzone.options[json[i]["data"]["id"]] = getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]);
 								break;
 						}
 						
 
 					}
-						document.getElementById("formular").innerHTML = output;
+					document.getElementById("formular").innerHTML = output;
+                    for (var i = 0; i < json.length; i++) {
+                        var type = json[i]["type"];
+                        if (type == 'form-upload') {
+                            $("#"+json[i]["data"]["id"]).dropzone(getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]));
+						}
+                    }
 				},
 				error : function(result) {
 					alert('Ein Fehler ist aufgetreten: ' + result);
