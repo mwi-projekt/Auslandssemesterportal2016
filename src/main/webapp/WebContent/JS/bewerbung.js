@@ -28,7 +28,7 @@ function new_Bewerbung() {
 								checkboxDokumentePostalischKorrekt : checkboxDokumentePostalischKorrekt
 							}
 						})	.done(function(data) {
-								swal("Dokument hochgeladen mit der ID = "+ data + " Dokument ausgew�hlt: " + name_dok1);
+								swal("Dokument hochgeladen mit der ID = "+ data + " Dokument ausgewählt: " + name_dok1);
 							})
 							.done(function() {
 								swal( "success" );
@@ -38,7 +38,7 @@ function new_Bewerbung() {
 							});
 
 	} else {
-		swal("Bitte Dokument hinzuf�gen!");
+		swal("Bitte Dokument hinzufügen!");
 	}
 }
 

@@ -1497,6 +1497,7 @@ function getStudiengaenge() {
 	    }
 	    $('#selStudiengang').html(options);
 	    getAngebotsDaten();
+	    
 	},
 	error : function(result) {
 
@@ -1602,6 +1603,7 @@ function getAngebotsDaten() {
 					    });
 			}
 		    }
+		    $('.keininhalt').hide();
 		},
 		error : function(result) {
 		}
