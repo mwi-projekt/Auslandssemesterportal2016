@@ -8,7 +8,6 @@
     <link rel="stylesheet"
           href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
     <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
-    <link rel="stylesheet" href="CSS/dropzone.css">
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/bewerbungsportal.css">
     <link rel="stylesheet" href="CSS/bewerbungsformular.css">
@@ -19,107 +18,11 @@
             src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-    <script src="external/dropzone.js"></script>
     <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
-      <!-- <script src="JS/bewerbungsportal.js"></script> -->
+    <script src="JS/task_overview.js"></script>
 </head>
 
 <body>
-<!--  PopupFeld für Registrierung -->
-<div class="erfolgreich"></div>
-<div class="popUpBack"></div>
-<div class="popUpBewerber">
-    <img class="smallImg" id="closeBewerber"
-         src="images/Button Delete.png"/>
-    <h2>Allgemeine Daten</h2>
-    <p>
-        Vorname: <b id="formVorname"></b>
-    </p>
-    <p>
-        Nachname: <b id="formNachname"></b>
-    </p>
-    <p>
-        Matrikelnummer: <b id="formMatrikelnummer"></b>
-    </p>
-    <p>
-        Email: <b id="formEmail" data-validation="email"></b>
-    </p>
-    <p>
-        Telefon: <b id="formTel"></b>
-    </p>
-    <p>
-        Mobil: <b id="formMobil"></b>
-    </p>
-    <p>
-        Standort: <b id="formStandort"></b>
-    </p>
-    <p>
-        Studiengang: <b id="formStudiengang"></b>
-    </p>
-    <p>
-        Kurs: <b id="formKurs"></b>
-    </p>
-    <br>
-    <h2>Englischnote</h2>
-    <p>
-        Punkte Abitur: <b id="formEnglisch"></b>
-    </p>
-    <br>
-    <h2>Adresse Praxisphase</h2>
-    <p>
-        Land: <b id="formPrLand"></b>
-    </p>
-    <p>
-        Bundesland: <b id="formPrBundesland"></b>
-    </p>
-    <p>
-        Straße: <b id="formPrStraße"></b>
-    </p>
-    <p>
-        PLZ: <b id="formPrPlz"></b>
-    </p>
-    <p>
-        Stadt: <b id="formPrStadt"></b>
-    </p>
-    <br>
-    <h2>Adresse Theoriephase</h2>
-    <p>
-        Land: <b id="formThLand"></b>
-    </p>
-    <p>
-        Bundesland: <b id="formThBundesland"></b>
-    </p>
-    <p>
-        Straße: <b id="formThStraße"></b>
-    </p>
-    <p>
-        PLZ: <b id="formThPlz"></b>
-    </p>
-    <p>
-        Stadt: <b id="formThStadt"></b>
-    </p>
-    <br>
-    <h2>Partnerunternehmen</h2>
-    <p>
-        Firmenname: <b id="formFirmenname"></b>
-    </p>
-    <p>
-        Ansprechpartner/in: <b id="formAnsprechpartner"></b>
-    </p>
-    <p>
-        E-Mail Ansprechpartner/in: <b id="formEmailAnsprech"></b>
-    </p>
-    <p>
-        Straße: <b id="formParStraße"></b>
-    </p>
-    <p>
-        PLZ: <b id="formParPlz"></b>
-    </p>
-    <p>
-        Stadt: <b id="formParStadt"></b>
-    </p>
-</div>
-<div class="popUpFeld"></div>
 <div class="header">
 
     <!-- Navigationsleiste -->
@@ -167,9 +70,7 @@
             <div class="navEl nonCms" id="nav2"><a href="http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html">Admin</a></div>
             <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
         </div>
-        <div id="formular"></div>
-        <div id="nextStep">
-        </div>
+        <div id="resultList"></div>
         <!-- <div class="inhalt nonCms" id="in1">
             <div class="col-md-12 inhaltBox">
                 <h2>Herzlich willkommen im Bewerbungsportal</h2>
@@ -184,12 +85,6 @@
                 </p>
             </div>
         </div> -->
-            <ul class="nav nav-tabs iFenster iF2">
-                <li class="active" id="li1">Vorbereitung</li>
-                <li id="li2">Studium</li>
-                <li id="li3">Leben</li>
-                <li id="li4">Fazit</li>
-            </ul>
             <iframe class="iFenster iF2" src="erfahrungsbericht1.html"
                     style="width: 100%; height: 500px;"></iframe>
 
@@ -209,27 +104,6 @@
         <div class="inhaltBox col-md-12">Das ist die Startseite. Hier
             muss noch Fülltext zur Beschreibung der möglichen Funktionen rein.
         </div>
-    </div>
-    <div class="inhalt cms" id="in4">
-        <h3>Folgende Studierende haben bereits einen Bewerbungsprozess
-            begonnen:</h3>
-        <table class="table" id="tableBewerber">
-            <thead>
-            <tr id="titleRow">
-                <td class="tableVorname">Vorname</td>
-                <td class="tableNachname">Nachname</td>
-                <td class="tableEmail">Email</td>
-                <td class="tableMatrikelnummer">Matrikelnummer</td>
-                <td class="tableStKurs">Kurs</td>
-                <td class="tableUniversität">Auslandsuniversität</td>
-                <td class="tableStatus">Status</td>
-                <td class="tableAktionen">Aktionen</td>
-            </tr>
-            </thead>
-            <tbody id="tableBewerberBody">
-
-            </tbody>
-        </table>
     </div>
     <div class="inhalt cms" id="in5">
         <div class="col-md-12 inhaltBox"></div>
