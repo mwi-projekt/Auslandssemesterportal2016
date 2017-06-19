@@ -14,6 +14,7 @@ var main = function() {
 		$('.logFenster').hide();
 		$('.loginButton').hide();
 		$('.regButton').hide();
+		$('.portalInfo').hide();
 		$('.logoFenster').show();
 		$('.logoutFenster').show();
 		$('.nutzerName').text(sessionStorage['User']);
@@ -30,6 +31,7 @@ var main = function() {
 				$('.cms').show();
 				$('#adminBereich').hide();
 				$('.Admin').show();
+				$('.portalInfo').show();
 			} else if (sessionStorage['verwaltung'] === "2") {
 				$('#adminBereich').hide();
 				$('#nutzerVerwaltung').show();
