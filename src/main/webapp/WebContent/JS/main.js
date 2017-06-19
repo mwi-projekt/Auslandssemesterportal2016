@@ -12,8 +12,12 @@ function dateiauswahl(evt) {
 			.innerHTML = '<ul>' + output.join('') + '</ul>';
 	}
 	//Falls neue Eingabe, neuer Aufruf der Auswahlfunktion
-document.getElementById('files')
-	.addEventListener('change', dateiauswahl, false);
+
+
+if ($('#files').length > 0) {
+    document.getElementById('files')
+        .addEventListener('change', dateiauswahl, false);
+}
 
 
 var imgCount = 1;
