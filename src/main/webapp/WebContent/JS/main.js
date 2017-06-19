@@ -1,25 +1,3 @@
-function dateiauswahl(evt) {
-		var files = evt.target.files; // FileList object
-		//Deklarierung eines Array Objekts mit Namen "output" Speicherung von Eigenschaften
-		var output = [];
-		//Zählschleife, bei jedem Durchgang den Namen, Typ und die Dateigröße der ausgewählten Dateien zum Array hinzufügen
-		for (var i = 0, f; f = files[i]; i++) {
-			output.push('<li><strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
-				f.size, ' bytes</li>');
-		}
-		//Auf das Ausgabefeld zugreifen, unsortierte Liste erstellen und das oben erstellte Array auslesen lassen
-		document.getElementById('list')
-			.innerHTML = '<ul>' + output.join('') + '</ul>';
-	}
-	//Falls neue Eingabe, neuer Aufruf der Auswahlfunktion
-
-
-if ($('#files').length > 0) {
-    document.getElementById('files')
-        .addEventListener('change', dateiauswahl, false);
-}
-
-
 var imgCount = 1;
 var back = 1;
 var angeboteNavBar = '<div class="navBar"><p class="navel current" id="l1">Allgemeine Infos</p><p class="navel" id="l2">FAQs</p><p class="navel" id="l3">Erfahrungsbericht</p><p class="navel" id="l4">Bilder</p><p class="navel" id="l5">Bewerben</p></div>';
