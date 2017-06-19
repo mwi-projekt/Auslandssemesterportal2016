@@ -13,6 +13,7 @@
             sidebar: '#sidebar .square',
             onchange: null,
             onedit: null,
+            oninit: null,
             render: null,
             filter: null,
             data: null
@@ -76,7 +77,7 @@
                 }
             } );
         },
-        handleCardDrop: function(that, event, ui, content) {
+        handleCardDrop: function(that, event, ui, content, init) {
 
             var outerThis = this;
             var self = $(that);
@@ -107,7 +108,7 @@
 
             this.limits[type].num++;
 
-            this.setCardContent(self.find('.content'), type, content);
+            this.setCardContent(self.find('.content'), type, content, init);
 
             // change node to active, enable sorting
             self.addClass('active').removeClass('ui-state-disabled');
@@ -182,7 +183,7 @@
 
             return outp;
         },
-        setCardContent: function(elm, type, content) {
+        setCardContent: function(elm, type, content, init) {
             var self = this;
 
             // set type of node
@@ -207,10 +208,18 @@
                 outp.content = content;
             }
 
-            if (typeof outp.content === "function") {
-                outp.content(elm, outp, this.updateCardContent, this);
+            if (init === true) {
+                if (typeof self.settings.oninit === "function") {
+                    self.settings.oninit(elm, outp, elm.data('cdata'), this.updateCardContent, this);
+                } else {
+                    this.updateCardContent(this, elm, outp);
+                }
             } else {
-                this.updateCardContent(this, elm, outp);
+                if (typeof outp.content === "function") {
+                    outp.content(elm, outp, this.updateCardContent, this);
+                } else {
+                    this.updateCardContent(this, elm, outp);
+                }
             }
         },
         updateCardContent: function (self, elm, outp) {
@@ -243,7 +252,7 @@
                 var tmp = self.addPlaceholder();
                 $el.append(tmp);
                 tmp.find('.content').data('cdata', this.data);
-                self.handleCardDrop(tmp, null, this.type, this.content);
+                self.handleCardDrop(tmp, null, this.type, this.content, true);
             });
         },
         nl2br: function (str) {

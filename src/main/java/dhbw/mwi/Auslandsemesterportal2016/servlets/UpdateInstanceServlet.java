@@ -26,21 +26,29 @@ public class UpdateInstanceServlet extends HttpServlet {
         String instanceID = request.getParameter("instance_id");
         String key = request.getParameter("key");
         String val = request.getParameter("value");
+        String type = request.getParameter("type");
         String[] keys = key.split("\\|", -1);
         String[] vals = val.split("\\|", -1);
+        String[] types = type.split("\\|", -1);
         Map<String,Object> vars = new HashMap<String,Object>();
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        RuntimeService runtime = engine.getRuntimeService();
-        ProcessInstance instance = runtime.createProcessInstanceQuery().processInstanceId(instanceID).singleResult();
    
         if (key != null && val != null) {
         	for (int i = 0; i < keys.length; i++){
         		//runtime.setVariable(instance.getId(), keys[i], vals[i]);
-        		vars.put(keys[i], vals[i]);	
-        	}
-        runtime.setVariable(instanceID, "bestanden", true);
+        		if (types[i].equals("text")){
+        		vars.put(keys[i], vals[i]);
+        		} else if (types[i].equals("number")){
+        			if (vals[i].equals("")){
+        				vals[i]= "0";
+        			}
+            	vars.put(keys[i], Integer.parseInt(vals[i]));
+        		} else if (types[i].equals("email")){
+                vars.put(keys[i], vals[i]);
+            	}
+        	}	
         	engine.getTaskService().complete(engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(), vars);	
-    		toClient.write("Saved");
+    		toClient.println("Saved");
         } else {
         	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         	toClient.print("Variables not set");

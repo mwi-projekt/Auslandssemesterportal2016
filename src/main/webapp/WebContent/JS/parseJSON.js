@@ -1,4 +1,14 @@
-var idList = [];
+var instanceID;
+var url;
+var typeList;
+var idList;
+$(document).ready(function() {
+	idList = [];
+	typeList = [];
+	url = new URL(window.location.href);
+	instanceID = url.searchParams.get("instance_id");
+	parse();
+});
 
 function parse(){
 	var step_id = "";
@@ -8,7 +18,7 @@ function parse(){
 		type : "GET",
 		url : "currentActivity",
 		data : {
-			instance_id: '4431ccda-4df5-11e7-a496-005056940bc2'
+			instance_id: instanceID
 		},
 		success : function(result) {
 			//alert('Aktiver Schritt: ' + result);
@@ -23,7 +33,7 @@ function parse(){
 					step : step_id
 				},
 				success : function(result) {
-						var json = JSON.parse(result);
+						var json = JSON.parse(decodeURI(result));
 						for (var i = 0; i < json.length; i++){
 							var type = json[i]["type"];
 							//alert (type);
@@ -42,26 +52,28 @@ function parse(){
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<form><label>' + json[i]["data"]["label"] + ' <select id="' + step_id + i +'"' + req +'>';
+								output = output + '<form><label>' + json[i]["data"]["label"] + ' <select id="' + json[i]["data"]["id"] +'"' + req +'>';
 								for (var j = 0; j < json[i]["data"]["values"].length; j++){
 									output = output + '<option>' + json[i]["data"]["values"][j] + '</option>';
 									//alert ("Option hinzugefügt: " + json[i]["data"]["values"][j]);
 								}
 								output = output + '</select></label></form><br>';
-								idList.push(step_id + i);
+								idList.push(json[i]["data"]["id"]);
+								typeList.push("text");
 								break;
 							case "form-text":
 								var req = "";
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + step_id + i +'"' + req + '>';
-								idList.push(step_id + i);
+								output = output + '<label>' + json[i]["data"]["label"] + ' </label><input type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '><br>';
+								idList.push(json[i]["data"]["id"]);
+								typeList.push(json[i]["data"]["type"]);
 							}
 						
 
 					}
-						document.getElementById("results").innerHTML = output;
+						document.getElementById("formular").innerHTML = output;
 				},
 				error : function(result) {
 					alert('Ein Fehler ist aufgetreten: ' + result);
@@ -78,23 +90,30 @@ function parse(){
 function saveData(){
 	var keyString = "";
 	var valString = "";
+	var typeString = "";
 	for (var j = 0; j < idList.length;j++){
 		keyString = keyString + idList[j] + "|";
 		valString = valString + document.getElementById(idList[j]).value + "|";
+		typeString = typeString + typeList[j] + "|";
 	}
 	keyString = keyString.substr(0,keyString.length-1);
 	valString = valString.substr(0,valString.length-1);
-		
+	typeString = typeString.substr(0,typeString.length-1);
+	//alert(keyString);
+	//alert(valString);
+	//alert(typeString);
 	$
 	.ajax({
 		type : "POST",
 		url : "setVariable",
 		data : {
-			instance_id: '4431ccda-4df5-11e7-a496-005056940bc2',
+			instance_id: instanceID,
 			key : keyString,
-			value: valString
+			value: valString,
+			type: typeString
 		},
-		success : function(result) {			
+		success : function(result) {
+			location.reload();
 		},
 		error : function(result) {
 			alert('Ein Fehler ist aufgetreten');

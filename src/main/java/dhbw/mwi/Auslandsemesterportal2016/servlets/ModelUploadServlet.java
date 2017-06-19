@@ -24,12 +24,16 @@ public class ModelUploadServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         Part filePart = null;
 
+        response.setContentType("text/html");
+
+        String action = request.getParameter("CKEditorFuncNum");
+
         try {
-            filePart = request.getPart("file");
+            filePart = request.getPart("upload");
 
             if (filePart != null){
-                System.out.println(getFileName(filePart));
-                OutputStream outs = new FileOutputStream(new File("/var/www/files/"+getFileName(filePart)));
+                String fileName = getFileName(filePart);
+                OutputStream outs = new FileOutputStream(new File("/var/www/files/"+fileName));
                 byte[] buf = new byte[1024];
                 int len;
                 InputStream is = filePart.getInputStream();
@@ -39,18 +43,17 @@ public class ModelUploadServlet extends HttpServlet {
                 outs.close();
                 is.close();
 
-                out.print("jop");
+                out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("+action+", 'http://193.196.7.215/files/"+fileName+"', '');</script>");
                 out.flush();
             } else {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                out.print("Error: wrong file");
+                out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("+action+", '', 'Datei fehlt');</script>");
                 out.flush();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("Error: wrong file");
+            out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("+action+", '', 'Server Fehler');</script>");
             out.flush();
         }
 

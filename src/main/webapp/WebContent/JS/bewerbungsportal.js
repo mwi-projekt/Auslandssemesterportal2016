@@ -106,8 +106,8 @@ var main = function() {
 						auslesen[i] = auslesen[i]
 							.trim();
 
-					    schritt_aktuell = auslesen[((2 * zaehler) + ((zaehler-1) * 2))];
-					    schritt_gesamt = auslesen[((3 * zaehler) + (zaehler-1))];
+					    schritt_aktuell = Number(auslesen[((2 * zaehler) + ((zaehler-1) * 2))]);
+					    schritt_gesamt = Number(auslesen[((3 * zaehler) + (zaehler-1))]);
 					    
 					    status = schritt_aktuell + ' von ' + schritt_gesamt + ' Schritte';
 					    
@@ -119,7 +119,7 @@ var main = function() {
 						}
 						
 						if (i === (4 * zaehler)) {
-						    if (zaehler === 1) {
+							if (status === "abgeschlossen") {
 							tabelle = tabelle
 								+ '<tr class="'
 								+ even
@@ -130,16 +130,16 @@ var main = function() {
 								+ '</td><td id="uni'
 								+ zaehler
 								+ '">'
-								+ auslesen[(0)]
+								+ auslesen[((4 * zaehler) - 4)]
 								+ '</td><td>'
-								+ auslesen[1]
+								+ auslesen[((4 * zaehler) - 3)]
 								+ '</td><td id="status'
 								+ zaehler
 								+ '">'
 								+ status
-								+ '</td><td class="btn" id="btnProzessFortfahren'
+								+ '</td><td class="btn" id="btnZusammenfassung'
 								+ zaehler
-								+ '">Fortsetzen</td><td class="btn btnProcessDelete">Löschen</td></tr>';
+								+ '">Zusammenfassung</td><td class="btn btnProcessDelete">Löschen</td></tr>';
 						    } else {
 							tabelle = tabelle
 								+ '<tr class="'
@@ -193,49 +193,56 @@ var main = function() {
 							$('#btnProzessFortfahren'+ i).on('click',
 								function(event) {
 								    var id = event.target.id
-									    .replace(
-										    'btnProzessFortfahren',
-										    '');
-								    $(
-									    '.popUpBack')
-									    .html(
-										    '<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
-								    $(
-									    '.popUpBack')
-									    .show();
-								    setTimeout(
-									    closeLoading,
-									    1000);
-
-								    // Ermittlung
-								    // des
-								    // Fortschritts
-								    // für die
-								    // weiteren
-								    // Bewerbungsschritte
-								    var uni = $(
-									    '#uni'
-										    + id)
-									    .text();
-								    $(
-									    '.iFenster')
-									    .hide();
-								    $('.iF1')
-									    .show();
-								    $('.dat')
-									    .hide();
+									    .replace('btnProzessFortfahren','');
+								    /*$('.popUpBack').html('<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
+								    $('.popUpBack').show();
+								    setTimeout(closeLoading,1000);*/
+								    
+								    // Ermittlung des Fortschritts für die weiteren Bewerbungsschritte
+								    var uni = $('#uni'+ id).text();
+								    /*$('.iFenster').hide();
+								    $('.iF1').show();
+								    $('.dat').hide();
 								    sessionStorage['uni'] = uni;
-								    $(
-									    '#bewProzess')
-									    .hide();
-								    $(
-									    '#aktuelleUni')
-									    .html(
-										    uni);
+								    $('#bewProzess').hide();
+								    $('#aktuelleUni').html(uni);
 								    sessionStorage['uni'] = uni;
 								    SchrittReq(uni);
-								    askNextStep(uni);
+								    askNextStep(uni);*/
+								    $
+								    .ajax({
+									type : "GET",
+									url : "getInstance",
+									data : {
+									    //NEUE DB-EINTRAG
+									    matnr : sessionStorage['matrikelnr'],
+									    uni : uni 
+									},
+									success : function(
+										result) {
+									    location.replace("http://193.196.7.215:8080/Auslandssemesterportal/WebContent/bewerben.html?instance_id="+result);
+									},
+									error : function(
+										result) {
+									}
+								    });
 
+
+								});
+							
+							$('#btnZusammenfassung'+ i).on('click',
+									function(event) {
+									var id = event.target.id
+								    	.replace('btnZusammenfassung','');
+									var uni = $('#uni'+ id).text();
+								    $('.iFenster').hide();
+								    $('.iF1').show();
+								    $('.dat').hide();
+									sessionStorage['uni'] = uni;
+									$('#bewProzess').hide();
+									$('#aktuelleUni').html(uni);
+									getDataAllPruef();
+									$('#bewFormular10').show();
 								});
 					    }
 
@@ -424,7 +431,7 @@ var main = function() {
 							    $('.iF1').show();
 							    $('#bewProzess')
 								    .hide();
-							    var datum = new Date();
+							    /*var datum = new Date();
 							    var dd = datum
 								    .getDate();
 							    var mm = datum
@@ -446,34 +453,26 @@ var main = function() {
 
 							    sessionStorage['uni'] = $(
 								    '#selectUni')
-								    .val();
+								    .val(); */
 							    $
 								    .ajax({
-									type : "POST",
-									url : "login_db",
+									type : "GET",
+									url : "getInstance",
 									data : {
 									    //NEUE DB-EINTRAG
-										action : "post_prozessStart",
-									    matrikelnummer : sessionStorage['matrikelnr'],
+									    matnr : sessionStorage['matrikelnr'],
 									    uni : $(
 										    '#selectUni')
-										    .val(),
-									    datum : heute,
-									    schritt1 : "0",
-									    schritt2 : "0",
-									    schritt3 : "0",
-									    schritt4 : "0",
-									    schritt5 : "0",
-									    Schritte_aktuell : "0",
-									    Schritte_gesamt : "10" //Hier fehlt die Dynamisierung 
+										    .val(), 
 									},
 									success : function(
 										result) {
-									    var uni = $(
+									    /*var uni = $(
 										    '#selectUni')
 										    .val();
 									    zaehlupdate(0);
-									    askNextStep(uni);
+									    askNextStep(uni); */
+									    location.replace("http://193.196.7.215:8080/Auslandssemesterportal/WebContent/bewerben.html?instance_id="+result);
 									},
 									error : function(
 										result) {
@@ -1400,7 +1399,7 @@ var main = function() {
     $('#btnbewFormular10').on('click', function(event) {
 
     });
-
+  
 };
 
 $(document).ready(main);
@@ -1481,83 +1480,6 @@ function SchrittReq(uni){
 		,
 		error : function(result) {}
 	});
-}
-// downloads Anzeigen
-function schritt0(uni) {
-    // $.ajax({
-    // type : "POST",
-    // url : "login_db",
-    // data : {
-    // action : "get_downloads",
-    // uni : uni,
-    // matrikelnummer : sessionStorage['matrikelnr'],
-    // },
-    // success : function(result) {
-    // $('.iFenster').hide();
-    // $('.iF1').show();
-    // $('.dat').hide();
-    // $('#bewFormular0').show();
-    // $('#bewFormular1').hide();
-    // $('#bewProzess').hide();
-    // $('#aktuelleUni').html(uni);
-    //
-    // }
-    //
-    // ,
-    // error : function(result) {
-    //
-    // }
-    // });
-}
-
-function schritt1(uni) {
-    // $.ajax({
-    // type : "POST",
-    // url : "login_db",
-    // data : {
-    // action : "get_userDaten",
-    // uni : uni,
-    // matrikelnr : sessionStorage['matrikelnr'],
-    // },
-    // success : function(result) {
-    // $('.iFenster').hide();
-    // $('.iF1').show();
-    // $('.dat').hide();
-    // $('#bewFormular0').hide();
-    // $('#bewFormular1').show();
-    // $('#bewProzess').hide();
-    // $('#aktuelleUni').html(uni);
-    // var auslesen = result.split(';');
-    // for (var i = 0; i < auslesen.length - 1; i++) {
-    // auslesen[i] = auslesen[i].trim();
-    // }
-    // fillBewForm(auslesen[1], auslesen[0], auslesen[2], auslesen[3],
-    // auslesen[4], auslesen[5], auslesen[6], auslesen[7]);
-    // $.ajax({
-    // type : "POST",
-    // url : "login_db",
-    // data : {
-    // action : "get_Note",
-    // matrikelnummer : sessionStorage['matrikelnr'],
-    // },
-    // success : function(result) {
-    // auslesen = result.split(';');
-    // if (isEmpty(auslesen[0]) != true) {
-    // sessionStorage['noteOkay'] = true;
-    // } else {
-    // sessionStorage['noteOkay'] = false;
-    // }
-    // $('#bewEnglischAbi').val(auslesen[0]);
-    // },
-    // error : function(result) {
-    //
-    // }
-    // });
-    // },
-    // error : function(result) {
-    //
-    // }
-    // });
 }
 
 function getStudiengaenge() {
@@ -1686,7 +1608,7 @@ function getAngebotsDaten() {
 	    });
 }
 
-function loadBewerber(auslesen, zaehler, tabelle, count, even) {
+/*function loadBewerber(auslesen, zaehler, tabelle, count, even) {
     if (count != -1) {
 	var status = 0;
 	if (auslesen[(2 * (zaehler - count))] === "0") {
@@ -1767,7 +1689,7 @@ function loadBewerber(auslesen, zaehler, tabelle, count, even) {
 
     }
 
-}
+}*/
 
 function addListener(zaehler) {
     for (var i = 1; i <= zaehler; i++) {
@@ -2294,7 +2216,7 @@ function defineNextStep(nextStepString, uni) {
         modules : 'html5'
     });
 
-    $('#bewFormular0, #bewFormular1, #bewFormular2, #bewFormular3, #bewFormular4, #bewFormular5, #bewFormular6, #bewFormular7, #bewFormular8, #bewFormular9, #bewFormular10').hide();
+    $('#bewFormular0 , #bewFormular1, #bewFormular2, #bewFormular3, #bewFormular4, #bewFormular5, #bewFormular6, #bewFormular7, #bewFormular8, #bewFormular9, #bewFormular10').hide();
     var i = sessionStorage['SchrittAktuell'];
     
     switch (nextStepString.trim()) {

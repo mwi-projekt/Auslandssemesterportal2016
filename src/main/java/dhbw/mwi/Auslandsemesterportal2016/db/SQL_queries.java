@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SQL_queries {
 
@@ -61,6 +64,9 @@ public static int executeUpdate (String query, String[] data, String[] types){//
 				statement.setString(i+1, data[i]);
 			} else if (types[i] == "int"){
 				statement.setInt(i+1, Integer.parseInt(data[i]));
+			} else if (types[i] == "date"){
+				java.sql.Date date = java.sql.Date.valueOf(data[i]);
+				statement.setDate(i+1,  date);
 			}
 			}
 		result = statement.executeUpdate();
@@ -175,5 +181,40 @@ public static ResultSet getJson(String step, String model){
 	 return null;
 	}	
 }
+
+public static String getInstanceId(int matNr, String uni){
+	String query = "SELECT processInstance FROM MapUserInstanz WHERE matrikelnummer = ? AND uni = ?";
+	String[] params = new String[]{""+matNr,uni};
+	String[] types = new String[]{"int","String"};
+	ResultSet ergebnis = executeStatement(query,params,types);
+	try{
+		if (ergebnis.next()){
+			return ergebnis.getString("processInstance");
+		} else {
+			return "";
+		}
+	} catch (Exception e){
+		e.printStackTrace();
+		return "";
+	}
+}
+
+public static void createInstance(String instanceID, String uni, int matNr, int stepCount){
+	//Nutzerinstanz eintragen}
+	String query = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status) VALUES (?,?,?,?)";
+	String[] params = new String[]{""+matNr,uni,instanceID,"1"};
+	String[] types = new String[]{"int","String","String","String"};
+	executeUpdate(query,params,types);
+	//Bewerbungsprozess eintragen
+	System.out.println("InsertIntoBewerbungsprozess");
+	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	Date date = new Date();
+	String dateString = dateFormat.format(date);
+	query = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, Schritte_aktuell, Schritte_gesamt) VALUES (?,?,?,?,?)";
+	params = new String[]{""+matNr,uni,dateString,"0",""+stepCount};
+	types = new String[]{"int","String","date","int","int"};
+	executeUpdate(query,params,types);
+}
+
 
 }

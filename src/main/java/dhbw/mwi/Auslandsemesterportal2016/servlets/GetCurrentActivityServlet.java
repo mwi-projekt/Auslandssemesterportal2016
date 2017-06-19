@@ -25,7 +25,6 @@ public class GetCurrentActivityServlet extends HttpServlet {
         String instanceID = request.getParameter("instance_id");
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtime = engine.getRuntimeService();
-        ProcessInstance instance = runtime.createProcessInstanceQuery().processInstanceId(instanceID).singleResult();
    
         if (instanceID != null) {
         	List<String> activitiesList = runtime.getActiveActivityIds(instanceID);

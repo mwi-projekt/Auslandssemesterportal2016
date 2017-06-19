@@ -39,7 +39,7 @@ $(document).ready(function () {
         model: 'studentBewerben',
         step: id
     }, function (data) {
-        init(JSON.parse(data));
+        init(JSON.parse(decodeURI(data)));
     }).fail(function () {
         if (type == 'upload') {
             init([
@@ -74,7 +74,7 @@ $(document).ready(function () {
         $.post('processmodel/save', {
             model: 'studentBewerben',
             step: id,
-            json: JSON.stringify(json)
+            json: encodeURI(JSON.stringify(json))
         }, function (data) {
             swal(
                 'Gespeichert!',
@@ -102,6 +102,10 @@ $(document).ready(function () {
                     $('#demo-label').text(data.label);
                 }
 
+                if (data.id) {
+                    $('#field-id').val(data.id);
+                }
+
 
                 $('#field-label').on('change keydown', function () {
                     $('#demo-label').text($(this).val());
@@ -110,7 +114,8 @@ $(document).ready(function () {
                 $('#field-save').on('click', function () {
                     var data = {
                         data: {
-                            label: $('#field-label').val()
+                            label: $('#field-label').val(),
+                            id: $('#field-id').val(),
                         }
                     };
                     success = true;
@@ -164,6 +169,10 @@ $(document).ready(function () {
                     offText: 'Nein'
                 });
 
+                if (data.id) {
+                    $('#field-id').val(data.id);
+                }
+
                 $('#field-label').on('change keydown', function () {
                     $('#demo-label').text($(this).val());
                 });
@@ -196,6 +205,7 @@ $(document).ready(function () {
                         data: {
                             values: values,
                             label: $('#field-label').val(),
+                            id: $('#field-id').val(),
                             required: $('#field-req')[0].checked
                         },
                         content: $('#demo').html()
@@ -220,6 +230,10 @@ $(document).ready(function () {
             },
             onOpen: function () {
 
+                if (data.id) {
+                    $('#field-id').val(data.id);
+                }
+
                 if (data.label) {
                     $('#field-label').val(data.label);
                     $('#demo-label').text(data.label);
@@ -243,6 +257,7 @@ $(document).ready(function () {
                         data: {
                             label: $('#field-label').val(),
                             type: $('#field-type').val(),
+                            id: $('#field-id').val(),
                             required: $('#field-req')[0].checked
                         }
                     };
@@ -266,7 +281,7 @@ $(document).ready(function () {
     });
 
     var checkboxForm = '';
-    $.get('checkbox-form.html', {}, function (data) {
+    $.get('modals/checkbox-form.html', {}, function (data) {
         checkboxForm = data;
     });
 
@@ -285,18 +300,12 @@ $(document).ready(function () {
             onedit: function ($elm, type, cb, self) {
                 if (type == 'form-select') {
                     openSelectFormPopup($elm.data('cdata'), function (data) {
-                        data.content = '<div class="form-group"><label>'+ data.label +'</label><br />' +
-                            '<select class="form-control">'+ data.content +'</select></div>';
-                        data.editor = false;
-                        cb(self, $elm, data);
+                        self.settings.oninit($elm, data, data.data, cb, self);
                     }, function () {
                     });
                 } else if (type == 'form-text') {
                     openTextInputPopup($elm.data('cdata'), function (data) {
-                        data.content = '<div class="form-group"><label>'+ data.data.label +'</label><br />' +
-                            '<input class="form-control" /></div>';
-                        data.editor = false;
-                        cb(self, $elm, data);
+                        self.settings.oninit($elm, data, data.data, cb, self);
                     }, function () {
                     });
                 } else if (type == 'form-checkbox') {
@@ -306,6 +315,27 @@ $(document).ready(function () {
                         cb(self, $elm, data);
                     }, function () {
                     });
+                }
+            },
+
+            oninit: function ($elm, outp, data, cb, self) {
+                var type = $elm.data('type');
+                if (type == 'form-select') {
+                    var con = '';
+                    $.each(data.values, function () {
+                        con += '<option>'+this+'</option>';
+                    });
+                    outp.content = '<div class="form-group"><label>'+ data.label +'</label><br />' +
+                        '<select class="form-control">'+ con +'</select></div>';
+                    outp.editor = false;
+                    cb(self, $elm, outp);
+                } else if (type == 'form-text') {
+                    outp.content = '<div class="form-group"><label>'+ data.label +'</label><br />' +
+                        '<input class="form-control" /></div>';
+                    outp.editor = false;
+                    cb(self, $elm, outp);
+                } else {
+                    cb(self, $elm, outp);
                 }
             },
 
@@ -344,10 +374,7 @@ $(document).ready(function () {
                     con = function (elm, outp, cb, self) {
                         outp.content = 'Hallo Welt';
                         openSelectFormPopup({}, function (data) {
-                            data.content = '<div class="form-group"><label>'+ data.data.label +'</label><br />' +
-                                '<select class="form-control">'+ data.content +'</select></div>';
-                            data.editor = false;
-                            cb(self, elm, data);
+                            self.settings.oninit(elm, data, data.data, cb, self);
                         }, function () {
                             elm.parent().find('.actions .fa-trash').trigger('click');
                         });
@@ -357,10 +384,7 @@ $(document).ready(function () {
                     con = function (elm, outp, cb, self) {
                         outp.content = 'Hallo Welt';
                         openTextInputPopup({}, function (data) {
-                            data.content = '<div class="form-group"><label>'+ data.data.label +'</label><br />' +
-                                '<input class="form-control" /></div>';
-                            data.editor = false;
-                            cb(self, elm, data);
+                            self.settings.oninit(elm, data, data.data, cb, self);
                         }, function () {
                             elm.parent().find('.actions .fa-trash').trigger('click');
                         });
