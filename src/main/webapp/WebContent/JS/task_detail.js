@@ -29,7 +29,7 @@ function parse() {
 					for (var k = 0; k < steps.length; k++){
 						collapsible = steps[k].split("|");
 						stepName = collapsible[0]; //Name des aktiven Prozessschrittes
-						output = output + stepName + '<br>';
+						output = output + '<div id ="' + stepName + '">';
 						var json = JSON.parse(decodeURI(collapsible[1]));
 						for (var i = 0; i < json.length; i++) {
 							var type = json[i]["type"];
@@ -85,11 +85,11 @@ function parse() {
 								break;
 							}
 					}
-					output = output + '<br>';
-					
+					output = output + '</div><br>';
 
 					}
 					document.getElementById("taskDetails").innerHTML = output;
+					getData();
 
 				},
 				error : function(result) {
@@ -97,6 +97,37 @@ function parse() {
 				}
 			});
 }
+
+
+function getData(){
+	var keyString = "";
+for (var l = 0; l < idList.length; l++)	{
+	keyString = keyString + idList[l]+"|";
+	}
+keyString = keyString.substr(0, keyString.length - 1);
+
+$.ajax({
+	type : "GET",
+	url : "getVariable",
+	data : {
+		instance_id : instanceID,
+		key : keyString
+	},
+	success : function(result) {
+		values = result.split("|");
+		for (var m = 0; m < values.length; m++){
+			//alert("Setze Element mit ID " + idList[m] + "auf Wert " + values[m]);
+			$("#" + idList[m]).text(values[m]);
+		}
+	},
+	error : function(result) {
+		alert('Ein Fehler ist aufgetreten');
+	}
+});
+	
+}
+
+
 
 function saveData() {
 	var keyString = "";
