@@ -216,5 +216,22 @@ public static void createInstance(String instanceID, String uni, int matNr, int 
 	executeUpdate(query,params,types);
 }
 
+public static String getAllActivities(String definitionKey){
+	String query = "SELECT step FROM processModel WHERE model = ?";
+	String[] params = new String[]{definitionKey};
+	String[] types = new String[]{"String"};
+	String activities = "";
+	ResultSet result =  executeStatement(query,params,types);
+	try{
+		while (result.next()){
+			activities = activities + result.getString("step") + ";";
+		}
+		return activities;
+	} catch (Exception e){
+		e.printStackTrace();
+		return "";
+	}
+}
+
 
 }
