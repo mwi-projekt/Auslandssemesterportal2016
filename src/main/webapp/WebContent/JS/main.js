@@ -31,13 +31,12 @@ var main = function() {
 				$('.cms').show();
 				$('#adminBereich').hide();
 				$('.Admin').show();
-				$('.portalInfo').show();
 			} else if (sessionStorage['verwaltung'] === "2") {
 				$('#adminBereich').hide();
 				$('#nutzerVerwaltung').show();
 				$('#normalBereich').hide();
 			}
-
+			$('.portalInfo').show();
 		} else {
 			$('.cms').hide();
 			$('.nonCms').show();
