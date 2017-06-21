@@ -26,8 +26,9 @@ public class ModelProcessSaveServlet extends HttpServlet {
         String model = request.getParameter("model");
         String step = request.getParameter("step");
         String json = request.getParameter("json");
+        String stepnumber = request.getParameter("stepnumber");
 
-        if (model != null && step != null && json != null) {
+        if (model != null && step != null && json != null && stepnumber != null) {
 
             String query = "SELECT * FROM processModel WHERE model = ? AND step = ?";
             String[] args = new String[]{model, step};
@@ -36,15 +37,15 @@ public class ModelProcessSaveServlet extends HttpServlet {
             try{
                 if (rs.next()) {
                     String id = rs.getString("id");
-                    query = "UPDATE processModel SET model = ?, step = ?, json = ? WHERE id = ?";
-                    args = new String[]{model, step, json, id};
-                    types = new String[]{"String","String","String", "int"};
+                    query = "UPDATE processModel SET model = ?, step = ?, json = ?, stepNumber = ? WHERE id = ?";
+                    args = new String[]{model, step, json, id, stepnumber};
+                    types = new String[]{"String","String","String", "int", "int"};
                     SQL_queries.executeUpdate(query,args,types);
                 } else {
-                    query = "INSERT INTO processModel (model, step, json) VALUES " +
-                            "(?,?,?)";
-                    args = new String[]{model, step, json};
-                    types = new String[]{"String","String","String"};
+                    query = "INSERT INTO processModel (model, step, json, stepNumber) VALUES " +
+                            "(?,?,?,?)";
+                    args = new String[]{model, step, json, stepnumber};
+                    types = new String[]{"String","String","String","int"};
                     SQL_queries.executeUpdate(query,args,types);
                 }
             }

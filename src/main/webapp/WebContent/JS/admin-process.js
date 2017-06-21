@@ -36,21 +36,50 @@ $(document).ready(function () {
                 canvas = viewer.get('canvas'),
                 elementRegistry = viewer.get('elementRegistry');
 
+            console.log(elementRegistry._elements);
+
             $.each(elementRegistry._elements, function () {
                 var bo = this.element.businessObject;
                 if (bo.$type == "bpmn:Lane" && bo.name == 'Student') {
+
+                    console.log(bo);
+
+                    var i = 0;
+                    var found;
                     $.each(bo.flowNodeRef, function () {
-                        if (this.$type == "bpmn:UserTask") {
-                            possibleIds.push(this.id);
-                            if ($.inArray(this.id, filled) > -1) {
-                                canvas.addMarker(this.id, 'user-task');
-                                $('#processSteps tbody').append('<tr><td>'+this.name+'</td><td><button data-mid="'+this.id+'" type="button" class="btn btn-primary">Bearbeiten</button></td></tr>')
-                            } else {
-                                canvas.addMarker(this.id, 'user-task-new');
-                                $('#processSteps tbody').append('<tr><td>'+this.name+'</td><td><button data-mid="'+this.id+'" type="button" class="btn btn-success">Erstellen</button></td></tr>')
-                            }
+                        if (this.$type == "bpmn:StartEvent") {
+                            found = this;
                         }
-                    })
+                    });
+                    if (found) {
+                        var y = 0;
+                        while (found != null) {
+                            if (found.$type == 'bpmn:UserTask') {
+                                i++;
+                                possibleIds.push(found.id);
+                                if ($.inArray(found.id, filled) > -1) {
+                                    canvas.addMarker(found.id, 'user-task');
+                                    $('#processSteps tbody').append('<tr><td>'+found.name+'</td><td><button data-index="'+i+'" data-mid="'+found.id+'" type="button" class="btn btn-primary">Bearbeiten</button></td></tr>')
+                                } else {
+                                    canvas.addMarker(found.id, 'user-task-new');
+                                    $('#processSteps tbody').append('<tr><td>'+found.name+'</td><td><button data-index="'+i+'" data-mid="'+found.id+'" type="button" class="btn btn-success">Erstellen</button></td></tr>')
+                                }
+                            }
+                            if (found.outgoing.length == 0) {
+                                found = null;
+                                break;
+                            }
+                            found = found.outgoing[0].targetRef;
+
+                            if (found.lanes[0].name != "Student") {
+                                found = null;
+                                break;
+                            }
+
+                            console.log(found)
+                            if (y++ >= 100) break;
+                        }
+                    }
                 }
             });
 
@@ -73,6 +102,7 @@ $(document).ready(function () {
     }
 
     function createEntry(id) {
+        var index = $('button[data-mid='+id+']').data('index');
         $.sweetModal({
             title: 'Prozesschritt hinzufügen',
             content: '<div class="row">' +
@@ -99,10 +129,10 @@ $(document).ready(function () {
             width: '600px',
             onOpen: function () {
                 $('#newFormBtn').click(function () {
-                    location.href = 'admin-process-modeler.html?id=' + id + '&type=form';
+                    location.href = 'admin-process-modeler.html?id=' + id + '&type=form'+"&index="+index;
                 });
                 $('#newDownloadBtn').click(function () {
-                    location.href = 'admin-process-modeler.html?id=' + id + '&type=download';
+                    location.href = 'admin-process-modeler.html?id=' + id + '&type=download'+"&index="+index;
                 });
                 $('#newUploadBtn').click(function () {
                     location.href = 'admin-process-modeler.html?id=' + id + '&type=upload';
@@ -113,7 +143,8 @@ $(document).ready(function () {
     }
 
     function editEntry(id) {
-        location.href = 'admin-process-modeler.html?id=' + id;
+        var index = $('button[data-mid='+id+']').data('index');
+        location.href = 'admin-process-modeler.html?id=' + id+"&index="+index;
     }
 
 // load + show diagram
@@ -138,6 +169,5 @@ $(document).ready(function () {
     $('#processSteps').on('click', '.btn-primary', function () {
         editEntry($(this).data('mid'));
     });
-
 
 });

@@ -33,6 +33,7 @@ $(document).ready(function () {
 
     var id = $.urlParam('id').trim();
     var type = $.urlParam('type').trim();
+    var index = $.urlParam('index').trim();
     var json = {};
 
     $.get('processmodel/get', {
@@ -74,6 +75,7 @@ $(document).ready(function () {
         $.post('processmodel/save', {
             model: 'studentBewerben',
             step: id,
+            stepnumber: index,
             json: encodeURI(JSON.stringify(json))
         }, function (data) {
             swal(
