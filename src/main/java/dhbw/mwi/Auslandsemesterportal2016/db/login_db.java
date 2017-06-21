@@ -958,7 +958,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
 				"\n"+ 
 				"\n"+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "+ uni +" wurde erfolgreich an das Akademisches Auslandsamt versendet."+
-				"\n"+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnahe um die Bearbeitung Ihrer Bewerbung kümmern und entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen"+ 
+				"\n"+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen"+ 
 				"\n"+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren." +  
 				"\n"+ 
 				"\n"+ "Mit freundlichen Grüßen," + 
@@ -975,10 +975,10 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				"\n"+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: "+ uni + 
 				"\n"+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + 
 				"\n"+		
-				"\n"+ "Die Fehlerursache beträgt:" +
+				"\n"+ "Folgende Problem hat sich ergeben:" +
 				"\n"+ fehlerUrsache +
 				"\n"+
-				"\n"+ "Ein Mitarbeiter wird sich daher bald mit Ihnen in Verbindung setzen." +
+				"\n"+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können." +
 				"\n"+ "Wir bitten um Ihr Verständnis." +
 				"\n"+ 
 				"\n"+ "Mit freundlichen Grüßen," + 
