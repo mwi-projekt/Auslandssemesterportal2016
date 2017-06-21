@@ -117,7 +117,7 @@ $(document).ready(function () {
     }
 
 // load + show diagram
-    $.get('../Prozess_Student_bewerben.bpmn', function (diagramXML) {
+    $.get('bpmn/get?model=Prozess_Student_bewerben', function (diagramXML) {
         $.get( "processmodel/list", {
             model: 'studentBewerben'
         }, function( data ) {
