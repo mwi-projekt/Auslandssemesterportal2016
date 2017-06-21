@@ -9,6 +9,11 @@ $(document).ready(function() {
 	url = new URL(window.location.href);
 	instanceID = url.searchParams.get("instance_id");
 	verify = url.searchParams.get("verify");
+	if (!(verify === "true")){
+		$('#validate').hide();
+	} else {
+		$('#saveChanges').hide();
+	}
 	parse();
 });
 
@@ -137,7 +142,7 @@ $.ajax({
 
 
 
-function saveData() {
+function saveChanges() {
 	var keyString = "";
 	var valString = "";
 	var typeString = "";
@@ -178,4 +183,41 @@ function saveData() {
 			alert('Ein Fehler ist aufgetreten');
 		}
 	});
-};
+}
+
+function validateBew(){
+	validateString = $('#validierungErfolgreich').val();
+	grund = $('#reason').val();
+	resultString = "";
+	if (validateString === "true"){resultString = "bestätigen"} else {resultString = "ablehnen"};
+	swal({
+		  title: "Bewerbung " + resultString,
+		  text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
+		  type: "warning",
+		  showCancelButton: true,
+		  confirmButtonColor: "#DD6B55",
+		  confirmButtonText: "Bewerbung " + resultString,
+		  cancelButtonText: "Abbrechen",
+		  closeOnConfirm: false
+		},
+		function(){
+			$.ajax({
+				type : "POST",
+				url : "setVariable",
+				data : {
+					instance_id : instanceID,
+					key : 'validierungErfolgreich|grund',
+					value : validateString + '|' + grund,
+					type : 'boolean|text'
+				},
+				success : function(result) {
+					swal("Gespeichert","success");
+				},
+				error : function(result) {
+					alert('Ein Fehler ist aufgetreten');
+				}
+			});
+		});
+	
+	
+}

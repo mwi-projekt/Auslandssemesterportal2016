@@ -77,13 +77,16 @@
         	<form>
         		<label>Aktion</label>
         		<select id="validierungErfolgreich">
-        			<option value=true>Best&auml;tigen</option>
-        			<option value=false>Ablehnen</option>
+        			<option value="true">Best&auml;tigen</option>
+        			<option value="false">Ablehnen</option>
         		</select><br>
         		<label>Grund</label>
         		<input id="reason" type="text"><br>
-        		<button class="btn btn-success" id="submit" onClick="validate()">Speichern</button>
+        		<button type="button" class="btn btn-success" id="validate" onClick="validateBew()">Speichern</button>
         	</form>
+        </div>
+        <div id="">
+        <button type="button" class="btn btn-success" id="saveChanges" onClick="saveChanges()">Bewerbung abschlie&szlig;en</button>
         </div>
         <!-- <div class="inhalt nonCms" id="in1">
             <div class="col-md-12 inhaltBox">
