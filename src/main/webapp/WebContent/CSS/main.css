@@ -5,6 +5,14 @@ input {
 	/* width: 300px; */
 }
 
+.form-group:after {
+	 content: ".";
+	 clear: both;
+	 display: block;
+	 visibility: hidden;
+	 height: 0px;
+ }
+
 /* Allgemeine Elemente */
 .btn {
 	font-size: medium;
