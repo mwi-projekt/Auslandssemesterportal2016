@@ -117,7 +117,7 @@ $.ajax({
 		values = result.split("|");
 		for (var m = 0; m < values.length; m++){
 			//alert("Setze Element mit ID " + idList[m] + "auf Wert " + values[m]);
-			$("#" + idList[m]).text(values[m]);
+			$("#" + idList[m]).val(values[m]);
 		}
 	},
 	error : function(result) {
