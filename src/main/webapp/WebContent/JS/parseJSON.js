@@ -122,6 +122,11 @@ function parse(){
                             $("#"+json[i]["data"]["id"]).dropzone(getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]));
 						}
                     }
+                    $.validate({
+                        form : '#formular',
+						lang : 'de',
+                        modules : 'html5'
+                    });
 				},
 				error : function(result) {
 					alert('Ein Fehler ist aufgetreten: ' + result);
@@ -136,6 +141,13 @@ function parse(){
 }
 
 function saveData(){
+
+    var form = $('#formular');
+
+    if (form && !form.isValid()) {
+        swal('Bitte füllen sie alle Felder korrekt aus.');
+        return;
+    }
 
     for (var i = 0; i < json.length; i++) {
         var type = json[i]["type"];
