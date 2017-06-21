@@ -24,12 +24,16 @@ function parse() {
 					definition : 'studentBewerben'
 				},
 				success : function(result) {
+					output = output + '<div class="panel-group" id="accordion">';
 					result = result.substring(0, result.length - 1);
 					steps = result.split(";");
 					for (var k = 0; k < steps.length; k++){
 						collapsible = steps[k].split("|");
 						stepName = collapsible[0]; //Name des aktiven Prozessschrittes
-						output = output + '<div id ="' + stepName + '">';
+						output = output + '<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse' +
+						k + '">' + stepName + '</a></h4></div>'; //Header des Accordions
+						output = output + ' <div id="collapse' + k + '" class="panel-collapse collapse in"><div class="panel-body">'
+
 						var json = JSON.parse(decodeURI(collapsible[1]));
 						for (var i = 0; i < json.length; i++) {
 							var type = json[i]["type"];
@@ -85,10 +89,14 @@ function parse() {
 								break;
 							}
 					}
-					output = output + '</div><br>';
+					output = output + '</div></div></div><br>';
 
 					}
+					output = output + '</div>';
 					document.getElementById("taskDetails").innerHTML = output;
+					for (var m = 0; m < k; m++){
+					$('#collapse' + m).collapse("hide");
+					}
 					getData();
 
 				},
