@@ -206,7 +206,7 @@ function validateBew(){
 				url : "setVariable",
 				data : {
 					instance_id : instanceID,
-					key : 'validierungErfolgreich|grund',
+					key : 'validierungErfolgreich|fehlerUrsache',
 					value : validateString + '|' + grund,
 					type : 'boolean|text'
 				},
