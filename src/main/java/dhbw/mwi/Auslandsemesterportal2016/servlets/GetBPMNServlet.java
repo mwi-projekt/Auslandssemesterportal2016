@@ -27,12 +27,13 @@ public class GetBPMNServlet extends HttpServlet {
         if (model != null && pattern.matcher(model).matches()) {
 
             java.lang.ClassLoader classLoader = getClass().getClassLoader();
-            java.io.File file = new java.io.File(classLoader.getResource("resources/"+model+".bpmn").getFile());
+            java.io.File file = new java.io.File(classLoader.getResource(model+".bpmn").getFile());
 
             try {
                 if(file.exists() && !file.isDirectory()) {
                     java.io.FileInputStream fis = new java.io.FileInputStream(file);
-                    java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(fis));
+                    java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(fis, "UTF8"));
+                    response.setContentType("application/octet-stream");
                     String s = null;
                     while((s = reader.readLine()) != null) {
                         toClient.println(s);
