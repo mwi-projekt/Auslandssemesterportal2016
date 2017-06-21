@@ -2,6 +2,8 @@ var instanceID;
 var url;
 var typeList;
 var idList;
+var json;
+
 $(document).ready(function() {
 	idList = [];
 	typeList = [];
@@ -64,7 +66,7 @@ function parse(){
 					step : step_id
 				},
 				success : function(result) {
-						var json = JSON.parse(decodeURI(result));
+						json = JSON.parse(decodeURI(result));
 						for (var i = 0; i < json.length; i++){
 							var type = json[i]["type"];
 							//alert (type);
@@ -134,6 +136,20 @@ function parse(){
 }
 
 function saveData(){
+
+    for (var i = 0; i < json.length; i++) {
+        var type = json[i]["type"];
+        //alert (type);
+        switch (type) {
+            case "form-upload":
+                var dropzoneForm = $('#'+json[i]["data"]["id"])[0].dropzone;
+                if (!dropzoneForm.files || dropzoneForm.files.length <= 0) {
+                    swal('Bitte laden Sie zunächst eine Datei hoch');
+                    return;
+                }
+        }
+    }
+
 	var keyString = "";
 	var valString = "";
 	var typeString = "";
