@@ -940,8 +940,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			}
 		});
 		
-		String email = (String) execution.getVariable("studentEmail");
-		String nachname = (String) execution.getVariable("studentNachname");
+		String email = (String) execution.getVariable("bewEmail");
+		String nachname = (String) execution.getVariable("bewNachname");
 		String uni = (String) execution.getVariable("uni");
 		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
 		String fehlerUrsache = (String) execution.getVariable("fehlerUrsache");
