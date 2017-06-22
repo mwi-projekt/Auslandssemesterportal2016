@@ -56,7 +56,9 @@ function parse(){
 		success : function(result) {
 			//alert('Aktiver Schritt: ' + result);
 			step_id = result;
-			
+			if (step_id === "datenPruefen"){
+				location.href = 'task_details.html?instance_id=' + instanceID;
+			}
 			$
 			.ajax({
 				type : "GET",
@@ -116,6 +118,9 @@ function parse(){
 
 					}
 					document.getElementById("formular").innerHTML = output;
+					if (idList.length > 0){
+						getData();
+					}
                     for (var i = 0; i < json.length; i++) {
                         var type = json[i]["type"];
                         if (type == 'form-upload') {
@@ -202,3 +207,30 @@ function saveData(){
 		}
 	}); 
 };
+
+function getData(){
+	var keyString = "";
+for (var l = 0; l < idList.length; l++)	{
+	keyString = keyString + idList[l]+"|";
+	}
+keyString = keyString.substr(0, keyString.length - 1);
+
+$.ajax({
+	type : "GET",
+	url : "getVariable",
+	data : {
+		instance_id : instanceID,
+		key : keyString
+	},
+	success : function(result) {
+		values = result.split("|");
+		for (var m = 0; m < values.length; m++){
+			$('#' + idList[m]).val(values[m]);
+		}
+	},
+	error : function(result) {
+		alert('Ein Fehler ist aufgetreten');
+	}
+});
+
+}

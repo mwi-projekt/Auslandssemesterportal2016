@@ -35,6 +35,13 @@ public class GetInstanceServlet extends HttpServlet {
         	//Lege neue Instanz an
         	ProcessInstance instance = runtime.startProcessInstanceByKey("studentBewerben");
         	instance_id = instance.getId();
+        	String userData = SQL_queries.getUserData(matnr);
+        	if (!(userData.equals(""))){
+        		String[] user = userData.split("\\|");
+        		runtime.setVariable(instance_id, "bewNachname", user[0]);
+        		runtime.setVariable(instance_id, "bewVorname", user[1]);
+        		runtime.setVariable(instance_id, "bewEmail", user[2]);
+        	}
         	runtime.setVariable(instance_id, "uni", uni);
         	SQL_queries.createInstance(instance_id, uni, matnr, 10);
         }

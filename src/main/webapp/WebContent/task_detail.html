@@ -73,7 +73,7 @@
             <div class="navEl nonCms" id="nav3"><a href="http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html">Bewerben</a></div>
         </div>
         <div id="taskDetails"></div>
-        <div id="validate">
+        <div id="validate" class="form-group">
         	<form>
         		<label>Aktion</label>
         		<select id="validierungErfolgreich">
@@ -81,7 +81,7 @@
         			<option value="false">Ablehnen</option>
         		</select><br>
         		<label>Grund</label>
-        		<input id="reason" type="text"><br>
+        		<textarea class="form-control" rows="5" id="reason"></textarea><br>
         		<button type="button" class="btn btn-success" id="validateBtn" onClick="validateBew()">Speichern</button>
         	</form>
         </div>

@@ -10,9 +10,31 @@ $(document).ready(function() {
 	instanceID = url.searchParams.get("instance_id");
 	verify = url.searchParams.get("verify");
 	if (!(verify === "true")){
+		if (sessionStorage['rolle'] != '3') {
+		       swal({
+		           title: "Fehler!",
+		           text: "Sie besitzen nicht die nötigen Rechte um diese Seite zu sehen.",
+		           type: "error",
+		           confirmButtonText: "Ok"
+		       }, function () {
+		           location.href = 'index.html';
+		       });
+		    }
 		$('#validate').hide();
+		$('#nav3').hide();
 	} else {
+		if (sessionStorage['rolle'] != '1') {
+		       swal({
+		           title: "Fehler!",
+		           text: "Sie besitzen nicht die nötigen Rechte um diese Seite zu sehen.",
+		           type: "error",
+		           confirmButtonText: "Ok"
+		       }, function () {
+		           location.href = 'index.html';
+		       });
+		    }
 		$('#saveChanges').hide();
+		$('#nav2').hide();
 	}
 	parse();
 });
@@ -131,13 +153,16 @@ $.ajax({
 		for (var m = 0; m < values.length; m++){
 			//alert("Setze Element mit ID " + idList[m] + "auf Wert " + values[m]);
 			$("#" + idList[m]).val(values[m]);
+			if (verify === "true"){
+				$("#" + idList[m]).prop('readonly', true);
+			}
 		}
 	},
 	error : function(result) {
 		alert('Ein Fehler ist aufgetreten');
 	}
 });
-	
+
 }
 
 
@@ -211,10 +236,17 @@ function validateBew(){
 					type : 'boolean|text'
 				},
 				success : function(result) {
-					swal("Gespeichert","success");
+					swal({
+				           title: "Bewerbung " + resultString,
+				           text: "Gespeichert",
+				           type: "success",
+				           confirmButtonText: "Ok"
+				       }, function () {
+				           location.href = 'task_overview.html';
+				       });
 				},
 				error : function(result) {
-					alert('Ein Fehler ist aufgetreten');
+					sweetAlert("Fehler", "Ein Fehler ist aufgetreten", "error");
 				}
 			});
 		});

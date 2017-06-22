@@ -1,4 +1,14 @@
 $(document).ready(function() {
+	if (sessionStorage['rolle'] != '1') {
+	       swal({
+	           title: "Fehler!",
+	           text: "Sie besitzen nicht die nötigen Rechte um diese Seite zu sehen.",
+	           type: "error",
+	           confirmButtonText: "Ok"
+	       }, function () {
+	           location.href = 'index.html';
+	       });
+	    }
 	getList();
 });
 
