@@ -233,22 +233,22 @@ public static String getAllActivities(String definitionKey){
 	}
 }
 
-public static String getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse zurück
+public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse zurück
 	String queryString = "SELECT nachname,vorname,email FROM user WHERE matrikelnummer = ?;";
 	String[] params = new String[]{""+matNr};
 	String[] types = new String[]{"int"};
 	ResultSet ergebnis = executeStatement(queryString,params,types);
 	try{
 		 if(ergebnis.next()){
-			 return ergebnis.getString("nachname") + "|" + ergebnis.getString("vorname") + "|" + ergebnis.getString("email"); 
+			 return new String[]{ergebnis.getString("nachname"),ergebnis.getString("vorname"),ergebnis.getString("email")}; 
 		 } else {
-			 return "";
+			 return new String[0];
 		 }
 		
 	}
 	catch (Exception e){
 		e.printStackTrace();
-		return "";
+		return new String[0];
 	}
 }
 

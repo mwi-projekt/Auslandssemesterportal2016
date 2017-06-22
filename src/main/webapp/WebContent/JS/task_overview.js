@@ -20,6 +20,9 @@ function getList(){
 		data : {
 		},
 		success : function(result) {
+			if (result === ""){
+			output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";	
+			} else {
 			result = result.substring(0, result.length - 1);
 			output = '<table class="table table-hover table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Uni</th><th>Prüfen</th></tr></thead><tbody>';
 			instances = result.split(";");
@@ -30,6 +33,7 @@ function getList(){
 				//alert("<tr><td>" + singleInstance[1] + "</td><td>" + singleInstance[2] + "</td><td>" + singleInstance[3] + "</td><td>" + singleInstance[0] + "</td></tr>");
 			}
 			output = output + "</tbody></table>";
+			}
 			document.getElementById("resultList").innerHTML = output;
 		},
 		error : function(result) {
