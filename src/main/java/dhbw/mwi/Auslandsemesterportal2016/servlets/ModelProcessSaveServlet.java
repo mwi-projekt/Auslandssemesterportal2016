@@ -38,7 +38,7 @@ public class ModelProcessSaveServlet extends HttpServlet {
                 if (rs.next()) {
                     String id = rs.getString("id");
                     query = "UPDATE processModel SET model = ?, step = ?, json = ?, stepNumber = ? WHERE id = ?";
-                    args = new String[]{model, step, json, id, stepnumber};
+                    args = new String[]{model, step, json, stepnumber, id};
                     types = new String[]{"String","String","String", "int", "int"};
                     SQL_queries.executeUpdate(query,args,types);
                 } else {
