@@ -135,7 +135,7 @@ $(document).ready(function () {
                     location.href = 'admin-process-modeler.html?id=' + id + '&type=download'+"&index="+index;
                 });
                 $('#newUploadBtn').click(function () {
-                    location.href = 'admin-process-modeler.html?id=' + id + '&type=upload';
+                    location.href = 'admin-process-modeler.html?id=' + id + '&type=upload'+"&index="+index;
                 });
             },
             //theme: $.sweetModal.THEME_DARK
