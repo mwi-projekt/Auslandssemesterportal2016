@@ -214,7 +214,6 @@ var main = function() {
 									type : "GET",
 									url : "getInstance",
 									data : {
-									    //NEUE DB-EINTRAG
 									    matnr : sessionStorage['matrikelnr'],
 									    uni : uni 
 									},
@@ -235,14 +234,30 @@ var main = function() {
 									var id = event.target.id
 								    	.replace('btnZusammenfassung','');
 									var uni = $('#uni'+ id).text();
-								    $('.iFenster').hide();
+								    /*$('.iFenster').hide();
 								    $('.iF1').show();
 								    $('.dat').hide();
-									sessionStorage['uni'] = uni;
 									$('#bewProzess').hide();
 									$('#aktuelleUni').html(uni);
 									getDataAllPruef();
-									$('#bewFormular10').show();
+									$('#bewFormular10').show();*/
+									sessionStorage['uni'] = uni;
+									$
+								    .ajax({
+									type : "GET",
+									url : "getInstance",
+									data : {
+									    matnr : sessionStorage['matrikelnr'],
+									    uni : sessionStorage['uni'] 
+									},
+									success : function(
+										result) {
+									    location.replace("http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id="+result);
+									},
+									error : function(
+										result) {
+									}
+								    });
 								});
 					    }
 

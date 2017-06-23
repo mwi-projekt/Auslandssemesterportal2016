@@ -28,11 +28,7 @@ public class GetCurrentActivityServlet extends HttpServlet {
    
         if (instanceID != null) {
         	List<String> activitiesList = runtime.getActiveActivityIds(instanceID);
-        	String activeActivity = "";
-        	//Da wir auf Java 6 laufen, existiert der Befehl String.join leider nicht. Also hier manuell...
-        	for (int i = 0; i < activitiesList.size(); i++){
-        		activeActivity = activeActivity + activitiesList.get(i); 
-        	}
+        	String activeActivity = activitiesList.get(0);
         	toClient.write(activeActivity);
         }
     }

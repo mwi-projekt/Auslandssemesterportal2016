@@ -285,14 +285,15 @@ var main = function() {
 						sessionStorage['User'] = email;
 
 						if (sessionStorage['rolle'] === '2') {
-							$('.cms').show();
+							/*$('.cms').show();
 							$('.nonCms').show();
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
 							$('.weg').css('display', 'inline');
 							$('.nutzerName').html(email);
-							location.reload();
-
+							location.reload();*/
+							alert("Als Auslandsmitarbeiter eingeloggt");
+							location.href = 'task_overview.html'
 						} else if (sessionStorage['rolle'] === '3') {
 							location.href = 'index.html';
 							$('.nutzerName').html(email);

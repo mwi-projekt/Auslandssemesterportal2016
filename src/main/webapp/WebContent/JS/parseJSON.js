@@ -57,7 +57,7 @@ function parse(){
 			//alert('Aktiver Schritt: ' + result);
 			step_id = result;
 			if (step_id === "datenPruefen"){
-				location.href = 'task_detail.html?instance_id=' + instanceID;
+				location.href = 'task_detail.html?instance_id=' + instanceID + '&send_bew=true';
 			}
 			$
 			.ajax({

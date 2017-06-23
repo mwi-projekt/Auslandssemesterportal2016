@@ -28,13 +28,9 @@ public class GetOverviewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter toClient = response.getWriter();
 
-        String instanceID = request.getParameter("instance_id");
         String definition = request.getParameter("definition"); //Process Definition Key aus Camunda
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        RuntimeService runtime = engine.getRuntimeService();
         String output = "";
    
-        if (instanceID != null) {
         	String activityString = SQL_queries.getAllActivities(definition);
         	activityString = activityString.substring(0, activityString.length() - 1);
         	String[] activities = activityString.split(";");
@@ -43,15 +39,13 @@ public class GetOverviewServlet extends HttpServlet {
         		ResultSet rs = SQL_queries.getJson(activities[i], definition);
         		try{
         			rs.next();
-        			output = output + rs.getString("json") + ";";
+        			output = output + rs.getString("json");
+        			toClient.println(output);
+        			output = "";
         		} catch (Exception e){
         			e.printStackTrace();
         			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         		}
-        	}
-        	toClient.write(output);
-        } else {
-        	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        }
+        	}  
     }
 }
