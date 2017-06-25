@@ -292,8 +292,7 @@ var main = function() {
 							$('.weg').css('display', 'inline');
 							$('.nutzerName').html(email);
 							location.reload();*/
-							alert("Als Auslandsmitarbeiter eingeloggt");
-							location.href = 'task_overview.html'
+							window.location.href = 'task_overview.html'
 						} else if (sessionStorage['rolle'] === '3') {
 							location.href = 'index.html';
 							$('.nutzerName').html(email);
@@ -310,15 +309,15 @@ var main = function() {
 							$('.nutzerName').html(email);
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
-							location.reload();
+							window.location.reload();
 							
 						} else if (sessionStorage['rolle'] === "") {
 							$('#inName').css('color', 'red');
 							$('#inPasswort').css('color', 'red');
 							$('#falschLogin').show();
+							window.location.reload();
 						}
 						$('.logoFenster').show();
-						location.reload();
 						}
 
 					},

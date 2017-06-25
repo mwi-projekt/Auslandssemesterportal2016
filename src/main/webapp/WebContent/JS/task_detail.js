@@ -4,11 +4,13 @@ var typeList;
 var verify;
 var idList;
 var sendBew;
+var fileList;
 $(document)
 		.ready(
 				function() {
 					idList = [];
 					typeList = [];
+					fileList = [];
 					url = new URL(window.location.href);
 					instanceID = url.searchParams.get("instance_id");
 					verify = url.searchParams.get("verify");
@@ -25,7 +27,7 @@ $(document)
 										location.href = 'index.html';
 									});
 						}
-						if (!(sendBEW === "true")){
+						if (!(sendBew === "true")) {
 							$('#saveChanges').hide();
 						}
 						$('#validate').hide();
@@ -130,8 +132,10 @@ function parse() {
 									typeList.push("boolean");
 									break;
 								case "form-upload":
-									output = output + 'Download link for '
-											+ json[i]["data"]["filename"];
+									output = output + '<div id="'
+											+ json[i]["data"]["id"]
+											+ '">Datei wird geladen...</div>';
+									fileList.push(json[i]["data"]["id"]);
 									break;
 								}
 							}
@@ -182,7 +186,7 @@ function getData() {
 			alert('Ein Fehler ist aufgetreten');
 		}
 	});
-
+	getFiles();
 }
 
 function saveChanges() {
@@ -301,4 +305,24 @@ function validateBew() {
 				});
 			});
 
+}
+
+function getFiles() {
+	for (var p = 0; p < fileList.length; p++) {
+		$.ajax({
+			type : "GET",
+			url : "getProcessFile",
+			data : {
+				instance_id : instanceID,
+				key : fileList[p]
+			},
+			success : function(result) {
+				alert("setzte " + idList[p]);
+				$('#' + idList[p]).val('<a href="' + result + '" target="blank">Download</a>');
+			},
+			error : function(result) {
+				$('#' + idList[p]).val('Datei wurde nicht hochgeladen');
+			}
+		});
+	}
 }

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	if (sessionStorage['rolle'] != '1') {
+	if (sessionStorage['rolle'] === '3') {
 	       swal({
 	           title: "Fehler!",
 	           text: "Sie besitzen nicht die nötigen Rechte um diese Seite zu sehen.",

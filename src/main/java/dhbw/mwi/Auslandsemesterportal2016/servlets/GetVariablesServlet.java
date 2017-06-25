@@ -1,5 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.servlets;
 
+import org.apache.commons.io.FileUtils;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -10,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -35,7 +38,7 @@ public class GetVariablesServlet extends HttpServlet {
 			if (obj == null){
 				output = output  + "|";
 			} else {
-				output = output + obj.toString() + "|";
+				output = output + obj.toString() + "|";	
 			}
 		}		
 		toClient.println(output);
