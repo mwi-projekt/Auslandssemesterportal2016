@@ -4,13 +4,11 @@ var typeList;
 var verify;
 var idList;
 var sendBew;
-var fileList;
 $(document)
 		.ready(
 				function() {
 					idList = [];
 					typeList = [];
-					fileList = [];
 					url = new URL(window.location.href);
 					instanceID = url.searchParams.get("instance_id");
 					verify = url.searchParams.get("verify");
@@ -132,10 +130,8 @@ function parse() {
 									typeList.push("boolean");
 									break;
 								case "form-upload":
-									output = output + '<div id="'
-											+ json[i]["data"]["id"]
-											+ '">Datei wird geladen...</div>';
-									fileList.push(json[i]["data"]["id"]);
+									output = output + '<a href="http://193.196.7.215:8080/Auslandssemesterportal/WebContent/file_download.html?instance_id=' + instanceID + '&filename=' +
+									json[i]["data"]["id"] + '" target="blank">' + json[i]["data"]["filename"] + '</a>';
 									break;
 								}
 							}
@@ -186,7 +182,6 @@ function getData() {
 			alert('Ein Fehler ist aufgetreten');
 		}
 	});
-	getFiles();
 }
 
 function saveChanges() {
@@ -305,24 +300,4 @@ function validateBew() {
 				});
 			});
 
-}
-
-function getFiles() {
-	for (var p = 0; p < fileList.length; p++) {
-		$.ajax({
-			type : "GET",
-			url : "getProcessFile",
-			data : {
-				instance_id : instanceID,
-				key : fileList[p]
-			},
-			success : function(result) {
-				alert("setzte " + idList[p]);
-				$('#' + idList[p]).val('<a href="' + result + '" target="blank">Download</a>');
-			},
-			error : function(result) {
-				$('#' + idList[p]).val('Datei wurde nicht hochgeladen');
-			}
-		});
-	}
 }
