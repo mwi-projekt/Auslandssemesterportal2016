@@ -5,6 +5,10 @@ input {
 	/* width: 300px; */
 }
 
+.sweet-modal-content select {
+	width: 100%;
+}
+
 .form-group:after {
 	 content: ".";
 	 clear: both;

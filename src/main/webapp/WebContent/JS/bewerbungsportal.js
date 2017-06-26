@@ -301,7 +301,7 @@ var main = function() {
 	    .on(
 		    'click',
 		    function() {
-			var popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Bitte wähle die Uni aus.</p><select class="inBox" id="selectUni">';
+			var popUpHtml = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
 			$
 				.ajax({
 				    type : "POST",
@@ -377,88 +377,45 @@ var main = function() {
 					    }
 					}
 					popUpHtml = popUpHtml
-						+ '</select><label class="btn" id="newBewProzessWahl" style="margin-left: 10px;">Bestätigen</label>';
+						+ '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
 
 					if (popUpHtml.match('<option>') != '<option>') {
 					    popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
 					}
+                        $.sweetModal({
+                            title: 'Bitte wähle die Uni aus',
+                            content: popUpHtml,
+							width: '500px',
+                            onOpen: function () {
+                            	$('#newBewProzessWahl').on('click', function () {
+                                    sessionStorage['uni'] = $('#selectUni').val();
+                                    $.ajax({
+										type : "GET",
+										url : "getInstance",
+										data : {
+											//NEUE DB-EINTRAG
+											matnr : sessionStorage['matrikelnr'],
+											uni : $(
+												'#selectUni')
+												.val(),
+										},
+										success : function(
+											result) {
+											/*var uni = $(
+											 '#selectUni')
+											 .val();
+											 zaehlupdate(0);
+											 askNextStep(uni); */
+											location.replace("http://193.196.7.215:8080/Auslandssemesterportal/WebContent/bewerben.html?instance_id="+result);
+										},
+										error : function(
+											result) {
+										}
+									});
+                                });
+                            }
+                        });
 					$('.popUpFeld').html(popUpHtml);
-					$('.popUpFeld').show();
-					$('.popUpBack').show();
-					document.getElementById('popClose')
-						.addEventListener(
-							'click',
-							function(event) {
-							    $('.popUpBack')
-								    .hide();
-							    $('.popUpFeld')
-								    .hide();
-							});
-					document
-						.getElementById(
-							'newBewProzessWahl')
-						.addEventListener(
-							'click',
-							function(event) {
-							    $('.popUpFeld')
-								    .hide();
-							    $('.popUpBack')
-								    .hide();
-							    $('.iFenster')
-								    .hide();
-							    $('.iF1').show();
-							    $('#bewProzess')
-								    .hide();
-							    /*var datum = new Date();
-							    var dd = datum
-								    .getDate();
-							    var mm = datum
-								    .getMonth() + 1; // January
-							    // is
-							    // 0!
-
-							    var yyyy = datum
-								    .getFullYear();
-							    if (dd < 10) {
-								dd = '0' + dd
-							    }
-							    if (mm < 10) {
-								mm = '0' + mm
-							    }
-							    var heute = yyyy
-								    + '-' + mm
-								    + '-' + dd;
-
-							     */
-                                sessionStorage['uni'] = $(
-                                    '#selectUni')
-                                    .val();
-							    $
-								    .ajax({
-									type : "GET",
-									url : "getInstance",
-									data : {
-									    //NEUE DB-EINTRAG
-									    matnr : sessionStorage['matrikelnr'],
-									    uni : $(
-										    '#selectUni')
-										    .val(), 
-									},
-									success : function(
-										result) {
-									    /*var uni = $(
-										    '#selectUni')
-										    .val();
-									    zaehlupdate(0);
-									    askNextStep(uni); */
-									    location.replace("http://193.196.7.215:8080/Auslandssemesterportal/WebContent/bewerben.html?instance_id="+result);
-									},
-									error : function(
-										result) {
-									}
-								    });
-
-							});
 				    },
 				    error : function(result) {
 
