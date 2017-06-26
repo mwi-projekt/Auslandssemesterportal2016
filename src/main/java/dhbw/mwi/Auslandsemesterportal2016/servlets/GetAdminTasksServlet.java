@@ -32,7 +32,7 @@ public class GetAdminTasksServlet extends HttpServlet {
         for (int i = 0; i < results.size(); i++){
         	String instanceId = results.get(i).getId();
         	List<String> activities = runtime.getActiveActivityIds(instanceId);
-        	if (activities.isEmpty()){
+        	if (activities.get(0).equals("abgeschlossen")){
         		String name = (String) runtime.getVariable(instanceId, "bewNachname");
         		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
         		String uni = (String) runtime.getVariable(instanceId, "uni");

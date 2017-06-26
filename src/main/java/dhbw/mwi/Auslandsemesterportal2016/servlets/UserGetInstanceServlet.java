@@ -39,7 +39,7 @@ public class UserGetInstanceServlet extends HttpServlet {
         	String instanceID = listEntry[1];
         	String stepCounter = "";
         	List<String> activityList = runtime.getActiveActivityIds(instanceID);
-        	if (activityList.isEmpty()){
+        	if (activityList.get(0).equals("abgeschlossen")){
         		//Prozess abgeschlossen
         		stepCounter = "Abgeschlossen";
         	} else {

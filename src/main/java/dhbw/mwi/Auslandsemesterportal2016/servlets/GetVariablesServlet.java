@@ -24,6 +24,7 @@ public class GetVariablesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	response.setCharacterEncoding("UTF-8");
         PrintWriter toClient = response.getWriter();
 
         String instanceID = request.getParameter("instance_id");

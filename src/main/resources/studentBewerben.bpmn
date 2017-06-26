@@ -5,7 +5,6 @@
   </bpmn:collaboration>
   <bpmn:process id="studentBewerben" name="Student bewerben" isExecutable="true">
     <bpmn:laneSet>
-    
       <bpmn:lane id="Lane_07n76w6" name="Student">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>downloadsAnbieten</bpmn:flowNodeRef>
@@ -23,8 +22,9 @@
         <bpmn:flowNodeRef>datenValidieren</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_Datenpruefung</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>bestaetigungVersenden</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_0b01b6y</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>studentBenachrichtigen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_0b01b6y</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abgeschlossen</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_1" name="Bewerbung starten" camunda:formKey="app:start-form.html">
@@ -102,11 +102,8 @@
     <bpmn:sendTask id="bestaetigungVersenden" name="Bestätigungs-email versenden" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
       <bpmn:documentation>Student wird über Annahme bestätigt.</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_03x4egt</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_094sdpj</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_11n15y3</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:endEvent id="EndEvent_0b01b6y" name="Bewerbung abgeschlossen">
-      <bpmn:incoming>SequenceFlow_094sdpj</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:sendTask id="studentBenachrichtigen" name="Student benachrichtigen" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
       <bpmn:documentation>Student wird über Ablehnung informiert.</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_19mks64</bpmn:incoming>
@@ -118,12 +115,20 @@
     <bpmn:sequenceFlow id="SequenceFlow_03x4egt" name="Ja" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="bestaetigungVersenden">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_094sdpj" sourceRef="bestaetigungVersenden" targetRef="EndEvent_0b01b6y" />
     <bpmn:userTask id="datenPruefen" name="Daten prüfen">
       <bpmn:incoming>SequenceFlow_0h9aw8k</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0qbs3g8</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_0qbs3g8" sourceRef="datenPruefen" targetRef="datenValidieren" />
+    <bpmn:endEvent id="EndEvent_0b01b6y" name="Bewerbung abgeschlossen">
+      <bpmn:incoming>SequenceFlow_0o42i2u</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="abgeschlossen" name="Prozess abgeschlossen">
+      <bpmn:incoming>SequenceFlow_11n15y3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0o42i2u</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_11n15y3" sourceRef="bestaetigungVersenden" targetRef="abgeschlossen" />
+    <bpmn:sequenceFlow id="SequenceFlow_0o42i2u" sourceRef="abgeschlossen" targetRef="EndEvent_0b01b6y" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cl2lu7">
@@ -163,18 +168,11 @@
         <dc:Bounds x="1199" y="211" width="1976" height="258" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_0b01b6y_di" bpmnElement="EndEvent_0b01b6y">
-        <dc:Bounds x="3039" y="267" width="36" height="36" />
+        <dc:Bounds x="3088" y="388" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="3012" y="303" width="90" height="20" />
+          <dc:Bounds x="3069" y="424" width="74" height="24" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_094sdpj_di" bpmnElement="SequenceFlow_094sdpj">
-        <di:waypoint xsi:type="dc:Point" x="2983" y="285" />
-        <di:waypoint xsi:type="dc:Point" x="3039" y="285" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="3008" y="98" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_03enxy9_di" bpmnElement="datenValidieren">
         <dc:Bounds x="2628" y="245" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -319,6 +317,23 @@
         <di:waypoint xsi:type="dc:Point" x="2678" y="245" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2648" y="196.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1yss45q_di" bpmnElement="abgeschlossen">
+        <dc:Bounds x="3056" y="245" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_11n15y3_di" bpmnElement="SequenceFlow_11n15y3">
+        <di:waypoint xsi:type="dc:Point" x="2983" y="285" />
+        <di:waypoint xsi:type="dc:Point" x="3056" y="285" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3019.5" y="264" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0o42i2u_di" bpmnElement="SequenceFlow_0o42i2u">
+        <di:waypoint xsi:type="dc:Point" x="3106" y="325" />
+        <di:waypoint xsi:type="dc:Point" x="3106" y="388" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3121" y="350.5" width="0" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
