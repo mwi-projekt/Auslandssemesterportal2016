@@ -62,7 +62,7 @@ var main = function() {
 					for (var i = 0; i < row.length; i++){
 						instance_info = row[i].split('|');
 						//instance_info[0] = instanceID, [1] = uni, [2] = stepCounter
-						tabelle = tabelle + '<tr rid="' + (i+1) + '"><td id="uni' + (i+1) + '">' + instance_info[1] + '</td><td>' + instance_info[2] + '</td><td>';
+						tabelle = tabelle + '<tr data-rid="' + (i+1) + '"><td>' + instance_info[1] + '</td><td>' + instance_info[2] + '</td><td>';
 						//Anlegen der Buttons
 						if ((instance_info[2] === "Abgeschlossen")||(instance_info[2] === "Auf Rückmeldung warten")){
 							//Übersicht
@@ -71,19 +71,21 @@ var main = function() {
 								//Übersicht
 								tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'">Übersicht</button>';
 								//Prozess löschen
-								tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="' + instance_info[0] + '">Löschen</button>';
+								tabelle = tabelle + '<button uni="' + instance_info[1] + '" type="button" class="btn btn-danger btn-delete" rid="' + (i+1) + '">Löschen</button>';
 						} else {
 							//Fortsetzen
 							tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '\'">Fortsetzen</button>';
 							//Prozess löschen
-							tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="' + instance_info[0] + '">Löschen</button>'
+							tabelle = tabelle + '<button uni="' + instance_info[1] + '" type="button" class="btn btn-danger btn-delete" rid="' + (i+1) + '">Löschen</button>'
 						}
 						tabelle = tabelle + '</td></tr>'
 					}
 					tabelle = tabelle + '</table>';
 					$('#tableBewProzess').html(tabelle);
 					
-					$('.btnProcessDelete').on('click', function() {
+					$('.btn-delete').on('click', function() {
+						var uni = $(this).attr("uni");
+						var id = $(this).attr("rid");
 				    	swal({
 				    		  title: "Bist du sicher?",
 				    		  text: "Der Prozess kann nicht wiederhergestellt werden!",
@@ -95,8 +97,7 @@ var main = function() {
 				    		},
 				    	function(){
 				    		
-				    		var id = $('.btnProcessDelete').closest('tr').data('rid');
-				    		var uni = $('#uni' + id).text();
+				    		//var id = $('.btn-delete').closest('tr').data('rid');
 				    		var matrikelnummer = sessionStorage['matrikelnr'];
 
 				    		$.ajax({
@@ -107,7 +108,7 @@ var main = function() {
 				    				uni: uni
 				    			}
 				    		}).done(function(data) {
-				    			$('#tableBewProzessBody tr[data-rid='+ id +']').remove();
+				    			$('#tableBewProzess tr[data-rid='+ id +']').remove();
 				    			swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
 				    			sessionStorage['beworbeneUnis'].split(';');
 				    		}).error(function (error) {
