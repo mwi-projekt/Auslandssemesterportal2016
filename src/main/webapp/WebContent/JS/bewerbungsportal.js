@@ -415,7 +415,6 @@ var main = function() {
                                 });
                             }
                         });
-					$('.popUpFeld').html(popUpHtml);
 				    },
 				    error : function(result) {
 
