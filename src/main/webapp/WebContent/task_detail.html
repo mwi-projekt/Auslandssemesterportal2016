@@ -15,13 +15,18 @@
     <link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script
-            src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
     <script src="JS/task_detail.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- Latest compiled and minified bootstrap-select CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+	<!-- Latest compiled and minified bootstrap-select JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 </head>
 
 <body>
@@ -39,9 +44,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="images/DHBW.png" class="pull-left"
-                                                                     style="height: 1.5em;" alt="">&nbsp;DHBW
-                    Auslandsstudienportal</a>
+                <a class="navbar-brand" href="index.html">
+                	<img src="images/DHBW.png" class="pull-left" style="height: 1.5em;" alt="">
+                &nbsp;DHBW Auslandsstudienportal</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -75,12 +80,13 @@
         <div id="taskDetails"></div>
         <div id="validate" class="form-group">
         	<form>
-        		<label>Aktion</label>
-        		<select id="validierungErfolgreich">
+        		<label style="margin-left: 20px">Aktion</label>
+        		<select style= "margin-left: 10px" class="selectpicker" id="validierungErfolgreich" onchange="change(this)">
         			<option value="true">Best&auml;tigen</option>
         			<option value="false">Ablehnen</option>
         		</select><br>
-        		<label>Grund</label>
+        		<label style="margin-left: 20px">Grund</label>
+        		
         		<textarea class="form-control" rows="5" id="reason"></textarea><br>
         		<button type="button" class="btn btn-success" id="validateBtn" onClick="validateBew()">Speichern</button>
         	</form>
@@ -88,34 +94,9 @@
         <div id="">
         <button type="button" class="btn btn-success" id="saveChanges" onClick="saveChanges()">Bewerbung abschlie&szlig;en</button>
         </div>
-        <!-- <div class="inhalt nonCms" id="in1">
-            <div class="col-md-12 inhaltBox">
-                <h2>Herzlich willkommen im Bewerbungsportal</h2>
-                <p>Hier kannst du dir noch einmal alle Auslandsuniversitäten
-                    ansehen, die für die jeweiligen Studiengänge zur Verfügung stehen.</p>
-                <p>Im Reiter "Bewerben" ist bereits eine Vorauswahl für dich
-                    getroffen. Hier kannst du dich nur noch auf Univerisäten bewerben,
-                    die für deinen Studiengang verfügbar sind.</p>
-                <p>
-                    <i>Das Auslandsportal-Team wünscht dir viel Erfolg bei deiner
-                        Bewerbung und eine tolle Zeit im Ausland!!!</i>
-                </p>
-            </div>
-        </div> -->
-            <iframe class="iFenster iF2" src="erfahrungsbericht1.html"
-                    style="width: 100%; height: 500px;"></iframe>
 
         </div>
     </div>
-    <!-- <div class="inhalt nonCms" id="in4">
-        <div class="col-md-8 inhaltBox" style="width: 99%">
-            <h2>Erfahrungsberichte</h2>
-            <select class="inBox zweiD" id="selBerichte">
-                <option>Gesamtbewertung</option>
-                <option>Einzelbewertungen</option>
-            </select>
-        </div>
-    </div> -->
 
     <div class="inhalt cms" id="in3">
         <div class="inhaltBox col-md-12">Das ist die Startseite. Hier

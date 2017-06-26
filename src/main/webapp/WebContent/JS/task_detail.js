@@ -4,6 +4,8 @@ var typeList;
 var verify;
 var idList;
 var sendBew;
+
+		
 $(document)
 		.ready(
 				function() {
@@ -78,7 +80,7 @@ function parse() {
 						// Prozessschrittes
 						if (collapsible[1].search("id") != -1) {
 							output = output
-									+ '<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse'
+									+ '<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse'
 									+ k + '">' + stepName + '</a></h4></div>'; // Header
 							// des
 							// Accordions
@@ -308,4 +310,16 @@ function validateBew() {
 				});
 			});
 
+}
+function change(obj) {
+    var selectBox = obj;
+    var selected = selectBox.options[selectBox.selectedIndex].value;
+    var textarea = document.getElementById("reason");
+
+    if(selected === 'true'){
+        textarea.style.display = "none";
+    }
+    else{
+        textarea.style.display = "block";
+    }
 }
