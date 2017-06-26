@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class SQL_queries {
@@ -252,5 +253,54 @@ public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse z
 	}
 }
 
+public static ArrayList<String[]> getUserInstances(int matNr){ //Uni|instanceID für alles Instanzen zurück (Getrennt nach List-Entries)
+	String queryString = "SELECT uni,processInstance FROM MapUserInstanz WHERE matrikelnummer = ?;";
+	String[] params = new String[]{""+matNr};
+	String[] types = new String[]{"int"};
+	ResultSet ergebnis = executeStatement(queryString,params,types);
+	ArrayList<String[]> antwort = new ArrayList<String[]>();
+	try{
+		 while(ergebnis.next()){
+			 antwort.add(new String[]{ergebnis.getString("uni"),ergebnis.getString("processInstance")});
+		 }
+		return antwort;
+	}
+	catch (Exception e){
+		e.printStackTrace();
+		return new ArrayList<String[]>();
+	}
+}
+
+private static int getTotalSteps(String model){
+	String query = "SELECT max(stepNumber) FROM processModel WHERE model = ?";
+	String[] params = new String[]{model};
+	String[] types = new String[]{"String"};
+	ResultSet result =  executeStatement(query,params,types);
+	try {
+		result.next();
+		return result.getInt("max(stepNumber)");
+	}
+	catch (Exception e){
+		e.printStackTrace();
+		return 0;
+	}
+}
+
+public static String getStepCounter(String step, String model){
+	String query = "SELECT stepNumber FROM processModel WHERE model = ? AND step = ?";
+	String[] params = new String[]{model,step};
+	String[] types = new String[]{"String","String"};
+	ResultSet result =  executeStatement(query,params,types);
+	try{
+		if (result.next()){
+			return "Schritt " + result.getInt("stepNumber") + " von " + getTotalSteps(model);
+		} else {
+			return "Fehler";
+		}
+	} catch (Exception e){
+		e.printStackTrace();
+		return "Fehler";
+	}
+}
 
 }

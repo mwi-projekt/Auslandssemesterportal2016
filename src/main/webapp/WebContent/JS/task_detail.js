@@ -29,7 +29,7 @@ $(document)
 							$('#saveChanges').hide();
 						}
 						$('#validate').hide();
-						$('#nav3').hide();
+						$('#nav2').hide();
 					} else {
 						if (sessionStorage['rolle'] === '3') {
 							swal(
@@ -43,7 +43,7 @@ $(document)
 									});
 						}
 						$('#saveChanges').hide();
-						$('#nav2').hide();
+						$('#nav3').hide();
 					}
 					parse();
 				});
