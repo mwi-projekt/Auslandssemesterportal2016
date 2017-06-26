@@ -11,6 +11,20 @@ $(document).ready(function () {
        });
     }
 
+    $.urlParam = function(name) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+            .exec(window.location.href);
+
+        if (results == null) {
+            return " ";
+        } else {
+            return results[1] || 0;
+        }
+
+    };
+
+    var dia = $.urlParam('dia').trim();
+
     // init & logout
     $('.nutzerName').text(sessionStorage['User']);
     $('#logout').on('click', function() {
@@ -129,13 +143,13 @@ $(document).ready(function () {
             width: '600px',
             onOpen: function () {
                 $('#newFormBtn').click(function () {
-                    location.href = 'admin-process-modeler.html?id=' + id + '&type=form'+"&index="+index;
+                    location.href = 'admin-process-modeler.html?id=' + id + '&type=form'+"&index="+index+'&dia='+dia;
                 });
                 $('#newDownloadBtn').click(function () {
-                    location.href = 'admin-process-modeler.html?id=' + id + '&type=download'+"&index="+index;
+                    location.href = 'admin-process-modeler.html?id=' + id + '&type=download'+"&index="+index+'&dia='+dia;
                 });
                 $('#newUploadBtn').click(function () {
-                    location.href = 'admin-process-modeler.html?id=' + id + '&type=upload'+"&index="+index;
+                    location.href = 'admin-process-modeler.html?id=' + id + '&type=upload'+"&index="+index+'&dia='+dia;
                 });
             },
             //theme: $.sweetModal.THEME_DARK
@@ -144,13 +158,13 @@ $(document).ready(function () {
 
     function editEntry(id) {
         var index = $('button[data-mid='+id+']').data('index');
-        location.href = 'admin-process-modeler.html?id=' + id+"&index="+index;
+        location.href = 'admin-process-modeler.html?id=' + id+"&index="+index+'&dia='+dia;
     }
 
 // load + show diagram
-    $.get('bpmn/get?model=Prozess_Student_bewerben', function (diagramXML) {
+    $.get('bpmn/get?model='+dia, function (diagramXML) {
         $.get( "processmodel/list", {
-            model: 'studentBewerben'
+            model: dia
         }, function( data ) {
             var arr = data.split(';');
             if (arr.length > 1) {

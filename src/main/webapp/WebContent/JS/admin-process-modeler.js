@@ -32,12 +32,13 @@ $(document).ready(function () {
 
 
     var id = $.urlParam('id').trim();
+    var dia = $.urlParam('dia').trim();
     var type = $.urlParam('type').trim();
     var index = $.urlParam('index').trim();
     var json = {};
 
     $.get('processmodel/get', {
-        model: 'studentBewerben',
+        model: dia,
         step: id
     }, function (data) {
         init(JSON.parse(decodeURI(data)));

@@ -9,7 +9,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
-import static org.junit.Assert.*;
 
 import org.camunda.bpm.consulting.process_test_coverage.ProcessTestCoverage;
 
@@ -36,13 +35,13 @@ public class InMemoryH2Test {
    * Just tests if the process definition is deployable.
    */
   @Test
-  @Deployment(resources = "Prozess_Student_bewerben.bpmn")
+  @Deployment(resources = "studentBewerben.bpmn")
   public void testParsingAndDeployment() {
     // nothing is done here, as we just want to check for exceptions during deployment
   }
 
   @Test
-  @Deployment(resources = "Prozess_Student_bewerben.bpmn")
+  @Deployment(resources = "studentBewerben.bpmn")
   public void testHappyPath() {
     //ProcessInstance processInstance = processEngine().getRuntimeService().startProcessInstanceByKey(PROCESS_DEFINITION_KEY);
 
