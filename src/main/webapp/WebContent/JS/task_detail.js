@@ -319,10 +319,10 @@ function change(obj) {
 
     if(selected === 'true'){
         textarea.style.display = "none";
-        label.hide();
+        label.style.display = "none";
     }
     else{
         textarea.style.display = "block";
-        label.show();
+        label.style.display = "block";
     }
 }
