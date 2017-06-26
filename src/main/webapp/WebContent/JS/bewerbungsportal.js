@@ -5,7 +5,7 @@ var main = function() {
 	value : 20
     });
     getStudiengaenge();
-    // �berpr�fen, was der User f�r einen Status hat
+    // Überprüfen, was der User für einen Status hat
     if (isEmpty(sessionStorage['User']) === true) {
 		location.replace("index.html");
     } else {
@@ -42,11 +42,52 @@ var main = function() {
 			$('.' + titel).show();
 			if (titel === "Bewerben") {
 			    $('.iFenster').hide();
+			//Lade aktive Prozesse
+			    $
+			    .ajax({
+				type : "GET",
+				url : "getUserInstances",
+				data : {
+				    matnr : sessionStorage['matrikelnr']
+				},
+				success : function(result) {
+					tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Aktionen</th></tr></thead>';
+					row = result.split("\n");
+					
+					for (var i = 0; i < row.length; i++){
+						instance_info = row[i].split('|');
+						//instance_info[1] = instanceID, [2] = uni, [3] = stepCounter
+						tabelle = tabelle + '<tr><td>' + instance_info[2] + '</td><td>' + instance_info[3] + '</td><td>';
+						//Anlegen der Buttons
+						if ((instance_info[3] === "Abgeschlossen")||(instance_info[3] === "Auf Rückmeldung warten")){
+							//Übersicht
+							tabelle = tabelle + '<button type="button" class="btn btn-primary" href="task_detail.html?instance_id=' + instance_info[1] + '">Übersicht</button>';
+						} else if (instance_info[3] === "Daten prüfen"){
+								//Übersicht
+								tabelle = tabelle + '<button type="button" class="btn btn-primary" href="task_detail.html?instance_id=' + instance_info[1] + '">Übersicht</button>';
+								//Prozess löschen
+								tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[1] + '">Löschen</button>';
+						} else {
+							//Fortsetzen
+							tabelle = tabelle + '<button type="button" class="btn btn-primary" href="bewerben.html?instance_id=' + instance_info[1] + '">Fortsetzen</button>';
+							//Prozess löschen
+							tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[1] + '">Löschen</button>';
+						}
+						tabelle = tabelle + '</td></tr>'
+					}
+					tabelle = tabelle + '</table>';
+					$('#tableBewProzessBody').html(tabelle);
+					
+				},
+				error: function(result){
+					swal("Fehler","Beim abrufen der laufenden Prozesse ist ein fehler aufgetreten","error");
+				}
+				});
 			    /*$('.popUpBack')
 				    .html(
 					    '<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
 			    $('.popUpBack').show();*/
-			    setTimeout(closeLoading, 1500);
+			    /*setTimeout(closeLoading, 1500);
 			    $
 				    .ajax({
 					type : "POST",
@@ -76,7 +117,7 @@ var main = function() {
 					    
 						/*if (schritt_aktuell > schritt_gesamt) {
 							status = status + "FEHLER" + result;
-						}*/
+						}
 						if (schritt_aktuell == schritt_gesamt) {
 							status = "abgeschlossen";
 						}
@@ -150,7 +191,7 @@ var main = function() {
 					    // GENERIERUNG TABELLE 
 					    $('#tableBewProzessBody').html(
 						    tabelle);
-					    // *** ENDE TABELLE ***//
+					    // *** ENDE TABELLE 
 					    
 					    for (var i = 1; i < zaehler; i++) {
 							$('#btnProzessFortfahren'+ i).on('click',
@@ -159,7 +200,7 @@ var main = function() {
 									    .replace('btnProzessFortfahren','');
 								    /*$('.popUpBack').html('<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
 								    $('.popUpBack').show();
-								    setTimeout(closeLoading,1000);*/
+								    setTimeout(closeLoading,1000);
 								    
 								    // Ermittlung des Fortschritts für die weiteren Bewerbungsschritte
 								    var uni = $('#uni'+ id).text();
@@ -171,7 +212,7 @@ var main = function() {
 								    $('#bewProzess').hide();
 								    $('#aktuelleUni').html(uni);
 								    SchrittReq(uni);
-								    askNextStep(uni);*/
+								    askNextStep(uni);
 								    $
 								    .ajax({
 									type : "GET",
@@ -203,7 +244,7 @@ var main = function() {
 									$('#bewProzess').hide();
 									$('#aktuelleUni').html(uni);
 									getDataAllPruef();
-									$('#bewFormular10').show();*/
+									$('#bewFormular10').show();
 									sessionStorage['uni'] = uni;
 									$
 								    .ajax({
@@ -261,8 +302,8 @@ var main = function() {
 					error : function(result) {
 
 					}
-				    });
-			    $('#bewProzess').show();
+				    }); */
+			    //$('#bewProzess').show();
 			} else if (titel === "Bewerber") {
 			    $.ajax({
 				type : "POST",
