@@ -74,18 +74,18 @@
     <div class="col-md-8">
         <div class="nav2">
             <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
-            <div class="navEl nonCms current" id="nav2"><a style="color:white" href="index.html">Admin</a></div>
-            <div class="navEl nonCms current" id="nav3"><a style="color:white" href="index.html">Bewerben</a></div>
+            <div class="navEl nonCms current" id="nav2"><a style="color:white" href="task_overview.html">Admin</a></div>
+            <div class="navEl nonCms current" id="nav3"><a style="color:white" href="bewerbungsportal.html">Bewerben</a></div>
         </div>
         <div id="taskDetails"></div>
         <div id="validate" class="form-group">
         	<form>
-        		<label style="margin-left: 20px">Aktion</label>
-        		<select style= "margin-left: 10px" class="selectpicker" id="validierungErfolgreich" onchange="change(this)">
+        		<label style="margin-left: 20px margin-bottom: 20px;">Aktion</label>
+        		<select style= "margin-left: 20px" class="selectpicker" id="validierungErfolgreich" onchange="change(this)">
         			<option value="true">Best&auml;tigen</option>
         			<option value="false">Ablehnen</option>
         		</select><br>
-        		<label style="margin-left: 20px">Grund</label>
+        		<label style="margin-left: 20px" id="reasonl">Grund</label>
         		
         		<textarea class="form-control" rows="5" id="reason"></textarea><br>
         		<button type="button" class="btn btn-success" id="validateBtn" onClick="validateBew()">Speichern</button>

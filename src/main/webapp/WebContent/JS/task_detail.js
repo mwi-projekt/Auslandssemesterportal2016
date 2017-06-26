@@ -315,11 +315,14 @@ function change(obj) {
     var selectBox = obj;
     var selected = selectBox.options[selectBox.selectedIndex].value;
     var textarea = document.getElementById("reason");
+    var label = document.getElementById("reasonl");
 
     if(selected === 'true'){
         textarea.style.display = "none";
+        label.hide();
     }
     else{
         textarea.style.display = "block";
+        label.show();
     }
 }

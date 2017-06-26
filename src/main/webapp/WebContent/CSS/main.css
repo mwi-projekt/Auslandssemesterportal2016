@@ -755,8 +755,7 @@ i {
 .logoFenster {
 	visibility:hidden;
 }
-.panel-heading [data-toggle="collapse"]:after
-{
+.panel-heading [data-toggle="collapse"]:after {
 	font-family: 'Glyphicons Halflings';
 	content: "\e072";
 	float: right;
@@ -770,11 +769,16 @@ i {
 	-o-transform:      rotate(-90deg);
 	transform:         rotate(-90deg);
 }
-.panel-heading [data-toggle="collapse"].collapsed:after
-{
+.panel-heading [data-toggle="collapse"].collapsed:after {
 	-webkit-transform: rotate(90deg);
 	-moz-transform:    rotate(90deg);
 	-ms-transform:     rotate(90deg);
 	-o-transform:      rotate(90deg);
 	transform:         rotate(90deg);
+}
+#reason {
+	display: none;
+}
+#reasonl {
+	display: none;
 }
