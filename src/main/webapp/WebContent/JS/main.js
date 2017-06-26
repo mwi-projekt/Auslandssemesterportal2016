@@ -917,7 +917,7 @@ var main = function() {
 			$('#nutzerVerwaltung').show();
 			sessionStorage['verwaltung'] = 2;
 		} else if (id === 'verwaltungPortal') {
-			location.href = 'admin-process-overview.html';
+			location.href = 'admin-process.html?key=studentBewerben';
 		}
 	});
 	// Click-Listener für Link zurück zum Admin-Hauptmenü
