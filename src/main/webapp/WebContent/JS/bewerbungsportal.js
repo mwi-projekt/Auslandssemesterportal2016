@@ -52,31 +52,32 @@ var main = function() {
 				},
 				success : function(result) {
 					tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Aktionen</th></tr></thead>';
+					result = result.trim();
 					row = result.split("\n");
 					
 					for (var i = 0; i < row.length; i++){
 						instance_info = row[i].split('|');
-						//instance_info[1] = instanceID, [2] = uni, [3] = stepCounter
-						tabelle = tabelle + '<tr><td>' + instance_info[2] + '</td><td>' + instance_info[3] + '</td><td>';
+						//instance_info[0] = instanceID, [1] = uni, [2] = stepCounter
+						tabelle = tabelle + '<tr><td>' + instance_info[1] + '</td><td>' + instance_info[2] + '</td><td>';
 						//Anlegen der Buttons
-						if ((instance_info[3] === "Abgeschlossen")||(instance_info[3] === "Auf Rückmeldung warten")){
+						if ((instance_info[2] === "Abgeschlossen")||(instance_info[2] === "Auf Rückmeldung warten")){
 							//Übersicht
-							tabelle = tabelle + '<button type="button" class="btn btn-primary" href="task_detail.html?instance_id=' + instance_info[1] + '">Übersicht</button>';
-						} else if (instance_info[3] === "Daten prüfen"){
+							tabelle = tabelle + '<button type="button" class="btn btn-primary" href="task_detail.html?instance_id=' + instance_info[0] + '">Übersicht</button>';
+						} else if (instance_info[2] === "Daten prüfen"){
 								//Übersicht
-								tabelle = tabelle + '<button type="button" class="btn btn-primary" href="task_detail.html?instance_id=' + instance_info[1] + '">Übersicht</button>';
+								tabelle = tabelle + '<button type="button" class="btn btn-primary" href="task_detail.html?instance_id=' + instance_info[0] + '">Übersicht</button>';
 								//Prozess löschen
-								tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[1] + '">Löschen</button>';
+								tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[0] + '">Löschen</button>';
 						} else {
 							//Fortsetzen
-							tabelle = tabelle + '<button type="button" class="btn btn-primary" href="bewerben.html?instance_id=' + instance_info[1] + '">Fortsetzen</button>';
+							tabelle = tabelle + '<button type="button" class="btn btn-primary" href="bewerben.html?instance_id=' + instance_info[0] + '">Fortsetzen</button>';
 							//Prozess löschen
-							tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[1] + '">Löschen</button>';
+							tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[0] + '">Löschen</button>';
 						}
 						tabelle = tabelle + '</td></tr>'
 					}
 					tabelle = tabelle + '</table>';
-					$('#tableBewProzessBody').html(tabelle);
+					$('#tableBewProzess').html(tabelle);
 					
 				},
 				error: function(result){

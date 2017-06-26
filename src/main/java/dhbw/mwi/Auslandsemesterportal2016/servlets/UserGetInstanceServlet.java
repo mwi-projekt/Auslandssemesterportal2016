@@ -23,7 +23,7 @@ public class UserGetInstanceServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	response.setCharacterEncoding("UFT-8");
+    	response.setCharacterEncoding("UTF-8");
         PrintWriter toClient = response.getWriter();
         int matnr = Integer.parseInt(request.getParameter("matnr"));
 
