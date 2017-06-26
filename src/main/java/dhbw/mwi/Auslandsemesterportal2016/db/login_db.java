@@ -958,7 +958,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
 				"\n"+ 
 				"\n"+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "+ uni +" wurde erfolgreich an das Akademisches Auslandsamt versendet."+
-				"\n"+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen"+ 
+				"\n"+ 
+				"\n"+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen."+ 
 				"\n"+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren." +  
 				"\n"+ 
 				"\n"+ "Mit freundlichen Grüßen," + 
