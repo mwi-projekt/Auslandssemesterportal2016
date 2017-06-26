@@ -130,7 +130,7 @@ function parse() {
 									typeList.push("boolean");
 									break;
 								case "form-upload":
-									output = output + '<a href="http://193.196.7.215:8080/Auslandssemesterportal/WebContent/file_download.html?instance_id=' + instanceID + '&filename=' +
+									output = output + '<a href="http://193.196.7.215:8080/Auslandssemesterportal/WebContent/getProcessFile?instance_id=' + instanceID + '&key=' +
 									json[i]["data"]["id"] + '" target="blank">' + json[i]["data"]["filename"] + '</a>';
 									break;
 								}
