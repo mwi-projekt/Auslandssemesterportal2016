@@ -34,6 +34,7 @@ var main = function() {
 				$('.cms').show();
 				$('#adminBereich').hide();
 				$('.Admin').show();
+				$('.Mitarbeiter').hide();
 			} else if (sessionStorage['verwaltung'] === "2") {
 				$('#adminBereich').hide();
 				$('#nutzerVerwaltung').show();
@@ -909,6 +910,7 @@ var main = function() {
 			$('.cms').show();
 			$('#adminBereich').hide();
 			$('.Admin').show();
+			$('.Mitarbeiter').hide();
 			sessionStorage['verwaltung'] = 1;
 		} else if (id === 'verwaltungUser') {
 			$('#adminBereich').hide();
