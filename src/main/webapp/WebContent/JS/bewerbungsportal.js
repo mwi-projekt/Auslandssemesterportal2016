@@ -53,12 +53,16 @@ var main = function() {
 				success : function(result) {
 					tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Aktionen</th></tr></thead>';
 					result = result.trim();
+					if (result === ""){
+						$('#tableBewProzess').html('<h2>Keine Bewerbungen vorhanden</h2>');
+					}
+					else {
 					row = result.split("\n");
 					
 					for (var i = 0; i < row.length; i++){
 						instance_info = row[i].split('|');
 						//instance_info[0] = instanceID, [1] = uni, [2] = stepCounter
-						tabelle = tabelle + '<tr><td>' + instance_info[1] + '</td><td>' + instance_info[2] + '</td><td>';
+						tabelle = tabelle + '<tr rid="' + (i+1) + '"><td id="uni' + (i+1) + '">' + instance_info[1] + '</td><td>' + instance_info[2] + '</td><td>';
 						//Anlegen der Buttons
 						if ((instance_info[2] === "Abgeschlossen")||(instance_info[2] === "Auf Rückmeldung warten")){
 							//Übersicht
@@ -67,17 +71,52 @@ var main = function() {
 								//Übersicht
 								tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'">Übersicht</button>';
 								//Prozess löschen
-								tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[0] + '">Löschen</button>';
+								tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="' + instance_info[0] + '">Löschen</button>';
 						} else {
 							//Fortsetzen
 							tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '\'">Fortsetzen</button>';
 							//Prozess löschen
-							tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[0] + '">Löschen</button>'
+							tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="' + instance_info[0] + '">Löschen</button>'
 						}
 						tabelle = tabelle + '</td></tr>'
 					}
 					tabelle = tabelle + '</table>';
 					$('#tableBewProzess').html(tabelle);
+					
+					$('.btnProcessDelete').on('click', function() {
+				    	swal({
+				    		  title: "Bist du sicher?",
+				    		  text: "Der Prozess kann nicht wiederhergestellt werden!",
+				    		  type: "warning",
+				    		  showCancelButton: true,
+				    		  confirmButtonColor: "#DD6B55",
+				    		  confirmButtonText: "Löschen!",
+				    		  closeOnConfirm: false
+				    		},
+				    	function(){
+				    		
+				    		var id = $('.btnProcessDelete').closest('tr').data('rid');
+				    		var uni = $('#uni' + id).text();
+				    		var matrikelnummer = sessionStorage['matrikelnr'];
+
+				    		$.ajax({
+				    			type : "GET",
+				    			url : "process/delete",
+				    			data : {
+				    				matrikelnummer : matrikelnummer,
+				    				uni: uni
+				    			}
+				    		}).done(function(data) {
+				    			$('#tableBewProzessBody tr[data-rid='+ id +']').remove();
+				    			swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+				    			sessionStorage['beworbeneUnis'].split(';');
+				    		}).error(function (error) {
+				    			console.error(error);
+				    			swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+				    		})
+				    	});
+					});
+					}
 					
 				},
 				error: function(result){
