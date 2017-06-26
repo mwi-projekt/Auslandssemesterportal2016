@@ -63,7 +63,7 @@
 										<input type="text" placeholder="Nachname*" class="inBox form-control" id="inNachname" required>
 									</div>
 								</div>
-								<input type="email" placeholder="E-Mail Adresse / Nutzername*" class="inBox form-control" id="inMail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="E-Mail Adresse">
+								<input type="email" placeholder="E-Mail Adresse / Nutzername*" class="inBox form-control" id="inMail" required pattern="[a-zA-Z0-9]+\.[a-zA-Z0-9]+@(student.|)+dhbw-karlsruhe.de$" title="E-Mail Adresse">
 							</div>
 						</div>
 						<div class="student">
@@ -369,10 +369,11 @@
 				<a class="btn btn-default navMargin" href="#erfahrungsBerichte">Erfahrungsberichte</a>
 
 				<a class="btn btn-default navMargin" href="#infoMaterial">Infomaterial</a>
-				<a class="btn btn-default navMargin eingeloggt"
-					href="bewerbungsportal.html">Zum Bewerbungsportal</a> <label
-					class="btn cms cmsBtn inline" style="float: none"><a style="color: white"
-					href="admin-process.html">Bewerbungsprozesse bearbeiten</a></label>
+				<a class="btn btn-default navMargin eingeloggt" href="bewerbungsportal.html">Zum Bewerbungsportal</a> 
+				<label 	class="Admin btn cms cmsBtn inline" style="float: none"><a style="color: white"
+						href="admin-process.html">Bewerbungsprozesse bearbeiten</a></label>
+				<label 	class="btn cms cmsBtn inline" style="float: none"><a style="color: white"
+						href="task_overview.html">Bewerbungen Validieren</a></label>
 			</div>
 
 			<!--  

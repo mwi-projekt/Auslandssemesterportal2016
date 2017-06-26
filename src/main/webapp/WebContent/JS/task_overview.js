@@ -9,6 +9,14 @@ $(document).ready(function() {
 	           location.href = 'index.html';
 	       });
 	    }
+
+    // init & logout
+    $('.nutzerName').text(sessionStorage['User']);
+    $('#logout').on('click', function() {
+        sessionStorage.clear();
+        location.replace("index.html");
+    });
+
 	getList();
 });
 

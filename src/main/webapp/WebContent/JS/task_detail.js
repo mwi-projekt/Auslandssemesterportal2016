@@ -45,6 +45,14 @@ $(document)
 						$('#saveChanges').hide();
 						$('#nav3').hide();
 					}
+
+                    // init & logout
+                    $('.nutzerName').text(sessionStorage['User']);
+                    $('#logout').on('click', function() {
+                        sessionStorage.clear();
+                        location.replace("index.html");
+                    });
+
 					parse();
 				});
 

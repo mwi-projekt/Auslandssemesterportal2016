@@ -9,6 +9,14 @@ $(document).ready(function() {
 	typeList = [];
 	url = new URL(window.location.href);
 	instanceID = url.searchParams.get("instance_id");
+
+    // init & logout
+    $('.nutzerName').text(sessionStorage['User']);
+    $('#logout').on('click', function() {
+        sessionStorage.clear();
+        location.replace("index.html");
+    });
+
 	parse();
 });
 
