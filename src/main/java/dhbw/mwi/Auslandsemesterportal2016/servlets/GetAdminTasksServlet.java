@@ -31,12 +31,17 @@ public class GetAdminTasksServlet extends HttpServlet {
         List<ProcessInstance> results = runtime.createProcessInstanceQuery().list();
         for (int i = 0; i < results.size(); i++){
         	String instanceId = results.get(i).getId();
-        	List<String> acitivites = runtime.getActiveActivityIds(instanceId);
-        	if (acitivites.get(0).equals("datenValidieren")){
+        	List<String> activities = runtime.getActiveActivityIds(instanceId);
+        	if (activities.isEmpty()){
         		String name = (String) runtime.getVariable(instanceId, "bewNachname");
         		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
         		String uni = (String) runtime.getVariable(instanceId, "uni");
-        		output = output + instanceId + "|" + name + "|" + vname + "|" + uni + ";";
+        		output = output + instanceId + "|" + name + "|" + vname + "|" + uni + "|complete;";
+        	} else if (activities.get(0).equals("datenValidieren")){
+        		String name = (String) runtime.getVariable(instanceId, "bewNachname");
+        		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
+        		String uni = (String) runtime.getVariable(instanceId, "uni");
+        		output = output + instanceId + "|" + name + "|" + vname + "|" + uni + "|validate;";
         	}
         }
        toClient.print(output); 

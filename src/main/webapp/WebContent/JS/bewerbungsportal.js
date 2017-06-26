@@ -62,17 +62,17 @@ var main = function() {
 						//Anlegen der Buttons
 						if ((instance_info[2] === "Abgeschlossen")||(instance_info[2] === "Auf Rückmeldung warten")){
 							//Übersicht
-							tabelle = tabelle + '<button type="button" class="btn btn-primary" href="task_detail.html?instance_id=' + instance_info[0] + '">Übersicht</button>';
+							tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '\'">Übersicht</button>';
 						} else if (instance_info[2] === "Daten prüfen"){
 								//Übersicht
-								tabelle = tabelle + '<button type="button" class="btn btn-primary" href="task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true">Übersicht</button>';
+								tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'">Übersicht</button>';
 								//Prozess löschen
 								tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[0] + '">Löschen</button>';
 						} else {
 							//Fortsetzen
-							tabelle = tabelle + '<button type="button" class="btn btn-primary" href="bewerben.html?instance_id=' + instance_info[0] + '">Fortsetzen</button>';
+							tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '\'">Fortsetzen</button>';
 							//Prozess löschen
-							tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[0] + '">Löschen</button>';
+							tabelle = tabelle + '<button type="button" class="btn btn-danger btn-delete" id="delete_' + instance_info[0] + '">Löschen</button>'
 						}
 						tabelle = tabelle + '</td></tr>'
 					}
