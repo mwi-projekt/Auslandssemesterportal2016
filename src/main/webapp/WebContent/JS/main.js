@@ -22,6 +22,7 @@ var main = function() {
 			$('.cms').show();
 			$('.nonCms').show();
 			$('.Admin').hide();
+			$('.Mitarbeiter').show();
 			$('.portalInfo').show();
 		} else if (sessionStorage['rolle'] === "1") {
 			if (sessionStorage['verwaltung'] === "0"
@@ -38,6 +39,7 @@ var main = function() {
 				$('#nutzerVerwaltung').show();
 				$('#normalBereich').hide();
 			}
+			$('.Mitarbeiter').hide();
 			$('.portalInfo').show();
 		} else {
 			$('.cms').hide();

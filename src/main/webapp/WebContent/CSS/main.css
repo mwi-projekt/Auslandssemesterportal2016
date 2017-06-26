@@ -678,6 +678,9 @@ i {
 .Admin {
 	display: none;
 }
+.Mitarbeiter {
+	display: none;
+}
 
 /* Hier wird gebastelt */
 #laden {
@@ -751,4 +754,7 @@ i {
 }
 .logoFenster {
 	visibility:hidden;
+}
+.Mitarbeiter {
+	display: none;
 }
