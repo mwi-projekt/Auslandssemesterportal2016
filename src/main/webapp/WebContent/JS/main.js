@@ -21,6 +21,8 @@ var main = function() {
 		if (sessionStorage['rolle'] === "2") {
 			$('.cms').show();
 			$('.nonCms').show();
+			$('.Admin').hide();
+			$('.portalInfo').show();
 		} else if (sessionStorage['rolle'] === "1") {
 			if (sessionStorage['verwaltung'] === "0"
 					|| sessionStorage['verwaltung'] === undefined) {
