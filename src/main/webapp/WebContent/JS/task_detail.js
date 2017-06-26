@@ -181,7 +181,7 @@ function getData() {
 				// alert("Setze Element mit ID " + idList[m] + "auf Wert " +
 				// values[m]);
 				$("#" + idList[m]).val(values[m]);
-				if (verify === "true") {
+				if (!(sendBew === "true")) {
 					$("#" + idList[m]).prop('readonly', true);
 				}
 			}
@@ -241,7 +241,7 @@ function saveChanges() {
 								swal(
 										{
 											title : "Bewerbung eingereicht",
-											text : "Ihre Bewerbung wurd eingereicht. Sie erhalten möglichst Zeitnah eine Rückmeldung per Email",
+											text : "Ihre Bewerbung wurde eingereicht. Sie erhalten möglichst Zeitnah eine Rückmeldung per Email",
 											type : "success",
 											confirmButtonText : "Ok"
 										},
