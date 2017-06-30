@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class SQL_queries {
 
@@ -301,6 +302,15 @@ public static String getStepCounter(String step, String model){
 		e.printStackTrace();
 		return "Fehler";
 	}
+}
+
+public static String disableUser(String mail){//Gibt die eingetragene UUID zurück
+	UUID uuid = UUID.randomUUID();
+	String query = "UPDATE user SET verifiziert = ? WHERE email = ?";
+	String[] params = new String[]{""+ uuid,mail};
+	String[] types = new String[]{"String","String"};
+	executeUpdate(query,params,types);
+	return "" + uuid;
 }
 
 }
