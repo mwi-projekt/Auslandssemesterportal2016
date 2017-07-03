@@ -1,3 +1,10 @@
+if (!String.prototype.startsWith) {
+    String.prototype.startsWith = function(searchString, position) {
+        position = position || 0;
+        return this.indexOf(searchString, position) === position;
+    };
+}
+
 var main = function() {
     sessionStorage['nichtBeworben'] = false;
     sessionStorage['SchrittAktuell'] = 0;
@@ -29,10 +36,12 @@ var main = function() {
 		}
     }
 
+    if (window.location.hash && window.location.hash.startsWith('#nav')) {
+        $(window.location.hash).trigger('click');
+	}
+
     $('.navEl')
-	    .on(
-		    'click',
-		    function(event) {
+	    .on( 'click', function(event) {
 			$('.bewSub').hide();
 			$('.navEl').removeClass('current');
 			var titel = $(this).text();

@@ -340,7 +340,6 @@ $(document).ready(function () {
             // on change update output element
             onchange: function(output) {
                 json = output;
-                $('#output').html(JSON.stringify(output, null, 4));
             },
 
             onedit: function ($elm, type, cb, self) {
