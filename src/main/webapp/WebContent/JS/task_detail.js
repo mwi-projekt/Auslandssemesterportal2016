@@ -54,6 +54,11 @@ $(document)
                         sessionStorage.clear();
                         location.replace("index.html");
                     });
+                    
+                    
+                    $('#reason').hide();
+                    $('#reasonl').hide();
+                    $('#validateBtn').disable(true);
 
 					parse();
 				});
@@ -290,7 +295,7 @@ function validateBew() {
 					url : "setVariable",
 					data : {
 						instance_id : instanceID,
-						key : 'validierungErfolgreich|fehlerUrsache',
+						key : 'validierungErfolgreich|mailText',
 						value : validateString + '|' + grund,
 						type : 'boolean|text'
 					},
@@ -314,15 +319,29 @@ function validateBew() {
 function change(obj) {
     var selectBox = obj;
     var selected = selectBox.options[selectBox.selectedIndex].value;
-    var textarea = document.getElementById("reason");
-    var label = document.getElementById("reasonl");
 
-    if(selected === 'true'){
-        textarea.style.display = "none";
-        label.style.display = "none";
+    if(selected === ''){
+    	$('#reason').hide();
+        $('#reasonl').hide();
+        $('#validateBtn').disable(true);
     }
-    else{
-        textarea.style.display = "block";
-        label.style.display = "block";
+    else {
+    	$.ajax({
+			type : "GET",
+			url : "getMailText",
+			data : {
+				instance_id : instanceID,
+				validate: selected
+			},
+			success : function(result) {
+				$('#reason').text(result);
+				$('#validateBtn').disable(false);
+				$('#reason').show();
+		        $('#reasonl').show();
+			},
+			error : function(result) {
+				alert('Fehler beim Abrufen des Mailtextes');
+			}
+		});
     }
 }

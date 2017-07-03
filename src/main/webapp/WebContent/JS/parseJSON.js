@@ -168,7 +168,7 @@ function saveData(){
         switch (type) {
             case "form-upload":
                 var dropzoneForm = $('#'+json[i]["data"]["id"])[0].dropzone;
-                if (!dropzoneForm.files || dropzoneForm.files.length <= 0) {
+                if (!dropzoneForm.getAcceptedFiles() || dropzoneForm.getAcceptedFiles().length <= 0) {
                     swal('Bitte laden Sie zunächst eine Datei hoch');
                     return;
                 }

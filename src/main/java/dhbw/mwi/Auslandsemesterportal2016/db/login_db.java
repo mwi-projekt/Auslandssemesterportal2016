@@ -941,10 +941,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		});
 		
 		String email = (String) execution.getVariable("bewEmail");
-		String nachname = (String) execution.getVariable("bewNachname");
-		String uni = (String) execution.getVariable("uni");
 		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
-		String fehlerUrsache = (String) execution.getVariable("fehlerUrsache");
+		String mailText = (String) execution.getVariable("mailText");
 
 		try {
 			Message message = new MimeMessage(session);
@@ -955,36 +953,14 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			if(erfolgreich){
 				message.setSubject(
 						MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester validiert", "utf-8", "B"));
-				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
-				"\n"+ 
-				"\n"+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "+ uni +" wurde erfolgreich an das Akademisches Auslandsamt versendet."+
-				"\n"+ 
-				"\n"+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen."+ 
-				"\n"+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren." +  
-				"\n"+ 
-				"\n"+ "Mit freundlichen Grüßen," + 
-				"\n"+ 
-				"\n"+ "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
+				message.setContent(mailText, "text/plain; charset=UTF-8");
 							
 				}
 			//wenn Validierung fehlgeschlagen
 				else{
 					message.setSubject(
 							MimeUtility.encodeText("Bei der Validierung Ihrer Bewerbung ist ein Fehler aufgetreten", "utf-8", "B"));
-				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
-				"\n"+ 
-				"\n"+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: "+ uni + 
-				"\n"+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + 
-				"\n"+		
-				"\n"+ "Folgende Problem hat sich ergeben:" +
-				"\n"+ fehlerUrsache +
-				"\n"+
-				"\n"+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können." +
-				"\n"+ "Wir bitten um Ihr Verständnis." +
-				"\n"+ 
-				"\n"+ "Mit freundlichen Grüßen," + 
-				"\n"+ 
-				"\n"+ "Ihr Akademisches Auslandsamt", "text/plain; charset=UTF-8");
+				message.setContent(mailText, "text/plain; charset=UTF-8");
 			}
 
 			Transport.send(message);

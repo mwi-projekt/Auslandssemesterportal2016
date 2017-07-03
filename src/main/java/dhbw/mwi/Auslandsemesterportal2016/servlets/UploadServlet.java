@@ -31,6 +31,7 @@ public class UploadServlet extends HttpServlet {
         Part filePart = null;
         String key;
 
+        System.out.println("File-Upload Servlet");
         if (id.equals("leer")) {
             out.print("Error: can not find process id");
             out.flush();
