@@ -58,7 +58,7 @@ $(document)
                     
                     $('#reason').hide();
                     $('#reasonl').hide();
-                    $('#validateBtn').disable(true);
+                    $('#validateBtn').prop('disabled', true);
 
 					parse();
 				});
@@ -323,7 +323,7 @@ function change(obj) {
     if(selected === ''){
     	$('#reason').hide();
         $('#reasonl').hide();
-        $('#validateBtn').disable(true);
+        $('#validateBtn').prop('disabled', true);
     }
     else {
     	$.ajax({
@@ -335,7 +335,7 @@ function change(obj) {
 			},
 			success : function(result) {
 				$('#reason').text(result);
-				$('#validateBtn').disable(false);
+				$('#validateBtn').prop('disabled', false);
 				$('#reason').show();
 		        $('#reasonl').show();
 			},
