@@ -224,7 +224,7 @@ function saveChanges() {
 	swal(
 			{
 				title : "Bewerbung absenden",
-				text : "Wenn sie die Bewerbung abschicken, können Sie keine Änderungen mehr vornehmen. Fortfahren?",
+				text : "Wenn Du die Bewerbung abschickst, kannst Du keine Änderungen mehr vornehmen. Fortfahren?",
 				type : "warning",
 				showCancelButton : true,
 				confirmButtonColor : "#DD6B55",
@@ -248,7 +248,7 @@ function saveChanges() {
 								swal(
 										{
 											title : "Bewerbung eingereicht",
-											text : "Ihre Bewerbung wurde eingereicht. Sie erhalten möglichst Zeitnah eine Rückmeldung per Email",
+											text : "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
 											type : "success",
 											confirmButtonText : "Ok"
 										},
