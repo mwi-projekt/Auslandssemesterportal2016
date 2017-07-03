@@ -36,10 +36,6 @@ var main = function() {
 		}
     }
 
-    if (window.location.hash && window.location.hash.startsWith('#nav')) {
-        $(window.location.hash).trigger('click');
-	}
-
     $('.navEl')
 	    .on( 'click', function(event) {
 			$('.bewSub').hide();
@@ -600,6 +596,10 @@ var main = function() {
 	}
     });
 
+
+    if (window.location.hash && window.location.hash.startsWith('#nav')) {
+        $(window.location.hash).trigger('click');
+    }
   
 };
 
