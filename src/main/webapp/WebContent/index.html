@@ -169,17 +169,17 @@
 					<h4 class="modal-title">Login</h4>
 				</div>
 				<div class="modal-body">
-					<form action="">
-						<input type="email" placeholder="E-Mail Adresse" id="inEmail" class=" inBox" required autofocus>
-						<input type="password" placeholder="Passwort" id="inPasswort" class=" inBox" required>
+					<form id ="loginForm" action="">
+						<input type="email" placeholder="E-Mail Adresse" id="inEmail" class=" inBox" required autofocus style="width:80%; margin-left:5px">
+						<br>
+						<input type="password" placeholder="Passwort" id="inPasswort" class=" inBox" required style="width:80%; margin-left:5px">
 						<p id="falschLogin" style="color: red; margin-bottom: 0px; display: none">Falsche Eingabe. Bitte versuchen sie es erneut.</p>
 						<br>
-						<input type="submit" class="btn" id="btnLogin" value="Login" style="width: auto;">
 						<br>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+					<input form = "loginForm" type="submit" class="btn" id="btnLogin" value="Login" style="width: auto;">
 				</div>
 			</div>
 
