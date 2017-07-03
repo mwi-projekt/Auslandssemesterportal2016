@@ -26,7 +26,9 @@ public class GetOverviewServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	response.setCharacterEncoding("UTF-8");
         PrintWriter toClient = response.getWriter();
+        
 
         String definition = request.getParameter("definition"); //Process Definition Key aus Camunda
         String output = "";

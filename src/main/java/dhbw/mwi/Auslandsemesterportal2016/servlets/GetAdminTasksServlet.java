@@ -23,6 +23,7 @@ public class GetAdminTasksServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	response.setCharacterEncoding("UTF-8");
         PrintWriter toClient = response.getWriter();
 
         ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();

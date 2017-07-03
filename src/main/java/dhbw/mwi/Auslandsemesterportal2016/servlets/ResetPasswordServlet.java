@@ -29,6 +29,7 @@ public class ResetPasswordServlet extends HttpServlet {
         String to = request.getParameter("email");
         if (!(SQL_queries.isEmailUsed(to))){
         	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        	out.write("No account registered for this email adress");
         	throw new RuntimeException();
         }
         
@@ -82,7 +83,7 @@ public class ResetPasswordServlet extends HttpServlet {
             //Statement statement = connection.createStatement();
             //int rsupd = statement.executeUpdate(sqlupd);
             //statement.close();
-            out.print("Done");
+            out.print("Done resetting account " + to);
 
         } catch (MessagingException e) {
             e.printStackTrace();
