@@ -16,17 +16,6 @@ $(document)
 					verify = url.searchParams.get("verify");
 					sendBew = url.searchParams.get("send_bew");
 					if (!(verify === "true")) {
-						if (sessionStorage['rolle'] != '3') {
-							swal(
-									{
-										title : "Fehler!",
-										text : "Sie besitzen nicht die nötigen Rechte um diese Seite zu sehen.",
-										type : "error",
-										confirmButtonText : "Ok"
-									}, function() {
-										location.href = 'index.html';
-									});
-						}
 						if (!(sendBew === "true")) {
 							$('#saveChanges').hide();
 						}

@@ -15,7 +15,7 @@ function setpw() {
 		url : "updatePassword",
 		data : {
 			uuid: uuid_var,
-			pw: pw_var
+			password: pw_var
 		},
 		success : function(result) {
 			if (result == '0'){
