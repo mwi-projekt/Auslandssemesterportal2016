@@ -47,7 +47,10 @@ $(document)
 						$('#saveChanges').hide();
 						$('#nav3').hide();
 					}
-
+					// Hyperlink on "Zurück"-Button 
+					if (sessionStorage['rolle'] === '3') {
+					       document.getElementById('backbutton').onclick("location.href='bewerbungsportal.html'");
+					}
                     // init & logout
                     $('.nutzerName').text(sessionStorage['User']);
                     $('#logout').on('click', function() {
