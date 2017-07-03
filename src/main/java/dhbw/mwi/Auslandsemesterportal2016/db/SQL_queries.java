@@ -313,4 +313,13 @@ public static String disableUser(String mail){//Gibt die eingetragene UUID zurü
 	return "" + uuid;
 }
 
+public static int setPassword(String uuid, String pwd){//Gibt Anzahl der geänderten Zeilen zurück
+	String salt = Util.generateSalt();
+    String hashedpw = Util.HashSha256(Util.HashSha256(pwd) + salt);
+	String query = "UPDATE user SET passwort = ?, salt = ?, verifiziert = '1'  WHERE verifiziert = ?";
+	String[] params = new String[]{hashedpw,salt,uuid};
+	String[] types = new String[]{"String","String","String"};
+	return executeUpdate(query,params,types);
+}
+
 }

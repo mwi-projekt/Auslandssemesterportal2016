@@ -42,14 +42,13 @@ public class ResetPasswordServlet extends HttpServlet {
         // Sender's email ID needs to be mentioned
         String from = "noreply@dhbw-karlsruhe.de";// change accordingly
 
-        // Assuming you are sending email through relay.jangosmtp.net
-        String host = "mail.dh-karlsruhe.de";
+        String host = "10.3.43.6"; //smtp.dh-karlsruhe.de, der Server bekommt den nslookup aber nicht hin
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "false");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
-        //props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.port", "25");
 
         // Get the Session object.
         Session session = Session.getInstance(props);
@@ -65,15 +64,14 @@ public class ResetPasswordServlet extends HttpServlet {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
             // Set Subject: header field
-            message.setSubject("Passwortr&uuml;cksetzung Auslandssemesterportal");
+            message.setSubject("Passwortruecksetzung Auslandssemesterportal");
 
-            // Now set the actual message
-			String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?changePassword=" + uuid;
+			String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/changePw.html?uuid=" + uuid;
 
             message.setContent("<h2>Hallo"
-                    + ",</h2> Du hast eine Kennwortrücksetzung für dein Nutzerkonto im Auslandssemesterportal angefordert. "
-                    + "Um dein neues Kennwort zu setzen, klicke bitte auf folgenden Link. <br><br> "
-                    + "<a href=\"" + link + "\" target=\"new\">Passwort zurücksetzen</a>", "text/html");
+                    + ",</h2> Du hast eine Kennwortrücksetzung für dein Nutzerkonto im Auslandssemesterportal angefordert. \n"
+                    + "Um dein neues Kennwort zu setzen, klicke bitte auf folgenden Link. \n \n "
+                    + "<a href=\"" + link + "\" target=\"new\">Passwort zurücksetzen</a>", "text/html; charset=UTF-8");
 
             // Send message
             Transport.send(message);

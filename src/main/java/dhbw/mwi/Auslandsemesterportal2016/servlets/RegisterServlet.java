@@ -25,7 +25,6 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Connection connection = DB.getInstance();
         PrintWriter out = response.getWriter();
 
         int rolle = 0;
@@ -51,33 +50,23 @@ public class RegisterServlet extends HttpServlet {
         String to = request.getParameter("email");// change accordingly
 
         // Sender's email ID needs to be mentioned
-        String from = "mwiausland@gmail.com";// change accordingly
-        final String username = "mwiausland@gmail.com";// change
-        // accordingly
-        final String password = "MWIAusland1";// change accordingly
+        String host = "10.3.43.6";
 
-        // Assuming you are sending email through relay.jangosmtp.net
-        String host = "smtp.gmail.com";
-
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
+		Properties props = new Properties();
+        props.put("mail.smtp.auth", "false");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.port", "25");
 
         // Get the Session object.
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
+        Session session = Session.getInstance(props);
 
         try {
             // Create a default MimeMessage object.
             Message message = new MimeMessage(session);
 
             // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
+            message.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
 
             // Set To: header field of the header.
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));

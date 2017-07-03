@@ -270,7 +270,7 @@ function saveChanges() {
 
 function validateBew() {
 	validateString = $('#validierungErfolgreich').val();
-	grund = $('#reason').val();
+	grund = $('#reason').text();
 	resultString = "";
 	if (validateString === "true") {
 		resultString = "bestätigen"

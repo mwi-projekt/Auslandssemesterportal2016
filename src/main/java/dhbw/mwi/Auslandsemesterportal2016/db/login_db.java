@@ -880,21 +880,15 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		// Mail Server Properties
 		// email.setHostName("mail.dhbw-karlsruhe.de");
 
-		final String username = "mwiausland@gmail.com";
-		final String password = "MWIAusland1";
-		String host = "smtp.gmail.com";
+		String host = "10.3.43.6";
 
 		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", "587");
-
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
+        props.put("mail.smtp.auth", "false");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", "25");
+        
+		Session session = Session.getInstance(props);
 
 		try {
 			Message message = new MimeMessage(session);
@@ -924,21 +918,15 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 
-		final String username = "mwiausland@gmail.com";
-		final String password = "MWIAusland1";
-		String host = "smtp.gmail.com";
+		String host = "10.3.43.6";
 
 		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "false");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", "25");
 
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
+		Session session = Session.getInstance(props);
 		
 		String email = (String) execution.getVariable("bewEmail");
 		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
@@ -946,6 +934,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 		try {
 			Message message = new MimeMessage(session);
+			
+			message.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
 
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
 			
