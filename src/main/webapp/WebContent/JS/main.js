@@ -998,7 +998,7 @@ var main = function() {
 											} else if (rolle === 3) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTabelle" <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>DHBW Standort</td><td>Studiengang</td><td>Kurs</td><td>Matrikelnummer</td><td></td></tr></thead>';
+														+ '</h2><table id="userTabelle" <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>DHBW Standort</td><td>Studiengang</td><td>Kurs</td><td>Matrikelnummer</td><td></td><td></td></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
@@ -1031,7 +1031,9 @@ var main = function() {
 															+ auslesen[i + 7]
 															+ '</td><td class="btn" id="edit'
 															+ count
-															+ '">Bearbeiten</td></tr>';
+															+ '">Bearbeiten</td><td class="btn delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
+                            + count
+                            + '">Löschen</td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
@@ -1043,6 +1045,38 @@ var main = function() {
 											$('#userTabelle').html(tabelle);
 											for (var i = 1; isEmpty($(
 													'#edit' + i).text()) !== true; i++) {
+
+												$(document).on('click', '.delete-button', function () {
+
+                          var self = $(this);
+
+                          swal({
+                              title: "Bist du sicher?",
+                              text: "Der User kann nicht wiederhergestellt werden!",
+                              type: "warning",
+                              showCancelButton: true,
+                              confirmButtonColor: "#DD6B55",
+                              confirmButtonText: "Löschen!",
+                              closeOnConfirm: false
+                            },
+                            function(){
+                              $.ajax({
+                                type : "GET",
+                                url : "user/delete",
+                                data : {
+                                  matrikelnummer: self.data('matrikel')
+                                },
+                                success : function(result) {
+                                  self.closest('tr').remove();
+                                  swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                },
+                                error : function(result) {
+                                  swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                }
+                              });
+                            });
+                        });
+
 												document
 														.getElementById(
 																'edit' + i)
@@ -1478,7 +1512,7 @@ $.urlParam = function(name) {
 		return results[1] || 0;
 	}
 
-}
+};
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
 	var link = "";
