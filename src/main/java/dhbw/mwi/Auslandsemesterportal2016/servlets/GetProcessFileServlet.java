@@ -22,6 +22,21 @@ import java.util.List;
 public class GetProcessFileServlet extends HttpServlet {
 
     @Override
+    protected void doHead(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // checks if the file exists
+        String instanceID = request.getParameter("instance_id");
+        String key = request.getParameter("key");
+        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+        RuntimeService runtime = engine.getRuntimeService();
+        FileValue typedFileValue = (FileValue) runtime.getVariableTyped(instanceID, key);
+        if (typedFileValue != null) {
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletOutputStream toClient = response.getOutputStream();
 
