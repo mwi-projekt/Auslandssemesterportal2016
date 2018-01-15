@@ -8,7 +8,8 @@ before_install:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/target mwi@193.196.7.215:/home/mwi/test
+  script: scp
+  script: rsync --delete-after --quiet $TRAVIS_BUILD_DIR/target/Auslandssemesterportal.war mwi@193.196.7.215:/home/mwi/test/Auslandssemesterportal.war
   on:
     branch: master
 addons:
