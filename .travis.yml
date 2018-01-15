@@ -1,2 +1,10 @@
 language: java
-
+before_install:
+- openssl aes-256-cbc -K $encrypted_81ae95a4601b_key -iv $encrypted_81ae95a4601b_iv
+  -in deploy_rsa.enc -out deploy_rsa -d
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/target mwi@193.196.7.215:/home/mwi/test
+  on:
+    branch: master
