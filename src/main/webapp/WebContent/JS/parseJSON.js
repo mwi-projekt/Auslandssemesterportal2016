@@ -112,7 +112,7 @@ function parse(){
 								}
 								
 								if(json[i]["data"]["label"] == "Postleitzahl"){
-									isPlz = ' maxlength="5"';
+									isPlz = ' maxlength="5" pattern="[0-9]"';
 								}
 								
 								output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + ' </label><div class="col-sm-10"><input class="form-control" type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + ' ' + isPlz + '></div></div>';
