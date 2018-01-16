@@ -106,10 +106,16 @@ function parse(){
 								break;
 							case "form-text":
 								var req = "";
+								var isPlz = "";
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + ' </label><div class="col-sm-10"><input class="form-control" type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
+								
+								if(json[i]["data"]["label"] == "Postleitzahl"){
+									isPlz = ' maxlength="5"';
+								}
+								
+								output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + ' </label><div class="col-sm-10"><input class="form-control" type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + ' ' + isPlz + '></div></div>';
 								idList.push(json[i]["data"]["id"]);
 								typeList.push(json[i]["data"]["type"]);
 								break;
