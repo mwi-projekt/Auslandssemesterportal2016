@@ -824,7 +824,7 @@ var main = function() {
 			var el = $('#inli' + id);
 			if(el.val() == "" || el.val() == undefined){
 				el.remove();
-				$('#delPoLi').remove();
+				$('#delPoLi' + id).remove();
 
 			}
 			else{
