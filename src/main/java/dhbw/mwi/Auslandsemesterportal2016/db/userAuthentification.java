@@ -18,9 +18,9 @@ public class userAuthentification
 			for (int i = 0; i < cookies.length; i++)
 			{
 				//TODO define the name of the cookie value for the session id
-				if(cookies[i].getName()=="session_id")
+				if(cookies[i].getName()=="sessionID")
 					sessionId = cookies[i].getValue();
-				if(cookies[i].getName() =="mail")
+				if(cookies[i].getName() =="email")
 					mail = cookies[i].getValue();
 			}
 		
