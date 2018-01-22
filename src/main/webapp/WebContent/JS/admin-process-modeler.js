@@ -270,6 +270,10 @@ $(document).ready(function () {
                 if (data.id) {
                     $('#field-id').val(data.id);
                 }
+                
+                if (data.numchars) {
+                	$('#field-numchars').val(data.numchars);
+                }
 
                 if (data.label) {
                     $('#field-label').val(data.label);
@@ -298,6 +302,7 @@ $(document).ready(function () {
                         data: {
                             label: $('#field-label').val(),
                             type: $('#field-type').val(),
+                            numchars: $('#field-numchars').val(),
                             id: $('#field-id').val(),
                             required: $('#field-req')[0].checked
                         }

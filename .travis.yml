@@ -9,7 +9,7 @@ deploy:
   provider: script
   skip_cleanup: true
   script: scp
-  script: rsync --quiet $TRAVIS_BUILD_DIR/target/Auslandssemesterportal.war mwi@193.196.7.215:/home/mwi/test/Auslandssemesterportal.war
+  script: rsync --quiet $TRAVIS_BUILD_DIR/target/Auslandssemesterportal.war mwi@193.196.7.215:/home/mwi/camunda-tomcat8-bpm7.5.0/server/apache-tomcat-8.0.24/webapps/Auslandssemesterportal.war
   on:
     branch: master
 addons:
