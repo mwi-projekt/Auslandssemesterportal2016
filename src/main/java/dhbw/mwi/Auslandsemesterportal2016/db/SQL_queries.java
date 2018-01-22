@@ -176,7 +176,8 @@ public static String userLogin(String mail, String salt, String pw){
 	} catch (Exception e){
 	 e.printStackTrace();
 	}
-	return "" + resultCode + ";" + studiengang + ";" + matrikelnummer + ";" + rolle + ";" + accessToken;
+
+	return new String[] {resultCode, studiengang, matrikelnummer, rolle, accessToken};
 }
 
 public static boolean userSessionExists(int userID){
