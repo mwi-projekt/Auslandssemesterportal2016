@@ -1,9 +1,11 @@
 package dhbw.mwi.Auslandsemesterportal2016.servlets;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +19,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 
 public class HTMLDeliveryServlet extends HttpServlet 
 {
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String sessionId = null;
 		Cookie[] cookies = request.getCookies();
@@ -49,7 +51,7 @@ public class HTMLDeliveryServlet extends HttpServlet
 						, new String[]{"String"});*/
 				
 				//In the Meanwhile working SQL:
-				String userId = null, int role = 0;
+				String userId = null; int role = 0;
 				ResultSet rs = SQL_queries.executeStatement(
 						"SELECT user_id"
 						+ "FROM sessionid"
@@ -66,6 +68,7 @@ public class HTMLDeliveryServlet extends HttpServlet
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 		//check if a userId matching to the sessionId was found in DB
 				if(userId != null)
 				{

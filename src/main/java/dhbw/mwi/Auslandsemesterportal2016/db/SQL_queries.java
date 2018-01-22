@@ -155,17 +155,17 @@ public static String userLogin(String mail, String salt, String pw){
 				accessToken = Util.generateSalt();
 				userID = ergebnis.getInt("userID");
 				if(userSessionExists(userID)){
-					String query = "UPDATE loginSessions SET sessionID = ? WHERE userID = ?";
-					String[] params = new String[]{accessToken,userID};
-					String[] types = new String[]{"String","int"};
-					executeUpdate(query,params,types);
+					String query_ = "UPDATE loginSessions SET sessionID = ? WHERE userID = ?";
+					String[] params_ = new String[]{accessToken,""+userID};
+					String[] types_ = new String[]{"String","int"};
+					executeUpdate(query_,params_,types_);
 				}
 				else{
-					String query = "INSERT INTO loginSessions (sessionID, userID) VALUES " +
+					String query_ = "INSERT INTO loginSessions (sessionID, userID) VALUES " +
 							"(?,?)";
-					String[] params = new String[]{accessToken,userID};
-					String[] types = new String[]{"String","int"};
-					executeUpdate(query,params,types);
+					String[] params_ = new String[]{accessToken,""+userID};
+					String[] types_ = new String[]{"String","int"};
+					executeUpdate(query_,params_,types_);
 				}
 			} else {
 				resultCode = 3;
@@ -182,7 +182,7 @@ public static String userLogin(String mail, String salt, String pw){
 public static boolean userSessionExists(int userID){
 	String queryString = "SELECT 1 FROM loginSessions WHERE userID = ?;";
 	boolean resultExists = true;
-	String[] args = new String[]{userID};
+	String[] args = new String[]{""+userID};
 	String[] types = new String[]{"int"};
 	ResultSet ergebnis = executeStatement(queryString,args,types);
 	try{
