@@ -130,7 +130,7 @@ public static String getSalt(String mail){//Ermittelt das zur Mailadresse hinter
 	return salt;
 }
 
-public static String userLogin(String mail, String salt, String pw){
+public static String[] userLogin(String mail, String salt, String pw){
 	//Prüft Logindaten. ResultCodes: 1 = Erfolgreich, 2 = Falsche Daten, 3 = nicht aktiviert, 4 = Datenbankfehler
 	//Stringkette, die zurückgegeben wird: resultCode;Bezeichnung Studiengang;Matrikelnummer;Rolle (Nummer die in der DB steht)
 	String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);

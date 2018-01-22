@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -58,7 +59,7 @@ public class LoginServlet extends HttpServlet {
           out.append("" + result[0] + ";" + result[1] + ";" + result[2]+ ";" + result[3]);
           out.close();
 
-        /*} catch (SQLException e) {
+        /*} catch (SQLException e)
             e.printStackTrace();
         }
 
