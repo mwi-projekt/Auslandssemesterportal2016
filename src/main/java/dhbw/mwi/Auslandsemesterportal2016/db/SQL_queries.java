@@ -212,6 +212,26 @@ public static boolean checkUserSession(String accessToken, String mail){
 	return isCorrect;
 }
 
+//Rolle für User: 1 = Admin ; 2 = Mitarbeiter ; 3 = Student ; 0 = Fehler
+public static int getRoleForUser(String mail){
+		String queryString = "SELECT rolle FROM user WHERE email = ?;";
+		String[] args = new String[]{mail};
+		String[] types = new String[]{"String"};
+		ResultSet ergebnis = executeStatement(queryString,args,types);
+
+		try{
+			if (ergebnis.next()){
+				return ergebnis.getInt(1);
+			} else {
+				return 0;
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+			return 0;
+		}
+
+}
+
 
 public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle, String email, String studiengang,
 		String kurs, int matrikelnummer, String tel, String mobil, String standort, String verifiziert){

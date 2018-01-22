@@ -854,7 +854,7 @@ var main = function() {
 									+ (count + 1)
 									+ '" src="images/Button Delete.png" />');
 					document
-							.getElementById('delPoLi' + i)
+							.getElementById('delPoLi' + (count + 1))
 											.addEventListener(
 													'click',
 													delPoLi(event));
