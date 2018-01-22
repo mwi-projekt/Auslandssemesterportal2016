@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -21,10 +22,9 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	//Connection connection = DB.getInstance();
-        PrintWriter out = response.getWriter();
         String salt = "";
         String mail = "";
-        
+
 /*
         // SQL-Statement für Salt vorbereiten
         String sqlsalt = "SELECT salt FROM user WHERE '" + request.getParameter("email") + "'= email";
@@ -50,12 +50,16 @@ public class LoginServlet extends HttpServlet {
                     + "'= email AND '" + pw + "' = passwort"; */
         	mail = request.getParameter("email");
         	salt = SQL_queries.getSalt(mail);
-        	String result = SQL_queries.userLogin(mail, salt, request.getParameter("pw"));
+        	String[] result = SQL_queries.userLogin(mail, salt, request.getParameter("pw"));
             //rs = statement.executeQuery(sql);
-        	out.println(result);
-        	out.flush();
-        	out.close();
-        /*} catch (SQLException e) {
+          Cookie cookie = new Cookie( "sessionID", result[4] );
+          response.addCookie( cookie );
+
+          PrintWriter out = response.getWriter();
+          out.append("" + result[0] + ";" + result[1] + ";" + result[2]+ ";" + result[3]);
+          out.close();
+
+        /*} catch (SQLException e)
             e.printStackTrace();
         }
 

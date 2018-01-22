@@ -410,11 +410,9 @@ var main = function() {
 																+ '" /><img class="small" id="delPoLi'
 																+ i
 																+ '" src="images/Button Delete.png" />');
-										document
-												.getElementById('delPoLi' + i)
-												.addEventListener(
-														'click',
-														delPoLi(event));
+										$('#delPoLi' + i).click(function(event){
+											delPoLi(event);
+										});
 									}
 									$(this).text('Abbrechen');
 								} else if ($(this).text() === "Abbrechen") {
@@ -826,7 +824,7 @@ var main = function() {
 			var el = $('#inli' + id);
 			if(el.val() == "" || el.val() == undefined){
 				el.remove();
-				$('#delPoLi').remove();
+				$('#delPoLi' + id).remove();
 
 			}
 			else{
@@ -853,11 +851,9 @@ var main = function() {
 									+ '" value="" /><img class="small" id="delPoLi'
 									+ (count + 1)
 									+ '" src="images/Button Delete.png" />');
-					document
-							.getElementById('delPoLi' + i)
-											.addEventListener(
-													'click',
-													delPoLi(event));
+									$('#delPoLi' + (count+1)).click(function(event){
+										delPoLi(event);
+									});
 				}
 			});
 	// Click-Listener für neuen Erfahrungsbericht in Box Erfahrungsbericht

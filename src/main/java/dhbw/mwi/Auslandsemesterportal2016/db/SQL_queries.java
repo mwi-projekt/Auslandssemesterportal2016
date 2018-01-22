@@ -130,7 +130,7 @@ public static String getSalt(String mail){//Ermittelt das zur Mailadresse hinter
 	return salt;
 }
 
-public static String userLogin(String mail, String salt, String pw){
+public static String[] userLogin(String mail, String salt, String pw){
 	//Prüft Logindaten. ResultCodes: 1 = Erfolgreich, 2 = Falsche Daten, 3 = nicht aktiviert, 4 = Datenbankfehler
 	//Stringkette, die zurückgegeben wird: resultCode;Bezeichnung Studiengang;Matrikelnummer;Rolle (Nummer die in der DB steht)
 	String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);
@@ -176,7 +176,8 @@ public static String userLogin(String mail, String salt, String pw){
 	} catch (Exception e){
 	 e.printStackTrace();
 	}
-	return "" + resultCode + ";" + studiengang + ";" + matrikelnummer + ";" + rolle + ";" + accessToken;
+
+	return new String[] {(""+resultCode), studiengang, matrikelnummer, rolle, accessToken};
 }
 
 public static boolean userSessionExists(int userID){
