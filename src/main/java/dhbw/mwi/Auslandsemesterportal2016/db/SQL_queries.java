@@ -18,7 +18,7 @@ import java.util.UUID;
 public class SQL_queries {
 
 //Ersetzt durch executeStatement
-/*	
+/*
 private static ResultSet executeQuery(String query){ //Führt Query auf Datenbankanbindung aus DB.java aus
 Connection connection = DB.getInstance();
 ResultSet rs = null;
@@ -37,7 +37,7 @@ public static ResultSet executeStatement (String query, String[] data, String[] 
 	Connection connection = DB.getInstance();
 	ResultSet rs = null;
 	int parCount = data.length;
-	
+
 	try{
 		PreparedStatement statement = connection.prepareStatement(query);
 		for (int i = 0; i < parCount; i++){
@@ -48,7 +48,7 @@ public static ResultSet executeStatement (String query, String[] data, String[] 
 			}
 			}
 		rs = statement.executeQuery();
-		} 
+		}
 	    catch (Exception e){
 		e.printStackTrace();
 	    }
@@ -138,7 +138,9 @@ public static String userLogin(String mail, String salt, String pw){
 	String studiengang = "";
 	String matrikelnummer = "";
 	String rolle = "";
-	String query = "SELECT verifiziert, matrikelnummer, studiengang, rolle FROM user WHERE email = ? AND passwort = ?;";
+	String accessToken = "";
+	int userID;
+	String query = "SELECT verifiziert, matrikelnummer, studiengang, rolle, userID FROM user WHERE email = ? AND passwort = ?;";
 	String[] params = new String[]{mail,hashedPw};
 	String[] types = new String[]{"String","String"};
 	ResultSet ergebnis = executeStatement(query,params,types);
@@ -149,6 +151,22 @@ public static String userLogin(String mail, String salt, String pw){
 			rolle = ergebnis.getString("rolle");
 			if (ergebnis.getString("verifiziert").equals("1")){
 				resultCode = 1;
+
+				accessToken = Util.generateSalt();
+				userID = ergebnis.getInt("userID");
+				if(userSessionExists(userID)){
+					String query = "UPDATE loginSessions SET sessionID = ? WHERE userID = ?";
+					String[] params = new String[]{accessToken,userID};
+					String[] types = new String[]{"String","int"};
+					executeUpdate(query,params,types);
+				}
+				else{
+					String query = "INSERT INTO loginSessions (sessionID, userID) VALUES " +
+							"(?,?)";
+					String[] params = new String[]{accessToken,userID};
+					String[] types = new String[]{"String","int"};
+					executeUpdate(query,params,types);
+				}
 			} else {
 				resultCode = 3;
 			}
@@ -158,12 +176,46 @@ public static String userLogin(String mail, String salt, String pw){
 	} catch (Exception e){
 	 e.printStackTrace();
 	}
-	return "" + resultCode + ";" + studiengang + ";" + matrikelnummer + ";" + rolle;	
+	return "" + resultCode + ";" + studiengang + ";" + matrikelnummer + ";" + rolle + ";" + accessToken;
 }
 
-public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle, String email, String studiengang, 
+public static boolean userSessionExists(int userID){
+	String queryString = "SELECT 1 FROM loginSessions WHERE userID = ?;";
+	boolean resultExists = true;
+	String[] args = new String[]{userID};
+	String[] types = new String[]{"int"};
+	ResultSet ergebnis = executeStatement(queryString,args,types);
+	try{
+		resultExists = ergebnis.next();
+		ergebnis.close();
+	}
+	catch (Exception e){
+		e.printStackTrace();
+	}
+	return resultExists;
+}
+
+public static boolean checkUserSession(String accessToken, String mail){
+	String queryString = "SELECT loginSessions.accessToken, user.email FROM loginSessions,user WHERE user.userID = loginSessions.userID and email = ? and accessToken = ?;";
+	String salt = "";
+	String[] args = new String[]{mail,accessToken};
+	String[] types = new String[]{"String","int"};
+	boolean isCorrect = false;
+	ResultSet ergebnis = executeStatement(queryString,args,types);
+	try{
+		isCorrect = ergebnis.next();
+		ergebnis.close();
+	}
+	catch (Exception e){
+		e.printStackTrace();
+	}
+	return isCorrect;
+}
+
+
+public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle, String email, String studiengang,
 		String kurs, int matrikelnummer, String tel, String mobil, String standort, String verifiziert){
-	String query = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert) VALUES " + 
+	String query = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert) VALUES " +
 			"(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	String[] args = new String[]{vorname,nachname,passwort,salt,""+rolle,email,studiengang,kurs,""+matrikelnummer,tel,mobil,standort,verifiziert};
 	String[] types = new String[]{"String","String","String","String","int","String","String","String","int","String","String","String","String"};
@@ -181,7 +233,7 @@ public static ResultSet getJson(String step, String model){
 	} catch (Exception e){
 	 e.printStackTrace();
 	 return null;
-	}	
+	}
 }
 
 public static String getInstanceId(int matNr, String uni){
@@ -242,11 +294,11 @@ public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse z
 	ResultSet ergebnis = executeStatement(queryString,params,types);
 	try{
 		 if(ergebnis.next()){
-			 return new String[]{ergebnis.getString("nachname"),ergebnis.getString("vorname"),ergebnis.getString("email")}; 
+			 return new String[]{ergebnis.getString("nachname"),ergebnis.getString("vorname"),ergebnis.getString("email")};
 		 } else {
 			 return new String[0];
 		 }
-		
+
 	}
 	catch (Exception e){
 		e.printStackTrace();
