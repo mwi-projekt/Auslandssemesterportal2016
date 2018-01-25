@@ -198,9 +198,8 @@ public static boolean userSessionExists(int userID){
 
 public static boolean checkUserSession(String sessionID, String mail){
 	String queryString = "SELECT loginSessions.sessionID, user.email FROM loginSessions,user WHERE user.userID = loginSessions.userID and user.email = ? and loginSessions.sessionID = ?;";
-	String salt = "";
 	String[] args = new String[]{mail,sessionID};
-	String[] types = new String[]{"String","int"};
+	String[] types = new String[]{"String","String"};
 	boolean isCorrect = false;
 	ResultSet ergebnis = executeStatement(queryString,args,types);
 	try{
