@@ -26,7 +26,7 @@ public class GetAdminTasksServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
       int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
       if(rolle!=1 && rolle!=2){
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        response.sendError(401,"Rolle ist:"+rolle);
       }
       else{
         response.setCharacterEncoding("UTF-8");
