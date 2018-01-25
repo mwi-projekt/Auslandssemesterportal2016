@@ -197,7 +197,7 @@ public static boolean userSessionExists(int userID){
 }
 
 public static boolean checkUserSession(String accessToken, String mail){
-	String queryString = "SELECT loginSessions.accessToken, user.email FROM loginSessions,user WHERE user.userID = loginSessions.userID and email = ? and accessToken = ?;";
+	String queryString = "SELECT loginSessions.accessToken, user.email FROM loginSessions,user WHERE user.userID = loginSessions.userID and user.email = ? and loginSessions.accessToken = ?;";
 	String salt = "";
 	String[] args = new String[]{mail,accessToken};
 	String[] types = new String[]{"String","int"};
