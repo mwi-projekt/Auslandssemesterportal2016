@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
         	String[] result = SQL_queries.userLogin(mail, salt, request.getParameter("pw"));
             //rs = statement.executeQuery(sql);
           Cookie cookie = new Cookie( "sessionID", result[4] );
-          Cookie mailcookie = new Cookie( "sessionID", mail );
+          Cookie mailcookie = new Cookie( "email", mail );
           response.addCookie( cookie );
           response.addCookie( mailcookie );
           PrintWriter out = response.getWriter();
