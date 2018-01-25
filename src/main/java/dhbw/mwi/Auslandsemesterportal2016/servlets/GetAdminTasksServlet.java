@@ -1,7 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.servlets;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -25,12 +25,11 @@ public class GetAdminTasksServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      //int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
-      int rolle = -1;
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
       String sessionID = request.getCookies()[1].getValue();
       String mail = request.getCookies()[0].getValue();
       if(rolle!=1 && rolle!=2){
-        response.sendError(401,""+SQL_queries.checkUserSession(sessionID, mail)+" "+SQL_queries.getRoleForUser(mail));
+        response.sendError(401,""+SQL_queries.checkUserSession(sessionID, mail)+" "+SQL_queries.getRoleForUser(mail)+" Rolle: "+rolle);
       }
       else{
         response.setCharacterEncoding("UTF-8");
