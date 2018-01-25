@@ -26,17 +26,15 @@ public class GetAdminTasksServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
       //int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
-      int rolle = 0;
-      if(SQL_queries.checkUserSession(request.getCookies()[1].getValue(), request.getCookies()[0].getValue()))
+      int rolle = -1;
+      String sessionID = request.getCookies()[1].getValue();
+      String mail = request.getCookies()[0].getValue();
+      if(SQL_queries.checkUserSession(sessionID, mail))
       {
-        rolle = SQL_queries.getRoleForUser(request.getCookies()[0].getValue());
+        rolle = SQL_queries.getRoleForUser(mail);
       }
       if(rolle!=1 && rolle!=2){
-<<<<<<< HEAD
         response.sendError(401,""+rolle);
-=======
-        response.sendError(401,rolle);
->>>>>>> 83c86da5328837f9b81379b17d6014e8f5b80692
       }
       else{
         response.setCharacterEncoding("UTF-8");
