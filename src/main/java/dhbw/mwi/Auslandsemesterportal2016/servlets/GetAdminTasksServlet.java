@@ -36,7 +36,7 @@ public class GetAdminTasksServlet extends HttpServlet {
       //int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
       if(rolle!=1 && rolle!=2){
-        response.sendError(401,""++" "++" Rolle: "+rolle);
+        response.sendError(401,"Rolle: "+rolle);
       }
       else{
         response.setCharacterEncoding("UTF-8");
