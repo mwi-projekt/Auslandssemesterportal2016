@@ -32,7 +32,11 @@ public class GetAdminTasksServlet extends HttpServlet {
         rolle = SQL_queries.getRoleForUser(request.getCookies()[0].getValue());
       }
       if(rolle!=1 && rolle!=2){
+<<<<<<< HEAD
         response.sendError(401,""+rolle);
+=======
+        response.sendError(401,rolle);
+>>>>>>> 83c86da5328837f9b81379b17d6014e8f5b80692
       }
       else{
         response.setCharacterEncoding("UTF-8");
