@@ -1,6 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.servlets;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
