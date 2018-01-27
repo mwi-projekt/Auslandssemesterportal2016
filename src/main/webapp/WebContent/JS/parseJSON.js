@@ -106,10 +106,17 @@ function parse(){
 								break;
 							case "form-text":
 								var req = "";
+								var isPlz = "";
 								if (json[i]["data"]["required"] == true){
 									req = ' required="required"';
 								}
-								output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + ' </label><div class="col-sm-10"><input class="form-control" type="' + json[i]["data"]["type"]+ '" id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
+								output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + ' </label><div class="col-sm-10"><input class="form-control" type="' + json[i]["data"]["type"]+ '" ';
+								
+								if (json[i]["data"]["numchars"]) {
+									output += 'maxlength="'+ json[i]["data"]["numchars"] +'" ';
+								}
+								output += 'id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
+
 								idList.push(json[i]["data"]["id"]);
 								typeList.push(json[i]["data"]["type"]);
 								break;

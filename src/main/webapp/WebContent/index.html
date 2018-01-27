@@ -63,7 +63,7 @@
 										<input type="text" placeholder="Nachname*" class="inBox form-control" id="inNachname" required>
 									</div>
 								</div>
-								<input type="email" placeholder="DHBW E-Mail Adresse / Nutzername*" class="inBox form-control" id="inMail" required pattern="^[a-zA-Z0-9]*(\.){0,1}[a-zA-Z0-9]+@(student\.){0,1}dhbw-karlsruhe\.de$" title="Nachname.Vorname@student.dhbw-karlsruhe.de">
+								<input type="email" placeholder="DHBW E-Mail: Nachname.Vorname@student.dhbw-karlsruhe.de*" class="inBox form-control" id="inMail" required pattern="^[a-zA-Z0-9]*(\.){0,1}[a-zA-Z0-9]+@(student\.){0,1}dhbw-karlsruhe\.de$" title="Nachname.Vorname@student.dhbw-karlsruhe.de">
 							</div>
 						</div>
 						<div class="student">
@@ -107,7 +107,7 @@
 									</div>
 								</div>
 				
-								<input type="submit" class="btn btnReg" value="Registrieren" style="width: auto;">
+								
 	
 							</div>
 						</div>
@@ -149,6 +149,7 @@
 					<div class="btn" id="btnUserEditSave">Änderungen speichern</div>
 				</div>
 				<div class="modal-footer">
+					<input type="submit" class="btn btnReg" value="Registrieren" style="width: auto;">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
 				</div>
 			</div>
@@ -175,94 +176,19 @@
 						<input type="password" placeholder="Passwort" id="inPasswort" class=" inBox" required style="width:80%; margin-left:5px">
 						<p id="falschLogin" style="color: red; margin-bottom: 0px; display: none">Falsche Eingabe. Bitte versuchen sie es erneut.</p>
 						<br>
+						<a href="forgot_pw.html">Passwort vergessen?</a>
 						<br>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<input form = "loginForm" type="submit" class="btn" id="btnLogin" value="Login" style="width: auto;">
-					<a href="forgot_pw.html">Passwort vergessen?</a>
+					
 				</div>
 			</div>
 
 		</div>
 	</div>
 
-	<div class="erfolgreich"></div>
-	<div class="popUpBack"></div>
-	<div class="popUpFeld">
-		<b id="close"><img src="images/Button Delete.png" id="smallImg"></b>
-
-
-
-		<div class="modal-header">
-			<h2>Registrieren</h2>
-		</div>
-		<select class="rolleWahl inBox inline">
-			<option>Ich bin...</option>
-			<option>Studierender</option>
-			<option>Auslandsmitarbeiter</option>
-			<option>Unternehmen</option>
-		</select> <label class="btn auswahl">Bestätigen</label>
-		<div class="student auslandsmitarbeiter">
-			<p class="red" style="margin-top: 10px">*Pflichtfelder.</p>
-			<input type="text" placeholder="Vorname*" class="inBox"
-				id="inVorname"> <input type="text" placeholder="Nachname*"
-				class="inBox" id="inNachname"> <input type="text"
-				placeholder="E-Mail Adresse*" class="inBox" id="inMail">
-		</div>
-		<div class="student">
-			<input type="text" placeholder="Matrikelnummer*" class="inBox"
-				id="inMatrikel"> <select class="inBox" id="inStudiengang">
-				<option>Studiengang*</option>
-				<option>Wirtschaftsinformatik</option>
-				<option>Wirtschaftsingenieurwesen</option>
-			</select> <input type="text" placeholder="Kurs*" class="inBox" id="inKurs">
-			<select class="inBox" id="inStandort">
-				<option>DHBW Standort wählen*</option>
-				<option>DHBW Karlsruhe</option>
-				<option>DHBW Stuttgart</option>
-				<option>DHBW Mannheim</option>
-				<option>DHBW Mosbach</option>
-				<option>DHBW Lörrach</option>
-				<option>DHBW Ravensburg</option>
-				<option>DHBW Heidenheim</option>
-				<option>DHBW Villingen-Schwenningen</option>
-			</select> <input type="password" placeholder="Passwort 1. Mal*" class="inBox"
-				id="inPwSt1"> <input type="password"
-				placeholder="Passwort 2. Mal*" class="inBox" id="inPwSt2"> <label
-				class="btn btnReg">Registrieren</label>
-		</div>
-		<div id="askAdmin">
-			<p style="color: red">Bitte wenden sie sich an Herrn Prof. Dr.
-				Thomas Freytag, wenn sie Zugang zu diesem Portal benötigen.</p>
-		</div>
-		<div class="auslandsmitarbeiter">
-			<input type="text" placeholder="Telefonnummer" class="inBox"
-				id="inTel"> <input type="text" placeholder="Mobilfunknummer"
-				class="inBox" id="inMobil"> <input type="password"
-				placeholder="Passwort 1. Mal*" class="inBox" id="inPwAu1"> <input
-				type="password" placeholder="Passwort 2. Mal*" class="inBox"
-				id="inPwAu2"> <label class="btn btnReg">Registrieren</label>
-		</div>
-		<p class="falsch"></p>
-	</div>
-	<div class="nutzerBearbeiten">
-		<b id="closeBearb"><img src="images/Button Delete.png"
-			id="smallImg"></b>
-		<h2>Benutzerdaten bearbeiten</h2>
-		<input class="inBox" type="text" id="inEditVorname"
-			placeholder="Vorname"> <input class="inBox" type="text"
-			id="inEditNachname" placeholder="Nachname"> <input
-			class="inBox" type="text" id="inEditEmail" placeholder="Email">
-		<input class="inBox" type="text" id="inEditTel"
-			placeholder="Telefonnummer"> <input class="inBox" type="text"
-			id="inEditMobil" placeholder="Mobilfunknummer"> <input
-			class="inBox" type="text" id="inEditStudgang"
-			placeholder="Studiengang"> <input class="inBox" type="text"
-			id="inEditKurs" placeholder="Kurs"> <input class="inBox"
-			type="text" id="inEditMatnr" placeholder="Matrikelnummer"><br>
-		<div class="btn" id="btnUserEditSave">Änderungen speichern</div>
-	</div>
 	<!-- Navigationsleiste-------------------------------------------------------------------- -->
 	<div class="header">
 		<div class="row">

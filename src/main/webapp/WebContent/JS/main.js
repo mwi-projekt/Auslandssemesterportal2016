@@ -143,8 +143,8 @@ var main = function() {
 								$('.falsch')
 										.html(
 												unescape("Bitte wählen Sie nur Auslandsmitarbeiter, wenn Sie einer sind.")); */
-							
-							
+
+
 							if (studiengang === "Studiengang*") {
 								/*$('.falsch')
 										.html(
@@ -205,7 +205,7 @@ var main = function() {
 														});
 												$('.popUpBack').hide();
 												$('.popUpFeld').fadeOut();
-											
+
 												//$('#register').fadeOut();
 												//$('#register').hide();
 												$('.modal').fadeOut();
@@ -227,25 +227,25 @@ var main = function() {
 	}
 
 	);
-	
+
 	//Check ob Passwörter übereinstimmen
 	$('#inPwSt2').keyup(function(){
 		var inPwSt1 = document.getElementById("inPwSt1")
 		  , inPwSt2 = document.getElementById("inPwSt2");
-		
+
 		if(inPwSt1.value != inPwSt2.value) {
 			inPwSt2.setCustomValidity("Die Passwörter stimmen nicht überein");
 		} else {
 			inPwSt2.setCustomValidity('');
 		}
-		
+
 	});
-	
+
 	//Kein Reload der Modal-Boxen
 	$("form").submit(function () {
 		return false;
 	});
-	
+
 	// Click-Listener fuer Login-Button
 	$('#btnLogin').on(
 			'click',
@@ -306,8 +306,8 @@ var main = function() {
 							$('.weg').css('display', 'inline');
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
-							window.location.reload(); 
-							
+							window.location.reload();
+
 						} else if (sessionStorage['rolle'] === '1') {
 							$('#normalBereich').hide();
 							$('#adminBereich').show();
@@ -315,7 +315,7 @@ var main = function() {
 							$('.logFenster').hide();
 							$('.logoutFenster').show();
 							window.location.reload();
-							
+
 						} else if (sessionStorage['rolle'] === "") {
 							$('#inName').css('color', 'red');
 							$('#inPasswort').css('color', 'red');
@@ -398,6 +398,7 @@ var main = function() {
 											'.col-md-6').children('.titel')
 											.text();
 									$('#inPortalTitel').val(titel);
+									$('.inputsPortal').empty();
 									for (var i = 1; $('#li' + i).text() != ""; i++) {
 										$('.inputsPortal')
 												.append(
@@ -409,17 +410,9 @@ var main = function() {
 																+ '" /><img class="small" id="delPoLi'
 																+ i
 																+ '" src="images/Button Delete.png" />');
-										document
-												.getElementById('delPoLi' + i)
-												.addEventListener(
-														'click',
-														function(event) {
-															id = event.target.id;
-															id = id.substring(
-																	7, 8);
-															$('#inli' + id)
-																	.val('');
-														});
+										$('#delPoLi' + i).click(function(event){
+											delPoLi(event);
+										});
 									}
 									$(this).text('Abbrechen');
 								} else if ($(this).text() === "Abbrechen") {
@@ -696,7 +689,7 @@ var main = function() {
 											  type: "error",
 											  confirmButtonText: "OK"
 											});
-										
+
 									}
 								} else if ($(this).parent().attr('id') === 'angebotEdit') {
 									if (isEmpty($('#EditAngebot').text().trim()) != true
@@ -822,6 +815,24 @@ var main = function() {
 							}
 						}
 					});
+
+	function delPoLi(event){
+
+			var id = event.target.id;
+			id = id.substring(
+					7, 8);
+			var el = $('#inli' + id);
+			if(el.val() == "" || el.val() == undefined){
+				el.remove();
+				$('#delPoLi' + id).remove();
+
+			}
+			else{
+				el.val('');
+			}
+
+
+	}
 	// Click Listener für die Bild ändern Buttons
 	$('.upload').on('click', function() {
 		var id = $(this).attr('id');
@@ -832,18 +843,17 @@ var main = function() {
 	$('#cmsBtnInfoNeu').on(
 			'click',
 			function() {
-				var count = 0;
-				for (var i = 1; $('#li' + i).text() != ""; i++) {
-					count = i;
-				}
-				$('.inputsPortal').html(
-						$('.inputsPortal').html()
-								+ '<input class="inBox" id="inli' + (count + 1)
-								+ '" value="" /><img class="small" id="delLi'
-								+ (count + 1)
-								+ '" src="images/Button Delete.png" />');
-				for (var i = 1; $('#li' + i).text() != ""; i++) {
-					$('#inli' + i).val($('#li' + i).text());
+				var count = $('.inputsPortal .inBox').length;
+				if(count > 6){
+					swal('Warnung', 'Zum aktuellen Zeitpunkt können nicht mehr als 7 Infoelemente hinzugefügt werden', 'warning');
+				}else{
+					$('.inputsPortal').append('<input class="inBox" id="inli' + (count + 1)
+									+ '" value="" /><img class="small" id="delPoLi'
+									+ (count + 1)
+									+ '" src="images/Button Delete.png" />');
+									$('#delPoLi' + (count+1)).click(function(event){
+										delPoLi(event);
+									});
 				}
 			});
 	// Click-Listener für neuen Erfahrungsbericht in Box Erfahrungsbericht

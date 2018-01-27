@@ -1,5 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.servlets;
 
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -23,28 +25,43 @@ public class GetAdminTasksServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	response.setCharacterEncoding("UTF-8");
-        PrintWriter toClient = response.getWriter();
+      //Workaround until Florian fixed his Method
+      int rolle = -1;
+      String sessionID = request.getCookies()[1].getValue();
+      String mail = request.getCookies()[0].getValue();
+      if(SQL_queries.checkUserSession(sessionID, mail)){
+        rolle = SQL_queries.getRoleForUser(mail);
+      }
 
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        RuntimeService runtime = engine.getRuntimeService();
-        String output = "";
-        List<ProcessInstance> results = runtime.createProcessInstanceQuery().list();
-        for (int i = 0; i < results.size(); i++){
-        	String instanceId = results.get(i).getId();
-        	List<String> activities = runtime.getActiveActivityIds(instanceId);
-        	if (activities.get(0).equals("abgeschlossen")){
-        		String name = (String) runtime.getVariable(instanceId, "bewNachname");
-        		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
-        		String uni = (String) runtime.getVariable(instanceId, "uni");
-        		output = output + instanceId + "|" + name + "|" + vname + "|" + uni + "|complete;";
-        	} else if (activities.get(0).equals("datenValidieren")){
-        		String name = (String) runtime.getVariable(instanceId, "bewNachname");
-        		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
-        		String uni = (String) runtime.getVariable(instanceId, "uni");
-        		output = output + instanceId + "|" + name + "|" + vname + "|" + uni + "|validate;";
-        	}
-        }
-       toClient.print(output); 
+      //int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+
+      if(rolle!=1 && rolle!=2){
+        response.sendError(401,"Rolle: "+rolle);
+      }
+      else{
+        response.setCharacterEncoding("UTF-8");
+          PrintWriter toClient = response.getWriter();
+
+          ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+          RuntimeService runtime = engine.getRuntimeService();
+          String output = "";
+          List<ProcessInstance> results = runtime.createProcessInstanceQuery().list();
+          for (int i = 0; i < results.size(); i++){
+          	String instanceId = results.get(i).getId();
+          	List<String> activities = runtime.getActiveActivityIds(instanceId);
+          	if (activities.get(0).equals("abgeschlossen")){
+          		String name = (String) runtime.getVariable(instanceId, "bewNachname");
+          		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
+          		String uni = (String) runtime.getVariable(instanceId, "uni");
+          		output = output + instanceId + "|" + name + "|" + vname + "|" + uni + "|complete;";
+          	} else if (activities.get(0).equals("datenValidieren")){
+          		String name = (String) runtime.getVariable(instanceId, "bewNachname");
+          		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
+          		String uni = (String) runtime.getVariable(instanceId, "uni");
+          		output = output + instanceId + "|" + name + "|" + vname + "|" + uni + "|validate;";
+          	}
+          }
+         toClient.print(output);
+      }
     }
 }
