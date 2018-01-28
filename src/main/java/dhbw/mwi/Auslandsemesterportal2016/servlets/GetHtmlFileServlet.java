@@ -40,11 +40,12 @@ public class GetHtmlFileServlet extends HttpServlet
 		//gibt das höchste verfügbare, erlaubte Dokument zurück
 		while(userAccessLevel >=0)
 		{
-			try{
+			try
+			{
 				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[userAccessLevel]+requestedPage+".html");
 				if(view != null)
 				{
-					view.forward(request, response);
+					view.include(request, response);
 					return;
 				}
 			}
