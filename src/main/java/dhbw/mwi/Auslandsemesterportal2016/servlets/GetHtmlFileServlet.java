@@ -22,7 +22,7 @@ public class GetHtmlFileServlet extends HttpServlet
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		String requestedPage = request.getContextPath();
+		String requestedPage = request.getParameter("page");
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
 		//gibt das höchste verfügbare, erlaubte Dokument zurück
