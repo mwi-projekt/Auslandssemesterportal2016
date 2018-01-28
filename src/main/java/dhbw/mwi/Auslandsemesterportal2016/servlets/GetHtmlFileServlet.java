@@ -60,12 +60,14 @@ public class GetHtmlFileServlet extends HttpServlet
 			}
 			//Falls Dokument für Öffentliche Ansicht vorhanden, zurückgeben
 			case 0:
+			{
 				RequestDispatcher view = request.getRequestDispatcher(PUBLIC_HTML_FOLDER+requestedPage+".html");
 				if(view!=null)
 				{
 					view.forward(request, response);
 					break;
 				}
+			}
 			//Falls kein öffentliches Dokument vorhanden ist, HTTP 401 nicht autorisiert
 			default:
 			{
