@@ -20,7 +20,7 @@ public class GetHtmlFileServlet extends HttpServlet
 	private static final String EMPLOYEE_HTML_FOLDER = "/WebContent/HTML/employee/";
 	private static final String ADMIN_HTML_FOLDER = "/WebContent/HTML/admin/";
 	
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
 		String requestedPage = request.getParameter("page");
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
@@ -38,71 +38,47 @@ public class GetHtmlFileServlet extends HttpServlet
 			//Falls Dokument für Admin Ansicht vorhanden, zurückgeben
 			case 3:
 			{
-				RequestDispatcher view = request.getRequestDispatcher(ADMIN_HTML_FOLDER+requestedPage+".html");
-				//if(view!=null)
-				//{
-				try{	
-					view.forward(request, response);
-					break;
+				try{
+					RequestDispatcher view = request.getRequestDispatcher(ADMIN_HTML_FOLDER+requestedPage+".html");
+					if(view!=null)
+					{
+						view.forward(request, response);
+						break;
+					}
 				}
 				catch(Exception e)
 				{
-					//drop to next case
+					//do nothing, just drop down
 				}
-				//}
 			}
 			//Falls Dokument für Mitarbeiter Ansicht vorhanden, zurückgeben
 			case 2:
 			{
 				RequestDispatcher view = request.getRequestDispatcher(EMPLOYEE_HTML_FOLDER+requestedPage+".html");
-				/*if(view!=null)
+				if(view!=null)
 				{
 					view.forward(request, response);
 					break;
-				}*/
-				try{	
-					view.forward(request, response);
-					break;
-				}
-				catch(Exception e)
-				{
-					//drop to next case
 				}
 			}
 			//Falls Dokument für Studenten Ansicht vorhanden, zurückgeben
 			case 1:
 			{
 				RequestDispatcher view = request.getRequestDispatcher(STUDENT_HTML_FOLDER+requestedPage+".html");
-				/*if(view!=null)
+				if(view!=null)
 				{
 					view.forward(request, response);
 					break;
-				}*/
-				try{	
-					view.forward(request, response);
-					break;
-				}
-				catch(Exception e)
-				{
-					//drop to next case
 				}
 			}
 			//Falls Dokument für Öffentliche Ansicht vorhanden, zurückgeben
 			case 0:
 			{
 				RequestDispatcher view = request.getRequestDispatcher(PUBLIC_HTML_FOLDER+requestedPage+".html");
-				/*if(view!=null)
+				if(view!=null)
 				{
 					view.forward(request, response);
 					break;
-				}*/
-				try{	
-					view.forward(request, response);
-					break;
-				}
-				catch(Exception e)
-				{
-					//drop to next case
 				}
 			}
 			//Falls kein öffentliches Dokument vorhanden ist, HTTP 401 nicht autorisiert
