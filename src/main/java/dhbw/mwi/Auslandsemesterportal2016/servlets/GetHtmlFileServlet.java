@@ -15,10 +15,15 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 public class GetHtmlFileServlet extends HttpServlet 
 {
-	private static final String PUBLIC_HTML_FOLDER = "/WebContent/HTML/public/";
+	/*private static final String PUBLIC_HTML_FOLDER = "/WebContent/HTML/public/";
 	private static final String STUDENT_HTML_FOLDER = "/WebContent/HTML/student/";
 	private static final String EMPLOYEE_HTML_FOLDER = "/WebContent/HTML/employee/";
-	private static final String ADMIN_HTML_FOLDER = "/WebContent/HTML/admin/";
+	private static final String ADMIN_HTML_FOLDER = "/WebContent/HTML/admin/";*/
+	private static final String[] HTML_FOLDER = {"/WebContent/HTML/public/",
+												"/WebContent/HTML/student/",
+												"/WebContent/HTML/employee/",
+												"/WebContent/HTML/admin/"};
+	
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
@@ -33,7 +38,27 @@ public class GetHtmlFileServlet extends HttpServlet
 		
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
 		//gibt das höchste verfügbare, erlaubte Dokument zurück
-		switch(userAccessLevel)
+		while(userAccessLevel >=0)
+		{
+			try{
+				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[userAccessLevel]+requestedPage+".html");
+				if(view != null)
+				{
+					view.forward(request, response);
+					return;
+				}
+			}
+			catch(Exception e)
+			{
+				userAccessLevel--;
+			}
+		}
+		//Falls kein berechtigtes Dokument vorliegt
+		response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
+		return;
+		
+		/*switch(userAccessLevel)
 		{
 			//Falls Dokument für Admin Ansicht vorhanden, zurückgeben
 			case 3:
@@ -88,6 +113,6 @@ public class GetHtmlFileServlet extends HttpServlet
 	                     "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
 				return;
 			}
-		}
+		}*/
 	}
 }
