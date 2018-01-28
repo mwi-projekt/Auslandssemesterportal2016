@@ -24,6 +24,13 @@ public class GetHtmlFileServlet extends HttpServlet
 	{
 		String requestedPage = request.getParameter("page");
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
+		
+		//TODO JUST FOR TESTING PURPOSE, REMOVE ON PRODUCTIVE USE
+		if(request.getParameter("accessLevel")!=null)
+		{
+			userAccessLevel = Integer.parseInt(request.getParameter("accessLevel"));
+		}
+		
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
 		//gibt das höchste verfügbare, erlaubte Dokument zurück
 		switch(userAccessLevel)
