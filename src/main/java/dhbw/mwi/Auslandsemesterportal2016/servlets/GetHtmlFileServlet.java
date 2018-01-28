@@ -39,7 +39,7 @@ public class GetHtmlFileServlet extends HttpServlet
 			case 3:
 			{
 				try{
-					RequestDispatcher view = request.getRequestDispatcher(ADMIN_HTML_FOLDER+requestedPage+".html");
+					RequestDispatcher view = request.getServletContext().getRequestDispatcher(ADMIN_HTML_FOLDER+requestedPage+".html");
 					if(view!=null)
 					{
 						view.forward(request, response);
