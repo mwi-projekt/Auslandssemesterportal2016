@@ -15,10 +15,10 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 public class GetHtmlFileServlet extends HttpServlet 
 {
-	private static final String PUBLIC_HTML_FOLDER = "/HTML/public/";
-	private static final String STUDENT_HTML_FOLDER = "/HTML/student/";
-	private static final String EMPLOYEE_HTML_FOLDER = "/HTML/employee/";
-	private static final String ADMIN_HTML_FOLDER = "/HTML/admin/";
+	private static final String PUBLIC_HTML_FOLDER = "/WebContent/HTML/public/";
+	private static final String STUDENT_HTML_FOLDER = "/WebContent/HTML/student/";
+	private static final String EMPLOYEE_HTML_FOLDER = "/WebContent/HTML/employee/";
+	private static final String ADMIN_HTML_FOLDER = "/WebContent/HTML/admin/";
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -71,7 +71,7 @@ public class GetHtmlFileServlet extends HttpServlet
 			{
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
 	                     "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
-	  return;
+				return;
 			}
 		}
 	}
