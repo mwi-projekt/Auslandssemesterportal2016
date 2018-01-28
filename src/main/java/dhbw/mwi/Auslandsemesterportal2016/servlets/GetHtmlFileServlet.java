@@ -24,8 +24,11 @@ public class GetHtmlFileServlet extends HttpServlet
 	{
 		String requestedPage = request.getContextPath();
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
+		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
+		//gibt das höchste verfügbare, erlaubte Dokument zurück
 		switch(userAccessLevel)
 		{
+			//Falls Dokument für Admin Ansicht vorhanden, zurückgeben
 			case 3:
 			{
 				RequestDispatcher view = request.getRequestDispatcher(ADMIN_HTML_FOLDER+requestedPage+".html");
@@ -35,6 +38,7 @@ public class GetHtmlFileServlet extends HttpServlet
 					break;
 				}
 			}
+			//Falls Dokument für Mitarbeiter Ansicht vorhanden, zurückgeben
 			case 2:
 			{
 				RequestDispatcher view = request.getRequestDispatcher(EMPLOYEE_HTML_FOLDER+requestedPage+".html");
@@ -44,6 +48,7 @@ public class GetHtmlFileServlet extends HttpServlet
 					break;
 				}
 			}
+			//Falls Dokument für Studenten Ansicht vorhanden, zurückgeben
 			case 1:
 			{
 				RequestDispatcher view = request.getRequestDispatcher(STUDENT_HTML_FOLDER+requestedPage+".html");
@@ -53,9 +58,21 @@ public class GetHtmlFileServlet extends HttpServlet
 					break;
 				}
 			}
-			default:
+			//Falls Dokument für Öffentliche Ansicht vorhanden, zurückgeben
+			case 0:
 				RequestDispatcher view = request.getRequestDispatcher(PUBLIC_HTML_FOLDER+requestedPage+".html");
-				view.forward(request, response);
+				if(view!=null)
+				{
+					view.forward(request, response);
+					break;
+				}
+			//Falls kein öffentliches Dokument vorhanden ist, HTTP 401 nicht autorisiert
+			default:
+			{
+				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+	                     "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
+	  return;
+			}
 		}
 	}
 }
