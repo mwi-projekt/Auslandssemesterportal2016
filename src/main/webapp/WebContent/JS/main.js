@@ -343,6 +343,7 @@ var main = function() {
 		sessionStorage.clear();
 		location.replace("index.html");
 		$('.logFenster').show();
+		window.location.href = "logout";
 		/*
 		 * for (var i = 1; i <= 10; i++) { $('#'+ i + '5').addClass("hidden"); }
 		 */

@@ -232,6 +232,12 @@ public static int getRoleForUser(String mail){
 
 }
 
+public static int userLogout(String sessionID){
+		String query_ = "DELETE FROM loginSessions WHERE sessionID = ?";
+		String[] params_ = new String[]{sessionID};
+		String[] types_ = new String[]{"String"};
+		return executeUpdate(query_,params_,types_);
+}
 
 public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle, String email, String studiengang,
 		String kurs, int matrikelnummer, String tel, String mobil, String standort, String verifiziert){
