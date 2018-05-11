@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "ProcessDeleteServlet", urlPatterns = {"/WebContent/process/delete"})
 public class ProcessDeleteServlet extends HttpServlet {
@@ -22,49 +23,56 @@ public class ProcessDeleteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String matrikelnummer = request.getParameter("matrikelnummer");
-        String uni = request.getParameter("uni");
-        PrintWriter toClient = response.getWriter();
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-        if (matrikelnummer != null && uni != null) {
-            String id = ProcessService.getProcessId(matrikelnummer, uni);
+      if(rolle<1){
+        response.sendError(401);
+      }
+      else{
+          String matrikelnummer = request.getParameter("matrikelnummer");
+          String uni = request.getParameter("uni");
+          PrintWriter toClient = response.getWriter();
 
-            if (id != null && id != "leer") {
-                Connection connection = DB.getInstance();
+          if (matrikelnummer != null && uni != null) {
+              String id = ProcessService.getProcessId(matrikelnummer, uni);
 
-                // ProzessInstanz löschen
-                try {
-                    processEngine.getRuntimeService().deleteProcessInstance(id, "Bewerbung wurde von Studenten beendet");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+              if (id != null && id != "leer") {
+                  Connection connection = DB.getInstance();
 
-                // SQL-Befehl für das Löschen der Bewerbung aus der MySQL-DB
-                String deleteStatement = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + matrikelnummer
-                        + "' AND uniName = '" + uni + "' ";
+                  // ProzessInstanz löschen
+                  try {
+                      processEngine.getRuntimeService().deleteProcessInstance(id, "Bewerbung wurde von Studenten beendet");
+                  } catch (Exception e) {
+                      e.printStackTrace();
+                  }
 
-                String deleteStatement2 = "DELETE FROM MapUserInstanz WHERE matrikelnummer = '" + matrikelnummer
-                        + "' AND uni = '" + uni + "' ";
+                  // SQL-Befehl für das Löschen der Bewerbung aus der MySQL-DB
+                  String deleteStatement = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + matrikelnummer
+                          + "' AND uniName = '" + uni + "' ";
 
-                try {
-                    Statement statement = connection.createStatement();
-                    statement.executeUpdate(deleteStatement);
-                    statement.executeUpdate(deleteStatement2);
-                    statement.close();
-                } catch (SQLException e) {
-                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                    e.printStackTrace();
-                }
+                  String deleteStatement2 = "DELETE FROM MapUserInstanz WHERE matrikelnummer = '" + matrikelnummer
+                          + "' AND uni = '" + uni + "' ";
 
-                toClient.println(id);
+                  try {
+                      Statement statement = connection.createStatement();
+                      statement.executeUpdate(deleteStatement);
+                      statement.executeUpdate(deleteStatement2);
+                      statement.close();
+                  } catch (SQLException e) {
+                      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                      e.printStackTrace();
+                  }
 
-            } else {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                toClient.println("Error: can not find process");
-            }
-        } else {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            toClient.println("Error: parameter are missing");
+                  toClient.println(id);
+
+              } else {
+                  response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                  toClient.println("Error: can not find process");
+              }
+          } else {
+              response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+              toClient.println("Error: parameter are missing");
+          }
         }
     }
 }

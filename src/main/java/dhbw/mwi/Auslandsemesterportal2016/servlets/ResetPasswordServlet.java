@@ -25,6 +25,7 @@ public class ResetPasswordServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      //NO AUTHENTIFICATION NEEDED
         PrintWriter out = response.getWriter();
         String to = request.getParameter("email");
         if (!(SQL_queries.isEmailUsed(to))){
@@ -32,10 +33,10 @@ public class ResetPasswordServlet extends HttpServlet {
         	out.write("No account registered for this email adress");
         	throw new RuntimeException();
         }
-        
+
         String uuid = SQL_queries.disableUser(to);
         System.out.println("Resetting password for " + to);
-        	
+
         // registrierungsemail senden
         // Recipient's email ID needs to be mentioned.
 

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.*;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "ModelUploadServlet", urlPatterns = {"/WebContent/model/upload"})
 @MultipartConfig(maxFileSize = 16177215) // 16MB
@@ -21,40 +22,47 @@ public class ModelUploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PrintWriter out = response.getWriter();
-        Part filePart = null;
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-        response.setContentType("text/html");
+      if(rolle!=1){
+        response.sendError(401);
+      }
+      else{
+          PrintWriter out = response.getWriter();
+          Part filePart = null;
 
-        String action = request.getParameter("CKEditorFuncNum");
+          response.setContentType("text/html");
 
-        try {
-            filePart = request.getPart("upload");
+          String action = request.getParameter("CKEditorFuncNum");
 
-            if (filePart != null){
-                String fileName = getFileName(filePart);
-                OutputStream outs = new FileOutputStream(new File("/var/www/files/"+fileName));
-                byte[] buf = new byte[1024];
-                int len;
-                InputStream is = filePart.getInputStream();
-                while((len=is.read(buf)) > 0){
-                    outs.write(buf,0,len);
-                }
-                outs.close();
-                is.close();
+          try {
+              filePart = request.getPart("upload");
 
-                out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("+action+", 'http://193.196.7.215/files/"+fileName+"', '');</script>");
-                out.flush();
-            } else {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("+action+", '', 'Datei fehlt');</script>");
-                out.flush();
-            }
+              if (filePart != null){
+                  String fileName = getFileName(filePart);
+                  OutputStream outs = new FileOutputStream(new File("/var/www/files/"+fileName));
+                  byte[] buf = new byte[1024];
+                  int len;
+                  InputStream is = filePart.getInputStream();
+                  while((len=is.read(buf)) > 0){
+                      outs.write(buf,0,len);
+                  }
+                  outs.close();
+                  is.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("+action+", '', 'Server Fehler');</script>");
-            out.flush();
+                  out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("+action+", 'http://193.196.7.215/files/"+fileName+"', '');</script>");
+                  out.flush();
+              } else {
+                  response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                  out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("+action+", '', 'Datei fehlt');</script>");
+                  out.flush();
+              }
+
+          } catch (Exception e) {
+              e.printStackTrace();
+              out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("+action+", '', 'Server Fehler');</script>");
+              out.flush();
+          }
         }
 
     }

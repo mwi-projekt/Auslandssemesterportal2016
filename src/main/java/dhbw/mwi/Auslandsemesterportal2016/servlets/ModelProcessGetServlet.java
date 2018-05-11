@@ -17,6 +17,7 @@ public class ModelProcessGetServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      //NO AUTHENTIFICATION NEEDED
         PrintWriter toClient = response.getWriter();
 
         String model = request.getParameter("model");
@@ -29,7 +30,7 @@ public class ModelProcessGetServlet extends HttpServlet {
             String[] types = new String[]{"String","String"};
             ResultSet rs = SQL_queries.executeStatement(query,args,types); */
         	ResultSet rs = SQL_queries.getJson(step, model);
-        	
+
             try{
                 if (rs.next()) {
                     toClient.print(rs.getString("json"));

@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetProcessFileServlet", urlPatterns = {"/WebContent/getProcessFile"})
 public class GetProcessFileServlet extends HttpServlet {
@@ -38,29 +39,35 @@ public class GetProcessFileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ServletOutputStream toClient = response.getOutputStream();
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-        String instanceID = request.getParameter("instance_id");
-        String key = request.getParameter("key");
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        RuntimeService runtime = engine.getRuntimeService();
-        FileValue typedFileValue = (FileValue) runtime.getVariableTyped(instanceID, key);
-        InputStream is = typedFileValue.getValue();
+      if(rolle<1){
+        response.sendError(401);
+      }
+      else{
+          ServletOutputStream toClient = response.getOutputStream();
 
-        try {
-            response.setContentType(typedFileValue.getMimeType());
-            int nRead;
-            byte[] buf = new byte[1024];
+          String instanceID = request.getParameter("instance_id");
+          String key = request.getParameter("key");
+          ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+          RuntimeService runtime = engine.getRuntimeService();
+          FileValue typedFileValue = (FileValue) runtime.getVariableTyped(instanceID, key);
+          InputStream is = typedFileValue.getValue();
 
-            for(int nChunk = is.read(buf); nChunk!=-1; nChunk = is.read(buf)) {
-                toClient.write(buf, 0, nChunk);
-            }
+          try {
+              response.setContentType(typedFileValue.getMimeType());
+              int nRead;
+              byte[] buf = new byte[1024];
 
-            toClient.flush();
+              for(int nChunk = is.read(buf); nChunk!=-1; nChunk = is.read(buf)) {
+                  toClient.write(buf, 0, nChunk);
+              }
 
-        } catch (Exception e) {
+              toClient.flush();
 
+          } catch (Exception e) {
+
+          }
         }
-
     }
 }

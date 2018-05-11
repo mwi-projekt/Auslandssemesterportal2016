@@ -25,10 +25,11 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      //NO AUTHENTIFICATION NEEDED
         PrintWriter out = response.getWriter();
 
         int rolle = 0;
-        
+
         if (SQL_queries.isEmailUsed(request.getParameter("email"))){
         	out.print("mailError");
         	out.flush();
@@ -37,8 +38,8 @@ public class RegisterServlet extends HttpServlet {
         	out.flush();
         } else{
 
-        	
-        	
+
+
         if (request.getParameter("rolle").equals("Studierender")) {
             rolle = 3;
         } else if (request.getParameter("rolle").equals("Auslandsmitarbeiter")) {

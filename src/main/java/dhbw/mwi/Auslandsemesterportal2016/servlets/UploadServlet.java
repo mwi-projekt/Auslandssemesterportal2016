@@ -16,6 +16,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "UploadServlet", urlPatterns = {"/WebContent/upload_new"})
 @MultipartConfig(maxFileSize = 16177215) // 16MB
@@ -25,46 +26,53 @@ public class UploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String action = request.getParameter("action");
-        String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
-        PrintWriter out = response.getWriter();
-        Part filePart = null;
-        String key;
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-        System.out.println("File-Upload Servlet");
-        if (id.equals("leer")) {
-            out.print("Error: can not find process id");
-            out.flush();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            return;
-        }
+      if(rolle<1){
+        response.sendError(401);
+      }
+      else{
+          String action = request.getParameter("action");
+          String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+          PrintWriter out = response.getWriter();
+          Part filePart = null;
+          String key;
 
-        if (action == null || action.equals("")) {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("Error: wrong action");
-            out.flush();
-            return;
-        }
+          System.out.println("File-Upload Servlet");
+          if (id.equals("leer")) {
+              out.print("Error: can not find process id");
+              out.flush();
+              response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+              return;
+          }
 
-        try {
-            filePart = request.getPart("file");
+          if (action == null || action.equals("")) {
+              response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+              out.print("Error: wrong action");
+              out.flush();
+              return;
+          }
 
-            if (filePart != null){
-                FileValue typedFileValue = Variables.fileValue(action + ".pdf").file(filePart.getInputStream()).create();
-                processEngine.getRuntimeService().setVariable(id, action, typedFileValue);
-                out.print("jop");
-                out.flush();
-            } else {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                out.print("Error: wrong file");
-                out.flush();
-            }
+          try {
+              filePart = request.getPart("file");
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("Error: wrong file");
-            out.flush();
+              if (filePart != null){
+                  FileValue typedFileValue = Variables.fileValue(action + ".pdf").file(filePart.getInputStream()).create();
+                  processEngine.getRuntimeService().setVariable(id, action, typedFileValue);
+                  out.print("jop");
+                  out.flush();
+              } else {
+                  response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                  out.print("Error: wrong file");
+                  out.flush();
+              }
+
+          } catch (Exception e) {
+              e.printStackTrace();
+              response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+              out.print("Error: wrong file");
+              out.flush();
+          }
         }
 
     }
