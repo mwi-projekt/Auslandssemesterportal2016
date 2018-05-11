@@ -46,7 +46,7 @@ public class LogoutServlet extends HttpServlet {
             response.addCookie(c);
           }
         }
-        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() + "/WebContent/";
+        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/WebContent/";
         response.sendRedirect(baseLocation);
       }
     }

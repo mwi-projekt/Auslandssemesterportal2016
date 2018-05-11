@@ -17,7 +17,7 @@ $(document)
 					$('.nutzerName').text(sessionStorage['User']);
 					$('#logout').on('click', function() {
 						sessionStorage.clear();
-						location.replace("index.html");
+						location.replace("logout");
 					});
 
 					getList();
@@ -80,8 +80,8 @@ function getList() {
 							completed = '<table class="table table-hover table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Uni</th><th>Prüfen</th></tr></thead><tbody>' +
 							completed + "</tbody></table>";
 						}
-						
-						
+
+
 					}
 					document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed;
 							+ output;
