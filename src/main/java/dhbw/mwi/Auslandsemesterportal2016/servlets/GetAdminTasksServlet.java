@@ -25,15 +25,7 @@ public class GetAdminTasksServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      //Workaround until Florian fixed his Method
-      int rolle = -1;
-      String sessionID = request.getCookies()[1].getValue();
-      String mail = request.getCookies()[0].getValue();
-      if(SQL_queries.checkUserSession(sessionID, mail)){
-        rolle = SQL_queries.getRoleForUser(mail);
-      }
-
-      //int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
       if(rolle!=1 && rolle!=2){
         response.sendError(401,"Rolle: "+rolle);
