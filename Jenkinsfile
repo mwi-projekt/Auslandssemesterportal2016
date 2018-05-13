@@ -2,14 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Test') {
+        stage('Build') {
             steps {
-                sh 'mvn test'
+                sh 'mvn install'
             }
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
+            }
+        }
+        stage('Deploy') { 
+            steps {
+                sh './jenkins/scripts/deploy.sh' 
             }
         }
     }
