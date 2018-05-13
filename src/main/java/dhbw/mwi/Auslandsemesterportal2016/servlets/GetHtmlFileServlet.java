@@ -45,6 +45,7 @@ public class GetHtmlFileServlet extends HttpServlet
 				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[userAccessLevel]+requestedPage+".html");
 				if(view != null)
 				{
+					response.setStatus(HttpServletResponse.SC_ACCEPTED);
 					view.include(request, response);
 					return;
 				}
@@ -55,6 +56,7 @@ public class GetHtmlFileServlet extends HttpServlet
 			}
 		}
 		//Falls kein berechtigtes Dokument vorliegt
+		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
                 "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
 		return;
