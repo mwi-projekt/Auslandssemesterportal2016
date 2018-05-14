@@ -48,12 +48,7 @@ public class LogoutServlet extends HttpServlet {
           }
         }
 
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-          session.setAttribute("logout", true);
-            //session.invalidate();
-        }
-        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/WebContent/";
+        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/WebContent/?logout=true";
         response.sendRedirect(baseLocation);
       }
     }
