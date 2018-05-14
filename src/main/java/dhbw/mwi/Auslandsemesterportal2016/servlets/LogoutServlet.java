@@ -8,6 +8,7 @@ import org.camunda.bpm.engine.ProcessEngines;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
@@ -46,7 +47,7 @@ public class LogoutServlet extends HttpServlet {
             response.addCookie(c);
           }
         }
-        
+
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
