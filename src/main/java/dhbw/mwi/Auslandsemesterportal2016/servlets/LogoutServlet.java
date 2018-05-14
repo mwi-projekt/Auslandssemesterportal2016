@@ -46,6 +46,11 @@ public class LogoutServlet extends HttpServlet {
             response.addCookie(c);
           }
         }
+        
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
         String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/WebContent/";
         response.sendRedirect(baseLocation);
       }
