@@ -1,4 +1,4 @@
-var main = function() {
+var Secondfaq = function() {
 	$('.show').css('cursor', 'pointer');
 	$('.weg').hide();
 	$('.show').on('click', function() {
@@ -7,4 +7,4 @@ var main = function() {
 	});
 };
 
-$(document).ready(main);
+$(document).ready(Secondfaq);
