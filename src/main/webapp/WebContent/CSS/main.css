@@ -1,8 +1,14 @@
 	body {
 }
 
+button{
+	a:visited{
+		color: none;
+	}
+}
+
 a:visited {
-	color: violet;
+	color: grey;
 }
 
 input {
