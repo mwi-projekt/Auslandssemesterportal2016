@@ -14,7 +14,7 @@ $(document).ready(function() {
     $('.nutzerName').text(sessionStorage['User']);
     $('#logout').on('click', function() {
         sessionStorage.clear();
-        location.replace("index.html");
+        location.replace("logout");
     });
 
 	parse();
@@ -81,12 +81,12 @@ function parse(){
 							var type = json[i]["type"];
 							//alert (type);
 							switch (type){
-							case "title": 
+							case "title":
 								output = output + '<h1>' + json[i]["content"]+ '</h1><br>';
 								break;
-							case "subtitle": 
+							case "subtitle":
 								output = output + '<h3>' + json[i]["content"]+ '</h3><br>';
-								break;	
+								break;
 							case "paragraph":
 								output = output + '<p>' + json[i]["content"]+ '</p><br>';
 								break;
@@ -111,7 +111,7 @@ function parse(){
 									req = ' required="required"';
 								}
 								output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + ' </label><div class="col-sm-10"><input class="form-control" type="' + json[i]["data"]["type"]+ '" ';
-								
+
 								if (json[i]["data"]["numchars"]) {
 									output += 'maxlength="'+ json[i]["data"]["numchars"] +'" ';
 								}
@@ -129,7 +129,7 @@ function parse(){
                                 output = output + '<form action="upload_new" class="dropzone" id="'+json[i]["data"]["id"]+'"></form>';
 								break;
 						}
-						
+
 
 					}
 					document.getElementById("formular").innerHTML = output;
@@ -152,12 +152,12 @@ function parse(){
 					alert('Ein Fehler ist aufgetreten: ' + result);
 				}
 			});
-		
+
 		},
 		error : function(result) {
 			alert('Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.');
 		}
-	});	
+	});
 }
 
 function saveData(){
@@ -220,7 +220,7 @@ function saveData(){
 		error : function(result) {
 			alert('Ein Fehler ist aufgetreten');
 		}
-	}); 
+	});
 };
 
 function getData(){

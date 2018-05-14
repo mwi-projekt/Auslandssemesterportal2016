@@ -15,10 +15,6 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 public class GetHtmlFileServlet extends HttpServlet 
 {
-	/*private static final String PUBLIC_HTML_FOLDER = "/WebContent/HTML/public/";
-	private static final String STUDENT_HTML_FOLDER = "/WebContent/HTML/student/";
-	private static final String EMPLOYEE_HTML_FOLDER = "/WebContent/HTML/employee/";
-	private static final String ADMIN_HTML_FOLDER = "/WebContent/HTML/admin/";*/
 	private static final String[] HTML_FOLDER = {"/WebContent/HTML/public/",
 												"/WebContent/HTML/student/",
 												"/WebContent/HTML/employee/",

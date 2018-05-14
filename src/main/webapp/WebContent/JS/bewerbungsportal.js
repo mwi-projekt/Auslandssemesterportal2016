@@ -63,7 +63,7 @@ var main = function() {
 					}
 					else {
 					row = result.split("\n");
-					
+
 					for (var i = 0; i < row.length; i++){
 						instance_info = row[i].split('|');
 						//instance_info[0] = instanceID, [1] = uni, [2] = stepCounter
@@ -87,7 +87,7 @@ var main = function() {
 					}
 					tabelle = tabelle + '</table>';
 					$('#tableBewProzess').html(tabelle);
-					
+
 					$('.btn-delete').on('click', function() {
 						var uni = $(this).attr("uni");
 						var id = $(this).attr("rid");
@@ -101,7 +101,7 @@ var main = function() {
 				    		  closeOnConfirm: false
 				    		},
 				    	function(){
-				    		
+
 				    		//var id = $('.btn-delete').closest('tr').data('rid');
 				    		var matrikelnummer = sessionStorage['matrikelnr'];
 
@@ -123,7 +123,7 @@ var main = function() {
 				    	});
 					});
 					}
-					
+
 				},
 				error: function(result){
 					swal("Fehler","Beim abrufen der laufenden Prozesse ist ein fehler aufgetreten","error");
@@ -151,23 +151,23 @@ var main = function() {
 					    var status = '';
 					    var zaehler = 1;
 					    var auslesen = result.split(';');
-					    
+
 					    for (var i = 0; i < auslesen.length; i++) {
 						auslesen[i] = auslesen[i]
 							.trim();
 
 					    schritt_aktuell = Number(auslesen[((2 * zaehler) + ((zaehler-1) * 2))]);
 					    schritt_gesamt = Number(auslesen[((3 * zaehler) + (zaehler-1))]);
-					    
+
 					    status = schritt_aktuell + ' von ' + schritt_gesamt + ' Schritte';
-					    
+
 						/*if (schritt_aktuell > schritt_gesamt) {
 							status = status + "FEHLER" + result;
 						}
 						if (schritt_aktuell == schritt_gesamt) {
 							status = "abgeschlossen";
 						}
-						
+
 						if (i === (4 * zaehler)) {
 							if (status === "abgeschlossen") {
 							tabelle = tabelle
@@ -234,11 +234,11 @@ var main = function() {
 							$('#tableBewProzess').show();
 							$('#nichtBeworben').hide();
 					    }
-					    // GENERIERUNG TABELLE 
+					    // GENERIERUNG TABELLE
 					    $('#tableBewProzessBody').html(
 						    tabelle);
-					    // *** ENDE TABELLE 
-					    
+					    // *** ENDE TABELLE
+
 					    for (var i = 1; i < zaehler; i++) {
 							$('#btnProzessFortfahren'+ i).on('click',
 								function(event) {
@@ -247,7 +247,7 @@ var main = function() {
 								    /*$('.popUpBack').html('<img style="position: fixed; top: 50%; margin-top: -10%; width: 20%; left: 50%; margin-left: -10%" src="images/loading.gif" />');
 								    $('.popUpBack').show();
 								    setTimeout(closeLoading,1000);
-								    
+
 								    // Ermittlung des Fortschritts für die weiteren Bewerbungsschritte
 								    var uni = $('#uni'+ id).text();
                                     sessionStorage['uni'] = uni;
@@ -265,7 +265,7 @@ var main = function() {
 									url : "getInstance",
 									data : {
 									    matnr : sessionStorage['matrikelnr'],
-									    uni : uni 
+									    uni : uni
 									},
 									success : function(
 										result) {
@@ -278,7 +278,7 @@ var main = function() {
 
 
 								});
-							
+
 							$('#btnZusammenfassung'+ i).on('click',
 									function(event) {
 									var id = event.target.id
@@ -298,7 +298,7 @@ var main = function() {
 									url : "getInstance",
 									data : {
 									    matnr : sessionStorage['matrikelnr'],
-									    uni : sessionStorage['uni'] 
+									    uni : sessionStorage['uni']
 									},
 									success : function(
 										result) {
@@ -322,7 +322,7 @@ var main = function() {
 					    		  closeOnConfirm: false
 					    		},
 					    	function(){
-					    		
+
 					    		var id = $('.btnProcessDelete').closest('tr').data('rid');
 					    		var uni = $('#uni' + id).text();
 					    		var matrikelnummer = sessionStorage['matrikelnr'];
@@ -527,6 +527,7 @@ var main = function() {
     // Wenn der User auf logout geklickt wird.
     $('#logout').on('click', function() {
 	sessionStorage.clear();
+  location.replace("logout");
 	// Herausfinden auf welcher Seite ich mich gerade
 	// befinde
 	var title = $(document).find("title").text();
@@ -600,7 +601,7 @@ var main = function() {
     if (window.location.hash && window.location.hash.startsWith('#nav')) {
         $(window.location.hash).trigger('click');
     }
-  
+
 };
 
 $(document).ready(main);
@@ -624,7 +625,7 @@ function getStudiengaenge() {
 	    }
 	    $('#selStudiengang').html(options);
 	    getAngebotsDaten();
-	    
+
 	},
 	error : function(result) {
 
@@ -759,7 +760,7 @@ for (i = 0; i < acc.length; i++) {
             panel.style.display = "none";
         } else {
             panel.style.display = "block";
-            
+
         }
     }
 }

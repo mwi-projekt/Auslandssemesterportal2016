@@ -14,22 +14,30 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.util.List;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetCurrentActivityServlet", urlPatterns = {"/WebContent/currentActivity"})
 public class GetCurrentActivityServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PrintWriter toClient = response.getWriter();
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-        String instanceID = request.getParameter("instance_id");
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        RuntimeService runtime = engine.getRuntimeService();
-   
-        if (instanceID != null) {
-        	List<String> activitiesList = runtime.getActiveActivityIds(instanceID);
-        	String activeActivity = activitiesList.get(0);
-        	toClient.write(activeActivity);
+      if(rolle<1){
+        response.sendError(401);
+      }
+      else{
+          PrintWriter toClient = response.getWriter();
+
+          String instanceID = request.getParameter("instance_id");
+          ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+          RuntimeService runtime = engine.getRuntimeService();
+
+          if (instanceID != null) {
+          	List<String> activitiesList = runtime.getActiveActivityIds(instanceID);
+          	String activeActivity = activitiesList.get(0);
+          	toClient.write(activeActivity);
+          }
         }
     }
 }

@@ -5,7 +5,7 @@ var verify;
 var idList;
 var sendBew;
 
-		
+
 $(document)
 		.ready(
 				function() {
@@ -25,7 +25,7 @@ $(document)
 						$('#saveChanges').hide();
 						$('#nav3').hide();
 					}
-					// Hyperlink on "Zurück"-Button 
+					// Hyperlink on "Zurück"-Button
 					if (sessionStorage['rolle'] === '3') {
 					       document.getElementById('backbutton').onclick("location.href='bewerbungsportal.html'");
 					}
@@ -33,10 +33,10 @@ $(document)
                     $('.nutzerName').text(sessionStorage['User']);
                     $('#logout').on('click', function() {
                         sessionStorage.clear();
-                        location.replace("index.html");
+                        location.replace("logout");
                     });
-                    
-                    
+
+
                     $('#reason').hide();
                     $('#reasonl').hide();
                     $('#validateBtn').prop('disabled', true);

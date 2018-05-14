@@ -14,30 +14,40 @@ import javax.servlet.http.Cookie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "LogoutServlet", urlPatterns = {"/WebContent/logout"})
 public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      //ONLY VALID SESSIONS CAN LOGOUT
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-      Cookie[] cookies = request.getCookies();
-      String sessionId = null, mail = null;
-
-      for(Cookie c : cookies){
-        if(c.getName().equals("email")){
-          c.setValue("");
-          c.setMaxAge(0);
-          response.addCookie(c);
-        }
-        else if(c.getName().equals("sessionID")){
-          SQL_queries.userLogout(c.getValue());
-          c.setValue("");
-          c.setMaxAge(0);
-          response.addCookie(c);
-        }
+      if(rolle<1){
+        //JUST REDIRECT TO HOME IF NO ACTIVE SESSION
+        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() + "/WebContent/";
+        response.sendRedirect(baseLocation);
       }
-      String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() + "/WebContent/";
-      response.sendRedirect(baseLocation);
+      else{
+        Cookie[] cookies = request.getCookies();
+        String sessionId = null, mail = null;
+
+        for(Cookie c : cookies){
+          if(c.getName().equals("email")){
+            c.setValue("");
+            c.setMaxAge(0);
+            response.addCookie(c);
+          }
+          else if(c.getName().equals("sessionID")){
+            SQL_queries.userLogout(c.getValue());
+            c.setValue("");
+            c.setMaxAge(0);
+            response.addCookie(c);
+          }
+        }
+        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/WebContent/";
+        response.sendRedirect(baseLocation);
+      }
     }
 }

@@ -16,34 +16,42 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.util.List;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetInstanceServlet", urlPatterns = {"/WebContent/getInstance"})
 public class GetInstanceServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PrintWriter toClient = response.getWriter();
-        
-        int matnr = Integer.parseInt(request.getParameter("matnr"));
-        String uni = request.getParameter("uni");
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-        ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-        RuntimeService runtime = engine.getRuntimeService();
-        //Holt instanceId aus DB
-        String instance_id = SQL_queries.getInstanceId(matnr, uni);
-        if (instance_id == ""){
-        	//Lege neue Instanz an
-        	ProcessInstance instance = runtime.startProcessInstanceByKey("studentBewerben");
-        	instance_id = instance.getId();
-        	String[] user = SQL_queries.getUserData(matnr);
-        	if (user.length > 0){
-        		runtime.setVariable(instance_id, "bewNachname", user[0]);
-        		runtime.setVariable(instance_id, "bewVorname", user[1]);
-        		runtime.setVariable(instance_id, "bewEmail", user[2]);
-        	}
-        	runtime.setVariable(instance_id, "uni", uni);
-        	SQL_queries.createInstance(instance_id, uni, matnr, 10);
-        }
-        toClient.print(instance_id);
+      if(rolle<1){
+        response.sendError(401);
+      }
+      else{
+          PrintWriter toClient = response.getWriter();
+
+          int matnr = Integer.parseInt(request.getParameter("matnr"));
+          String uni = request.getParameter("uni");
+
+          ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+          RuntimeService runtime = engine.getRuntimeService();
+          //Holt instanceId aus DB
+          String instance_id = SQL_queries.getInstanceId(matnr, uni);
+          if (instance_id == ""){
+          	//Lege neue Instanz an
+          	ProcessInstance instance = runtime.startProcessInstanceByKey("studentBewerben");
+          	instance_id = instance.getId();
+          	String[] user = SQL_queries.getUserData(matnr);
+          	if (user.length > 0){
+          		runtime.setVariable(instance_id, "bewNachname", user[0]);
+          		runtime.setVariable(instance_id, "bewVorname", user[1]);
+          		runtime.setVariable(instance_id, "bewEmail", user[2]);
+          	}
+          	runtime.setVariable(instance_id, "uni", uni);
+          	SQL_queries.createInstance(instance_id, uni, matnr, 10);
+          }
+          toClient.print(instance_id);
+      }
     }
 }

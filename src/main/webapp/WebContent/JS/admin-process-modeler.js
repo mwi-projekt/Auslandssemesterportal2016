@@ -27,7 +27,7 @@ $(document).ready(function () {
     $('.nutzerName').text(sessionStorage['User']);
     $('#logout').on('click', function() {
         sessionStorage.clear();
-        location.replace("index.html");
+        location.replace("logout");
     });
 
 
@@ -270,7 +270,7 @@ $(document).ready(function () {
                 if (data.id) {
                     $('#field-id').val(data.id);
                 }
-                
+
                 if (data.numchars) {
                 	$('#field-numchars').val(data.numchars);
                 }

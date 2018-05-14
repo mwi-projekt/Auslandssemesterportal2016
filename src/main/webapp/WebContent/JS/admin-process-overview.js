@@ -15,7 +15,7 @@ $(document).ready(function () {
     $('.nutzerName').text(sessionStorage['User']);
     $('#logout').on('click', function() {
         sessionStorage.clear();
-        location.replace("index.html");
+        location.replace("logout");
     });
 
     $.ajax

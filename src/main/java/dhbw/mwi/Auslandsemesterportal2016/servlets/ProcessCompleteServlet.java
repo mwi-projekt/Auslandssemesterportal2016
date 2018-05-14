@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "ProcessCompleteServlet", urlPatterns = {"/WebContent/process/complete"})
 public class ProcessCompleteServlet extends HttpServlet {
@@ -22,27 +23,34 @@ public class ProcessCompleteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String matrikelnummer = request.getParameter("matrikelnummer");
-        String uni = request.getParameter("uni");
-        PrintWriter toClient = response.getWriter();
+      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-        if (matrikelnummer != null && uni != null) {
-            String id = ProcessService.getProcessId(matrikelnummer, uni);
+      if(rolle<1){
+        response.sendError(401);
+      }
+      else{
+          String matrikelnummer = request.getParameter("matrikelnummer");
+          String uni = request.getParameter("uni");
+          PrintWriter toClient = response.getWriter();
 
-            if (id != null && id != "leer") {
+          if (matrikelnummer != null && uni != null) {
+              String id = ProcessService.getProcessId(matrikelnummer, uni);
 
-                processEngine.getTaskService().complete(
-                        processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId());
+              if (id != null && id != "leer") {
 
-                toClient.println(id);
+                  processEngine.getTaskService().complete(
+                          processEngine.getTaskService().createTaskQuery().processInstanceId(id).singleResult().getId());
 
-            } else {
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                toClient.println("Error: can not find process");
-            }
-        } else {
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            toClient.println("Error: parameter are missing");
+                  toClient.println(id);
+
+              } else {
+                  response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                  toClient.println("Error: can not find process");
+              }
+          } else {
+              response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+              toClient.println("Error: parameter are missing");
+          }
         }
     }
 }
