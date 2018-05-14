@@ -1,6 +1,10 @@
 	body {
 }
 
+a:visited {
+	color: violet;
+}
+
 input {
 	/* width: 300px; */
 }

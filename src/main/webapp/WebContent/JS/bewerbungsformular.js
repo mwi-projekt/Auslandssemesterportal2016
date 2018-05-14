@@ -24,6 +24,45 @@ var main = function() {
 			}
 		
 		});
+	
+	$('.b9').bind('keyup change', function(e) {
+	    if ($(this).val().length > 4) {
+	        var ort = $('.b10');
+	        $.getJSON('http://www.geonames.org/postalCodeLookupJSON?&country=DE&callback=?', {postalcode: this.value }, function(response) {
+	            if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+	                ort.val(response.postalcodes[0].placeName);
+	            }
+	        })
+	    } else {
+	        $('.b10').val('');
+	    }
+	});
+	
+	$('.b13').bind('keyup change', function(e) {
+	    if ($(this).val().length > 4) {
+	        var ort = $('.b14');
+	        $.getJSON('http://www.geonames.org/postalCodeLookupJSON?&country=DE&callback=?', {postalcode: this.value }, function(response) {
+	            if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+	                ort.val(response.postalcodes[0].placeName);
+	            }
+	        })
+	    } else {
+	        $('.b14').val('');
+	    }
+	});
+	
+	$('.b18').bind('keyup change', function(e) {
+	    if ($(this).val().length > 4) {
+	        var ort = $('.b19');
+	        $.getJSON('http://www.geonames.org/postalCodeLookupJSON?&country=DE&callback=?', {postalcode: this.value }, function(response) {
+	            if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+	                ort.val(response.postalcodes[0].placeName);
+	            }
+	        })
+	    } else {
+	        $('.b19').val('');
+	    }
+	});
 
 
 	
@@ -59,8 +98,6 @@ var main = function() {
    });
 
 };
-
-
 
 $(document).ready(main);
 
