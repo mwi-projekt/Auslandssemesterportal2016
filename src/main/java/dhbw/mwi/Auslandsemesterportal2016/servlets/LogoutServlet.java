@@ -50,7 +50,8 @@ public class LogoutServlet extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.invalidate();
+          session.setAttribute("logout", true);
+            //session.invalidate();
         }
         String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/WebContent/";
         response.sendRedirect(baseLocation);
