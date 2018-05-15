@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" viewBox="0 0 1000 1000" width="1000" height="1000" style="stroke:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-width:1;stroke-dasharray:none;fill:#000000;fill-opacity:1;fill-rule:evenodd" font-family="Arial" font-size="15" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow1" x="-1000" y="-1000" width="2000" height="2000">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="14.4698" dy="64.0805" result="offsetblur" />
+      <feFlood flood-color="#404040" flood-opacity="0.5" />
+      <feComposite operator="in" in2="offsetblur" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <g id="Shape" opacity="1" filter="url(#shadow1)" />
+  <rect id="Rectangle" x="150" y="530" width="250" height="420" rx="40" style="fill:#FFFFFF;" />
+  <path id="Polygon" d="M840,450L160,449.9941L500.0107,170z" style="fill:#FFFFFF;" />
+  <rect id="Rectangle1" x="600" y="530" width="250" height="420" rx="40" style="fill:#FFFFFF;" />
+  <path id="Rectangle2" d="M190,440L810,440C831.9434,440 850,453.9793 850,470.9677L850,569.0323C850,586.0207 831.9434,600 810,600L190,600C168.0566,600 150,586.0207 150,569.0323L150,470.9677C150,453.9793 168.0566,440 190,440z" style="fill:#FFFFFF;" />
+  <path id="Rectangle3" d="M853.6373,436.6177L470.2427,115.1179C461.5576,107.8348 460.3195,94.6102 467.4999,85.8219L485.357,63.9665C492.5374,55.1782 505.5929,53.9396 514.278,61.2226L897.6726,382.7225C906.3577,390.0055 907.5958,403.2302 900.4154,412.0184L882.5583,433.8739C875.3778,442.6621 862.3224,443.9007 853.6373,436.6177z" style="fill:#FFFFFF;" />
+  <rect id="Rectangle4" x="420" y="620" width="160" height="330" rx="40" style="fill:#FFFFFF;" />
+  <rect id="Rectangle5" x="420" y="620" width="160" height="120" style="fill:#FFFFFF;" />
+  <rect id="Rectangle6" x="150" y="830" width="250" height="120" style="fill:#FFFFFF;" />
+  <rect id="Rectangle7" x="600" y="830" width="250" height="120" style="fill:#FFFFFF;" />
+  <rect id="Rectangle8" x="420" y="830" width="160" height="120" style="fill:#FFFFFF;" />
+  <path id="Rectangle9" d="M97.512,371.2755L474.8836,64.6216C483.6801,57.4736 496.8999,58.7632 504.1686,67.4786L526.7499,94.5539C534.0187,103.2693 532.7616,116.3229 523.965,123.471L146.5935,430.1249C137.797,437.273 124.5772,435.9833 117.3085,427.2679L94.7271,400.1926C87.4584,391.4772 88.7155,378.4236 97.512,371.2755z" style="fill:#FFFFFF;" />
+</svg>
