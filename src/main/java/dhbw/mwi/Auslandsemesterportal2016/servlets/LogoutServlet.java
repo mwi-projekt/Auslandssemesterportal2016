@@ -8,6 +8,7 @@ import org.camunda.bpm.engine.ProcessEngines;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
@@ -26,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
 
       if(rolle<1){
         //JUST REDIRECT TO HOME IF NO ACTIVE SESSION
-        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() + "/WebContent/";
+        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/WebContent/?logout=true";
         response.sendRedirect(baseLocation);
       }
       else{
@@ -46,7 +47,8 @@ public class LogoutServlet extends HttpServlet {
             response.addCookie(c);
           }
         }
-        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/WebContent/";
+
+        String baseLocation = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/WebContent/?logout=true";
         response.sendRedirect(baseLocation);
       }
     }

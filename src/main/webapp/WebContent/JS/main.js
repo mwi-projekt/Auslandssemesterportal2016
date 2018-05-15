@@ -2,6 +2,11 @@ var imgCount = 1;
 var back = 1;
 var angeboteNavBar = '<div class="navBar"><p class="navel current" id="l1">Allgemeine Infos</p><p class="navel" id="l2">FAQs</p><p class="navel" id="l3">Erfahrungsbericht</p><p class="navel" id="l4">Bilder</p><p class="navel" id="l5">Bewerben</p></div>';
 var main = function() {
+	if($.urlParam('logout').trim()){
+		sessionStorage.clear();
+		window.location.href = removeQueryStringParameter('logout');
+	}
+
 	$('.imgSlider').css('background-image', 'url(images/pan' + back + '.jpg)');
 	loadPortalInfo();
 	loop();
@@ -1710,6 +1715,29 @@ function loadAuslandsangeboteInhalt() {
 				}
 			});
 }
+//Function to remove certain URL Parameters
+function removeQueryStringParameter(key, url) {
+    if (!url) url = window.location.href;
+
+    var hashParts = url.split('#');
+
+    var regex = new RegExp("([?&])" + key + "=.*?(&|#|$)", "i");
+
+    if (hashParts[0].match(regex)) {
+        //REMOVE KEY AND VALUE
+        url = hashParts[0].replace(regex, '$1');
+
+        //REMOVE TRAILING ? OR &
+        url = url.replace(/([?&])$/, '');
+
+        //ADD HASH
+        if (typeof hashParts[1] !== 'undefined' && hashParts[1] !== null)
+            url += '#' + hashParts[1];
+    }
+
+    return url;
+}
+
 // L�d die Daten f�r die Infomaterialien auf die Seite
 function loadInfoMaterial() {
 	$.ajax({
