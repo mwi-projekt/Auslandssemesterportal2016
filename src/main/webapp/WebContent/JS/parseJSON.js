@@ -72,7 +72,7 @@ function parse(){
 				type : "GET",
 				url : "processmodel/get",
 				data : {
-					model: 'schottland',
+					model: 'studentBewerben',
 					step : step_id
 				},
 				success : function(result) {
