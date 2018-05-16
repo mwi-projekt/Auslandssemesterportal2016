@@ -15,7 +15,7 @@ public class Auslandsemesterportal2016ProcessApplication extends ServletProcessA
  // private static final String PROCESS_DEFINITION_KEY = "Auslandsemesterportal2016";
 
   /**
-   * Innerhalb dieser Methode wird der Prozess "studentBewerben.bpmn" angestoßen.
+   * Innerhalb dieser Methode werden die Prozesse angestoßen.
    */
   
   public ProcessInstance bewerbungStarten(ProcessEngine processEngine) {
