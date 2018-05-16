@@ -933,7 +933,7 @@ var main = function() {
 			$('#nutzerVerwaltung').show();
 			sessionStorage['verwaltung'] = 2;
 		} else if (id === 'verwaltungPortal') {
-			location.href = 'admin-process.html?dia=studentBewerben';
+			location.href = 'choose-diagram.html';
 		}
 	});
 	// Click-Listener für Link zurück zum Admin-Hauptmenü
