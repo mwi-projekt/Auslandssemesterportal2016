@@ -79,7 +79,7 @@ $(document).ready(function () {
     
     $('#save').click(function () {
         $.post('processmodel/save', {
-            model: 'studentBewerben',
+            model: dia,
             step: id,
             stepnumber: index,
             json: encodeURI(JSON.stringify(json))
