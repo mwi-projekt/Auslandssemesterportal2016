@@ -51,7 +51,7 @@ public class GetInstanceServlet extends HttpServlet {
           	runtime.setVariable(instance_id, "uni", uni);
           	SQL_queries.createInstance(instance_id, uni, matnr, 10);
           }
-          toClient.print(instance_id);
+          toClient.print(instance_id+"&uni="+uni);
       }
     }
 }

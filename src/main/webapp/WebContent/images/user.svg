@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" viewBox="0 0 1000 1000" width="1000" height="1000" style="stroke:none;stroke-linecap:butt;stroke-linejoin:miter;stroke-width:1;stroke-dasharray:none;fill:#000000;fill-opacity:1;fill-rule:evenodd" font-family="Arial" font-size="15" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="shadow1" x="-1000" y="-1000" width="2000" height="2000">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" />
+      <feOffset dx="14.4698" dy="64.0805" result="offsetblur" />
+      <feFlood flood-color="#404040" flood-opacity="0.5" />
+      <feComposite operator="in" in2="offsetblur" />
+      <feMerge>
+        <feMergeNode />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <ellipse id="Circle" cx="518.6796" cy="288.6796" rx="188.6796" ry="188.6796" style="fill:#B2B2B2;" />
+  <g id="Shape" opacity="1" filter="url(#shadow1)" />
+  <path id="Rectangle" d="M400,810L631.5971,810L631.5971,917.4397L400,917.4397z" style="fill:#FFFFFF;" />
+  <path id="Pie Slice" d="M250,949.8784C250.0182,663.9463 374.1727,428.6881 525.0332,428.7226C675.8938,428.7572 800.0182,664.0723 800,950.0044L525,949.9389z" style="fill:#B2B2B2;" />
+  <path id="Pie Slice1" d="M200,949.8812C200.0186,670.1348 326.4304,439.9662 480.0338,440C633.6373,440.0338 760.0186,670.2581 760,950.0044L480,949.9403z" style="fill:#FFFFFF;" />
+  <ellipse id="Circle1" cx="478.6796" cy="288.6796" rx="188.6796" ry="188.6796" style="fill:#FFFFFF;" />
+</svg>
