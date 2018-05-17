@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>DHBW Auslandsinfo</title>
-		
+
 		<link rel="stylesheet"
 			href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
@@ -23,11 +23,11 @@
 		</script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
 		<script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
-				
+
 		<!-- End Cookie Consent plugin -->
-	
+
 	</head>
-	
+
 	<body>
 
 
@@ -40,12 +40,13 @@
 
 			<!-- Modal content-->
 			<div class="modal-content">
+				<form action="" id="regForm">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Registrieren</h4>
 				</div>
 				<div class="modal-body">
-					<form action="" id="regForm">
+
 						<select class="rolleWahl inBox inline" required>
 							<option>Ich bin...</option>
 							<option>Studierender</option>
@@ -106,9 +107,9 @@
 										<input type="password" placeholder="Passwort 2. Mal*" class="inBox form-control" id="inPwSt2" required>
 									</div>
 								</div>
-				
-								
-	
+
+
+
 							</div>
 						</div>
 						<div id="askAdmin">
@@ -117,7 +118,7 @@
 									Dr. Thomas Freytag, wenn sie Zugang zu diesem Portal benötigen.</p>
 							</div>
 						</div>
-	
+
 						<div class="auslandsmitarbeiter">
 							<div class="form-group">
 								<input type="text" placeholder="Telefonnummer" class="inBox" id="inTel">
@@ -128,7 +129,6 @@
 							</div>
 						</div>
 						<p class="falsch"></p>
-					</form>
 				</div>
 				<div class="nutzerBearbeiten">
 					<b id="closeBearb"><img src="images/Button Delete.png"
@@ -152,6 +152,7 @@
 					<input type="submit" class="btn btnReg" value="Registrieren" style="width: auto;">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
 				</div>
+				</form>
 			</div>
 
 
@@ -182,7 +183,7 @@
 				</div>
 				<div class="modal-footer">
 					<input form = "loginForm" type="submit" class="btn" id="btnLogin" value="Login" style="width: auto;">
-					
+
 				</div>
 			</div>
 
@@ -205,23 +206,23 @@
 			<div class="logFenster">
 				<button type="button" class="btn btn-default navMargin loginMain"
 					data-toggle="modal" id="loginMain" data-target="#login">Login</button>
-			
+
 				<button type="button" class="btn btn-default navMargin"
 					data-toggle="modal" id="register" data-target="#register">Registrieren</button>
-			</div>	
+			</div>
 			<div class="logoutFenster">
-			
-					
+
+
 						Eingeloggt als <b class="nutzerName"></b>
-					
+
 						<button type="button" class="btn btn-default navMargin"
 					 id="logout" data-target="#logout">Logout</button>
-					
+
 			</div>
 
 		</div>
 
-		<!--  
+		<!--
 			<div class="col-md-2"></div>
 			<div class="col-md-1">
 				<a class="pull-left" href="http://www.dhbw-karlsruhe.de"><img
@@ -255,7 +256,7 @@
 						Eingeloggt als <b class="nutzerName"></b> <u class="pull-right"
 							id="logout">Logout</u>
 					</p>
-				</div> 
+				</div>
 				<br> <br> <br> <br>
 				<button type="button" class="btn btn-info btn-lg"
 					data-toggle="modal" data-target="#register">Registrieren</button>
@@ -296,14 +297,14 @@
 				<a class="btn btn-default navMargin" href="#erfahrungsBerichte">Erfahrungsberichte</a>
 
 				<a class="btn btn-default navMargin" href="#infoMaterial">Infomaterial</a>
-				<a class="btn btn-default navMargin eingeloggt" href="bewerbungsportal.html">Zum Bewerbungsportal</a> 
+				<a class="btn btn-default navMargin eingeloggt" href="bewerbungsportal.html">Zum Bewerbungsportal</a>
 				<label 	class="btn cms cmsBtn inline Admin" style="float: none"><a style="color: white"
 						href="admin-process.html?dia=studentBewerben">Bewerbungsprozesse bearbeiten</a></label>
 				<label 	class="btn cms cmsBtn inline Mitarbeiter" style="float: none"><a style="color: white"
 						href="task_overview.html">Bewerbungen Validieren</a></label>
 			</div>
 
-			<!--  
+			<!--
 			<label class="btn inline"><a href="#portalInfo">Was ist
 					das?</a></label> <label class="btn inline"><a href="#auslandsAngebote">Auslandsangebote</a></label>
 			<label class="btn inline"><a href="#erfahrungsBerichte">Erfahrungsberichte</a></label>
@@ -356,16 +357,16 @@
 						<p class="cmsPortal">
 							<b style="color: #D60000">Infoelemente bearbeiten</b>
 						</p>
-						
+
 						<div class="inputsPortal cmsPortal"></div>
-						
+
 						<p class="cmsPortal btn cmsBtn" id="cmsBtnInfoNeu">Neues
 							Infoelement hinzufügen +</p>
 						<p class="red nonCms">Jetzt einfach registrieren und Vorteile
 							nutzen</p>
 						<button type="button" class="btn btn-default linkreg nonCMS"
 					data-toggle="modal" data-target="#register">Registrieren</button>
-						
+
 						<p class="cmsPortal cmsBtn btn" id="cmsPortalSave"
 							style="clear: both; float: right">Änderungen speichern</p>
 					</div>
@@ -526,11 +527,11 @@
 										style="float: right" />
 								</div>
 								<div class="contentAng" id="cEdit14">
-									<b>Hier können keine Bilder hochgeladen werden.</b>  
+									<b>Hier können keine Bilder hochgeladen werden.</b>
 
-	
-									
-									
+
+
+
 								</div>
 							</div>
 							<p class="cmsAngebote cmsBtn btn" id="cmsBtnSave"
