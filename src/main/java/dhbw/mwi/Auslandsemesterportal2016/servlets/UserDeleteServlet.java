@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "UserDeleteServlet", urlPatterns = {"/WebContent/user/delete"})
 public class UserDeleteServlet extends HttpServlet {
@@ -18,7 +19,7 @@ public class UserDeleteServlet extends HttpServlet {
       if(rolle!=1 && rolle!=2){
         response.sendError(401,"Rolle: "+rolle);
       }
-      else{      
+      else{
           String matrikelnummer = request.getParameter("matrikelnummer");
           PrintWriter toClient = response.getWriter();
 
