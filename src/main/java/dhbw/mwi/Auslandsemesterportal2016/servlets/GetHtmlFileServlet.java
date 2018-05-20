@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetHtmlFileServlet", urlPatterns = {//"/WebContent/getHtml",
-		"/WebContent/html/*"
+		"/WebContent/faq",
+		"/WebContent/index",
+		"/WebContent/changePw"
 		})
 		 
 //TODO richtige Fehlermeldung ausgeben. Aktuell immer 400 - BAD REQUEST
@@ -31,15 +33,6 @@ public class GetHtmlFileServlet extends HttpServlet
 	{
 		
 		String requestedPage = request.getPathInfo();
-		
-		
-		
-		/**
-		if (requestedPage == null) {
-			
-			requestedPage = "/index";
-		}
-		*/
 		
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
