@@ -20,9 +20,9 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 public class GetHtmlFileServlet extends HttpServlet 
 {
 	private static final String[] HTML_FOLDER = {"/WebContent/HTML/public/",
-												"/WebContent/HTML/student/",
+												"/WebContent/HTML/admin/",
 												"/WebContent/HTML/employee/",
-												"/WebContent/HTML/admin/"};
+												"/WebContent/HTML/student/"};
 	
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
