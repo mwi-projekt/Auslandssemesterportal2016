@@ -14,7 +14,29 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 @WebServlet(name = "GetHtmlFileServlet", urlPatterns = {//"/WebContent/getHtml",
 		"/WebContent/faq",
 		"/WebContent/index",
-		"/WebContent/changePw"
+		"/WebContent/changePw",
+		"/WebContent/admin-process-modeler",
+		"/WebContent/admin-process-overview",
+		"/WebContent/admin-process",
+		"/WebContent/choose-diagram",
+		"/WebContent/index",
+		"/WebContent/task_detail",
+		"/WebContent/test",
+		"/WebContent/accordion",
+		"/WebContent/bewerbungsportal",
+		"/WebContent/erfahrungsbericht1",
+		"/WebContent/erfahrungsbericht2",
+		"/WebContent/erfahrungsbericht3",
+		"/WebContent/erfahrungsbericht4",
+		"/WebContent/forgot_pw",
+		"/WebContent/impressum",
+		"/WebContent/bewerben",
+		"/WebContent/bewerbungsformular",
+		"/WebContent/dokumente",
+		"/WebContent/einschreibungsprozess",
+		"/WebContent/einscheibungsprozessSchottland",
+		"/WebContent/fertig",
+		"/WebContent/start"
 		})
 		 
 //TODO richtige Fehlermeldung ausgeben. Aktuell immer 400 - BAD REQUEST
@@ -52,11 +74,10 @@ public class GetHtmlFileServlet extends HttpServlet
 		//Durchsuche alle Ordner
 		for(int i = 0; i < HTML_FOLDER.length; i++)
 		{
-			RequestDispatcher tempView = null;
+			RequestDispatcher tempView;
 			try
 			{
 				tempView = request.getServletContext().getRequestDispatcher(HTML_FOLDER[i]+requestedPage+".html");
-				tempView.include(request, response);
 			}
 			catch(Exception e)
 			{
