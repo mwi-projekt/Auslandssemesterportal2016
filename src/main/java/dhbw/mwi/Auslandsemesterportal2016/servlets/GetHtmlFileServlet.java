@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetHtmlFileServlet", urlPatterns = {"/WebContent/getHtml",
 		/*"/Web"
@@ -28,7 +28,7 @@ public class GetHtmlFileServlet extends HttpServlet
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
 		String requestedPage = request.getParameter("page");
-		int userAccessLevel = UserAuthentification.isUserAuthentifiedByCookie(request);
+		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
 		/*//TODO JUST FOR TESTING PURPOSE, REMOVE ON PRODUCTIVE USE
 		if(request.getParameter("accessLevel")!=null)
@@ -56,8 +56,8 @@ public class GetHtmlFileServlet extends HttpServlet
 			}
 		}
 		//Falls kein berechtigtes Dokument vorliegt
-		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		response.sendError(HttpServletResponse.SC_NOT_FOUND,
                 "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
 		return;
 		
