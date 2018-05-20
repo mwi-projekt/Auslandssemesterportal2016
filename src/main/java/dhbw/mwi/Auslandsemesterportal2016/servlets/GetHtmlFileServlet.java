@@ -103,7 +103,9 @@ public class GetHtmlFileServlet extends HttpServlet
 		catch(Exception e)
 		{
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+					"Es gab einen Fehler in der Verarbeitung des Requests."
+					+ e.getStackTrace());
 		}
 		
 		
