@@ -21,22 +21,22 @@ public class GetHtmlFileServlet extends HttpServlet
 {
 	
 	//Level: keins (0), Admin (1), Mitarbeiter (2), Student (3)
-	private static final String[] HTML_FOLDER = {"/WebContent/HTML/public/",
-												"/WebContent/HTML/admin/",
-												"/WebContent/HTML/employee/",
-												"/WebContent/HTML/student/"};
+	private static final String[] HTML_FOLDER = {"/WebContent/HTML/public",
+												"/WebContent/HTML/admin",
+												"/WebContent/HTML/employee",
+												"/WebContent/HTML/student"};
 	
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
-		String requestedPage = request.getParameter("page");
-		if(requestedPage == null)
-		{
-			requestedPage = request.getPathInfo();
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, "Es konnte keine Seite unter der Adresse "
-					+ requestedPage + " gefunden werden.");
-		}
+		//String requestedPage = request.getParameter("page");
+		
+		String requestedPage = request.getPathInfo();
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
+		
+		if(requestedPage == "/") {
+			requestedPage = "/index";
+		}
 		
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
 		//gibt das höchste verfügbare, erlaubte Dokument zurück
