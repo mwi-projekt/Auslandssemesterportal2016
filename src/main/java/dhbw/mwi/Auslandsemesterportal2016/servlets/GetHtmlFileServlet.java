@@ -44,10 +44,10 @@ public class GetHtmlFileServlet extends HttpServlet
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
 		
-		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "." +requestedPage+". userLevel:" + userAccessLevel);
-		return;
+		//response.sendError(HttpServletResponse.SC_BAD_REQUEST, "." +requestedPage+". userLevel:" + userAccessLevel);
 		
-		/*
+		
+		
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
 		//gibt das höchste verfügbare, erlaubte Dokument zurück
 		
@@ -124,6 +124,6 @@ public class GetHtmlFileServlet extends HttpServlet
 					+ e.getMessage());
 		}
 		
-		*/
+		
 	}
 }
