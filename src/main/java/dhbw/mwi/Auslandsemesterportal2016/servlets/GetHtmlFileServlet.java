@@ -11,14 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
-@WebServlet(name = "GetHtmlFileServlet", urlPatterns = {"/WebContent/getHtml",
-		/*"/Web"
-		 * */
+@WebServlet(name = "GetHtmlFileServlet", urlPatterns = {//"/WebContent/getHtml",
+		"/WebContent/**"
 		})
 		 
+//TODO richtige Fehlermeldung ausgeben. Aktuell immer 400 - BAD REQUEST
 
 public class GetHtmlFileServlet extends HttpServlet 
 {
+	
+	//Level: keins (0), Admin (1), Mitarbeiter (2), Student (3)
 	private static final String[] HTML_FOLDER = {"/WebContent/HTML/public/",
 												"/WebContent/HTML/admin/",
 												"/WebContent/HTML/employee/",
@@ -47,7 +49,7 @@ public class GetHtmlFileServlet extends HttpServlet
 			catch(Exception e)
 			{
 				continue;
-			}		
+			}	
 			//falls Dokument in Ordner
 			if(userAccessLevel==i || i == 0)
 			{
