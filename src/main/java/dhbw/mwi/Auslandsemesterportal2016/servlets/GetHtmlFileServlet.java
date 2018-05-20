@@ -32,17 +32,22 @@ public class GetHtmlFileServlet extends HttpServlet
 		
 		String requestedPage = request.getPathInfo();
 		
-		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "." +requestedPage+".");
-		return;
+		
+		
 		/**
 		if (requestedPage == null) {
 			
 			requestedPage = "/index";
 		}
 		*/
-		/*	
+		
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
+		
+		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "." +requestedPage+". userLevel:" + userAccessLevel);
+		return;
+		
+		/*
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
 		//gibt das höchste verfügbare, erlaubte Dokument zurück
 		
