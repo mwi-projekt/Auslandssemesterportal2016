@@ -47,7 +47,7 @@ public class GetHtmlFileServlet extends HttpServlet
 				if(tempView!=null)
 				{
 					//Zugriff erlaubt
-					if(userAccessLevel>=i)
+					if(userAccessLevel==i || i == 0)
 					{
 						//höchstes Gefundenes Dokument?
 						if(highestDocumentLevelFound < i)
