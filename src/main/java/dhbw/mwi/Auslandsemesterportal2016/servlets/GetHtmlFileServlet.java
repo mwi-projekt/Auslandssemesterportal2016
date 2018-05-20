@@ -30,6 +30,12 @@ public class GetHtmlFileServlet extends HttpServlet
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
 		String requestedPage = request.getParameter("page");
+		if(requestedPage == null)
+		{
+			requestedPage = request.getPathInfo();
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "Es konnte keine Seite unter der Adresse "
+					+ requestedPage + " gefunden werden.");
+		}
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
