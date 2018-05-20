@@ -32,11 +32,13 @@ public class GetHtmlFileServlet extends HttpServlet
 		
 		String requestedPage = request.getPathInfo();
 		
+		response.sendError(HttpServletResponse.SC_FOUND, "." +requestedPage+".");
+		/**
 		if (requestedPage == null) {
 			
 			requestedPage = "/index";
 		}
-		
+		*/
 			
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
