@@ -30,92 +30,62 @@ public class GetHtmlFileServlet extends HttpServlet
 		String requestedPage = request.getParameter("page");
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
-		/*//TODO JUST FOR TESTING PURPOSE, REMOVE ON PRODUCTIVE USE
-		if(request.getParameter("accessLevel")!=null)
-		{
-			userAccessLevel = Integer.parseInt(request.getParameter("accessLevel"));
-		}
-		*/
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
 		//gibt das höchste verfügbare, erlaubte Dokument zurück
-		while(userAccessLevel >=0)
-		{
-			try
-			{
-				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[userAccessLevel]+requestedPage+".html");
-				if(view != null)
-				{
-					response.setStatus(HttpServletResponse.SC_ACCEPTED);
-					view.include(request, response);
-					return;
-				}
-			}
-			catch(Exception e)
-			{
-				userAccessLevel--;
-			}
-		}
-		//Falls kein berechtigtes Dokument vorliegt
-		response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		response.sendError(HttpServletResponse.SC_NOT_FOUND,
-                "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
-		return;
 		
-		/*switch(userAccessLevel)
+		int highestDocumentLevelFound = -1;
+		boolean forbiddenDocumentFound = false;
+		
+		//Durchsuche alle Ordner
+		for(int i = 0; i < HTML_FOLDER.length; i++)
 		{
-			//Falls Dokument für Admin Ansicht vorhanden, zurückgeben
-			case 3:
+			RequestDispatcher tempView = request.getServletContext().getRequestDispatcher(HTML_FOLDER[i]+requestedPage+".html");
+			//falls Dokument in Ordner
+			if(tempView!=null)
 			{
-				try{
-					RequestDispatcher view = request.getServletContext().getRequestDispatcher(ADMIN_HTML_FOLDER+requestedPage+".html");
-					if(view!=null)
+				//Zugriff erlaubt
+				if(userAccessLevel>=i)
+				{
+					//höchstes Gefundenes Dokument?
+					if(highestDocumentLevelFound < i)
 					{
-						view.forward(request, response);
-						break;
+						highestDocumentLevelFound = i;
 					}
 				}
-				catch(Exception e)
+				//Zugriff nicht erlaubt
+				else
 				{
-					//do nothing, just drop down
-				}
+					forbiddenDocumentFound = true;
+				}		
 			}
-			//Falls Dokument für Mitarbeiter Ansicht vorhanden, zurückgeben
-			case 2:
+		}
+		//wurde ein erlaubtes Dokument gefunden?
+		if(highestDocumentLevelFound >= 0)
+		{
+			response.setStatus(HttpServletResponse.SC_ACCEPTED);
+			RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[highestDocumentLevelFound]+requestedPage+".html");
+			view.include(request, response);
+			return;
+		}
+		//es wurde kein erlaubtes Dokument gefunden
+		else
+		{
+			//es wurde ein verbotenes Dokument gefunden
+			if(forbiddenDocumentFound)
 			{
-				RequestDispatcher view = request.getRequestDispatcher(EMPLOYEE_HTML_FOLDER+requestedPage+".html");
-				if(view!=null)
-				{
-					view.forward(request, response);
-					break;
-				}
-			}
-			//Falls Dokument für Studenten Ansicht vorhanden, zurückgeben
-			case 1:
-			{
-				RequestDispatcher view = request.getRequestDispatcher(STUDENT_HTML_FOLDER+requestedPage+".html");
-				if(view!=null)
-				{
-					view.forward(request, response);
-					break;
-				}
-			}
-			//Falls Dokument für Öffentliche Ansicht vorhanden, zurückgeben
-			case 0:
-			{
-				RequestDispatcher view = request.getRequestDispatcher(PUBLIC_HTML_FOLDER+requestedPage+".html");
-				if(view!=null)
-				{
-					view.forward(request, response);
-					break;
-				}
-			}
-			//Falls kein öffentliches Dokument vorhanden ist, HTTP 401 nicht autorisiert
-			default:
-			{
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-	                     "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
+		                "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
 				return;
 			}
-		}*/
+			//es wurde nichts gefunden
+			else
+			{
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+				response.sendError(HttpServletResponse.SC_NOT_FOUND,
+		                "Seite wurde nicht gefunden!");
+				return;
+			}
+		}
 	}
 }
