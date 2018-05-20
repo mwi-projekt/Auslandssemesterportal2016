@@ -32,7 +32,8 @@ public class GetHtmlFileServlet extends HttpServlet
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
 		
-		String requestedPage = request.getPathInfo();
+		String requestedPage = request.getServletPath();
+		requestedPage.replaceAll("WebContent/", "");
 		
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
