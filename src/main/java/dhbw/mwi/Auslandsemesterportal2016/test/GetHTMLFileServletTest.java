@@ -12,48 +12,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.servlets.GetHtmlFileServlet;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({UserAuthentification.class})
 public class GetHTMLFileServletTest  extends Mockito
 {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private GetHtmlFileServlet servlet;
-	private userAuthentification userAuth;
-	
-	@Test
-	public void requestForNonExistingPageShouldFail()  throws Exception
-	{
-		//Mock Ups
-		when(request.getParameter("page")).thenReturn("xyz");
-		when(request.getParameter("accessLevel")).thenReturn("0");
-		
-//		doReturn(1).when(userAuth).isUserAuthentifiedByCookie(request);
-		when(userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(1);
-		
-		//Do Something
-		servlet.doGet(request, response);
-		
-		//Check Success
-		assertEquals(response.toString(), 403, response.getStatus());
-	}
-
-	@Test
-	public void requestForTestPageShouldSucceed() throws Exception
-	{
-		//Mock Ups
-		when(request.getParameter("page")).thenReturn("student");
-		when(userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(1);
-		
-		//Do Something
-		servlet.doGet(request, response);
-		
-		//Check Success
-		assertEquals(response.toString(), 200, response.getStatus());
-	}
+	private UserAuthentification userAuthentification;
 	
 	@Before
 	public void setup()
@@ -61,8 +33,43 @@ public class GetHTMLFileServletTest  extends Mockito
 		request = mock(HttpServletRequest.class);
 		response = mock(HttpServletResponse.class);
 		servlet = new GetHtmlFileServlet();
-		userAuth = mock(userAuthentification.class);
+		userAuthentification = mock(UserAuthentification.class);
+		
 	}
+	
+	@Test
+	public void requestForNonExistingPageShouldFail()  throws Exception
+	{
+		//Mock Ups
+//		when(request.getParameter("page")).thenReturn("xyz");
+//		when(request.getParameter("accessLevel")).thenReturn("0");
+//		when(UserAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(1);
+		doReturn(1).when(userAuthentification).isUserAuthentifiedByCookie(request);
+		
+		
+		//Do Something
+		servlet.doGet(request, response);
+		
+		//Check Success
+		assertEquals(HttpServletResponse.SC_UNAUTHORIZED, response.getStatus());
+	}
+
+	
+	@Test
+	public void requestForTestPageShouldSucceed() throws Exception
+	{
+		//Mock Ups
+		when(request.getParameter("page")).thenReturn("student");
+//		when(userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(1);
+		
+		//Do Something
+		servlet.doGet(request, response);
+		
+		//Check Success
+		assertEquals(HttpServletResponse.SC_ACCEPTED, response.getStatus());
+	}
+	
+
 
 	@After
 	public void cleanup()
@@ -70,6 +77,6 @@ public class GetHTMLFileServletTest  extends Mockito
 		request = null;
 		response = null;
 		servlet = null;
-		userAuth = null;
+		userAuthentification = null;
 	}
 }
