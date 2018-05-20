@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetHtmlFileServlet", urlPatterns = {//"/WebContent/getHtml",
-		"/WebContent/HTML/*"
+		"/WebContent/html/*"
 		})
 		 
 //TODO richtige Fehlermeldung ausgeben. Aktuell immer 400 - BAD REQUEST
