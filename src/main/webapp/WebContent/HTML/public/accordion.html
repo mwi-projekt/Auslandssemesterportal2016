@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DHBW Auslandsportal</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/InfoBox.css">
+    <link rel="stylesheet" type="text/css" href="external/jquery.sweet-modal.min.css">
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="bower_components/bpmn-js/dist/bpmn-navigated-viewer.js"></script>
+    <script src="external/jquery.sweet-modal.min.js"></script>
+    <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+ <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        Allgemeine Daten</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse in">
+      <div class="panel-body">
+ 			<table>
+		          <tr>
+		              <td>Nachname</td>
+		              <td style="padding-top: 7px; padding-left: 20px"><label id="nachnamePruef"></label></td>
+		          </tr>
+		          <tr>
+		              <td>Vorname</td>
+		              <td style="padding-top: 7px; padding-left: 20px"><label id="vornamePruef"></label></td>
+		          </tr>
+		          <tr>
+		              <td>E-Mail</td>
+		              <td style="padding-top: 7px; padding-left: 20px"><label id="emailPruef"></label></td>
+		          </tr>
+		          <tr>
+		              <td>Studiengang</td>
+		              <td style="padding-top: 7px; padding-left: 20px"><label id="studiengangPruef"></label>
+		              </td>
+		          </tr>
+		          <tr>
+		              <td>Kurs</td>
+		              <td style="padding-top: 7px; padding-left: 20px"><label id="kursPruef"></label></td>
+		          </tr>
+		          <tr>
+		              <td>Matrikelnummer</td>
+		              <td style="padding-top: 7px; padding-left: 20px"><label id="matrikelPruef"></label></td>
+		          </tr>
+		          <tr>
+		              <td>Telefon</td>
+		              <td style="padding-top: 7px; padding-left: 20px"><label id="telPruef"></label></td>
+		          </tr>
+		          <tr>
+		              <td>Mobil</td>
+		              <td style="padding-top: 7px; padding-left: 20px"><label id="mobilPruef"></label></td>
+		          </tr>
+     		 </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+        Adresse Theorie- und Praxisphase</a>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">
+      <b>Adresse Praxisphase</b><br>
+           <table>
+               <tr>
+                   <td>Straße</td>
+                   <td style="padding-top: 7px; padding-left: 34px"><label
+                           id="bewStrassePruefPrax"></label></td>
+               </tr>
+               <tr>
+                   <td>Hausnummer</td>
+                   <td style="padding-top: 7px; padding-left: 34px"><label
+                           id="bewHausnummerPruefPrax"></label></td>
+               </tr>
+               <tr>
+                   <td>PLZ</td>
+                   <td style="padding-top: 7px; padding-left: 34px"><label id="bewPlzPruefPrax"></label>
+                   </td>
+               </tr>
+               <tr>
+                   <td>Stadt</td>
+                   <td style="padding-top: 7px; padding-left: 34px"><label id="bewStadtPruefPrax"></label>
+                   </td>
+               </tr>
+           </table>
+           
+           <br><br><br>
+
+     <b>Adresse Theoriephase</b><br>
+           <table>
+               <tr>
+                   <td>Straße</td>
+                   <td style="padding-top: 7px; padding-left: 34px"><label
+                           id="bewStrassePruefTheo"></label></td>
+               </tr>
+               <tr>
+                   <td>Hausnummer</td>
+                   <td style="padding-top: 7px; padding-left: 34px"><label
+                           id="bewHausnummerPruefTheo"></label></td>
+               </tr>
+               <tr>
+                   <td>PLZ</td>
+                   <td style="padding-top: 7px; padding-left: 34px"><label id="bewPlzPruefTheo"></label>
+                   </td>
+               </tr>
+               <tr>
+                   <td>Stadt</td>
+                   <td style="padding-top: 7px; padding-left: 34px"><label id="bewStadtPruefTheo"></label>
+                   </td>
+               </tr>
+           </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        Gastuniversität</a>
+      </h4>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.</div>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+        Dokumente</a>
+      </h4>
+    </div>
+    <div id="collapse4" class="panel-collapse collapse">
+      <div class="panel-body">Anbei befinden sich Deine hochgeladenen PDFs.</div>
+    </div>
+  </div>
+</div> 
+</body> 
+</html>

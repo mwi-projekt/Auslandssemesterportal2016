@@ -15,7 +15,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.servlets.GetHtmlFileServlet;
 
 @RunWith(PowerMockRunner.class)
@@ -25,7 +25,7 @@ public class GetHTMLFileServletTest  extends Mockito
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private GetHtmlFileServlet servlet;
-	private UserAuthentification userAuthentification;
+	private userAuthentification uA;
 	
 	@Before
 	public void setup()
@@ -33,7 +33,7 @@ public class GetHTMLFileServletTest  extends Mockito
 		request = mock(HttpServletRequest.class);
 		response = mock(HttpServletResponse.class);
 		servlet = new GetHtmlFileServlet();
-		userAuthentification = mock(UserAuthentification.class);
+		uA = mock(userAuthentification.class);
 		
 	}
 	
@@ -44,7 +44,7 @@ public class GetHTMLFileServletTest  extends Mockito
 //		when(request.getParameter("page")).thenReturn("xyz");
 //		when(request.getParameter("accessLevel")).thenReturn("0");
 //		when(UserAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(1);
-		doReturn(1).when(userAuthentification).isUserAuthentifiedByCookie(request);
+		doReturn(1).when(uA).isUserAuthentifiedByCookie(request);
 		
 		
 		//Do Something
@@ -77,6 +77,6 @@ public class GetHTMLFileServletTest  extends Mockito
 		request = null;
 		response = null;
 		servlet = null;
-		userAuthentification = null;
+		uA = null;
 	}
 }

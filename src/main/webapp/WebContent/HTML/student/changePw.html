@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DHBW Auslandsportal</title>
+
+    <link rel="stylesheet"
+          href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="CSS/dropzone.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/bewerbungsportal.css">
+    <link rel="stylesheet" href="CSS/bewerbungsformular.css">
+    <link rel="stylesheet" href="CSS/InfoBox.css">
+    <link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
+
+    <script
+            src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script src="external/dropzone.js"></script>
+    <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
+      <script src="JS/changePw.js"></script>
+      <!-- <script src="JS/bewerbungsportal.js"></script> -->
+</head>
+
+<body>
+<div class="popUpFeld"></div>
+<div class="header">
+
+    <!-- Navigationsleiste -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="images/DHBW.png" class="pull-left"
+                                                                     style="height: 1.5em;" alt="">&nbsp;DHBW
+                    Auslandsstudienportal</a>
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+<!-- Mittlerer Teil -->
+<div class="row aufgaben">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="nav2">
+            <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
+            <div class="navEl nonCms current" id="nav2"><a style="color:white" href="index.html">Index</a></div>
+            <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
+        </div>
+        <div id="formular" class="form-horizontal">
+        <label for="pw">Passwort</label>
+        <input type="password" class="form-control" id="pw">
+        <label for="pw_repeat">Wiederholen</label>
+        <input type="password" class="form-control" id="pw_repeat">
+        </div>
+        <div id="nextStep">
+        <button id="savePassword" class="btn btn-success navMargin">Speichern</button>
+        </div>
+        <!-- <div class="inhalt nonCms" id="in1">
+            <div class="col-md-12 inhaltBox">
+                <h2>Herzlich willkommen im Bewerbungsportal</h2>
+                <p>Hier kannst du dir noch einmal alle Auslandsuniversitäten
+                    ansehen, die für die jeweiligen Studiengänge zur Verfügung stehen.</p>
+                <p>Im Reiter "Bewerben" ist bereits eine Vorauswahl für dich
+                    getroffen. Hier kannst du dich nur noch auf Univerisäten bewerben,
+                    die für deinen Studiengang verfügbar sind.</p>
+                <p>
+                    <i>Das Auslandsportal-Team wünscht dir viel Erfolg bei deiner
+                        Bewerbung und eine tolle Zeit im Ausland!!!</i>
+                </p>
+            </div>
+        </div> -->
+               <div class="iFenster iF1 col-xs-6" id="bewFormular"
+                     style="width: 100%; height: 100%;">
+                    <div style="width: 100%; margin-top: 0px;" class="container">
+                        <form role="form" id="frmContact">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="pull-left">
+                                    </div>
+                                    <!-- 	<div class="pull-right">
+                                        <a class="backToBewView">Zurück zur Prozessübersicht</a>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <form class="row dat" id="bewFormular0">
+                    </form>
+                    
+                <div id="einschreibungsProzess"></div>
+            </div>
+            <iframe class="iFenster iF2" src="erfahrungsbericht1.html"
+                    style="width: 100%; height: 500px;"></iframe>
+
+        </div>
+    </div>
+    <!-- <div class="inhalt nonCms" id="in4">
+        <div class="col-md-8 inhaltBox" style="width: 99%">
+            <h2>Erfahrungsberichte</h2>
+            <select class="inBox zweiD" id="selBerichte">
+                <option>Gesamtbewertung</option>
+                <option>Einzelbewertungen</option>
+            </select>
+        </div>
+    </div> -->
+
+<!-- 	FuÃŸzeile -->
+	<div class="footer">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="pull-right">
+					<p>
+						<a href="index.html">Startseite</a> | <a href="impressum.html">Impressum</a>
+						| <a href="faq.html">FAQs</a>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- test -->
+
+<!-- test -->
+</body>
+</html>
