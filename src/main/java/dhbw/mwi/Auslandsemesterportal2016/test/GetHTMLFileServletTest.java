@@ -19,7 +19,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.servlets.GetHtmlFileServlet;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({UserAuthentification.class})
+@PrepareForTest({userAuthentification.class})
 public class GetHTMLFileServletTest  extends Mockito
 {
 	private HttpServletRequest request;
