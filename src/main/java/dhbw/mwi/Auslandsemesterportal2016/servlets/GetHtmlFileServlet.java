@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
-@WebServlet(name = "GetHtmlFileServlet", urlPatterns = {"/WebContent/getHtml"})
+@WebServlet(name = "GetHtmlFileServlet", urlPatterns = {"/WebContent/getHtml",
+		/*"/Web"
+		 * */
+		})
+		 
 
 public class GetHtmlFileServlet extends HttpServlet 
 {
@@ -24,14 +28,14 @@ public class GetHtmlFileServlet extends HttpServlet
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
 		String requestedPage = request.getParameter("page");
-		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
+		int userAccessLevel = UserAuthentification.isUserAuthentifiedByCookie(request);
 		
-		//TODO JUST FOR TESTING PURPOSE, REMOVE ON PRODUCTIVE USE
+		/*//TODO JUST FOR TESTING PURPOSE, REMOVE ON PRODUCTIVE USE
 		if(request.getParameter("accessLevel")!=null)
 		{
 			userAccessLevel = Integer.parseInt(request.getParameter("accessLevel"));
 		}
-		
+		*/
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
 		//gibt das höchste verfügbare, erlaubte Dokument zurück
 		while(userAccessLevel >=0)

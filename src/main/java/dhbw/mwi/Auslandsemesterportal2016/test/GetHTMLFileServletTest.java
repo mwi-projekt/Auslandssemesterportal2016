@@ -35,6 +35,7 @@ public class GetHTMLFileServletTest  extends Mockito
 		servlet = new GetHtmlFileServlet();
 		uA = mock(userAuthentification.class);
 		
+		
 	}
 	
 	@Test
