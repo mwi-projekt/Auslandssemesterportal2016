@@ -33,7 +33,8 @@ public class GetHtmlFileServlet extends HttpServlet
 	{
 		
 		String requestedPage = request.getServletPath();
-		requestedPage.replaceAll("WebContent/", "");
+		
+		requestedPage = requestedPage.substring(11, requestedPage.length()-1);
 		
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
