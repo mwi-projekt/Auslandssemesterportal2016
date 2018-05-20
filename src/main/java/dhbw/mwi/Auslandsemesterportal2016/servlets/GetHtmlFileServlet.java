@@ -32,14 +32,15 @@ public class GetHtmlFileServlet extends HttpServlet
 		
 		String requestedPage = request.getPathInfo();
 		
-		response.sendError(HttpServletResponse.SC_FOUND, "." +requestedPage+".");
+		response.sendError(HttpServletResponse.SC_BAD_REQUEST, "." +requestedPage+".");
+		return;
 		/**
 		if (requestedPage == null) {
 			
 			requestedPage = "/index";
 		}
 		*/
-			
+		/*	
 		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
 		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
@@ -118,6 +119,6 @@ public class GetHtmlFileServlet extends HttpServlet
 					+ e.getMessage());
 		}
 		
-		
+		*/
 	}
 }
