@@ -39,24 +39,32 @@ public class GetHtmlFileServlet extends HttpServlet
 		//Durchsuche alle Ordner
 		for(int i = 0; i < HTML_FOLDER.length; i++)
 		{
-			RequestDispatcher tempView = request.getServletContext().getRequestDispatcher(HTML_FOLDER[i]+requestedPage+".html");
-			//falls Dokument in Ordner
-			if(tempView!=null)
+			try
 			{
-				//Zugriff erlaubt
-				if(userAccessLevel>=i)
+				RequestDispatcher tempView = request.getServletContext().getRequestDispatcher(HTML_FOLDER[i]+requestedPage+".html");
+				
+				//falls Dokument in Ordner
+				if(tempView!=null)
 				{
-					//höchstes Gefundenes Dokument?
-					if(highestDocumentLevelFound < i)
+					//Zugriff erlaubt
+					if(userAccessLevel>=i)
 					{
-						highestDocumentLevelFound = i;
+						//höchstes Gefundenes Dokument?
+						if(highestDocumentLevelFound < i)
+						{
+							highestDocumentLevelFound = i;
+						}
 					}
+					//Zugriff nicht erlaubt
+					else
+					{
+						forbiddenDocumentFound = true;
+					}		
 				}
-				//Zugriff nicht erlaubt
-				else
-				{
-					forbiddenDocumentFound = true;
-				}		
+			}
+			catch(Exception e)
+			{
+				//do nothing
 			}
 		}
 		//wurde ein erlaubtes Dokument gefunden?
