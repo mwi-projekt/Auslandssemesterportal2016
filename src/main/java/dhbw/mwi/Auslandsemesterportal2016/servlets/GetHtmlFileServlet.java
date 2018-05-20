@@ -56,6 +56,7 @@ public class GetHtmlFileServlet extends HttpServlet
 			try
 			{
 				tempView = request.getServletContext().getRequestDispatcher(HTML_FOLDER[i]+requestedPage+".html");
+				tempView.include(request, response);
 			}
 			catch(Exception e)
 			{
