@@ -62,19 +62,22 @@ public class GetHtmlFileServlet extends HttpServlet
 				continue;
 			}	
 			//falls Dokument in Ordner
-			if(userAccessLevel==i || i == 0)
+			if(tempView != null)
 			{
-				//höchstes Gefundenes Dokument?
-				if(highestDocumentLevelFound < i)
+				if(userAccessLevel==i || i == 0)
 				{
-					highestDocumentLevelFound = i;
+					//höchstes Gefundenes Dokument?
+					if(highestDocumentLevelFound < i)
+					{
+						highestDocumentLevelFound = i;
+					}
+				}
+				//Zugriff nicht erlaubt
+				else
+				{
+					forbiddenDocumentFound = true;
 				}
 			}
-			//Zugriff nicht erlaubt
-			else
-			{
-				forbiddenDocumentFound = true;
-			}							
 		}
 		//wurde ein erlaubtes Dokument gefunden?
 		try
