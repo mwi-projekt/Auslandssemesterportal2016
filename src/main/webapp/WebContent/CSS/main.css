@@ -753,7 +753,8 @@ i {
 	margin: 10px 10px 10px 10px;
 }
 .dhbwLogo {
-	max-width: 30%;
+	max-width: 10%;
+	width: 10%;
     height: auto;
 }
 .headerWebsite {
