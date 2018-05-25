@@ -13,7 +13,7 @@
 		<script
 			src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="JS/main.js"></script>
-		<script src="JS/faq.js"></script>
+<!--    <script src="JS/faq.js"></script> -->
 		<script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
 		<title>FAQ</title>
 	</head>
