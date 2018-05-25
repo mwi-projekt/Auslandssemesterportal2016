@@ -3,20 +3,30 @@
 <html>
 	<head>
 		<title>DHBW Auslandsportal</title>
+        <link rel="stylesheet"
+href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="CSS/main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no" charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
 
-		<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
-		<link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
-		<link rel="stylesheet" href="CSS/main.css">
-		<link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
-
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-		<script src="JS/main.js"></script>
-<!--  	<script src="JS/faq.js"></script> -->
-		<script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
+        <script
+src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+        <script src="JS/main.js"></script>
+        <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+        <script type="text/javascript">
+            window.cookieconsent_options = {"message":"Diese Webiste verwendet Cookies","dismiss":"Verstanden!","learnMore":"More info","link":null,"theme":"light-top"};
+        </script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+        <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
 	</head>
 
 	<body>
-		<!--  PopupFeld f�r Registrierung ALT
+		<!--  PopupFeld fï¿½r Registrierung ALT
 		<div class="popUpBack"></div>
 		<div class="popUpFeld">
 			<a href="#" id="close"><img src="images/Button Delete.png" id="smallImg"></a>
@@ -39,7 +49,7 @@
 		-->
 
 
-<!--  PopupFeld f�r Registrierung --------------------------------------------------------------->
+<!--  PopupFeld für Registrierung --------------------------------------------------------------->
     <div class="erfolgreich"></div>
     <div class="popUpBack"></div>
 
@@ -60,7 +70,7 @@
 							<option>Studierender</option>
 							<option>Auslandsmitarbeiter</option>
                         </select>
-                        <label class="btn auswahl">Best�tigen</label>
+                        <label class="btn auswahl">Bestätigen</label>
                         <div class="student auslandsmitarbeiter">
                             <p class="red" style="margin-top: 10px">*Pflichtfelder.</p>
                             <div class="form-group">
@@ -95,12 +105,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <select class="inBox form-control" id="inStandort" required>
-                                            <option value="">DHBW Standort w�hlen*</option>
+                                            <option value="">DHBW Standort wählen*</option>
                                             <option value="DHBW_Karlsruhe">DHBW Karlsruhe</option>
                                             <option value="DHBW_Stuttgart">DHBW Stuttgart</option>
                                             <option value="DHBW_Mannheim">DHBW Mannheim</option>
                                             <option value="DHBW_Mosbach">DHBW Mosbach</option>
-                                            <option value="DHBW_L�rrach">DHBW L�rrach</option>
+                                            <option value="DHBW_Lörrach">DHBW Lörrach</option>
                                             <option value="DHBW_Ravensburg">DHBW Ravensburg</option>
                                             <option value="DHBW_Heidenheim">DHBW Heidenheim</option>
                                             <option value="DHBW_Villingen-Schwenningen">DHBW Villingen-Schwenningen</option>
@@ -109,7 +119,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="password" placeholder="Passwort 1. Mal*" class="inBox form-control" id="inPwSt1" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Das Passwort muss mindestens 8 Zeichen lang sein und eine Nummer sowie einen Gro�- und Kleinbuchstaben beinhalten">
+                                        <input type="password" placeholder="Passwort 1. Mal*" class="inBox form-control" id="inPwSt1" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Das Passwort muss mindestens 8 Zeichen lang sein und eine Nummer sowie einen Groß- und Kleinbuchstaben beinhalten">
                                     </div>
                                     <div class="col-md-6">
                                         <input type="password" placeholder="Passwort 2. Mal*" class="inBox form-control" id="inPwSt2" required>
@@ -123,7 +133,7 @@
                         <div id="askAdmin">
                             <div class="form-group">
                                 <p style="color: red">Bitte wenden sie sich an Herrn Prof.
-                                    Dr. Thomas Freytag, wenn sie Zugang zu diesem Portal ben�tigen.</p>
+                                    Dr. Thomas Freytag, wenn sie Zugang zu diesem Portal benötigen.</p>
                             </div>
                         </div>
 
@@ -154,11 +164,11 @@
                         type="text" id="inEditKurs" placeholder="Kurs"> <input
                         class="inBox" type="text" id="inEditMatnr"
                         placeholder="Matrikelnummer"><br>
-                    <div class="btn" id="btnUserEditSave">�nderungen speichern</div>
+                    <div class="btn" id="btnUserEditSave">Änderungen speichern</div>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btnReg" value="Registrieren" style="width: auto;">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Schlie�en</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
                 </div>
                 </form>
             </div>
@@ -233,7 +243,6 @@
 
     </div>
     </div>
-    
 		<!-- Mittlerer Teil -->
 
   		<div class="inhalt">
@@ -247,36 +256,36 @@
   			-->
   			<div class="container">
 	  			<div class="inhaltBox show">
-	  				<h3>Wer darf sich für ein Auslandsstudium bewerben?<b class="caret"></b></h3>
-	  				<p class="weg">Grundsätzlich ist für alle Studierenden der DHBW Karlsruhe ein Auslandssemester an einer der Partneruniversitäten der DHBW möglich. Notwendig dazu sind die Zustimmung der Ausbildungsfirma und die Zustimmung des Studiengangsleiters.</p>
+	  				<h3>Wer darf sich fÃ¼r ein Auslandsstudium bewerben?<b class="caret"></b></h3>
+	  				<p class="weg">GrundsÃ¤tzlich ist fÃ¼r alle Studierenden der DHBW Karlsruhe ein Auslandssemester an einer der PartneruniversitÃ¤ten der DHBW mÃ¶glich. Notwendig dazu sind die Zustimmung der Ausbildungsfirma und die Zustimmung des Studiengangsleiters.</p>
 	  			</div>
 	  			<div class="inhaltBox show">
-	  				<h3>In welchem Studiensemester sollte ich mich für ein Auslandsaufenthalt bewerben?<b class="caret"></b></h3>
+	  				<h3>In welchem Studiensemester sollte ich mich fÃ¼r ein Auslandsaufenthalt bewerben?<b class="caret"></b></h3>
 	  				<p class="weg">Das Studium an der Dualen Hochschule ist kurz. Die Planung eines Auslandsaufenthalts nimmt jedoch
-						viel Zeit in Anspruch. Es ist also wichtig, den Auslandsaufenthalt möglichst früh zu planen und schon im 1. Semester sollte man wissen, wohin die Reise gehen soll und das Unternehmen sollte um Zustimmung gebeten werden.
+						viel Zeit in Anspruch. Es ist also wichtig, den Auslandsaufenthalt mÃ¶glichst frÃ¼h zu planen und schon im 1. Semester sollte man wissen, wohin die Reise gehen soll und das Unternehmen sollte um Zustimmung gebeten werden.
 	  				</p>
 	  			</div>
 	  			<div class="inhaltBox show">
 	  				<h3>In welchem Studiensemester sollte das Auslandssemester vollzogen werden?<b class="caret"></b></h3>
-	  				<p class="weg">Das Auslandssemester sollte idealerweise im 4. Semester absolviert werden. Der Zeitraum, in dem die Vorlesungen, Seminare und Prüfungen an der ausländischen Hochschule stattfinden, stimmt in der Regel nicht vollständig mit der Theoriephase an der DHBW Überein. In der Regel dauert das Theoriesemester an der ausländischen Hochschule � wie auch an den deutschen Universitäten � länger. Das heißt, das Auslandssemester reicht in der Regel in die Praxisphase hinein und
-					die DHBW-Studierenden müssen sich mit ihren Ausbildungsunternehmen auch in Bezug auf die Semesterzeiten abstimmen.
+	  				<p class="weg">Das Auslandssemester sollte idealerweise im 4. Semester absolviert werden. Der Zeitraum, in dem die Vorlesungen, Seminare und PrÃ¼fungen an der auslÃ¤ndischen Hochschule stattfinden, stimmt in der Regel nicht vollstÃ¤ndig mit der Theoriephase an der DHBW Ãœberein. In der Regel dauert das Theoriesemester an der auslÃ¤ndischen Hochschule ï¿½ wie auch an den deutschen UniversitÃ¤ten ï¿½ lÃ¤nger. Das heiÃŸt, das Auslandssemester reicht in der Regel in die Praxisphase hinein und
+					die DHBW-Studierenden mÃ¼ssen sich mit ihren Ausbildungsunternehmen auch in Bezug auf die Semesterzeiten abstimmen.
 	  				</p>
 	  			</div>
 	  			<div class="inhaltBox show">
-	  				<h3>Wie viel würde ein Auslandssemester kosten?<b class="caret"></b></h3>
-	  				<p class="weg">Die Kosten für ein Auslandssemester variieren stark vom jeweiligen Standort der Partneruniversität. Genauere Informationen zu den Kosten entnehmen Sie bitte dem Dokument <a href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf">�Inforboschüre 2017/18�</a>.</p>
+	  				<h3>Wie viel wÃ¼rde ein Auslandssemester kosten?<b class="caret"></b></h3>
+	  				<p class="weg">Die Kosten fÃ¼r ein Auslandssemester variieren stark vom jeweiligen Standort der PartneruniversitÃ¤t. Genauere Informationen zu den Kosten entnehmen Sie bitte dem Dokument <a href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf">ï¿½InforboschÃ¼re 2017/18ï¿½</a>.</p>
 	  			</div>
 	  			<div class="inhaltBox show">
-	  				<h3>Besteht die Möglichkeit, finanzielle Hilfe zu beantragen?<b class="caret"></b></h3>
-	  				<p class="weg">Zur finanziellen Unterst�tzung des Auslandsaufenthaltes kann die Beantragung eines  Sokrates/Erasmus-Stipendiums im Auslandsamt (Höhe ca. 200 Euro monatlich) oder eines Stipendiums der Landesstiftung Baden-Württemberg (Höhe ca. 100-300 Euro monatlich) beantragt werden. Weitere Details zu Finanzierungsmöglichkeiten können im Dokument <a href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf">�Infobroschüre 2017/18�</a> eingesehen werden. Des Weiteren bieten viele Partnerunternehmen ihren Studierenden weitere Finanzierungsmöglichkeiten an.</p>
+	  				<h3>Besteht die MÃ¶glichkeit, finanzielle Hilfe zu beantragen?<b class="caret"></b></h3>
+	  				<p class="weg">Zur finanziellen Unterstï¿½tzung des Auslandsaufenthaltes kann die Beantragung eines  Sokrates/Erasmus-Stipendiums im Auslandsamt (HÃ¶he ca. 200 Euro monatlich) oder eines Stipendiums der Landesstiftung Baden-WÃ¼rttemberg (HÃ¶he ca. 100-300 Euro monatlich) beantragt werden. Weitere Details zu FinanzierungsmÃ¶glichkeiten kÃ¶nnen im Dokument <a href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf">ï¿½InfobroschÃ¼re 2017/18ï¿½</a> eingesehen werden. Des Weiteren bieten viele Partnerunternehmen ihren Studierenden weitere FinanzierungsmÃ¶glichkeiten an.</p>
 	  			</div>
 	  			<div class="inhaltBox show">
-	  				<h3>Welche Partneruniversitäten stehen zur Verfügung?<b class="caret"></b></h3>
-	  				<p class="weg">Wir bieten zahlreiche Universitäten in den unterschiedlichsten Ecken der Welt. Das Angebot erstreckt sich von Australien bis USA. Alle Angebote sind in dem Dokument <a href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf">�Inforboschüre 2017/18�</a> aufgelistet.</p>
+	  				<h3>Welche PartneruniversitÃ¤ten stehen zur VerfÃ¼gung?<b class="caret"></b></h3>
+	  				<p class="weg">Wir bieten zahlreiche UniversitÃ¤ten in den unterschiedlichsten Ecken der Welt. Das Angebot erstreckt sich von Australien bis USA. Alle Angebote sind in dem Dokument <a href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf">ï¿½InforboschÃ¼re 2017/18ï¿½</a> aufgelistet.</p>
 	  			</div>
   			</div>
   		</div>
-		<!-- Fußzeile -->
+		<!-- FuÃŸzeile -->
 		<div class="footer">
 			<div class="row">
 				<div class="col-md-2"></div>
