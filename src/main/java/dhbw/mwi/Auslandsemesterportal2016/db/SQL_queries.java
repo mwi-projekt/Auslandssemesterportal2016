@@ -129,7 +129,26 @@ public static String getSalt(String mail){//Ermittelt das zur Mailadresse hinter
 	}
 	return salt;
 }
-
+public static String createUserSession(int userID){
+    String accessToken = Util.generateSalt();
+    
+    if(userSessionExists(userID)){
+            String query_ = "UPDATE loginSessions SET sessionID = ? WHERE userID = ?";
+            String[] params_ = new String[]{accessToken,""+userID};
+            String[] types_ = new String[]{"String","int"};
+            executeUpdate(query_,params_,types_);
+    }
+    else{
+            String query_ = "INSERT INTO loginSessions (sessionID, userID) VALUES " +
+                            "(?,?)";
+            String[] params_ = new String[]{accessToken,""+userID};
+            String[] types_ = new String[]{"String","int"};
+            executeUpdate(query_,params_,types_);
+    }
+    return accessToken;
+                                
+    
+}
 public static String[] userLogin(String mail, String salt, String pw){
 	//Prüft Logindaten. ResultCodes: 1 = Erfolgreich, 2 = Falsche Daten, 3 = nicht aktiviert, 4 = Datenbankfehler
 	//Stringkette, die zurückgegeben wird: resultCode;Bezeichnung Studiengang;Matrikelnummer;Rolle (Nummer die in der DB steht)
@@ -150,23 +169,8 @@ public static String[] userLogin(String mail, String salt, String pw){
 			matrikelnummer = ergebnis.getString("matrikelnummer");
 			rolle = ergebnis.getString("rolle");
 			if (ergebnis.getString("verifiziert").equals("1")){
-				resultCode = 1;
-
-				accessToken = Util.generateSalt();
-				userID = ergebnis.getInt("userID");
-				if(userSessionExists(userID)){
-					String query_ = "UPDATE loginSessions SET sessionID = ? WHERE userID = ?";
-					String[] params_ = new String[]{accessToken,""+userID};
-					String[] types_ = new String[]{"String","int"};
-					executeUpdate(query_,params_,types_);
-				}
-				else{
-					String query_ = "INSERT INTO loginSessions (sessionID, userID) VALUES " +
-							"(?,?)";
-					String[] params_ = new String[]{accessToken,""+userID};
-					String[] types_ = new String[]{"String","int"};
-					executeUpdate(query_,params_,types_);
-				}
+				accessToken = createUserSession(ergebnis.getInt("userID"));
+                                resultCode = 1;
 			} else {
 				resultCode = 3;
 			}
