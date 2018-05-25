@@ -337,21 +337,8 @@ var main = function() {
 				});
 			});
 	$('#logout').on('click', function() {
-		sessionStorage.clear();
-		// Herausfinden auf welcher Seite ich mich gerade befinde
-		var title = $(document).find("title").text();
-		if (title === "DHBW Auslandsinfo") {
-
-		} else if (title === "DHBW Auslandsportal") {
-			location.replace("index.html");
-		}
-		sessionStorage.clear();
-		location.replace("index.html");
-		$('.logFenster').show();
 		window.location.href = "logout";
-		/*
-		 * for (var i = 1; i <= 10; i++) { $('#'+ i + '5').addClass("hidden"); }
-		 */
+
 	});
 	$('.arrow').on('click', function() {
 		var id = $(this).attr('id');

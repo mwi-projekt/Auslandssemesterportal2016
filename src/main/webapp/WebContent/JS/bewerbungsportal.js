@@ -526,25 +526,7 @@ var main = function() {
 
     // Wenn der User auf logout geklickt wird.
     $('#logout').on('click', function() {
-	sessionStorage.clear();
-  location.replace("logout");
-	// Herausfinden auf welcher Seite ich mich gerade
-	// befinde
-	var title = $(document).find("title").text();
-	if (title === "DHBW Auslandsinfo") {
-
-	} else /*
-		 * if (title === "DHBW Auslandsportal" || title === "DHBW
-		 * Auslandsportalprozess")
-		 */{
-	    location.replace("index.html");
-	}
-	$('#inName').val('');
-	$('.logoutFenster').hide();
-	$('.loginFenster').show();
-	/*
-	 * for (var i = 1; i <= 10; i++) { $('#'+ i + '5').addClass("hidden"); }
-	 */
+		window.location.href = "logout"; 
     });
     // Wenn während des Bewerbungsprozess auf "Zurück" zur Übersicht geklickt
     // wird

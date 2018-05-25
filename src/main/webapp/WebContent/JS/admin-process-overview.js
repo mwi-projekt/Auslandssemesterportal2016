@@ -14,8 +14,7 @@ $(document).ready(function () {
     // init & logout
     $('.nutzerName').text(sessionStorage['User']);
     $('#logout').on('click', function() {
-        sessionStorage.clear();
-        location.replace("logout");
+		window.location.href = "logout";
     });
 
     $.ajax

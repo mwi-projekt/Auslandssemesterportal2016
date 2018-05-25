@@ -26,8 +26,7 @@ $(document).ready(function () {
     // init & logout
     $('.nutzerName').text(sessionStorage['User']);
     $('#logout').on('click', function() {
-        sessionStorage.clear();
-        location.replace("logout");
+		window.location.href = "logout";
     });
 
 
@@ -72,11 +71,11 @@ $(document).ready(function () {
         }
     });
 
-    
+
     $('#uebersicht').click(function() {
     	location.href="admin-process.html?dia="+dia;
     })
-    
+
     $('#save').click(function () {
         $.post('processmodel/save', {
             model: dia,
