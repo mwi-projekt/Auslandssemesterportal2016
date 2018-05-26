@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang>
+<html>
 	<head>
 		<title>DHBW Auslandsportal</title>
         <link rel="stylesheet"
@@ -23,32 +23,8 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
         </script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
         <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
-        <meta charset = "UTF-8"/>
+        <meta charset "UTF-8"/>
 	</head>
-
-	<body>
-		<!--  PopupFeld f"r Registrierung ALT
-		<div class="popUpBack"></div>
-		<div class="popUpFeld">
-			<a href="#" id="close"><img src="images/Button Delete.png" id="smallImg"></a>
-			<h3>Registrieren</h3>
-			<p>*Pflichtfelder.</p>
-			<input type="text" placeholder="Vorname" class="inBox" id="inVorname">
-			<input type="text" placeholder="Nachname" class="inBox" id="inNachname">
-			<input type="text" placeholder="Matrikelnummer" class="inBox" id="inMatrikel">
-			<select class="inBox" id="inStudiengang">
-				<option>Studiengang</option>
-				<option>Wirtschaftsinformatik</option>
-				<option>Wirtschaftsingenieurwesen</option>
-			</select>
-			<input type="text" placeholder="E-Mail Adresse" class="inBox" id="inMail">
-			<input type="password" placeholder="Passwort 1. Mal" class="inBox" id="inPw1">
-			<input type="password" placeholder="Passwort 2. Mal" class="inBox" id="inPw2">
-			<label class="btn" id="btnReg">Registrieren</label>
-		</div>
-
-		-->
-
 
 <!--  PopupFeld für Registrierung --------------------------------------------------------------->
     <div class="erfolgreich"></div>
@@ -149,35 +125,101 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
                         </div>
                         <p class="falsch"></p>
                 </div>
-		<!-- Navigationsleiste -->
-		<!-- Navigationsleiste -->
-		<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-		<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header page-scroll">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="index.html"><img src="images/DHBW.png" class="pull-left" style="height: 1.5em;" alt="">&nbsp;DHBW Auslandsstudienportal</a>
-				</div>
+                <div class="nutzerBearbeiten">
+                    <b id="closeBearb"><img src="images/Button Delete.png"
+                        id="smallImg"></b>
+                    <h2>Benutzerdaten bearbeiten</h2>
+                    <input class="inBox" type="text" id="inEditVorname"
+                        placeholder="Vorname"> <input class="inBox" type="text"
+                        id="inEditNachname" placeholder="Nachname"> <input
+                        class="inBox" type="text" id="inEditEmail" placeholder="Email">
+                    <input class="inBox" type="text" id="inEditTel"
+                        placeholder="Telefonnummer"> <input class="inBox"
+                        type="text" id="inEditMobil" placeholder="Mobilfunknummer">
+                    <input class="inBox" type="text" id="inEditStudgang"
+                        placeholder="Studiengang"> <input class="inBox"
+                        type="text" id="inEditKurs" placeholder="Kurs"> <input
+                        class="inBox" type="text" id="inEditMatnr"
+                        placeholder="Matrikelnummer"><br>
+                    <div class="btn" id="btnUserEditSave">Änderungen speichern</div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btnReg" value="Registrieren" style="width: auto;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                </div>
+                </form>
+            </div>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-1" aria-expanded="true">
-						<ul style="padding-top: 0px; padding-bottom: 0px;" class="nav navbar-nav navbar-right">
-						
-<li><a href="index.html#portalInfo" style="padding-left: 30px;">Infos</a></li>
-<li><a href="faq" style="padding-left: 30px;">FAQ</a></li>
-<li class="regButton"><a href="#" data-toggle="modal" data-target="#register" style="padding-left: 30px;">Registrieren</a></li>
-<li class="divider-vertical"></li>
-<li class="loginButton"><a href="#" data-toggle="modal" data-target="#login" style="padding-left: 30px;">Login</a></li>
-<li class="logoutFenster">Eingeloggt als <b class="nutzerName"></b>
-					
-						<button type="button" class="btn btn-default navMargin logoutButton"
-					 id="logout" data-target="#logout">Logout</button></li>
-</ul></div></div></nav>
+
+
+        </div>
+
+    </div>
+    
+    <!-- Modal -->
+    <div id="login" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <form id ="loginForm" action="">
+                        <input type="email" placeholder="E-Mail Adresse" id="inEmail" class=" inBox" required autofocus style="width:80%; margin-left:5px">
+                        <br>
+                        <input type="password" placeholder="Passwort" id="inPasswort" class=" inBox" required style="width:80%; margin-left:5px">
+                        <p id="falschLogin" style="color: red; margin-bottom: 0px; display: none">Falsche Eingabe. Bitte versuchen sie es erneut.</p>
+                        <br>
+                        <a href="forgot_pw.html">Passwort vergessen?</a>
+                        <br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input form = "loginForm" type="submit" class="btn" id="btnLogin" value="Login" style="width: auto;">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="header">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <a href="index.html"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
+            </div>
+
+            <div class="col-md-3">
+            <div class="logFenster">
+                <button type="button" class="btn btn-default navMargin loginMain"
+                    data-toggle="modal" id="loginMain" data-target="#login">Login</button>
+
+                <button type="button" class="btn btn-default navMargin"
+                    data-toggle="modal" id="register" data-target="#register">Registrieren</button>
+            </div>
+            <div class="logoutFenster">
+
+
+                        Eingeloggt als <b class="nutzerName"></b>
+
+                        <button type="button" class="btn btn-default navMargin"
+                     id="logout" data-target="#logout">Logout</button>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
 
 		<!-- Mittlerer Teil -->
   		<div class="inhalt">
@@ -192,54 +234,54 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
   			<div class="container">
 	  			<div class="inhaltBox">
 	  				<h3>Impressum</h3>
-	  				<p><br>Duale Hochschule Baden-W�rttemberg Karlsruhe<br>
+	  				<p><br>Duale Hochschule Baden-Württemberg Karlsruhe<br>
 					Baden-Wuerttemberg Cooperative State University Karlsruhe<br>
-					Erzbergerstra�e 121 � 76133 Karlsruhe<br>
-					Postfach 10 01 36 � 76231 Karlsruhe<br>
+					Erzbergerstraße 121 · 76133 Karlsruhe<br>
+					Postfach 10 01 36 · 76231 Karlsruhe<br>
 					<br>
 					Telefon +49 (0)721 97 35 - 5<br>
 					Fax +49 (0)721 97 35 - 600<br>
 					<br>
-					Umsatzsteuer-Identifikationsnummer gem�� � 5 Telemediengesetz: DE287664832<br>
+					Umsatzsteuer-Identifikationsnummer gemäß § 5 Telemediengesetz: DE287664832<br>
 					<br>
-					Anschriftsdaten f�r o.g. Umsatzsteuer-Identifikationsnummer:<br>
+					Anschriftsdaten für o.g. Umsatzsteuer-Identifikationsnummer:<br>
 					<br>
 					Duale Hochschule<br>
-					Baden-W�rttemberg<br>
-					Pr�sidium<br>
+					Baden-Württemberg<br>
+					Präsidium<br>
 					Friedrichstr. 14<br>
 					70174 Stuttgart<br>
 					<br>
 					<a href="info@dhbw-karlsruhe.de">info@dhbw-karlsruhe.de</a><br>
 					<a href="http://www.dhbw-karlsruhe.de">http://www.dhbw-karlsruhe.de</a><br>
 					<br>
-					Redaktion und Verantwortung f�r die Homepage:<br>
-					Duale Hochschule Baden-W�rttemberg Karlsruhe<br>
+					Redaktion und Verantwortung für die Homepage:<br>
+					Duale Hochschule Baden-Württemberg Karlsruhe<br>
 					<br>
-					Haftungsausschluss<br>
+					<b>Haftungsausschluss</b><br>
 					<br>
-					1. Inhalt des Onlineangebotes<br>
-					Die Duale Hochschule Baden-W�rttemberg Karlsruhe �bernimmt keinerlei Gew�hr f�r die Aktualit�t, Korrektheit, Vollst�ndigkeit oder Qualit�t der bereitgestellten Informationen. Haftungsanspr�che gegen den Autor, welche sich auf Sch�den materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollst�ndiger Informationen verursacht wurden, sind grunds�tzlich ausgeschlossen, sofern seitens der Dualen Hochschule Baden-W�rttemberg Karlsruhe kein nachweislich vors�tzliches oder grob fahrl�ssiges Verschulden vorliegt.
-					Alle Angebote sind freibleibend und unverbindlich. Die Duale Hochschule Baden-W�rttemberg Karlsruhe beh�lt es sich ausdr�cklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ank�ndigung zu ver�ndern, zu erg�nzen, zu l�schen oder die Ver�ffentlichung zeitweise oder endg�ltig einzustellen.<br>
+					<b>1. Inhalt des Onlineangebotes</b><br>
+					Die Duale Hochschule Baden-Württemberg Karlsruhe übernimmt keinerlei Gewähr für die Aktualität, Korrektheit, Vollständigkeit oder Qualität der bereitgestellten Informationen. Haftungsansprüche gegen den Autor, welche sich auf Schäden materieller oder ideeller Art beziehen, die durch die Nutzung oder Nichtnutzung der dargebotenen Informationen bzw. durch die Nutzung fehlerhafter und unvollständiger Informationen verursacht wurden, sind grundsätzlich ausgeschlossen, sofern seitens der Dualen Hochschule Baden-Württemberg Karlsruhe kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden vorliegt.
+					Alle Angebote sind freibleibend und unverbindlich. Die Duale Hochschule Baden-Württemberg Karlsruhe behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.<br>
 					<br>
-					2. Verweise und Links<br>
-					Bei direkten oder indirekten Verweisen auf fremde Internetseiten ("Links"), die au�erhalb des Verantwortungsbereiches der Dualen Hochschule Baden-W�rttemberg Karlsruhe liegen, w�rde eine Haftungsverpflichtung ausschlie�lich in dem Fall in Kraft treten, in dem die Duale Hochschule Baden-W�rttemberg Karlsruhe von den Inhalten Kenntnis hat und es ihr technisch m�glich und zumutbar w�re, die Nutzung im Falle rechtswidriger Inhalte zu verhindern.
-					Die Duale Hochschule Baden-W�rttemberg Karlsruhe erkl�rt hiermit ausdr�cklich, dass zum Zeitpunkt der Linksetzung keine illegalen Inhalte auf den zu verlinkenden Seiten erkennbar waren. Auf die aktuelle und zuk�nftige Gestaltung, die Inhalte oder die Urheberschaft der gelinkten/verkn�pften Seiten hat die Duale Hochschule Baden-W�rttemberg Karlsruhe keinerlei Einfluss. Deshalb distanziert sie sich hiermit ausdr�cklich von allen Inhalten aller gelinkten/verkn�pften Seiten, die nach der Linksetzung ver�ndert wurden. Diese Feststellung gilt f�r alle innerhalb des eigenen Internetangebotes gesetzten Links und Verweise. F�r illegale, fehlerhafte oder unvollst�ndige Inhalte und insbesondere f�r Sch�den, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der �ber Links auf die jeweilige Ver�ffentlichung lediglich verweist.<br>
+					<b>2. Verweise und Links</b><br>
+					Bei direkten oder indirekten Verweisen auf fremde Internetseiten ("Links"), die außerhalb des Verantwortungsbereiches der Dualen Hochschule Baden-Württemberg Karlsruhe liegen, würde eine Haftungsverpflichtung ausschließlich in dem Fall in Kraft treten, in dem die Duale Hochschule Baden-Württemberg Karlsruhe von den Inhalten Kenntnis hat und es ihr technisch möglich und zumutbar wäre, die Nutzung im Falle rechtswidriger Inhalte zu verhindern.
+					Die Duale Hochschule Baden-Württemberg Karlsruhe erklärt hiermit ausdrücklich, dass zum Zeitpunkt der Linksetzung keine illegalen Inhalte auf den zu verlinkenden Seiten erkennbar waren. Auf die aktuelle und zukünftige Gestaltung, die Inhalte oder die Urheberschaft der gelinkten/verknüpften Seiten hat die Duale Hochschule Baden-Württemberg Karlsruhe keinerlei Einfluss. Deshalb distanziert sie sich hiermit ausdrücklich von allen Inhalten aller gelinkten/verknüpften Seiten, die nach der Linksetzung verändert wurden. Diese Feststellung gilt für alle innerhalb des eigenen Internetangebotes gesetzten Links und Verweise. Für illegale, fehlerhafte oder unvollständige Inhalte und insbesondere für Schäden, die aus der Nutzung oder Nichtnutzung solcherart dargebotener Informationen entstehen, haftet allein der Anbieter der Seite, auf welche verwiesen wurde, nicht derjenige, der über Links auf die jeweilige Veröffentlichung lediglich verweist.<br>
 					<br>
-					3. Urheber- und Kennzeichenrecht<br>
-					Die Duale Hochschule Baden-W�rttemberg Karlsruhe ist bestrebt, in allen Publikationen die Urheberrechte der verwendeten Grafiken, Tondokumente, Videosequenzen und Texte zu beachten, von ihr selbst erstellte Grafiken, Tondokumente, Videosequenzen und Texte zu nutzen oder auf lizenzfreie Grafiken, Tondokumente, Videosequenzen und Texte zur�ckzugreifen.
-					Alle innerhalb des Internetangebotes genannten und ggf. durch Dritte gesch�tzten Marken- und Warenzeichen unterliegen uneingeschr�nkt den Bestimmungen des jeweils g�ltigen Kennzeichenrechts und den Besitzrechten der jeweiligen eingetragenen Eigent�mer. Allein aufgrund der blo�en Nennung ist nicht der Schluss zu ziehen, dass Markenzeichen nicht durch Rechte Dritter gesch�tzt sind.
-					Das Copyright f�r ver�ffentlichte, von der Duale Hochschule Baden-W�rttemberg Karlsruhe selbst erstellte Objekte bleibt allein bei der Dualen Hochschule Baden-W�rttemberg Karlsruhe. Eine Vervielf�ltigung oder Verwendung solcher Grafiken, Tondokumente, Videosequenzen und Texte in anderen elektronischen oder gedruckten Publikationen ist ohne ausdr�ckliche Zustimmung der Dualen Hochschule Baden-W�rttemberg Karlsruhe nicht gestattet.<br>
+					<b>3. Urheber- und Kennzeichenrecht</b><br>
+					Die Duale Hochschule Baden-Württemberg Karlsruhe ist bestrebt, in allen Publikationen die Urheberrechte der verwendeten Grafiken, Tondokumente, Videosequenzen und Texte zu beachten, von ihr selbst erstellte Grafiken, Tondokumente, Videosequenzen und Texte zu nutzen oder auf lizenzfreie Grafiken, Tondokumente, Videosequenzen und Texte zurückzugreifen.
+					Alle innerhalb des Internetangebotes genannten und ggf. durch Dritte geschützten Marken- und Warenzeichen unterliegen uneingeschränkt den Bestimmungen des jeweils gültigen Kennzeichenrechts und den Besitzrechten der jeweiligen eingetragenen Eigentümer. Allein aufgrund der bloßen Nennung ist nicht der Schluss zu ziehen, dass Markenzeichen nicht durch Rechte Dritter geschützt sind.
+					Das Copyright für veröffentlichte, von der Duale Hochschule Baden-Württemberg Karlsruhe selbst erstellte Objekte bleibt allein bei der Dualen Hochschule Baden-Württemberg Karlsruhe. Eine Vervielfältigung oder Verwendung solcher Grafiken, Tondokumente, Videosequenzen und Texte in anderen elektronischen oder gedruckten Publikationen ist ohne ausdrückliche Zustimmung der Dualen Hochschule Baden-Württemberg Karlsruhe nicht gestattet.<br>
 					<br>
-					4. Datenschutz<br>
-					Sofern innerhalb des Internetangebotes die M�glichkeit zur Eingabe pers�nlicher oder gesch�ftlicher Daten (Emailadressen, Namen, Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des Nutzers auf ausdr�cklich freiwilliger Basis.<br>
+					<b>4. Datenschutz</b><br>
+					Sofern innerhalb des Internetangebotes die Möglichkeit zur Eingabe persönlicher oder geschäftlicher Daten (Emailadressen, Namen, Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des Nutzers auf ausdrücklich freiwilliger Basis.<br>
 					<br>
-					5. Rechtswirksamkeit dieses Haftungsausschlusses<br>
-					Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollst�ndig entsprechen sollten, bleiben die �brigen Teile des Dokumentes in ihrem Inhalt und ihrer G�ltigkeit davon unber�hrt !<br>
+					<b>5. Rechtswirksamkeit dieses Haftungsausschlusses</b><br>
+					Dieser Haftungsausschluss ist als Teil des Internetangebotes zu betrachten, von dem aus auf diese Seite verwiesen wurde. Sofern Teile oder einzelne Formulierungen dieses Textes der geltenden Rechtslage nicht, nicht mehr oder nicht vollständig entsprechen sollten, bleiben die übrigen Teile des Dokumentes in ihrem Inhalt und ihrer Gültigkeit davon unberührt!<br>
 					</p>
 	  			</div>
   		</div>
-		<!-- Fußzeile -->
+		<!-- FuÃŸzeile -->
 		<div class="footer">
 			<div class="row">
 				<div class="col-md-2"></div>
