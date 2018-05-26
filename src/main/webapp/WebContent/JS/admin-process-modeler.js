@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // redirect if user does not have the necessary role
+    /*// redirect if user does not have the necessary role
     if (sessionStorage['rolle'] != '1') {
        swal({
            title: "Fehler!",
@@ -9,7 +9,7 @@ $(document).ready(function () {
        }, function () {
            location.href = 'index.html';
        });
-    }
+    }*/
 
     $.urlParam = function(name) {
         var results = new RegExp('[\?&]' + name + '=([^&#]*)')

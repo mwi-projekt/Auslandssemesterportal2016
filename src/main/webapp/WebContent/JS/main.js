@@ -938,11 +938,12 @@ var main = function() {
 					function() {
 						var id = $(this).attr('id');
 						if (id === 'userNeu') {
-							$('.popUpBack').show();
+							/*$('.popUpBack').show();
 							$('.popUpFeld').show();
 							$('.rolleWahl').val('Auslandsmitarbeiter').hide();
-							$('.auswahl').hide();
+							$('.auswahl').hide();*/
 							$('.auslandsmitarbeiter').show();
+							alert("Neuer Mitarbeiter soll angelegt werden!");
 
 						} else {
 							var rolle = 0;
