@@ -74,7 +74,7 @@ public class GetHtmlFileServlet extends HttpServlet
 		//Durchsuche alle Ordner
 		for(int i = 0; i < HTML_FOLDER.length; i++)
 		{
-			RequestDispatcher tempView;
+			RequestDispatcher tempView = null;
 			try
 			{
 				tempView = request.getServletContext().getRequestDispatcher(HTML_FOLDER[i]+requestedPage+".html");
