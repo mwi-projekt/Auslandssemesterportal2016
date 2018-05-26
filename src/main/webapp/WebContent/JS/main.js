@@ -941,8 +941,8 @@ var main = function() {
 							/*$('.popUpBack').show();
 							$('.popUpFeld').show();
 							$('.rolleWahl').val('Auslandsmitarbeiter').hide();
-							$('.auswahl').hide();
-							$('.auslandsmitarbeiter').show();*/
+							$('.auswahl').hide();*/
+							$('.auslandsmitarbeiter').show();
 							alert("Neuer Mitarbeiter soll angelegt werden!");
 
 						} else {
