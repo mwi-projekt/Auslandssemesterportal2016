@@ -34,8 +34,7 @@ public class ResetPasswordServlet extends HttpServlet {
         	throw new RuntimeException();
         }
 
-        String uuid = SQL_queries.disableUser(to);
-        System.out.println("Resetting password for " + to);
+        String uuid = SQL_queries.forgetPassword(to);
 
         // registrierungsemail senden
         // Recipient's email ID needs to be mentioned.
@@ -43,16 +42,8 @@ public class ResetPasswordServlet extends HttpServlet {
         // Sender's email ID needs to be mentioned
         String from = "noreply@dhbw-karlsruhe.de";// change accordingly
 
-        String host = "10.3.43.6"; //smtp.dh-karlsruhe.de, der Server bekommt den nslookup aber nicht hin
-
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "false");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "25");
-
         // Get the Session object.
-        Session session = Session.getInstance(props);
+        Session session = Util.getEmailSession();
 
         try {
             // Create a default MimeMessage object.
@@ -65,7 +56,7 @@ public class ResetPasswordServlet extends HttpServlet {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
             // Set Subject: header field
-            message.setSubject("Passwortruecksetzung Auslandssemesterportal");
+            message.setSubject("Passwortrücksetzung Auslandssemesterportal");
 
 			String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/changePw.html?uuid=" + uuid;
 

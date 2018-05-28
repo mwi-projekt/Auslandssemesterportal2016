@@ -386,19 +386,19 @@ public static String getStepCounter(String step, String model){
 	}
 }
 
-public static String disableUser(String mail){//Gibt die eingetragene UUID zurück
+public static String forgetPassword(String mail){
 	UUID uuid = UUID.randomUUID();
-	String query = "UPDATE user SET verifiziert = ? WHERE email = ?";
+	String query = "UPDATE user SET resetToken = ? WHERE email = ?";
 	String[] params = new String[]{""+ uuid,mail};
 	String[] types = new String[]{"String","String"};
 	executeUpdate(query,params,types);
 	return "" + uuid;
 }
 
-public static int setPassword(String uuid, String pwd){//Gibt Anzahl der geänderten Zeilen zurück
+public static int setPassword(String uuid, String pwd){
 	String salt = Util.generateSalt();
     String hashedpw = Util.HashSha256(Util.HashSha256(pwd) + salt);
-	String query = "UPDATE user SET passwort = ?, salt = ?, verifiziert = '1'  WHERE verifiziert = ?";
+	String query = "UPDATE user SET passwort = ?, salt = ?, resetToken = ''  WHERE resetToken = ?";
 	String[] params = new String[]{hashedpw,salt,uuid};
 	String[] types = new String[]{"String","String","String"};
 	return executeUpdate(query,params,types);
