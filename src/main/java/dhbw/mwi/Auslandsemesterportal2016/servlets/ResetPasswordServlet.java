@@ -40,7 +40,7 @@ public class ResetPasswordServlet extends HttpServlet {
         // Recipient's email ID needs to be mentioned.
 
         // Sender's email ID needs to be mentioned
-        String from = "noreply@dhbw-karlsruhe.de";// change accordingly
+        /*String from = "noreply@dhbw-karlsruhe.de";// change accordingly
 
         // Get the Session object.
         Session session = Util.getEmailSession();
@@ -56,10 +56,18 @@ public class ResetPasswordServlet extends HttpServlet {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
             // Set Subject: header field
+<<<<<<< HEAD
             message.setSubject("Passwortrücksetzung Auslandssemesterportal");
 
+=======
+            message.setSubject("Passwortruecksetzung Auslandssemesterportal");
+*/
+>>>>>>> 178fa330c41d4d9ee34e13b9aa234808cea8a4d0
 			String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/changePw.html?uuid=" + uuid;
 
+        	try{
+        		Message message = Util.getEmailMessage(to
+        				, "Passwortruecksetzung Auslandssemesterportal");
             message.setContent("<h2>Hallo"
                     + ",</h2> Du hast eine Kennwortrücksetzung für dein Nutzerkonto im Auslandssemesterportal angefordert. \n"
                     + "Um dein neues Kennwort zu setzen, klicke bitte auf folgenden Link. \n \n "

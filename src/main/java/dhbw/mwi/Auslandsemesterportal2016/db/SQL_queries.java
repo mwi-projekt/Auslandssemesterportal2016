@@ -301,7 +301,7 @@ public static void createInstance(String instanceID, String uni, int matNr, int 
 }
 
 public static String getAllActivities(String definitionKey){
-	String query = "SELECT step FROM processModel WHERE model = ? ORDER BY stepNumber";
+	String query = "SELECT `step` FROM `processModel` ORDER BY `stepNumber`";
 	String[] params = new String[]{definitionKey};
 	String[] types = new String[]{"String"};
 	String activities = "";

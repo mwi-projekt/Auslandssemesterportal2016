@@ -41,6 +41,11 @@ public class GetOverviewServlet extends HttpServlet {
           String output = "";
 
           	String activityString = SQL_queries.getAllActivities(definition);
+          	if(activityString.length()==0)
+          	{
+          		response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+          		return;
+          	}
           	activityString = activityString.substring(0, activityString.length() - 1);
           	String[] activities = activityString.split(";");
           	for (int i = 0; i< activities.length;i++){
