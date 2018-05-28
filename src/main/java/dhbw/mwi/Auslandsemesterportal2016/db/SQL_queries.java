@@ -236,6 +236,26 @@ public static int getRoleForUser(String mail){
 
 }
 
+//DO NOT USE IN ANY SERVLET. DO NOT GIVE USERIDs TO PUBLIC
+public static int getUserID(String mail){
+		String queryString = "SELECT userID FROM user WHERE email = ?;";
+		String[] args = new String[]{mail};
+		String[] types = new String[]{"String"};
+		ResultSet ergebnis = executeStatement(queryString,args,types);
+
+		try{
+			if (ergebnis.next()){
+				return ergebnis.getInt(1);
+			} else {
+				return -1;
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+			return -1;
+		}
+
+}
+
 public static int userLogout(String sessionID){
 		String query_ = "DELETE FROM loginSessions WHERE sessionID = ?";
 		String[] params_ = new String[]{sessionID};

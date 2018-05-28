@@ -8,22 +8,9 @@ import javax.servlet.http.*;
 
 
 public class userAuthentificationTest {
-    String testUser_mail = "testusermwi@dhbw.de";
-    String testUser_pw = "Password1234";
-    int testUser_id = 368;
-    int testUser_rolle = 3;
-    
-    String testAAMA_mail = "testaamamwi@dhbw.de";
-    String testAAMA_pw = "Password1234";
-    int testAAMA_id = 370;
-    int testAAMA_rolle = 2;
-    
-    String testAdmin_mail = "testadminmwi@dhbw.de";
-    String testAdmin_pw = "Password1234";
-    int testAdmin_id = 371;
-    int testAdmin_rolle = 1;
-
-    
+    String[] testUser = TestUser.getUser();
+    String[] testAAMA = TestUser.getAAMA();
+    String[] testAdmin = TestUser.getAdmin();
     
     HttpServletRequest req = mock(HttpServletRequest.class);
     
@@ -32,12 +19,12 @@ public class userAuthentificationTest {
 
     @Test
     public void testNoCookie() {
-       assertEquals(userAuthentification.isUserAuthentifiedByCookie(req), -1);
+       assertEquals(-1, userAuthentification.isUserAuthentifiedByCookie(req));
     }
     
     @Test
     public void testNoValidSession() {
-        Cookie cookie_mail = new Cookie("email", testUser_mail);
+        Cookie cookie_mail = new Cookie("email", testUser[0]);
         Cookie cookie_sessionID = new Cookie("sessionID", "123456789abc");
         Cookie[] cookies = new Cookie[2];
         cookies[0] = cookie_mail;
@@ -49,41 +36,41 @@ public class userAuthentificationTest {
     
     @Test
     public void testValidSession() {
-        String accessToken = SQL_queries.createUserSession(testUser_id);
-        Cookie cookie_mail = new Cookie("email", testUser_mail);
+        String accessToken = SQL_queries.createUserSession(Integer.parseInt(testUser[2]));
+        Cookie cookie_mail = new Cookie("email", testUser[0]);
         Cookie cookie_sessionID = new Cookie("sessionID", accessToken);
         Cookie[] cookies = new Cookie[2];
         cookies[0] = cookie_mail;
         cookies[1] = cookie_sessionID;
         
         when(req.getCookies()).thenReturn(cookies);
-        assertEquals(userAuthentification.isUserAuthentifiedByCookie(req), 3);
+        assertEquals(3, userAuthentification.isUserAuthentifiedByCookie(req));
     }
     
     @Test
     public void testAAMASession() {
-        String accessToken = SQL_queries.createUserSession(testAAMA_id);
-        Cookie cookie_mail = new Cookie("email", testAAMA_mail);
+        String accessToken = SQL_queries.createUserSession(Integer.parseInt(testAAMA[2]));
+        Cookie cookie_mail = new Cookie("email", testAAMA[0]);
         Cookie cookie_sessionID = new Cookie("sessionID", accessToken);
         Cookie[] cookies = new Cookie[2];
         cookies[0] = cookie_mail;
         cookies[1] = cookie_sessionID;
         
         when(req.getCookies()).thenReturn(cookies);
-        assertEquals(userAuthentification.isUserAuthentifiedByCookie(req), 2);
+        assertEquals(2, userAuthentification.isUserAuthentifiedByCookie(req));
     }
     
       @Test
     public void testAdminSession() {
-        String accessToken = SQL_queries.createUserSession(testAdmin_id);
-        Cookie cookie_mail = new Cookie("email", testAdmin_mail);
+        String accessToken = SQL_queries.createUserSession(Integer.parseInt(testAdmin[2]));
+        Cookie cookie_mail = new Cookie("email", testAdmin[0]);
         Cookie cookie_sessionID = new Cookie("sessionID", accessToken);
         Cookie[] cookies = new Cookie[2];
         cookies[0] = cookie_mail;
         cookies[1] = cookie_sessionID;
         
         when(req.getCookies()).thenReturn(cookies);
-        assertEquals(userAuthentification.isUserAuthentifiedByCookie(req), 1);
+        assertEquals(1, userAuthentification.isUserAuthentifiedByCookie(req));
     }
 
 }
