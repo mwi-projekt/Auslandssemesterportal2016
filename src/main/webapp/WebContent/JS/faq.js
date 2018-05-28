@@ -1,4 +1,4 @@
-var main = function() {
+var expandFAQ = function() {
 	$('.show').css('cursor', 'pointer');
 	$('.weg').hide();
 	$('.show').on('click', function() {
@@ -6,5 +6,4 @@ var main = function() {
 		$(this).children('.weg').show();
 	});
 };
-
-$(document).ready(main);
+$(document).ready(expandFAQ);
