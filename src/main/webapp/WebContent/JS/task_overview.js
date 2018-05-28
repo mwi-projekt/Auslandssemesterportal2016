@@ -26,7 +26,7 @@ function getList() {
 	$
 			.ajax({
 				type : "GET",
-				url : "getTasks",
+				url : "getOverview",
 				data : {},
 				success : function(result) {
 					output = "";
