@@ -167,7 +167,8 @@ public class GetHtmlFileServlet extends HttpServlet
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"Es gab einen Fehler in der Verarbeitung des Requests."
 					+ "UserAccessLevel: " + userAccessLevel
-					+ "ForbiddenDocumentFound: " + forbiddenDocumentFound
+					+ ", Requested Path: " + requestedPage
+					+ ", ForbiddenDocumentFound: " + forbiddenDocumentFound
 					+ ", PublicDocumentFound: " + publicDocumentFound
 					+ ", RightDocuementFound: " + rightDocumentFound
 					+ e.getMessage());
