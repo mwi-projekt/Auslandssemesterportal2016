@@ -65,7 +65,7 @@ $(document).ready(function () {
                         }
                     });
                     if (found) {
-                    	checkModelEntries(found, i);
+                    	checkModelEntries(found, i, canvas);
                     }
                 }
             });
@@ -88,7 +88,7 @@ $(document).ready(function () {
         });
     }
     
-    function checkModelEntries(found, i) {
+    function checkModelEntries(found, i, canvas) {
 		if (found.$type == 'bpmn:UserTask') {
 			if ($.inArray(found.id, possibleIds) !== -1) return;
             i++;
@@ -113,7 +113,7 @@ $(document).ready(function () {
                 found = null;
                 return;
             }
-            checkModelEntries(found, i);
+            checkModelEntries(found, i, canvas);
         }
 	}
 
