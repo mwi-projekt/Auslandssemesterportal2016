@@ -65,7 +65,7 @@ $(document).ready(function () {
                         }
                     });
                     if (found) {
-                    	checkModelEntries(found);
+                    	checkModelEntries(found, i, canvas);
                     }
                 }
             });
@@ -88,9 +88,9 @@ $(document).ready(function () {
         });
     }
     
-    function checkModelEntries(found) {
+    function checkModelEntries(found, i, canvas) {
 		if (found.$type == 'bpmn:UserTask') {
-			if ($.inArray(found.id, possibleIds)) return;
+			if ($.inArray(found.id, possibleIds) !== -1) return;
             i++;
             possibleIds.push(found.id);
             if ($.inArray(found.id, filled) > -1) {
@@ -113,7 +113,7 @@ $(document).ready(function () {
                 found = null;
                 return;
             }
-            checkModelEntries(found);
+            checkModelEntries(found, i, canvas);
         }
 	}
 
