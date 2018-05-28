@@ -10,16 +10,16 @@
         <bpmn:flowNodeRef>downloadsAnbieten</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>datenEingeben</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_EnglischMutter</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>englischNotePruefen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>daadHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_EnglischStart</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_EnglischEnd</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>dualisHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>motivationHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>zustimmungHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>abiturHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>datenPruefen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>erasmusLAhochladen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_EnglischEnd</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>daadHochladen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>englischNotePruefen</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_05ro1a0" name="Mitarbeiter AAA">
         <bpmn:flowNodeRef>datenValidieren</bpmn:flowNodeRef>
@@ -98,18 +98,10 @@
     <bpmn:sequenceFlow id="SequenceFlow_12my7xt" name="Nein" sourceRef="ExclusiveGateway_EnglischMutter" targetRef="englischNotePruefen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">$(muttersprache!='Englisch')</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:task id="englischNotePruefen" name="Englischnote prüfen">
-      <bpmn:incoming>SequenceFlow_12my7xt</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1p3sxt6</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1p3sxt6" sourceRef="englischNotePruefen" targetRef="ExclusiveGateway_EnglischStart" />
     <bpmn:sequenceFlow id="SequenceFlow_1d0ul03" name="Nein" sourceRef="ExclusiveGateway_EnglischStart" targetRef="daadHochladen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englischNote&lt;11}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="daadHochladen" name="DAAD-Formular hochladen">
-      <bpmn:incoming>SequenceFlow_1d0ul03</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1tpgdb5</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischStart" name="Englischnote &#62;= 11 Punkte?">
       <bpmn:incoming>SequenceFlow_1p3sxt6</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1d0ul03</bpmn:outgoing>
@@ -118,12 +110,6 @@
     <bpmn:sequenceFlow id="SequenceFlow_0d39a82" name="Ja" sourceRef="ExclusiveGateway_EnglischStart" targetRef="ExclusiveGateway_EnglischEnd">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englischNote&gt;=11}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischEnd">
-      <bpmn:incoming>SequenceFlow_0d39a82</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_1tpgdb5</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_06jsa12</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0tdd3mj</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:userTask id="dualisHochladen" name="Dualisauszug hochladen">
       <bpmn:incoming>SequenceFlow_0yksv3e</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_06b7u3b</bpmn:outgoing>
@@ -154,11 +140,25 @@
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_16lu1ap" sourceRef="erasmusLAhochladen" targetRef="abiturHochladen" />
     <bpmn:sequenceFlow id="SequenceFlow_0tdd3mj" sourceRef="ExclusiveGateway_EnglischEnd" targetRef="erasmusLAhochladen" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischEnd">
+      <bpmn:incoming>SequenceFlow_0d39a82</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1tpgdb5</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_06jsa12</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0tdd3mj</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="daadHochladen" name="DAAD-Formular hochladen">
+      <bpmn:incoming>SequenceFlow_1d0ul03</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1tpgdb5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="englischNotePruefen" name="Englischnote eintragen">
+      <bpmn:incoming>SequenceFlow_12my7xt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1p3sxt6</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cl2lu7">
       <bpmndi:BPMNShape id="Participant_00ci3jw_di" bpmnElement="Participant_00ci3jw">
-        <dc:Bounds x="1169" y="43" width="2083" height="506" />
+        <dc:Bounds x="1169" y="43" width="2085" height="506" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="1246" y="110" width="36" height="36" />
@@ -187,10 +187,10 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Lane_07n76w6_di" bpmnElement="Lane_07n76w6">
-        <dc:Bounds x="1199" y="43" width="2053" height="200" />
+        <dc:Bounds x="1199" y="43" width="2055" height="206" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_05ro1a0_di" bpmnElement="Lane_05ro1a0">
-        <dc:Bounds x="1199" y="243" width="2053" height="306" />
+        <dc:Bounds x="1199" y="249" width="2055" height="300" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_0b01b6y_di" bpmnElement="EndEvent_0b01b6y">
         <dc:Bounds x="3088" y="416" width="36" height="36" />
@@ -218,19 +218,21 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1tpgdb5_di" bpmnElement="SequenceFlow_1tpgdb5">
-        <di:waypoint x="2040" y="134" />
-        <di:waypoint x="2040" y="152" />
+        <di:waypoint x="2009" y="134" />
+        <di:waypoint x="2009" y="148" />
+        <di:waypoint x="2040" y="148" />
+        <di:waypoint x="2040" y="161" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2010" y="133" width="90" height="20" />
+          <dc:Bounds x="1979.5" y="123" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_06jsa12_di" bpmnElement="SequenceFlow_06jsa12">
         <di:waypoint x="1625" y="153" />
-        <di:waypoint x="1625" y="226" />
-        <di:waypoint x="2040" y="226" />
-        <di:waypoint x="2040" y="202" />
+        <di:waypoint x="1625" y="230" />
+        <di:waypoint x="2040" y="230" />
+        <di:waypoint x="2040" y="211" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1752" y="221" width="12" height="12" />
+          <dc:Bounds x="1762" y="215" width="12" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_06b7u3b_di" bpmnElement="SequenceFlow_06b7u3b">
@@ -295,9 +297,6 @@
       <bpmndi:BPMNShape id="UserTask_0tv0gv6_di" bpmnElement="abiturHochladen">
         <dc:Bounds x="2293" y="88" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_1mxzyty_di" bpmnElement="daadHochladen">
-        <dc:Bounds x="1990" y="54" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_08zndvo_di" bpmnElement="dualisHochladen">
         <dc:Bounds x="2437" y="88" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -343,9 +342,6 @@
           <dc:Bounds x="3076" y="379" width="90" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Task_0hjzucm_di" bpmnElement="englischNotePruefen">
-        <dc:Bounds x="1690" y="88" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_12my7xt_di" bpmnElement="SequenceFlow_12my7xt">
         <di:waypoint x="1650" y="128" />
         <di:waypoint x="1690" y="128" />
@@ -363,30 +359,30 @@
         <di:waypoint x="1790" y="128" />
         <di:waypoint x="1852" y="128" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1821" y="107" width="0" height="12" />
+          <dc:Bounds x="1776" y="107" width="90" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1d0ul03_di" bpmnElement="SequenceFlow_1d0ul03">
         <di:waypoint x="1902" y="128" />
         <di:waypoint x="1929" y="128" />
         <di:waypoint x="1929" y="94" />
-        <di:waypoint x="1990" y="94" />
+        <di:waypoint x="1959" y="94" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1933" y="105" width="22" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0d39a82_di" bpmnElement="SequenceFlow_0d39a82">
         <di:waypoint x="1877" y="153" />
-        <di:waypoint x="1877" y="177" />
-        <di:waypoint x="2015" y="177" />
+        <di:waypoint x="1877" y="186" />
+        <di:waypoint x="2015" y="186" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1886" y="159" width="12" height="12" />
+          <dc:Bounds x="1886" y="168" width="12" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0uvn9zu_di" bpmnElement="ExclusiveGateway_EnglischEnd" isMarkerVisible="true">
-        <dc:Bounds x="2015" y="152" width="50" height="50" />
+        <dc:Bounds x="2015" y="161" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1915" y="167" width="90" height="20" />
+          <dc:Bounds x="1915" y="176" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_11i0vzk_di" bpmnElement="erasmusLAhochladen">
@@ -400,14 +396,20 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0tdd3mj_di" bpmnElement="SequenceFlow_0tdd3mj">
-        <di:waypoint x="2065" y="177" />
-        <di:waypoint x="2104" y="177" />
+        <di:waypoint x="2065" y="186" />
+        <di:waypoint x="2104" y="186" />
         <di:waypoint x="2104" y="128" />
         <di:waypoint x="2143" y="128" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2119" y="146.5" width="0" height="12" />
+          <dc:Bounds x="2119" y="151" width="0" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0b7eb4e_di" bpmnElement="daadHochladen">
+        <dc:Bounds x="1959" y="54" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0hfqf70_di" bpmnElement="englischNotePruefen">
+        <dc:Bounds x="1690" y="88" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
