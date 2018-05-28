@@ -58,7 +58,13 @@ public class GetHtmlFileServlet extends HttpServlet
 		
 		requestedPage = requestedPage.substring(11, requestedPage.length());
 		
-		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
+		int userAccessLevel;
+		if(requestedPage == "faq")
+			userAccessLevel = 0;
+		else if(requestedPage == "impressum")
+			userAccessLevel = 0;
+		else
+			userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
 		
 		//response.sendError(HttpServletResponse.SC_BAD_REQUEST, "." +requestedPage+". userLevel:" + userAccessLevel);
