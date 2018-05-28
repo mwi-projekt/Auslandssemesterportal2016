@@ -7,4 +7,4 @@ var Secondfaq = function() {
 	});
 };
 
-$(document).ready(main);
+$(document).ready(Secondfaq);
