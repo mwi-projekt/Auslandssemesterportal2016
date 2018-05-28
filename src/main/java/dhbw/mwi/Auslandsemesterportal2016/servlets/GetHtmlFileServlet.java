@@ -59,7 +59,7 @@ public class GetHtmlFileServlet extends HttpServlet
 		requestedPage = requestedPage.substring(11, requestedPage.length());
 		
 		int userAccessLevel;
-		if(requestedPage == "/faq")
+		/*if(requestedPage == "/faq")
 		{
 			response.setStatus(HttpServletResponse.SC_ACCEPTED);
 			RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"/faq.html");
@@ -72,7 +72,9 @@ public class GetHtmlFileServlet extends HttpServlet
 			RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"/impressum.html");
 			view.include(request, response);
 			return;
-		}
+		}*/
+		if(requestedPage  == "/faq" || requestedPage == "/impressum")
+			userAccessLevel = 0;
 		else
 			userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
