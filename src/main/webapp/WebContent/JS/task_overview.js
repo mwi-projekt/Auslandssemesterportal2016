@@ -1,7 +1,7 @@
 $(document)
 		.ready(
 				function() {
-					if (sessionStorage['rolle'] === '3') {
+					if (sessionStorage['rolle'] === '2') {
 						swal(
 								{
 									title : "Fehler!",
