@@ -48,12 +48,12 @@ public class RegisterServlet extends HttpServlet {
 
         // registrierungsemail senden
         // Recipient's email ID needs to be mentioned.
-        String to = request.getParameter("email");// change accordingly
-
-        Session session = Util.getEmailSession();
+        //String to = request.getParameter("email");// change accordingly
+    	
+        /*Session session = Util.getEmailSession();
         
 
-        try {
+
             // Create a default MimeMessage object.
             Message message = new MimeMessage(session);
 
@@ -65,13 +65,16 @@ public class RegisterServlet extends HttpServlet {
 
             // Set Subject: header field
             message.setSubject("Akademisches Auslandsamt Registrierung");
-
+*/
             // Now set the actual message
 					/*
 					 * message.setText(
 					 * "Hello, this is sample for to check send " +
 					 * "email using JavaMailAPI ");
 					 */
+        try {
+        	Message message = Util.getEmailMessage(request.getParameter("email")
+    			, "Akademisches Auslandsamt Registrierung");
             UUID id = UUID.randomUUID();
             System.out.println(id);
 
