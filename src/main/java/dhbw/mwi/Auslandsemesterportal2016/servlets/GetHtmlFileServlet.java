@@ -55,10 +55,30 @@ public class GetHtmlFileServlet extends HttpServlet
 	{
 		
 		String requestedPage = request.getServletPath();
+		int userAccessLevel;
+		if(requestedPage  == "/WebContent/faq" || requestedPage == "/WebContent/impressum")
+			userAccessLevel = 0;
+		else
+			userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
 		
 		requestedPage = requestedPage.substring(11, requestedPage.length());
 		
-		int userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
+		
+		/*if(requestedPage == "/faq")
+		{
+			response.setStatus(HttpServletResponse.SC_ACCEPTED);
+			RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"/faq.html");
+			view.include(request, response);
+			return;
+		}
+		else if(requestedPage == "/impressum")
+		{
+			response.setStatus(HttpServletResponse.SC_ACCEPTED);
+			RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"/impressum.html");
+			view.include(request, response);
+			return;
+		}*/
+		
 		
 		
 		//response.sendError(HttpServletResponse.SC_BAD_REQUEST, "." +requestedPage+". userLevel:" + userAccessLevel);
@@ -70,6 +90,8 @@ public class GetHtmlFileServlet extends HttpServlet
 		
 		int highestDocumentLevelFound = -1;
 		boolean forbiddenDocumentFound = false;
+		boolean publicDocumentFound = false;
+		boolean rightDocumentFound = false;
 		
 		//Durchsuche alle Ordner
 		for(int i = 0; i < HTML_FOLDER.length; i++)
@@ -86,15 +108,15 @@ public class GetHtmlFileServlet extends HttpServlet
 			//falls Dokument in Ordner
 			if(tempView != null)
 			{
-				if(userAccessLevel==i || i == 0)
+				if(i == 0)
 				{
-					//höchstes Gefundenes Dokument?
-					if(highestDocumentLevelFound < i)
-					{
-						highestDocumentLevelFound = i;
-					}
+					publicDocumentFound = true;
 				}
 				//Zugriff nicht erlaubt
+				else if(i == userAccessLevel)
+				{
+					rightDocumentFound = true;
+				}
 				else
 				{
 					forbiddenDocumentFound = true;
@@ -105,11 +127,18 @@ public class GetHtmlFileServlet extends HttpServlet
 		try
 		{
 			
-			if(highestDocumentLevelFound >= 0)
+			if(rightDocumentFound)
 			{
 				
 				response.setStatus(HttpServletResponse.SC_ACCEPTED);
-				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[highestDocumentLevelFound]+requestedPage+".html");
+				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[userAccessLevel]+requestedPage+".html");
+				view.include(request, response);
+				return;
+			}
+			else if(publicDocumentFound)
+			{
+				response.setStatus(HttpServletResponse.SC_ACCEPTED);
+				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+requestedPage+".html");
 				view.include(request, response);
 				return;
 			}
@@ -139,8 +168,11 @@ public class GetHtmlFileServlet extends HttpServlet
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
 					"Es gab einen Fehler in der Verarbeitung des Requests."
-					+ "ForbiddenDocumentFound: " + forbiddenDocumentFound
-					+ "HighestFoundDocument: " + highestDocumentLevelFound
+					+ "UserAccessLevel: " + userAccessLevel
+					+ ", Requested Path: " + requestedPage
+					+ ", ForbiddenDocumentFound: " + forbiddenDocumentFound
+					+ ", PublicDocumentFound: " + publicDocumentFound
+					+ ", RightDocuementFound: " + rightDocumentFound
 					+ e.getMessage());
 		}
 		

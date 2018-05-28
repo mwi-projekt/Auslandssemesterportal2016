@@ -41,7 +41,7 @@ public class ResetPasswordServlet extends HttpServlet {
         // Recipient's email ID needs to be mentioned.
 
         // Sender's email ID needs to be mentioned
-        String from = "noreply@dhbw-karlsruhe.de";// change accordingly
+        /*String from = "noreply@dhbw-karlsruhe.de";// change accordingly
 
         String host = "10.3.43.6"; //smtp.dh-karlsruhe.de, der Server bekommt den nslookup aber nicht hin
 
@@ -66,9 +66,12 @@ public class ResetPasswordServlet extends HttpServlet {
 
             // Set Subject: header field
             message.setSubject("Passwortruecksetzung Auslandssemesterportal");
-
+*/
 			String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/changePw.html?uuid=" + uuid;
 
+        	try{
+        		Message message = Util.getEmailMessage(to
+        				, "Passwortruecksetzung Auslandssemesterportal");
             message.setContent("<h2>Hallo"
                     + ",</h2> Du hast eine Kennwortrücksetzung für dein Nutzerkonto im Auslandssemesterportal angefordert. \n"
                     + "Um dein neues Kennwort zu setzen, klicke bitte auf folgenden Link. \n \n "

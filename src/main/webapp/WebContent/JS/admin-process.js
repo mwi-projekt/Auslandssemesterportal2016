@@ -65,33 +65,7 @@ $(document).ready(function () {
                         }
                     });
                     if (found) {
-                        var y = 0;
-                        while (found != null) {
-                            if (found.$type == 'bpmn:UserTask') {
-                                i++;
-                                possibleIds.push(found.id);
-                                if ($.inArray(found.id, filled) > -1) {
-                                    canvas.addMarker(found.id, 'user-task');
-                                    $('#processSteps tbody').append('<tr><td>'+found.name+'</td><td><button data-index="'+i+'" data-mid="'+found.id+'" type="button" class="btn btn-primary">Bearbeiten</button></td></tr>')
-                                } else {
-                                    canvas.addMarker(found.id, 'user-task-new');
-                                    $('#processSteps tbody').append('<tr><td>'+found.name+'</td><td><button data-index="'+i+'" data-mid="'+found.id+'" type="button" class="btn btn-success">Erstellen</button></td></tr>')
-                                }
-                            }
-                            if (found.outgoing.length == 0) {
-                                found = null;
-                                break;
-                            }
-                            found = found.outgoing[0].targetRef;
-
-                            if (found.lanes[0].name != "Student") {
-                                found = null;
-                                break;
-                            }
-
-                            console.log(found)
-                            if (y++ >= 100) break;
-                        }
+                    	checkModelEntries(found, i, canvas);
                     }
                 }
             });
@@ -113,6 +87,35 @@ $(document).ready(function () {
 
         });
     }
+    
+    function checkModelEntries(found, i, canvas) {
+		if (found.$type == 'bpmn:UserTask') {
+			if ($.inArray(found.id, possibleIds) !== -1) return;
+            i++;
+            possibleIds.push(found.id);
+            if ($.inArray(found.id, filled) > -1) {
+                canvas.addMarker(found.id, 'user-task');
+                $('#processSteps tbody').append('<tr><td>'+found.name+'</td><td><button data-index="'+i+'" data-mid="'+found.id+'" type="button" class="btn btn-primary">Bearbeiten</button></td></tr>')
+            } else {
+                canvas.addMarker(found.id, 'user-task-new');
+                $('#processSteps tbody').append('<tr><td>'+found.name+'</td><td><button data-index="'+i+'" data-mid="'+found.id+'" type="button" class="btn btn-success">Erstellen</button></td></tr>')
+            }
+        }
+        if (found.outgoing.length == 0) {
+            found = null;
+            return;
+        }
+        
+        for (var j = 0; j < found.outgoing.length; j++) {
+            found = found.outgoing[j].targetRef;
+
+            if (found.lanes[0].name != "Student") {
+                found = null;
+                return;
+            }
+            checkModelEntries(found, i, canvas);
+        }
+	}
 
     function createEntry(id) {
         var index = $('button[data-mid='+id+']').data('index');
