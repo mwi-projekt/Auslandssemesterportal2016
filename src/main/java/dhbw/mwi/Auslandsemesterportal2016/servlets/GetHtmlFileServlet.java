@@ -59,9 +59,9 @@ public class GetHtmlFileServlet extends HttpServlet
 		requestedPage = requestedPage.substring(11, requestedPage.length());
 		
 		int userAccessLevel;
-		if(requestedPage == "faq")
+		if(requestedPage == "/faq")
 			userAccessLevel = 0;
-		else if(requestedPage == "impressum")
+		else if(requestedPage == "/impressum")
 			userAccessLevel = 0;
 		else
 			userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
@@ -76,6 +76,8 @@ public class GetHtmlFileServlet extends HttpServlet
 		
 		int highestDocumentLevelFound = -1;
 		boolean forbiddenDocumentFound = false;
+		boolean publicDocumentFound = false;
+		boolean rightDocumentFound = false;
 		
 		//Durchsuche alle Ordner
 		for(int i = 0; i < HTML_FOLDER.length; i++)
@@ -92,15 +94,15 @@ public class GetHtmlFileServlet extends HttpServlet
 			//falls Dokument in Ordner
 			if(tempView != null)
 			{
-				if(userAccessLevel==i || i == 0)
+				if(i == 0)
 				{
-					//höchstes Gefundenes Dokument?
-					if(highestDocumentLevelFound < i)
-					{
-						highestDocumentLevelFound = i;
-					}
+					publicDocumentFound = true;
 				}
 				//Zugriff nicht erlaubt
+				else if(i == userAccessLevel)
+				{
+					rightDocumentFound = true;
+				}
 				else
 				{
 					forbiddenDocumentFound = true;
@@ -111,11 +113,18 @@ public class GetHtmlFileServlet extends HttpServlet
 		try
 		{
 			
-			if(highestDocumentLevelFound >= 0)
+			if(rightDocumentFound)
 			{
 				
 				response.setStatus(HttpServletResponse.SC_ACCEPTED);
-				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[highestDocumentLevelFound]+requestedPage+".html");
+				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[userAccessLevel]+requestedPage+".html");
+				view.include(request, response);
+				return;
+			}
+			else if(publicDocumentFound)
+			{
+				response.setStatus(HttpServletResponse.SC_ACCEPTED);
+				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+requestedPage+".html");
 				view.include(request, response);
 				return;
 			}
