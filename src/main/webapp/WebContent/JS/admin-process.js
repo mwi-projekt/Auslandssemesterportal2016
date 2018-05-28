@@ -90,7 +90,7 @@ $(document).ready(function () {
     
     function checkModelEntries(found) {
 		if (found.$type == 'bpmn:UserTask') {
-			if ($.inArray(found.id, possibleIds)) return;
+			if ($.inArray(found.id, possibleIds) !== -1) return;
             i++;
             possibleIds.push(found.id);
             if ($.inArray(found.id, filled) > -1) {
