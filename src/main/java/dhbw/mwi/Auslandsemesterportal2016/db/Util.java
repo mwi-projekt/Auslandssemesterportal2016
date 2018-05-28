@@ -5,8 +5,13 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class Util {
 
@@ -42,7 +47,7 @@ public class Util {
         return result;
     }
 
-    public static Session getEmailSession() {
+    private static Session getEmailSession() {
     	/*// Sender's email ID needs to be mentioned
         String host = "10.3.43.6";
 
@@ -82,4 +87,23 @@ public class Util {
 		return session;
     }
     
+    public static Message getEmailMessage(String emailTo, String emailFrom, String subject) throws AddressException, MessagingException
+    {
+    	Message message = new MimeMessage(getEmailSession());
+
+        // Set From: header field of the header.
+        message.setFrom(new InternetAddress(emailFrom));
+
+        // Set To: header field of the header.
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailTo));
+
+        // Set Subject: header field
+        message.setSubject(subject);
+        return message;
+    }
+    
+    public static Message getEmailMessage(String emailTo, String subject) throws AddressException, MessagingException
+    {
+    	return getEmailMessage(emailTo, "noreply@dhbw-karlsruhe.de",  subject);
+    }
 }
