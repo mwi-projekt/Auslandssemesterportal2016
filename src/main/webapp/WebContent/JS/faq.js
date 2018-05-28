@@ -6,4 +6,4 @@ var expandFAQ = function() {
 		$(this).children('.weg').show();
 	});
 };
-$(document).ready(expandFAQ);
+$('document').ready(expandFAQ);
