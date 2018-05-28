@@ -56,13 +56,9 @@ public class ResetPasswordServlet extends HttpServlet {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 
             // Set Subject: header field
-<<<<<<< HEAD
-            message.setSubject("Passwortrücksetzung Auslandssemesterportal");
-
-=======
             message.setSubject("Passwortruecksetzung Auslandssemesterportal");
 */
->>>>>>> 178fa330c41d4d9ee34e13b9aa234808cea8a4d0
+
 			String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/changePw.html?uuid=" + uuid;
 
         	try{
