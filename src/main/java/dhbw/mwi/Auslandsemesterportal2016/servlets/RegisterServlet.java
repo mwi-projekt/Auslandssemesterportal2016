@@ -50,17 +50,8 @@ public class RegisterServlet extends HttpServlet {
         // Recipient's email ID needs to be mentioned.
         String to = request.getParameter("email");// change accordingly
 
-        // Sender's email ID needs to be mentioned
-        String host = "10.3.43.6";
-
-		Properties props = new Properties();
-        props.put("mail.smtp.auth", "false");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "25");
-
-        // Get the Session object.
-        Session session = Session.getInstance(props);
+        Session session = Util.getEmailSession();
+        
 
         try {
             // Create a default MimeMessage object.
