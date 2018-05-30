@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.14.0">
   <bpmn:collaboration id="Collaboration_1cl2lu7">
-    <bpmn:participant id="Participant_00ci3jw" name="Schottland" processRef="bewerben_schottland" />
+    <bpmn:participant id="Participant_00ci3jw" name="USA Channel Island" processRef="bewerben_channel_island" />
   </bpmn:collaboration>
-  <bpmn:process id="bewerben_schottland" name="Bewerbungen Schottland" isExecutable="true">
+  <bpmn:process id="bewerben_channel_island" name="Bewerbungen USA Channel Island" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_07n76w6" name="Student">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
@@ -17,7 +17,6 @@
         <bpmn:flowNodeRef>zustimmungHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>abiturHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>datenPruefen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>erasmusLAhochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_EnglischEnd</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>daadHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>englischNotePruefen</bpmn:flowNodeRef>
@@ -117,16 +116,12 @@
       <bpmn:outgoing>SequenceFlow_0h9aw8k</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="abiturHochladen" name="Abiturzeugnis hochladen">
-      <bpmn:incoming>SequenceFlow_16lu1ap</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0tdd3mj</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0yksv3e</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="datenPruefen" name="Daten prüfen">
       <bpmn:incoming>SequenceFlow_0h9aw8k</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0qbs3g8</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="erasmusLAhochladen" name="Erasmus Learning Aggreement hochladen">
-      <bpmn:incoming>SequenceFlow_0tdd3mj</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_16lu1ap</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischEnd">
       <bpmn:incoming>SequenceFlow_0d39a82</bpmn:incoming>
@@ -159,8 +154,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_06b7u3b" sourceRef="dualisHochladen" targetRef="motivationHochladen" />
     <bpmn:sequenceFlow id="SequenceFlow_0r1y3rt" sourceRef="motivationHochladen" targetRef="zustimmungHochladen" />
     <bpmn:sequenceFlow id="SequenceFlow_0h9aw8k" sourceRef="zustimmungHochladen" targetRef="datenPruefen" />
-    <bpmn:sequenceFlow id="SequenceFlow_16lu1ap" sourceRef="erasmusLAhochladen" targetRef="abiturHochladen" />
-    <bpmn:sequenceFlow id="SequenceFlow_0tdd3mj" sourceRef="ExclusiveGateway_EnglischEnd" targetRef="erasmusLAhochladen" />
+    <bpmn:sequenceFlow id="SequenceFlow_0tdd3mj" sourceRef="ExclusiveGateway_EnglischEnd" targetRef="abiturHochladen" />
     <bpmn:sequenceFlow id="SequenceFlow_1tpgdb5" sourceRef="daadHochladen" targetRef="ExclusiveGateway_EnglischEnd" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_abweichendSemester" name="Abweichende Semesteradresse?">
       <bpmn:incoming>SequenceFlow_1ikinnd</bpmn:incoming>
@@ -400,26 +394,16 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_0uvn9zu_di" bpmnElement="ExclusiveGateway_EnglischEnd" isMarkerVisible="true">
         <dc:Bounds x="2613" y="161" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2513" y="176" width="90" height="20" />
+          <dc:Bounds x="2673" y="176" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_11i0vzk_di" bpmnElement="erasmusLAhochladen">
-        <dc:Bounds x="2741" y="88" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_16lu1ap_di" bpmnElement="SequenceFlow_16lu1ap">
-        <di:waypoint x="2841" y="128" />
-        <di:waypoint x="2891" y="128" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2821" y="107" width="90" height="12" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0tdd3mj_di" bpmnElement="SequenceFlow_0tdd3mj">
         <di:waypoint x="2663" y="186" />
-        <di:waypoint x="2702" y="186" />
-        <di:waypoint x="2702" y="128" />
-        <di:waypoint x="2741" y="128" />
+        <di:waypoint x="2769" y="186" />
+        <di:waypoint x="2769" y="128" />
+        <di:waypoint x="2891" y="128" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2672" y="151" width="90" height="12" />
+          <dc:Bounds x="2739" y="151" width="90" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_0b7eb4e_di" bpmnElement="daadHochladen">

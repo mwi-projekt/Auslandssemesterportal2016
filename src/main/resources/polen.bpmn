@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.14.0">
   <bpmn:collaboration id="Collaboration_1cl2lu7">
-    <bpmn:participant id="Participant_00ci3jw" name="Schottland" processRef="bewerben_schottland" />
+    <bpmn:participant id="Participant_00ci3jw" name="Polen" processRef="bewerben_polen" />
   </bpmn:collaboration>
-  <bpmn:process id="bewerben_schottland" name="Bewerbungen Schottland" isExecutable="true">
+  <bpmn:process id="bewerben_polen" name="Bewerbungen Polen" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_07n76w6" name="Student">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
