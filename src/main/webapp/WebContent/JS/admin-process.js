@@ -164,7 +164,7 @@ $(document).ready(function () {
     }
 
 // load + show diagram
-    $('#dianame').text(dia.name);
+    $('#dianame').text(dia);
     $.get('bpmn/get?model='+dia, function (diagramXML) {
         $.get( "processmodel/list", {
             model: dia
