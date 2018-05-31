@@ -24,7 +24,7 @@ $(document).ready(function () {
     };
 
     var dia = $.urlParam('dia').trim();
-
+    
     // init & logout
     $('.nutzerName').text(sessionStorage['User']);
     $('#logout').on('click', function() {
@@ -164,6 +164,7 @@ $(document).ready(function () {
     }
 
 // load + show diagram
+    $('#dianame').text("text"+dia);
     $.get('bpmn/get?model='+dia, function (diagramXML) {
         $.get( "processmodel/list", {
             model: dia
