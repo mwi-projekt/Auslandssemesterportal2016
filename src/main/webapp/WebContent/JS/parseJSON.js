@@ -53,7 +53,6 @@ function getDropzoneOptions(action, fileName) {
 function parse(){
 	var step_id = "";
 	var output = "";
-	var uni = $('#selectUni').val();
 	$
 	.ajax({
 		type : "GET",
