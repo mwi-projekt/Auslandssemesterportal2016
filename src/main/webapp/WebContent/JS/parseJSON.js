@@ -53,6 +53,7 @@ function getDropzoneOptions(action, fileName) {
 function parse(){
 	var step_id = "";
 	var output = "";
+	var uni = $('#selectUni').val();
 	$
 	.ajax({
 		type : "GET",
@@ -71,7 +72,7 @@ function parse(){
 				type : "GET",
 				url : "processmodel/get",
 				data : {
-					model: 'studentBewerben',
+					model: uni,
 					step : step_id
 				},
 				success : function(result) {
