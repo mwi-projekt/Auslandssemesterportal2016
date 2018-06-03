@@ -488,11 +488,11 @@ var main = function() {
 										},
 										success : function(
 											result) {
-											/*var uni = $(
+											var uni = $(
 											 '#selectUni')
 											 .val();
 											 zaehlupdate(0);
-											 askNextStep(uni); */
+											 askNextStep(uni);
 											location.replace("http://193.196.7.215:8080/Auslandssemesterportal/WebContent/bewerben.html?instance_id="+result);
 										},
 										error : function(
