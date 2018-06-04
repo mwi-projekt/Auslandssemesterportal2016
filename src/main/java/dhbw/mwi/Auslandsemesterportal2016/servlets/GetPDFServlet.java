@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
-@WebServlet(name = "GetHtmlFileServlet", urlPatterns = 
+@WebServlet(name = "GetPDFServlet", urlPatterns = 
 		{"/WebContent/Anmeldeformular",
 		"/WebContent/DAAD-Sprachzeugnis"})
 
