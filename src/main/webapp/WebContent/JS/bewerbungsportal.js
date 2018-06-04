@@ -398,14 +398,7 @@ var main = function() {
 					studiengang : sessionStorage['studiengang'],
 				    },
 				    success : function(result) {
-					var splitArr = result.split(';');
-					var auslesen = [];
-					for (var i = 0; i < splitArr.length - 1; i+=2) {
-						auslesen.push([
-							splitArr[i].trim(),
-							splitArr[i + 1].trim()
-						]);
-					}
+					var auslesen = result.split(';');
 					// var splitUnis =
 					// sessionStorage['beworbeneUnis'].split(';');
 					var splitUni = [];
@@ -420,17 +413,19 @@ var main = function() {
 					if (isEmpty(splitUni) != true) {
 					    for (var i = 0; i < auslesen.length - 1; i++) {
 						for (var k = 0; k < splitUni.length; k++) {
+						    auslesen[i] = auslesen[i]
+							    .trim();
 						    // Diese Abfrage verhindert,
 						    // dass Unis f�r die der
 						    // Student sich beworben hat
 						    // in der Auswahl angezeigt
 						    // werden
-						    if (splitUni[k] === auslesen[i][0]) {
+						    if (splitUni[k] === auslesen[i]) {
 							pruefen = "ja";
 						    } else {
 							hilfsindex = hilfsindex
 								+ ';'
-								+ auslesen[i][0];
+								+ auslesen[i];
 						    }
 						    if (pruefen === "ja") {
 							hilfsindex = '';
@@ -439,12 +434,12 @@ var main = function() {
 						    }
 						}
 						if (isEmpty(index) != true) {
+						    var ausgelesen = index
+							    .split(';');
 						    for (var m = 1; m < ausgelesen.length; m++) {
 							popUpHtml = popUpHtml
-								+ '<option value="'
-								+ auslesen[m][1]
-								+ '">'
-								+ ausgelesen[m][0]
+								+ '<option>'
+								+ ausgelesen[m]
 								+ '</option>';
 						    }
 
@@ -454,26 +449,24 @@ var main = function() {
 					    }
 					    if (auslesen.length - 1 > splitUni.length) {
 						popUpHtml = popUpHtml
-							+ '<option value="'
-							+ auslesen[splitUni.length][1]
-							+ '">';
-							+ auslesen[splitUni.length][0]
+							+ '<option>'
+							+ auslesen[splitUni.length]
 							+ '</option>';
 					    }
 					} else {
 					    for (var l = 0; l < auslesen.length - 1; l++) {
+						auslesen[l] = auslesen[l]
+							.trim();
 						popUpHtml = popUpHtml
-							+ '<option value="'
-							+ auslesen[l][1]
-							+ '">'
-							+ auslesen[l][0]
+							+ '<option>'
+							+ auslesen[l]
 							+ '</option>';
 					    }
 					}
 					popUpHtml = popUpHtml
 						+ '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
 
-					if (popUpHtml.match('<option') != '<option') {
+					if (popUpHtml.match('<option>') != '<option>') {
 					    popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
 					}
                         $.sweetModal({
@@ -499,7 +492,7 @@ var main = function() {
 											 '#selectUni')
 											 .val();
 											 zaehlupdate(0);
-											 askNextStep(uni);*/
+											 askNextStep(uni); */
 											location.replace("http://193.196.7.215:8080/Auslandssemesterportal/WebContent/bewerben.html?instance_id="+result);
 										},
 										error : function(
