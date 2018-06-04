@@ -874,92 +874,60 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		}
 	}
 
-	/** Methode dient zum Benachrichtigen des Auslandsmitarbeiter */
+	/** TASK LISTENER ASSIGNMENT: 
+         * Methode dient zum Benachrichtigen des Auslandsmitarbeiter
+         */
 	@Override
 	public void notify(DelegateTask delegateTask) {
-		// Mail Server Properties
-		// email.setHostName("mail.dhbw-karlsruhe.de");
+            // Automatic Mail Server Properties
 
-		String host = "10.3.43.6";
+            try {
+        	Message message = Util.getEmailMessage("mwiausland@gmail.com", "Akademisches Auslandsamt Registrierung");
 
-		Properties props = new Properties();
-        props.put("mail.smtp.auth", "false");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "25");
-        
-		Session session = Session.getInstance(props);
-
-		try {
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("mwiausland@gmail.com"));
-			message.setSubject(MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester", "utf-8", "B"));
-			message.setContent("Sehr geehrte Frau Dreischer," + "\n" + "\n"
+                message.setContent("Sehr geehrte Frau Dreischer," + "\n" + "\n"
 					+ "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n"
 					+ "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n"
 					+ "http://193.196.7.215:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(),
 					"text/plain; charset=UTF-8");
 
-			Transport.send(message);
+                // Send message
+                Transport.send(message);
 
-		} catch (MessagingException e) {
-			System.out.print("Could not send email!");
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        }
 
-	// Methode dient zum Versenden von Email an Student nach
+	
+
+        // SEND TASK
+        // Methode dient zum Versenden von Email an Student nach
 	// Validierung der getätigten Eingaben
-
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
+            String email = (String) execution.getVariable("bewEmail");
+            boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
+            String mailText = (String) execution.getVariable("mailText");
 
-		String host = "10.3.43.6";
 
-		Properties props = new Properties();
-        props.put("mail.smtp.auth", "false");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "25");
+            try {
+		Message message;
+                
+                //Bei erfolgreicher Validierung
+                if(erfolgreich){
+                    message = Util.getEmailMessage(email, "Eingereichte Bewerbung für Auslandssemester validiert");
+                    message.setContent(mailText, "text/plain; charset=UTF-8");
+                }
+                //wenn Validierung fehlgeschlagen
+                else{
+                    message = Util.getEmailMessage(email, "Bei der Validierung Ihrer Bewerbung ist ein Fehler aufgetreten"); 
+                    message.setContent(mailText, "text/plain; charset=UTF-8");
+                }
 
-		Session session = Session.getInstance(props);
-		
-		String email = (String) execution.getVariable("bewEmail");
-		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
-		String mailText = (String) execution.getVariable("mailText");
-
-		try {
-			Message message = new MimeMessage(session);
-			
-			message.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
-
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-			
-			//Bei erfolgreicher Validierung
-			if(erfolgreich){
-				message.setSubject(
-						MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester validiert", "utf-8", "B"));
-				message.setContent(mailText, "text/plain; charset=UTF-8");
-							
-				}
-			//wenn Validierung fehlgeschlagen
-				else{
-					message.setSubject(
-							MimeUtility.encodeText("Bei der Validierung Ihrer Bewerbung ist ein Fehler aufgetreten", "utf-8", "B"));
-				message.setContent(mailText, "text/plain; charset=UTF-8");
-			}
-
-			Transport.send(message);
+                Transport.send(message);
 
 		} catch (MessagingException e) {
 			System.out.print("Could not send email!");
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
