@@ -79,7 +79,7 @@ var main = function() {
 								tabelle = tabelle + '<button uni="' + instance_info[1] + '" type="button" class="btn btn-danger btn-delete" rid="' + (i+1) + '">Löschen</button>';
 						} else {
 							//Fortsetzen
-							tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '\'">Fortsetzen</button>';
+							tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '\'&uni='+instance_info[1]+'">Fortsetzen</button>';
 							//Prozess löschen
 							tabelle = tabelle + '<button uni="' + instance_info[1] + '" type="button" class="btn btn-danger btn-delete" rid="' + (i+1) + '">Löschen</button>'
 						}
