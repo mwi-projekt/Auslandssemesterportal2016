@@ -40,7 +40,7 @@ public class GetInstanceServlet extends HttpServlet {
           String instance_id = SQL_queries.getInstanceId(matnr, uni);
           if (instance_id == ""){
           	//Lege neue Instanz an
-          	ProcessInstance instance = runtime.startProcessInstanceByKey("studentBewerben");
+          	ProcessInstance instance = runtime.startProcessInstanceByKey(uni);
           	instance_id = instance.getId();
           	String[] user = SQL_queries.getUserData(matnr);
           	if (user.length > 0){

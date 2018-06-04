@@ -209,7 +209,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 			} else if (action.equals("get_Unis")) {
 
-				sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
+				sql = "SELECT uniTitel, model FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 						+ request.getParameter("studiengang") + "' ";
 
 			} else if (action.equals("post_prozessStart")) {
