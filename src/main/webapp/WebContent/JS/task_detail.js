@@ -27,7 +27,7 @@ $(document)
 					}
 					// Hyperlink on "Zurück"-Button
 					if (sessionStorage['rolle'] === '3') {
-					       document.getElementById('backbutton').on('click', function() {
+					       $('#backbutton').on('click', function() {
 					           location.href='bewerbungsportal.html';
 					       });
 					}
