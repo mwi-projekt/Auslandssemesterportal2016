@@ -400,7 +400,7 @@ var main = function() {
 				    success : function(result) {
 					var splitArr = result.split(';');
 					var auslesen = [];
-					for (var i = 0; i < splitArr.length; i+=2) {
+					for (var i = 0; i < splitArr.length - 1; i+=2) {
 						auslesen.push([
 							splitArr[i].trim(),
 							splitArr[i + 1].trim()
@@ -430,7 +430,7 @@ var main = function() {
 						    } else {
 							hilfsindex = hilfsindex
 								+ ';'
-								+ auslesen[i];
+								+ auslesen[i][0];
 						    }
 						    if (pruefen === "ja") {
 							hilfsindex = '';
