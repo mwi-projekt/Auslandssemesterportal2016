@@ -473,7 +473,7 @@ var main = function() {
 					popUpHtml = popUpHtml
 						+ '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
 
-					if (popUpHtml.match('<option>') != '<option>') {
+					if (popUpHtml.match('<option') != '<option') {
 					    popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
 					}
                         $.sweetModal({
