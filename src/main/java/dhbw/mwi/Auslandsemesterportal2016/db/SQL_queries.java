@@ -357,7 +357,7 @@ public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse z
 }
 
 public static String getmodel(String uni) {
-	String queryy = "SELECT model FROM cms_auslandsAngeboteInhalt WHERE uniTitel='"+uni+"'";
+	String queryy = "SELECT model FROM cms_auslandsAngeboteInhalt WHERE uniTitel=?";
 	String[] args = new String[]{uni};
 	String[] types = new String[]{"String"};
 	ResultSet modell = executeStatement(queryy, args, types);
