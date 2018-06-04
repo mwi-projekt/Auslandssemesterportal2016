@@ -363,7 +363,7 @@ public static String getmodel(String uni) {
 	ResultSet modell = executeStatement(queryy, args, types);
 	try{
 		if (modell.next()){
-			return modell.getString(queryy);
+			return modell.getString("model");
 		} else {
 			return "";
 		}
