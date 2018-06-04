@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.14.0">
   <bpmn:collaboration id="Collaboration_1cl2lu7">
-    <bpmn:participant id="Participant_00ci3jw" name="USA San Marcos" processRef="bewerben_san_marcos" />
+    <bpmn:participant id="Participant_00ci3jw" name="USA San Marcos" processRef="usasm" />
   </bpmn:collaboration>
-  <bpmn:process id="bewerben_san_marcos" name="Bewerbungen USA San Marcos" isExecutable="true">
+  <bpmn:process id="usasm" name="Bewerbungen USA San Marcos" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_07n76w6" name="Student">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
