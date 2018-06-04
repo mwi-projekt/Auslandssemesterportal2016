@@ -27,7 +27,9 @@ function getList() {
 			.ajax({
 				type : "GET",
 				url : "getOverview",
-				data : {},
+				data : {
+					definition : 'studentBewerben'
+				},
 				success : function(result) {
 					output = "";
 					completed = "";
