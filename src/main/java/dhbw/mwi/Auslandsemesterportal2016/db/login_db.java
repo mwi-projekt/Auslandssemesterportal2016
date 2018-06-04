@@ -882,7 +882,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
             // Automatic Mail Server Properties
 
             try {
-        	Message message = Util.getEmailMessage("mwiausland@gmail.com", "Akademisches Auslandsamt Registrierung");
+        	Message message = Util.getEmailMessage("info@thomasbruckner.de", "Akademisches Auslandsamt Registrierung");
 
                 message.setContent("Sehr geehrte Frau Dreischer," + "\n" + "\n"
 					+ "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n"
