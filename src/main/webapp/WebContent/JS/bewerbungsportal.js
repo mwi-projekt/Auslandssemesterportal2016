@@ -398,7 +398,14 @@ var main = function() {
 					studiengang : sessionStorage['studiengang'],
 				    },
 				    success : function(result) {
-					var auslesen = result.split('\n');
+					var splitArr = result.split(';');
+					var auslesen = [];
+					for (var i = 0; i < splitArr.length; i+=2) {
+						auslesen.push([
+							splitArr[i].trim(),
+							splitArr[i + 1].trim()
+						]);
+					}
 					// var splitUnis =
 					// sessionStorage['beworbeneUnis'].split(';');
 					var splitUni = [];
@@ -413,8 +420,6 @@ var main = function() {
 					if (isEmpty(splitUni) != true) {
 					    for (var i = 0; i < auslesen.length - 1; i++) {
 						for (var k = 0; k < splitUni.length; k++) {
-						    auslesen[i] = auslesen[i]
-							    .split(';');
 						    // Diese Abfrage verhindert,
 						    // dass Unis f�r die der
 						    // Student sich beworben hat
@@ -434,8 +439,6 @@ var main = function() {
 						    }
 						}
 						if (isEmpty(index) != true) {
-						    var ausgelesen = index
-							    .split(';');
 						    for (var m = 1; m < ausgelesen.length; m++) {
 							popUpHtml = popUpHtml
 								+ '<option value="'
@@ -459,7 +462,6 @@ var main = function() {
 					    }
 					} else {
 					    for (var l = 0; l < auslesen.length - 1; l++) {
-						auslesen[l] = auslesen[l].split(';');
 						popUpHtml = popUpHtml
 							+ '<option value="'
 							+ auslesen[l][1]
