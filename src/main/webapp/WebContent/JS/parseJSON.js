@@ -66,8 +66,8 @@ function parse(){
 		success : function(result) {
 			//alert('Aktiver Schritt: ' + result);
 			var resultArr = result.split(';');
-			step_id = result[0];
-			var model = result[1];
+			step_id = resultArr[0];
+			var model = resultArr[1];
 			if (step_id === "datenPruefen"){
 				location.href = 'task_detail.html?instance_id=' + instanceID + '&send_bew=true';
 			}
