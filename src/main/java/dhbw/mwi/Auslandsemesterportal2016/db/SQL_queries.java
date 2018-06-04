@@ -357,13 +357,13 @@ public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse z
 }
 
 public static String getmodel(String uni) {
-	String queryy = "SELECT definitionkey FROM cms_auslandsAngeboteInhalt WHERE uniTitel=?";
+	String queryy = "SELECT model FROM cms_auslandsAngeboteInhalt WHERE uniTitel=?";
 	String[] args = new String[]{uni};
 	String[] types = new String[]{"String"};
 	ResultSet modell = executeStatement(queryy, args, types);
 	try{
 		if (modell.next()){
-			return modell.getString("definitionkey");
+			return modell.getString("model");
 		} else {
 			return "";
 		}
