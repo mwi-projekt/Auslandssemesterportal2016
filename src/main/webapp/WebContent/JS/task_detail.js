@@ -331,7 +331,7 @@ function validateBew() {
 							type : "success",
 							confirmButtonText : "Ok"
 						}, function() {
-							//location.href = 'task_overview.html';
+							location.href = 'task_overview.html';
 						});
 					},
 					error : function(result) {
