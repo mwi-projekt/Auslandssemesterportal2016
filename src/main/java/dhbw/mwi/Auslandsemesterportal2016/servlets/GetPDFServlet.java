@@ -13,7 +13,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetHtmlFileServlet", urlPatterns = 
 		{"/WebContent/Anmeldeformular",
-		"/WebContent/daad_formular"})
+		"/WebContent/DAAD-Sprachzeugnis"})
 
 
 public class GetPDFServlet extends HttpServlet
