@@ -33,7 +33,7 @@ public class GetInstanceServlet extends HttpServlet {
 
           int matnr = Integer.parseInt(request.getParameter("matnr"));
           String uni = request.getParameter("uni");
-          String model = request.getParameter("model");
+          String model = SQL_queries.getmodel(uni);
 
           ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
           RuntimeService runtime = engine.getRuntimeService();

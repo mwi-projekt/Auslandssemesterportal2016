@@ -356,6 +356,23 @@ public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse z
 	}
 }
 
+public static String getmodel(String uni) {
+	String queryy = "SELECT model FROM cms_auslandsAngeboteInhalt WHERE uniTitel='"+uni+"'";
+	String[] args = new String[]{uni};
+	String[] types = new String[]{"String"};
+	ResultSet modell = executeStatement(queryy, args, types);
+	try{
+		if (modell.next()){
+			return modell.getString(queryy);
+		} else {
+			return "";
+		}
+	} catch (Exception e){
+		e.printStackTrace();
+		return "";
+	}
+}
+
 public static ArrayList<String[]> getUserInstances(int matNr){ //Uni|instanceID für alles Instanzen zurück (Getrennt nach List-Entries)
 	String queryString = "SELECT uni,processInstance FROM MapUserInstanz WHERE matrikelnummer = ?;";
 	String[] params = new String[]{""+matNr};
