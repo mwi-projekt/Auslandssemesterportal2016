@@ -1,7 +1,7 @@
 $(document)
 		.ready(
 				function() {
-					if (sessionStorage['rolle'] === '2') {
+					if (sessionStorage['rolle'] === '3') {
 						swal(
 								{
 									title : "Fehler!",
@@ -26,8 +26,10 @@ function getList() {
 	$
 			.ajax({
 				type : "GET",
-				url : "getOverview",
-				data : {},
+				url : "getTasks",
+				data : {
+					'definition' : 'studentBewerben'
+				},
 				success : function(result) {
 					output = "";
 					completed = "";
