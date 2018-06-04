@@ -398,7 +398,7 @@ var main = function() {
 					studiengang : sessionStorage['studiengang'],
 				    },
 				    success : function(result) {
-					var auslesen = result.split(';');
+					var auslesen = result.split('\n');
 					// var splitUnis =
 					// sessionStorage['beworbeneUnis'].split(';');
 					var splitUni = [];
@@ -414,13 +414,13 @@ var main = function() {
 					    for (var i = 0; i < auslesen.length - 1; i++) {
 						for (var k = 0; k < splitUni.length; k++) {
 						    auslesen[i] = auslesen[i]
-							    .trim();
+							    .split(';');
 						    // Diese Abfrage verhindert,
 						    // dass Unis f�r die der
 						    // Student sich beworben hat
 						    // in der Auswahl angezeigt
 						    // werden
-						    if (splitUni[k] === auslesen[i]) {
+						    if (splitUni[k] === auslesen[i][0]) {
 							pruefen = "ja";
 						    } else {
 							hilfsindex = hilfsindex
@@ -438,8 +438,10 @@ var main = function() {
 							    .split(';');
 						    for (var m = 1; m < ausgelesen.length; m++) {
 							popUpHtml = popUpHtml
-								+ '<option>'
-								+ ausgelesen[m]
+								+ '<option value="'
+								+ auslesen[m][1]
+								+ '">'
+								+ ausgelesen[m][0]
 								+ '</option>';
 						    }
 
@@ -449,17 +451,20 @@ var main = function() {
 					    }
 					    if (auslesen.length - 1 > splitUni.length) {
 						popUpHtml = popUpHtml
-							+ '<option>'
-							+ auslesen[splitUni.length]
+							+ '<option value="'
+							+ auslesen[splitUni.length][1]
+							+ '">';
+							+ auslesen[splitUni.length][0]
 							+ '</option>';
 					    }
 					} else {
 					    for (var l = 0; l < auslesen.length - 1; l++) {
-						auslesen[l] = auslesen[l]
-							.trim();
+						auslesen[l] = auslesen[l].split(';');
 						popUpHtml = popUpHtml
-							+ '<option>'
-							+ auslesen[l]
+							+ '<option value="'
+							+ auslesen[l][1]
+							+ '">'
+							+ auslesen[l][0]
 							+ '</option>';
 					    }
 					}
