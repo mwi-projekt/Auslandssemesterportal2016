@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
-@WebServlet(name = "GetHtmlFileServlet", urlPatterns = {"/WebContent/anmeldeformular",
-		"/WebContent/daad_formular"})
+@WebServlet(name = "GetHtmlFileServlet", urlPatterns = 
+		{"/WebContent/Anmeldeformular",
+		"/WebContent/DAAD-Sprachzeugnis"})
 
 
 public class GetPDFServlet extends HttpServlet
 {
-	private static final String PDF_FOLDER = "docs";
+	private static final String PDF_FOLDER = "/WebContent/docs";
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
 	{
