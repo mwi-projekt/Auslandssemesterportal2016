@@ -27,7 +27,9 @@ $(document)
 					}
 					// Hyperlink on "Zurück"-Button
 					if (sessionStorage['rolle'] === '3') {
-					       document.getElementById('backbutton').onclick("location.href='bewerbungsportal.html'");
+					       document.getElementById('backbutton').on('click', function() {
+					           location.href='bewerbungsportal.html';
+					       });
 					}
                     // init & logout
                     $('.nutzerName').text(sessionStorage['User']);
@@ -331,7 +333,7 @@ function validateBew() {
 							type : "success",
 							confirmButtonText : "Ok"
 						}, function() {
-							//location.href = 'task_overview.html';
+							location.href = 'task_overview.html';
 						});
 					},
 					error : function(result) {
