@@ -28,7 +28,7 @@ function getList() {
 				type : "GET",
 				url : "getOverview",
 				data : {
-					definition : 'studentBewerben'
+					'definition' : 'studentBewerben'
 				},
 				success : function(result) {
 					output = "";
