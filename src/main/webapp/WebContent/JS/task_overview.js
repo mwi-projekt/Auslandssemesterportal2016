@@ -26,7 +26,7 @@ function getList() {
 	$
 			.ajax({
 				type : "GET",
-				url : "GetAdminTasksServlet",
+				url : "getTasks",
 				data : {
 					'definition' : 'studentBewerben'
 				},
