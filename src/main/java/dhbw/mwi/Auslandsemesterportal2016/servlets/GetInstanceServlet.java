@@ -33,6 +33,7 @@ public class GetInstanceServlet extends HttpServlet {
 
           int matnr = Integer.parseInt(request.getParameter("matnr"));
           String uni = request.getParameter("uni");
+          String model = request.getParameter("model");
 
           ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
           RuntimeService runtime = engine.getRuntimeService();
@@ -40,7 +41,7 @@ public class GetInstanceServlet extends HttpServlet {
           String instance_id = SQL_queries.getInstanceId(matnr, uni);
           if (instance_id == ""){
           	//Lege neue Instanz an
-          	ProcessInstance instance = runtime.startProcessInstanceByKey("studentBewerben");
+          	ProcessInstance instance = runtime.startProcessInstanceByKey(model);
           	instance_id = instance.getId();
           	String[] user = SQL_queries.getUserData(matnr);
           	if (user.length > 0){
