@@ -1,4 +1,5 @@
 var instanceID;
+var uni;
 var url;
 var typeList;
 var idList;
@@ -9,6 +10,7 @@ $(document).ready(function() {
 	typeList = [];
 	url = new URL(window.location.href);
 	instanceID = url.searchParams.get("instance_id");
+	instanceID = url.searchParams.get("uni");
 
     // init & logout
     $('.nutzerName').text(sessionStorage['User']);
@@ -58,11 +60,14 @@ function parse(){
 		type : "GET",
 		url : "currentActivity",
 		data : {
-			instance_id: instanceID
+			instance_id: instanceID,
+			uni: uni
 		},
 		success : function(result) {
 			//alert('Aktiver Schritt: ' + result);
-			step_id = result;
+			var resultArr = result.split(';');
+			step_id = result[0];
+			var model = result[1];
 			if (step_id === "datenPruefen"){
 				location.href = 'task_detail.html?instance_id=' + instanceID + '&send_bew=true';
 			}
@@ -71,7 +76,7 @@ function parse(){
 				type : "GET",
 				url : "processmodel/get",
 				data : {
-					model: 'studentBewerben',
+					model: model,
 					step : step_id
 				},
 				success : function(result) {

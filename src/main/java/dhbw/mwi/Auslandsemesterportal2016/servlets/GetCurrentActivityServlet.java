@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.util.List;
+
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetCurrentActivityServlet", urlPatterns = {"/WebContent/currentActivity"})
@@ -30,6 +32,8 @@ public class GetCurrentActivityServlet extends HttpServlet {
           PrintWriter toClient = response.getWriter();
 
           String instanceID = request.getParameter("instance_id");
+          String uni = request.getParameter("uni");
+          String model = SQL_queries.getmodel(uni);
           ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
           RuntimeService runtime = engine.getRuntimeService();
 
@@ -37,6 +41,8 @@ public class GetCurrentActivityServlet extends HttpServlet {
           	List<String> activitiesList = runtime.getActiveActivityIds(instanceID);
           	String activeActivity = activitiesList.get(0);
           	toClient.write(activeActivity);
+          	toClient.write(";");
+          	toClient.write(model);
           }
         }
     }
