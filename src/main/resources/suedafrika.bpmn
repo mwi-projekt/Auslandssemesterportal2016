@@ -138,10 +138,10 @@
       <bpmn:outgoing>SequenceFlow_1p3sxt6</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_06jsa12" name="Ja" sourceRef="ExclusiveGateway_EnglischMutter" targetRef="ExclusiveGateway_EnglischEnd">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache=='Englisch'}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_12my7xt" name="Nein" sourceRef="ExclusiveGateway_EnglischMutter" targetRef="englischNotePruefen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">$(muttersprache!='Englisch')</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!muttersprache}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1p3sxt6" sourceRef="englischNotePruefen" targetRef="ExclusiveGateway_EnglischStart" />
     <bpmn:sequenceFlow id="SequenceFlow_1d0ul03" name="Nein" sourceRef="ExclusiveGateway_EnglischStart" targetRef="daadHochladen">
@@ -167,11 +167,11 @@
       <bpmn:outgoing>SequenceFlow_14f1mar</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_0avj3my" name="Ja" sourceRef="ExclusiveGateway_abweichendSemester" targetRef="Task_1jq3nab">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">$(semesteradresseAnders=='Ja')</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${semesteradresseAnders}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_14f1mar" sourceRef="Task_1jq3nab" targetRef="ExclusiveGateway_EnglischMutter" />
     <bpmn:sequenceFlow id="SequenceFlow_10wm7tv" name="Nein" sourceRef="ExclusiveGateway_abweichendSemester" targetRef="ExclusiveGateway_EnglischMutter">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">$(semesteradresseAnders=='Nein')</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!semesteradresseAnders}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
