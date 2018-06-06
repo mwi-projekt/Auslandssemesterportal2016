@@ -926,7 +926,7 @@ var main = function() {
                            AAACreateModal = $('#AAACreate');
                            $('#userNeu').attr("data-toggle", "modal").attr("href", "#AAACreate"); 
                            $('#AAACreateForm').submit(function( event ){
-                                var email = $('#AAAEmail').val();
+                                var email = $('#AAAMail').val();
                                 var vname = $('#AAAVorname').val();
                                 var nname = $('#AAANachname').val();
                                 var standort = $('#AAAStandort').val();
