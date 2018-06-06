@@ -265,10 +265,10 @@ public static int userLogout(String sessionID){
 
 public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle, String email, String studiengang,
 		String kurs, int matrikelnummer, String tel, String mobil, String standort, String verifiziert){
-	String query = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert) VALUES " +
-			"(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	String[] args = new String[]{vorname,nachname,passwort,salt,""+rolle,email,studiengang,kurs,""+matrikelnummer,tel,mobil,standort,verifiziert};
-	String[] types = new String[]{"String","String","String","String","int","String","String","String","int","String","String","String","String"};
+	String query = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert, resetToken) VALUES " +
+			"(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	String[] args = new String[]{vorname,nachname,passwort,salt,""+rolle,email,studiengang,kurs,""+matrikelnummer,tel,mobil,standort,verifiziert,""};
+	String[] types = new String[]{"String","String","String","String","int","String","String","String","int","String","String","String","String", "String"};
 	return executeUpdate(query,args,types);
 }
 
