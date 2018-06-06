@@ -53,9 +53,10 @@ public class createAAAServlet extends HttpServlet {
                 String aa = "Auslandsamt Mitarbeiter";
                 // Verbindung zur DB um neuen Nutzer zu speichern
                 int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),request.getParameter("nachname"),pw,
-                        salt,rolle,request.getParameter("email"),aa,aa,
+                        salt,role,request.getParameter("email"),aa,aa,
                         Integer.parseInt(request.getParameter("aaaid")),"","",request.getParameter("standort"),"1");
-                
+                //DEBUG REGISTRATION
+                System.out.println(rsupd);
                 RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
                 rd.forward(request,response);
 
