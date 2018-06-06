@@ -959,6 +959,14 @@ var main = function() {
                                                     confirmButtonText: "OK"
                                                 });
                                             }
+                                            else if (data == "registerError"){
+                                                swal({
+                                                    title: "Fehler!",
+                                                    text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                                                    type: "error",
+                                                    confirmButtonText: "OK"
+                                                });
+                                            }
                                             else {
                                                 swal({
                                                     title: "Account erfolgreich erstellt",
@@ -974,9 +982,7 @@ var main = function() {
                                           
                                 event.preventDefault();
                             });
-                            $('#btnAAACreate').click(function(){
-                               $('#AAACreateForm').submit();
-                           });
+
                          }
                         
                         

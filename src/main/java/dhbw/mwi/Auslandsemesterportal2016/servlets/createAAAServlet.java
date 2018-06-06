@@ -40,8 +40,8 @@ public class createAAAServlet extends HttpServlet {
                     out.print("mailError");
                     out.flush();
             }
-
-            try {
+            else{
+                try {
                     Message message = Util.getEmailMessage(request.getParameter("email")
                             , "Akademisches Auslandsamt Registrierung");
                 //Random initial Password
@@ -55,18 +55,24 @@ public class createAAAServlet extends HttpServlet {
                 int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),request.getParameter("nachname"),pw,
                         salt,role,request.getParameter("email"),aa,aa,
                         Integer.parseInt(request.getParameter("aaaid")),"","",request.getParameter("standort"),"1");
-                //DEBUG REGISTRATION
-                out.print(rsupd);
-                out.flush();
-                //RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
-                //rd.forward(request,response);
+                
+                if(rsupd == 0){
+                    out.print("registerError");
+                    out.flush();
+                }
+                else{
+                    RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
+                    rd.forward(request,response);
+                }      
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new RuntimeException(e);
-
+                }
+                
             }
+            
         }
 
     }
