@@ -56,9 +56,10 @@ public class createAAAServlet extends HttpServlet {
                         salt,role,request.getParameter("email"),aa,aa,
                         Integer.parseInt(request.getParameter("aaaid")),"","",request.getParameter("standort"),"1");
                 //DEBUG REGISTRATION
-                System.out.println(rsupd);
-                RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
-                rd.forward(request,response);
+                out.print(rsupd);
+                out.flush();
+                //RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
+                //rd.forward(request,response);
 
 
             } catch (Exception e) {
