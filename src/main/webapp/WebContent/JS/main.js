@@ -974,6 +974,9 @@ var main = function() {
                                           
                                 event.preventDefault();
                             });
+                            $('#btnAAACreate').click(function(){
+                               $('#AAACreateForm').submit();
+                           });
                          }
                         
                         
