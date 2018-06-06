@@ -918,6 +918,67 @@ var main = function() {
 		} else if (id === 'verwaltungUser') {
 			$('#adminBereich').hide();
 			$('#nutzerVerwaltung').show();
+                        
+                        var AAACreateModal = $('#AAACreate');
+                        
+                        if(AAACreateModal.length == 0){
+                           $('#login').after('<div id="AAACreate" class="modal fade" role="dialog"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button> <h4 class="modal-title">Neuen Auslandsmitarbeiter anlegen</h4> </div><div class="modal-body"> <form id="AAACreateForm" action=""> <div class="form-group"> <div class="row"> <div class="col-md-6"> <input type="text" placeholder="Vorname*" class="inBox form-control" id="AAAVorname" required=""> </div><div class="col-md-6"> <input type="text" placeholder="Nachname*" class="inBox form-control" id="AAANachname" required=""> </div></div></div> <input type="email" placeholder="E-Mail Adresse*" class="inBox form-control" id="AAAMail" required="" title="E-Mail"><br><input type="email" placeholder="Mitarbeiternummer*" class="inBox form-control" id="AAAID" required="" title="Mitarbeiternummer"> <br><select class="inBox form-control" id="AAAStandort" required=""> <option value="">DHBW Standort wählen*</option> <option value="DHBW_Karlsruhe">DHBW Karlsruhe</option> <option value="DHBW_Stuttgart">DHBW Stuttgart</option> <option value="DHBW_Mannheim">DHBW Mannheim</option> <option value="DHBW_Mosbach">DHBW Mosbach</option> <option value="DHBW_Lörrach">DHBW Lörrach</option> <option value="DHBW_Ravensburg">DHBW Ravensburg</option> <option value="DHBW_Heidenheim">DHBW Heidenheim</option> <option value="DHBW_Villingen-Schwenningen">DHBW Villingen-Schwenningen</option> </select> <br></form> </div><div class="modal-footer"> <input form="AAACreateForm" type="submit" class="btn" id="btnAAACreate" value="Anlegen" style="width: auto;"> </div></div></div></div>');
+                           AAACreateModal = $('#AAACreate');
+                           $('#userNeu').attr("data-toggle", "modal").attr("href", "#AAACreate"); 
+                           $('#AAACreateForm').submit(function( event ){
+                                var email = $('#AAAEmail').val();
+                                var vname = $('#AAAVorname').val();
+                                var nname = $('#AAANachname').val();
+                                var standort = $('#AAAStandort').val();
+                                var aaaid = $('#AAAID').val();
+                                $.ajax({
+                                    type : "POST",
+                                    url : "createAAA",
+                                    data : {
+                                            email : email,
+                                            vorname: vname,
+                                            nachname: nname,
+                                            standort: standort,
+                                            aaaid: aaaid
+                                    },
+                                    success : function(data) {
+                                            if (data == "mailError"){
+                                                swal({
+                                                    title: "Fehler!",
+                                                    text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
+                                                    type: "error",
+                                                    confirmButtonText: "OK"
+                                                });
+                                            
+                                            } 
+                                            else if (data == "No account registered for this email adress"){
+                                                swal({
+                                                    title: "Fehler!",
+                                                    text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                                                    type: "error",
+                                                    confirmButtonText: "OK"
+                                                });
+                                            }
+                                            else {
+                                                swal({
+                                                    title: "Account erfolgreich erstellt",
+                                                    text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
+                                                    type: "success",
+                                                    confirmButtonText: "OK"
+                                                });
+                                                
+                                            }
+                                        }
+                                  
+                                    });
+                                          
+                                event.preventDefault();
+                            });
+                         }
+                        
+                        
+                        
+                        
 			sessionStorage['verwaltung'] = 2;
 		} else if (id === 'verwaltungPortal') {
 			location.href = 'choose-diagram.html';
