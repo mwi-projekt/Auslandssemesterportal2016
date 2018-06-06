@@ -56,7 +56,7 @@ public class createAAAServlet extends HttpServlet {
                         salt,rolle,request.getParameter("email"),aa,aa,
                         Integer.parseInt(request.getParameter("aaaid")),"","",request.getParameter("standort"),"1");
                 
-                RequestDispatcher rd = request.getRequestDispatcher("ResetPasswordServlet");
+                RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
                 rd.forward(request,response);
 
 
