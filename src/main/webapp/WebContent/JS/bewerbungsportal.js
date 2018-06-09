@@ -74,12 +74,12 @@ var main = function() {
 							tabelle = tabelle + '<span class="glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '\'"></span>';
 						} else if (instance_info[2] === "Daten prüfen"){
 								//Übersicht
-								tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'">Übersicht</button>';
+								tabelle = tabelle + '<span class="glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'"></span>';
 								//Prozess löschen
 								tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>';
 						} else {
 							//Fortsetzen
-							tabelle = tabelle + '<span class="	glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '&uni='+instance_info[1]+'\'">Fortsetzen</button>';
+							tabelle = tabelle + '<span class="glyphicon glyphicon-circle-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '&uni='+instance_info[1]+'\'"></span>';
 							//Prozess löschen
 							tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>'
 						}
