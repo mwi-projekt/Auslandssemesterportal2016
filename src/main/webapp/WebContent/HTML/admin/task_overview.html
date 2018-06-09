@@ -50,6 +50,71 @@
 		</div>
 	</div>
 
+    <!-- Modal -->
+    <div id="login" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Login</h4>
+                </div>
+                <div class="modal-body">
+                    <form id ="loginForm" action="">
+                        <input type="email" placeholder="E-Mail Adresse" id="inEmail" class=" inBox" required autofocus style="width:80%; margin-left:5px">
+                        <br>
+                        <input type="password" placeholder="Passwort" id="inPasswort" class=" inBox" required style="width:80%; margin-left:5px">
+                        <p id="falschLogin" style="color: red; margin-bottom: 0px; display: none">Falsche Eingabe. Bitte versuchen sie es erneut.</p>
+                        <br>
+                        <a href="forgot_pw.html">Passwort vergessen?</a>
+                        <br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input form = "loginForm" type="submit" class="btn" id="btnLogin" value="Login" style="width: auto;">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="header">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <a href="index.html"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
+            </div>
+
+            <div class="col-md-3">
+            <div class="logFenster">
+                <button type="button" class="btn btn-default navMargin loginMain"
+                    data-toggle="modal" id="loginMain" data-target="#login">Login</button>
+
+                <button type="button" class="btn btn-default navMargin"
+                    data-toggle="modal" id="register" data-target="#register">Registrieren</button>
+            </div>
+            <div class="logoutFenster">
+
+
+                        Eingeloggt als <b class="nutzerName"></b>
+
+                        <button type="button" class="btn btn-default navMargin"
+                     id="logout" data-target="#logout">Logout</button>
+
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+    
 <!-- Mittlerer Teil -->
 <div class="row aufgaben">
     <div class="col-md-2"></div>
