@@ -1106,7 +1106,7 @@ var main = function() {
 															+ count
 															+ '"><span class ="glyphicon glyphicon-edit" title="Bearbeiten"></span></td><td data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
                             + count
-                            + '"><span class="glyphicon glyphicon-trash delete-button" title="Löschen"></span></td></tr>';
+                            + '"><span class="glyphicon glyphicon-trash delete-button" id="delete" title="Löschen"></span></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
