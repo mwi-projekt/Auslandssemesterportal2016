@@ -1106,7 +1106,7 @@ var main = function() {
 															+ count
 															+ '"></td><td class="glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
 															+ count
-															+ + '"></td></tr>';
+															+ '"></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
