@@ -79,9 +79,9 @@ var main = function() {
 								tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>';
 						} else {
 							//Fortsetzen
-							tabelle = tabelle + '<td><span class="glyphicon glyphicon-circle-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '&uni='+instance_info[1]+'\'"></span></td>';
+							tabelle = tabelle + '<td><span class="glyphicon glyphicon-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '&uni='+instance_info[1]+'\'"></span></td>';
 							//Prozess löschen
-							tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>'
+							tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>';
 						}
 						tabelle = tabelle + '</tr>'
 					}
