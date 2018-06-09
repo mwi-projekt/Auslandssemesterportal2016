@@ -1059,7 +1059,7 @@ var main = function() {
 															+ auslesen[i + 3]
 															+ '</td><td class="mobil">'
 															+ auslesen[i + 4]
-															+ '</td><td class="glyphicon glyphicon-edit" id="edit'
+															+ '</td><td class="glyphicon glyphicon-edit" id="edit title="Bearbeiten"'
 															+ count
 															+ '"></td></tr>';
 													if (even === 'even') {
@@ -1102,9 +1102,9 @@ var main = function() {
 															+ auslesen[i + 6]
 															+ '</td><td class="matrikelnr">'
 															+ auslesen[i + 7]
-															+ '</td><td class="glyphicon glyphicon-edit" id="edit'
+															+ '</td><td class="glyphicon glyphicon-edit" id="edit title="Bearbeiten"'
 															+ count
-															+ '"></td><td class="glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
+															+ '"></td><td class="glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete title="Löschen"'
                             + count
                             + '"></td></tr>';
 													if (even === 'even') {
