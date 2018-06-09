@@ -27,31 +27,12 @@
 </head>
 
 <body>
-    <!--  PopupFeld für Registrierung ---------------------------------------------------------------->
-	<div class="erfolgreich"></div>
-	<div class="popUpBack"></div>
-    <div class="header">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-1">
-                <a href="index.html">
-                    <img class="img-thumbnail" src="images/DHBW-Logo.svg" />
-                </a>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3">
-                <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
-            </div>
-            <div class="col-md-3">
-                <!--STUDENT EMPLOYEE ADMIN-->
-                <div class="logoutFenster">
-                    Eingeloggt als
-                    <b class="nutzerName"></b>
-                    <button type="button" class="btn btn-default navMargin" id="logout" data-target="#logout">Logout</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div include-html="header.html"></div>
+	
+	<script>
+		includeHTML();
+	</script>
+
     <!-- Mittlerer Teil -------------------------------------------------------------------------->
     <div class="inhalt" id="normalBereich">
         <div class="row navBar" style="text-align: center">
