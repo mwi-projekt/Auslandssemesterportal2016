@@ -1106,7 +1106,7 @@ var main = function() {
 															+ count
 															+ '"></td><td class="btn delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
                             + count
-                            + '"></td></tr>';
+                            + '">Löschen</td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
