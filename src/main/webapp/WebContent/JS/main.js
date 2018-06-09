@@ -1102,11 +1102,11 @@ var main = function() {
 															+ auslesen[i + 6]
 															+ '</td><td class="matrikelnr">'
 															+ auslesen[i + 7]
-															+ '</td><td class="glyphicon glyphicon-edit" data-matrikel="'+ auslesen[i + 7].trim() +'" id="edit'
+															+ '</td><td class="glyphicon glyphicon-edit" id="edit" data-matrikel="'+ auslesen[i + 7].trim() +'" id="edit'
 															+ count
 															+ '"></td><td class="glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
-                            + count
-                            + '"></td></tr>';
+															+ count
+															+ + '"></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
