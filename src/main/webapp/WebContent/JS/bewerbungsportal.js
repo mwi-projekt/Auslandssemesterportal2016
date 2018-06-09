@@ -71,7 +71,7 @@ var main = function() {
 						//Anlegen der Buttons
 						if ((instance_info[2] === "Abgeschlossen")||(instance_info[2] === "Auf Rückmeldung warten")){
 							//Übersicht
-							tabelle = tabelle + '<td rowspan="2"><span class="glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '\'"></span></td>';
+							tabelle = tabelle + '<td rowspan="2"><span class="glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '\'"></span>';
 						} else if (instance_info[2] === "Daten prüfen"){
 								//Übersicht
 								tabelle = tabelle + '<td rowspan="2"><span class="glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'"></span>';
