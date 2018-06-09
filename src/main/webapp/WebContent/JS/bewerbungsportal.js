@@ -56,7 +56,7 @@ var main = function() {
 				    matnr : sessionStorage['matrikelnr']
 				},
 				success : function(result) {
-					tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Aktionen</th></tr></thead>';
+					tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th colspan="2">Aktionen</th></tr></thead>';
 					result = result.trim();
 					if (result === ""){
 						$('#tableBewProzess').html('<h2>Keine Bewerbungen vorhanden</h2>');
@@ -67,7 +67,7 @@ var main = function() {
 					for (var i = 0; i < row.length; i++){
 						instance_info = row[i].split('|');
 						//instance_info[0] = instanceID, [1] = uni, [2] = stepCounter
-						tabelle = tabelle + '<tr data-rid="' + (i+1) + '"><td colspan="2">' + instance_info[1] + '</td><td>' + instance_info[2] + '</td><td>';
+						tabelle = tabelle + '<tr data-rid="' + (i+1) + '"><td>' + instance_info[1] + '</td><td colspan="2">' + instance_info[2] + '</td><td>';
 						//Anlegen der Buttons
 						if ((instance_info[2] === "Abgeschlossen")||(instance_info[2] === "Auf Rückmeldung warten")){
 							//Übersicht
