@@ -1059,9 +1059,9 @@ var main = function() {
 															+ auslesen[i + 3]
 															+ '</td><td class="mobil">'
 															+ auslesen[i + 4]
-															+ '</td><td class="btn" id="edit'
+															+ '</td><td class="glyphicon glyphicon-edit" id="edit'
 															+ count
-															+ '">Bearbeiten</td></tr>';
+															+ '"></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
