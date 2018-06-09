@@ -76,12 +76,12 @@ var main = function() {
 								//Übersicht
 								tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'">Übersicht</button>';
 								//Prozess löschen
-								tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" alt="Löschen" rid="' + (i+1) + '"></span>';
+								tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>';
 						} else {
 							//Fortsetzen
 							tabelle = tabelle + '<button type="button" class="btn btn-primary" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '&uni='+instance_info[1]+'\'">Fortsetzen</button>';
 							//Prozess löschen
-							tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" alt="Löschen" rid="' + (i+1) + '"></span>'
+							tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>'
 						}
 						tabelle = tabelle + '</td></tr>'
 					}
