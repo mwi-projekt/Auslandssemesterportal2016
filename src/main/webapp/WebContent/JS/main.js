@@ -1102,9 +1102,9 @@ var main = function() {
 															+ auslesen[i + 6]
 															+ '</td><td class="matrikelnr">'
 															+ auslesen[i + 7]
-															+ '</td><td class="glyphicon glyphicon-list" id="edit'
+															+ '</td><td class="btn glyphicon glyphicon-list" id="edit'
 															+ count
-															+ '"></td><td class="btn delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
+															+ '">Bearbeiten</td><td class="btn delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
                             + count
                             + '">Löschen</td></tr>';
 													if (even === 'even') {
