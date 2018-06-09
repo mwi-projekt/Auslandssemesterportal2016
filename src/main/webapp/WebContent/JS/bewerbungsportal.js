@@ -67,7 +67,7 @@ var main = function() {
 					for (var i = 0; i < row.length; i++){
 						instance_info = row[i].split('|');
 						//instance_info[0] = instanceID, [1] = uni, [2] = stepCounter
-						tabelle = tabelle + '<tr data-rid="' + (i+1) + '"><td>' + instance_info[1] + '</td><td>' + instance_info[2] + '</td><td>';
+						tabelle = tabelle + '<tr data-rid="' + (i+1) + '"><td>' + instance_info[1] + '</td><td>' + instance_info[2] + '</td>';
 						//Anlegen der Buttons
 						if ((instance_info[2] === "Abgeschlossen")||(instance_info[2] === "Auf Rückmeldung warten")){
 							//Übersicht
@@ -83,7 +83,7 @@ var main = function() {
 							//Prozess löschen
 							tabelle = tabelle + '<td><span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span></td>'
 						}
-						tabelle = tabelle + '</td></tr>'
+						tabelle = tabelle + '</tr>'
 					}
 					tabelle = tabelle + '</table>';
 					$('#tableBewProzess').html(tabelle);
