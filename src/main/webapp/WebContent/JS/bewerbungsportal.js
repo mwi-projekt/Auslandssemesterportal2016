@@ -67,21 +67,21 @@ var main = function() {
 					for (var i = 0; i < row.length; i++){
 						instance_info = row[i].split('|');
 						//instance_info[0] = instanceID, [1] = uni, [2] = stepCounter
-						tabelle = tabelle + '<tr data-rid="' + (i+1) + '"><td>' + instance_info[1] + '</td><td>' + instance_info[2] + '</td>';
+						tabelle = tabelle + '<tr data-rid="' + (i+1) + '"><td rowspan="2">' + instance_info[1] + '<td>' + instance_info[2] + '</td></td>';
 						//Anlegen der Buttons
 						if ((instance_info[2] === "Abgeschlossen")||(instance_info[2] === "Auf Rückmeldung warten")){
 							//Übersicht
-							tabelle = tabelle + '<td rowspan="2"><span class="glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '\'"></span>';
+							tabelle = tabelle + '<span class="glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '\'"></span>';
 						} else if (instance_info[2] === "Daten prüfen"){
 								//Übersicht
-								tabelle = tabelle + '<td rowspan="2"><span class="glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'"></span>';
+								tabelle = tabelle + '<span class="glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'"></span>';
 								//Prozess löschen
-								tabelle = tabelle + '<td><span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span></td></td>';
+								tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>';
 						} else {
 							//Fortsetzen
-							tabelle = tabelle + '<td rowspan="2"><span class="glyphicon glyphicon-circle-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '&uni='+instance_info[1]+'\'"></span>';
+							tabelle = tabelle + '<span class="glyphicon glyphicon-circle-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '&uni='+instance_info[1]+'\'"></span>';
 							//Prozess löschen
-							tabelle = tabelle + '<td><span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span></td></td>'
+							tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>'
 						}
 						tabelle = tabelle + '</tr>'
 					}
