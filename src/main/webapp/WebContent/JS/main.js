@@ -1059,9 +1059,9 @@ var main = function() {
 															+ auslesen[i + 3]
 															+ '</td><td class="mobil">'
 															+ auslesen[i + 4]
-															+ '</td><td class="glyphicon glyphicon-edit" id="edit'
+															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
-															+ '"></td></tr>';
+															+ '" title="Bearbeiten"></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
@@ -1104,9 +1104,9 @@ var main = function() {
 															+ auslesen[i + 7]
 															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
-															+ '"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
+															+ '" title="Bearbeiten"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
                             + count
-                            + '"></span></td></tr>';
+                            + '" title="Löschen"></span></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
