@@ -301,7 +301,6 @@ function validateBew() {
 	} else {
 		resultString = "ablehnen"
 	}
-	;
 	swal(
 			{
 				title : "Bewerbung " + resultString,
