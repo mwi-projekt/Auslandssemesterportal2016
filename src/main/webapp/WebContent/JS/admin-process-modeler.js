@@ -546,6 +546,6 @@ $(document).ready(function () {
 	for (var i = 1; i < 10; i++) {
 		$('.angCont' + i).hide();
 		$('.c' + i + '1').show();
-	}
+	} 
 
 });

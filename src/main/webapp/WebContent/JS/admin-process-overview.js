@@ -88,5 +88,5 @@ $(document).ready(function () {
 		$('.angCont' + i).hide();
 		$('.c' + i + '1').show();
 	}
-
+ 
 });
