@@ -4,9 +4,6 @@
 		window.location.href = removeQueryStringParameter('logout');
 	}
 
-	$('.imgSlider').css('background-image', 'url(images/pan' + back + '.jpg)');
-	loadPortalInfo();
-	loop();
 	// Überprüfen ob jemand eingeloggt ist
 	if (isEmpty(sessionStorage['User']) === true
 			|| sessionStorage['User'] === 'undefined') {
