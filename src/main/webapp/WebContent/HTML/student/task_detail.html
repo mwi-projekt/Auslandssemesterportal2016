@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>DHBW Auslandsportal</title>
 
-    <link rel="stylesheet"
-          href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
     <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/bewerbungsportal.css">
@@ -21,12 +21,12 @@
     <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
     <script src="JS/task_detail.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-    <!-- Latest compiled and minified bootstrap-select CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
 
-	<!-- Latest compiled and minified bootstrap-select JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <!-- Latest compiled and minified bootstrap-select CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified bootstrap-select JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 </head>
 
 <body>
@@ -41,16 +41,16 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <form action="" id="regForm">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Registrieren</h4>
-                </div>
-                <div class="modal-body">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Registrieren</h4>
+                    </div>
+                    <div class="modal-body">
 
                         <select class="rolleWahl inBox inline" required>
                             <option>Ich bin...</option>
-<option>Studierender</option>
-<option>Auslandsmitarbeiter</option>
+                            <option>Studierender</option>
+                            <option>Auslandsmitarbeiter</option>
                         </select>
                         <label class="btn auswahl">Bestätigen</label>
                         <div class="student auslandsmitarbeiter">
@@ -64,7 +64,9 @@
                                         <input type="text" placeholder="Nachname*" class="inBox form-control" id="inNachname" required>
                                     </div>
                                 </div>
-                                <input type="email" placeholder="DHBW E-Mail: Nachname.Vorname@student.dhbw-karlsruhe.de*" class="inBox form-control" id="inMail" required pattern="^[a-zA-Z0-9]*(\.){0,1}[a-zA-Z0-9]+@(student\.){0,1}dhbw-karlsruhe\.de$" title="Nachname.Vorname@student.dhbw-karlsruhe.de">
+                                <input type="email" placeholder="DHBW E-Mail: Nachname.Vorname@student.dhbw-karlsruhe.de*" class="inBox form-control" id="inMail"
+                                    required pattern="^[a-zA-Z0-9]*(\.){0,1}[a-zA-Z0-9]+@(student\.){0,1}dhbw-karlsruhe\.de$"
+                                    title="Nachname.Vorname@student.dhbw-karlsruhe.de">
                             </div>
                         </div>
                         <div class="student">
@@ -101,7 +103,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="password" placeholder="Passwort 1. Mal*" class="inBox form-control" id="inPwSt1" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Das Passwort muss mindestens 8 Zeichen lang sein und eine Nummer sowie einen Groß- und Kleinbuchstaben beinhalten">
+                                        <input type="password" placeholder="Passwort 1. Mal*" class="inBox form-control" id="inPwSt1" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                            title="Das Passwort muss mindestens 8 Zeichen lang sein und eine Nummer sowie einen Groß- und Kleinbuchstaben beinhalten">
                                     </div>
                                     <div class="col-md-6">
                                         <input type="password" placeholder="Passwort 2. Mal*" class="inBox form-control" id="inPwSt2" required>
@@ -114,8 +117,8 @@
                         </div>
                         <div id="askAdmin">
                             <div class="form-group">
-                                <p style="color: red">Bitte wenden sie sich an Herrn Prof.
-                                    Dr. Thomas Freytag, wenn sie Zugang zu diesem Portal benötigen.</p>
+                                <p style="color: red">Bitte wenden sie sich an Herrn Prof. Dr. Thomas Freytag, wenn sie Zugang zu diesem Portal
+                                    benötigen.</p>
                             </div>
                         </div>
 
@@ -129,29 +132,27 @@
                             </div>
                         </div>
                         <p class="falsch"></p>
-                </div>
-                <div class="nutzerBearbeiten">
-                    <b id="closeBearb"><img src="images/Button Delete.png"
-                        id="smallImg"></b>
-                    <h2>Benutzerdaten bearbeiten</h2>
-                    <input class="inBox" type="text" id="inEditVorname"
-                        placeholder="Vorname"> <input class="inBox" type="text"
-                        id="inEditNachname" placeholder="Nachname"> <input
-                        class="inBox" type="text" id="inEditEmail" placeholder="Email">
-                    <input class="inBox" type="text" id="inEditTel"
-                        placeholder="Telefonnummer"> <input class="inBox"
-                        type="text" id="inEditMobil" placeholder="Mobilfunknummer">
-                    <input class="inBox" type="text" id="inEditStudgang"
-                        placeholder="Studiengang"> <input class="inBox"
-                        type="text" id="inEditKurs" placeholder="Kurs"> <input
-                        class="inBox" type="text" id="inEditMatnr"
-                        placeholder="Matrikelnummer"><br>
-                    <div class="btn" id="btnUserEditSave">Änderungen speichern</div>
-                </div>
-                <div class="modal-footer">
-                    <input type="submit" class="btn btnReg" value="Registrieren" style="width: auto;">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
-                </div>
+                    </div>
+                    <div class="nutzerBearbeiten">
+                        <b id="closeBearb">
+                            <img src="images/Button Delete.png" id="smallImg">
+                        </b>
+                        <h2>Benutzerdaten bearbeiten</h2>
+                        <input class="inBox" type="text" id="inEditVorname" placeholder="Vorname">
+                        <input class="inBox" type="text" id="inEditNachname" placeholder="Nachname">
+                        <input class="inBox" type="text" id="inEditEmail" placeholder="Email">
+                        <input class="inBox" type="text" id="inEditTel" placeholder="Telefonnummer">
+                        <input class="inBox" type="text" id="inEditMobil" placeholder="Mobilfunknummer">
+                        <input class="inBox" type="text" id="inEditStudgang" placeholder="Studiengang">
+                        <input class="inBox" type="text" id="inEditKurs" placeholder="Kurs">
+                        <input class="inBox" type="text" id="inEditMatnr" placeholder="Matrikelnummer">
+                        <br>
+                        <div class="btn" id="btnUserEditSave">Änderungen speichern</div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btnReg" value="Registrieren" style="width: auto;">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Schließen</button>
+                    </div>
                 </form>
             </div>
 
@@ -171,7 +172,7 @@
                     <h4 class="modal-title">Login</h4>
                 </div>
                 <div class="modal-body">
-                    <form id ="loginForm" action="">
+                    <form id="loginForm" action="">
                         <input type="email" placeholder="E-Mail Adresse" id="inEmail" class=" inBox" required autofocus style="width:80%; margin-left:5px">
                         <br>
                         <input type="password" placeholder="Passwort" id="inPasswort" class=" inBox" required style="width:80%; margin-left:5px">
@@ -182,7 +183,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <input form = "loginForm" type="submit" class="btn" id="btnLogin" value="Login" style="width: auto;">
+                    <input form="loginForm" type="submit" class="btn" id="btnLogin" value="Login" style="width: auto;">
 
                 </div>
             </div>
@@ -195,7 +196,9 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-2">
-                <a href="/Auslandssemesterportal/WebContent/"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
+                <a href="/Auslandssemesterportal/WebContent/">
+                    <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" />
+                </a>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3">
@@ -203,26 +206,24 @@
             </div>
 
             <div class="col-md-3">
-            <div class="logFenster">
-                <button type="button" class="btn btn-default navMargin loginMain"
-                    data-toggle="modal" id="loginMain" data-target="#login">Login</button>
+                <div class="logFenster">
+                    <button type="button" class="btn btn-default navMargin loginMain" data-toggle="modal" id="loginMain" data-target="#login">Login</button>
 
-                <button type="button" class="btn btn-default navMargin"
-                    data-toggle="modal" id="register" data-target="#register">Registrieren</button>
+                    <button type="button" class="btn btn-default navMargin" data-toggle="modal" id="register" data-target="#register">Registrieren</button>
+                </div>
+                <div class="logoutFenster">
+
+
+                    Eingeloggt als
+                    <b class="nutzerName"></b>
+
+                    <button type="button" class="btn btn-default navMargin" id="logout" data-target="#logout">Logout</button>
+
+                </div>
+
             </div>
-            <div class="logoutFenster">
 
-
-                        Eingeloggt als <b class="nutzerName"></b>
-
-                        <button type="button" class="btn btn-default navMargin"
-                     id="logout" data-target="#logout">Logout</button>
-
-            </div>
-
-        </div>
-
-        <!--
+            <!--
             <div class="col-md-2"></div>
             <div class="col-md-1">
                <img src="DHBW-Logo.svg" alt="SVG mit img Tag laden" width="200">  
@@ -262,46 +263,51 @@
                 <button type="button" class="btn btn-info btn-lg"
                     data-toggle="modal" data-target="#login">Login</button>
             </div> -->
-    </div>
+        </div>
     </div>
 
-<!-- Mittlerer Teil -->
-<div class="row aufgaben">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <div class="nav2">
-            <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
-            <div class="navEl nonCms current" id="nav2"><a style="color:white" href="task_overview.html">Admin</a></div>
-            <div class="navEl nonCms current" id="nav3"><a style="color:white" href="bewerbungsportal.html">Bewerben</a></div>
-        </div>
-        <div>
-        	<button id= backbutton type="button" class="btn btn-primary" onclick="location.href='task_overview.html'" style="margin-top:10px; margin-left:7px; margin-bottom: 10px">Zurück zur Übersicht</button>
-        </div>
-        <div id="taskDetails"></div>
-        <div id="validate" class="form-group">
-        	<form>
-        		<label style="margin-left: 20px; margin-bottom: 20px;">Aktion</label>
-        		<select style= "margin-left: 20px" class="selectpicker" id="validierungErfolgreich" onchange="change(this)">
-        			<option value="">-- Ausw&auml;hlen --</option>
-        			<option value="true">Best&auml;tigen</option>
-        			<option value="false">Ablehnen</option>
-        		</select><br>
-        		<label style="margin-left: 20px" id="reasonl">Grund</label>
-        		
-        		<textarea class="form-control" rows="5" id="reason"></textarea><br>
-        		<button type="button" class="btn btn-success" id="validateBtn" onClick="validateBew()">Absenden</button>
-        	</form>
-        </div>
-        <div id="">
-        <button type="button" class="btn btn-success" id="saveChanges" onClick="saveChanges()">Mail versenden</button>
-        </div>
+    <!-- Mittlerer Teil -->
+    <div class="row aufgaben">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="nav2">
+                <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
+                <div class="navEl nonCms current" id="nav2">
+                    <a style="color:white" href="task_overview.html">Admin</a>
+                </div>
+                <div class="navEl nonCms current" id="nav3">
+                    <a style="color:white" href="bewerbungsportal.html">Bewerben</a>
+                </div>
+            </div>
+            <div>
+                <button id="b" ackbutton type="button" class="btn btn-primary" onclick="location.href='task_overview.html'" style="margin-top:10px; margin-left:7px; margin-bottom: 10px">Zurück zur Übersicht</button>
+            </div>
+            <div id="taskDetails"></div>
+            <div id="validate" class="form-group">
+                <form>
+                    <label style="margin-left: 20px; margin-bottom: 20px;">Aktion</label>
+                    <select style="margin-left: 20px" class="selectpicker" id="validierungErfolgreich" onchange="change(this)">
+                        <option value="">-- Ausw&auml;hlen --</option>
+                        <option value="true">Best&auml;tigen</option>
+                        <option value="false">Ablehnen</option>
+                    </select>
+                    <br>
+                    <label style="margin-left: 20px" id="reasonl">Grund</label>
+
+                    <textarea class="form-control" rows="5" id="reason"></textarea>
+                    <br>
+                    <button type="button" class="btn btn-success" id="validateBtn" onClick="validateBew()">Absenden</button>
+                </form>
+            </div>
+            <div id="">
+                <button type="button" class="btn btn-success" id="saveChanges" onClick="saveChanges()">Mail versenden</button>
+            </div>
 
         </div>
     </div>
 
     <div class="inhalt cms" id="in3">
-        <div class="inhaltBox col-md-12">Das ist die Startseite. Hier
-            muss noch Fülltext zur Beschreibung der möglichen Funktionen rein.
+        <div class="inhaltBox col-md-12">Das ist die Startseite. Hier muss noch Fülltext zur Beschreibung der möglichen Funktionen rein.
         </div>
     </div>
     <div class="inhalt cms" id="in5">
@@ -310,25 +316,28 @@
     <div class="inhalt cms" id="in6">
         <div class="col-md-12 inhaltBox"></div>
     </div>
-<!--  </div>
+    <!--  </div>
 </div> -->
 
-<!-- 	FuÃŸzeile -->
-	<div class="footer">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<div class="pull-right">
-					<p>
-						<a href="index.html">Startseite</a> | <a href="impressum">Impressum</a>
-						| <a href="faq">FAQs</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-<!-- test -->
+    <!-- 	FuÃŸzeile -->
+    <div class="footer">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="pull-right">
+                    <p>
+                        <a href="index.html">Startseite</a> |
+                        <a href="impressum">Impressum</a>
+                        |
+                        <a href="faq">FAQs</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- test -->
 
-<!-- test -->
+    <!-- test -->
 </body>
+
 </html>
