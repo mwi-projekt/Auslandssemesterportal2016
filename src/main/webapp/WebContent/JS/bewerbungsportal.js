@@ -71,17 +71,17 @@ var main = function() {
 						//Anlegen der Buttons
 						if ((instance_info[2] === "Abgeschlossen")||(instance_info[2] === "Auf Rückmeldung warten")){
 							//Übersicht
-							tabelle = tabelle + '<td><span class="btn glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '\'"></span></td>';
+							tabelle = tabelle + '<td><span class="btn glyphicon glyphicon-list" text-align="center" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '\'"></span></td>';
 						} else if (instance_info[2] === "Daten prüfen"){
 								//Übersicht
-								tabelle = tabelle + '<td><span class="btn glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'"></span><td>';
+								tabelle = tabelle + '<td><span class="btn glyphicon glyphicon-list" text-align="center" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info[0] + '&send_bew=true\'"></span><td>';
 								//Prozess löschen
-								tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="btn glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>';
+								tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="btn glyphicon glyphicon-trash btn-delete" text-align="center" title="Löschen" rid="' + (i+1) + '"></span>';
 						} else {
 							//Fortsetzen
-							tabelle = tabelle + '<td><span class="btn glyphicon glyphicon-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '&uni='+instance_info[1]+'\'"></span><td>';
+							tabelle = tabelle + '<td><span class="btn glyphicon glyphicon-arrow-right" text-align="center" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info[0] + '&uni='+instance_info[1]+'\'"></span><td>';
 							//Prozess löschen
-							tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="btn glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i+1) + '"></span>'; 
+							tabelle = tabelle + '<span uni="' + instance_info[1] + '" class="btn glyphicon glyphicon-trash btn-delete" text-align="center" title="Löschen" rid="' + (i+1) + '"></span>'; 
 						}
 						tabelle = tabelle + '</td></tr>'
 					}
