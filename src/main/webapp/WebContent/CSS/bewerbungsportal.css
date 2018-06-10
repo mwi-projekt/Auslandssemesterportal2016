@@ -36,6 +36,7 @@ th {
 	transition: background-color 0.5s;
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
+	visited: none;
 }
 
 .navEl:hover {
