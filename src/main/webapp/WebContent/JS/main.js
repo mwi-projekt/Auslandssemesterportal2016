@@ -1104,7 +1104,7 @@ var main = function() {
 															+ auslesen[i + 7]
 															+ '</td><td><button class="glyphicon glyphicon-edit" id="edit'
 															+ count
-															+ '"></button></td><td><button class="glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
+															+ '"> </button></td><td><button class="glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
                             + count
                             + '"></button></td></tr>';
 													if (even === 'even') {
