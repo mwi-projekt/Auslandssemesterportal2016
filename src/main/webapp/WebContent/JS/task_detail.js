@@ -4,6 +4,7 @@ var typeList;
 var verify;
 var idList;
 var sendBew;
+var processDefinition;
 
 
 $(document)
@@ -15,6 +16,7 @@ $(document)
 			instanceID = url.searchParams.get("instance_id");
 			verify = url.searchParams.get("verify");
 			sendBew = url.searchParams.get("send_bew");
+			processDefinition = url.searchParams.get("uni");
 			if (!(verify === "true")) {
 				if (!(sendBew === "true")) {
 					$('#saveChanges').hide();
@@ -55,7 +57,7 @@ function parse() {
 			url: "getOverview",
 			data: {
 				instance_id: instanceID,
-				definition: 'studentBewerben'
+				definition: processDefinition
 			},
 			success: function (result) {
 				output = output +
