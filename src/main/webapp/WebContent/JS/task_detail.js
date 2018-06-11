@@ -57,7 +57,8 @@ $(document)
 					step_id = resultArr[0];
 					processDefinition = resultArr[1];
 					parse();
-				});
+				}
+			});
 			
 		});
 
