@@ -313,6 +313,23 @@ function validateBew() {
 		closeOnConfirm: false
 	}, function () {
 
+		for(var i = 0; i<grund.length;i++)
+		{
+			if(grund[i] == '-')
+				if(grund[i+1] == '-')
+					if(grund[i+2]== ' ')
+						if(grund[i+3]=='P')
+						{
+							swal({
+								title: "Platzhalter überprüfen ",
+								text: "Bitte überprüfen sie den Text nocheinmal auf nicht entfernte Platzhalter",
+								type: "warning",
+								confirmButtonText: "Ok"
+							});
+							return;
+						}
+		}
+
 		// alert(keyString);
 		// alert(valString);
 		// alert(typeString);
