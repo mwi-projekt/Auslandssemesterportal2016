@@ -69,7 +69,7 @@ function parse(){
 			step_id = resultArr[0];
 			var model = resultArr[1];
 			if (step_id === "datenPruefen"){
-				location.href = 'task_detail.html?instance_id=' + instanceID + '&send_bew=true';
+				location.href = 'task_detail.html?instance_id=' + instanceID + '&uni='+uni+'&send_bew=true';
 			}
 			$
 			.ajax({
