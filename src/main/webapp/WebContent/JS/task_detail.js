@@ -16,7 +16,7 @@ $(document)
 			instanceID = url.searchParams.get("instance_id");
 			verify = url.searchParams.get("verify");
 			sendBew = url.searchParams.get("send_bew");
-			processDefinition = url.searchParams.get("uni");
+			var uni = url.searchParams.get("uni");
 			if (!(verify === "true")) {
 				if (!(sendBew === "true")) {
 					$('#saveChanges').hide();
@@ -44,7 +44,21 @@ $(document)
 			$('#reasonl').hide();
 			$('#validateBtn').prop('disabled', true);
 
-			parse();
+			$.ajax({
+				type : "GET",
+				url : "currentActivity",
+				data : {
+					instance_id: instanceID,
+					uni: uni
+				},
+				success : function(result) {
+					//alert('Aktiver Schritt: ' + result);
+					var resultArr = result.split(';');
+					step_id = resultArr[0];
+					processDefinition = resultArr[1];
+					parse();
+				});
+			
 		});
 
 function parse() {
