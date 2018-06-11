@@ -317,18 +317,8 @@ function validateBew() {
 	} else {
 		resultString = "ablehnen"
 	}
-	swal({
-		title: "Bewerbung " + resultString,
-		text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
-		type: "warning",
-		showCancelButton: true,
-		confirmButtonColor: "#DD6B55",
-		confirmButtonText: "Bewerbung " + resultString,
-		cancelButtonText: "Abbrechen",
-		closeOnConfirm: false
-	}, function () {
 
-		for(var i = 0; i<grund.length;i++)
+	for(var i = 0; i<grund.length;i++)
 		{
 			if(grund[i] == '-')
 				if(grund[i+1] == '-')
@@ -344,6 +334,17 @@ function validateBew() {
 							return;
 						}
 		}
+
+	swal({
+		title: "Bewerbung " + resultString,
+		text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Bewerbung " + resultString,
+		cancelButtonText: "Abbrechen",
+		closeOnConfirm: false
+	}, function () {
 
 		// alert(keyString);
 		// alert(valString);
