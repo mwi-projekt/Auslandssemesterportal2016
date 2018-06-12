@@ -337,14 +337,14 @@ public static String getAllActivities(String definitionKey){
 	}
 }
 
-public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse zurück
-	String queryString = "SELECT nachname,vorname,email FROM user WHERE matrikelnummer = ?;";
+public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse|aktuelleUni|bewStudiengang|Kurs zurück
+	String queryString = "SELECT nachname,vorname,email,standort,studiengang,kurs FROM user WHERE matrikelnummer = ?;";
 	String[] params = new String[]{""+matNr};
 	String[] types = new String[]{"int"};
 	ResultSet ergebnis = executeStatement(queryString,params,types);
 	try{
 		 if(ergebnis.next()){
-			 return new String[]{ergebnis.getString("nachname"),ergebnis.getString("vorname"),ergebnis.getString("email")};
+			 return new String[]{ergebnis.getString("nachname"),ergebnis.getString("vorname"),ergebnis.getString("email"),ergebnis.getString("standort").replace('_', ' '),ergebnis.getString("studiengang"),ergebnis.getString("kurs")};
 		 } else {
 			 return new String[0];
 		 }
