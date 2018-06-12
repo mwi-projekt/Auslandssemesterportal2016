@@ -35,7 +35,9 @@ public class UserUpdateServlet extends HttpServlet {
          
           PrintWriter toClient = response.getWriter();
           if(newmail.equals("0")){
-              toClient.println(SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, tel, mobil, mail));
+              //DEBUG
+              toClient.println("mail:"+mail+";newmail:"+newmail+";vorname:"+vorname+";nachname:"+nachname+";tel:"+tel+";mobil:"+mobil+";studgang:"+studgang+";kurs:"+kurs+";matnr:"+matnr);
+              toClient.println(SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, tel, mobil)+" Tel:"+tel);
           }
           else{
               SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, tel, mobil, newmail);
