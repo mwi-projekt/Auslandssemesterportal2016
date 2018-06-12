@@ -1245,10 +1245,18 @@ var main = function() {
                                     matnr: dataNewMatnr
 				},
                                 success : function(result) {
-                                  swal('Gelöscht!', result, 'success');
+                                  swal('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
+                                  $('#userEdit .close').click();
+                                  if($('#inEditEmail').attr('data-role') == "2"){
+                                      $('#userMaShow').click();
+                                  }
+                                  else{
+                                      $('#userStudShow').click();
+                                  }
+                                  
                                 },
                                 error : function(result) {
-                                  swal('Fehler', result, 'error');
+                                  swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
                                 }
                               });
         });                                
