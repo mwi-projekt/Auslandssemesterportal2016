@@ -1016,6 +1016,11 @@ var main = function() {
 
 						} else {
 							var rolle = 0;
+                                                        $('.nutzerBearbeiten b').remove();
+                                                        $('.nutzerBearbeiten h2').remove();
+                                                        var userEditModal = $('.nutzerBearbeiten').detach();
+                                                        $('#login').after('<div id="userEdit" class="modal fade" role="dialog"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button> <h4 class="modal-title">Benutzer Bearbeiten</h4> </div><div class="modal-body" id="userEditBody"> </div></div></div>');
+                                                        userEditModal.appendTo('#userEditBody');
 							var typ = '';
 							if (id === 'userStudShow') {
 								rolle = 3;
@@ -1061,7 +1066,7 @@ var main = function() {
 															+ auslesen[i + 4]
 															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
-															+ '" title="Bearbeiten"></td></tr>';
+															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
@@ -1104,7 +1109,7 @@ var main = function() {
 															+ auslesen[i + 7]
 															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
-															+ '" title="Bearbeiten"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
+															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
                             + count
                             + '" title="Löschen"></span></td></tr>';
 													if (even === 'even') {
@@ -1150,94 +1155,53 @@ var main = function() {
                             });
                         });
 
-												document
-														.getElementById(
-																'edit' + i)
-														.addEventListener(
-																'click',
-																function(event) {
-																	var id = $(
-																			this)
-																			.attr(
-																					'id');
-																	var laenge = id.length;
-																	if (laenge === 5) {
-																		id = id
-																				.substring(
-																						4,
-																						5);
-																	} else {
-																		id = id
-																				.substring(
-																						4,
-																						6);
-																	}
-																	$(
-																			'#inEditVorname')
-																			.val(
-																					$(
-																							'#row'
-																									+ id)
-																							.children(
-																									'.vorname')
-																							.text());
-																	$(
-																			'#inEditNachname')
-																			.val(
-																					$(
-																							'#row'
-																									+ id)
-																							.children(
-																									'.nachname')
-																							.text());
-																	$(
-																			'#inEditEmail')
-																			.val(
-																					$(
-																							'#row'
-																									+ id)
-																							.children(
-																									'.email')
-																							.text());
-																	if (rolle === 2) {
-																		$(
-																				'#inEditTel')
-																				.val(
-																						$(
-																								'#row'
-																										+ id)
-																								.children(
-																										'.telnummer')
-																								.text());
-																		$(
-																				'#inEditMobil')
-																				.val(
-																						$(
-																								'#row'
-																										+ id)
-																								.children(
-																										'.mobil')
-																								.text());
-																		$(
-																				'#inEditTel')
-																				.show();
-																		$(
-																				'#inEditMobil')
-																				.show();
-																		$(
-																				'#inEditStudgang')
-																				.hide();
-																		$(
-																				'#inEditKurs')
-																				.hide();
-																		$(
-																				'#inEditMatnr')
-																				.hide();
-																	}
-																	$(
-																			'.nutzerBearbeiten')
-																			.show();
-																});
+                            $('edit' + i).click(function(){
+                                var id = $(this).attr('id');
+                                var laenge = id.length;
+                                if (laenge === 5) {
+                                    id = id
+                                        .substring(
+                                            4,
+                                            5);
+                                } else {
+                                    id = id
+                                        .substring(
+                                            4,
+                                            6);
+                                }
+                                $('#inEditVorname').val($('#row' +id).children('.vorname').text());
+                                $('#inEditVorname').attr('data-value',$('#inEditVorname').val());
+                                $('#inEditNachname').val($('#row' +id).children('.nachname').text());
+                                 $('#inEditNachname').attr('data-value',$('#inEditNachname').val());
+                                $('#inEditEmail').val($('#row' +id).children('.email').text());
+                                $('#inEditEmail').attr('data-value',$('#inEditEmail').val());
+                                $('#inEditEmail').attr('data-role',rolle);
+                                $('#inEditTel').val($('#row' +id).children('.telnummer').text());
+                                $('#inEditTel').attr('data-value',$('#inEditTel').val());
+                                $('#inEditMobil').val($('#row' +id).children('.mobil').text());
+                                $('#inEditMobil').attr('data-value',$('#inEditMobil').val());
+                                $('#inEditStudgang').val($('#row' +id).children('.studgang').text());
+                                $('#inEditStudgang').attr('data-value',$('#inEditStudgang').val());
+                                $('#inEditKurs').val($('#row' +id).children('.kurs').text());
+                                $('#inEditKurs').attr('data-value',$('#inEditKurs').val());
+                                $('#inEditMatnr').val($('#row' +id).children('.matrikelnr').text());
+                                $('#inEditMatnr').attr('data-value',$('#inEditMatnr').val());
+                                if (rolle === 2) {
+                                    $('#inEditTel').show();
+                                    $('#inEditMobil').show();
+                                    $('#inEditStudgang').hide();
+                                    $('#inEditKurs').hide();
+                                    $('#inEditMatnr').hide();
+                                }
+                                else{
+                                    $('#inEditTel').show();
+                                    $('#inEditMobil').show();
+                                    $('#inEditStudgang').show();
+                                    $('#inEditKurs').show();
+                                    $('#inEditMatnr').show();
+                                }
+                                $('.nutzerBearbeiten').show();
+                            });
 											}
 										},
 										error : function(result) {
@@ -1251,6 +1215,43 @@ var main = function() {
 									});
 						}
 					});
+                                        
+        $('#btnUserEditSave').click(function(){
+            var dataMail = $('#inEditEmail').attr('data-value');
+            var dataNewMail  = "0";
+            var dataNewVorname = $('#inEditVorname').val();
+            var dataNewNachaname = $('#inEditNachname').val();
+            var dataNewTel = $('#inEditTel').val();
+            var dataNewMobil = $('#inEditMobil').val();
+            var dataNewStudgang = $('#inEditStudgang').val();
+            var dataNewKurs = $('#inEditKurs').val();
+            var dataNewMatnr = $('#inEditMatnr').val();
+            if($('#inEditEmail').attr('data-value') != $('#inEditEmail').val()){
+                var dataNewMail = $('#inEditEmail').val();
+            } 
+                   
+            $.ajax({
+                                type : "POST",
+                                url : "user/update",
+                                data : {
+                                    email : dataMail,
+                                    newemail: dataNewMail,
+                                    vorname : dataNewVorname,
+                                    nachname : dataNewNachaname,
+                                    tel: dataNewTel,
+                                    mobil: dataNewMobil,
+                                    studgang: dataNewStudgang,
+                                    kurs: dataNewKurs,
+                                    matnr: dataNewMatnr
+				},
+                                success : function(result) {
+                                  swal('Gelöscht!', result, 'success');
+                                },
+                                error : function(result) {
+                                  swal('Fehler', result, 'error');
+                                }
+                              });
+        });                                
 	// Click-Listener f�r Schlie�enbild im Bearbeiten PopUp
 	$('#closeBearb').on('click', function() {
 		$('.nutzerBearbeiten').hide();

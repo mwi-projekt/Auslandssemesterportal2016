@@ -272,6 +272,23 @@ public static int userRegister(String vorname, String nachname, String passwort,
 	return executeUpdate(query,args,types);
 }
 
+public static int updateUser(String vorname, String nachname, String email, String studiengang,
+		String kurs, String matrikelnummer, String tel, String mobil){
+	String query = "UPDATE user SET vorname = ?, nachname = ?, studiengang = ?, kurs = ?, matrikelnummer = ?, tel = ?, mobil = ? WHERE email = ?";
+	String[] args = new String[]{vorname,nachname,studiengang,kurs,""+matrikelnummer,tel,mobil,email};
+	String[] types = new String[]{"String","String","String","String","int","String","String"};
+	return executeUpdate(query,args,types);
+}
+
+public static int updateUser(String vorname, String nachname, String email, String studiengang,
+		String kurs, String matrikelnummer, String tel, String mobil, String newmail){
+	String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, studiengang = ?, kurs = ?, matrikelnummer = ?, tel = ?, mobil = ? WHERE email = ?";
+	String[] args = new String[]{vorname,nachname,newmail,studiengang,kurs,""+matrikelnummer,tel,mobil, email};
+	String[] types = new String[]{"String","String","String","String","String","int","String","String"};
+	return executeUpdate(query,args,types);
+}
+
+
 public static ResultSet getJson(String step, String model){
 	//Gibt JSON-Dokument für die Eingabemaske zurück
 	String query = "SELECT json FROM processModel WHERE step = ? AND model = ?;";
