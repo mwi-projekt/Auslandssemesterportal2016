@@ -1155,7 +1155,7 @@ var main = function() {
                             });
                         });
 
-                            $('edit' + i).click(function(){
+                            $('#edit' + i).click(function(){
                                 var id = $(this).attr('id');
                                 var laenge = id.length;
                                 if (laenge === 5) {
