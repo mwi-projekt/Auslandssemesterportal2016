@@ -276,7 +276,7 @@ public static int updateUser(String vorname, String nachname, String email, Stri
 		String kurs, String matrikelnummer, String tel, String mobil){
 	String query = "UPDATE user SET vorname = ?, nachname = ?, studiengang = ?, kurs = ?, matrikelnummer = ?, tel = ?, mobil = ? WHERE email = ?";
 	String[] args = new String[]{vorname,nachname,studiengang,kurs,""+matrikelnummer,tel,mobil,email};
-	String[] types = new String[]{"String","String","String","String","int","String","String"};
+	String[] types = new String[]{"String","String","String","String","int","String","String","String"};
 	return executeUpdate(query,args,types);
 }
 
@@ -284,7 +284,7 @@ public static int updateUser(String vorname, String nachname, String email, Stri
 		String kurs, String matrikelnummer, String tel, String mobil, String newmail){
 	String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, studiengang = ?, kurs = ?, matrikelnummer = ?, tel = ?, mobil = ? WHERE email = ?";
 	String[] args = new String[]{vorname,nachname,newmail,studiengang,kurs,""+matrikelnummer,tel,mobil, email};
-	String[] types = new String[]{"String","String","String","String","String","int","String","String"};
+	String[] types = new String[]{"String","String","String","String","String","int","String","String","String"};
 	return executeUpdate(query,args,types);
 }
 
