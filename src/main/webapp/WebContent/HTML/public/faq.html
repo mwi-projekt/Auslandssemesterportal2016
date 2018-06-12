@@ -50,7 +50,9 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
 		-->
 
 
-<!--  PopupFeld für Registrierung --------------------------------------------------------------->
+	<div include-html="header.html"></div>
+	
+    <!--  PopupFeld für Registrierung --------------------------------------------------------------->
     <div class="erfolgreich"></div>
     <div class="popUpBack"></div>
 
@@ -68,8 +70,8 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
 
                         <select class="rolleWahl inBox inline" required>
                             <option>Ich bin...</option>
-							<option>Studierender</option>
-							<option>Auslandsmitarbeiter</option>
+<option>Studierender</option>
+<option>Auslandsmitarbeiter</option>
                         </select>
                         <label class="btn auswahl">Bestätigen</label>
                         <div class="student auslandsmitarbeiter">
@@ -179,7 +181,6 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
         </div>
 
     </div>
-    
     <!-- Modal -->
     <div id="login" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -197,7 +198,7 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
                         <input type="password" placeholder="Passwort" id="inPasswort" class=" inBox" required style="width:80%; margin-left:5px">
                         <p id="falschLogin" style="color: red; margin-bottom: 0px; display: none">Falsche Eingabe. Bitte versuchen sie es erneut.</p>
                         <br>
-                        <a href="forgot_pw.html">Passwort vergessen?</a>
+                        <a href="forgot_pw">Passwort vergessen?</a>
                         <br>
                     </form>
                 </div>
@@ -210,12 +211,12 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
         </div>
     </div>
 
-
+    <!-- Navigationsleiste-------------------------------------------------------------------- -->
     <div class="header">
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-2">
-                <a href="index.html"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
+                <a href="/Auslandssemesterportal/WebContent/"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3">
@@ -242,6 +243,46 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
 
         </div>
 
+        <!--
+            <div class="col-md-2"></div>
+            <div class="col-md-1">
+               <img src="DHBW-Logo.svg" alt="SVG mit img Tag laden" width="200">  
+            </div>
+            <div class="col-md-4">
+                <br> <br>
+                <h3 class="ueberschrift">Auslandsstudienportal DHBW Karlsruhe</h3>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+            <!--      <div class="loginFenster pull-right">
+                    <b id="loginClose"><img src="images/Button Delete.png"
+                        id="smallImg"></b> <br> <br> <input type="text"
+                        placeholder="Nachname.Vorname" id="inName" class=" inBox" /> <input
+                        type="password" placeholder="Passwort" id="inPasswort"
+                        class=" inBox" />
+                    <p id="falschLogin"
+                        style="color: red; margin-bottom: 0px; display: none">Falsche
+                        Eingabe. Bitte versuchen sie es erneut.</p>
+                    <br> <label class=" btn" id="btnLogin">Login</label><br>
+                    <div>
+                        <p class="loginShow">
+                            Login <b class="caret"></b>
+                        </p>
+                        <p class="regShow linkReg">Registrieren</p>
+                    </div>
+                </div>
+                <div class="logoutFenster pull-right">
+                    <p class="logged">
+                        Eingeloggt als <b class="nutzerName"></b> <u class="pull-right"
+                            id="logout">Logout</u>
+                    </p>
+                </div>
+                <br> <br> <br> <br>
+                <button type="button" class="btn btn-info btn-lg"
+                    data-toggle="modal" data-target="#register">Registrieren</button>
+                <button type="button" class="btn btn-info btn-lg"
+                    data-toggle="modal" data-target="#login">Login</button>
+            </div> -->
     </div>
     </div>
 		<!-- Mittlerer Teil -->

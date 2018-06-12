@@ -1059,9 +1059,9 @@ var main = function() {
 															+ auslesen[i + 3]
 															+ '</td><td class="mobil">'
 															+ auslesen[i + 4]
-															+ '</td><td class="btn" id="edit'
+															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
-															+ '">Bearbeiten</td></tr>';
+															+ '" title="Bearbeiten"></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
@@ -1071,7 +1071,7 @@ var main = function() {
 											} else if (rolle === 3) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTabelle" <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>DHBW Standort</td><td>Studiengang</td><td>Kurs</td><td>Matrikelnummer</td><td></td><td></td></tr></thead>';
+														+ '</h2><table id="userTabelle" <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>DHBW Standort</td><td>Studiengang</td><td>Kurs</td><td>Matrikelnummer</td><td colspan="2">Aktionen</td></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
@@ -1102,11 +1102,11 @@ var main = function() {
 															+ auslesen[i + 6]
 															+ '</td><td class="matrikelnr">'
 															+ auslesen[i + 7]
-															+ '</td><td class="btn" id="edit'
+															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
-															+ '">Bearbeiten</td><td class="btn delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
+															+ '" title="Bearbeiten"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
                             + count
-                            + '">Löschen</td></tr>';
+                            + '" title="Löschen"></span></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {

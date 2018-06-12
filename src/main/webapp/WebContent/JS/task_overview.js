@@ -28,7 +28,7 @@ function getList() {
 				type : "GET",
 				url : "getTasks",
 				data : {
-					'definition' : 'studentBewerben'
+					//'definition' : 'studentBewerben'
 				},
 				success : function(result) {
 					output = "";
@@ -52,6 +52,8 @@ function getList() {
 										+ "</td><td>"
 										+ '<button class="btn btn-default" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
 										+ singleInstance[0]
+										+ '&uni='
+										+ singleInstance[3]
 										+ '&verify=true\'">Details</button>'
 										+ "</td></tr>"
 							} else if (singleInstance[4] === 'complete') {
@@ -65,6 +67,8 @@ function getList() {
 										+ "</td><td>"
 										+ '<button class="btn btn-default" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
 										+ singleInstance[0]
+										+ '&uni='
+										+ singleInstance[3]
 										+ '\'">Details</button>'
 										+ "</td></tr>"
 							}

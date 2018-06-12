@@ -186,5 +186,7 @@ $(document).ready(function () {
     $('#processSteps').on('click', '.btn-primary', function () {
         editEntry($(this).data('mid'));
     });
-
+    
 });
+
+

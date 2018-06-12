@@ -4,7 +4,9 @@
 <head>
     <meta charset="utf-8">
     <title>DHBW Auslandsportal</title>
-
+	
+	<link rel="stylesheet"
+href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet"
           href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
     <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
@@ -15,7 +17,9 @@
     <link rel="stylesheet" href="CSS/InfoBox.css">
     <link rel="stylesheet" type="text/css" href="external/jquery.sweet-modal.min.css">
     <link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
-
+	
+	<script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script
             src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
@@ -23,6 +27,7 @@
     <script src="external/dropzone.js"></script>
     <script src="external/jquery.sweet-modal.min.js"></script>
     <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script src="JS/main.js"></script>
     <script src="JS/bewerbungsformular.js"></script>
     <!--  <script src="JS/parseJSON.js"></script>-->
     <script src="JS/bewerbungsportal.js"></script>
@@ -126,41 +131,35 @@
 <div class="popUpFeld"></div>
 <div class="header">
 
-    <!-- Navigationsleiste -->
-    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="true">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html"><img src="images/DHBW.png" class="pull-left"
-                                                                     style="height: 1.5em;" alt="">&nbsp;DHBW
-                    Auslandsstudienportal</a>
+       <!-- Navigationsleiste-------------------------------------------------------------------- -->
+    <div class="header">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <a href="/Auslandssemesterportal/WebContent/"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="navbar-collapse collapse in" id="bs-example-navbar-collapse-1" aria-expanded="true">
-                <ul class="nav navbar-nav navbar-right">
+            <div class="col-md-3">
 
-                    <li><a href="index.html#portalInfo" style="padding-left: 30px;">Infos</a></li>
-                    <li><a href="faq.html" style="padding-left: 30px;">FAQ</a></li>
-                    <li class="logoutFenster">Eingeloggt als <b class="nutzerName"></b>
+            	<div class="logoutFenster">
 
-                        <button type="button" class="btn btn-default navMargin logoutButton"
-                                id="logout" data-target="#logout">Logout
-                        </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-</div>
+                        Eingeloggt als <b class="nutzerName"></b>
+
+                        <button type="button" class="btn btn-default navMargin"
+                     id="logout" data-target="#logout">Logout</button>
+
+            	</div>
+
+        	</div>
+
+    	</div>
+   	</div>
+
 
 <!-- Mittlerer Teil -->
 <div class="row aufgaben">
@@ -168,8 +167,8 @@
     <div class="col-md-8">
         <div class="nav2">
             <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
-            <a href="#nav1" class="navEl current nonCms" id="nav1">Angebote</a>
-            <a href="#nav2" class="navEl nonCms" id="nav2">Bewerben</a>
+            <a href="#nav1" class="navEl current" id="nav1">Angebote</a>
+            <a href="#nav2" class="navEl" id="nav2">Bewerben</a>
             <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
         </div>
         <!-- <div class="inhalt nonCms" id="in1">
