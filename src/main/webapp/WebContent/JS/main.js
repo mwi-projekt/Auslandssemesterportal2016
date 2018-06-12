@@ -1044,7 +1044,7 @@ var main = function() {
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTabelle" <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>Telefonnummer</td><td>Mobilfunknummer</td><td></td></tr></thead>';
+														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>Telefonnummer</td><td>Mobilfunknummer</td><td></td></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
@@ -1060,13 +1060,13 @@ var main = function() {
 															+ auslesen[i]
 															+ '</td><td class="email">'
 															+ auslesen[i + 2]
-															+ '</td><td class=telnummer">'
+															+ '</td><td class="telnummer">'
 															+ auslesen[i + 3]
 															+ '</td><td class="mobil">'
 															+ auslesen[i + 4]
 															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
-															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"></td></tr>';
+															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td></tr>';
 													if (even === 'even') {
 														even = 'odd';
 													} else {
@@ -1076,7 +1076,7 @@ var main = function() {
 											} else if (rolle === 3) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTabelle" <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>DHBW Standort</td><td>Studiengang</td><td>Kurs</td><td>Matrikelnummer</td><td colspan="2">Aktionen</td></tr></thead>';
+														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>DHBW Standort</td><td>Studiengang</td><td>Kurs</td><td>Matrikelnummer</td><td colspan="2">Aktionen</td></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
@@ -1194,8 +1194,8 @@ var main = function() {
                                     $('#inEditMatnr').hide();
                                 }
                                 else{
-                                    $('#inEditTel').show();
-                                    $('#inEditMobil').show();
+                                    $('#inEditTel').hide();
+                                    $('#inEditMobil').hide();
                                     $('#inEditStudgang').show();
                                     $('#inEditKurs').show();
                                     $('#inEditMatnr').show();
