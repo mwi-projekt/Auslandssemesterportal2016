@@ -83,7 +83,6 @@ function parse() {
 					collapsible = steps[k].split("|");
 					stepName = collapsible[0]; // Name des aktiven
 					// Prozessschrittes
-					console.log("Collapsible:  " + collapsible[0]);
 					
 					if (collapsible[1].search("id") != -1) {
 						var innerOutput = "";
@@ -144,7 +143,6 @@ function parse() {
 						}
 
 						if (innerOutput != '') {
-						console.log( k + " StepName: " + stepName + "Typ: " + typeof stepName);
 							if (stepName === "datenEingeben"){
 								visibleStepName = "Persönliche Daten";
 							} else if (stepName === "datenEingebenUnt"){
@@ -152,7 +150,7 @@ function parse() {
 							} else if (stepName === "Task_1jq3nab"){
 								visibleStepName = "Semesteranschrift";
 							} else if (stepName === "englischNotePruefen"){
-								visibleStepName = "Englisch Note";
+								visibleStepName = "Note Fremdsprache";
 							} else {
 								visibleStepName = "Sonstige Angaben";
 							}
