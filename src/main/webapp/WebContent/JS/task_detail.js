@@ -146,7 +146,7 @@ function parse() {
 						if (innerOutput != '') {
 						console.log( k + " StepName: " + stepName + "Typ: " + typeof stepName);
 							if (stepName === "datenEingeben"){
-								visibleStepName = "Persoenliche Daten";
+								visibleStepName = "Persönliche Daten";
 							} else if (stepName === "datenEingebenUnt"){
 								visibleStepName = "Partnerunternehmen";
 							} else if (stepName === "Task_1jq3nab"){
