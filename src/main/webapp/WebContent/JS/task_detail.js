@@ -83,6 +83,7 @@ function parse() {
 					collapsible = steps[k].split("|");
 					stepName = collapsible[0]; // Name des aktiven
 					// Prozessschrittes
+					console.log(stepName);
 					if (collapsible[1].search("id") != -1) {
 						var innerOutput = "";
 						var json = JSON.parse(decodeURI(collapsible[1]));
