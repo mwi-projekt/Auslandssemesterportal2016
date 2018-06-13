@@ -144,7 +144,8 @@ function parse() {
 						}
 
 						if (innerOutput != '') {
-						console.log( k + " StepName: " + stepName);
+						console.log( k + " StepName: " + stepName + "Typ: " + typeof stepName);
+						
 							output = output +
 								'<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
 								k + '">' + stepName + '</a></h4></div>'; // Header
