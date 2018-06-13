@@ -142,6 +142,7 @@ function parse() {
 						}
 
 						if (innerOutput != '') {
+<<<<<<< HEAD
 							var visibleStepName = "";
 							//Aus dem StepName die Überschrift für task_detail bekommen
 							if (stepName != null) {
@@ -159,9 +160,11 @@ function parse() {
 									}
 								
 							
+=======
+>>>>>>> parent of eb4a9a3... Übersichtsseite anpassen
 							output = output +
 								'<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
-								k + '">' + visibleStepName + '</a></h4></div>'; // Header
+								k + '">' + stepName + '</a></h4></div>'; // Header
 							// des
 							// Accordions
 							output = output +
