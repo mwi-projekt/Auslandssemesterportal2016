@@ -1218,8 +1218,8 @@ var main = function() {
 					});
                                         
         $('#btnUserEditSave').click(function(){
-            var dataMail = $('#inEditEmail').attr('data-value');
-            var dataNewMail  = "0";
+            var dataMail = $('#inEditEmail').val();
+            var dataOldMail  = "0";
             var dataRole = $('#inEditEmail').attr('data-role');
             var dataNewVorname = $('#inEditVorname').val();
             var dataNewNachaname = $('#inEditNachname').val();
@@ -1229,7 +1229,7 @@ var main = function() {
             var dataNewKurs = $('#inEditKurs').val();
             var dataNewMatnr = $('#inEditMatnr').val();
             if($('#inEditEmail').attr('data-value') != $('#inEditEmail').val()){
-                var dataNewMail = $('#inEditEmail').val();
+                var dataOldMail = $('#inEditEmail').attr('data-value');
             } 
             
             if(dataRole == "2"){
@@ -1238,7 +1238,7 @@ var main = function() {
                     url : "user/update",
                     data : {
                         email : dataMail,
-                        newemail: dataNewMail,
+                        oldemail: dataOldMail,
                         vorname : dataNewVorname,
                         nachname : dataNewNachaname,
                         tel: dataNewTel,
@@ -1264,7 +1264,7 @@ var main = function() {
                     url : "user/update",
                     data : {
                         email : dataMail,
-                        newemail: dataNewMail,
+                        oldemail: dataOldMail,
                         vorname : dataNewVorname,
                         nachname : dataNewNachaname,
                         studgang: dataNewStudgang,

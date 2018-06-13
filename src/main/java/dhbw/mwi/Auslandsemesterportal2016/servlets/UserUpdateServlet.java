@@ -23,14 +23,14 @@ public class UserUpdateServlet extends HttpServlet {
       else{
           try{
           String mail = request.getParameter("email");
-          String newmail = request.getParameter("newemail");
+          String oldmail = request.getParameter("oldmail");
           String vorname = request.getParameter("vorname");
           String nachname = request.getParameter("nachname");
           String role = request.getParameter("role");
           
          
           PrintWriter toClient = response.getWriter();
-          if(newmail.equals("0")){
+          if(oldmail.equals("0")){
               int result;
               if(role.equals("2")){
                 String tel = request.getParameter("tel");
@@ -56,13 +56,13 @@ public class UserUpdateServlet extends HttpServlet {
               if(role.equals("2")){
                 String tel = request.getParameter("tel");
                 String mobil = request.getParameter("mobil");
-                result = SQL_queries.updateMA(vorname, nachname, mail, tel, mobil, newmail);
+                result = SQL_queries.updateMA(vorname, nachname, oldmail, tel, mobil, mail);
               }
               else{
                 String studgang = request.getParameter("studgang");
                 String kurs = request.getParameter("kurs");
                 String matnr = request.getParameter("matnr");
-                result = SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, newmail);
+                result = SQL_queries.updateUser(vorname, nachname, oldmail, studgang, kurs, matnr, mail);
               }
               
               if(result == 1){
