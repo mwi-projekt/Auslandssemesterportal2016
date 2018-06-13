@@ -59,12 +59,13 @@
 
 <!-- Mittlerer Teil -->
 <div>
-	<table id="testtable">
+	<table id="example" class="table table-striped table-bordered" style="width:100%">
 		<tr>
 			<!--When a header is clicked, run the sortTable function, with a parameter,
 				0 for sorting by names, 1 for sorting by country: -->
-			<th onclick="sortTable(0)">Name</th>
-			<th onclick="sortTable(1)">Vorname</th>
+			<thead>Name</th>
+			<thead>Vorname</th>
+			<tbody>
 		</tr>
 		<tr>
  			<td>Hugler</td>
@@ -74,6 +75,7 @@
  			<td>Hugler2</td>
     		<td>Fabian2</td>
   		</tr>
+  		</tbody>
 	</table>
 </div>
 

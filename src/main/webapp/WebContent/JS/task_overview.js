@@ -20,6 +20,10 @@ $(document)
 					});
 
 					getList();
+					
+					$(document).ready(function() {
+    				$('#example').DataTable();
+} );
 				});
 
 function getList() {
@@ -96,6 +100,8 @@ function getList() {
 				}
 			});
 }
+
+// wird sort table nicht  verwendet
 function sortTable(n) {
   		var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   	table = document.getElementById("testtable");
