@@ -21,6 +21,7 @@ public class UserUpdateServlet extends HttpServlet {
         response.sendError(401,"Rolle: "+rolle);
       }
       else{
+          PrintWriter toClient = response.getWriter();
           try{
           String mail = request.getParameter("email");
           String oldmail = request.getParameter("oldmail");
@@ -29,7 +30,7 @@ public class UserUpdateServlet extends HttpServlet {
           String role = request.getParameter("role");
           
          
-          PrintWriter toClient = response.getWriter();
+          
           if(oldmail.equals("0")){
               int result;
               if(role.equals("2")){
@@ -76,7 +77,7 @@ public class UserUpdateServlet extends HttpServlet {
                             
           } catch(Exception e) {
               response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-              
+              toClient.println(e.toString());
           }
       }
     }
