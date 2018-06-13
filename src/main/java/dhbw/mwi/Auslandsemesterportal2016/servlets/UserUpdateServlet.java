@@ -1,5 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.servlets;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import java.util.UUID;
+import javax.mail.Message;
+import javax.mail.Transport;
 import javax.servlet.RequestDispatcher;
 
 @WebServlet(name = "UserUpdateServlet", urlPatterns = {"/WebContent/user/update"})
@@ -67,8 +71,17 @@ public class UserUpdateServlet extends HttpServlet {
               }
               
               if(result == 1){
-                  RequestDispatcher rd = request.getRequestDispatcher("../resetPassword");
-                  rd.forward(request,response);
+                String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?confirm=" + SQL_queries.deactivateUser(mail);        
+                Message message = Util.getEmailMessage(mail
+                                              , "Bestätigen: Geänderte E-Mail-Adresse Auslandssemesterportal");
+                message.setContent("<h2>Hallo"
+                          + ",</h2> Die E-Mail-Adresse deines Accounts für das Auslandssemesterportal<br>"
+                          + "Um Deine neue Adresse zu best&auml;tigen, klicke bitte auf folgenden Link. Danach kannst du dich mit deiner neuen Adresse und deinem Passwort wie gewohn einloggen.<br><br> "
+                    + "<a href=\"" + link + "\" target=\"new\">E-Mail-Adresse best&auml;tigen</a>", "text/html; charset=UTF-8");
+
+                
+                 Transport.send(message);
+                 toClient.println("Success");
               }
               else{
                   response.sendError(500, "UpdateError");

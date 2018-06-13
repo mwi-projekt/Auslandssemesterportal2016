@@ -465,6 +465,15 @@ public static String forgetPassword(String mail){
 	return "" + uuid;
 }
 
+public static String deactivateUser(String mail){
+	UUID uuid = UUID.randomUUID();
+	String query = "UPDATE user SET verifiziert = ? WHERE email = ?";
+	String[] params = new String[]{""+ uuid,mail};
+	String[] types = new String[]{"String","String"};
+	executeUpdate(query,params,types);
+	return "" + uuid;
+}
+
 public static int setPassword(String uuid, String pwd){
 	String salt = Util.generateSalt();
     String hashedpw = Util.HashSha256(Util.HashSha256(pwd) + salt);
