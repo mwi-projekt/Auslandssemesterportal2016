@@ -26,16 +26,25 @@ public class UserUpdateServlet extends HttpServlet {
           String newmail = request.getParameter("newemail");
           String vorname = request.getParameter("vorname");
           String nachname = request.getParameter("nachname");
-          String tel = request.getParameter("tel");
-          String mobil = request.getParameter("mobil");
-          String studgang = request.getParameter("studgang");
-          String kurs = request.getParameter("kurs");
-          String matnr = request.getParameter("matnr");
+          String role = request.getParameter("role");
           
          
           PrintWriter toClient = response.getWriter();
           if(newmail.equals("0")){
-              if(SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, tel, mobil) == 1){
+              int result;
+              if(role.equals("2")){
+                String tel = request.getParameter("tel");
+                String mobil = request.getParameter("mobil");
+                result = SQL_queries.updateMA(vorname, nachname, mail, tel, mobil);
+              }
+              else{
+                String studgang = request.getParameter("studgang");
+                String kurs = request.getParameter("kurs");
+                String matnr = request.getParameter("matnr");
+                result = SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr);
+              }
+              
+              if( result == 1){
                   toClient.println("success");
               }
               else{
@@ -43,7 +52,20 @@ public class UserUpdateServlet extends HttpServlet {
               }
           }
           else{
-              if(SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, tel, mobil, newmail) == 1){
+              int result;
+              if(role.equals("2")){
+                String tel = request.getParameter("tel");
+                String mobil = request.getParameter("mobil");
+                result = SQL_queries.updateMA(vorname, nachname, mail, tel, mobil, newmail);
+              }
+              else{
+                String studgang = request.getParameter("studgang");
+                String kurs = request.getParameter("kurs");
+                String matnr = request.getParameter("matnr");
+                result = SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, newmail);
+              }
+              
+              if(result == 1){
                   RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
                   rd.forward(request,response);
               }

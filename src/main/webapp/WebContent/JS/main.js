@@ -1219,6 +1219,7 @@ var main = function() {
         $('#btnUserEditSave').click(function(){
             var dataMail = $('#inEditEmail').attr('data-value');
             var dataNewMail  = "0";
+            var dataRole = $('#inEditEmail').attr('data-role');
             var dataNewVorname = $('#inEditVorname').val();
             var dataNewNachaname = $('#inEditNachname').val();
             var dataNewTel = $('#inEditTel').val();
@@ -1229,36 +1230,60 @@ var main = function() {
             if($('#inEditEmail').attr('data-value') != $('#inEditEmail').val()){
                 var dataNewMail = $('#inEditEmail').val();
             } 
-                   
-            $.ajax({
-                                type : "POST",
-                                url : "user/update",
-                                data : {
-                                    email : dataMail,
-                                    newemail: dataNewMail,
-                                    vorname : dataNewVorname,
-                                    nachname : dataNewNachaname,
-                                    tel: dataNewTel,
-                                    mobil: dataNewMobil,
-                                    studgang: dataNewStudgang,
-                                    kurs: dataNewKurs,
-                                    matnr: dataNewMatnr
-				},
-                                success : function(result) {
-                                  swal('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
-                                  $('#userEdit .close').click();
-                                  if($('#inEditEmail').attr('data-role') == "2"){
-                                      $('#userMaShow').click();
-                                  }
-                                  else{
-                                      $('#userStudShow').click();
-                                  }
-                                  
-                                },
-                                error : function(result) {
-                                  swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
-                                }
-                              });
+            
+            if(dataRole == "2"){
+               $.ajax({
+                    type : "POST",
+                    url : "user/update",
+                    data : {
+                        email : dataMail,
+                        newemail: dataNewMail,
+                        vorname : dataNewVorname,
+                        nachname : dataNewNachaname,
+                        tel: dataNewTel,
+                        mobil: dataNewMobil,
+                        role: "2"
+                    },
+                    success : function(result) {
+                      swal('Erfolgreich geändert.', 'Die Mitarbeiterdaten wurden aktualisiert.', 'success');
+                      $('#userEdit .close').click();
+                      
+                      $('#userMaShow').click();
+                      
+
+                    },
+                    error : function(result) {
+                      swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
+                    }
+                 });  
+            }
+            else{
+                 $.ajax({
+                    type : "POST",
+                    url : "user/update",
+                    data : {
+                        email : dataMail,
+                        newemail: dataNewMail,
+                        vorname : dataNewVorname,
+                        nachname : dataNewNachaname,
+                        studgang: dataNewStudgang,
+                        kurs: dataNewKurs,
+                        matnr: dataNewMatnr,
+                        role: "3"
+                    },
+                    success : function(result) {
+                      swal('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
+                      $('#userEdit .close').click();
+                      $('#userStudShow').click();
+                      
+
+                    },
+                    error : function(result) {
+                      swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
+                    }
+                 });
+            }
+           
         });                                
 	// Click-Listener f�r Schlie�enbild im Bearbeiten PopUp
 	$('#closeBearb').on('click', function() {
