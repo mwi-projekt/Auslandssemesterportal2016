@@ -66,7 +66,7 @@ public class UserUpdateServlet extends HttpServlet {
               }
               
               if(result == 1){
-                  RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
+                  RequestDispatcher rd = request.getRequestDispatcher("../resetPassword");
                   rd.forward(request,response);
               }
               else{
