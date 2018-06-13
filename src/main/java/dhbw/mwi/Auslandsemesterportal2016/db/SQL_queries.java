@@ -272,6 +272,23 @@ public static int userRegister(String vorname, String nachname, String passwort,
 	return executeUpdate(query,args,types);
 }
 
+public static int updateUser(String vorname, String nachname, String email, String studiengang,
+		String kurs, String matrikelnummer, String tel, String mobil){
+	String query = "UPDATE user SET vorname = ?, nachname = ?, studiengang = ?, kurs = ?, matrikelnummer = ?, tel = ?, mobil = ? WHERE email = ?";
+	String[] args = new String[]{vorname,nachname,studiengang,kurs,""+matrikelnummer,tel,mobil,email};
+	String[] types = new String[]{"String","String","String","String","int","String","String","String"};
+	return executeUpdate(query,args,types);
+}
+
+public static int updateUser(String vorname, String nachname, String email, String studiengang,
+		String kurs, String matrikelnummer, String tel, String mobil, String newmail){
+	String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, studiengang = ?, kurs = ?, matrikelnummer = ?, tel = ?, mobil = ? WHERE email = ?";
+	String[] args = new String[]{vorname,nachname,newmail,studiengang,kurs,""+matrikelnummer,tel,mobil, email};
+	String[] types = new String[]{"String","String","String","String","String","int","String","String","String"};
+	return executeUpdate(query,args,types);
+}
+
+
 public static ResultSet getJson(String step, String model){
 	//Gibt JSON-Dokument für die Eingabemaske zurück
 	String query = "SELECT json FROM processModel WHERE step = ? AND model = ?;";
@@ -337,14 +354,14 @@ public static String getAllActivities(String definitionKey){
 	}
 }
 
-public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse zurück
-	String queryString = "SELECT nachname,vorname,email FROM user WHERE matrikelnummer = ?;";
+public static String[] getUserData(int matNr){ //Gibt Name|Vorname|Mailadresse|aktuelleUni|bewStudiengang|Kurs zurück
+	String queryString = "SELECT nachname,vorname,email,standort,studiengang,kurs FROM user WHERE matrikelnummer = ?;";
 	String[] params = new String[]{""+matNr};
 	String[] types = new String[]{"int"};
 	ResultSet ergebnis = executeStatement(queryString,params,types);
 	try{
 		 if(ergebnis.next()){
-			 return new String[]{ergebnis.getString("nachname"),ergebnis.getString("vorname"),ergebnis.getString("email")};
+			 return new String[]{ergebnis.getString("nachname"),ergebnis.getString("vorname"),ergebnis.getString("email"),ergebnis.getString("standort").replace('_', ' '),ergebnis.getString("studiengang"),ergebnis.getString("kurs")};
 		 } else {
 			 return new String[0];
 		 }

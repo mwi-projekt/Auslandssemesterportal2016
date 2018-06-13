@@ -589,22 +589,7 @@ i {
 	font-weight: bold;
 }
 
-.nutzerBearbeiten {
-	display: none;
-	position: absolute;
-	width: 30%;
-	left: 50%;
-	margin-left: -15%;
-	top: 10%;
-	background: #AFEEEE;
-	border: 1px solid black;
-	font-size: medium;
-	padding: 5px;
-	border-radius: 5px;
-	z-index: 103;
-	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5);
-	box-shadow: 0 6px 12px rgba(0, 0, 0, .5);
-}
+
 
 /* Footer */
 .footer {

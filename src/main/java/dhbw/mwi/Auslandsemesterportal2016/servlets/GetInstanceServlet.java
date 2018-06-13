@@ -48,6 +48,10 @@ public class GetInstanceServlet extends HttpServlet {
           		runtime.setVariable(instance_id, "bewNachname", user[0]);
           		runtime.setVariable(instance_id, "bewVorname", user[1]);
           		runtime.setVariable(instance_id, "bewEmail", user[2]);
+                        runtime.setVariable(instance_id, "matrikelnummer", matnr);
+                        runtime.setVariable(instance_id, "aktuelleUni", user[3]);
+                        runtime.setVariable(instance_id, "bewStudiengang", user[4]);
+                        runtime.setVariable(instance_id, "bewKurs", user[5]);
           	}
           	runtime.setVariable(instance_id, "uni", uni);
           	SQL_queries.createInstance(instance_id, uni, matnr, 10);
