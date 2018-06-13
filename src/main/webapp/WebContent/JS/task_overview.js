@@ -20,13 +20,8 @@ $(document)
 					});
 
 					getList();
-					
 
-				$(document).ready(function() {
-    			$('.table').DataTable();
-				} );
 
-} );
 				});
 
 function getList() {
