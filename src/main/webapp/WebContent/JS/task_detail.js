@@ -83,6 +83,7 @@ function parse() {
 					collapsible = steps[k].split("|");
 					stepName = collapsible[0]; // Name des aktiven
 					// Prozessschrittes
+					console.log("Collapsible:  " + collapsible[0]);
 					
 					if (collapsible[1].search("id") != -1) {
 						var innerOutput = "";
@@ -143,7 +144,7 @@ function parse() {
 						}
 
 						if (innerOutput != '') {
-						console.log(stepName);
+						console.log( k + " StepName: " + stepName);
 							output = output +
 								'<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
 								k + '">' + stepName + '</a></h4></div>'; // Header
