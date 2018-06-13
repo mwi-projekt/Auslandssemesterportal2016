@@ -148,7 +148,7 @@ function parse() {
 						
 							output = output +
 								'<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
-								k + '">' + stepName + '</a></h4></div>'; // Header
+								k + '">' + "stepName" + '</a></h4></div>'; // Header
 							// des
 							// Accordions
 							output = output +
