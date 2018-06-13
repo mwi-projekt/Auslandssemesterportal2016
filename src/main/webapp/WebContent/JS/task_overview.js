@@ -21,8 +21,7 @@ $(document)
 
 					getList();
 					
-					$(document).ready(function() {
-    				$('#example').DataTable();
+					
 } );
 				});
 
