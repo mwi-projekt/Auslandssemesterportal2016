@@ -75,7 +75,7 @@ public class UserUpdateServlet extends HttpServlet {
                 Message message = Util.getEmailMessage(mail
                                               , "Bestätigen: Geänderte E-Mail-Adresse Auslandssemesterportal");
                 message.setContent("<h2>Hallo"
-                          + ",</h2> Die E-Mail-Adresse deines Accounts für das Auslandssemesterportal<br>"
+                          + ",</h2> Die E-Mail-Adresse deines Accounts für das Auslandssemesterportal wurde erfolgreich ge&auml;ndert.<br>"
                           + "Um Deine neue Adresse zu best&auml;tigen, klicke bitte auf folgenden Link. Danach kannst du dich mit deiner neuen Adresse und deinem Passwort wie gewohn einloggen.<br><br> "
                     + "<a href=\"" + link + "\" target=\"new\">E-Mail-Adresse best&auml;tigen</a>", "text/html; charset=UTF-8");
 
