@@ -154,7 +154,7 @@ function parse() {
 								else if (stepName == "englischNotePruefen"){
 									visibleStepName = "Englischnote";
 									}
-								else (){
+								else {
 									visibleStepName = "Semesteranschrift";
 									}
 								
