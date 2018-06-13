@@ -83,6 +83,7 @@ function parse() {
 					collapsible = steps[k].split("|");
 					stepName = collapsible[0]; // Name des aktiven
 					// Prozessschrittes
+					
 					if (collapsible[1].search("id") != -1) {
 						var innerOutput = "";
 						var json = JSON.parse(decodeURI(collapsible[1]));
@@ -142,9 +143,21 @@ function parse() {
 						}
 
 						if (innerOutput != '') {
+							if (stepName === "datenEingeben"){
+								visibleStepName = "Persönliche Daten";
+							} else if (stepName === "datenEingebenUnt"){
+								visibleStepName = "Partnerunternehmen";
+							} else if (stepName === "Task_1jq3nab"){
+								visibleStepName = "Semesteranschrift";
+							} else if (stepName === "englischNotePruefen"){
+								visibleStepName = "Note Fremdsprache";
+							} else {
+								visibleStepName = "Sonstige Angaben";
+							}
+						
 							output = output +
 								'<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
-								k + '">' + stepName + '</a></h4></div>'; // Header
+								k + '">' + visibleStepName + '</a></h4></div>'; // Header
 							// des
 							// Accordions
 							output = output +
@@ -317,24 +330,6 @@ function validateBew() {
 	} else {
 		resultString = "ablehnen"
 	}
-
-	for(var i = 0; i<grund.length;i++)
-		{
-			if(grund[i] == '-')
-				if(grund[i+1] == '-')
-					if(grund[i+2]== ' ')
-						if(grund[i+3]=='P')
-						{
-							swal({
-								title: "Platzhalter überprüfen ",
-								text: "Bitte überprüfen sie den Text nocheinmal auf nicht entfernte Platzhalter",
-								type: "warning",
-								confirmButtonText: "Ok"
-							});
-							return;
-						}
-		}
-
 	swal({
 		title: "Bewerbung " + resultString,
 		text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
