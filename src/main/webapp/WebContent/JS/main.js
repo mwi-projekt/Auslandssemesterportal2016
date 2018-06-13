@@ -1076,20 +1076,7 @@ var main = function() {
 											} else if (rolle === 3) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2>
-														<table id="userTable"> 
-															<thead>
-																<tr class="titleRow">
-																	<td>Vorname</td>
-																	<td>Nachname</td>
-																	<td>Email</td>
-																	<td>DHBW Standort</td>
-																	<td>Studiengang</td>
-																	<td>Kurs</td>
-																	<td>Matrikelnummer</td>
-																	<td colspan="2">Aktionen</td>
-																</tr>
-															</thead>';
+														+ '</h2><table id="userTable"><thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>DHBW Standort</td><td>Studiengang</td><td>Kurs</td><td>Matrikelnummer</td><td colspan="2">Aktionen</td></tr></thead>';
 															
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
