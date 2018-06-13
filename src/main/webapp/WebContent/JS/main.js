@@ -1238,7 +1238,7 @@ var main = function() {
                     url : "user/update",
                     data : {
                         email : dataMail,
-                        oldemail: dataOldMail,
+                        oldmail: dataOldMail,
                         vorname : dataNewVorname,
                         nachname : dataNewNachaname,
                         tel: dataNewTel,
@@ -1264,7 +1264,7 @@ var main = function() {
                     url : "user/update",
                     data : {
                         email : dataMail,
-                        oldemail: dataOldMail,
+                        oldmail: dataOldMail,
                         vorname : dataNewVorname,
                         nachname : dataNewNachaname,
                         studgang: dataNewStudgang,
