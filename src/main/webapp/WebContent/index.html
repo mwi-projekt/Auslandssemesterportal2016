@@ -11,7 +11,11 @@ href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="CSS/main.css">
         <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no" charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 
+		
         <script
 src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script
@@ -24,7 +28,11 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></scri
         </script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
         <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
-
+		
+		<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+   	 	<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+	
         <!-- End Cookie Consent plugin -->
 
     </head>
@@ -686,6 +694,15 @@ href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Ausla
                 </div>
                 <br>
                 <div class="" id="userTabelle"></div>
+                
+                
+                <!-- Bootstrap Script für userTabelle, damit Suche und Sotierung automatisch funktioniert ------------->
+                <script>
+					$(document).ready(function() {
+    				$('#userTabelle').DataTable();
+					 );
+				</script>
+                
             </div>
         </div>
     </div>
