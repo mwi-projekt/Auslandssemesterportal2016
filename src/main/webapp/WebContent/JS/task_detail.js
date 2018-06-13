@@ -142,26 +142,6 @@ function parse() {
 						}
 
 						if (innerOutput != '') {
-<<<<<<< HEAD
-							var visibleStepName = "";
-							//Aus dem StepName die Überschrift für task_detail bekommen
-							if (stepName != null) {
-								if(stepName == "datenEingeben"){
-									visibleStepName = "Persönliche Daten";
-									}
-								else if (stepName == "datenEingebenUnt"){
-									visibleStepName = "Partnerunternehmen";
-									}
-								else if (stepName == "englischNotePruefen"){
-									visibleStepName = "Englischnote";
-									}
-								else {
-									visibleStepName = "Semesteranschrift";
-									}
-								
-							
-=======
->>>>>>> parent of eb4a9a3... Übersichtsseite anpassen
 							output = output +
 								'<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
 								k + '">' + stepName + '</a></h4></div>'; // Header
@@ -337,24 +317,6 @@ function validateBew() {
 	} else {
 		resultString = "ablehnen"
 	}
-
-	for(var i = 0; i<grund.length;i++)
-		{
-			if(grund[i] == '-')
-				if(grund[i+1] == '-')
-					if(grund[i+2]== ' ')
-						if(grund[i+3]=='P')
-						{
-							swal({
-								title: "Platzhalter überprüfen ",
-								text: "Bitte überprüfen sie den Text nocheinmal auf nicht entfernte Platzhalter",
-								type: "warning",
-								confirmButtonText: "Ok"
-							});
-							return;
-						}
-		}
-
 	swal({
 		title: "Bewerbung " + resultString,
 		text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
