@@ -43,7 +43,7 @@ function getList() {
 
 						for (var i = 0; i < instances.length; i++) {
 							singleInstance = instances[i].split("|");
-							if (singleInstance[4] === 'validate') {
+							if (singleInstance[6] === 'validate') {
 								output = output
 										+ "<tr><td>"
 										+ singleInstance[1]
@@ -62,7 +62,7 @@ function getList() {
 										+ singleInstance[6]
 										+ '&verify=true\'"> </button>'
 										+ "</td></tr>"
-							} else if (singleInstance[4] === 'complete') {
+							} else if (singleInstance[6] === 'complete') {
 								completed = completed
 								+ "<tr><td>"
 								+ singleInstance[1]
