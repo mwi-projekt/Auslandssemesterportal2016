@@ -52,11 +52,11 @@ function getList() {
 										+ "</td><td>"
 										+ singleInstance[3]
 										+ "</td><td>"
-										+ '<button class="btn btn-default" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
+										+ '<button class="glyphicon glyphicon-list" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
 										+ singleInstance[0]
 										+ '&uni='
 										+ singleInstance[3]
-										+ '&verify=true\'">Details</button>'
+										+ '&verify=true\'"> </button>'
 										+ "</td></tr>"
 							} else if (singleInstance[4] === 'complete') {
 								completed = completed
@@ -67,11 +67,11 @@ function getList() {
 										+ "</td><td>"
 										+ singleInstance[3]
 										+ "</td><td>"
-										+ '<button class="btn btn-default" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
+										+ '<button class="glyphicon glyphicon-list" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
 										+ singleInstance[0]
 										+ '&uni='
 										+ singleInstance[3]
-										+ '\'">Details</button>'
+										+ '\'"> </button>'
 										+ "</td></tr>"
 							}
 						}
