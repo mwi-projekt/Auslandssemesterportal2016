@@ -49,6 +49,7 @@ public class GetAdminTasksServlet extends HttpServlet {
          		String partnerUni = (String) runtime.getVariable(instanceId, "uni");
           		
           		output = output + instanceId + "|" + name + "|" + vname + "|"  + kurs + "|" + uni + "|" + partnerUni + "|complete;";
+          		
           	} else if (activities.get(0).equals("datenValidieren")){
           		String name = (String) runtime.getVariable(instanceId, "bewNachname");
           		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
