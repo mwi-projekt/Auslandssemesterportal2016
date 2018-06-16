@@ -621,6 +621,10 @@ i {
 	color: white;
 }
 
+.cmsBtn:visited {
+	color: white;
+}
+
 .cmsBtn:hover {
 	background: rgb(48, 192, 192);
 }
