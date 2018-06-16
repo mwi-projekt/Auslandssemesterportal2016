@@ -45,17 +45,17 @@ public class GetAdminTasksServlet extends HttpServlet {
           		String name = (String) runtime.getVariable(instanceId, "bewNachname");
           		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
           		String uni = (String) runtime.getVariable(instanceId, "aktuelleUni");
-//          		String kurs = (String) runtime.getVariable(instanceId, "bewKurs");
+         		String kurs = (String) runtime.getVariable(instanceId, "bewKurs");
 //          		String partnerUni = (String) runtime.getVariable(instanceId, "uni");
           		
-          		output = output + instanceId + "|" + name + "|" + vname + "|"  + uni + "|complete;";
+          		output = output + instanceId + "|" + name + "|" + vname + "|"  + uni + "|" + kurs + "|" + partnerUni + "|complete;";
           	} else if (activities.get(0).equals("datenValidieren")){
           		String name = (String) runtime.getVariable(instanceId, "bewNachname");
           		String vname = (String) runtime.getVariable(instanceId, "bewVorname");
          		String uni = (String) runtime.getVariable(instanceId, "aktuelleUni");
-//         		String kurs = (String) runtime.getVariable(instanceId, "bewKurs");
-//          	String partnerUni = (String) runtime.getVariable(instanceId, "uni");
-          		output = output + instanceId + "|" + name + "|" + vname + "|"  + uni + "|validate;";
+         		String kurs = (String) runtime.getVariable(instanceId, "bewKurs");
+         		String partnerUni = (String) runtime.getVariable(instanceId, "uni");
+          		output = output + instanceId + "|" + name + "|" + vname + "|"  + uni + "|" + kurs + "|" + partnerUni + "|validate;";
           	}
           }
          toClient.print(output);
