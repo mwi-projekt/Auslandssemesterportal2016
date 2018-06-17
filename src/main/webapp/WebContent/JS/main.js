@@ -1051,24 +1051,6 @@ var main = function() {
 															.trim();
 													count++;
 													
-													// --------- Test Tabelle -------
-													
-													/*var table = '';
-													var rows = 4;
-													var cols = 3;
-													for ( var r = 0; r < rows; r++)
-													{
-														table += '<tr>';
-														for (var c = 0; c < cols; c++)
-														{
-															table += '<tr> + c + '</td>';
-														}
-														table += '</tr>';
-														
-													}
-													*/
-													// --------- Test Tabelle ende -----
-													
 													tabelle = tabelle
 															+ '<tr class="'
 															+ even
