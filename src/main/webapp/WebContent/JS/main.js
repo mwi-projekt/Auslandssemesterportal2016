@@ -1064,6 +1064,7 @@ var main = function() {
 															table += '<tr> + c + '</td>';
 														}
 														table += '</tr>';
+														
 													}
 													*/
 													// --------- Test Tabelle ende -----
