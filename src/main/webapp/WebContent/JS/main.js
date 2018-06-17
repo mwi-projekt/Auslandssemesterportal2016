@@ -1045,9 +1045,10 @@ var main = function() {
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTabelle" class"table table-striped table-bordered"><thead><tr><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th>Löschen</th></tr></thead>';
+														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>Telefonnummer</td><td>Mobilfunknummer</td><td></td></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
-													auslesen[i] = auslesen[i].trim();
+													auslesen[i] = auslesen[i]
+															.trim();
 													count++;
 													
 													// --------- Test Tabelle -------
@@ -1069,15 +1070,19 @@ var main = function() {
 													// --------- Test Tabelle ende -----
 													
 													tabelle = tabelle
-															+ '<tr><td>'
+															+ '<tr class="'
+															+ even
+															+ '" id="row'
+															+ count
+															+ '"><td class="vorname">'
 															+ auslesen[i + 1]
-															+ '</td><td>'
+															+ '</td><td class="nachname">'
 															+ auslesen[i]
-															+ '</td><td>'
+															+ '</td><td class="email">'
 															+ auslesen[i + 2]
-															+ '</td><td>'
+															+ '</td><td class="telnummer">'
 															+ auslesen[i + 3]
-															+ '</td><td>'
+															+ '</td><td class="mobil">'
 															+ auslesen[i + 4]
 															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
