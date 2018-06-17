@@ -444,7 +444,7 @@ var main = function() {
 								 	for (var i = 1; $('#kb' + i).html() != undefined; i++) { 
 								 		$('#kb' +
 								 		i).children().children('textarea').text($('#kb' +
-								 		).children().children('.middle').text().trim()); 
+								 		).children().children('.middle').text().trim(); 
 								 	}
 								 	$('.cmsBerichte').show();
 								 	$(this).text('Abbrechen'); 
