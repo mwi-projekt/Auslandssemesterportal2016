@@ -1622,7 +1622,6 @@ $.urlParam = function(name) {
 	} else {
 		return results[1] || 0;
 	}
-
 };
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
