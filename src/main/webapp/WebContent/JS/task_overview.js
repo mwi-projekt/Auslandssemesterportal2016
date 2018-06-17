@@ -86,7 +86,7 @@ function getList() {
 						if (output === ""){
 							output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
 						} else {
-							output = '<table class="table table-hover table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Prüfen</th></tr></thead><tbody>' +
+							output = '<table class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Prüfen</th></tr></thead><tbody>' +
 							output + "</tbody></table>";
 						}
 						if (completed === ""){
