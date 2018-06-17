@@ -1045,10 +1045,9 @@ var main = function() {
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable" class"table table-striped table-bordered"> <thead><tr><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th></tr></thead>';
+														+ '</h2><table id="userTabelle" class"table table-striped table-bordered"><thead><tr><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th>Löschen</th></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
-													auslesen[i] = auslesen[i]
-															.trim();
+													auslesen[i] = auslesen[i].trim();
 													count++;
 													
 													// --------- Test Tabelle -------
@@ -1070,15 +1069,15 @@ var main = function() {
 													// --------- Test Tabelle ende -----
 													
 													tabelle = tabelle
-															+ '<tr><td class="vorname">'
+															+ '<tr><td>'
 															+ auslesen[i + 1]
-															+ '</td><td class="nachname">'
+															+ '</td><td>'
 															+ auslesen[i]
-															+ '</td><td class="email">'
+															+ '</td><td>'
 															+ auslesen[i + 2]
-															+ '</td><td class="telnummer">'
+															+ '</td><td>'
 															+ auslesen[i + 3]
-															+ '</td><td class="mobil">'
+															+ '</td><td>'
 															+ auslesen[i + 4]
 															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
@@ -1137,7 +1136,7 @@ var main = function() {
 												}
 											}
 											tabelle = tabelle + '</table>';
-											$('#userTabelle').html(tabelle);
+											$('$('#userTabelle').html(tabelle);').html(tabelle);
 											for (var i = 1; isEmpty($(
 													'#edit' + i).text()) !== true; i++) {
 
