@@ -434,8 +434,8 @@ var main = function() {
 								}
 								break;
 							case 'erfahrungsBerichte':
-								 swal('Dieser Bereich kann noch nicht bearbeitet werden.');
-								/*
+								 //swal('Dieser Bereich kann noch nicht bearbeitet werden.');
+								
 								 if ($(this).text() === "Bearbeiten") {
 								 	$('.kurzbericht').show();
 								 	$('.erfahrungsBerichte').children().children().children('.nonCms').hide();
@@ -455,7 +455,7 @@ var main = function() {
 								 	$(this).text('Bearbeiten'); 
 								 }
 								break;
-								*/
+								
 							case 'infoMaterial':
 								if ($(this).text() === "Bearbeiten") {
 									$('#infoMaterial').children().children(
