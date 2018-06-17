@@ -330,6 +330,7 @@ function validateBew() {
 	} else {
 		resultString = "ablehnen"
 	}
+	console.log(grund);
 	if (grund.includes("Platzhalter") ||
 		grund.includes("Anmerkungen") ||
 		grund.includes("--")) {
@@ -341,7 +342,7 @@ function validateBew() {
 			confirmButtonColor: "#DD6B55",
 			confirmButtonText: "Ignorieren",
 			cancelButtonText: "Abbrechen",
-			closeOnConfirm: true
+			closeOnConfirm: false
 		});
 	}
 	else{
