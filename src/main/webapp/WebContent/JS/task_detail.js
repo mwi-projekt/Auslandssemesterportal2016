@@ -342,47 +342,46 @@ function validateBew() {
 			confirmButtonText: "Ignorieren",
 			cancelButtonText: "Abbrechen",
 			closeOnConfirm: true
-		}, function () {
-
-			swal({
-				title: "Bewerbung " + resultString,
-				text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText: "Bewerbung " + resultString,
-				cancelButtonText: "Abbrechen",
-				closeOnConfirm: false
-			}, function () {
-
-				// alert(keyString);
-				// alert(valString);
-				// alert(typeString);
-				$.ajax({
-					type: "POST",
-					url: "setVariable",
-					data: {
-						instance_id: instanceID,
-						key: 'validierungErfolgreich|mailText',
-						value: validateString + '|' + grund,
-						type: 'boolean|text'
-					},
-					success: function (result) {
-						swal({
-							title: "Bewerbung " + resultString,
-							text: "Gespeichert",
-							type: "success",
-							confirmButtonText: "Ok"
-						}, function () {
-							location.href = 'task_overview.html';
-						});
-					},
-					error: function (result) {
-						alert('Ein Fehler ist aufgetreten');
-					}
-				});
-			});
 		});
+
+	swal({
+		title: "Bewerbung " + resultString,
+		text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#DD6B55",
+		confirmButtonText: "Bewerbung " + resultString,
+		cancelButtonText: "Abbrechen",
+		closeOnConfirm: false
+	}, function () {
+
+		// alert(keyString);
+		// alert(valString);
+		// alert(typeString);
+		$.ajax({
+			type: "POST",
+			url: "setVariable",
+			data: {
+				instance_id: instanceID,
+				key: 'validierungErfolgreich|mailText',
+				value: validateString + '|' + grund,
+				type: 'boolean|text'
+			},
+			success: function (result) {
+				swal({
+					title: "Bewerbung " + resultString,
+					text: "Gespeichert",
+					type: "success",
+					confirmButtonText: "Ok"
+				}, function () {
+					location.href = 'task_overview.html';
+				});
+			},
+			error: function (result) {
+				alert('Ein Fehler ist aufgetreten');
+			}
+		});
+	});
 
 }
 
