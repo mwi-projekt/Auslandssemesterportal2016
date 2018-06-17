@@ -347,7 +347,10 @@ function validateBew() {
 			confirmButtonColor: "#DD6B55",
 			confirmButtonText: "Bewerbung " + resultString,
 			cancelButtonText: "Abbrechen",
-		});
+		}).then(
+			function(){},
+			function(){return;}
+		);
 	}
 	else{
 		console.log('In der Nachricht: "' + grund + '" wurden keine Platzhalter gefunden');
