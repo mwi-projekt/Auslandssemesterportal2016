@@ -335,14 +335,27 @@ function validateBew() {
 		grund.includes("Anmerkungen") ||
 		grund.includes("--")) {
 		swal({
-			title: "Bewerbung " + resultString,
+			title: "Platzhalter",
 			text: "Mögliche Platzhalter im Email Text gefunden.",
 			type: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#DD6B55",
-			confirmButtonText: "Ignorieren",
-			cancelButtonText: "Abbrechen",
-			closeOnConfirm: false
+			cancel: "Überprüfen",
+			continue:{
+				text:"Ignorieren",
+				value:"continue"
+			}
+		})
+		.then((value)=>{
+			switch(value)
+				{
+				case "continue":
+				{
+					break;
+				}
+				default:
+				{
+					return;
+				}
+			}
 		});
 	}
 	else{
