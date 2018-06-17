@@ -1045,7 +1045,7 @@ var main = function() {
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>Telefonnummer</td><td>Mobilfunknummer</td><td></td></tr></thead>';
+														+ '</h2><table id="userTable" class"table table-striped table-bordered"> <thead><tr><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
@@ -1070,11 +1070,7 @@ var main = function() {
 													// --------- Test Tabelle ende -----
 													
 													tabelle = tabelle
-															+ '<tr class="'
-															+ even
-															+ '" id="row'
-															+ count
-															+ '"><td class="vorname">'
+															+ '<tr><td class="vorname">'
 															+ auslesen[i + 1]
 															+ '</td><td class="nachname">'
 															+ auslesen[i]
