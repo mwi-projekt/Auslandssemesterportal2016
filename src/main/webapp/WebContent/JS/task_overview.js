@@ -97,7 +97,7 @@ function getList() {
 						}
 
 						$(document).ready(function() {
-    					$('#task').DataTable();
+    					$('.table').DataTable();
 						} );
 
 					}
