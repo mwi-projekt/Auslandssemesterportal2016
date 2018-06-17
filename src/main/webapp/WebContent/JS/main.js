@@ -1136,7 +1136,7 @@ var main = function() {
 												}
 											}
 											tabelle = tabelle + '</table>';
-											$('$('#userTabelle').html(tabelle);
+											$('#userTabelle').html(tabelle);
 											for (var i = 1; isEmpty($(
 													'#edit' + i).text()) !== true; i++) {
 
