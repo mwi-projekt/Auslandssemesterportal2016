@@ -442,9 +442,7 @@ var main = function() {
 								 	$('.erfahrungsBerichte').children().children().children().children('.nonCms').hide();
 								 
 								 	for (var i = 1; $('#kb' + i).html() != undefined; i++) { 
-								 		$('#kb' +
-								 		i).children().children('textarea').text($('#kb' +
-								 		).children().children('.middle').text().trim()); 
+								 		$('#kb' +i).children().children('textarea').text($('#kb').children().children('.middle').text().trim()); 
 								 	}
 								 	$('.cmsBerichte').show();
 								 	$(this).text('Abbrechen'); 
