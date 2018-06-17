@@ -347,9 +347,6 @@ function validateBew() {
 			confirmButtonColor: "#DD6B55",
 			confirmButtonText: "Bewerbung " + resultString,
 			cancelButtonText: "Abbrechen",
-		},function () {
-			break;
-		
 		});
 	}
 	else{
