@@ -344,6 +344,9 @@ function validateBew() {
 			closeOnConfirm: true
 		});
 	}
+	else{
+		console.log('In der Nachricht: "' + grund + '" wurden keine Platzhalter gefunden');
+	}
 
 	swal({
 		title: "Bewerbung " + resultString,
