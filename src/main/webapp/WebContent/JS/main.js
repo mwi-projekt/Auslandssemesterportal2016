@@ -1045,7 +1045,7 @@ var main = function() {
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>Telefonnummer</td><td>Mobilfunknummer</td><td></td></tr></thead>';
+														+ '</h2><table id="userTabelle"> <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>Telefonnummer</td><td>Mobilfunknummer</td><td></td></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
