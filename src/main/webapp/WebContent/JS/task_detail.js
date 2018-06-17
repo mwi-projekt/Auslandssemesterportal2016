@@ -330,9 +330,9 @@ function validateBew() {
 	} else {
 		resultString = "ablehnen"
 	}
-	if (grund.includes('Platzhalter') ||
-		grund.includes('Anmerkungen') ||
-		grund.includes('--'))
+	if (grund.includes("Platzhalter") ||
+		grund.includes("Anmerkungen") ||
+		grund.includes("--")) {
 		swal({
 			title: "Bewerbung " + resultString,
 			text: "Mögliche Platzhalter im Email Text gefunden.",
@@ -343,6 +343,7 @@ function validateBew() {
 			cancelButtonText: "Abbrechen",
 			closeOnConfirm: true
 		});
+	}
 
 	swal({
 		title: "Bewerbung " + resultString,
