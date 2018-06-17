@@ -434,25 +434,28 @@ var main = function() {
 								}
 								break;
 							case 'erfahrungsBerichte':
-								swal('Dieser Bereich kann noch nicht bearbeitet werden.');
-								/*
-								 * if ($(this).text() === "Bearbeiten") {
-								 * $('.kurzbericht').show();
-								 * $('.erfahrungsBerichte').children().children().children('.nonCms').hide();
-								 * $('.erfahrungsBerichte').children().children().children().children('.nonCms').hide();
-								 * for (var i = 1; $('#kb' + i).html() !=
-								 * undefined; i++) { $('#kb' +
-								 * i).children().children('textarea').text($('#kb' +
-								 * i).children().children('.middle').text().trim()); }
-								 * $('.cmsBerichte').show();
-								 * $(this).text('Abbrechen'); } else if
-								 * ($(this).text() === "Abbrechen"){
-								 * $('#erfahrungsBerichte').children().children().children('.nonCms').show();
-								 * $('.erfahrungsBerichte').children().children().children().children('.nonCms').show();
-								 * $('.cmsBerichte').hide();
-								 * $('.kurzbericht').hide(); $('.zeig').show();
-								 * $(this).text('Bearbeiten'); }
-								 */
+								// swal('Dieser Bereich kann noch nicht bearbeitet werden.');
+								
+								 if ($(this).text() === "Bearbeiten") {
+								 	$('.kurzbericht').show();
+								 	$('.erfahrungsBerichte').children().children().children('.nonCms').hide();
+								 	$('.erfahrungsBerichte').children().children().children().children('.nonCms').hide();
+								 
+								 	for (var i = 1; $('#kb' + i).html() != undefined; i++) { 
+								 		$('#kb' +
+								 		i).children().children('textarea').text($('#kb' +
+								 		).children().children('.middle').text().trim()); 
+								 	}
+								 	$('.cmsBerichte').show();
+								 	$(this).text('Abbrechen'); 
+								 } 
+								 else if ($(this).text() === "Abbrechen"){
+									$('#erfahrungsBerichte').children().children().children('.nonCms').show();
+								 	$('.erfahrungsBerichte').children().children().children().children('.nonCms').show();
+								 	$('.cmsBerichte').hide();
+								 	$('.kurzbericht').hide(); $('.zeig').show();
+								 	$(this).text('Bearbeiten'); 
+								 }
 								break;
 							case 'infoMaterial':
 								if ($(this).text() === "Bearbeiten") {
