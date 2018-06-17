@@ -337,23 +337,21 @@ function validateBew() {
 		swal({
 			title: "Platzhalter",
 			text: "Mögliche Platzhalter im Email Text gefunden.",
-			/*type: "warning",
+			icon: "warning",
 			cancel: "Überprüfen",
 			continue:{
 				text:"Ignorieren",
 				value:"continue"
-			}*/
-			showCancelButton: true,
+			}
+			/*showCancelButton: true,
 			confirmButtonColor: "#DD6B55",
 			confirmButtonText: "Bewerbung " + resultString,
-			cancelButtonText: "Abbrechen",
-		}).then(
-			function(){},
-			function(){return;}
-		);
+			cancelButtonText: "Abbrechen",*/
+		});
+		console.log('Platzhalter gefunden');
 	}
 	else{
-		console.log('In der Nachricht: "' + grund + '" wurden keine Platzhalter gefunden');
+		console.log('In der Nachricht wurden keine Platzhalter gefunden');
 	}
 
 	swal({
