@@ -92,10 +92,13 @@ function getList() {
 						if (completed === ""){
 							completed = "<h2>Es gibt noch keine abgeschlossenen Bewerbungen</h2>";
 						} else {
-							completed = '<table class="table table-hover table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Prüfen</th></tr></thead><tbody>' +
+							completed = '<table class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Prüfen</th></tr></thead><tbody>' +
 							completed + "</tbody></table>";
 						}
 
+						$(document).ready(function() {
+    					$('.table').DataTable();
+						} );
 
 					}
 					document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed;
