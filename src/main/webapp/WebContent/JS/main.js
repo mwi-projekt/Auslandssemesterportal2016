@@ -899,6 +899,10 @@ var main = function() {
                              var nname = $('#AAANachname').val();
                              var phone = $('#AAAPhone').val();
                              var mobil = $('#AAAMobile').val();
+                             swal({
+                                    title: 'Speichere Änderungen'
+                               });
+                            swal.showLoading();
                              $.ajax({
                                  type : "POST",
                                  url : "createAAA",
@@ -910,7 +914,9 @@ var main = function() {
                                          mobil: mobil
                                  },
                                  success : function(data) {
+                                        swal.close();
                                          if (data == "mailError"){
+                                             
                                              swal({
                                                  title: "Fehler!",
                                                  text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
