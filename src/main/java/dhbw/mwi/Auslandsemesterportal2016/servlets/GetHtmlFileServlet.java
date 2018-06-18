@@ -36,7 +36,8 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 		"/WebContent/einschreibungsprozess",
 		"/WebContent/einscheibungsprozessSchottland",
 		"/WebContent/fertig",
-		"/WebContent/start"
+		"/WebContent/start",
+		"/WebContent/faq_mitarbeiter"
 		})
 		 
 //TODO richtige Fehlermeldung ausgeben. Aktuell immer 400 - BAD REQUEST
