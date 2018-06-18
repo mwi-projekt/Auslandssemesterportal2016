@@ -1256,7 +1256,10 @@ var main = function() {
             if($('#inEditEmail').attr('data-value') != $('#inEditEmail').val()){
                 var dataOldMail = $('#inEditEmail').attr('data-value');
             } 
-            
+            swal({
+                title: 'Speichere Änderungen'
+                });
+            swal.showLoading();
             if(dataRole == "2"){
                $.ajax({
                     type : "POST",
@@ -1271,6 +1274,7 @@ var main = function() {
                         role: "2"
                     },
                     success : function(result) {
+                      swal.close();  
                       swal('Erfolgreich geändert.', 'Die Mitarbeiterdaten wurden aktualisiert.', 'success');
                       $('#userEdit .close').click();
                       
@@ -1279,6 +1283,7 @@ var main = function() {
 
                     },
                     error : function(result) {
+                      swal.close();  
                       swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
                     }
                  });  
@@ -1298,6 +1303,7 @@ var main = function() {
                         role: "3"
                     },
                     success : function(result) {
+                      swal.close();    
                       swal('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
                       $('#userEdit .close').click();
                       $('#userStudShow').click();
@@ -1305,6 +1311,7 @@ var main = function() {
 
                     },
                     error : function(result) {
+                      swal.close();    
                       swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
                     }
                  });
