@@ -11,6 +11,8 @@ $(document)
 								}, function() {
 									location.href = 'index.html';
 								});
+					}else if (sessionStorage['rolle'] === '2'){
+						$('.logoutFenster').show();
 					}
 
 					// init & logout
