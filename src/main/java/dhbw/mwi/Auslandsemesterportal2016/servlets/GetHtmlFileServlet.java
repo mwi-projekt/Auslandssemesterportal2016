@@ -13,7 +13,6 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetHtmlFileServlet", urlPatterns = {//"/WebContent/getHtml",
 		"/WebContent/faq",
-		//"/WebContent/index",
 		"/WebContent/changePw",
 		"/WebContent/admin-process-modeler",
 		"/WebContent/admin-process-overview",
