@@ -99,18 +99,6 @@ var main = function() {
 		$(this).addClass('current');
 		$('.c' + id).show();
 	});
-	// Auswahl der Rolle im RegistrierenPopUp
-	$('.auswahl').on('click', function() {
-		if ($('.rolleWahl').val() === "Studierender") {
-			$('.auslandsmitarbeiter').hide();
-			$('.student').show();
-			$('#askAdmin').hide();
-		} else if ($('.rolleWahl').val() === "Auslandsmitarbeiter") {
-			$('.auslandsmitarbeiter').hide();
-			$('.student').hide();
-			$('#askAdmin').show();
-		}
-	});
 	// Click-Listener fuer Registrieren-Button
 	$('#regForm').submit(function() {
 
@@ -123,37 +111,20 @@ var main = function() {
 						pw1 = '';
 						pw2 = '';
 						standort = '';
-						var rolle = $('.rolleWahl').val();
-						if (rolle === "Studierender") {
+						var rolle = "Studierender")
 
-							pw1 = $('#inPwSt1').val();
-							pw2 = $('#inPwSt2').val();
-							matrikelnummer = $('#inMatrikel').val();
-							studiengang = $('#inStudiengang').val();
-							kurs = $('#inKurs').val();
-							standort = $('#inStandort').val();
-						} else if (rolle === "Auslandsmitarbeiter") {
-							pw1 = $('#inPwAu1').val();
-							pw2 = $('#inPwAu2').val();
-							swal($('#inTel').val());
-							telefon = $('#inTel').val();
-							mobil = $('#inMobil').val();
-						}
+                                                pw1 = $('#inPwSt1').val();
+                                                pw2 = $('#inPwSt2').val();
+                                                matrikelnummer = $('#inMatrikel').val();
+                                                studiengang = $('#inStudiengang').val();
+                                                kurs = $('#inKurs').val();
+                                                standort = $('#inStandort').val();
+						
 						if (pw1 === pw2) {
 							var vorname = $('#inVorname').val();
 							var nachname = $('#inNachname').val();
 							var email = $('#inMail').val();
-							/*if (rolle === 'Auslandsmitarbeiter'
-									&& email.match('dhbw-karlsruhe.de') != 'dhbw-karlsruhe.de') {
-								$('.falsch')
-										.html(
-												unescape("Bitte wählen Sie nur Auslandsmitarbeiter, wenn Sie einer sind.")); */
-
-
 							if (studiengang === "Studiengang*") {
-								/*$('.falsch')
-										.html(
-												unescape("Bitte wähle deinen Studiengang aus."));*/
 								swal({
 									  title: "Studiengang auswählen",
 									  text: "Bitte einen Studiengang aus der Liste auswählen",

@@ -244,18 +244,6 @@ input {
 	box-shadow: 0 6px 12px rgba(0, 0, 0, .5);
 }
 
-#askAdmin {
-	display: none;
-}
-
-.student {
-	display: none;
-}
-
-.auslandsmitarbeiter {
-	display: none;
-}
-
 .falsch {
 	color: red;
 	margin-top: 10px;
