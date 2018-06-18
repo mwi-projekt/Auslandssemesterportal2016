@@ -58,7 +58,7 @@ public class GetHtmlFileServlet extends HttpServlet
 		int userAccessLevel;
                 if(requestedPage == "/index" || requestedPage == "/"){
                     response.setStatus(HttpServletResponse.SC_ACCEPTED);
-                    RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"index.html");
+                    RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"/index.html");
                     view.include(request, response);
                     return;
                 }else{
