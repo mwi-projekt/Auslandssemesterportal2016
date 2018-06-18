@@ -1010,20 +1010,17 @@ var main = function() {
 										success : function(result) {
 											var auslesen = result.split(';');
 											var count = 0;
-											var even = 'odd';
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th><th></th></tr></thead>';
+														+ '</h2><table id="userTable" class="table table-striped table-bordered"> <thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th><th></th></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
 													count++;
 													
 													tabelle = tabelle
-															+ '<tr class="'
-															+ even
-															+ '" id="row'
+															+ '<tr id="row'
 															+ count
 															+ '"><td class="vorname">'
 															+ auslesen[i + 1]
@@ -1043,16 +1040,11 @@ var main = function() {
                                                                                                                         +'" id="delete'
                                                                                                                         + count
                                                                                                                         + '" title="Löschen"></span></td></tr>';
-													if (even === 'even') {
-														even = 'odd';
-													} else {
-														even = 'even';
-													}
 												}
 											} else if (rolle === 3) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
+														+ '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
 															
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
@@ -1066,9 +1058,7 @@ var main = function() {
 													}
 													count++;
 													tabelle = tabelle
-															+ '<tr class="'
-															+ even
-															+ '" id="row'
+															+ '<tr id="row'
 															+ count
 															+ '"><td class="vorname">'
 															+ auslesen[i + 1]
@@ -1087,13 +1077,8 @@ var main = function() {
 															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
 															+ count
 															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
-                            + count
-                            + '" title="Löschen"></span></td></tr>';
-													if (even === 'even') {
-														even = 'odd';
-													} else {
-														even = 'even';
-													}
+                                                                                                                        + count
+                                                                                                                        + '" title="Löschen"></span></td></tr>';
 												}
 											}
                         tabelle = tabelle + '</table>';
