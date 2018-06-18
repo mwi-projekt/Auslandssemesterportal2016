@@ -81,18 +81,10 @@ public class RegisterServlet extends HttpServlet {
             // Zufälliges Salt generieren und Passwort hashen
             String salt = Util.generateSalt();
             String pw = Util.HashSha256(Util.HashSha256(request.getParameter("passwort")) + salt);
-            /*
-            String sqlupd = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert) VALUES ('"
-                    + request.getParameter("vorname") + "', '" + request.getParameter("nachname") + "', '" + pw
-                    + "', '" + salt + "', '" + rolle + "', '" + request.getParameter("email") + "', '"
-                    + request.getParameter("studiengang") + "', '" + request.getParameter("kurs") + "', '"
-                    + request.getParameter("matrikelnummer") + "', '" + request.getParameter("tel") + "', '"
-                    + request.getParameter("mobil") + "', '" + request.getParameter("standort") + "', '" + id
-                    + "')";
-                    */
+           
 
-            //String link = "193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?confirm=" + id;
-            String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?confirm=" + id;
+            
+            String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/?confirm=" + id;
 
             message.setContent("<h2>Hallo " + request.getParameter("vorname")
                     + ",</h2> Du hast Dich auf der Seite des Auslandsportals registriert. "
