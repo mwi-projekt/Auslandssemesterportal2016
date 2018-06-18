@@ -1296,10 +1296,6 @@ var main = function() {
 		$('.nutzerBearbeiten').hide();
 		$('.popUpBack').hide();
 	});
-	// Click-Listener f�r �nderungen speichern Button im Nutzer Bearbeiten PopUp
-	$('#btnUserEditSave').on('click', function() {
-		swal("Hier passiert noch nichts.");
-	});
 	// Auswahlm�glichkeit auf der Startseite zur Sortierung der Angebote
 	$('#selStudiengang').on('click', function(event) {
 		if ($('#selStudiengang').val() != "Alle Angebote") {
