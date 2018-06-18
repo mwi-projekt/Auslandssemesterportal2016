@@ -1032,7 +1032,7 @@ var main = function() {
 															+ auslesen[i + 3]
 															+ '</td><td class="mobil">'
 															+ auslesen[i + 4]
-															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
+															+ '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit'
 															+ count
 															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td>'
                                                                                                                         + '<td><span class="btn glyphicon glyphicon-trash deleteAAA-button" data-mail="'
@@ -1074,7 +1074,7 @@ var main = function() {
 															+ auslesen[i + 6]
 															+ '</td><td class="matrikelnr">'
 															+ auslesen[i + 7]
-															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
+															+ '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit'
 															+ count
 															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
                                                                                                                         + count
@@ -1084,92 +1084,85 @@ var main = function() {
                         tabelle = tabelle + '</table>';
                         $('#userTabelle').html(tabelle)
                         var nonSortable = (rolle == 3 ? [7,8] : [5,6]);
-                        $('#userTable').DataTable({
-                            "columnDefs": [
-                                { "orderable": false, "targets":  nonSortable }
-                              ]
-                        });
                         
-                        $('.delete-button').click(function () {
+                        var setClickListeners = function (){
+                            $('.delete-button').click(function () {
 
-                            var self = $(this);
+                                var self = $(this);
 
-                            swal({
-                                title: "Bist du sicher?",
-                                text: "Der User kann nicht wiederhergestellt werden!",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "Löschen!"
-                              }).then((result) => {
-                                if (result.value) {
-                                    swal({
-                                    title: 'Lösche User'
-                                    });
-                                    swal.showLoading();
-                                    $.ajax({
-                                      type : "GET",
-                                      url : "user/delete",
-                                      data : {
-                                        matrikelnummer: self.data('matrikel')
-                                      },
-                                      success : function(result) {
-                                        swal.close();
-                                        $('#userStudShow').click();
-                                        swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
-                                      },
-                                      error : function(result) {
-                                        swal.close();
-                                        swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
-                                      }
-                                    });
-                                 }
-                             });
-                              
-                        });
-                        
-                        $('.deleteAAA-button').click(function () {
+                                swal({
+                                    title: "Bist du sicher?",
+                                    text: "Der User kann nicht wiederhergestellt werden!",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Löschen!"
+                                 }).then((result) => {
+                                    if (result.value) {
+                                        swal({
+                                        title: 'Lösche User'
+                                        });
+                                        swal.showLoading();
+                                        $.ajax({
+                                          type : "GET",
+                                          url : "user/delete",
+                                          data : {
+                                            matrikelnummer: self.data('matrikel')
+                                          },
+                                          success : function(result) {
+                                            swal.close();
+                                            $('#userStudShow').click();
+                                            swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                          },
+                                          error : function(result) {
+                                            swal.close();
+                                            swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                          }
+                                        });
+                                     }
+                                });
 
-                            var self = $(this);
+                            });
+                            
+                            $('.deleteAAA-button').click(function () {
 
-                            swal({
-                                title: "Bist du sicher?",
-                                text: "Der User kann nicht wiederhergestellt werden!",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "Löschen!"
-                              }).then((result) => {
-                                if (result.value) {
-                                    swal({
-                                    title: 'Lösche User'
-                                    });
-                                    swal.showLoading();
-                                    $.ajax({
-                                      type : "POST",
-                                      url : "user/deleteAAA",
-                                      data : {
-                                        mail: self.data('mail')
-                                      },
-                                      success : function(result) {
-                                        swal.close();
-                                        $('#userMaShow').click();
-                                        swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
-                                      },
-                                      error : function(result) {
-                                        swal.close();
-                                        swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
-                                      }
-                                    });
-                                 }
-                             });
-                              
-                        });
-                        
-                        for (var i = 1; isEmpty($(
-                                        '#edit' + i).text()) !== true; i++) {
+                                var self = $(this);
 
-                            $('#edit' + i).click(function(){
+                                swal({
+                                    title: "Bist du sicher?",
+                                    text: "Der User kann nicht wiederhergestellt werden!",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Löschen!"
+                                  }).then((result) => {
+                                    if (result.value) {
+                                        swal({
+                                        title: 'Lösche User'
+                                        });
+                                        swal.showLoading();
+                                        $.ajax({
+                                          type : "POST",
+                                          url : "user/deleteAAA",
+                                          data : {
+                                            mail: self.data('mail')
+                                          },
+                                          success : function(result) {
+                                            swal.close();
+                                            $('#userMaShow').click();
+                                            swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                          },
+                                          error : function(result) {
+                                            swal.close();
+                                            swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                          }
+                                        });
+                                     }
+                                 });
+
+                            });
+                            
+                            $('.useredit-button').click(function(){
                                 var id = $(this).attr('id');
                                 var laenge = id.length;
                                 if (laenge === 5) {
@@ -1216,7 +1209,25 @@ var main = function() {
                                 }
                                 $('.nutzerBearbeiten').show();
                             });
-											}
+                            
+                            
+                            
+                        }
+                        
+                        $('#userTable').DataTable({
+                            "columnDefs": [
+                                { "orderable": false, "targets":  nonSortable }
+                              ],
+                              "drawCallback": function( settings ) {
+                                  setClickListeners();    
+                                }
+                        });
+                        
+                        
+                        
+                        
+                        
+                        
 										},
 										error : function(result) {
 											swal({
