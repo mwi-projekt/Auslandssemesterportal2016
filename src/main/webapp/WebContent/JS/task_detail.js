@@ -74,6 +74,7 @@ function parse() {
 				instance_id: instanceID,
 				definition: processDefinition
 			},
+			
 			success: function (result) {
 				output = output +
 					'<div class="panel-group" id="accordion">';
