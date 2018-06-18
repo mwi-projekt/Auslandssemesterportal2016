@@ -1010,20 +1010,17 @@ var main = function() {
 										success : function(result) {
 											var auslesen = result.split(';');
 											var count = 0;
-											var even = 'odd';
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th><th></th></tr></thead>';
+														+ '</h2><table id="userTable" class="table table-striped table-bordered"> <thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th><th></th></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
 													count++;
 													
 													tabelle = tabelle
-															+ '<tr class="'
-															+ even
-															+ '" id="row'
+															+ '<tr id="row'
 															+ count
 															+ '"><td class="vorname">'
 															+ auslesen[i + 1]
@@ -1035,7 +1032,7 @@ var main = function() {
 															+ auslesen[i + 3]
 															+ '</td><td class="mobil">'
 															+ auslesen[i + 4]
-															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
+															+ '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit'
 															+ count
 															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td>'
                                                                                                                         + '<td><span class="btn glyphicon glyphicon-trash deleteAAA-button" data-mail="'
@@ -1043,16 +1040,11 @@ var main = function() {
                                                                                                                         +'" id="delete'
                                                                                                                         + count
                                                                                                                         + '" title="Löschen"></span></td></tr>';
-													if (even === 'even') {
-														even = 'odd';
-													} else {
-														even = 'even';
-													}
 												}
 											} else if (rolle === 3) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
+														+ '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
 															
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
@@ -1066,9 +1058,7 @@ var main = function() {
 													}
 													count++;
 													tabelle = tabelle
-															+ '<tr class="'
-															+ even
-															+ '" id="row'
+															+ '<tr id="row'
 															+ count
 															+ '"><td class="vorname">'
 															+ auslesen[i + 1]
@@ -1084,107 +1074,95 @@ var main = function() {
 															+ auslesen[i + 6]
 															+ '</td><td class="matrikelnr">'
 															+ auslesen[i + 7]
-															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
+															+ '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit'
 															+ count
 															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
-                            + count
-                            + '" title="Löschen"></span></td></tr>';
-													if (even === 'even') {
-														even = 'odd';
-													} else {
-														even = 'even';
-													}
+                                                                                                                        + count
+                                                                                                                        + '" title="Löschen"></span></td></tr>';
 												}
 											}
                         tabelle = tabelle + '</table>';
                         $('#userTabelle').html(tabelle)
                         var nonSortable = (rolle == 3 ? [7,8] : [5,6]);
-                        $('#userTable').DataTable({
-                            "columnDefs": [
-                                { "orderable": false, "targets":  nonSortable }
-                              ]
-                        });
                         
-                        $('.delete-button').click(function () {
+                        var setClickListeners = function (){
+                            $('.delete-button').click(function () {
 
-                            var self = $(this);
+                                var self = $(this);
 
-                            swal({
-                                title: "Bist du sicher?",
-                                text: "Der User kann nicht wiederhergestellt werden!",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "Löschen!"
-                              }).then((result) => {
-                                if (result.value) {
-                                    swal({
-                                    title: 'Lösche User'
-                                    });
-                                    swal.showLoading();
-                                    $.ajax({
-                                      type : "GET",
-                                      url : "user/delete",
-                                      data : {
-                                        matrikelnummer: self.data('matrikel')
-                                      },
-                                      success : function(result) {
-                                        swal.close();
-                                        self.closest('tr').remove();
-                                        swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
-                                      },
-                                      error : function(result) {
-                                        swal.close();
-                                        swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
-                                      }
-                                    });
-                                 }
-                             });
-                              
-                        });
-                        
-                        $('.deleteAAA-button').click(function () {
+                                swal({
+                                    title: "Bist du sicher?",
+                                    text: "Der User kann nicht wiederhergestellt werden!",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Löschen!"
+                                 }).then((result) => {
+                                    if (result.value) {
+                                        swal({
+                                        title: 'Lösche User'
+                                        });
+                                        swal.showLoading();
+                                        $.ajax({
+                                          type : "GET",
+                                          url : "user/delete",
+                                          data : {
+                                            matrikelnummer: self.data('matrikel')
+                                          },
+                                          success : function(result) {
+                                            swal.close();
+                                            $('#userStudShow').click();
+                                            swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                          },
+                                          error : function(result) {
+                                            swal.close();
+                                            swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                          }
+                                        });
+                                     }
+                                });
 
-                            var self = $(this);
+                            });
+                            
+                            $('.deleteAAA-button').click(function () {
 
-                            swal({
-                                title: "Bist du sicher?",
-                                text: "Der User kann nicht wiederhergestellt werden!",
-                                type: "warning",
-                                showCancelButton: true,
-                                confirmButtonColor: "#DD6B55",
-                                confirmButtonText: "Löschen!"
-                              }).then((result) => {
-                                if (result.value) {
-                                    swal({
-                                    title: 'Lösche User'
-                                    });
-                                    swal.showLoading();
-                                    $.ajax({
-                                      type : "GET",
-                                      url : "user/deleteAAA",
-                                      data : {
-                                        mail: self.data('mail')
-                                      },
-                                      success : function(result) {
-                                        swal.close();
-                                        self.closest('tr').remove();
-                                        swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
-                                      },
-                                      error : function(result) {
-                                        swal.close();
-                                        swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
-                                      }
-                                    });
-                                 }
-                             });
-                              
-                        });
-                        
-                        for (var i = 1; isEmpty($(
-                                        '#edit' + i).text()) !== true; i++) {
+                                var self = $(this);
 
-                            $('#edit' + i).click(function(){
+                                swal({
+                                    title: "Bist du sicher?",
+                                    text: "Der User kann nicht wiederhergestellt werden!",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Löschen!"
+                                  }).then((result) => {
+                                    if (result.value) {
+                                        swal({
+                                        title: 'Lösche User'
+                                        });
+                                        swal.showLoading();
+                                        $.ajax({
+                                          type : "POST",
+                                          url : "user/deleteAAA",
+                                          data : {
+                                            mail: self.data('mail')
+                                          },
+                                          success : function(result) {
+                                            swal.close();
+                                            $('#userMaShow').click();
+                                            swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                          },
+                                          error : function(result) {
+                                            swal.close();
+                                            swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                          }
+                                        });
+                                     }
+                                 });
+
+                            });
+                            
+                            $('.useredit-button').click(function(){
                                 var id = $(this).attr('id');
                                 var laenge = id.length;
                                 if (laenge === 5) {
@@ -1231,7 +1209,25 @@ var main = function() {
                                 }
                                 $('.nutzerBearbeiten').show();
                             });
-											}
+                            
+                            
+                            
+                        }
+                        
+                        $('#userTable').DataTable({
+                            "columnDefs": [
+                                { "orderable": false, "targets":  nonSortable }
+                              ],
+                              "drawCallback": function( settings ) {
+                                  setClickListeners();    
+                                }
+                        });
+                        
+                        
+                        
+                        
+                        
+                        
 										},
 										error : function(result) {
 											swal({
