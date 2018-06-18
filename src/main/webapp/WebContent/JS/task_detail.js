@@ -331,22 +331,22 @@ function validateBew() {
 		resultString = "ablehnen"
 	}
 	console.log(grund);
-	if (grund.includes("Platzhalter") ||
-		grund.includes("Anmerkungen") ||
-		grund.includes("--")) {
+	if (grund.indexOf("Platzhalter") < 0||
+		grund.indexOf("--") < 0) {
 		swal({
 			title: "Platzhalter",
 			text: "Mögliche Platzhalter im Email Text gefunden.",
-			icon: "warning",
+			/*icon: "warning",
 			cancel: "Überprüfen",
 			continue:{
 				text:"Ignorieren",
 				value:"continue"
-			}
-			/*showCancelButton: true,
+			},*/
+			type: warning,
+			showCancelButton: true,
 			confirmButtonColor: "#DD6B55",
-			confirmButtonText: "Bewerbung " + resultString,
-			cancelButtonText: "Abbrechen",*/
+			confirmButtonText: "Ignorieren",
+			cancelButtonText: "Abbrechen"
 		});
 		console.log('Platzhalter gefunden');
 	}
