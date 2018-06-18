@@ -20,7 +20,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 		"/WebContent/admin-process",
 		"/WebContent/choose-diagram",
 		"/WebContent/index",
-		"/WebContent/task_detail",
+		"/WebContent/task_overview",
 		"/WebContent/test",
 		"/WebContent/accordion",
 		"/WebContent/bewerbungsportal",

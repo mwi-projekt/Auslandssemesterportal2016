@@ -61,7 +61,7 @@ function getList() {
 										+ '<button class="btn cms glyphicon glyphicon-list" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
 										+ singleInstance[0]
 										+ '&uni='
-										+ singleInstance[6]
+										+ singleInstance[5]
 										+ '&verify=true\'"> </button>'
 										+ "</td></tr>"
 							} else if (singleInstance[6] === 'complete') {
@@ -80,7 +80,7 @@ function getList() {
 								+ '<button class="btn cms glyphicon glyphicon-list" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
 								+ singleInstance[0]
 								+ '&uni='
-								+ singleInstance[6]
+								+ singleInstance[5]
 								+ '&verify=true\'"> </button>'
 								+ "</td></tr>"
 							}
