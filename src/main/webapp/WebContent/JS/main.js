@@ -302,6 +302,8 @@ var main = function() {
 							$('.weg').css('display', 'inline');
 							$('.nutzerName').html(email);
 							location.reload();*/
+							$('.nutzerName').html(email);
+							$('.logoutFenster').show();
 							window.location.href = 'task_overview.html'
 						} else if (sessionStorage['rolle'] === '3') {
 							location.href = 'index.html';
@@ -434,7 +436,7 @@ var main = function() {
 								}
 								break;
 							case 'erfahrungsBerichte':
-								// swal('Dieser Bereich kann noch nicht bearbeitet werden.');
+								 //swal('Dieser Bereich kann noch nicht bearbeitet werden.');
 								
 								 if ($(this).text() === "Bearbeiten") {
 								 	$('.kurzbericht').show();
@@ -455,6 +457,7 @@ var main = function() {
 								 	$(this).text('Bearbeiten'); 
 								 }
 								break;
+								
 							case 'infoMaterial':
 								if ($(this).text() === "Bearbeiten") {
 									$('#infoMaterial').children().children(
@@ -1045,7 +1048,7 @@ var main = function() {
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTabelle"> <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>Telefonnummer</td><td>Mobilfunknummer</td><td></td></tr></thead>';
+														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>Telefonnummer</td><td>Mobilfunknummer</td><td></td></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
@@ -1621,7 +1624,6 @@ $.urlParam = function(name) {
 	} else {
 		return results[1] || 0;
 	}
-
 };
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
