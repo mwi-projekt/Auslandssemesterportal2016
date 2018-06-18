@@ -1014,7 +1014,7 @@ var main = function() {
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><td colspan="2">Aktionen</td></tr></thead>';
+														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th><th></th></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
@@ -1052,7 +1052,7 @@ var main = function() {
 											} else if (rolle === 3) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><td colspan="2">Aktionen</td></tr></thead>';
+														+ '</h2><table id="userTable"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
 															
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
@@ -1097,7 +1097,12 @@ var main = function() {
 												}
 											}
                         tabelle = tabelle + '</table>';
-                        $('#userTabelle').html(tabelle).DataTable();
+                        $('#userTabelle').html(tabelle)
+                        $('#userTable').DataTable({
+                            "columnDefs": [
+                                { "orderable": false, "targets": [7,8] }
+                              ]
+                        });
                         
                         $('.delete-button').click(function () {
 
