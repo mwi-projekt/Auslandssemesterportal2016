@@ -302,6 +302,8 @@ var main = function() {
 							$('.weg').css('display', 'inline');
 							$('.nutzerName').html(email);
 							location.reload();*/
+							$('.nutzerName').html(email);
+							$('.logoutFenster').show();
 							window.location.href = 'task_overview.html'
 						} else if (sessionStorage['rolle'] === '3') {
 							location.href = 'index.html';
