@@ -951,6 +951,7 @@ var main = function() {
 
                                          }
                                          $('#AAACreate').modal('hide');
+                                         $('#userMaShow').click();
                                      }
 
                                  });
