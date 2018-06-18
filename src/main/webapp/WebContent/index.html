@@ -4,8 +4,7 @@
     <head>
         <title>DHBW Auslandsinfo</title>
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <! <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
         <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
         <link rel="stylesheet" href="CSS/main.css">
@@ -302,11 +301,11 @@
                 <a class="btn btn-default navMargin" href="#erfahrungsBerichte">Erfahrungsberichte</a>
 
                 <a class="btn btn-default navMargin" href="#infoMaterial">Infomaterial</a>
-                <a class="btn btn-default navMargin eingeloggt" href="bewerbungsportal.html">Zum Bewerbungsportal</a>
+                <div class="pull-right"><a class="btn cmsBtn eingeloggt" href="bewerbungsportal.html">Zum Bewerbungsportal</a></div>
                 <div class="pull-right"> <label class="btn cms cmsBtn inline Admin" style="float: none"><a style="color: white"
 href="choose-diagram.html">Bewerbungsprozesse bearbeiten</a></label> </div>
-                <label     class="btn cms cmsBtn inline Mitarbeiter" style="float: none"><a style="color: white"
-                        href="task_overview.html">Bewerbungen Validieren</a></label>
+                <div class="pull-right"><label     class="btn cms cmsBtn inline Mitarbeiter" style="float: none"><a style="color: white"
+                        href="task_overview.html">Bewerbungen Validieren</a></label></div>
             </div>
          
 
@@ -689,18 +688,9 @@ href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Ausla
                     <div class="btn btnUser" id="userNeu">Neuen AAA anlegen</div>
                 </div>
                 <div class="pull-right">
-                    <p class="btn backAdmin">Zurück zum Hauptmenü</p>
+                    <p class="btn cmsBtn backAdmin">Zurück zum Hauptmenü</p>
                 </div>
                 <br>
-                
-                 <!-- Bootstrap Script für userTabelle, damit Suche und Sotierung automatisch funktioniert ------------->
-                
-                <div class="" id="userTabelle"></div>
-                <script>
-					$(document).ready(function() {
-    				$('.table').DataTable();
-					} );
-				</script>
             </div>
         </div>
     </div>
@@ -712,7 +702,7 @@ href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Ausla
                 <div class="pull-right">
                     <p>
                         <a href="index">Startseite</a> | <a href="impressum">Impressum</a>
-                        | <a href="faq">FAQs</a>
+                        | <a href="faq_mitarbeiter.html">FAQs</a>
                     </p>
                 </div>
             </div>

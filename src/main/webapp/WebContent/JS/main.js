@@ -302,6 +302,8 @@ var main = function() {
 							$('.weg').css('display', 'inline');
 							$('.nutzerName').html(email);
 							location.reload();*/
+							$('.nutzerName').html(email);
+							$('.logoutFenster').show();
 							window.location.href = 'task_overview.html'
 						} else if (sessionStorage['rolle'] === '3') {
 							location.href = 'index.html';
@@ -434,26 +436,28 @@ var main = function() {
 								}
 								break;
 							case 'erfahrungsBerichte':
-								swal('Dieser Bereich kann noch nicht bearbeitet werden.');
-								/*
-								 * if ($(this).text() === "Bearbeiten") {
-								 * $('.kurzbericht').show();
-								 * $('.erfahrungsBerichte').children().children().children('.nonCms').hide();
-								 * $('.erfahrungsBerichte').children().children().children().children('.nonCms').hide();
-								 * for (var i = 1; $('#kb' + i).html() !=
-								 * undefined; i++) { $('#kb' +
-								 * i).children().children('textarea').text($('#kb' +
-								 * i).children().children('.middle').text().trim()); }
-								 * $('.cmsBerichte').show();
-								 * $(this).text('Abbrechen'); } else if
-								 * ($(this).text() === "Abbrechen"){
-								 * $('#erfahrungsBerichte').children().children().children('.nonCms').show();
-								 * $('.erfahrungsBerichte').children().children().children().children('.nonCms').show();
-								 * $('.cmsBerichte').hide();
-								 * $('.kurzbericht').hide(); $('.zeig').show();
-								 * $(this).text('Bearbeiten'); }
-								 */
+								 //swal('Dieser Bereich kann noch nicht bearbeitet werden.');
+								
+								 if ($(this).text() === "Bearbeiten") {
+								 	$('.kurzbericht').show();
+								 	$('.erfahrungsBerichte').children().children().children('.nonCms').hide();
+								 	$('.erfahrungsBerichte').children().children().children().children('.nonCms').hide();
+								 
+								 	for (var i = 1; $('#kb' + i).html() != undefined; i++) { 
+								 		$('#kb' +i).children().children('textarea').text($('#kb').children().children('.middle').text().trim()); 
+								 	}
+								 	$('.cmsBerichte').show();
+								 	$(this).text('Abbrechen'); 
+								 } 
+								 else if ($(this).text() === "Abbrechen"){
+									$('#erfahrungsBerichte').children().children().children('.nonCms').show();
+								 	$('.erfahrungsBerichte').children().children().children().children('.nonCms').show();
+								 	$('.cmsBerichte').hide();
+								 	$('.kurzbericht').hide(); $('.zeig').show();
+								 	$(this).text('Bearbeiten'); 
+								 }
 								break;
+								
 							case 'infoMaterial':
 								if ($(this).text() === "Bearbeiten") {
 									$('#infoMaterial').children().children(
@@ -1049,6 +1053,7 @@ var main = function() {
 													auslesen[i] = auslesen[i]
 															.trim();
 													count++;
+													
 													tabelle = tabelle
 															+ '<tr class="'
 															+ even
@@ -1619,7 +1624,6 @@ $.urlParam = function(name) {
 	} else {
 		return results[1] || 0;
 	}
-
 };
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
