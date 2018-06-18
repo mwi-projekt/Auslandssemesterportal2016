@@ -56,7 +56,7 @@ public class GetHtmlFileServlet extends HttpServlet
 		
 		String requestedPage = request.getServletPath();
 		int userAccessLevel;
-		if(requestedPage  == "/WebContent/faq" || requestedPage == "/WebContent/impressum")
+		if(requestedPage  == "/WebContent/faq" || requestedPage == "/WebContent/impressum" || requestedPage == "/WebContent/index")
 			userAccessLevel = 0;
 		else
 			userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
