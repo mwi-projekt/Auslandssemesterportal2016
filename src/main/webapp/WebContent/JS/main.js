@@ -1098,9 +1098,10 @@ var main = function() {
 											}
                         tabelle = tabelle + '</table>';
                         $('#userTabelle').html(tabelle)
+                        var nonSortable = (rolle == 3 ? [7,8] : [5,6]);
                         $('#userTable').DataTable({
                             "columnDefs": [
-                                { "orderable": false, "targets": [7,8] }
+                                { "orderable": false, "targets":  nonSortable }
                               ]
                         });
                         
