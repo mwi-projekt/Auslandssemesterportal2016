@@ -1176,22 +1176,22 @@ var main = function() {
                                             4,
                                             6);
                                 }
-                                $('#inEditVorname').val($('#row' +id).children('.vorname').text());
+                                $('#inEditVorname').val($('#row' +id).children('.vorname').text().trim());
                                 $('#inEditVorname').attr('data-value',$('#inEditVorname').val());
-                                $('#inEditNachname').val($('#row' +id).children('.nachname').text());
+                                $('#inEditNachname').val($('#row' +id).children('.nachname').text().trim());
                                  $('#inEditNachname').attr('data-value',$('#inEditNachname').val());
-                                $('#inEditEmail').val($('#row' +id).children('.email').text());
+                                $('#inEditEmail').val($('#row' +id).children('.email').text(.trim()));
                                 $('#inEditEmail').attr('data-value',$('#inEditEmail').val());
                                 $('#inEditEmail').attr('data-role',rolle);
-                                $('#inEditTel').val($('#row' +id).children('.telnummer').text());
+                                $('#inEditTel').val($('#row' +id).children('.telnummer').text().trim());
                                 $('#inEditTel').attr('data-value',$('#inEditTel').val());
-                                $('#inEditMobil').val($('#row' +id).children('.mobil').text());
+                                $('#inEditMobil').val($('#row' +id).children('.mobil').text().trim());
                                 $('#inEditMobil').attr('data-value',$('#inEditMobil').val());
-                                $('#inEditStudgang').val($('#row' +id).children('.studgang').text());
+                                $('#inEditStudgang').val($('#row' +id).children('.studgang').text().trim());
                                 $('#inEditStudgang').attr('data-value',$('#inEditStudgang').val());
-                                $('#inEditKurs').val($('#row' +id).children('.kurs').text());
+                                $('#inEditKurs').val($('#row' +id).children('.kurs').text().trim());
                                 $('#inEditKurs').attr('data-value',$('#inEditKurs').val());
-                                $('#inEditMatnr').val($('#row' +id).children('.matrikelnr').text());
+                                $('#inEditMatnr').val($('#row' +id).children('.matrikelnr').text().trim());
                                 $('#inEditMatnr').attr('data-value',$('#inEditMatnr').val());
                                 if (rolle === 2) {
                                     $('#inEditTel').show();
