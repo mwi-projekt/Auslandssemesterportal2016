@@ -1180,7 +1180,7 @@ var main = function() {
                                 $('#inEditVorname').attr('data-value',$('#inEditVorname').val());
                                 $('#inEditNachname').val($('#row' +id).children('.nachname').text().trim());
                                  $('#inEditNachname').attr('data-value',$('#inEditNachname').val());
-                                $('#inEditEmail').val($('#row' +id).children('.email').text(.trim()));
+                                $('#inEditEmail').val($('#row' +id).children('.email').text().trim());
                                 $('#inEditEmail').attr('data-value',$('#inEditEmail').val());
                                 $('#inEditEmail').attr('data-role',rolle);
                                 $('#inEditTel').val($('#row' +id).children('.telnummer').text().trim());
