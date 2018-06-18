@@ -175,6 +175,38 @@
 
         </div>
     </div>
+    <div id="AAACreate" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">Neuen Auslandsmitarbeiter anlegen</h4>
+                </div>
+                <form id="AAACreateForm" action="">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="Vorname*" class="inBox form-control" id="AAAVorname" required="">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="Nachname*" class="inBox form-control" id="AAANachname" required="">
+                                </div>
+                            </div>
+                        </div>
+                        <input type="email" placeholder="E-Mail Adresse*" class="inBox form-control" id="AAAMail" required title="E-Mail">
+                        <br>
+                        <input type="text" placeholder="Telefonnummer" class="inBox form-control" id="AAAPhone" title="Telefonnummer">
+                        <br>
+                        <input type="text" placeholder="Mobil" class="inBox form-control" id="AAAMobile" title="Mobil">
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <input form="AAACreateForm" type="submit" class="btn" id="btnAAACreate" value="Anlegen" style="width: auto;"> </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigationsleiste-------------------------------------------------------------------- -->
     <div class="header">
@@ -665,7 +697,7 @@ href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Ausla
                         Studenten</div>
                     <div class="btn btnUser" id="userMaShow">Registrierte
                         Auslandsamtmitarbeiter</div>
-                    <div class="btn btnUser" id="userNeu">Neuen AAA anlegen</div>
+                    <div class="btn btnUser" id="userNeu" data-toggle="modal" href="#AAACreate">Neuen AAA anlegen</div>
                 </div>
                 <div class="pull-right">
                     <p class="btn cmsBtn backAdmin">Zurück zum Hauptmenü</p>
