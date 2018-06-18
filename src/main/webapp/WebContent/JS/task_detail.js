@@ -74,10 +74,12 @@ function parse() {
 				instance_id: instanceID,
 				definition: processDefinition
 			},
+			
 			success: function (result) {
 				output = output +
 					'<div class="panel-group" id="accordion">';
-				result = result.trim();
+				result = result
+					.trim();
 				steps = result.split("\n");
 				for (var k = 0; k < steps.length; k++) {
 					collapsible = steps[k].split("|");
