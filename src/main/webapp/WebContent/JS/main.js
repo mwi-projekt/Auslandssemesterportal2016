@@ -111,7 +111,7 @@ var main = function() {
 						pw1 = '';
 						pw2 = '';
 						standort = '';
-						var rolle = "Studierender")
+						var rolle = "Studierender";
 
                                                 pw1 = $('#inPwSt1').val();
                                                 pw2 = $('#inPwSt2').val();
