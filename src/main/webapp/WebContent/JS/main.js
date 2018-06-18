@@ -1115,7 +1115,7 @@ var main = function() {
                                       },
                                       success : function(result) {
                                         swal.close();
-                                        self.closest('tr').remove();
+                                        $('#userStudShow').click();
                                         swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
                                       },
                                       error : function(result) {
@@ -1146,14 +1146,14 @@ var main = function() {
                                     });
                                     swal.showLoading();
                                     $.ajax({
-                                      type : "GET",
+                                      type : "POST",
                                       url : "user/deleteAAA",
                                       data : {
                                         mail: self.data('mail')
                                       },
                                       success : function(result) {
                                         swal.close();
-                                        self.closest('tr').remove();
+                                        $('#userMaShow').click();
                                         swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
                                       },
                                       error : function(result) {

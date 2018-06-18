@@ -13,7 +13,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 public class AAADeleteServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
       if(rolle!=1 && rolle!=2){
@@ -27,7 +27,7 @@ public class AAADeleteServlet extends HttpServlet {
                   String query = "DELETE FROM user WHERE mail = ?";
                   String[] args = new String[]{mail};
                   String[] types = new String[]{"String"};
-                  SQL_queries.executeUpdate(query,args,types);
+                  toClient.println(SQL_queries.executeUpdate(query,args,types));
           } else {
               response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
               toClient.println("Error: parameter are missing");
