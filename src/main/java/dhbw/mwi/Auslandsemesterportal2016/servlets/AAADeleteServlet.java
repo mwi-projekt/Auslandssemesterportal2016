@@ -27,7 +27,15 @@ public class AAADeleteServlet extends HttpServlet {
                   String query = "DELETE FROM user WHERE email = ?";
                   String[] args = new String[]{mail};
                   String[] types = new String[]{"String"};
-                  toClient.println(SQL_queries.executeUpdate(query,args,types));
+                  int result = SQL_queries.executeUpdate(query,args,types);
+                  
+                  if(result == 1){
+                      toClient.println("User Deleted");
+                  }
+                  else{
+                      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                      toClient.println("User not found or could not be deleted");
+                  }
           } else {
               response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
               toClient.println("Error: parameter are missing");
