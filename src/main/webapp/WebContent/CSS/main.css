@@ -782,3 +782,7 @@ i {
 #reasonl {
 	display: none;
 }
+
+#register .nutzerBearbeiten{
+    display: none;
+}
