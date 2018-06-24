@@ -58,7 +58,7 @@ function getList() {
 										+ "</td><td>"
 										+ singleInstance[5]
 										+ "</td><td>"
-										+ '<button class="btn glyphicon glyphicon-list" name="Details" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
+										+ '<button class="btn glyphicon glyphicon-list" title="Details" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
 										+ singleInstance[0]
 										+ '&uni='
 										+ singleInstance[5]
