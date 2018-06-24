@@ -58,7 +58,7 @@ function getList() {
 										+ "</td><td>"
 										+ singleInstance[5]
 										+ "</td><td>"
-										+ '<button class="btn cms glyphicon glyphicon-list" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
+										+ '<button class="btn glyphicon glyphicon-list" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
 										+ singleInstance[0]
 										+ '&uni='
 										+ singleInstance[5]
@@ -76,12 +76,6 @@ function getList() {
 								+ singleInstance[4]
 								+ "</td><td>"
 								+ singleInstance[5]
-								+ "</td><td>"
-								+ '<button class="btn cms glyphicon glyphicon-list" onclick="location.href=\'http://193.196.7.215:8080/Auslandssemesterportal/WebContent/task_detail.html?instance_id='
-								+ singleInstance[0]
-								+ '&uni='
-								+ singleInstance[5]
-								+ '&verify=true\'"> </button>'
 								+ "</td></tr>"
 							}
 						}
@@ -94,7 +88,7 @@ function getList() {
 						if (completed === ""){
 							completed = "<h2>Es gibt noch keine abgeschlossenen Bewerbungen</h2>";
 						} else {
-							completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Prüfen</th></tr></thead><tbody>' +
+							completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
 							completed + "</tbody></table>";
 						}
 
