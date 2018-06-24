@@ -45,13 +45,13 @@ $(document)
 			$('#validateBtn').prop('disabled', true);
 
 			$.ajax({
-				type : "GET",
-				url : "currentActivity",
-				data : {
+				type: "GET",
+				url: "currentActivity",
+				data: {
 					instance_id: instanceID,
 					uni: uni
 				},
-				success : function(result) {
+				success: function (result) {
 					//alert('Aktiver Schritt: ' + result);
 					var resultArr = result.split(';');
 					step_id = resultArr[0];
@@ -59,7 +59,7 @@ $(document)
 					parse();
 				}
 			});
-			
+
 		});
 
 function parse() {
@@ -74,16 +74,18 @@ function parse() {
 				instance_id: instanceID,
 				definition: processDefinition
 			},
+			
 			success: function (result) {
 				output = output +
 					'<div class="panel-group" id="accordion">';
-				result = result.trim();
+				result = result
+					.trim();
 				steps = result.split("\n");
 				for (var k = 0; k < steps.length; k++) {
 					collapsible = steps[k].split("|");
 					stepName = collapsible[0]; // Name des aktiven
 					// Prozessschrittes
-					
+
 					if (collapsible[1].search("id") != -1) {
 						var innerOutput = "";
 						var json = JSON.parse(decodeURI(collapsible[1]));
@@ -143,18 +145,18 @@ function parse() {
 						}
 
 						if (innerOutput != '') {
-							if (stepName === "datenEingeben"){
+							if (stepName === "datenEingeben") {
 								visibleStepName = "Persönliche Daten";
-							} else if (stepName === "datenEingebenUnt"){
+							} else if (stepName === "datenEingebenUnt") {
 								visibleStepName = "Partnerunternehmen";
-							} else if (stepName === "Task_1jq3nab"){
+							} else if (stepName === "Task_1jq3nab") {
 								visibleStepName = "Semesteranschrift";
-							} else if (stepName === "englischNotePruefen"){
+							} else if (stepName === "englischNotePruefen") {
 								visibleStepName = "Note Fremdsprache";
 							} else {
 								visibleStepName = "Sonstige Angaben";
 							}
-						
+
 							output = output +
 								'<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
 								k + '">' + visibleStepName + '</a></h4></div>'; // Header
@@ -330,6 +332,30 @@ function validateBew() {
 	} else {
 		resultString = "ablehnen"
 	}
+	console.log(grund);
+	if (grund.indexOf("Platzhalter") < 0||
+		grund.indexOf("--") < 0) {
+		swal({
+			title: "Platzhalter",
+			text: "Mögliche Platzhalter im Email Text gefunden.",
+			/*icon: "warning",
+			cancel: "Überprüfen",
+			continue:{
+				text:"Ignorieren",
+				value:"continue"
+			},*/
+			type: warning,
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "Ignorieren",
+			cancelButtonText: "Abbrechen"
+		});
+		console.log('Platzhalter gefunden');
+	}
+	else{
+		console.log('In der Nachricht wurden keine Platzhalter gefunden');
+	}
+
 	swal({
 		title: "Bewerbung " + resultString,
 		text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",

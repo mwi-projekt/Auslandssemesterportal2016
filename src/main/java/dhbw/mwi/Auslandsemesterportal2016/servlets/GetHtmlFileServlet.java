@@ -13,14 +13,13 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetHtmlFileServlet", urlPatterns = {//"/WebContent/getHtml",
 		"/WebContent/faq",
-		//"/WebContent/index",
 		"/WebContent/changePw",
 		"/WebContent/admin-process-modeler",
 		"/WebContent/admin-process-overview",
 		"/WebContent/admin-process",
 		"/WebContent/choose-diagram",
 		"/WebContent/index",
-		"/WebContent/task_detail",
+		"/WebContent/task_overview",
 		"/WebContent/test",
 		"/WebContent/accordion",
 		"/WebContent/bewerbungsportal",
@@ -36,7 +35,8 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 		"/WebContent/einschreibungsprozess",
 		"/WebContent/einscheibungsprozessSchottland",
 		"/WebContent/fertig",
-		"/WebContent/start"
+		"/WebContent/start",
+		"/WebContent/faq_mitarbeiter"
 		})
 		 
 //TODO richtige Fehlermeldung ausgeben. Aktuell immer 400 - BAD REQUEST
@@ -56,126 +56,129 @@ public class GetHtmlFileServlet extends HttpServlet
 		
 		String requestedPage = request.getServletPath();
 		int userAccessLevel;
-		if(requestedPage  == "/WebContent/faq" || requestedPage == "/WebContent/impressum")
-			userAccessLevel = 0;
-		else
-			userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
+               
+                    if(requestedPage  == "/WebContent/faq" || requestedPage == "/WebContent/impressum")
+                          userAccessLevel = 0;
+                  else
+                          userAccessLevel = userAuthentification.isUserAuthentifiedByCookie(request);
+
+                  requestedPage = requestedPage.substring(11, requestedPage.length());
+
+
+                  /*if(requestedPage == "/faq")
+                  {
+                          response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                          RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"/faq.html");
+                          view.include(request, response);
+                          return;
+                  }
+                  else if(requestedPage == "/impressum")
+                  {
+                          response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                          RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"/impressum.html");
+                          view.include(request, response);
+                          return;
+                  }*/
+
+
+
+                  //response.sendError(HttpServletResponse.SC_BAD_REQUEST, "." +requestedPage+". userLevel:" + userAccessLevel);
+
+
+
+                  //Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
+                  //gibt das höchste verfügbare, erlaubte Dokument zurück
+
+                  int highestDocumentLevelFound = -1;
+                  boolean forbiddenDocumentFound = false;
+                  boolean publicDocumentFound = false;
+                  boolean rightDocumentFound = false;
+
+                  //Durchsuche alle Ordner
+                  for(int i = 0; i < HTML_FOLDER.length; i++)
+                  {
+                          RequestDispatcher tempView = null;
+                          try
+                          {
+                                  tempView = request.getServletContext().getRequestDispatcher(HTML_FOLDER[i]+requestedPage+".html");
+                          }
+                          catch(Exception e)
+                          {
+                                  continue;
+                          }	
+                          //falls Dokument in Ordner
+                          if(tempView != null)
+                          {
+                                  if(i == 0)
+                                  {
+                                          publicDocumentFound = true;
+                                  }
+                                  //Zugriff nicht erlaubt
+                                  else if(i == userAccessLevel)
+                                  {
+                                          rightDocumentFound = true;
+                                  }
+                                  else
+                                  {
+                                          forbiddenDocumentFound = true;
+                                  }
+                          }
+                  }
+                  //wurde ein erlaubtes Dokument gefunden?
+                  try
+                  {
+
+                          if(rightDocumentFound)
+                          {
+
+                                  response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                                  RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[userAccessLevel]+requestedPage+".html");
+                                  view.include(request, response);
+                                  return;
+                          }
+                          else if(publicDocumentFound)
+                          {
+                                  response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                                  RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+requestedPage+".html");
+                                  view.include(request, response);
+                                  return;
+                          }
+                          //es wurde kein erlaubtes Dokument gefunden
+                          else
+                          {
+                                  //es wurde ein verbotenes Dokument gefunden
+                                  if(forbiddenDocumentFound)
+                                  {
+                                          response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                                          response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                                          "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
+                                          return;
+                                  }
+                                  //es wurde nichts gefunden
+                                  else
+                                  {
+                                          response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                                          response.sendError(HttpServletResponse.SC_NOT_FOUND,
+                                          "Seite wurde nicht gefunden!");
+                                          return;
+                                  }
+                          }
+                  }
+                  catch(Exception e)
+                  {
+                          response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                          response.sendError(HttpServletResponse.SC_BAD_REQUEST,
+                                          "Es gab einen Fehler in der Verarbeitung des Requests."
+                                          + "UserAccessLevel: " + userAccessLevel
+                                          + ", Requested Path: " + requestedPage
+                                          + ", ForbiddenDocumentFound: " + forbiddenDocumentFound
+                                          + ", PublicDocumentFound: " + publicDocumentFound
+                                          + ", RightDocuementFound: " + rightDocumentFound
+                                          + e.getMessage());
+                  }  
+                }
 		
-		requestedPage = requestedPage.substring(11, requestedPage.length());
 		
 		
-		/*if(requestedPage == "/faq")
-		{
-			response.setStatus(HttpServletResponse.SC_ACCEPTED);
-			RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"/faq.html");
-			view.include(request, response);
-			return;
-		}
-		else if(requestedPage == "/impressum")
-		{
-			response.setStatus(HttpServletResponse.SC_ACCEPTED);
-			RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+"/impressum.html");
-			view.include(request, response);
-			return;
-		}*/
-		
-		
-		
-		//response.sendError(HttpServletResponse.SC_BAD_REQUEST, "." +requestedPage+". userLevel:" + userAccessLevel);
-		
-		
-		
-		//Prüfe das Level des Nutzers, falls kein Dokument für das Level vorhanden, prüfe das nächstniedriger Level
-		//gibt das höchste verfügbare, erlaubte Dokument zurück
-		
-		int highestDocumentLevelFound = -1;
-		boolean forbiddenDocumentFound = false;
-		boolean publicDocumentFound = false;
-		boolean rightDocumentFound = false;
-		
-		//Durchsuche alle Ordner
-		for(int i = 0; i < HTML_FOLDER.length; i++)
-		{
-			RequestDispatcher tempView = null;
-			try
-			{
-				tempView = request.getServletContext().getRequestDispatcher(HTML_FOLDER[i]+requestedPage+".html");
-			}
-			catch(Exception e)
-			{
-				continue;
-			}	
-			//falls Dokument in Ordner
-			if(tempView != null)
-			{
-				if(i == 0)
-				{
-					publicDocumentFound = true;
-				}
-				//Zugriff nicht erlaubt
-				else if(i == userAccessLevel)
-				{
-					rightDocumentFound = true;
-				}
-				else
-				{
-					forbiddenDocumentFound = true;
-				}
-			}
-		}
-		//wurde ein erlaubtes Dokument gefunden?
-		try
-		{
-			
-			if(rightDocumentFound)
-			{
-				
-				response.setStatus(HttpServletResponse.SC_ACCEPTED);
-				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[userAccessLevel]+requestedPage+".html");
-				view.include(request, response);
-				return;
-			}
-			else if(publicDocumentFound)
-			{
-				response.setStatus(HttpServletResponse.SC_ACCEPTED);
-				RequestDispatcher view = request.getServletContext().getRequestDispatcher(HTML_FOLDER[0]+requestedPage+".html");
-				view.include(request, response);
-				return;
-			}
-			//es wurde kein erlaubtes Dokument gefunden
-			else
-			{
-				//es wurde ein verbotenes Dokument gefunden
-				if(forbiddenDocumentFound)
-				{
-					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-					response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-			                "Sie haben keine Berechtigung auf diese Seite zuzugreifen!");
-					return;
-				}
-				//es wurde nichts gefunden
-				else
-				{
-					response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-					response.sendError(HttpServletResponse.SC_NOT_FOUND,
-			                "Seite wurde nicht gefunden!");
-					return;
-				}
-			}
-		}
-		catch(Exception e)
-		{
-			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST,
-					"Es gab einen Fehler in der Verarbeitung des Requests."
-					+ "UserAccessLevel: " + userAccessLevel
-					+ ", Requested Path: " + requestedPage
-					+ ", ForbiddenDocumentFound: " + forbiddenDocumentFound
-					+ ", PublicDocumentFound: " + publicDocumentFound
-					+ ", RightDocuementFound: " + rightDocumentFound
-					+ e.getMessage());
-		}
-		
-		
-	}
+	
 }

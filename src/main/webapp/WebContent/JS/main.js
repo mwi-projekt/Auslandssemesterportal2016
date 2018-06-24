@@ -99,18 +99,6 @@ var main = function() {
 		$(this).addClass('current');
 		$('.c' + id).show();
 	});
-	// Auswahl der Rolle im RegistrierenPopUp
-	$('.auswahl').on('click', function() {
-		if ($('.rolleWahl').val() === "Studierender") {
-			$('.auslandsmitarbeiter').hide();
-			$('.student').show();
-			$('#askAdmin').hide();
-		} else if ($('.rolleWahl').val() === "Auslandsmitarbeiter") {
-			$('.auslandsmitarbeiter').hide();
-			$('.student').hide();
-			$('#askAdmin').show();
-		}
-	});
 	// Click-Listener fuer Registrieren-Button
 	$('#regForm').submit(function() {
 
@@ -123,37 +111,20 @@ var main = function() {
 						pw1 = '';
 						pw2 = '';
 						standort = '';
-						var rolle = $('.rolleWahl').val();
-						if (rolle === "Studierender") {
+						var rolle = "Studierender";
 
-							pw1 = $('#inPwSt1').val();
-							pw2 = $('#inPwSt2').val();
-							matrikelnummer = $('#inMatrikel').val();
-							studiengang = $('#inStudiengang').val();
-							kurs = $('#inKurs').val();
-							standort = $('#inStandort').val();
-						} else if (rolle === "Auslandsmitarbeiter") {
-							pw1 = $('#inPwAu1').val();
-							pw2 = $('#inPwAu2').val();
-							swal($('#inTel').val());
-							telefon = $('#inTel').val();
-							mobil = $('#inMobil').val();
-						}
+                                                pw1 = $('#inPwSt1').val();
+                                                pw2 = $('#inPwSt2').val();
+                                                matrikelnummer = $('#inMatrikel').val();
+                                                studiengang = $('#inStudiengang').val();
+                                                kurs = $('#inKurs').val();
+                                                standort = $('#inStandort').val();
+						
 						if (pw1 === pw2) {
 							var vorname = $('#inVorname').val();
 							var nachname = $('#inNachname').val();
 							var email = $('#inMail').val();
-							/*if (rolle === 'Auslandsmitarbeiter'
-									&& email.match('dhbw-karlsruhe.de') != 'dhbw-karlsruhe.de') {
-								$('.falsch')
-										.html(
-												unescape("Bitte wählen Sie nur Auslandsmitarbeiter, wenn Sie einer sind.")); */
-
-
 							if (studiengang === "Studiengang*") {
-								/*$('.falsch')
-										.html(
-												unescape("Bitte wähle deinen Studiengang aus."));*/
 								swal({
 									  title: "Studiengang auswählen",
 									  text: "Bitte einen Studiengang aus der Liste auswählen",
@@ -302,6 +273,8 @@ var main = function() {
 							$('.weg').css('display', 'inline');
 							$('.nutzerName').html(email);
 							location.reload();*/
+							$('.nutzerName').html(email);
+							$('.logoutFenster').show();
 							window.location.href = 'task_overview.html'
 						} else if (sessionStorage['rolle'] === '3') {
 							location.href = 'index.html';
@@ -434,26 +407,28 @@ var main = function() {
 								}
 								break;
 							case 'erfahrungsBerichte':
-								swal('Dieser Bereich kann noch nicht bearbeitet werden.');
-								/*
-								 * if ($(this).text() === "Bearbeiten") {
-								 * $('.kurzbericht').show();
-								 * $('.erfahrungsBerichte').children().children().children('.nonCms').hide();
-								 * $('.erfahrungsBerichte').children().children().children().children('.nonCms').hide();
-								 * for (var i = 1; $('#kb' + i).html() !=
-								 * undefined; i++) { $('#kb' +
-								 * i).children().children('textarea').text($('#kb' +
-								 * i).children().children('.middle').text().trim()); }
-								 * $('.cmsBerichte').show();
-								 * $(this).text('Abbrechen'); } else if
-								 * ($(this).text() === "Abbrechen"){
-								 * $('#erfahrungsBerichte').children().children().children('.nonCms').show();
-								 * $('.erfahrungsBerichte').children().children().children().children('.nonCms').show();
-								 * $('.cmsBerichte').hide();
-								 * $('.kurzbericht').hide(); $('.zeig').show();
-								 * $(this).text('Bearbeiten'); }
-								 */
+								 //swal('Dieser Bereich kann noch nicht bearbeitet werden.');
+								
+								 if ($(this).text() === "Bearbeiten") {
+								 	$('.kurzbericht').show();
+								 	$('.erfahrungsBerichte').children().children().children('.nonCms').hide();
+								 	$('.erfahrungsBerichte').children().children().children().children('.nonCms').hide();
+								 
+								 	for (var i = 1; $('#kb' + i).html() != undefined; i++) { 
+								 		$('#kb' +i).children().children('textarea').text($('#kb').children().children('.middle').text().trim()); 
+								 	}
+								 	$('.cmsBerichte').show();
+								 	$(this).text('Abbrechen'); 
+								 } 
+								 else if ($(this).text() === "Abbrechen"){
+									$('#erfahrungsBerichte').children().children().children('.nonCms').show();
+								 	$('.erfahrungsBerichte').children().children().children().children('.nonCms').show();
+								 	$('.cmsBerichte').hide();
+								 	$('.kurzbericht').hide(); $('.zeig').show();
+								 	$(this).text('Bearbeiten'); 
+								 }
 								break;
+								
 							case 'infoMaterial':
 								if ($(this).text() === "Bearbeiten") {
 									$('#infoMaterial').children().children(
@@ -918,72 +893,73 @@ var main = function() {
 		} else if (id === 'verwaltungUser') {
 			$('#adminBereich').hide();
 			$('#nutzerVerwaltung').show();
-                        
-                        var AAACreateModal = $('#AAACreate');
-                        
-                        if(AAACreateModal.length == 0){
-                           $('#login').after('<div id="AAACreate" class="modal fade" role="dialog"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button> <h4 class="modal-title">Neuen Auslandsmitarbeiter anlegen</h4> </div><form id="AAACreateForm" action=""> <div class="modal-body"> <div class="form-group"> <div class="row"> <div class="col-md-6"> <input type="text" placeholder="Vorname*" class="inBox form-control" id="AAAVorname" required=""> </div><div class="col-md-6"> <input type="text" placeholder="Nachname*" class="inBox form-control" id="AAANachname" required=""> </div></div></div><input type="email" placeholder="E-Mail Adresse*" class="inBox form-control" id="AAAMail" required="" title="E-Mail"><br><input type="number" placeholder="Mitarbeiternummer*" class="inBox form-control" id="AAAID" required="" title="Mitarbeiternummer"> <br><select class="inBox form-control" id="AAAStandort" required=""> <option value="">DHBW Standort wählen*</option> <option value="DHBW_Karlsruhe">DHBW Karlsruhe</option> <option value="DHBW_Stuttgart">DHBW Stuttgart</option> <option value="DHBW_Mannheim">DHBW Mannheim</option> <option value="DHBW_Mosbach">DHBW Mosbach</option> <option value="DHBW_Lörrach">DHBW Lörrach</option> <option value="DHBW_Ravensburg">DHBW Ravensburg</option> <option value="DHBW_Heidenheim">DHBW Heidenheim</option> <option value="DHBW_Villingen-Schwenningen">DHBW Villingen-Schwenningen</option> </select> <br></div><div class="modal-footer"> <input form="AAACreateForm" type="submit" class="btn" id="btnAAACreate" value="Anlegen" style="width: auto;"> </div></form> </div></div></div>');
-                           AAACreateModal = $('#AAACreate');
-                           $('#userNeu').attr("data-toggle", "modal").attr("href", "#AAACreate"); 
-                           $('#AAACreateForm').submit(function( event ){
-                                var email = $('#AAAMail').val();
-                                var vname = $('#AAAVorname').val();
-                                var nname = $('#AAANachname').val();
-                                var standort = $('#AAAStandort').val();
-                                var aaaid = $('#AAAID').val();
-                                $.ajax({
-                                    type : "POST",
-                                    url : "createAAA",
-                                    data : {
-                                            email : email,
-                                            vorname: vname,
-                                            nachname: nname,
-                                            standort: standort,
-                                            aaaid: aaaid
-                                    },
-                                    success : function(data) {
-                                            if (data == "mailError"){
-                                                swal({
-                                                    title: "Fehler!",
-                                                    text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
-                                                    type: "error",
-                                                    confirmButtonText: "OK"
-                                                });
-                                            
-                                            } 
-                                            else if (data == "No account registered for this email adress"){
-                                                swal({
-                                                    title: "Fehler!",
-                                                    text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                                                    type: "error",
-                                                    confirmButtonText: "OK"
-                                                });
-                                            }
-                                            else if (data == "registerError"){
-                                                swal({
-                                                    title: "Fehler!",
-                                                    text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                                                    type: "error",
-                                                    confirmButtonText: "OK"
-                                                });
-                                            }
-                                            else {
-                                                swal({
-                                                    title: "Account erfolgreich erstellt",
-                                                    text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
-                                                    type: "success",
-                                                    confirmButtonText: "OK"
-                                                });
-                                                
-                                            }
-                                        }
-                                  
-                                    });
-                                          
-                                event.preventDefault();
-                            });
+                        $('#AAACreateForm').submit(function( event ){
+                             var email = $('#AAAMail').val();
+                             var vname = $('#AAAVorname').val();
+                             var nname = $('#AAANachname').val();
+                             var phone = $('#AAAPhone').val();
+                             var mobil = $('#AAAMobile').val();
+                             swal({
+                                    title: 'Speichere Änderungen'
+                               });
+                            swal.showLoading();
+                             $.ajax({
+                                 type : "POST",
+                                 url : "createAAA",
+                                 data : {
+                                         email : email,
+                                         vorname: vname,
+                                         nachname: nname,
+                                         phone: phone,
+                                         mobil: mobil
+                                 },
+                                 success : function(data) {
+                                        swal.close();
+                                         if (data == "mailError"){
+                                             
+                                             swal({
+                                                 title: "Fehler!",
+                                                 text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
+                                                 type: "error",
+                                                 confirmButtonText: "OK"
+                                             });
 
-                         }
+                                         } 
+                                         else if (data == "No account registered for this email adress"){
+                                             swal({
+                                                 title: "Fehler!",
+                                                 text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                                                 type: "error",
+                                                 confirmButtonText: "OK"
+                                             });
+                                         }
+                                         else if (data == "registerError"){
+                                             swal({
+                                                 title: "Fehler!",
+                                                 text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                                                 type: "error",
+                                                 confirmButtonText: "OK"
+                                             });
+                                         }
+                                         else {
+                                             swal({
+                                                 title: "Account erfolgreich erstellt",
+                                                 text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
+                                                 type: "success",
+                                                 confirmButtonText: "OK"
+                                             });
+
+                                         }
+                                         $('#AAACreate').modal('hide');
+                                         $('#userMaShow').click();
+                                     }
+
+                                 });
+
+                             event.preventDefault();
+                         });
+
+                         
                         
                         
                         
@@ -1016,12 +992,7 @@ var main = function() {
 
 						} else {
 							var rolle = 0;
-                                                        $('.nutzerBearbeiten b').remove();
-                                                        $('.nutzerBearbeiten h2').remove();
-                                                        var userEditModal = $('.nutzerBearbeiten').detach();
-                                                        $('#login').after('<div id="userEdit" class="modal fade" role="dialog"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal">×</button> <h4 class="modal-title">Benutzer Bearbeiten</h4> </div><div class="modal-body" id="userEditBody"> </div></div></div>');
-                                                        userEditModal.appendTo('#userEditBody');
-							var typ = '';
+                                                        							var typ = '';
 							if (id === 'userStudShow') {
 								rolle = 3;
 								typ = "Studierende";
@@ -1040,19 +1011,17 @@ var main = function() {
 										success : function(result) {
 											var auslesen = result.split(';');
 											var count = 0;
-											var even = 'odd';
 											if (rolle === 2) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"> <thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>Telefonnummer</td><td>Mobilfunknummer</td><td></td></tr></thead>';
+														+ '</h2><table id="userTable" class="table table-striped table-bordered"> <thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th><th></th></tr></thead>';
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
 															.trim();
 													count++;
+													
 													tabelle = tabelle
-															+ '<tr class="'
-															+ even
-															+ '" id="row'
+															+ '<tr id="row'
 															+ count
 															+ '"><td class="vorname">'
 															+ auslesen[i + 1]
@@ -1064,19 +1033,19 @@ var main = function() {
 															+ auslesen[i + 3]
 															+ '</td><td class="mobil">'
 															+ auslesen[i + 4]
-															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
+															+ '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit'
 															+ count
-															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td></tr>';
-													if (even === 'even') {
-														even = 'odd';
-													} else {
-														even = 'even';
-													}
+															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td>'
+                                                                                                                        + '<td><span class="btn glyphicon glyphicon-trash deleteAAA-button" data-mail="'
+                                                                                                                        + auslesen[i + 2].trim() 
+                                                                                                                        +'" id="delete'
+                                                                                                                        + count
+                                                                                                                        + '" title="Löschen"></span></td></tr>';
 												}
 											} else if (rolle === 3) {
 												var tabelle = '<h2>Registrierte '
 														+ typ
-														+ '</h2><table id="userTable"><thead><tr class="titleRow"><td>Vorname</td><td>Nachname</td><td>Email</td><td>DHBW Standort</td><td>Studiengang</td><td>Kurs</td><td>Matrikelnummer</td><td colspan="2">Aktionen</td></tr></thead>';
+														+ '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
 															
 												for (var i = 0; i < (auslesen.length - 1); i = i + 9) {
 													auslesen[i] = auslesen[i]
@@ -1090,9 +1059,7 @@ var main = function() {
 													}
 													count++;
 													tabelle = tabelle
-															+ '<tr class="'
-															+ even
-															+ '" id="row'
+															+ '<tr id="row'
 															+ count
 															+ '"><td class="vorname">'
 															+ auslesen[i + 1]
@@ -1108,55 +1075,95 @@ var main = function() {
 															+ auslesen[i + 6]
 															+ '</td><td class="matrikelnr">'
 															+ auslesen[i + 7]
-															+ '</td><td><span class="btn glyphicon glyphicon-edit" id="edit'
+															+ '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit'
 															+ count
 															+ '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="'+ auslesen[i + 7].trim() +'" id="delete'
-                            + count
-                            + '" title="Löschen"></span></td></tr>';
-													if (even === 'even') {
-														even = 'odd';
-													} else {
-														even = 'even';
-													}
+                                                                                                                        + count
+                                                                                                                        + '" title="Löschen"></span></td></tr>';
 												}
 											}
-											tabelle = tabelle + '</table>';
-											$('#userTabelle').html(tabelle);
-											for (var i = 1; isEmpty($(
-													'#edit' + i).text()) !== true; i++) {
+                        tabelle = tabelle + '</table>';
+                        $('#userTabelle').html(tabelle)
+                        var nonSortable = (rolle == 3 ? [7,8] : [5,6]);
+                        
+                        var setClickListeners = function (){
+                            $('.delete-button').click(function () {
 
-												$(document).on('click', '.delete-button', function () {
+                                var self = $(this);
 
-                          var self = $(this);
+                                swal({
+                                    title: "Bist du sicher?",
+                                    text: "Der User kann nicht wiederhergestellt werden!",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Löschen!"
+                                 }).then((result) => {
+                                    if (result.value) {
+                                        swal({
+                                        title: 'Lösche User'
+                                        });
+                                        swal.showLoading();
+                                        $.ajax({
+                                          type : "GET",
+                                          url : "user/delete",
+                                          data : {
+                                            matrikelnummer: self.data('matrikel')
+                                          },
+                                          success : function(result) {
+                                            swal.close();
+                                            $('#userStudShow').click();
+                                            swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                          },
+                                          error : function(result) {
+                                            swal.close();
+                                            swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                          }
+                                        });
+                                     }
+                                });
 
-                          swal({
-                              title: "Bist du sicher?",
-                              text: "Der User kann nicht wiederhergestellt werden!",
-                              type: "warning",
-                              showCancelButton: true,
-                              confirmButtonColor: "#DD6B55",
-                              confirmButtonText: "Löschen!",
-                              closeOnConfirm: false
-                            },
-                            function(){
-                              $.ajax({
-                                type : "GET",
-                                url : "user/delete",
-                                data : {
-                                  matrikelnummer: self.data('matrikel')
-                                },
-                                success : function(result) {
-                                  self.closest('tr').remove();
-                                  swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
-                                },
-                                error : function(result) {
-                                  swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
-                                }
-                              });
                             });
-                        });
+                            
+                            $('.deleteAAA-button').click(function () {
 
-                            $('#edit' + i).click(function(){
+                                var self = $(this);
+
+                                swal({
+                                    title: "Bist du sicher?",
+                                    text: "Der User kann nicht wiederhergestellt werden!",
+                                    type: "warning",
+                                    showCancelButton: true,
+                                    confirmButtonColor: "#DD6B55",
+                                    confirmButtonText: "Löschen!"
+                                  }).then((result) => {
+                                    if (result.value) {
+                                        swal({
+                                        title: 'Lösche User'
+                                        });
+                                        swal.showLoading();
+                                        $.ajax({
+                                          type : "POST",
+                                          url : "user/deleteAAA",
+                                          data : {
+                                            mail: self.data('mail')
+                                          },
+                                          success : function(result) {
+                                            swal.close();
+                                            $('#userMaShow').click();
+                                            swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                          },
+                                          error : function(result) {
+                                            swal.close();
+                                            swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                          }
+                                        });
+                                     }
+                                 });
+
+                            });
+                            
+                            $('.useredit-button').click(function(){
                                 var id = $(this).attr('id');
                                 var laenge = id.length;
                                 if (laenge === 5) {
@@ -1170,22 +1177,22 @@ var main = function() {
                                             4,
                                             6);
                                 }
-                                $('#inEditVorname').val($('#row' +id).children('.vorname').text());
+                                $('#inEditVorname').val($('#row' +id).children('.vorname').text().trim());
                                 $('#inEditVorname').attr('data-value',$('#inEditVorname').val());
-                                $('#inEditNachname').val($('#row' +id).children('.nachname').text());
+                                $('#inEditNachname').val($('#row' +id).children('.nachname').text().trim());
                                  $('#inEditNachname').attr('data-value',$('#inEditNachname').val());
-                                $('#inEditEmail').val($('#row' +id).children('.email').text());
+                                $('#inEditEmail').val($('#row' +id).children('.email').text().trim());
                                 $('#inEditEmail').attr('data-value',$('#inEditEmail').val());
                                 $('#inEditEmail').attr('data-role',rolle);
-                                $('#inEditTel').val($('#row' +id).children('.telnummer').text());
+                                $('#inEditTel').val($('#row' +id).children('.telnummer').text().trim());
                                 $('#inEditTel').attr('data-value',$('#inEditTel').val());
-                                $('#inEditMobil').val($('#row' +id).children('.mobil').text());
+                                $('#inEditMobil').val($('#row' +id).children('.mobil').text().trim());
                                 $('#inEditMobil').attr('data-value',$('#inEditMobil').val());
-                                $('#inEditStudgang').val($('#row' +id).children('.studgang').text());
+                                $('#inEditStudgang').val($('#row' +id).children('.studgang').text().trim());
                                 $('#inEditStudgang').attr('data-value',$('#inEditStudgang').val());
-                                $('#inEditKurs').val($('#row' +id).children('.kurs').text());
+                                $('#inEditKurs').val($('#row' +id).children('.kurs').text().trim());
                                 $('#inEditKurs').attr('data-value',$('#inEditKurs').val());
-                                $('#inEditMatnr').val($('#row' +id).children('.matrikelnr').text());
+                                $('#inEditMatnr').val($('#row' +id).children('.matrikelnr').text().trim());
                                 $('#inEditMatnr').attr('data-value',$('#inEditMatnr').val());
                                 if (rolle === 2) {
                                     $('#inEditTel').show();
@@ -1203,7 +1210,25 @@ var main = function() {
                                 }
                                 $('.nutzerBearbeiten').show();
                             });
-											}
+                            
+                            
+                            
+                        }
+                        
+                        $('#userTable').DataTable({
+                            "columnDefs": [
+                                { "orderable": false, "targets":  nonSortable }
+                              ],
+                              "drawCallback": function( settings ) {
+                                  setClickListeners();    
+                                }
+                        });
+                        
+                        
+                        
+                        
+                        
+                        
 										},
 										error : function(result) {
 											swal({
@@ -1231,7 +1256,10 @@ var main = function() {
             if($('#inEditEmail').attr('data-value') != $('#inEditEmail').val()){
                 var dataOldMail = $('#inEditEmail').attr('data-value');
             } 
-            
+            swal({
+                title: 'Speichere Änderungen'
+                });
+            swal.showLoading();
             if(dataRole == "2"){
                $.ajax({
                     type : "POST",
@@ -1246,6 +1274,7 @@ var main = function() {
                         role: "2"
                     },
                     success : function(result) {
+                      swal.close();  
                       swal('Erfolgreich geändert.', 'Die Mitarbeiterdaten wurden aktualisiert.', 'success');
                       $('#userEdit .close').click();
                       
@@ -1254,6 +1283,7 @@ var main = function() {
 
                     },
                     error : function(result) {
+                      swal.close();  
                       swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
                     }
                  });  
@@ -1273,6 +1303,7 @@ var main = function() {
                         role: "3"
                     },
                     success : function(result) {
+                      swal.close();    
                       swal('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
                       $('#userEdit .close').click();
                       $('#userStudShow').click();
@@ -1280,6 +1311,7 @@ var main = function() {
 
                     },
                     error : function(result) {
+                      swal.close();    
                       swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
                     }
                  });
@@ -1290,10 +1322,6 @@ var main = function() {
 	$('#closeBearb').on('click', function() {
 		$('.nutzerBearbeiten').hide();
 		$('.popUpBack').hide();
-	});
-	// Click-Listener f�r �nderungen speichern Button im Nutzer Bearbeiten PopUp
-	$('#btnUserEditSave').on('click', function() {
-		swal("Hier passiert noch nichts.");
 	});
 	// Auswahlm�glichkeit auf der Startseite zur Sortierung der Angebote
 	$('#selStudiengang').on('click', function(event) {
@@ -1619,7 +1647,6 @@ $.urlParam = function(name) {
 	} else {
 		return results[1] || 0;
 	}
-
 };
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
