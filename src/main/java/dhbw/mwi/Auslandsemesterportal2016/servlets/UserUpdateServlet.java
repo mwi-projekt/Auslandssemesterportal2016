@@ -71,7 +71,7 @@ public class UserUpdateServlet extends HttpServlet {
               }
               
               if(result == 1){
-                String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/index.html?confirm=" + SQL_queries.deactivateUser(mail);        
+                String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/?confirm=" + SQL_queries.deactivateUser(mail);        
                 Message message = Util.getEmailMessage(mail
                                               , "Bestätigen: Geänderte E-Mail-Adresse Auslandssemesterportal");
                 message.setContent("<h2>Hallo"
