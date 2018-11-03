@@ -179,12 +179,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			// }
 
 		} else {
-			if (action.equals("get_portalInfo")) {
-				confirm(request.getParameter("confirm"));
-
-				sql = "SELECT titel, listelement1, listelement2, listelement3, listelement4, listelement5, listelement6, listelement7 FROM cms_portalInfo";
-
-			} else if (action.equals("post_portalInfo")) {
+			if (action.equals("post_portalInfo")) {
 				sqlupd = "UPDATE cms_portalInfo SET titel = '" + request.getParameter("titel") + "', listelement1 = '"
 						+ request.getParameter("listelement1") + "' , listelement2 = '"
 						+ request.getParameter("listelement2") + "', listelement3 = '"
@@ -199,9 +194,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				sql = "SELECT nachname, vorname, email, tel, mobil, studiengang, kurs, matrikelnummer, standort FROM user WHERE rolle ='"
 						+ request.getParameter("rolle") + "' ";
 				System.out.println("HIER");
-
-			} else if (action.equals("get_Auslandsangebote")) {
-				sql = "SELECT studiengang FROM cms_auslandsAngebote WHERE ID > 0";
 
 			} else if (action.equals("get_AuslandsangeboteInhalt")) {
 				sql = "SELECT uniTitel, model, allgemeineInfos, faq, erfahrungsbericht, bilder, bewerben FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
@@ -287,9 +279,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			} else if (action.equals("get_Studiengaenge")) {
 				sql = "SELECT studiengang FROM cms_auslandsAngebote";
 
-			} else if (action.equals("get_angeboteDaten")) {
-				sql = "SELECT studiengang, uniTitel, allgemeineInfos, faq, erfahrungsbericht, maps FROM cms_auslandsAngeboteInhalt";
-
 			} else if (action.equals("post_newStudiengang")) {
 				sqlupd = "INSERT INTO cms_auslandsAngebote (studiengang) VALUES ('"
 						+ request.getParameter("studiengang") + "') ";
@@ -319,9 +308,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 						+ request.getParameter("listelement6") + "' , link6 = '" + request.getParameter("link6")
 						+ "' , listelement7 = '" + request.getParameter("listelement7") + "' , link7 = '"
 						+ request.getParameter("link7") + "' ";
-
-			} else if (action.equals("get_infoMaterial")) {
-				sql = "SELECT titel, listelement1, link1, listelement2, link2, listelement3, link3, listelement4, link4, listelement5, link5, listelement6, link6, listelement7, link7 FROM cms_infoMaterial";
 
 			} else if (action.equals("get_bewerber")) {
 				sql = "SELECT matrikelnummer, uniName, startDatum, schritt_1, schritt_2, schritt_3, schritt_4, schritt_5 FROM bewerbungsprozess";
