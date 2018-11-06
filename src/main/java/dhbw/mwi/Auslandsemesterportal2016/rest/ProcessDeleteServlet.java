@@ -1,34 +1,35 @@
-package dhbw.mwi.Auslandsemesterportal2016.servlets;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.DB;
-import dhbw.mwi.Auslandsemesterportal2016.db.ProcessService;
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngines;
-
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
-@WebServlet(name = "ProcessDeleteServlet", urlPatterns = {"/WebContent/process/delete"})
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
+
+import dhbw.mwi.Auslandsemesterportal2016.db.DB;
+import dhbw.mwi.Auslandsemesterportal2016.db.ProcessService;
+
+@WebServlet(name = "ProcessDeleteServlet", urlPatterns = {"/process/delete"})
 public class ProcessDeleteServlet extends HttpServlet {
 
     ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+      /*int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
       if(rolle<1){
         response.sendError(401);
       }
-      else{
+      else{*/
           String matrikelnummer = request.getParameter("matrikelnummer");
           String uni = request.getParameter("uni");
           PrintWriter toClient = response.getWriter();
@@ -73,6 +74,6 @@ public class ProcessDeleteServlet extends HttpServlet {
               response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
               toClient.println("Error: parameter are missing");
           }
-        }
+        //}
     }
 }
