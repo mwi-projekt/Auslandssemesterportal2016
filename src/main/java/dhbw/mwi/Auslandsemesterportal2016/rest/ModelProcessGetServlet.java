@@ -1,18 +1,17 @@
-package dhbw.mwi.Auslandsemesterportal2016.servlets;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngines;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
 
-@WebServlet(name = "ModelProcessGetServlet", urlPatterns = {"/WebContent/processmodel/get"})
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+
+@WebServlet(name = "ModelProcessGetServlet", urlPatterns = {"/processmodel/get"})
 public class ModelProcessGetServlet extends HttpServlet {
 
     @Override

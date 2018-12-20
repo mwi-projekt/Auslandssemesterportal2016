@@ -1,6 +1,5 @@
-package dhbw.mwi.Auslandsemesterportal2016.servlets;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.ProcessService;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.variable.Variables;
@@ -16,9 +15,10 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import dhbw.mwi.Auslandsemesterportal2016.db.ProcessService;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
-@WebServlet(name = "UploadServlet", urlPatterns = {"/WebContent/upload_new"})
+@WebServlet(name = "UploadServlet", urlPatterns = {"/upload"})
 @MultipartConfig(maxFileSize = 16177215) // 16MB
 public class UploadServlet extends HttpServlet {
 

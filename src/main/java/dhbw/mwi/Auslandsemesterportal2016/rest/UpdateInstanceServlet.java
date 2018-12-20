@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.servlets;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
@@ -17,17 +17,17 @@ import java.util.HashMap;
 import java.util.Map;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
-@WebServlet(name = "UpdateInstanceServlet", urlPatterns = {"/WebContent/setVariable"})
+@WebServlet(name = "UpdateInstanceServlet", urlPatterns = {"/setVariable"})
 public class UpdateInstanceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+      /*int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
       if(rolle<1){
         response.sendError(401);
       }
-      else{
+      else{*/
           PrintWriter toClient = response.getWriter();
 
           String instanceID = request.getParameter("instance_id");
@@ -62,6 +62,6 @@ public class UpdateInstanceServlet extends HttpServlet {
           	response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
           	toClient.print("Variables not set");
           }
-        }
+        //}
     }
 }
