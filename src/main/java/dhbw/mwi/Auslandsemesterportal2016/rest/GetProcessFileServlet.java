@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.servlets;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
-@WebServlet(name = "GetProcessFileServlet", urlPatterns = {"/WebContent/getProcessFile"})
+@WebServlet(name = "GetProcessFileServlet", urlPatterns = {"/getProcessFile"})
 public class GetProcessFileServlet extends HttpServlet {
 
     @Override
@@ -39,12 +39,12 @@ public class GetProcessFileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+      /*int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
       if(rolle<1){
         response.sendError(401);
       }
-      else{
+      else{*/
           ServletOutputStream toClient = response.getOutputStream();
 
           String instanceID = request.getParameter("instance_id");
@@ -68,6 +68,6 @@ public class GetProcessFileServlet extends HttpServlet {
           } catch (Exception e) {
 
           }
-        }
+       // }
     }
 }

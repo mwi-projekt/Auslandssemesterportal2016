@@ -26,14 +26,14 @@ public class UploadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+     /*int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
       if(rolle<1){
         response.sendError(401);
       }
-      else{
+      else{*/
           String action = request.getParameter("action");
-          String id = ProcessService.getProcessId(request.getParameter("matrikelnummer"), request.getParameter("uni"));
+          String id = request.getParameter("instance");
           PrintWriter out = response.getWriter();
           Part filePart = null;
           String key;
@@ -73,7 +73,7 @@ public class UploadServlet extends HttpServlet {
               out.print("Error: wrong file");
               out.flush();
           }
-        }
+       // }
 
     }
 

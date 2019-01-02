@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.servlets;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
@@ -13,17 +13,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 
-@WebServlet(name = "GetBPMNServlet", urlPatterns = {"/WebContent/bpmn/get"})
+@WebServlet(name = "GetBPMNServlet", urlPatterns = {"/bpmn/get"})
 public class GetBPMNServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+      /*int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
       if(rolle!=1){
         response.sendError(401);
       }
-      else{
+      else{*/
             PrintWriter toClient = response.getWriter();
 
             String model = request.getParameter("model");
@@ -58,6 +58,6 @@ public class GetBPMNServlet extends HttpServlet {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 toClient.println("Error: missing parameters");
             }
-          }
+        //  }
     }
 }

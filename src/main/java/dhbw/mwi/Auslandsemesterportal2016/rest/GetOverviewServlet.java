@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.servlets;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
@@ -11,6 +11,7 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,23 +23,22 @@ import java.sql.ResultSet;
 import java.util.List;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
-@WebServlet(name = "GetOverviewServlet", urlPatterns = {"/WebContent/getOverview"})
+@WebServlet(name = "GetOverviewServlet", urlPatterns = {"/getOverview"})
 public class GetOverviewServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+      /*int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
       if(rolle<1){
         response.sendError(401);
       }
-      else{
+      else{*/
       	response.setCharacterEncoding("UTF-8");
           PrintWriter toClient = response.getWriter();
 
 
           String definition = request.getParameter("definition"); //Process Definition Key aus Camunda
-          String output = "";
 
           	String activityString = SQL_queries.getAllActivities(definition);
           	if(activityString.length()==0)
@@ -48,19 +48,26 @@ public class GetOverviewServlet extends HttpServlet {
           	}
           	activityString = activityString.substring(0, activityString.length() - 1);
           	String[] activities = activityString.split(";");
+          	
+          	JSONArray arr = new JSONArray();
+          	
           	for (int i = 0; i< activities.length;i++){
-          		output = output + activities[i] + "|";
           		ResultSet rs = SQL_queries.getJson(activities[i], definition);
           		try{
           			rs.next();
-          			output = output + rs.getString("json");
-          			toClient.println(output);
-          			output = "";
+          			JSONObject line = new JSONObject();
+          			line.put("activity", activities[i]);
+          			line.put("data", rs.getString("json"));
+          			arr.put(line);
           		} catch (Exception e){
           			e.printStackTrace();
           			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
           		}
           	}
-          }
+          	
+          	JSONObject json = new JSONObject();
+          	json.put("data", arr);
+          	Util.writeJson(response, json);
+          //}
     }
 }
