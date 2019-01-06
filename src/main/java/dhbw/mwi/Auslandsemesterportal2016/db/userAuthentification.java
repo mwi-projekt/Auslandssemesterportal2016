@@ -1,6 +1,5 @@
 package dhbw.mwi.Auslandsemesterportal2016.db;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
