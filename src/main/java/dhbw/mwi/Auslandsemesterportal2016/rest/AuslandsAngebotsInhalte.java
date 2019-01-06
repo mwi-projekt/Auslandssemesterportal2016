@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
-@WebServlet(urlPatterns = {"/auslandsAngebotsInhalte"})
+@WebServlet(urlPatterns = { "/auslandsAngebotsInhalte" })
 public class AuslandsAngebotsInhalte extends HttpServlet {
 
 	@Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String sql = "SELECT studiengang, uniTitel, allgemeineInfos, faq, erfahrungsbericht, maps FROM cms_auslandsAngeboteInhalt";
 		ResultSet rs = SQL_queries.executeStatement(sql);
 		Util.writeJson(response, rs);
 	}
-	
+
 }

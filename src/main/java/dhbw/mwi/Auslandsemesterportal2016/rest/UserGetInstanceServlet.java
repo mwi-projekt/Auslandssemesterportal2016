@@ -1,26 +1,22 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngines;
-import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.camunda.bpm.engine.impl.util.json.JSONArray;
-import org.camunda.bpm.engine.impl.util.json.JSONObject;
-import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
-
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.impl.util.json.JSONArray;
+import org.camunda.bpm.engine.impl.util.json.JSONObject;
+
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 @WebServlet(urlPatterns = { "/getUserInstances" })
 public class UserGetInstanceServlet extends HttpServlet {
@@ -65,7 +61,7 @@ public class UserGetInstanceServlet extends HttpServlet {
 				row.put("stepCounter", stepCounter);
 				data.put(row);
 			} catch (Exception e) {
-				
+
 			}
 		}
 		json.put("data", data);

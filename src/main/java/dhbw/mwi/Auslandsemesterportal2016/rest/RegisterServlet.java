@@ -1,24 +1,19 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.DB;
-import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.UUID;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Properties;
-import java.util.UUID;
+
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {

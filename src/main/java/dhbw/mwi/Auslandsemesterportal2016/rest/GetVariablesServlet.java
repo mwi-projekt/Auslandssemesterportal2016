@@ -13,31 +13,31 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetVariablesServlet", urlPatterns = { "/getVariables" })
 public class GetVariablesServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		/*
-		 * int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
-		 * 
-		 * if(rolle<1){ response.sendError(401); } else{
-		 */
-		String instanceID = request.getParameter("instance_id");
-		String key = request.getParameter("key");
-		String[] keys = key.split("\\|", -1);
-		ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-		RuntimeService runtime = engine.getRuntimeService();
+		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		if (rolle < 1) {
+			response.sendError(401);
+		} else {
+			String instanceID = request.getParameter("instance_id");
+			String key = request.getParameter("key");
+			String[] keys = key.split("\\|", -1);
+			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+			RuntimeService runtime = engine.getRuntimeService();
 
-		JSONObject json = new JSONObject();
+			JSONObject json = new JSONObject();
 
-		for (int i = 0; i < keys.length; i++) {
-			Object obj = runtime.getVariable(instanceID, keys[i]);
-			json.put(keys[i], obj);
+			for (int i = 0; i < keys.length; i++) {
+				Object obj = runtime.getVariable(instanceID, keys[i]);
+				json.put(keys[i], obj);
+			}
+			Util.writeJson(response, json);
+
 		}
-		Util.writeJson(response, json);
-
-		// }
 	}
 }
