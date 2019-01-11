@@ -22,8 +22,8 @@ public class LoginServletTest {
     HttpServletRequest req = mock(HttpServletRequest.class);
     HttpServletResponse res = mock(HttpServletResponse.class);
     
-    
-    /*@Test
+    /*
+    @Test
     public void testWrongCredentials() {
         try {
             when(req.getParameter("email")).thenReturn(testUser[0]);
