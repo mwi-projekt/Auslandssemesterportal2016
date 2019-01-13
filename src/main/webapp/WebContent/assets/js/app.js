@@ -220,7 +220,7 @@ function logout() {
         url: baseUrl + "/logout",
         complete: function () {
             sessionStorage.clear();
-            document.location.href = 'index.html';
+            document.location.href = 'index.jsp';
         }
     });
 }

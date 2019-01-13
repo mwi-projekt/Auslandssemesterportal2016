@@ -25,7 +25,7 @@ function setpw() {
 					type : "error",
 					confirmButtonText : "Ok"
 				}, function() {
-					location.href = 'index.html';
+					location.href = 'index.jsp';
 				});	
 			}
 			swal({
@@ -34,7 +34,7 @@ function setpw() {
 				type : "success",
 				confirmButtonText : "Ok"
 			}, function() {
-				location.href = 'index.html';
+				location.href = 'index.jsp';
 			});
 		},
 		error : function(result) {
