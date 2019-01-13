@@ -1,8 +1,12 @@
 package dhbw.mwi.Auslandsemesterportal2016.db;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -13,6 +17,10 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
+import javax.servlet.http.HttpServletResponse;
+
+import org.camunda.bpm.engine.impl.util.json.JSONArray;
+import org.camunda.bpm.engine.impl.util.json.JSONObject;
 
 public class Util {
 
@@ -107,4 +115,38 @@ public class Util {
     {
     	return getEmailMessage(emailTo, "noreply@dhbw-karlsruhe.de",  subject);
     }
+
+    public static void writeJson(HttpServletResponse response, JSONObject json) {
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.print(json.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void writeJson(HttpServletResponse response, ResultSet rs) {
+		JSONArray arr = new JSONArray();
+		if (rs != null) {
+			try {
+				while (rs.next()) {
+					JSONObject json = new JSONObject();
+					for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+						json.putOnce(rs.getMetaData().getColumnName(i), rs.getString(i));
+					}
+					arr.put(json);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		JSONObject data = new JSONObject();
+		data.put("data", arr);
+		writeJson(response, data);
+	}
 }
