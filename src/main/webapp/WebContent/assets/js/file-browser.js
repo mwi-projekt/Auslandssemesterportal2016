@@ -1,5 +1,5 @@
 $(function(){
-	var baseUrl = 'http://localhost:8080/Auslandssemesterportal';
+	var baseUrl = 'http://193.196.7.215:8080/Auslandssemesterportal';
 
 	var filemanager = $('.filemanager'),
 		fileList = filemanager.find('.data');
