@@ -257,7 +257,7 @@ function saveChanges() {
         function () {
             $.ajax({
                 type: "POST",
-                url: "setVariable",
+                url: baseUrl + "/setVariable",
                 data: {
                     instance_id: instanceID,
                     key: keyString,
@@ -319,7 +319,7 @@ function validateBew() {
     }, function () {
         $.ajax({
             type: "POST",
-            url: "setVariable",
+            url: baseUrl + "/setVariable",
             data: {
                 instance_id: instanceID,
                 key: 'validierungErfolgreich|mailText',
@@ -355,7 +355,7 @@ function change(obj) {
     } else {
         $.ajax({
             type: "GET",
-            url: "getMailText",
+            url: baseUrl + "/getMailText",
             data: {
                 instance_id: instanceID,
                 validate: selected

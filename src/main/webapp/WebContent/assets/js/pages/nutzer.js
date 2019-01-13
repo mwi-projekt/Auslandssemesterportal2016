@@ -281,4 +281,79 @@ $(document).ready(function () {
 
         event.preventDefault();
     });
+    $('#btnUserEditSave').click(function () {
+		var dataMail = $('#inEditEmail').val();
+		var dataOldMail = "0";
+		var dataRole = $('#inEditEmail').attr('data-role');
+		var dataNewVorname = $('#inEditVorname').val();
+		var dataNewNachaname = $('#inEditNachname').val();
+		var dataNewTel = $('#inEditTel').val();
+		var dataNewMobil = $('#inEditMobil').val();
+		var dataNewStudgang = $('#inEditStudgang').val();
+		var dataNewKurs = $('#inEditKurs').val();
+		var dataNewMatnr = $('#inEditMatnr').val();
+		if ($('#inEditEmail').attr('data-value') != $('#inEditEmail').val()) {
+			var dataOldMail = $('#inEditEmail').attr('data-value');
+		}
+		swal({
+			title: 'Speichere Änderungen'
+		});
+		swal.showLoading();
+		if (dataRole == "2") {
+			$.ajax({
+				type: "POST",
+				url: baseUrl + "/user/update",
+				data: {
+					email: dataMail,
+					oldmail: dataOldMail,
+					vorname: dataNewVorname,
+					nachname: dataNewNachaname,
+					tel: dataNewTel,
+					mobil: dataNewMobil,
+					role: "2"
+				},
+				success: function (result) {
+					swal.close();
+					swal('Erfolgreich geändert.', 'Die Mitarbeiterdaten wurden aktualisiert.', 'success');
+					$('#userEdit .close').click();
+
+					$('#userMaShow').click();
+
+
+				},
+				error: function (result) {
+					swal.close();
+					swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
+				}
+			});
+		} else {
+			$.ajax({
+				type: "POST",
+				url: baseUrl + "/user/update",
+				data: {
+					email: dataMail,
+					oldmail: dataOldMail,
+					vorname: dataNewVorname,
+					nachname: dataNewNachaname,
+					studgang: dataNewStudgang,
+					kurs: dataNewKurs,
+					matnr: dataNewMatnr,
+					role: "3"
+				},
+				success: function (result) {
+					swal.close();
+					swal('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
+					$('#userEdit .close').click();
+					$('#userStudShow').click();
+
+
+				},
+				error: function (result) {
+					swal.close();
+					swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
+				}
+			});
+		}
+
+	});
 });

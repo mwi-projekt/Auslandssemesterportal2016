@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <title>DHBW Auslandsportal</title>
 
-    <link rel="stylesheet"
-          href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/bootstrap.min.css">
     <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/InfoBox.css">
@@ -15,11 +14,12 @@
     <link rel="stylesheet" href="CSS/admin-process.css">
 	<link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="vendor/jquery.min.js"></script>
+    <script src="external/jquery-ui/jquery-ui.min.js"></script>
     <script src="bower_components/bpmn-js/dist/bpmn-navigated-viewer.js"></script>
-    <script src="JS/admin-process.js"></script>
     <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/pages/admin-process.js"></script>
 </head>
 
 <body>
@@ -57,8 +57,8 @@
 <div class="container admin-process">
 	<div class="row">
 		<div class="col-md-6"></div>
-		<div class="col-md-3"><button class="btn cmsBtn" onclick="window.location.href='http://193.196.7.215:8080/Auslandssemesterportal/WebContent/'">Zurück zum Hauptmenü</button></div>
-		<div class="col-md-3"><button class="btn cmsBtn" onclick="window.location.href='choose-diagram.html'">Zurück zur Prozessauswahl</button></div>
+		<div class="col-md-3"><a href="index.html" class="btn cmsBtn">Zurück zum Hauptmenü</a></div>
+		<div class="col-md-3"><a href="choose_diagram.html" class="btn cmsBtn">Zurück zur Prozessauswahl</a></div>
 	</div>   		
     <div class="row">
         <div class="col-md-12">

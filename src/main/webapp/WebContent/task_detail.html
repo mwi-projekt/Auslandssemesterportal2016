@@ -6,27 +6,27 @@
     <meta charset="utf-8">
     <title>DHBW Auslandsportal</title>
 
-    <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/bootstrap.min.css">
     <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
     <link rel="stylesheet" href="CSS/main.css">
     <link rel="stylesheet" href="CSS/bewerbungsportal.css">
     <link rel="stylesheet" href="CSS/bewerbungsformular.css">
     <link rel="stylesheet" href="CSS/InfoBox.css">
     <link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script src="vendor/jquery.min.js"></script>
+        <script src="vendor/bootstrap.min.js"></script>
+        <script src="vendor/jquery.form-validator.min.js"></script>
     <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
-    <script src="JS/task_detail.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="vendor/bootstrap.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/pages/task-detail.js"></script>
 
     <!-- Latest compiled and minified bootstrap-select CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap-select.min.css">
 
     <!-- Latest compiled and minified bootstrap-select JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <script src="vendor/bootstrap-select.min.js"></script>
 </head>
 
 <body>
@@ -92,11 +92,11 @@
 
                     <textarea class="form-control" rows="5" id="reason"></textarea>
                     <br>
-                    <button type="button" class="btn cms" id="validateBtn" onClick="validateBew()">Absenden</button>
+                    <button type="button" class="btn btn-success" id="validateBtn" onClick="validateBew()">Absenden</button>
                 </form>
             </div>
             <div id="">
-                <button type="button" class="btn cms" id="saveChanges" onClick="saveChanges()">Mail versenden</button>
+                <button type="button" class="btn btn-success" id="saveChanges" onClick="saveChanges()">Mail versenden</button>
             </div>
 
         </div>
