@@ -545,10 +545,6 @@ i {
 
 /* Nutzerverwaltung */
 
-#nutzerVerwaltung {
-	display: none;
-}
-
 #nutzerVerwaltung .row {
 	padding: 20px;
 }
