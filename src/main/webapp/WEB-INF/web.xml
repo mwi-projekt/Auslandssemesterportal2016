@@ -7,7 +7,9 @@
   
   <display-name>Auslandssemesterportal</display-name>
   <welcome-file-list>
-      <welcome-file>index</welcome-file>
+      <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
   	<filter>
