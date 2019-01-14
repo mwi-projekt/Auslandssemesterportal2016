@@ -13,7 +13,7 @@ $(document).ready(function () {
             typ = "Auslandsmitarbeiter";
         }
         $.ajax({
-            type: "GET",
+            type: "GET", 
             url: baseUrl + "/getUser",
             data: {
                 rolle: rolle,

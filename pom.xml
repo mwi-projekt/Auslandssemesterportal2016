@@ -243,7 +243,6 @@
 				lines to your tomcat-users.xml: (inside the <tomcat-users>-tag) <role rolename="manager-script"/> 
 				<user username="admin" password="admin" roles="manager-script"/> -->
 			<!-- <plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat7-maven-plugin</artifactId> 
-				<version>2.2</version> <configuration> <url>http://localhost:8080/manager/text</url> 
 				<username>admin</username> <password>admin</password> </configuration> </plugin> -->
 			<plugin>
 				<!-- Usage: mvn jboss-as:deploy See also: https://docs.jboss.org/jbossas/7/plugins/maven/latest/examples/deployment-example.html -->
