@@ -95,6 +95,9 @@
                         <p class="cmsPortal cmsBtn btn" id="cmsPortalSave" style="clear: both; float: right">Änderungen
                             speichern</p>
                     </div>
+                    <a>test</a>
+                    <i class="fa fa-chevron-circle-up"></i>
+                    <a>test</a>
                     <a href="#" class="linkUp">Zum Seitenanfang</a>
                 </div>
                 <div class="auslandsAngebote inhaltBox row" id="auslandsAngebote">
@@ -344,7 +347,6 @@
                             speichern</p>
                     </div>
                     <a href="#" class="linkUp">Zum Seitenanfang</a>
-                    <i href="#" class="fa fa-chevron-circle-up"></i>
                 </div>
             </div>
         </div>
