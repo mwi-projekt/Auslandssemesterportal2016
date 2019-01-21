@@ -38,7 +38,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
                             "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-trash taskdelete" title="Delete" onclick="window.location.href=\'https://www.google.de/'  +
+                            '<button class="btn glyphicon glyphicon-trash taskdelete" title="Delete" onclick="location.href=\'https://www.google.de/'  +
                             singleInstance.id +
                             '"></button>' +
                             "</td></tr>"
@@ -74,7 +74,7 @@ function getList() {
                     $('.table').DataTable();
                 });
                 
-                var setClickListeners = function () {
+               /* var setClickListeners = function () {
                     $('.taskdelete').click(function () {
                     	var self = $(this);
 
@@ -115,7 +115,7 @@ function getList() {
                                    
                 
                     });
-                }
+                }*/
             }
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; +
             output;
