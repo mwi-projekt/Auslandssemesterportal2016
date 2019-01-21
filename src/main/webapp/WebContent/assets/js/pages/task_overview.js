@@ -38,7 +38,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
                             "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" ' +
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="location.href=\'task_detail.html?instance_id=' +
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
@@ -75,44 +75,6 @@ function getList() {
                 $(document).ready(function () {
                     $('.table').DataTable();
                 });
-                
-                var setClickListeners = function () {
-                    $('.btn-delete').click(function () {
-                    	var self = $(this);
-
-                        swal({
-                            title: "TEST BIST DU SICHER?",
-                            text: "Der User kann nicht wiederhergestellt werden!",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "Löschen!"
-                        }).then((result) => {
-                        	  if (result.value) {
-                                  swal({
-                                      title: 'Lösche User'
-                                  });
-                                  swal.showLoading();
-                                  $.ajax({
-                                      type: "GET",
-                                      url: baseUrl + "/user/delete",
-                                      data: {
-                                          matrikelnummer: self.data('matrikel')
-                                      },
-                                      success: function (result) {
-                                          swal.close();
-                                          $('#userStudShow').click();
-                                          swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
-                                      },
-                                      error: function (result) {
-                                          swal.close();
-                                          swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
-                                      }
-                                  });
-                              }
-                        });
-                    
-                    });
 
             }
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; +
