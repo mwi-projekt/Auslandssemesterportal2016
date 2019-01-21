@@ -107,7 +107,6 @@ function parse() {
                                 typeList.push(json[i]["data"]["type"]);
                                 break;
                             case "form-checkbox":
-                                dis = ' disabled ="disabled"';
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' +
                                     json[i]["data"]["id"] +  '"disabled> ' + 
