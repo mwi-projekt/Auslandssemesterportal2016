@@ -37,7 +37,7 @@ function getList() {
                             '&uni=' +
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
-                            "</td></td>" +
+                            "</td><td>" +
                             '<button class="btn glyphicon glyphicon-list" title="Delete" onclick="location.href=\'task_detail.html?instance_id=' +
                             singleInstance.id +
                             '&uni=' +
