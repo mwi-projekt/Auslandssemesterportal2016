@@ -344,6 +344,7 @@
                             speichern</p>
                     </div>
                     <a href="#" class="linkUp">Zum Seitenanfang</a>
+                    <a href="#" ><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
