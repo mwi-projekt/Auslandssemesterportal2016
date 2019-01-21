@@ -25,7 +25,7 @@ public class TaskDeleteServlet extends HttpServlet {
 			PrintWriter toClient = response.getWriter();
 
 			if (taskId != null) {
-				String query = "DELETE FROM ACT_RU_TASK WHERE PROC_INST_ID = ?";
+				String query = "DELETE * FROM ACT_RU_TASK WHERE PROC_INST_ID = ?";
 				String[] args = new String[] { taskId };
 				String[] types = new String[] { "int" };
 				SQL_queries.executeUpdate(query, args, types);
