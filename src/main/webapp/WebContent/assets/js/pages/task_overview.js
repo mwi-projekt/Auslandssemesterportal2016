@@ -40,7 +40,7 @@ function getList() {
                             "</td><td>" +
                             
                             
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask()"' +
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')"' +
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
@@ -92,12 +92,10 @@ function getList() {
     });
 }
 
-function deleteTask () {
-   alert("Test");
-	
-}	
-	//$('.taskdelete').click(function () {
-    	/*window.alert("Es wurde aufgerufen mit der Id " + id);
+function deleteTask (taskId) {
+    //$('.taskdelete').click(function () {
+    	alert("Es wurde aufgerufen mit der Id " + taskId);
+}
     	/*var self = $(this);
 	
         swal({
