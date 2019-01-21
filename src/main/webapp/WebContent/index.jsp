@@ -95,7 +95,6 @@
                         <p class="cmsPortal cmsBtn btn" id="cmsPortalSave" style="clear: both; float: right">Änderungen
                             speichern</p>
                     </div>
-                    <a href="#" class="linkUp">Zum Seitenanfang</a>
                 </div>
                 <div class="auslandsAngebote inhaltBox row" id="auslandsAngebote">
                     <div class="col-md-12">
@@ -229,7 +228,6 @@
                         <p class="inline">Sortieren nach Studiengang</p>
                         <select class="inBox inline zweiD" id="selStudiengang"></select>
                     </div>
-                    <a href="#" class="linkUp" id="angebotLinkUp">Zum Seitenanfang</a>
 
                 </div>
                 <div class="erfahrungsBerichte inhaltBox row" id="erfahrungsBerichte">
@@ -299,7 +297,6 @@
                         <p class="cmsBerichte cmsBtn btn" id="cmsBtnSave" style="clear: both; float: right">Änderungen
                             speichern</p>
                     </div>
-                    <a href="#" class="linkUp">Zum Seitenanfang</a>
 
                 </div>
                 <div class="infoMaterial inhaltBox row" id="infoMaterial">
@@ -343,7 +340,6 @@
                         <p class="cmsInfo cmsBtn btn" id="cmsBtnSave" style="clear: both; float: right">Änderungen
                             speichern</p>
                     </div>
-                    <a href="#" class="linkUp">Zum Seitenanfang</a>
                 </div>
             </div>
         </div>
