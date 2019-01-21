@@ -40,8 +40,11 @@ function getList() {
                             "</td><td>" +
                             
                             
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')> </button>' +
-                            
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')" id="' +
+                            singleInstance.id +
+                            '&uni=' +
+                            singleInstance.uni +
+                            '&verify=true\'"> </button>' +
                             "</td></tr>"
                             
                                                        
@@ -127,4 +130,4 @@ function deleteTask (taskId) {
         	 }
         }); */
 
-    //}//);
+   // }//);
