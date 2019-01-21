@@ -107,14 +107,14 @@ function deleteTask (taskID) {
             confirmButtonText: "Löschen!"
         }).then((result) => {
         	alert("Du hast auf Löschen gedrückt");
-        	 if (result.value) {
+        	if (result.value) {
                  alert("Auf Löschen gedrückt");
         		 swal({
                      title: 'Lösche Bewerbung'
                  });
                  swal.showLoading();
                  $.ajax({
-                     type: "GET",
+                     type: "POST",
                      url: baseUrl + "/task/delete",
                      data: {
                          taskId: self.data(taskID)
@@ -132,4 +132,4 @@ function deleteTask (taskID) {
         	 }
         }); 
 
-   }//);
+   }

@@ -15,7 +15,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 public class TaskDeleteServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle !=2) {
