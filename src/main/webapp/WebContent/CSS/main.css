@@ -380,6 +380,12 @@ margin: auto;
 	clear: both;
 	color: rgb(48, 192, 192) !important;
 }
+.fa fa-chevron-up {
+	float: right;
+	margin-bottom: 10px;
+	clear: both;
+	position: fixed;
+}
 
 .linkUp:hover {
 	text-decoration: underline !important;
