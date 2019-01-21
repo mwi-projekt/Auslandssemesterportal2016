@@ -38,7 +38,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
                             "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="location.href=\'task_detail.html?instance_id=' + 
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')" id="' + 
                             singleInstance.id +
                             '"></button>' +
                             "</td></tr>"
@@ -74,9 +74,9 @@ function getList() {
                     $('.table').DataTable();
                 });
                 
-                var setClickListeners = function () {
-                    $('.taskdelete').click(function () {
-                    	window.alert("Es wurde aufgerufen");
+                var deleteTask = function (taskId) {
+                    //$('.taskdelete').click(function () {
+                    	window.alert("Es wurde aufgerufen mit der Id " + id);
                     	/*var self = $(this);
 					
                         swal({
@@ -111,9 +111,9 @@ function getList() {
                         	 }
                         }); */
                 
-                    });
+                    }//);
                 }
-            }
+            
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; +
             output;
         },
