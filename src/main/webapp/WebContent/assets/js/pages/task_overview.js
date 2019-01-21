@@ -106,6 +106,7 @@ function deleteTask (taskID) {
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"
         }).then((result) => {
+        	alert("Du hast auf Löschen gedrückt");
         	 if (result.value) {
                  alert("Auf Löschen gedrückt");
         		 swal({
