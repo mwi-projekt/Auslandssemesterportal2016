@@ -38,11 +38,9 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
                             "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" id="taskdelete"' +
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" data-id="' + singleInstance.id + '"  id="taskdelete' +
                             singleInstance.id +
-                            '&uni=' +
-                            singleInstance.uni +
-                            '&verify=true\'"> </button>' +
+                            '"></button>' +
                             "</td></tr>"
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
@@ -97,7 +95,7 @@ function getList() {
                                      type: "GET",
                                      url: baseUrl + "/task/delete",
                                      data: {
-                                         matrikelnummer: self.data('singleInstance.id')
+                                         taskId: self.data('singleInstance.id')
                                      },
                                      success: function (result) {
                                          swal.close();
