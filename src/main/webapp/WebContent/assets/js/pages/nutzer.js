@@ -92,7 +92,8 @@ $(document).ready(function () {
                             confirmButtonText: "Löschen!"
                         }).then((result) => {
                             if (result.value) {
-                                swal({
+                                alert("Du hast auf Löschen gedrückt");
+                            	swal({
                                     title: 'Lösche User'
                                 });
                                 swal.showLoading();
