@@ -228,6 +228,7 @@
                         <p class="inline">Sortieren nach Studiengang</p>
                         <select class="inBox inline zweiD" id="selStudiengang"></select>
                     </div>
+                    <a href="#" class="linkUp" id="angebotLinkUp">Zum Seitenanfang</a>
 
                 </div>
                 <div class="erfahrungsBerichte inhaltBox row" id="erfahrungsBerichte">
