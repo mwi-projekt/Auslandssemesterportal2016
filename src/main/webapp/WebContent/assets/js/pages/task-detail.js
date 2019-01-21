@@ -111,7 +111,7 @@ function parse() {
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' +
                                     json[i]["data"]["id"] + '"> ' +
-                                    json[i]["data"]["label"] + dis +
+                                    json[i]["data"]["label"] +
                                     ' </label></div></div></div>';
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push("boolean");
