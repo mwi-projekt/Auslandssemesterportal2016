@@ -40,18 +40,14 @@ function getList() {
                             "</td><td>" +
                             
                             
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="return confirm('Bist du dir sicher?')' +
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')" id="' +
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
                             "</td></tr>"
                             
-                            
-                            /*'<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')" id="' + 
-                            singleInstance.id +
-                            '"></button>' +
-                            "</td></tr>"*/
+                                                       
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
                             "<tr><td>" +
@@ -84,7 +80,7 @@ function getList() {
                     $('.table').DataTable();
                 });
                 
-                var deleteTask = function (taskId) {
+                function deleteTask (taskId) {
                     //$('.taskdelete').click(function () {
                     	window.alert("Es wurde aufgerufen mit der Id " + id);
                     	/*var self = $(this);
