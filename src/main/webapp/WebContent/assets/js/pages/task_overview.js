@@ -37,6 +37,12 @@ function getList() {
                             '&uni=' +
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
+                            "</td></td>" +
+                            '<button class="btn glyphicon glyphicon-list" title="Delete" onclick="location.href=\'task_detail.html?instance_id=' +
+                            singleInstance.id +
+                            '&uni=' +
+                            singleInstance.uni +
+                            '&verify=true\'"> </button>' +
                             "</td></tr>"
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
@@ -56,7 +62,7 @@ function getList() {
                 if (output === "") {
                     output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
                 } else {
-                    output = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Prüfen</th></tr></thead><tbody>' +
+                    output = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Prüfen</th><th>Löschen</th></tr></thead><tbody>' +
                         output + "</tbody></table>";
                 }
                 if (completed === "") {
