@@ -100,14 +100,15 @@ function deleteTask (taskID) {
 	
         swal({
             title: "Bist du sicher?",
-            text: "Der User kann nicht wiederhergestellt werden!",
+            text: "Die Bewerbung kann nicht wiederhergestellt werden!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"
         }).then((result) => {
         	 if (result.value) {
-                 swal({
+                 alert("Auf Löschen gedrückt");
+        		 swal({
                      title: 'Lösche Bewerbung'
                  });
                  swal.showLoading();
