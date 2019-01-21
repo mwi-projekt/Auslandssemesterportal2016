@@ -96,7 +96,7 @@
                             speichern</p>
                     </div>
                     <a>test</a>
-                    <i class="fa fa-chevron-circle-up"></i>
+                    <img href="#" src="images/chevron_up.png"/>
                     <a>test</a>
                     <a href="#" class="linkUp">Zum Seitenanfang</a>
                 </div>
