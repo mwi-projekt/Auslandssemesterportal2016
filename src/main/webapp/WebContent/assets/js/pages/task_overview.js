@@ -38,10 +38,20 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
                             "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')" id="' + 
+                            
+                            
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="location.href=\'task_detail.html?instance_id=' +
+                            singleInstance.id +
+                            '&uni=' +
+                            singleInstance.uni +
+                            '&verify=true\'"> </button>' +
+                            "</td></tr>"
+                            
+                            
+                            /*'<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')" id="' + 
                             singleInstance.id +
                             '"></button>' +
-                            "</td></tr>"
+                            "</td></tr>"*/
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
                             "<tr><td>" +
