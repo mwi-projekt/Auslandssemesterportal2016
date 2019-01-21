@@ -40,7 +40,7 @@ function getList() {
                             "</td><td>" +
                             
                             
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')" id="' +
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="return confirm('Bist du dir sicher?')' +
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
