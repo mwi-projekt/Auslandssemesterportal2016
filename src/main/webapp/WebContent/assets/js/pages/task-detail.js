@@ -74,13 +74,14 @@ function parse() {
                                 var req = "";
                                 if (json[i]["data"]["required"] == true) {
                                     req = ' required="required"';
+                                    dis = ' disabled ="disablend"';
                                 }
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><label class="col-sm-2 control-label">' +
                                     json[i]["data"]["label"] +
                                     '</label><div class="col-sm-10"><select class="form-control" id="' +
-                                    json[i]["data"]["id"] + '"' + req +
-                                    'disabled>';
+                                    json[i]["data"]["id"] + '"' + req + dis +
+                                    '>';
                                 for (var j = 0; j < json[i]["data"]["values"].length; j++) {
                                     innerOutput = innerOutput + '<option>' +
                                         json[i]["data"]["values"][j] +
