@@ -40,11 +40,8 @@ function getList() {
                             "</td><td>" +
                             
                             
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')"' +
-                            singleInstance.id +
-                            '&uni=' +
-                            singleInstance.uni +
-                            '&verify=true\'"> </button>' +
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')> </button>' +
+                            
                             "</td></tr>"
                             
                                                        
@@ -94,7 +91,7 @@ function getList() {
 
 function deleteTask (taskId) {
     //$('.taskdelete').click(function () {
-    	alert("Es wurde aufgerufen mit der Id " + taskId);
+    	window.alert("Es wurde aufgerufen mit der Id " + id);
 }
     	/*var self = $(this);
 	
