@@ -95,9 +95,6 @@
                         <p class="cmsPortal cmsBtn btn" id="cmsPortalSave" style="clear: both; float: right">Änderungen
                             speichern</p>
                     </div>
-                    <a>test</a>
-                    <img href="#" src="images/chevron_up.png"/>
-                    <a>test</a>
                     <a href="#" class="linkUp">Zum Seitenanfang</a>
                 </div>
                 <div class="auslandsAngebote inhaltBox row" id="auslandsAngebote">
