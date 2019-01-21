@@ -80,13 +80,13 @@ function parse() {
                                     json[i]["data"]["label"] +
                                     '</label><div class="col-sm-10"><select class="form-control" id="' +
                                     json[i]["data"]["id"] + '"' + req +
-                                    '>';
+                                    'disabled>';
                                 for (var j = 0; j < json[i]["data"]["values"].length; j++) {
                                     innerOutput = innerOutput + '<option>' +
                                         json[i]["data"]["values"][j] +
                                         '</option>';
                                 }
-                                innerOutput = innerOutput + '</select disabled></div></div>';
+                                innerOutput = innerOutput + '</select></div></div>';
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push("text");
                                 break;
