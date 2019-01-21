@@ -95,8 +95,8 @@ function getList() {
 function deleteTask (taskID) {
     //$('.taskdelete').click(function () {
     	alert(taskID);
-}
-    	/*var self = $(this);
+
+    	var self = $(this);
 	
         swal({
             title: "Bist du sicher?",
@@ -115,7 +115,7 @@ function deleteTask (taskID) {
                      type: "GET",
                      url: baseUrl + "/task/delete",
                      data: {
-                         taskId: self.data('singleInstance.id')
+                         taskId: self.data(taskID)
                      },
                      success: function (result) {
                          swal.close();
@@ -128,6 +128,6 @@ function deleteTask (taskID) {
                      }
                  });
         	 }
-        }); */
+        }); 
 
-   // }//);
+   }//);
