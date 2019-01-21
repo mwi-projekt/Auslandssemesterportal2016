@@ -38,7 +38,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
                             "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Details" onclick="location.href=\'task_detail.html?instance_id=' + 
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="location.href=\'task_detail.html?instance_id=' + 
                             singleInstance.id +
                             '"></button>' +
                             "</td></tr>"
@@ -74,10 +74,11 @@ function getList() {
                     $('.table').DataTable();
                 });
                 
-               /* var setClickListeners = function () {
+                var setClickListeners = function () {
                     $('.taskdelete').click(function () {
-                    	var self = $(this);
-
+                    	window.alert("Es wurde aufgerufen");
+                    	/*var self = $(this);
+					
                         swal({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
@@ -108,14 +109,10 @@ function getList() {
                                      }
                                  });
                         	 }
-                        });
-                        
-                    
-                    
-                                   
+                        }); */
                 
                     });
-                }*/
+                }
             }
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; +
             output;
