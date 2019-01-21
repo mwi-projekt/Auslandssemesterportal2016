@@ -585,6 +585,8 @@ i {
 	font-size: x-small !important;
 	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .8);
 	box-shadow: 0 6px 12px rgba(0, 0, 0, .8);
+	position: sticky;
+	
 }
 
 .footer a {
