@@ -86,7 +86,7 @@ function parse() {
                                         json[i]["data"]["values"][j] +
                                         '</option>';
                                 }
-                                innerOutput = innerOutput + '</select></div></div>';
+                                innerOutput = innerOutput + '</select disabled></div></div>';
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push("text");
                                 break;
