@@ -91,7 +91,7 @@ function getList() {
 
 function deleteTask (taskId) {
     //$('.taskdelete').click(function () {
-    	window.alert("Es wurde aufgerufen mit der Id " + id);
+    	alert("Es wurde aufgerufen mit der Id ");
 }
     	/*var self = $(this);
 	
