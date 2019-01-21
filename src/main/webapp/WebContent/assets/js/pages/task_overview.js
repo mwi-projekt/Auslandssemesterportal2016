@@ -40,11 +40,11 @@ function getList() {
                             "</td><td>" +
                             
                             
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(' + singleInstance.id + ')" id="' + /*Klammer:' + singleInstance.id + '*/
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask("' + singleInstance.id + '")" id="' + /*Klammer:' + singleInstance.id + '*/
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
-                            '&verify=true\'"> </button>' +
+                            '&verify=true\"> </button>' +
                             "</td></tr>"
                             
                                                        
