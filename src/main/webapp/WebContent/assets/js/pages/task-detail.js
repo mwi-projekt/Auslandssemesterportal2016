@@ -214,7 +214,7 @@ function getData() {
             $.each(result, function (key, value) {
                 $('#' + key).val(value);
                 if (!(sendBew === "true")) {
-                    $("#" + key).prop('readonly', true);
+                    $("#" + key).prop('readonly', false);
                 }
             });
         },
