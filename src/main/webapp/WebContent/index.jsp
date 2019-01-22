@@ -19,6 +19,11 @@
             </div>
         </div>
     </div>
+    
+    <a href="#" id="linkToStart">
+		<img src="images/chevron_up.png" width="8%" height="8%" alt="Pfeil nach oben" />
+	</a>
+    
     <div class="inhalt" id="normalBereich">
         <div class="container">
             <div class="row navBar">
