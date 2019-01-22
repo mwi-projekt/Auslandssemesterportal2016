@@ -21,7 +21,7 @@
     </div>
     
     <a href="#">
-		<img src="images/chevron.png"  style="position:fixed; bottom:0; right:0;" alt="Pfeil nach oben" />
+		<img src="images/chevron.png"  style="position:fixed; z-index: 999; bottom:25px; right:11%;" alt="Pfeil nach oben" />
 	</a>
     
     <div class="inhalt" id="normalBereich">
