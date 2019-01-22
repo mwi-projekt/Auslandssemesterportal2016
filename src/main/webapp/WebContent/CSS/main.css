@@ -1,18 +1,20 @@
-	body {
+body {
+	
 }
 
-button{
-	a:visited{
+button {
+	a: visited{  
 		color: none;
-	}
 }
 
+}
 a:visited {
 	color: grey;
 }
 
 input {
 	/* width: 300px; */
+	
 }
 
 .sweet-modal-content select {
@@ -20,12 +22,12 @@ input {
 }
 
 .form-group:after {
-	 content: ".";
-	 clear: both;
-	 display: block;
-	 visibility: hidden;
-	 height: 0px;
- }
+	content: ".";
+	clear: both;
+	display: block;
+	visibility: hidden;
+	height: 0px;
+}
 
 /* Allgemeine Elemente */
 .btn {
@@ -38,16 +40,20 @@ input {
 	/* -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
 	/* box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
 }
+
 .btn-primary {
-	    background-color: #d3d3d3;
+	background-color: #d3d3d3;
 }
+
 .btn-success {
 	color: #fff;
 }
+
 .btn:hover {
 	background: #D60000;
 	color: white;
 }
+
 .btn-success:hover {
 	background-color: #47a447;
 }
@@ -62,17 +68,15 @@ input {
 	box-shadow: 0 6px 12px rgba(0, 0, 0, .5);
 	margin-bottom: 10px;
 	color: black;
-	
 }
 
-.navbar-brand{
+.navbar-brand {
 	line-height: 28px;
 }
 
 .red {
 	color: #e2001d;
 }
-
 
 .tuerkis {
 	background: #AFEEEE;
@@ -96,6 +100,7 @@ input {
 }
 
 #logo {
+	
 }
 
 .ueberschrift {
@@ -138,37 +143,37 @@ input {
 }
 
 #falschLogin {
-	color: red; 
-	margin-bottom: 0px; 
+	color: red;
+	margin-bottom: 0px;
 	display: none;
 }
 
 .logoutFenster {
-    display: none;
-    /* background: #AFEEEE; */
-    /* border: 1px solid white; */
-    /* border-radius: 5px; */
-    border-top: none;
-    /* border-top-right-radius: 0px; */
-    /* border-top-left-radius: 0px; */
-    /* top: 0%; */
-    /* margin-top: 57px; */
-    color: #777;
-    padding: 0px;
-    position: absolute;
-    /* -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
-    /* box-shadow: 0 3px 3px rgba(0, 0, 0, .5); */
-    z-index: 102;
-    padding-left: 4px;
-    right: 1em;
-    margin-left:30px;
+	display: none;
+	/* background: #AFEEEE; */
+	/* border: 1px solid white; */
+	/* border-radius: 5px; */
+	border-top: none;
+	/* border-top-right-radius: 0px; */
+	/* border-top-left-radius: 0px; */
+	/* top: 0%; */
+	/* margin-top: 57px; */
+	color: #777;
+	padding: 0px;
+	position: absolute;
+	/* -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
+	/* box-shadow: 0 3px 3px rgba(0, 0, 0, .5); */
+	z-index: 102;
+	padding-left: 4px;
+	right: 1em;
+	margin-left: 30px;
 }
 
 .logoutButton {
-	color:#777;
-	border:1px solid #777;
-	font-size:14px;
-	background-color:#f7f7f7;
+	color: #777;
+	border: 1px solid #777;
+	font-size: 14px;
+	background-color: #f7f7f7;
 }
 
 .loginShow {
@@ -217,6 +222,7 @@ input {
 	box-shadow: 0 6px 12px rgba(0, 0, 0, .5);
 	display: none;
 }
+
 .popUpBack {
 	display: none;
 	top: 0px;
@@ -292,24 +298,22 @@ input {
 	/* color: white; */
 }
 
-
-
 /* imgSlider */
-@media only screen and (max-width: 800px) {
-    // this css will only be used when the screen size is max 800px
+@media only screen and (max-width: 800px) { //
+	this css will only be used when the screen size is max 800px
 	.imgSlider {
-	display: none;
+		display: none;
 	}
 }
 
 .imgSlider {
-width: 100%;
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
-height: 250px;
-display: inline-block;
-margin: auto;
+	width: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 250px;
+	display: inline-block;
+	margin: auto;
 }
 
 .pfeil {
@@ -345,7 +349,7 @@ margin: auto;
 	margin-top: 10px;
 	font-weight: bold;
 	color: white;
-	box-shadow: 0 6px 12px rgba(0, 0 ,0, 0.5);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
 	cursor: pointer;
 }
 
@@ -364,7 +368,6 @@ margin: auto;
 }
 
 /* Inhalt Boxen */
-
 .inhaltBox {
 	/* -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
 	/* box-shadow: 0 2px 6px rgba(0, 0, 0, .5); */
@@ -387,6 +390,7 @@ margin: auto;
 
 /* portalInfo */
 .portalInfo {
+	
 }
 
 .portalInfo p {
@@ -411,6 +415,7 @@ margin: auto;
 	padding-left: 15px;
 	cursor: pointer;
 }
+
 .studiengang:hover {
 	text-decoration: underline;
 }
@@ -433,8 +438,8 @@ margin: auto;
 	padding: 5px;
 	border-bottom: 1px solid black;
 	clear: both;
-	
 }
+
 .uni {
 	display: none;
 	clear: both;
@@ -449,9 +454,6 @@ margin: auto;
 .maps {
 	border: 1px groove black;
 }
-
-
-
 
 .navBar p {
 	display: inline;
@@ -544,7 +546,6 @@ i {
 }
 
 /* Nutzerverwaltung */
-
 #nutzerVerwaltung .row {
 	padding: 20px;
 }
@@ -573,8 +574,6 @@ i {
 	font-weight: bold;
 }
 
-
-
 /* Footer */
 .footer {
 	width: 100%;
@@ -585,14 +584,17 @@ i {
 	font-size: x-small !important;
 	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .8);
 	box-shadow: 0 6px 12px rgba(0, 0, 0, .8);
-	position: sticky;
-	
+}
+
+#linkToStart {
+	position: fixed;
+	right: 10px;
+	bottom: 10px
 }
 
 .footer a {
 	font-size: small;
 	color: rgb(48, 192, 192);
-	
 }
 
 /* CMS zur Auslandsverwaltung */
@@ -663,6 +665,7 @@ i {
 .Admin {
 	display: none;
 }
+
 .Mitarbeiter {
 	display: none;
 }
@@ -683,7 +686,6 @@ i {
 	padding: 10px;
 	font-size: large;
 	cursor: pointer;
-	
 }
 
 .contentAng {
@@ -700,7 +702,7 @@ i {
 }
 
 .active {
-	background: #f1f3f3!important;
+	background: #f1f3f3 !important;
 	display: inline-block;
 	color: #000000;
 }
@@ -723,24 +725,30 @@ i {
 .eingeloggt {
 	display: none;
 }
+
 .navMargin {
 	margin: 10px 10px 10px 10px;
 }
+
 .dhbwLogo {
 	max-width: 10%;
 	width: 10%;
-    height: auto;
+	height: auto;
 }
+
 .headerWebsite {
 	text-align: left;
 }
+
 .logFenster {
-	text-algin: center;	
-    visibility: visible;
+	text-algin: center;
+	visibility: visible;
 }
+
 .logoFenster {
-	visibility:hidden;
+	visibility: hidden;
 }
+
 .panel-heading [data-toggle="collapse"]:after {
 	font-family: 'Glyphicons Halflings';
 	content: "\e072";
@@ -748,31 +756,33 @@ i {
 	color: #b0c5d8;
 	font-size: 18px;
 	line-height: 22px;
-
 	-webkit-transform: rotate(-90deg);
-	-moz-transform:    rotate(-90deg);
-	-ms-transform:     rotate(-90deg);
-	-o-transform:      rotate(-90deg);
-	transform:         rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
 }
+
 .panel-heading [data-toggle="collapse"].collapsed:after {
 	-webkit-transform: rotate(90deg);
-	-moz-transform:    rotate(90deg);
-	-ms-transform:     rotate(90deg);
-	-o-transform:      rotate(90deg);
-	transform:         rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
 }
+
 #reason {
 	display: none;
 }
+
 #reasonl {
 	display: none;
 }
 
-#register .nutzerBearbeiten{
-    display: none;
+#register .nutzerBearbeiten {
+	display: none;
 }
 
 .swal2-popup {
-  font-size: 1.6rem !important;
+	font-size: 1.6rem !important;
 }
