@@ -38,9 +38,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\'"> </button>' +
                             "</td><td>" +
-                            
-                            
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteTask(\''+ singleInstance.id + '\')" id="' + /*Klammer:' + singleInstance.id + '*/
+                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteProcessButtons('+ singleInstance.uni + ',' + singleInstance.matrikelnummer + ',' + singleInstance.id + ')" id="' + 
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
@@ -91,6 +89,34 @@ function getList() {
         }
     });
 }
+
+function deleteProcessButtons(uni, matrikelnummer, id) {
+        swal({
+            title: "Bist du sicher?",
+            text: "Der Prozess kann nicht wiederhergestellt werden! Das hier wird angezeigt :-)",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Löschen!",
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                type: "GET",
+                url: baseUrl + "/process/delete",
+                data: {
+                    matrikelnummer: matrikelnummer,
+                    uni: uni
+                }
+            }).done(function (data) {
+                $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+            }).error(function (error) {
+                console.error(error);
+                swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+            })
+        });
+    };
+
 
 function deleteTask (taskID) {
     //$('.taskdelete').click(function () {

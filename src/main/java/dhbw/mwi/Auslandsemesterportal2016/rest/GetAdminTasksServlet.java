@@ -46,7 +46,8 @@ public class GetAdminTasksServlet extends HttpServlet {
 					obj.put("aktuelleUni", runtime.getVariable(instanceId, "aktuelleUni"));
 					obj.put("kurs", runtime.getVariable(instanceId, "bewKurs"));
 					obj.put("uni", runtime.getVariable(instanceId, "uni"));
-
+					//zu Testzwecken hinzugefügt für AAA löschen 
+					obj.put("matrikelnummer", runtime.getVariable(instanceId, "matrikelnummer"));
 					if (activities.get(0).equals("abgeschlossen")) {
 						obj.put("status", "complete");
 					} else {
