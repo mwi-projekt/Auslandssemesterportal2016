@@ -80,8 +80,9 @@ function getList() {
                 
                 
                 }
-            
+            initDeleteProcessButtonsTaskOverview();
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; +
+            
             output;
         },
         error: function (result) {
@@ -89,7 +90,39 @@ function getList() {
         }
     });
 }
+function initDeleteProcessButtonsTaskOverview() {
+    $('.btn-delete').on('click', function () {
+        var uni = $(this).attr("uni");
+        var id = $(this).attr("rid");
+        swal({
+            title: "Bist du sicher?",
+            text: "Der Prozess kann nicht wiederhergestellt werden!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Löschen!",
+            closeOnConfirm: false
+        }, function () {
+            //var id = $('.btn-delete').closest('tr').data('rid');
+            var matrikelnummer = sessionStorage['matrikelnr'];
 
+            $.ajax({
+                type: "GET",
+                url: baseUrl + "/process/delete",
+                data: {
+                    matrikelnummer: matrikelnummer,
+                    uni: uni
+                }
+            }).done(function (data) {
+                $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+            }).error(function (error) {
+                console.error(error);
+                swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+            })
+        });
+    });
+}
 function deleteProcessButtons(uni, matrikelnummer, id) {
     alert("Die Funktion deleteProcessbuttons wird aufgerufen");
     alert(uni);
