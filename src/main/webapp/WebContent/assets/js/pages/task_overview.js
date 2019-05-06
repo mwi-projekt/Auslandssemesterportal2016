@@ -91,7 +91,11 @@ function getList() {
 }
 
 function deleteProcessButtons(uni, matrikelnummer, id) {
-        swal({
+    alert("Die Funktion deleteProcessbuttons wird aufgerufen");
+    alert(uni);
+    alert(matrikelnummer);
+    alert(id);
+	swal({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden! Das hier wird angezeigt :-)",
             type: "warning",
