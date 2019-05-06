@@ -44,7 +44,10 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\"> </button>' +
                             "</td></tr>"
+                    document.getElementById("" + singleInstance.id + "&uni=" + singleInstance.uni +  "&verify=true\"").onclick = function() {deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)}; 
                             
+                            
+                                 
                                                        
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
@@ -80,6 +83,8 @@ function getList() {
                 
                 
                 }
+            
+            //nächste Zeile: Zu Testzwecken, kann wenn nicht wieder gelöscht werden
             initDeleteProcessButtonsTaskOverview();
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; +
             
