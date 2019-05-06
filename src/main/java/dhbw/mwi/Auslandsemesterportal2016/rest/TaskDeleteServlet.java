@@ -8,12 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
+
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "TaskDeleteServlet", urlPatterns = { "/task/delete" })
 public class TaskDeleteServlet extends HttpServlet {
 
+	ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
@@ -25,10 +30,12 @@ public class TaskDeleteServlet extends HttpServlet {
 			PrintWriter toClient = response.getWriter();
 
 			if (taskId != null) {
-				String query = "DELETE * FROM ACT_RU_TASK WHERE PROC_INST_ID = ?";
-				String[] args = new String[] { taskId };
-				String[] types = new String[] { "int" };
-				SQL_queries.executeUpdate(query, args, types);
+				try {
+					processEngine.getRuntimeService().deleteProcessInstance(taskId, "Die Bewerbung wurde vom AAA gelöscht");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			} else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				toClient.println("Error: parameter are missing");
