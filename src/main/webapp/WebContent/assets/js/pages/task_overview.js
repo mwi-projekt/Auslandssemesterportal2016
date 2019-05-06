@@ -95,7 +95,7 @@ function deleteProcessButtons(uni, matrikelnummer, id) {
     alert(uni);
     alert(matrikelnummer);
     alert(id);
-	swal({
+	/*swal({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden! Das hier wird angezeigt :-)",
             type: "warning",
@@ -119,7 +119,8 @@ function deleteProcessButtons(uni, matrikelnummer, id) {
                 swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
             })
         });
-    };
+        */
+}
 
 
 function deleteTask (taskID) {
