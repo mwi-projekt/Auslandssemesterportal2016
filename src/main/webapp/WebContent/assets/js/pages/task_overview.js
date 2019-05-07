@@ -43,11 +43,9 @@ function getList() {
                             '&uni=' +
                             singleInstance.uni +
                             '&verify=true\"> </button>' +
-                            "</td></tr>"
+                            "</td></tr>";
                     document.getElementById("" + singleInstance.id + "&uni=" + singleInstance.uni +  "&verify=true\"").onclick = function() {deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)}; 
                             
-                            
-                                 
                                                        
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
