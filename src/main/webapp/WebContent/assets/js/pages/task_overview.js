@@ -54,7 +54,14 @@ function getList() {
                             singleInstance.uni +
                             "</td></tr>"
                     }
-                    document.getElementById(singleInstance.id).addEventListener("click", deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)); 
+                    document.getElementById(singleInstance.id).addEventListener("click", function () {
+                        alert("Die Funktion deleteProcessbuttons wird aufgerufen");
+                        alert(uni);
+                        alert(matrikelnummer);
+                        alert(id);
+                    });
+                    	//deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)); 
+                    
                     
                 }
                 if (output === "") {
