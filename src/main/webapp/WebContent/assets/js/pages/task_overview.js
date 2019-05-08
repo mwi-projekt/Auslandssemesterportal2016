@@ -44,9 +44,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\"> </button>' +
                             "</td></tr>";
-                    document.getElementById("" + singleInstance.id + "&uni=" + singleInstance.uni +  "&verify=true\"").onclick = function() {deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)}; 
-                            
-                                                       
+                 
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
                             "<tr><td>" +
@@ -61,6 +59,8 @@ function getList() {
                             singleInstance.uni +
                             "</td></tr>"
                     }
+                    document.getElementById("" + singleInstance.id + "&uni=" + singleInstance.uni +  "&verify=true\"").onclick = function() {deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)}; 
+                    
                 }
                 if (output === "") {
                     output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
