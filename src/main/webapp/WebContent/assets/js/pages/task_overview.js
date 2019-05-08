@@ -36,14 +36,9 @@ function getList() {
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
-                            '&verify=true\'"> </button>' +
-                            "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-trash btn-delete" title="Delete" onclick="deleteProcessButtons('+ singleInstance.uni + ',' + singleInstance.matrikelnummer + ',' + singleInstance.id + ');" id="' + 
-                            singleInstance.id +
-                            '&uni=' +
-                            singleInstance.uni +
                             '&verify=true\"> </button>' +
-                            "</td></tr>";
+                            "</td><td>" +
+                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" id=" + singleInstance.id + "></button></td></tr>";
                  
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
@@ -59,7 +54,7 @@ function getList() {
                             singleInstance.uni +
                             "</td></tr>"
                     }
-                    document.getElementById("" + singleInstance.id + "&uni=" + singleInstance.uni +  "&verify=true\"").addEventListener("click", deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)); 
+                    document.getElementById(singleInstance.id).addEventListener("click", deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)); 
                     
                 }
                 if (output === "") {
