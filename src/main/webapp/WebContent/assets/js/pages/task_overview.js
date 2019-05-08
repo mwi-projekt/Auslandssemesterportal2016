@@ -1,6 +1,42 @@
+
+function deleteProcessButtons(uni, matrikelnummer) {
+    alert("Die Funktion deleteProcessbuttons wird aufgerufen");
+    alert(uni);
+    alert(matrikelnummer);
+   
+	/*swal({
+            title: "Bist du sicher?",
+            text: "Der Prozess kann nicht wiederhergestellt werden! Das hier wird angezeigt :-)",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Löschen!",
+            closeOnConfirm: false
+        }, function () {
+            $.ajax({
+                type: "GET",
+                url: baseUrl + "/process/delete",
+                data: {
+                    matrikelnummer: matrikelnummer,
+                    uni: uni
+                }
+            }).done(function (data) {
+                $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+            }).error(function (error) {
+                console.error(error);
+                swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+            })
+        });
+        */
+}
+
+
 $(document).ready(function () {
     getList();
 });
+
+
 
 function getList() {
     $.ajax({
@@ -38,7 +74,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\"> </button>' +
                             "</td><td>" +
-                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" id=\"delete_"+ singleInstance.uni + "_" + singleInstance.matrikelnummer + "\"></button></td></tr>";
+                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons("+ singleInstance.uni + "," +  singleInstance.matrikelnummer + ")\"></button></td></tr>";
                  
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
@@ -53,17 +89,8 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td></tr>"
-                    }
-                    
-                    document.getElementById("delete_"+ singleInstance.uni + "_" + singleInstance.matrikelnummer).addEventListener("click", function () {
-                        alert("Die Funktion deleteProcessbuttons wird aufgerufen");
-                        alert(uni);
-                        alert(matrikelnummer);
-
-                    });
-                    	//deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)); 
-                    
-                    
+                    } 
+                   
                 }
                 if (output === "") {
                     output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
@@ -125,38 +152,6 @@ function initDeleteProcessButtonsTaskOverview() {
         });
     });
 }
-function deleteProcessButtons(uni, matrikelnummer, id) {
-    alert("Die Funktion deleteProcessbuttons wird aufgerufen");
-    alert(uni);
-    alert(matrikelnummer);
-    alert(id);
-	/*swal({
-            title: "Bist du sicher?",
-            text: "Der Prozess kann nicht wiederhergestellt werden! Das hier wird angezeigt :-)",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!",
-            closeOnConfirm: false
-        }, function () {
-            $.ajax({
-                type: "GET",
-                url: baseUrl + "/process/delete",
-                data: {
-                    matrikelnummer: matrikelnummer,
-                    uni: uni
-                }
-            }).done(function (data) {
-                $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
-            }).error(function (error) {
-                console.error(error);
-                swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-            })
-        });
-        */
-}
-
 
 function deleteTask (taskID) {
     //$('.taskdelete').click(function () {
