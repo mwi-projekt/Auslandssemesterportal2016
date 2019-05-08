@@ -74,7 +74,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\"> </button>' +
                             "</td><td>" +
-                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons("+ singleInstance.uni + "," +  singleInstance.matrikelnummer + ")\"></button></td></tr>";
+                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons(\""+ singleInstance.uni + "\"," +  singleInstance.matrikelnummer + ")\"></button></td></tr>";
                  
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
