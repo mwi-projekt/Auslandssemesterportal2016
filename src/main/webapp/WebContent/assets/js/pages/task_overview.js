@@ -59,7 +59,7 @@ function getList() {
                             singleInstance.uni +
                             "</td></tr>"
                     }
-                    //document.getElementById("" + singleInstance.id + "&uni=" + singleInstance.uni +  "&verify=true\"").onclick = function() {deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)}; 
+                    document.getElementById("" + singleInstance.id + "&uni=" + singleInstance.uni +  "&verify=true\"").addEventListener("click", deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)); 
                     
                 }
                 if (output === "") {
@@ -78,12 +78,8 @@ function getList() {
                 $(document).ready(function () {
                     $('.table').DataTable();
                 });
-                
-                
-                }
-            
-            //nächste Zeile: Zu Testzwecken, kann wenn nicht wieder gelöscht werden
-            initDeleteProcessButtonsTaskOverview();
+            }
+           
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; +
             
             output;
