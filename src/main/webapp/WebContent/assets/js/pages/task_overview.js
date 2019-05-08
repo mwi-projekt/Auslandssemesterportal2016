@@ -59,7 +59,7 @@ function getList() {
                             singleInstance.uni +
                             "</td></tr>"
                     }
-                    document.getElementById("" + singleInstance.id + "&uni=" + singleInstance.uni +  "&verify=true\"").onclick = function() {deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)}; 
+                    //document.getElementById("" + singleInstance.id + "&uni=" + singleInstance.uni +  "&verify=true\"").onclick = function() {deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)}; 
                     
                 }
                 if (output === "") {
