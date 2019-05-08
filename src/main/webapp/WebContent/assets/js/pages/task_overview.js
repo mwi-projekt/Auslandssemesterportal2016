@@ -38,7 +38,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\"> </button>' +
                             "</td><td>" +
-                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" id=" + singleInstance.id + "></button></td></tr>";
+                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" id=\"delete_"+ singleInstance.uni + "_" + singleInstance.matrikelnummer + "\"></button></td></tr>";
                  
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
@@ -54,11 +54,12 @@ function getList() {
                             singleInstance.uni +
                             "</td></tr>"
                     }
-                    document.getElementById(singleInstance.id).addEventListener("click", function () {
+                    
+                    document.getElementById("delete_"+ singleInstance.uni + "_" + singleInstance.matrikelnummer).addEventListener("click", function () {
                         alert("Die Funktion deleteProcessbuttons wird aufgerufen");
                         alert(uni);
                         alert(matrikelnummer);
-                        alert(id);
+
                     });
                     	//deleteProcessButtons(singleInstance.uni, singleInstance.matrikelnummer, singleInstance.id)); 
                     
