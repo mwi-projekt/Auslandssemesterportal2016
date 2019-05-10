@@ -25,7 +25,8 @@ function getList() {
                 for (var i = 0; i < instances.length; i++) {
                     singleInstance = instances[i];
                     if (singleInstance.status === 'validate') {
-                        output = output +
+                        alert(singleInstance.uni);
+                    	output = output +
                             "<tr><td>" +
                             singleInstance.name +
                             "</td><td>" +
@@ -43,7 +44,7 @@ function getList() {
                             singleInstance.uni +
                             '&verify=true\"> </button>' +
                             "</td><td>" +
-                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons(\""+ singleInstance.uni + "\"," +  singleInstance.matrikelnummer + ")\"></button></td></tr>";
+                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick="deleteProcessButtons(\""+singleInstance.uni\""+","+singleInstance.matrikelnummer+")\"></button></td></tr>";
                  
                     } else if (singleInstance[6] === 'complete') {
                         completed = completed +
