@@ -25,7 +25,7 @@ function getList() {
                 for (var i = 0; i < instances.length; i++) {
                     singleInstance = instances[i];
                     if (singleInstance.status === 'validate') {
-                        alert(singleInstance.uni);
+                       
                     	output = output +
                             "<tr><td>" +
                             singleInstance.name +
