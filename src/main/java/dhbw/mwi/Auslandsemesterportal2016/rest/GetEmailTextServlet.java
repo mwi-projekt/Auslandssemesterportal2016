@@ -59,7 +59,7 @@ public class GetEmailTextServlet extends HttpServlet {
 						+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 						+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
 						+ "Folgende Problem hat sich ergeben:" + "\n "
-						+ " <s> -- Platzhalter für Erläuterung des Problems -- </s> " + "\n" + "\n"
+						+ " <strong> -- Platzhalter für Erläuterung des Problems -- </strong> " + "\n" + "\n"
 						+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können."
 						+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
 						+ "\n" + "Ihr Akademisches Auslandsamt" + "</html>.");
