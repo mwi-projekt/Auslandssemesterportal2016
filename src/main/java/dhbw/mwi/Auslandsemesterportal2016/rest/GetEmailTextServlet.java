@@ -54,14 +54,15 @@ public class GetEmailTextServlet extends HttpServlet {
 						+ "</html>.");
 			} else {
 				// Text für abgelehnte Bewerbung
-				output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
+				ausgabe.setContentType("text/html");
+				ausgabe.setText("<html>" + "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 						+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 						+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
-						+ "Folgende Problem hat sich ergeben:"
-						+ "\n [b] -- Platzhalter für Erläuterung des Problems -- [/b]" + "\n" + "\n"
+						+ "Folgende Problem hat sich ergeben:" + "\n "
+						+ " <s> -- Platzhalter für Erläuterung des Problems -- </s> " + "\n" + "\n"
 						+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können."
 						+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
-						+ "\n" + "Ihr Akademisches Auslandsamt";
+						+ "\n" + "Ihr Akademisches Auslandsamt" + "</html>.");
 			}
 
 			ausgabe.setEditable(false);
