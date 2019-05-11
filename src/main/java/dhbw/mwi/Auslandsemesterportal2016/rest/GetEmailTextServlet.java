@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JEditorPane;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
@@ -35,17 +36,20 @@ public class GetEmailTextServlet extends HttpServlet {
 			String student_name = runtime.getVariable(instanceID, "bewNachname").toString();
 			String uni = runtime.getVariable(instanceID, "uni").toString();
 			String output = "";
+			JEditorPane ausgabe = new JEditorPane();
 
 			if (validation_result.equals("true")) {
 				// Text für erfolgreiche Bewerbung
-				output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
+				ausgabe.setContentType("text/html");
+				ausgabe.setText("<html>" + "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 						+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
 						+ uni + " wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n"
-						+ "-- Platzhalter für Anmerkungen des Auslandsamts --" + "\n" + "\n" + "\n"
+						+ "<b> -- Platzhalter für Anmerkungen des Auslandsamts -- </b>" + "\n" + "\n" + "\n"
 						+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen."
 						+ "\n"
 						+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
-						+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt";
+						+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt"
+						+ "</html>.");
 			} else {
 				// Text für abgelehnte Bewerbung
 				output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
