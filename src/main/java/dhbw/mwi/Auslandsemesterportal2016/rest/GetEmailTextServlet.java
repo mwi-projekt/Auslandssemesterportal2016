@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.JEditorPane;
+import javax.swing.JFrame;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
@@ -35,7 +36,8 @@ public class GetEmailTextServlet extends HttpServlet {
 			RuntimeService runtime = engine.getRuntimeService();
 			String student_name = runtime.getVariable(instanceID, "bewNachname").toString();
 			String uni = runtime.getVariable(instanceID, "uni").toString();
-			String output = "";
+
+			JFrame frame = new JFrame();
 			JEditorPane ausgabe = new JEditorPane();
 
 			if (validation_result.equals("true")) {
@@ -62,7 +64,10 @@ public class GetEmailTextServlet extends HttpServlet {
 						+ "\n" + "Ihr Akademisches Auslandsamt";
 			}
 
-			toClient.print(output);
+			ausgabe.setEditable(false);
+			frame.add(ausgabe);
+			frame.setVisible(true);
+
 		}
 	}
 }
