@@ -63,6 +63,12 @@ $(document).ready(function () {
     });
 });
 
+$(document).scroll(function() { 
+	   if($(window).scrollTop() === 0) {
+	     console.log("test");
+	   }
+	});
+
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
     $.ajax({

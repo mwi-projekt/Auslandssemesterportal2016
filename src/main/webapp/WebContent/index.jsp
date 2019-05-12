@@ -21,7 +21,7 @@
     </div>
     
     <a href="#">
-		<img src="images/chevron.png"  style="position:fixed; z-index: 999; bottom:25px; right:11%;" alt="Pfeil nach oben" />
+		<img src="images/chevron.png" class="chevronup"  style="position:fixed; z-index: 999; bottom:25px; right:50%;" alt="Pfeil nach oben" />
 	</a>
     
     <div class="inhalt" id="normalBereich">
@@ -318,7 +318,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <h3 class="titel nonCms" id="infoMaterialTitel">Informationsmaterial</h3>
+                        <h3 class="titel nonCms" id="infoMaterialTitel">Informationsmateriall</h3>
                         <p class="cmsInfo">
                             <b style="color: #D60000">Titel ändern</b>
                         </p>
