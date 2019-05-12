@@ -89,6 +89,7 @@ public class GetEmailTextServlet extends HttpServlet {
 						+ "\n" + "Ihr Akademisches Auslandsamt" + "</html>.");
 			}
 
+			// toClient.print(output);
 			ausgabe.setEditable(false);
 			frame.add(ausgabe);
 			frame.setVisible(true);
