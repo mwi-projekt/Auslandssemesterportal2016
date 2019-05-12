@@ -318,7 +318,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <h3 class="titel nonCms" id="infoMaterialTitel">Informationsmaterial</h3>
+                        <h3 class="titel nonCms" id="infoMaterialTitel">Informationsmateriall</h3>
                         <p class="cmsInfo">
                             <b style="color: #D60000">Titel ändern</b>
                         </p>
