@@ -90,6 +90,7 @@ public class GetEmailTextServlet extends HttpServlet {
 			}
 
 			// toClient.print(output);
+			toClient.print(ausgabe.getText());
 			ausgabe.setEditable(false);
 			frame.add(ausgabe);
 			frame.setVisible(true);
