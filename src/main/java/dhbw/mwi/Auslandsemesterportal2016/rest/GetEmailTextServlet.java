@@ -40,7 +40,7 @@ public class GetEmailTextServlet extends HttpServlet {
 				// Text für erfolgreiche Bewerbung
 				output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 						+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
-						+ uni + " wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n"
+						+ uni + " wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n" + "\n"
 						+ "-- Platzhalter für Anmerkungen des Auslandsamts --" + "\n" + "\n" + "\n"
 						+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und	entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen."
 						+ "\n"
@@ -51,8 +51,8 @@ public class GetEmailTextServlet extends HttpServlet {
 				output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 						+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 						+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
-						+ "Folgende Problem hat sich ergeben: " + "\n "
-						+ " -- Platzhalter für Erläuterung des Problems -- > " + "\n" + "\n"
+						+ "Folgende Problem hat sich ergeben: " + "\n " + "\n"
+						+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
 						+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können."
 						+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
 						+ "\n" + "Ihr Akademisches Auslandsamt";
