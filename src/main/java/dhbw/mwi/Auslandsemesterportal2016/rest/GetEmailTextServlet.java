@@ -7,8 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
@@ -38,13 +36,12 @@ public class GetEmailTextServlet extends HttpServlet {
 			String uni = runtime.getVariable(instanceID, "uni").toString();
 			String output = "";
 
-			JFrame frame = new JFrame();
-			JEditorPane ausgabe = new JEditorPane();
-			ausgabe.setContentType("text/html");
+			// JFrame frame = new JFrame();
+			// JEditorPane ausgabe = new JEditorPane();
+			// ausgabe.setContentType("text/html");
 
 			if (validation_result.equals("true")) {
 				// Text für erfolgreiche Bewerbung
-
 				output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 						+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
 						+ uni + " wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n"
@@ -69,7 +66,6 @@ public class GetEmailTextServlet extends HttpServlet {
 				 */
 			} else {
 				// Text für abgelehnte Bewerbung
-
 				output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 						+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 						+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
@@ -96,10 +92,10 @@ public class GetEmailTextServlet extends HttpServlet {
 			}
 
 			toClient.print(output);
-			/*
-			 * toClient.print(ausgabe.getText()); ausgabe.setEditable(false);
-			 * frame.add(ausgabe); frame.setVisible(true);
-			 */
+			// ausgabe.setEditable(false);
+			// frame.add(ausgabe);
+			// frame.setVisible(true);
+			// toClient.print(ausgabe.getText());
 
 		}
 	}
