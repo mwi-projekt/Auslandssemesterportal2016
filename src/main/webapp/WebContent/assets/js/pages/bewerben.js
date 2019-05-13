@@ -9,6 +9,19 @@ $(document).ready(function () {
     uni = url.searchParams.get("uni");
 
     parse();
+
+    $('#bewPLZ').bind('keyup change', function (e) {
+        if ($(this).val().length > 4) {
+            var ort = $('#bewOrt');
+            $.getJSON('https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?', { postalcode: this.value }, function (response) {
+                if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+                    ort.val(response.postalcodes[0].placeName);
+                }
+            })
+        } else {
+            $('#bewOrt').val('');
+        }
+    });
 });
 
 function parse() {
