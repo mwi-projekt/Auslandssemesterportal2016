@@ -110,8 +110,13 @@ function deleteProcessButtons(uni, matrikelnummer) {
                     uni: uni
                 }
             }).done(function (data) {
-                $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                swal({
+                	title: 'Gelöscht!',
+                	text: 'Der Prozess wurde erfolgreich gelöscht.',
+                	type: 'success'
+                }, function() {
+                	location.reload();
+                });
             }).error(function (error) {
                 console.error(error);
                 swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
