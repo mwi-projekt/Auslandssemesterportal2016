@@ -42,7 +42,7 @@ function getList() {
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
-                            '&verify=true\"> </button>' +
+                            '&verify=true\'\"> </button>' +
                             "</td><td>" +
                             "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons(\""+singleInstance.uni+"\","+singleInstance.matrikelnummer+")\"></button></td></tr>";
                  
