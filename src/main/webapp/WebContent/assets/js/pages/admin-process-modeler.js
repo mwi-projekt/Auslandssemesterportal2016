@@ -1,10 +1,9 @@
-$(window).bind('beforeunload', function(){
-  return 'Are you sure you want to leave?';
-});
+$(window).onbeforeunload = function() {
+   return "Möchten sie wirklich verlassen?";
+};
 
-$(window).unload(function(){
-  alert('Bye.');
-});
+$(window).onunload = function(event) { return "test" };
+
 
 $(document).ready(function () {
     var id = $.urlParam('id').trim();
@@ -12,14 +11,6 @@ $(document).ready(function () {
     var type = $.urlParam('type').trim();
     var index = $.urlParam('index').trim();
     var json = {};
-    
-    $(window).bind('beforeunload', function(){
-    	  return 'Are you sure you want to leave?';
-    	});
-
-    	$(window).unload(function(){
-    	  alert('Bye.');
-    	});
 
     $.get(baseUrl + '/processmodel/get', {
         model: dia,
