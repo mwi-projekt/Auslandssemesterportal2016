@@ -222,13 +222,6 @@ $(document).scroll(function() {
 	   }
 	});
 
-$(window).bind('beforeunload', function() {} );
-
-$(window).bind('onbeforeunload', function(){
-	  console.log("unloadtest");
-	  return 'Ungespeicherte Informationenen gehen verloren. Trotzdem verlassen?';
-	});
-
 // Läd die Daten für die Infomaterialien auf die Seite
 function loadInfoMaterial() {
     $.ajax({

@@ -1,9 +1,25 @@
+$(window).bind('beforeunload', function(){
+  return 'Are you sure you want to leave?';
+});
+
+$(window).unload(function(){
+  alert('Bye.');
+});
+
 $(document).ready(function () {
     var id = $.urlParam('id').trim();
     var dia = $.urlParam('dia').trim();
     var type = $.urlParam('type').trim();
     var index = $.urlParam('index').trim();
     var json = {};
+    
+    $(window).bind('beforeunload', function(){
+    	  return 'Are you sure you want to leave?';
+    	});
+
+    	$(window).unload(function(){
+    	  alert('Bye.');
+    	});
 
     $.get(baseUrl + '/processmodel/get', {
         model: dia,
@@ -466,10 +482,3 @@ $(document).ready(function () {
     }
     
 });
-
-$(window).bind('beforeunload', function() {} );
-
-$(window).bind('onbeforeunload', function(){
-	  console.log("unloadtest");
-	  return 'Ungespeicherte Informationenen gehen verloren. Trotzdem verlassen?';
-	});
