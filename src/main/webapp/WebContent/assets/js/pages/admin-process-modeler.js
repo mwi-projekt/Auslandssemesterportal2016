@@ -467,6 +467,9 @@ $(document).ready(function () {
     
 });
 
-$(window).bind('beforeunload', function(){
+$(window).bind('beforeunload', function() {} );
+
+$(window).bind('onbeforeunload', function(){
+	  console.log("unloadtest");
 	  return 'Ungespeicherte Informationenen gehen verloren. Trotzdem verlassen?';
 	});

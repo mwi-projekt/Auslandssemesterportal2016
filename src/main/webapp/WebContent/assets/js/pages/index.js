@@ -211,6 +211,7 @@ function loadAuslandsangeboteInhalt() {
     });
 }
 
+// Setzt den back to top Pfeil auf invisible wenn man sich ganz oben auf der Seite befindet
 $(document).scroll(function() { 
 	   if($(window).scrollTop() === 0) {
 	     $(".chevronup").css('opacity', '0');
@@ -219,6 +220,13 @@ $(document).scroll(function() {
 		 $(".chevronup").css('opacity', '1');
 	     $(".chevronup").css('cursor', 'pointer');
 	   }
+	});
+
+$(window).bind('beforeunload', function() {} );
+
+$(window).bind('onbeforeunload', function(){
+	  console.log("unloadtest");
+	  return 'Ungespeicherte Informationenen gehen verloren. Trotzdem verlassen?';
 	});
 
 // Läd die Daten für die Infomaterialien auf die Seite
