@@ -69,6 +69,7 @@ $(document).scroll(function() {
 	   }
 	});
 
+
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
     $.ajax({
@@ -216,6 +217,14 @@ function loadAuslandsangeboteInhalt() {
         }
     });
 }
+
+$(document).scroll(function() { 
+	   if($(window).scrollTop() === 0) {
+	     $("#chevronup").style.display = 'none';
+	   }else{
+		 $("#chevronup").style.display = 'block'
+	   }
+	});
 
 // Läd die Daten für die Infomaterialien auf die Seite
 function loadInfoMaterial() {
