@@ -213,9 +213,9 @@ function loadAuslandsangeboteInhalt() {
 
 $(document).scroll(function() { 
 	   if($(window).scrollTop() === 0) {
-	     $(".chevronup").style.opacity = "0";
+	     $(".chevronup").css('opacity', '0');
 	   }else{
-		 $(".chevronup").style.opacity = "1";
+		 $(".chevronup").css('opacity', '1');
 	   }
 	});
 
