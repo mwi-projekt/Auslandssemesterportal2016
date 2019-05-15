@@ -466,3 +466,7 @@ $(document).ready(function () {
     }
     
 });
+
+$(window).bind('beforeunload', function(){
+	  return 'Ungespeicherte Informationenen gehen verloren. Trotzdem verlassen?';
+	});
