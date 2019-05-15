@@ -214,10 +214,10 @@ function loadAuslandsangeboteInhalt() {
 $(document).scroll(function() { 
 	   if($(window).scrollTop() === 0) {
 	     $(".chevronup").css('opacity', '0');
-	     $(".chevronup").hide();
+	     $(".chevronup").css('cursor', 'initial');
 	   }else{
 		 $(".chevronup").css('opacity', '1');
-		 $(".chevronup").show();
+	     $(".chevronup").css('cursor', 'pointer');
 	   }
 	});
 
