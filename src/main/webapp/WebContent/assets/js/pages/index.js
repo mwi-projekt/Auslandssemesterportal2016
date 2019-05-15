@@ -220,9 +220,9 @@ function loadAuslandsangeboteInhalt() {
 
 $(document).scroll(function() { 
 	   if($(window).scrollTop() === 0) {
-	     $("#chevronup").hide();
+	     $(".chevronup").hide();
 	   }else{
-		 $("#chevronup").show();
+		 $(".chevronup").show();
 	   }
 	});
 
