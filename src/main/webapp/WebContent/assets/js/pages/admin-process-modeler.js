@@ -1,11 +1,24 @@
 $(window).onbeforeunload = function() {
+	alert("The Window is closing!");
    return "Möchten sie wirklich verlassen?";
 };
 
+$(window).addEventListener('beforeunload', function (e) {
+			return "test";
+	});
+
 $(window).onunload = function(event) { return "test" };
 
+$(window).onbeforeunload = function(e) {
+    alert("The Window is closing!");
+};
 
 $(document).ready(function () {
+	
+	$(window).on('beforeunload', function(){
+        return 'Are you sure you want to leave?';
+ });
+	
     var id = $.urlParam('id').trim();
     var dia = $.urlParam('dia').trim();
     var type = $.urlParam('type').trim();
