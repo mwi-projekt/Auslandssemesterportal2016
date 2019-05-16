@@ -1,4 +1,4 @@
-$(window).onbeforeunload = function(e){
+window.onbeforeunload = function(e){
     return "Möchten Sie die Seite wirkllich verlassen? Ungespeicherte Inhalte gehen verloren.";
 };
 
