@@ -1,6 +1,6 @@
-$(window).addEventListener('beforeunload', function (e) {
-			return "test";
-	});
+$(window).onbeforeunload = function(e){
+    return "Möchten Sie die Seite wirkllich verlassen? Ungespeicherte Inhalte gehen verloren.";
+};
 
 $(document).ready(function () {
 	
@@ -64,10 +64,6 @@ $(document).ready(function () {
             )
         });
     });
-    
-    $(window).on('beforeunload', function(){
-        return 'Are you sure you want to leave?';
- });
 
     function openCheckboxPopup(data, cb, cbClose) {
         var success = false;
