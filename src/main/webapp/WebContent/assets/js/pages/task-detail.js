@@ -6,10 +6,6 @@ var idList;
 var sendBew;
 var processDefinition;
 
-console.log($(document).getElementById("muttersprache").value);
-console.log($(document).getElementById("semesteradresseAnders").value);
-
-
 $(document).ready(function () {
     idList = [];
     typeList = [];
@@ -46,6 +42,9 @@ $(document).ready(function () {
             parse();
         }
     });
+    
+    console.log($(document).getElementById("muttersprache").value);
+    console.log($(document).getElementById("semesteradresseAnders").value);
     
 });
 
