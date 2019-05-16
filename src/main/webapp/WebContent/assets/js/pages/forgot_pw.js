@@ -15,7 +15,7 @@ function resetpw() {
 		success : function(result) {
 			swal({
 				title : "Kennwort zurückgesetzt",
-				text : "Falls diese Mailadresse und bekannt ist, erhalten Sie eine Mail mit einem Link zum zurücksetzen des Passworts",
+				text : "Falls diese Mailadresse uns bekannt ist, erhalten Sie eine Mail mit einem Link zum zurücksetzen des Passworts",
 				type : "success",
 				confirmButtonText : "Ok"
 			}, function() {
