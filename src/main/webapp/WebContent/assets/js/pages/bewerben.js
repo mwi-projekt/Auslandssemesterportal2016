@@ -248,4 +248,23 @@ function getDropzoneOptions(action, fileName) {
             this.removeFile(file);
         }
     }
+
+/*    function showGDPRComplianceDialogue() {
+    	swal({
+    		title: "DSGVO zustimmen",
+    		text: "Yo Bro, wir verkaufen deine Daten an Facebook. Ist das in Ordnung für dich?",
+    		buttons: {
+    			cancel: "Auf gar keinen Fall",
+    			confirm: "Ja, habe ich schon vermutet"
+    		}
+    	}).then( val => {
+    		if(val) {
+    			swal({
+    				title: "Vielen Dank!",
+    				text: "Sie haben ihre Zustimmung zur Datenverarbeitung erteilt",
+    				icon: "success"
+    			}).then(saveData());
+    		}
+    	})
+    } */
 }

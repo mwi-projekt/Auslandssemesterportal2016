@@ -131,7 +131,7 @@ function parse() {
                         } else if (stepName === "Task_1jq3nab") {
                             visibleStepName = "Semesteranschrift";
                         } else if (stepName === "englischNotePruefen") {
-                            visibleStepName = "Note Fremdsprache";
+                            visibleStepName = "Englischnote im Abitur in Punkten";
                         } else {
                             visibleStepName = "Sonstige Angaben";
                         }
