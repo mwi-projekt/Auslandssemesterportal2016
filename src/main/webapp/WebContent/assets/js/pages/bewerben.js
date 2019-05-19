@@ -3,18 +3,6 @@ var uni;
 var idList = [];
 var typeList = [];
 
-$('#bewPLZ').bind('keyup change', function (e) {
-    if ($(this).val().length > 4) {
-        var ort = $('#bewOrt');
-        $.getJSON('https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?', { postalcode: this.value }, function (response) {
-            if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
-                ort.val(response.postalcodes[0].placeName);
-            }
-        })
-    } else {
-        $('#bewOrt').val('');
-    }
-});
 
 $(document).ready(function () {
     var url = new URL(window.location.href);
@@ -22,6 +10,21 @@ $(document).ready(function () {
     uni = url.searchParams.get("uni");
  
     parse();
+    
+  //automatische Ergänzung des Ortes anhand der PLZ
+    $('#bewPLZ').bind('keyup change', function (e) {
+        if ($(this).val().length > 4) {
+            var ort = $('#bewOrt');
+            $.getJSON('https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?', { postalcode: this.value }, function (response) {
+                if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+                    ort.val(response.postalcodes[0].placeName);
+                }
+            })
+        } else {
+            $('#bewOrt').val('');
+        }
+    });
+
 
 
 });
