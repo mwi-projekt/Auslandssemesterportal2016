@@ -3,16 +3,6 @@ var uni;
 var idList = [];
 var typeList = [];
 
-$(document).ready(function () {
-    var url = new URL(window.location.href);
-    instanceID = url.searchParams.get("instance_id");
-    uni = url.searchParams.get("uni");
-
-    parse();
-
-});
-
-// automatische Ergänzung des Ortes anhand der PLZ
 $('#bewPLZ').bind('keyup change', function (e) {
     if ($(this).val().length > 4) {
         var ort = $('#bewOrt');
@@ -25,6 +15,17 @@ $('#bewPLZ').bind('keyup change', function (e) {
         $('#bewOrt').val('');
     }
 });
+
+$(document).ready(function () {
+    var url = new URL(window.location.href);
+    instanceID = url.searchParams.get("instance_id");
+    uni = url.searchParams.get("uni");
+ 
+    parse();
+
+
+});
+
 
 function parse() {
     $.ajax({
@@ -101,6 +102,8 @@ function parse() {
                                 break;
                         }
                     }
+
+                   
                     // set content
                     document.getElementById("formular").innerHTML = output;
                     if (idList.length > 0) {

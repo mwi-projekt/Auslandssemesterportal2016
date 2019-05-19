@@ -228,7 +228,7 @@ function initBewerben() {
             }
         },
         error: function (result) {
-            swal("Fehler", "Beim abrufen der laufenden Prozesse ist ein fehler aufgetreten", "error");
+            swal("Fehler", "Beim Abrufen der laufenden Prozesse ist ein Fehler aufgetreten", "error");
         }
     });
 }

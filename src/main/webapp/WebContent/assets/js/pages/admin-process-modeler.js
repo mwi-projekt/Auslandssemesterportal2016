@@ -1,4 +1,9 @@
+window.onbeforeunload = function(e){
+    return "Möchten Sie die Seite wirkllich verlassen? Ungespeicherte Inhalte gehen verloren.";
+};
+
 $(document).ready(function () {
+	
     var id = $.urlParam('id').trim();
     var dia = $.urlParam('dia').trim();
     var type = $.urlParam('type').trim();

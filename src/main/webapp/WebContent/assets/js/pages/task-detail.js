@@ -42,7 +42,10 @@ $(document).ready(function () {
             parse();
         }
     });
-
+    
+    console.log($(document).getElementById("muttersprache").value);
+    console.log($(document).getElementById("semesteradresseAnders").value);
+    
 });
 
 function parse() {

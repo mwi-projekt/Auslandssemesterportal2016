@@ -63,12 +63,6 @@ $(document).ready(function () {
     });
 });
 
-$(document).scroll(function() { 
-	   if($(window).scrollTop() === 0) {
-	     console.log("test");
-	   }
-	});
-
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
     $.ajax({
@@ -216,6 +210,17 @@ function loadAuslandsangeboteInhalt() {
         }
     });
 }
+
+// Setzt den back to top Pfeil auf invisible wenn man sich ganz oben auf der Seite befindet
+$(document).scroll(function() { 
+	   if($(window).scrollTop() === 0) {
+	     $(".chevronup").css('opacity', '0');
+	     $(".chevronup").css('cursor', 'initial');
+	   }else{
+		 $(".chevronup").css('opacity', '1');
+	     $(".chevronup").css('cursor', 'pointer');
+	   }
+	});
 
 // Läd die Daten für die Infomaterialien auf die Seite
 function loadInfoMaterial() {
