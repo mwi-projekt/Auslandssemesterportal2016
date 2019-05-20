@@ -12,7 +12,7 @@ $(document).ready(function () {
     parse();
     
   //automatische Ergänzung des Ortes anhand der PLZ
-    $('#bewPLZ').bind('keyup change', function (e) {
+    $(document).bind('#bewPLZ','keyup change', function (e) {
         if ($(this).val().length > 4) {
             var ort = $('#bewOrt');
             $.getJSON('https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?', { postalcode: this.value }, function (response) {
@@ -24,7 +24,6 @@ $(document).ready(function () {
             $('#bewOrt').val('');
         }
     });
-
 
 });
 
