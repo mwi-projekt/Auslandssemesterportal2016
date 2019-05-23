@@ -3,9 +3,7 @@ var uni;
 var idList = [];
 var typeList = [];
 
-window.onload = function() {
-	  console.log("Log");
-	};
+window.onload = showGDPRComplianceDialogue();
 
 $(document).ready(function () {
     var url = new URL(window.location.href);
@@ -28,17 +26,6 @@ $(document).ready(function () {
         }
     });
 });
-
-/*if(document.readyState === 'ready') {
-	console.log("readyState = Complete");
-	showGDPRComplianceDialogue();
-}*/
-
-/*$( document ).ready(function() {
-    console.log( "ready!" );
-});
-
-/*$( window ).on( "load", function() { console.log("Log"); }) */
 
 function showGDPRComplianceDialogue() {
 	swal({
