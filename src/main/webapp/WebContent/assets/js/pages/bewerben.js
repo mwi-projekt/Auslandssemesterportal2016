@@ -29,13 +29,13 @@ $(document).ready(function () {
 /*if(document.readyState === 'ready') {
 	console.log("readyState = Complete");
 	showGDPRComplianceDialogue();
-}
+}*/
 
 $( document ).ready(function() {
     console.log( "ready!" );
-}); */
+});
 
-$( window ).on( "load", function() { console.log("Log"); })
+/*$( window ).on( "load", function() { console.log("Log"); })*/
 
 function showGDPRComplianceDialogue() {
 	swal({
