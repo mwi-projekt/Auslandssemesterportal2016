@@ -248,7 +248,7 @@ function getDropzoneOptions(action, fileName) {
         }
     }
 
-/*    function showGDPRComplianceDialogue() {
+    function showGDPRComplianceDialogue() {
     	swal({
     		title: "DSGVO zustimmen",
     		text: "Yo Bro, wir verkaufen deine Daten an Facebook. Ist das in Ordnung für dich?",
@@ -265,5 +265,5 @@ function getDropzoneOptions(action, fileName) {
     			}).then(saveData());
     		}
     	})
-    } */
+    }
 }
