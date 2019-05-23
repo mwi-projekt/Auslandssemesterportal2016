@@ -27,6 +27,7 @@ $(document).ready(function () {
 });
 
 if(document.readyState === 'complete') {
+	console.log("readyState = Complete");
 	showGDPRComplianceDialogue();
 }
 
