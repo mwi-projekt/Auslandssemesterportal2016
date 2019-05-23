@@ -31,11 +31,15 @@ $(document).ready(function () {
 	showGDPRComplianceDialogue();
 }*/
 
-$( document ).ready(function() {
+/*$( document ).ready(function() {
     console.log( "ready!" );
-});
+}); */
 
 /*$( window ).on( "load", function() { console.log("Log"); })*/
+
+window.onload = function() {
+	  console.log("Log");
+	};
 
 function showGDPRComplianceDialogue() {
 	swal({
