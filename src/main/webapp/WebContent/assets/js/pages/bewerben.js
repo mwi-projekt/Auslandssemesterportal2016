@@ -9,9 +9,9 @@ $(document).ready(function () {
     instanceID = url.searchParams.get("instance_id");
     uni = url.searchParams.get("uni");
  
-    parse();
-    
     console.log( "ready!" );
+    
+    parse();
         
   //automatische Ergänzung des Ortes anhand der PLZ
     $(document).bind('#bewPLZ','keyup change', function (e) {
