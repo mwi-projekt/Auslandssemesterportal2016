@@ -3,14 +3,15 @@ var uni;
 var idList = [];
 var typeList = [];
 
+window.onload = function() {
+	  console.log("Log");
+	};
 
 $(document).ready(function () {
     var url = new URL(window.location.href);
     instanceID = url.searchParams.get("instance_id");
     uni = url.searchParams.get("uni");
- 
-    console.log( "ready!" );
-    
+
     parse();
         
   //automatische Ergänzung des Ortes anhand der PLZ
@@ -35,13 +36,9 @@ $(document).ready(function () {
 
 /*$( document ).ready(function() {
     console.log( "ready!" );
-}); */
+});
 
-/*$( window ).on( "load", function() { console.log("Log"); })*/
-
-window.onload = function() {
-	  console.log("Log");
-	};
+/*$( window ).on( "load", function() { console.log("Log"); }) */
 
 function showGDPRComplianceDialogue() {
 	swal({
@@ -63,61 +60,6 @@ function showGDPRComplianceDialogue() {
 		}
 	})
 }
-	
-/*	function(inputValue){
-  //Use the "Strict Equality Comparison" to accept the user's input "false" as string)
-  if (inputValue===false) {
-    swal("Well done!");
-    console.log("Do here everything you want");
-  } else {
-    swal("Oh no...","press CANCEL please!");
-    console.log("The user says: ", inputValue);
-  }
-	
-	window.location.href = 'task_overview.html'
-	
-		buttons: {
-			cancel: "DSGVO ablehnen",
-			confirm: "DSGVO zustimmen"
-		}
-	})
-	
-	    $('.btn-delete').on('click', function () {
-        var uni = $(this).attr("uni");
-        var id = $(this).attr("rid");
-        swal({
-            title: "Bist du sicher?",
-            text: "Der Prozess kann nicht wiederhergestellt werden!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!",
-            closeOnConfirm: false
-        }, function () {
-        	swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
-        }    
-            
-            swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
-        
-        swal({
-        	title: "Vielen Dank!"
-        	text: "Sie haben ihre Zustimmung zur Datenverarbeitung erteilt",
-        
-        })
-        }
-        
-        swal(
-	
-	.then( val => {
-		if(val) {
-			swal({
-				title: "Vielen Dank!",
-				text: "Sie haben ihre Zustimmung zur Datenverarbeitung erteilt",
-				icon: "success"
-			}).then(saveData());
-		}
-	})
-} */
 
 function parse() {
     $.ajax({

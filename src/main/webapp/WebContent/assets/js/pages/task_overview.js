@@ -1,11 +1,7 @@
 
-
-
 $(document).ready(function () {
     getList();
 });
-
-
 
 function getList() {
     $.ajax({
