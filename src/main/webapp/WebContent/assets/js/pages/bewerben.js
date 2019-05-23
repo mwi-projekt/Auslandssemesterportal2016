@@ -26,20 +26,83 @@ $(document).ready(function () {
     });
 });
 
-if(document.readyState === 'complete') {
+/*if(document.readyState === 'ready') {
 	console.log("readyState = Complete");
 	showGDPRComplianceDialogue();
 }
 
+$( document ).ready(function() {
+    console.log( "ready!" );
+}); */
+
+$( window ).on( "load", function() { console.log("Log"); })
+
 function showGDPRComplianceDialogue() {
 	swal({
 		title: "DSGVO zustimmen",
-		text: "Yo Bro, wir verkaufen deine Daten an Facebook. Ist das in Ordnung für dich?",
-		buttons: {
-			cancel: "Auf gar keinen Fall",
-			confirm: "Ja, habe ich schon vermutet"
+		text: "Yo Bro, wir verkaufen deine Daten an Facebook.\n Ist das in Ordnung für dich?",
+		type: "warning",
+		showCancelButton: true,
+        cancelButtonText: "DSGVO ablehnen",
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "DSGVO akzeptieren",
+        closeOnConfirm: false,
+        closeOnCancel: false
+	}, function (inputValue) {
+		if(inputValue===true){
+			swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
+			saveData();
+		} else {
+			window.location.href = 'bewerbungsportal.html'
 		}
-	}).then( val => {
+	})
+}
+	
+/*	function(inputValue){
+  //Use the "Strict Equality Comparison" to accept the user's input "false" as string)
+  if (inputValue===false) {
+    swal("Well done!");
+    console.log("Do here everything you want");
+  } else {
+    swal("Oh no...","press CANCEL please!");
+    console.log("The user says: ", inputValue);
+  }
+	
+	window.location.href = 'task_overview.html'
+	
+		buttons: {
+			cancel: "DSGVO ablehnen",
+			confirm: "DSGVO zustimmen"
+		}
+	})
+	
+	    $('.btn-delete').on('click', function () {
+        var uni = $(this).attr("uni");
+        var id = $(this).attr("rid");
+        swal({
+            title: "Bist du sicher?",
+            text: "Der Prozess kann nicht wiederhergestellt werden!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Löschen!",
+            closeOnConfirm: false
+        }, function () {
+        	swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
+        }    
+            
+            swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
+        
+        swal({
+        	title: "Vielen Dank!"
+        	text: "Sie haben ihre Zustimmung zur Datenverarbeitung erteilt",
+        
+        })
+        }
+        
+        swal(
+	
+	.then( val => {
 		if(val) {
 			swal({
 				title: "Vielen Dank!",
@@ -48,7 +111,7 @@ function showGDPRComplianceDialogue() {
 			}).then(saveData());
 		}
 	})
-}
+} */
 
 function parse() {
     $.ajax({
