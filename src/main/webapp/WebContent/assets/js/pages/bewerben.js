@@ -10,7 +10,7 @@ $(document).ready(function () {
     uni = url.searchParams.get("uni");
  
     parse();
-    
+        
   //automatische Ergänzung des Ortes anhand der PLZ
     $(document).bind('#bewPLZ','keyup change', function (e) {
         if ($(this).val().length > 4) {
@@ -24,10 +24,11 @@ $(document).ready(function () {
             $('#bewOrt').val('');
         }
     });
-    
-    showGDPRComplianceDialogue();
-
 });
+
+if(document.readyState === 'complete') {
+	showGDPRComplianceDialogue();
+}
 
 function showGDPRComplianceDialogue() {
 	swal({
