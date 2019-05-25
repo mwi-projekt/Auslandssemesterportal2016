@@ -30,10 +30,10 @@ public class createSGLServlet extends HttpServlet {
 		
 		if (rolle != 1 && rolle != 2) {
 			response.sendError(401, "Rolle: " + rolle);
-		} /*else {
+		} else {
 		
 			//Rolle SGL Eintragen
-			/*int role = 4;
+			int role = 4;
 
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
 				out.print("mailError");
@@ -50,6 +50,7 @@ public class createSGLServlet extends HttpServlet {
 					String pw = Util.HashSha256(Util.HashSha256(id.toString()) + salt);
 					String aa = "--";
 					// Verbindung zur DB um neuen Nutzer zu speichern
+					//Hier fehlt noch die Übergabe des Studiengangs
 					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
 							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), aa, aa, -1,
 							request.getParameter("phone"), request.getParameter("mobil"), aa, "1");
@@ -70,7 +71,7 @@ public class createSGLServlet extends HttpServlet {
 
 			}
 
-		}**/
+		}
 
 	}
 }
