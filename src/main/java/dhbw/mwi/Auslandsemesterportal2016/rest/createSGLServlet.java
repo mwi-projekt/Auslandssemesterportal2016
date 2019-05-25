@@ -26,12 +26,14 @@ public class createSGLServlet extends HttpServlet {
 		response.setStatus(400);
 		response.setContentType("text/xml");
 		PrintWriter writer=response.getWriter();
-		writer.append("this is the new file");
+		writer.append("this is the new file" + rolle);
 		
-		/*if (rolle != 1 && rolle != 2) {
+		if (rolle != 1 && rolle != 2) {
 			response.sendError(401, "Rolle: " + rolle);
-		} else {*/
-			/*int role = 2;
+		} /*else {
+		
+			//Rolle SGL Eintragen
+			/*int role = 4;
 
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
 				out.print("mailError");
@@ -66,9 +68,9 @@ public class createSGLServlet extends HttpServlet {
 
 				}
 
-			}*/
+			}
 
-		}
+		}**/
 
 	}
-//}
+}
