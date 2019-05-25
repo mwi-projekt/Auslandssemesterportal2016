@@ -158,6 +158,8 @@ $(document).on('submit', '#loginForm', function (e) {
                     window.location.href = 'task_overview.html'
                 } else if (sessionStorage['rolle'] == 3) {
                     window.location.href = 'bewerbungsportal.html';
+                } else if (sessionStorage['rolle'] == 4) {
+                	window.location.href = 'task_overview_sgl.html';
                 } else {
                     window.location.reload();
                 }
