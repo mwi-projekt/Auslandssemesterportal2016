@@ -282,6 +282,71 @@ $(document).ready(function () {
 
         event.preventDefault();
     });
+    
+    $('#SGLCreateForm').submit(function (event) {
+        var email = $('#SGLMail').val();
+        var studiengang = $('#SGLStudiengang').val();
+        var vname = $('#SGLVorname').val();
+        var nname = $('#SGLNachname').val();
+        var phone = $('#SGLPhone').val();
+        var mobil = $('#SGLMobile').val();
+        swal({
+            title: 'Speichere Änderungen'
+        });
+        swal.showLoading();
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "/createAAA",
+            data: {
+                email: email,
+                vorname: vname,
+                nachname: nname,
+                phone: phone,
+                mobil: mobil
+            },
+            success: function (data) {
+                swal.close();
+                if (data == "mailError") {
+
+                    swal({
+                        title: "Fehler!",
+                        text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
+                        type: "error",
+                        confirmButtonText: "OK"
+                    });
+
+                } else if (data == "No account registered for this email adress") {
+                    swal({
+                        title: "Fehler!",
+                        text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                        type: "error",
+                        confirmButtonText: "OK"
+                    });
+                } else if (data == "registerError") {
+                    swal({
+                        title: "Fehler!",
+                        text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                        type: "error",
+                        confirmButtonText: "OK"
+                    });
+                } else {
+                    swal({
+                        title: "Account erfolgreich erstellt",
+                        text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
+                        type: "success",
+                        confirmButtonText: "OK"
+                    });
+
+                }
+                $('#SGLCreate').modal('hide');
+                $('#userMaShow').click();
+            }
+
+        });
+
+        event.preventDefault();
+    });
+    
     $('#btnUserEditSave').click(function () {
 		var dataMail = $('#inEditEmail').val();
 		var dataOldMail = "0";
