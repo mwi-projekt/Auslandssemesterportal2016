@@ -11,7 +11,10 @@ $(document).ready(function () {
         } else if (id === 'userMaShow') {
             rolle = 2;
             typ = "Auslandsmitarbeiter";
-        }
+        } /*else if (id == ''){
+        	rolle = 4;
+        	typ = "Studiengangsleiter";
+        }*/
         $.ajax({
             type: "GET", 
             url: baseUrl + "/getUser",
@@ -294,13 +297,14 @@ $(document).ready(function () {
             title: 'Speichere Änderungen'
         });
         swal.showLoading();
-        $.ajax({
+        /*$.ajax({
             type: "POST",
             url: baseUrl + "/createSGL",
             data: {
                 email: email,
                 vorname: vname,
                 nachname: nname,
+                studiengang: studiengang,
                 phone: phone,
                 mobil: mobil
             },
@@ -342,7 +346,7 @@ $(document).ready(function () {
                 $('#userMaShow').click();
             }
 
-        });
+        });*/
 
         event.preventDefault();
     });
