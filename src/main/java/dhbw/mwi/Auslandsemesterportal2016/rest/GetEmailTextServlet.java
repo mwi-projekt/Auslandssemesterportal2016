@@ -21,7 +21,7 @@ public class GetEmailTextServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle != 1 && rolle != 2) {
+		if (rolle != 1 && rolle != 2 && rolle != 4) {
 			response.sendError(401);
 		} else {
 			response.setCharacterEncoding("UTF-8");
@@ -67,9 +67,10 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
 							+ uni + " wurde erfolgreich durch ihrem Studiengangsleiter validiert." + "\n" + "\n"
 							+ "-- Platzhalter für Anmerkungen des Auslandsamts --" + "\n" + "\n" + "\n"
-							+ "Im nächsten Schritt wird ihre Bewerbung an das Akademische Auslandsamat für einen weiteren Validierungsprozess übergeben."
+							+ "Im nächsten Schritt wird ihre Bewerbung an einen Mitarbeiter des Akademischen Auslandsamtes für einen weiteren Validierungsprozess übergeben."
 							+ "\n"
-							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren.";
+							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
+							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt";;
 				} else {
 					// Text für abgelehnte Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
