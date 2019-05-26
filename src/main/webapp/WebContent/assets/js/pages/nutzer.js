@@ -99,8 +99,6 @@ $(document).ready(function () {
                             row.studiengang +
                             '</td><td class="kurs">' +
                             row.kurs +
-                            '</td><td class="matrikelnr">' +
-                            row.matrikelnummer +
                             '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' +
                             i +
                             '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="' + row.matrikelnummer + '" id="delete' +
