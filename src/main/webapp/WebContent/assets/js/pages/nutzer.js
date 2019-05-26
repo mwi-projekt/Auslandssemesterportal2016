@@ -287,7 +287,7 @@ $(document).ready(function () {
     });
     
     $('#SGLCreateForm').submit(function (event) {
-        var email = $('#SGLMail').val();
+        /*var email = $('#SGLMail').val();
         var studiengang = $('#SGLStudiengang').val();
         var vname = $('#SGLVorname').val();
         var nname = $('#SGLNachname').val();
@@ -296,7 +296,13 @@ $(document).ready(function () {
         swal({
             title: 'Speichere Änderungen'
         });
-        swal.showLoading();
+        swal.showLoading();*/
+        swal({
+            title: "Debugging!",
+            text: "Funktion wurde aufgerufen.",
+            type: "error",
+            confirmButtonText: "OK"
+        });
         /*$.ajax({
             type: "POST",
             url: baseUrl + "/createSGL",
@@ -348,7 +354,7 @@ $(document).ready(function () {
 
         });*/
 
-        event.preventDefault();
+        //event.preventDefault();
     });
     
     $('#btnUserEditSave').click(function () {
