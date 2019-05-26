@@ -36,7 +36,7 @@ public class GetEmailTextServlet extends HttpServlet {
 			String uni = runtime.getVariable(instanceID, "uni").toString();
 			String output = "";
 
-			if (rolle == 5) {
+			if (rolle == 2) {
 
 				if (validation_result.equals("true")) {
 					// Text für erfolgreiche Bewerbung
@@ -60,13 +60,26 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "\n" + "Ihr Akademisches Auslandsamt";
 				}
 
-			} else if (rolle == 2) {
+			} else if (rolle == 4) {
 				if (validation_result.equals("true")) {
 					// Text für erfolgreiche Bewerbung
-					output = "Sehr geehrte/r Herr/Frau " + student_name + " zulassen test";
+					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
+							+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
+							+ uni + " wurde erfolgreich durch ihrem Studiengangsleiter validiert." + "\n" + "\n"
+							+ "-- Platzhalter für Anmerkungen des Auslandsamts --" + "\n" + "\n" + "\n"
+							+ "Im nächsten Schritt wird ihre Bewerbung an das Akademische Auslandsamat für einen weiteren Validierungsprozess übergeben."
+							+ "\n"
+							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren.";
 				} else {
 					// Text für abgelehnte Bewerbung
-					output = "Sehr geehrte/r Herr/Frau " + student_name + " ablehnen test";
+					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
+							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
+							+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
+							+ "Folgende Problem hat sich ergeben: " + "\n " + "\n"
+							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
+							+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können."
+							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
+							+ "\n" + "Ihr Akademisches Auslandsamt";
 				}
 			}
 			toClient.print(output);
