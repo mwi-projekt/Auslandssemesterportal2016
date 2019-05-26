@@ -47,7 +47,7 @@ public class createSGLServlet extends HttpServlet {
 					// Verbindung zur DB um neuen Nutzer zu speichern
 					//Hier fehlt noch die Übergabe des Studiengangs
 					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
-							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), aa, request.getParameter("studiengang"), -1,
+							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), request.getParameter("studiengang"), aa, -1,
 							request.getParameter("phone"), request.getParameter("mobil"), aa, "1");
 
 					if (rsupd == 0) {
