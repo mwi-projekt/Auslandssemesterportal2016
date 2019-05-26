@@ -11,10 +11,10 @@ $(document).ready(function () {
         } else if (id === 'userMaShow') {
             rolle = 2;
             typ = "Auslandsmitarbeiter";
-        } /*else if (id == ''){
+        } else if (id == 'userSGLShow'){
         	rolle = 4;
         	typ = "Studiengangsleiter";
-        }*/
+        }
         $.ajax({
             type: "GET", 
             url: baseUrl + "/getUser",
@@ -342,7 +342,7 @@ $(document).ready(function () {
 
                 }
                 $('#SGLCreate').modal('hide');
-                $('#userMaShow').click();
+                $('#userSGLShow').click();
             }
 
         });

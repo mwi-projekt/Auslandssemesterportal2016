@@ -22,11 +22,6 @@ public class createSGLServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
-
-		/*response.setStatus(400);
-		response.setContentType("text/xml");
-		PrintWriter writer=response.getWriter();
-		writer.append("this is the new file" + rolle);*/
 		
 		if (rolle != 1 && rolle != 2) {
 			response.sendError(401, "Rolle: " + rolle);
