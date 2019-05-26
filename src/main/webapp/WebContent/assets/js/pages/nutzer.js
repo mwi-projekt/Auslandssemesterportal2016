@@ -340,7 +340,7 @@ $(document).ready(function () {
                     });
 
                 }
-                $('#AAACreate').modal('hide');
+                $('#SGLCreate').modal('hide');
                 $('#userMaShow').click();
             }
 
