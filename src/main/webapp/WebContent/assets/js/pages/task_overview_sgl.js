@@ -38,7 +38,7 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-list" title="Details" onclick="location.href=\'task_detail.html?instance_id=' +
+                            '<button class="btn glyphicon glyphicon-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' +
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
