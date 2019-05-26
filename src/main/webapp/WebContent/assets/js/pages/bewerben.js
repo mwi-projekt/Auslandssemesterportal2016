@@ -45,7 +45,6 @@ function showGDPRComplianceDialogue() {
 	}, function (isConfirm) {
 		if(isConfirm === true) {
 			swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
-//			saveData();
 			flagGDPRConfirmed = true;
 		} else {
 			window.location.href = 'bewerbungsportal.html';
