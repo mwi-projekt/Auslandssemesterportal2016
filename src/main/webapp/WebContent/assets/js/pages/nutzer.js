@@ -299,7 +299,7 @@ $(document).ready(function () {
         swal.showLoading();
         $.ajax({
             type: "POST",
-            url: baseUrl + "/createAAA",
+            url: baseUrl + "/createSGL",
             data: {
                 email: email,
                 vorname: vname,
