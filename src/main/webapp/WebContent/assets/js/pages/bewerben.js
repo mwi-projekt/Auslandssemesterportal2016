@@ -3,7 +3,11 @@ var uni;
 var idList = [];
 var typeList = [];
 
-window.onload = showGDPRComplianceDialogue();
+//window.onload = showGDPRComplianceDialogue();
+
+$(window).load(function() {
+	showGDPRComplianceDialogue();
+});
 
 $(document).ready(function () {
     var url = new URL(window.location.href);
@@ -39,11 +43,11 @@ function showGDPRComplianceDialogue() {
         closeOnConfirm: false,
         closeOnCancel: false
 	}, function (inputValue) {
-		if(inputValue===true){
+		if(inputValue === true) {
 			swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
-			saveData();
+//			saveData();
 		} else {
-			window.location.href = 'bewerbungsportal.html'
+			window.location.href = 'bewerbungsportal.html';
 		}
 	})
 }
