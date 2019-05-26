@@ -39,6 +39,7 @@ public class GetAdminTasksServlet extends HttpServlet {
 				String instanceId = results.get(i).getId();
 				List<String> activities = runtime.getActiveActivityIds(instanceId);
 				JSONObject obj = new JSONObject();
+				System.out.println(activities);
 				if (activities.get(0).equals("abgeschlossen") || activities.get(0).equals("datenValidieren")) {
 					obj.put("id", instanceId);
 					obj.put("name", runtime.getVariable(instanceId, "bewNachname"));
@@ -57,7 +58,7 @@ public class GetAdminTasksServlet extends HttpServlet {
 					arr.put(obj);
 				}
 			}
-
+			System.out.println(arr);
 			json.put("data", arr);
 			Util.writeJson(response, json);
 		}
