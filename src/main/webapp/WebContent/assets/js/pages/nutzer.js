@@ -290,6 +290,7 @@ $(document).ready(function () {
         var email = $('#SGLMail').val();
         var vname = $('#SGLVorname').val();
         var nname = $('#SGLNachname').val();
+        //var studiengang = $('#SGLStudiengang').val();
         var phone = $('#SGLPhone').val();
         var mobil = $('#SGLMobile').val();
         swal({
