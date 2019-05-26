@@ -36,7 +36,7 @@ public class GetEmailTextServlet extends HttpServlet {
 			String uni = runtime.getVariable(instanceID, "uni").toString();
 			String output = "";
 
-			if (rolle == 2) {
+			if (rolle == 5) {
 
 				if (validation_result.equals("true")) {
 					// Text für erfolgreiche Bewerbung
@@ -60,7 +60,7 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "\n" + "Ihr Akademisches Auslandsamt";
 				}
 
-			} else if (rolle == 4) {
+			} else if (rolle == 2) {
 				if (validation_result.equals("true")) {
 					// Text für erfolgreiche Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + " zulassen test";
