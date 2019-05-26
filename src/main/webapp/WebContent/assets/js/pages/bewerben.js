@@ -5,9 +5,9 @@ var typeList = [];
 
 //window.onload = showGDPRComplianceDialogue();
 
-$(window).load(function() {
+/*$(window).load(function() {
 	showGDPRComplianceDialogue();
-});
+});*/
 
 $(document).ready(function () {
     var url = new URL(window.location.href);
