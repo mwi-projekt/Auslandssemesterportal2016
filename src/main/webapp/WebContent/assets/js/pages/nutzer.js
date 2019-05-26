@@ -78,6 +78,36 @@ $(document).ready(function () {
                             '" title="Löschen"></span></td></tr>';
                     }
                 }
+                else if (rolle === 4) {
+                    var tabelle = '<h2>Registrierte ' +
+                        typ +
+                        '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
+
+                    for (var i = 0; i < auslesen.length; i++) {
+                        var row = auslesen[i];
+                        tabelle = tabelle +
+                            '<tr id="row' + i +
+                            '"><td class="vorname">' +
+                            row.vorname +
+                            '</td><td class="nachname">' +
+                            row.nachname +
+                            '</td><td class="email">' +
+                            row.email +
+                            '</td><td>' +
+                            row.standort +
+                            '<td class="studgang">' +
+                            row.studiengang +
+                            '</td><td class="kurs">' +
+                            row.kurs +
+                            '</td><td class="matrikelnr">' +
+                            row.matrikelnummer +
+                            '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' +
+                            i +
+                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="' + row.matrikelnummer + '" id="delete' +
+                            i +
+                            '" title="Löschen"></span></td></tr>';
+                    }
+                }    
                 tabelle = tabelle + '</table>';
                 $('#userTabelle').html(tabelle)
                 var nonSortable = (rolle == 3 ? [7, 8] : [5, 6]);
