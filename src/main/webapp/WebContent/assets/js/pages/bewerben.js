@@ -2,12 +2,7 @@ var instanceID;
 var uni;
 var idList = [];
 var typeList = [];
-
-//window.onload = showGDPRComplianceDialogue();
-
-/*$(window).load(function() {
-	showGDPRComplianceDialogue();
-});*/
+var flagGDPRConfirmed = false;
 
 $(document).ready(function () {
     var url = new URL(window.location.href);
@@ -29,6 +24,11 @@ $(document).ready(function () {
             $('#bewOrt').val('');
         }
     });
+    
+    if(flagGDPRConfirmed === false) {
+    		showGDPRComplianceDialogue();
+    }
+    
 });
 
 function showGDPRComplianceDialogue() {
@@ -38,14 +38,15 @@ function showGDPRComplianceDialogue() {
 		type: "warning",
 		showCancelButton: true,
         cancelButtonText: "DSGVO ablehnen",
-        confirmButtonColor: "#DD6B55",
+        confirmButtonColor: "#228B22",
         confirmButtonText: "DSGVO akzeptieren",
         closeOnConfirm: false,
         closeOnCancel: false
-	}, function (inputValue) {
-		if(inputValue === true) {
+	}, function (isConfirm) {
+		if(isConfirm === true) {
 			swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
 //			saveData();
+			flagGDPRConfirmed = true;
 		} else {
 			window.location.href = 'bewerbungsportal.html';
 		}
