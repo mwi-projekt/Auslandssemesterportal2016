@@ -48,7 +48,7 @@ public class createSGLServlet extends HttpServlet {
 					//Hier fehlt noch die Übergabe des Studiengangs
 					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
 							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), aa, aa, -1,
-							request.getParameter("phone"), request.getParameter("mobil"), aa, "1");
+							request.getParameter("phone"), request.getParameter("mobil"), request.getParameter("studiengang"), "1");
 
 					if (rsupd == 0) {
 						out.print("registerError");

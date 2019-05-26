@@ -332,6 +332,7 @@ $(document).ready(function () {
                 email: email,
                 vorname: vname,
                 nachname: nname,
+                studiengang: studiengang,
                 phone: phone,
                 mobil: mobil
             },
