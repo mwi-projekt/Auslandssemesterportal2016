@@ -81,7 +81,7 @@ $(document).ready(function () {
                 else if (rolle === 4) {
                     var tabelle = '<h2>Registrierte ' +
                         typ +
-                        '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
+                        '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th></th><th></th></tr></thead>';
 
                     for (var i = 0; i < auslesen.length; i++) {
                         var row = auslesen[i];
