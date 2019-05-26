@@ -287,8 +287,7 @@ $(document).ready(function () {
     });
     
     $('#SGLCreateForm').submit(function (event) {
-        /*var email = $('#SGLMail').val();
-        var studiengang = $('#SGLStudiengang').val();
+        var email = $('#SGLMail').val();
         var vname = $('#SGLVorname').val();
         var nname = $('#SGLNachname').val();
         var phone = $('#SGLPhone').val();
@@ -296,21 +295,14 @@ $(document).ready(function () {
         swal({
             title: 'Speichere Änderungen'
         });
-        swal.showLoading();*/
-        swal({
-            title: "Debugging!",
-            text: "Funktion wurde aufgerufen.",
-            type: "error",
-            confirmButtonText: "OK"
-        });
-        /*$.ajax({
+        swal.showLoading();
+        $.ajax({
             type: "POST",
-            url: baseUrl + "/createSGL",
+            url: baseUrl + "/createAAA",
             data: {
                 email: email,
                 vorname: vname,
                 nachname: nname,
-                studiengang: studiengang,
                 phone: phone,
                 mobil: mobil
             },
@@ -348,14 +340,16 @@ $(document).ready(function () {
                     });
 
                 }
-                $('#SGLCreate').modal('hide');
+                $('#AAACreate').modal('hide');
                 $('#userMaShow').click();
             }
 
-        });*/
+        });
 
-        //event.preventDefault();
+        event.preventDefault();
     });
+    
+
     
     $('#btnUserEditSave').click(function () {
 		var dataMail = $('#inEditEmail').val();
