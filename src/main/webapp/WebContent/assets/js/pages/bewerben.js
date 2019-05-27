@@ -18,7 +18,7 @@ $(document).ready(function () {
     
 });
 
-$(document).bind('#bewPLZ','keyup change', function (e) {
+$(document).on('keyup change', '#bewPLZ', function (e) {
     if ($(this).val().length > 4) {
         var ort = $('#bewOrt');
         $.getJSON('https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?', { postalcode: this.value }, function (response) {
