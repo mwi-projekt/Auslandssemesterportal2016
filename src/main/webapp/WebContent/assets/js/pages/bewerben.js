@@ -11,23 +11,24 @@ $(document).ready(function () {
 
     parse();
         
-    $(document).bind('#bewPLZ','keyup change', function (e) {
-        if ($(this).val().length > 4) {
-            var ort = $('#bewOrt');
-            $.getJSON('https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?', { postalcode: this.value }, function (response) {
-                if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
-                    ort.val(response.postalcodes[0].placeName);
-                }
-            });
-        } else {
-            $('#bewOrt').val('');
-        }
-    });
     
     if(flagGDPRConfirmed === false) {
     		showGDPRComplianceDialogue();
     }
     
+});
+
+$(document).bind('#bewPLZ','keyup change', function (e) {
+    if ($(this).val().length > 4) {
+        var ort = $('#bewOrt');
+        $.getJSON('https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?', { postalcode: this.value }, function (response) {
+            if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+                ort.val(response.postalcodes[0].placeName);
+            }
+        });
+    } else {
+        $('#bewOrt').val('');
+    }
 });
 
 function showGDPRComplianceDialogue() {
