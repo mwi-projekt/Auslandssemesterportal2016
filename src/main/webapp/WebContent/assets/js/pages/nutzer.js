@@ -101,7 +101,7 @@ $(document).ready(function () {
                             row.kurs +
                             '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' +
                             i +
-                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="' + row.matrikelnummer + '" id="delete' +
+                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash deleteSGL-button" data-matrikel="' + row.matrikelnummer + '" id="delete' +
                             i +
                             '" title="Löschen"></span></td></tr>';
                     }
@@ -148,6 +148,44 @@ $(document).ready(function () {
                         });
 
                     });
+                    
+                    $('.deleteSQL-button').click(function () {
+
+                        var self = $(this);
+
+                        swal({
+                            title: "Bist du sicher?",
+                            text: "Der User kann nicht wiederhergestellt werden!",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Löschen!"
+                        }).then((result) => {
+                            if (result.value) {
+                                swal({
+                                    title: 'Lösche User'
+                                });
+                                swal.showLoading();
+                                $.ajax({
+                                    type: "POST",
+                                    url: baseUrl + "/user/deleteSGL",
+                                    data: {
+                                        mail: self.data('mail')
+                                    },
+                                    success: function (result) {
+                                        swal.close();
+                                        $('#userMaShow').click();
+                                        swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                    },
+                                    error: function (result) {
+                                        swal.close();
+                                        swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                    }
+                                });
+                            }
+                        });
+
+                    });                    
 
                     $('.deleteAAA-button').click(function () {
 
