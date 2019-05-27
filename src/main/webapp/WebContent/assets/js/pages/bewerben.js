@@ -2,7 +2,7 @@ var instanceID;
 var uni;
 var idList = [];
 var typeList = [];
-var flagGDPRConfirmed = false;
+
 
 $(document).ready(function () {
     var url = new URL(window.location.href);
@@ -11,11 +11,6 @@ $(document).ready(function () {
 
     parse();
         
-    
-    if(flagGDPRConfirmed === false) {
-    		showGDPRComplianceDialogue();
-    }
-    
 });
 
 $(document).on('keyup change', '#bewPLZ', function (e) {
@@ -118,7 +113,11 @@ function parse() {
                                 typeList.push(json[i]["data"]["type"]);
                                 break;
                             case "form-checkbox":
-                                output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' + json[i]["data"]["id"] + '"> ' + json[i]["data"]["label"] + ' </label></div></div></div>';
+                            	var req = "";
+                                if (json[i]["data"]["required"] == true) {
+                                    req = ' required="required"';
+                                }                        	
+                            	output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' + json[i]["data"]["id"] + '"' + req + '>' + json[i]["data"]["label"] + ' </label></div></div></div>';
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push("boolean");
                                 break;

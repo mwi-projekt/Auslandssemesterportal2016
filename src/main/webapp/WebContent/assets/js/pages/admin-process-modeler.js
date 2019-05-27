@@ -1,6 +1,21 @@
-window.onbeforeunload = function(e){
-    return "Möchten Sie die Seite wirkllich verlassen? Ungespeicherte Inhalte gehen verloren.";
-};
+window.onbeforeunload = function() {
+	displayWarningUponPageExit();
+    return null;
+}
+
+function displayWarningUponPageExit() {
+	swal({
+		title: "Warnung",
+		text: "Ungespeicherte Inhalte gehen verloren.\n Möchten Sie wirklich fortfahren?",
+		type: "warning",
+		showCancelButton: true,
+        cancelButtonText: "Auf Seite bleiben",
+        confirmButtonColor: "#EE0000",
+        confirmButtonText: "Seite verlassen",
+        closeOnConfirm: false,
+        closeOnCancel: false
+	})
+}
 
 $(document).ready(function () {
 	
