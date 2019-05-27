@@ -174,7 +174,7 @@ $(document).ready(function () {
                                     },
                                     success: function (result) {
                                         swal.close();
-                                        $('#userMaShow').click();
+                                        $('#userSGLShow').click();
                                         swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
                                     },
                                     error: function (result) {
