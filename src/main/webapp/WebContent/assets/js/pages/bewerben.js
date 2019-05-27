@@ -11,7 +11,6 @@ $(document).ready(function () {
 
     parse();
         
-  //automatische Ergänzung des Ortes anhand der PLZ
     $(document).bind('#bewPLZ','keyup change', function (e) {
         if ($(this).val().length > 4) {
             var ort = $('#bewOrt');
@@ -19,7 +18,7 @@ $(document).ready(function () {
                 if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
                     ort.val(response.postalcodes[0].placeName);
                 }
-            })
+            });
         } else {
             $('#bewOrt').val('');
         }
