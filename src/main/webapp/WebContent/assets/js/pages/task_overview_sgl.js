@@ -10,7 +10,7 @@ $(document).ready(function () {
 function getList() {
     $.ajax({
         type: "GET",
-        url: baseUrl + "/getTasks",
+        url: baseUrl + "/getSGLTasks",
         data: {
             //'definition' : 'studentBewerben'
         },
