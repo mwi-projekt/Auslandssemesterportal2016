@@ -101,7 +101,7 @@ $(document).ready(function () {
                             row.kurs +
                             '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' +
                             i +
-                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash deleteSGL-button" data-matrikel="' + row.matrikelnummer + '" id="delete' +
+                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash deleteSGL-button" data-mail="' + row.email + '" id="delete' +
                             i +
                             '" title="Löschen"></span></td></tr>';
                     }
@@ -170,7 +170,7 @@ $(document).ready(function () {
                                     type: "POST",
                                     url: baseUrl + "/user/deleteSGL",
                                     data: {
-                                        mail: self.data('mail')
+                                    	mail: self.data('mail')
                                     },
                                     success: function (result) {
                                         swal.close();
