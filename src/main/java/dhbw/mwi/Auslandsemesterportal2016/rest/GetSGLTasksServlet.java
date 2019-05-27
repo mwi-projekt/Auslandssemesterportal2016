@@ -19,7 +19,7 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
-@WebServlet(name = "GetAdminTasksServlet", urlPatterns = { "/getSGLTasks" })
+@WebServlet(name = "GetSGLTasksServlet", urlPatterns = { "/getSGLTasks" })
 public class GetSGLTasksServlet extends HttpServlet {
 
 	@Override
