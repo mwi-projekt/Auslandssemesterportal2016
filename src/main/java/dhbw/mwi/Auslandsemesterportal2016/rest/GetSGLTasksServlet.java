@@ -59,15 +59,15 @@ public class GetSGLTasksServlet extends HttpServlet {
 					arr.put(obj);
 				}
 			}
-			PrintWriter out = response.getWriter();
+			/*PrintWriter out = response.getWriter();
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			out.print(arr);
-			out.flush();
+			out.flush();*/
 			
-			/*System.out.println(arr);
+			System.out.println(arr);
 			json.put("data", arr);
-			Util.writeJson(response, json);*/
+			Util.writeJson(response, json);
 		}
 	}
 //}
