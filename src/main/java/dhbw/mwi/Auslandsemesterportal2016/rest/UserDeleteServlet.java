@@ -18,7 +18,7 @@ public class UserDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle != 1 && rolle != 2) {
+		if ((rolle != 1 && rolle != 2) && rolle != 3) {
 			response.sendError(401, "Rolle: " + rolle);
 		} else {
 			String matrikelnummer = request.getParameter("matrikelnummer");
