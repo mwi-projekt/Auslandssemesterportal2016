@@ -149,7 +149,7 @@ $(document).ready(function () {
 
                     });
                     
-                    $('.deleteSQL-button').click(function () {
+                    $('.deleteSGL-button').click(function () {
 
                         var self = $(this);
 
