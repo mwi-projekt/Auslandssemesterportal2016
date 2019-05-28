@@ -294,7 +294,7 @@ function validateBew() {
     } else if (validateString === "false"){
         resultString = "ablehnen"
     } else {
-    	resultString = "bearbeiten"
+    	resultString = "zur Bearbeitung freigeben"
     }
     console.log(grund);
     if (grund.indexOf("Platzhalter") < 0 ||
