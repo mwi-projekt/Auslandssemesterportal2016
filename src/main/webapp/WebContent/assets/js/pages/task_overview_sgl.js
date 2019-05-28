@@ -24,7 +24,7 @@ function getList() {
 
                 for (var i = 0; i < instances.length; i++) {
                     singleInstance = instances[i];
-                    if (singleInstance.status === 'SGLvalidate') {
+                    if (singleInstance.status === 'validate') {
                        
                     	output = output +
                             "<tr><td>" +
@@ -46,7 +46,7 @@ function getList() {
                             "</td><td>" +
                             "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                  
-                    } else if (singleInstance[6] === 'SGLcomplete') {
+                    } else if (singleInstance[6] === 'complete') {
                         completed = completed +
                             "<tr><td>" +
                             singleInstance.name +
