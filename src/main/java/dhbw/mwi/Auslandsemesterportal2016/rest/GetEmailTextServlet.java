@@ -69,7 +69,10 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "\n" + "Ihr Akademisches Auslandsamt";
 				}
 
-			} else if (rolle == 4) {
+			} else if (rolle == 3){
+				//Hier muss eine Mail an den SGL generiert werden, wenn der Student die Bewerbung abschickt
+			}
+		      else if (rolle == 4) {
 				if (validation_result.equals("true")) {
 					// Text für erfolgreiche Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
@@ -79,7 +82,7 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "Im nächsten Schritt wird ihre Bewerbung an einen Mitarbeiter des Akademischen Auslandsamtes für einen weiteren Validierungsprozess übergeben."
 							+ "\n"
 							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
-							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt";;
+							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Studiengangsleiter/in";;
 				} else if (validation_result.equals("false")) {
 					// Text für abgelehnte Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
@@ -88,7 +91,7 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "Folgende Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
 							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
-							+ "\n" + "Ihr Akademisches Auslandsamt";
+							+ "\n" + "Ihr Studiengangsleiter/in";
 				} else {
 					// Text für Bewerbung zur Bearbeitung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
@@ -98,7 +101,7 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
 							+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können."
 							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
-							+ "\n" + "Ihr Akademisches Auslandsamt";
+							+ "\n" + "Ihr Studiengangsleiter/in";
 				}
 			}
 			toClient.print(output);
