@@ -41,7 +41,8 @@ public class GetSGLTasksServlet extends HttpServlet {
 				List<String> activities = runtime.getActiveActivityIds(instanceId);
 				JSONObject obj = new JSONObject();
 				System.out.println(activities);
-				if (activities.get(0).equals("datenValidieren") || activities.get(0).equals("datenValidierenSGL")) {
+				if (/*activities.get(0).equals("datenValidieren") ||*/ activities.get(0).equals("datenValidierenSGL")) {
+					obj.put("status", "SGLvalidate");
 					obj.put("id", instanceId);
 					obj.put("name", runtime.getVariable(instanceId, "bewNachname"));
 					obj.put("vname", runtime.getVariable(instanceId, "bewVorname"));
@@ -50,16 +51,37 @@ public class GetSGLTasksServlet extends HttpServlet {
 					obj.put("uni", runtime.getVariable(instanceId, "uni"));
 					
 					
-					//zu Testzwecken hinzugefügt für AAA löschen 
+					/*
 					obj.put("matrikelnummer", runtime.getVariable(instanceId, "matrikelnummer"));
 					if (activities.get(0).equals("datenValidieren")) {
 						obj.put("status", "complete");
 					} else {
 						obj.put("status", "validate");
-					}
+					}*/
 
 					arr.put(obj);
 				}
+				else if (activities.get(0).equals("datenValidieren")) {
+					obj.put("status", "SGLcomplete");
+					obj.put("id", instanceId);
+					obj.put("name", runtime.getVariable(instanceId, "bewNachname"));
+					obj.put("vname", runtime.getVariable(instanceId, "bewVorname"));
+					obj.put("aktuelleUni", runtime.getVariable(instanceId, "aktuelleUni"));
+					obj.put("kurs", runtime.getVariable(instanceId, "bewKurs"));
+					obj.put("uni", runtime.getVariable(instanceId, "uni"));
+					
+					
+					/*
+					obj.put("matrikelnummer", runtime.getVariable(instanceId, "matrikelnummer"));
+					if (activities.get(0).equals("datenValidieren")) {
+						obj.put("status", "complete");
+					} else {
+						obj.put("status", "validate");
+					}*/
+
+					arr.put(obj);
+				}
+				
 			}
 			/*PrintWriter out = response.getWriter();
 			response.setContentType("application/json");
