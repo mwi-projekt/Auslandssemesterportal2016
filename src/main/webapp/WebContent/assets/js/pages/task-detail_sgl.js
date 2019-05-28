@@ -291,8 +291,10 @@ function validateBew() {
     resultString = "";
     if (validateString === "true") {
         resultString = "bestätigen"
-    } else {
+    } else if (validateString === "false"){
         resultString = "ablehnen"
+    } else {
+    	resultString = "bearbeiten"
     }
     console.log(grund);
     if (grund.indexOf("Platzhalter") < 0 ||
