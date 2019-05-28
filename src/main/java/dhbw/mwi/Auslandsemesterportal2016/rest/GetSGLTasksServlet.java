@@ -41,7 +41,7 @@ public class GetSGLTasksServlet extends HttpServlet {
 				List<String> activities = runtime.getActiveActivityIds(instanceId);
 				JSONObject obj = new JSONObject();
 				System.out.println(activities);
-				if (activities.get(0).equals("abgeschlossen") || activities.get(0).equals("datenValidierenSGL")) {
+				if (/*activities.get(0).equals("abgeschlossen") ||*/ activities.get(0).equals("datenValidierenSGL")) {
 					obj.put("id", instanceId);
 					obj.put("name", runtime.getVariable(instanceId, "bewNachname"));
 					obj.put("vname", runtime.getVariable(instanceId, "bewVorname"));
