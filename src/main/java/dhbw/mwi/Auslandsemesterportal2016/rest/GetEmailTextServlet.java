@@ -48,8 +48,17 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "\n"
 							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
 							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt";
-				} else {
+				} else if (validation_result.equals("false")) {
 					// Text für abgelehnte Bewerbung
+					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
+							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
+							+ "Leider konnte Ihre Bewerbung nicht berücksichtigt werden." + "\n" + "\n"
+							+ "Folgende Problem hat sich ergeben: " + "\n " + "\n"
+							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
+							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
+							+ "\n" + "Ihr Akademisches Auslandsamt";
+				} else {
+					// Text für Bewerbung zur Bearbeitung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 							+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
@@ -71,8 +80,17 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "\n"
 							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
 							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt";;
-				} else {
+				} else if (validation_result.equals("false")) {
 					// Text für abgelehnte Bewerbung
+					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
+							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
+							+ "Leider konnte Ihre Bewerbung nicht berücksichtigt werden." + "\n" + "\n"
+							+ "Folgende Problem hat sich ergeben: " + "\n " + "\n"
+							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
+							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
+							+ "\n" + "Ihr Akademisches Auslandsamt";
+				} else {
+					// Text für Bewerbung zur Bearbeitung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 							+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
