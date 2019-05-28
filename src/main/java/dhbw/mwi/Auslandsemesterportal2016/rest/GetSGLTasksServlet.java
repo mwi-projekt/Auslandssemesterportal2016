@@ -26,9 +26,9 @@ public class GetSGLTasksServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		/*if (rolle != 1 && rolle != 2 && rolle != 4) {
+		if (rolle != 1 && rolle != 2 && rolle != 4) {
 			response.sendError(401, "Rolle: " + rolle);
-		} else {*/
+		} else {
 
 			JSONObject json = new JSONObject();
 			JSONArray arr = new JSONArray();
@@ -58,16 +58,10 @@ public class GetSGLTasksServlet extends HttpServlet {
 
 					arr.put(obj);
 				}
-			}
-			/*PrintWriter out = response.getWriter();
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			out.print(arr);
-			out.flush();*/
-			
+			}		
 			System.out.println(arr);
 			json.put("data", arr);
 			Util.writeJson(response, json);
 		}
 	}
-//}
+}
