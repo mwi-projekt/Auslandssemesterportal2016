@@ -217,6 +217,7 @@ function getData() {
                 $('#' + key).val(value);
                 if(key === 'muttersprache' || key === 'semesteradresseAnders'){
                 	$('#' + key).prop("checked", value);
+                	variableEnglishAndSemesteranschrift(key,value);
                 }
                 if (!(sendBew === "true")) {
                     $("#" + key).prop('readonly', true);
@@ -227,6 +228,16 @@ function getData() {
             alert('Ein Fehler ist aufgetreten');
         }
     });
+}
+
+function variableEnglishAndSemesteranschrift(key, value){
+	if(key === 'muttersprache' && value === true){
+		document.getElementById("Englischnote im Abitur in Punkten").remove();
+	}else if(key === 'semesteradresseAnders' && value === false){
+		document.getElementById("Semesteranschrift").remove();
+	}
+	
+	
 }
 
 function saveChanges() {
