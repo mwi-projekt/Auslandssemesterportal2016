@@ -182,6 +182,7 @@ function saveData() {
     var keyString = "";
     var valString = "";
     var typeString = "";
+    console.log(idList);
     for (var j = 0; j < idList.length; j++) {
 
         if ($('#' + idList[j]).attr('type') == 'checkbox') {
@@ -198,6 +199,8 @@ function saveData() {
     keyString = keyString.substr(0, keyString.length - 1);
     valString = valString.substr(0, valString.length - 1);
     typeString = typeString.substr(0, typeString.length - 1);
+    console.log(keyString);
+    console.log(valString);
     $.ajax({
         type: "POST",
         url: baseUrl + "/setVariable",
