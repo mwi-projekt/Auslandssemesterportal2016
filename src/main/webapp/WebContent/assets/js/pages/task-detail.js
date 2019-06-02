@@ -136,7 +136,7 @@ function parse() {
                         }
 
                         output = output +
-                            '<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
+                            '<div class="panel panel-default" id="'+json[i]["content"]+'"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
                             k + '">' + visibleStepName + '</a></h4></div>'; // Header
                         // des
                         // Accordions
