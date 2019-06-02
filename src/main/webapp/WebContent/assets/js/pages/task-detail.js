@@ -211,10 +211,8 @@ function getData() {
             key: keyString
         },
         success: function (result) {
-        	console.log(result);
             $.each(result, function (key, value) {
                 $('#' + key).val(value);
-                console.log(key);
                 if(key === 'muttersprache' || key === 'semesteradresseAnders'){
                 	$('#' + key).prop("checked", value);
                 }
@@ -298,7 +296,6 @@ function validateBew() {
     } else {
     	resultString = "zur Bearbeitung freigeben"
     }
-    console.log(grund);
     if (grund.indexOf("Platzhalter") < 0 ||
         grund.indexOf("--") < 0) {
         swal({
@@ -310,7 +307,6 @@ function validateBew() {
             confirmButtonText: "Ignorieren",
             cancelButtonText: "Abbrechen"
         });
-        console.log('Platzhalter gefunden');
     } else {
         console.log('In der Nachricht wurden keine Platzhalter gefunden');
     }
