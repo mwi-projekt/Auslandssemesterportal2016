@@ -43,9 +43,6 @@ $(document).ready(function () {
         }
     });
     
-    console.log($(document).getElementById("muttersprache").value);
-    console.log($(document).getElementById("semesteradresseAnders").value);
-    
 });
 
 function parse() {
@@ -69,8 +66,6 @@ function parse() {
                 if (data.search("id") != -1) {
                     var innerOutput = "";
                     var json = JSON.parse(decodeURI(data));
-                    console.log(data);
-                	console.log(json);
                     for (var i = 0; i < json.length; i++) {
                         var type = json[i]["type"];
                         // alert (type);
@@ -216,6 +211,7 @@ function getData() {
             key: keyString
         },
         success: function (result) {
+        	console.log(result);
             $.each(result, function (key, value) {
                 $('#' + key).val(value);
                 if (!(sendBew === "true")) {
