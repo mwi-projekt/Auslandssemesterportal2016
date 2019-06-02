@@ -237,7 +237,6 @@ function variableEnglishAndSemesteranschrift(key, value){
 		document.getElementById("Semesteranschrift").remove();
 	}
 	
-	
 }
 
 function saveChanges() {
