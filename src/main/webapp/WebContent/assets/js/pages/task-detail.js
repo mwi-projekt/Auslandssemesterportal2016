@@ -69,6 +69,8 @@ function parse() {
                 if (data.search("id") != -1) {
                     var innerOutput = "";
                     var json = JSON.parse(decodeURI(data));
+                    console.log(data);
+                	console.log(json);
                     for (var i = 0; i < json.length; i++) {
                         var type = json[i]["type"];
                         // alert (type);
@@ -110,7 +112,6 @@ function parse() {
                                 typeList.push(json[i]["data"]["type"]);
                                 break;
                             case "form-checkbox":
-                            	console.log(json["data"]);
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' +
                                     json[i]["data"]["id"] +  '"disabled> ' + 
