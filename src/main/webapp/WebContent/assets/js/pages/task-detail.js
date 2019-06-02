@@ -214,6 +214,10 @@ function getData() {
         	console.log(result);
             $.each(result, function (key, value) {
                 $('#' + key).val(value);
+                console.log(key);
+                if(key === 'muttersprache' || key === 'semesteradresseAnders'){
+                	$('#' + key).prop("checked", value);
+                }
                 if (!(sendBew === "true")) {
                     $("#" + key).prop('readonly', true);
                 }
