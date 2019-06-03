@@ -96,7 +96,7 @@ function getList() {
                 });
             }
            
-            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed + '<br><h1>Bewerbungen bei Studiengangsleitern</h1>' + validateSGL;
+            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Bewerbungen bei Studiengangsleitern</h1>' + validateSGL + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed ;
         },
         error: function (result) {
             swal("Ein Fehler ist aufgetreten", "error");
