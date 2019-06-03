@@ -13,7 +13,7 @@ $(document).ready(function () {
         
 });
 
-// automatisc Ort erkennen bei PLZ Eingabe
+// automatisc Ort erkennen bei PLZ Eingabe in Persönliche Daten
 $(document).on('keyup change', '#bewPLZ', function (e) {
     if ($(this).val().length > 4) {
         var ort = $('#bewOrt');
@@ -26,6 +26,22 @@ $(document).on('keyup change', '#bewPLZ', function (e) {
         $('#bewOrt').val('');
     }
 });
+
+
+//automatisc Ort erkennen bei PLZ Eingabe in Unternehmensdaten
+$(document).on('keyup change', '#untPLZ', function (e) {
+    if ($(this).val().length > 4) {
+        var ort = $('#untOrt');
+        $.getJSON('https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?', { postalcode: this.value }, function (response) {
+            if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+                ort.val(response.postalcodes[0].placeName);
+            }
+        });
+    } else {
+        $('#untOrt').val('');
+    }
+});
+
 
 function showGDPRComplianceDialogue() {
 	swal({
