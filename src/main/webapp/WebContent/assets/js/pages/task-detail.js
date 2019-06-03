@@ -305,7 +305,7 @@ function validateBew() {
         resultString = "bestätigen"
     } else if (validateString === "false"){
         resultString = "ablehnen"
-    } else {
+    } else if (validateString === "edit"){
     	resultString = "zur Bearbeitung freigeben"
     }
     if (grund.indexOf("Platzhalter") < 0 ||
@@ -340,7 +340,7 @@ function validateBew() {
                 instance_id: instanceID,
                 key: 'validierungErfolgreich|mailText',
                 value: validateString + '|' + grund,
-                type: 'boolean|text'
+                type: 'text|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
             },
             success: function (result) {
                 swal({
