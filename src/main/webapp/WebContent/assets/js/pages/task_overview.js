@@ -13,6 +13,7 @@ function getList() {
         success: function (result) {
             output = "";
             completed = "";
+            validateSGL = "";
             if (!result || result.data.length == 0) {
                 // substring bilden nicht möglich bei leerem String
             } else {
@@ -21,7 +22,6 @@ function getList() {
                 for (var i = 0; i < instances.length; i++) {
                     singleInstance = instances[i];
                     if (singleInstance.status === 'validate') {
-                       
                     	output = output +
                             "<tr><td>" +
                             singleInstance.name +
@@ -42,7 +42,7 @@ function getList() {
                             "</td><td>" +
                             "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                  
-                    } else if (singleInstance[6] === 'complete') {
+                    } else if (singleInstance.status === 'complete') {
                         completed = completed +
                             "<tr><td>" +
                             singleInstance.name +
@@ -55,7 +55,20 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td></tr>"
-                    } 
+                    } else if (singleInstance.status === 'validateSGL') {
+                    	validateSGL = validateSGL +
+                    		"<tr><td>" +
+                    		singleInstance.name +
+                    		"</td><td>" +
+                    		singleInstance.vname +
+                    		"</td><td>" +
+                    		singleInstance.kurs +
+                    		"</td><td>" +
+                    		singleInstance.aktuelleUni +
+                    		"</td><td>" +
+                    		singleInstance.uni +
+                    		"</td></tr>"
+                    }
                    
                 }
                 if (output === "") {
@@ -70,6 +83,12 @@ function getList() {
                     completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
                         completed + "</tbody></table>";
                 }
+                if (validateSGL === "") {
+                	validateSGL = "<h2> Es gibt keine Bewebungen, die von einem Studiengangsleiter zu validieren sind</h2>";
+                } else {
+                	validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                    	validateSGL + "</tbody></table>";
+                }
                 
 
                 $(document).ready(function () {
@@ -77,9 +96,7 @@ function getList() {
                 });
             }
            
-            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; +
-            
-            output;
+            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed + '<br><h1>Bewerbungen bei Studiengangsleitern</h1>' + validateSGL;
         },
         error: function (result) {
             swal("Ein Fehler ist aufgetreten", "error");

@@ -40,19 +40,20 @@ public class GetAdminTasksServlet extends HttpServlet {
 				List<String> activities = runtime.getActiveActivityIds(instanceId);
 				JSONObject obj = new JSONObject();
 				System.out.println(activities);
-				if (activities.get(0).equals("abgeschlossen") || activities.get(0).equals("datenValidieren")) {
+				if (activities.get(0).equals("abgeschlossen") || activities.get(0).equals("datenValidieren") || activities.get(0).equals("datenValidierenSQL")) {
 					obj.put("id", instanceId);
 					obj.put("name", runtime.getVariable(instanceId, "bewNachname"));
 					obj.put("vname", runtime.getVariable(instanceId, "bewVorname"));
 					obj.put("aktuelleUni", runtime.getVariable(instanceId, "aktuelleUni"));
 					obj.put("kurs", runtime.getVariable(instanceId, "bewKurs"));
-					obj.put("uni", runtime.getVariable(instanceId, "uni"));
-					//zu Testzwecken hinzugefügt für AAA löschen 
+					obj.put("uni", runtime.getVariable(instanceId, "uni")); 
 					obj.put("matrikelnummer", runtime.getVariable(instanceId, "matrikelnummer"));
 					if (activities.get(0).equals("abgeschlossen")) {
 						obj.put("status", "complete");
-					} else {
+					} else if (activities.get(0).equals("datenValidieren")){
 						obj.put("status", "validate");
+					} else if (activities.get(0).equals("datenValidierenSGL")) {
+						obj.put("status", "validateSGL");
 					}
 
 					arr.put(obj);
