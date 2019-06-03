@@ -1,39 +1,20 @@
-window.onbeforeunload = function() {
+window.onbeforeunload = function(e) {
 	displayWarningUponPageExit();
     return null;
 }
 
 function displayWarningUponPageExit() {
-	$('.external-link').on('click',function(){
-
-		var getLink = $(this).attr('href');
-
-		swal({
-		  title: 'You&#39;re Leaving This Site!',
-		  text: 'This is a link to an external site. Click OK to continue to the content (' + getLink + ').',
-		  html: true,
-		  confirmButtonColor: '#2ecc71',
-		  showCancelButton: true,
-		},function(){
-
-		window.open(getLink,'_blank')
-
-		});
-
-		return false;
-
-		});
-//	swal({
-//		title: "Warnung",
-//		text: "Ungespeicherte Inhalte gehen verloren.\n Möchten Sie wirklich fortfahren?",
-//		type: "warning",
-//		showCancelButton: true,
-//        cancelButtonText: "Auf Seite bleiben",
-//        confirmButtonColor: "#EE0000",
-//        confirmButtonText: "Seite verlassen",
-//        closeOnConfirm: false,
-//        closeOnCancel: false
-//	})
+	swal({
+		title: "Warnung",
+		text: "Ungespeicherte Inhalte gehen verloren.\n Möchten Sie wirklich fortfahren?",
+		type: "warning",
+		showCancelButton: true,
+        cancelButtonText: "Auf Seite bleiben",
+        confirmButtonColor: "#EE0000",
+        confirmButtonText: "Seite verlassen",
+        closeOnConfirm: false,
+        closeOnCancel: false
+	})
 }
 
 $(document).ready(function () {
