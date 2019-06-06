@@ -304,7 +304,7 @@ function validateBew() {
         resultString = "bestätigen"
     } else if (validateString === "false"){
         resultString = "ablehnen"
-    } else if (validateString === "edit"){
+    } else {
     	resultString = "zur Bearbeitung freigeben"
     }
     if (grund.indexOf("Platzhalter") < 0 ||
