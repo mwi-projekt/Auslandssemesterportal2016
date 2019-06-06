@@ -217,7 +217,7 @@ function getData() {
                 $('#' + key).val(value);
                 if(key === 'muttersprache' || key === 'semesteradresseAnders'){
                 	$('#' + key).prop("checked", value);
-                	variableEnglishAndSemesteranschrift(key,value);
+//                	variableEnglishAndSemesteranschrift(key,value);
                 }
                 if (!(sendBew === "true")) {
                     $("#" + key).prop('readonly', true);
