@@ -57,7 +57,6 @@ function parse() {
 
         success: function (result) {
             var steps = result.data;
-            console.log(steps);
             output = output +
                 '<div class="panel-group" id="accordion">';
             for (var k = 0; k < steps.length; k++) {
@@ -67,7 +66,6 @@ function parse() {
                 if (data.search("id") != -1) {
                     var innerOutput = "";
                     var json = JSON.parse(decodeURI(data));
-                    console.log(json);
                     for (var i = 0; i < json.length; i++) {
                         var type = json[i]["type"];
                         // alert (type);
@@ -121,6 +119,8 @@ function parse() {
                                 break;
                         }
                     }
+                    
+                    console.log(idList);
 
                     if (innerOutput != '') {
                         if (stepName === "datenEingeben") {
@@ -243,7 +243,6 @@ function saveChanges() {
     var keyString = "";
     var valString = "";
     var typeString = "";
-    console.log(idList);
     for (var j = 0; j < idList.length; j++) {
         if ($('#' + idList[j]).attr('type') == 'checkbox') {
             var checkedString = (document.getElementById(idList[j]).checked) ? 'true' :
