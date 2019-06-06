@@ -252,8 +252,7 @@ function saveChanges() {
             typeString = typeString + typeList[j] + "|";
         } else {
             keyString = keyString + idList[j] + "|";
-            valString = valString + document.getElementById(idList[j]).value +
-                "|";
+            valString = valString + document.getElementById(idList[j]).value + "|";
             typeString = typeString + typeList[j] + "|";
         }
     }
