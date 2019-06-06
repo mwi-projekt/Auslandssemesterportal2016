@@ -243,6 +243,7 @@ function saveChanges() {
     var keyString = "";
     var valString = "";
     var typeString = "";
+    console.log(idList);
     for (var j = 0; j < idList.length; j++) {
         if ($('#' + idList[j]).attr('type') == 'checkbox') {
             var checkedString = (document.getElementById(idList[j]).checked) ? 'true' :
