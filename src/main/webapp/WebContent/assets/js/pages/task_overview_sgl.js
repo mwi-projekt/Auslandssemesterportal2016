@@ -19,7 +19,6 @@ function getList() {
             completed = "";
             if (!result || result.data.length == 0) {
                 // substring bilden nicht möglich bei leerem String
-            	console.log("TEST1" + output);
             } else {
                 var instances = result.data;
 
@@ -66,7 +65,6 @@ function getList() {
             }
                
                 if (output === "") {
-                	console.log(output);
                     output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
                 } else {
                     output = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Prüfen</th><th>Löschen</th></tr></thead><tbody>' +
@@ -83,15 +81,7 @@ function getList() {
                 $(document).ready(function () {
                     $('.table').DataTable();
                 });
-           // }
-            
-            console.log("TEST3" + output);
-            
-           /* if (output === "") {
-            	console.log(output);
-                output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
-            } */
-           
+          
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; 
         },
         error: function (result) {
