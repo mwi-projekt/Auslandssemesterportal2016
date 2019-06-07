@@ -63,8 +63,8 @@ function getList() {
                     } 
                    
                 }
-                
-                console.log("TEST2" + output);
+            }
+               
                 if (output === "") {
                 	console.log(output);
                     output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
@@ -83,14 +83,14 @@ function getList() {
                 $(document).ready(function () {
                     $('.table').DataTable();
                 });
-            }
+           // }
             
             console.log("TEST3" + output);
             
-            if (output === "") {
+           /* if (output === "") {
             	console.log(output);
                 output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
-            } 
+            } */
            
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; 
         },
