@@ -62,7 +62,9 @@ function getList() {
                     } 
                    
                 }
+                console.log(output);
                 if (output === "") {
+                	console.log(output);
                     output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
                 } else {
                     output = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Prüfen</th><th>Löschen</th></tr></thead><tbody>' +
