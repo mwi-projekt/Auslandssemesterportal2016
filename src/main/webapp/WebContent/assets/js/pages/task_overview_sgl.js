@@ -81,9 +81,7 @@ function getList() {
                 });
             }
            
-            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; +
-            
-            output;
+            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; 
         },
         error: function (result) {
             swal("Ein Fehler ist aufgetreten", "error");
