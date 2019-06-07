@@ -57,7 +57,7 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
 							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
 							+ "\n" + "Ihr Akademisches Auslandsamt";
-				} else {
+				} else if (validation_result.equals("edit")){
 					// Text für Bewerbung zur Bearbeitung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
