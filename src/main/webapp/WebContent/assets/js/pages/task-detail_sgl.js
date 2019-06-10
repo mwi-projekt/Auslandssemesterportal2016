@@ -300,6 +300,7 @@ function saveChanges() {
 
 function validateBew() {
     validateString = $('#validierungErfolgreich').val();
+    console.log(validateString); //Ausgabe
     grund = $('#reason').text();
     resultString = "";
     if (validateString === "true") {
@@ -309,7 +310,7 @@ function validateBew() {
     } else if (validateString === "edit"){
     	resultString = "zur Bearbeitung freigeben"
     }
-    console.log(grund);
+    console.log("grund" + grund); //Ausgabe
     if (grund.indexOf("Platzhalter") < 0 ||
         grund.indexOf("--") < 0) {
         swal({
