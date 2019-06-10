@@ -194,7 +194,9 @@
     <bpmn:endEvent id="EndEvent_true" name="Bewerbung erfolgreich abgeschlossen">
       <bpmn:incoming>SequenceFlow_0fihakq</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0xy7yr5" name="Ablehnen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="EndEvent_false" />
+    <bpmn:sequenceFlow id="SequenceFlow_0xy7yr5" name="Ablehnen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="EndEvent_false">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich == edit}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:userTask id="datenValidieren" name="Daten validieren" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="mitarbeiterAAA">
       <bpmn:extensionElements>
         <camunda:taskListener class="dhbw.mwi.Auslandsemesterportal2016.db.login_db" event="assignment" />

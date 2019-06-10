@@ -310,7 +310,6 @@ function validateBew() {
     } else if (validateString === "edit"){
     	resultString = "zur Bearbeitung freigeben"
     }
-    console.log("grund" + grund); //Ausgabe
     if (grund.indexOf("Platzhalter") < 0 ||
         grund.indexOf("--") < 0) {
         swal({
