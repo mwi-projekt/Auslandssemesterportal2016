@@ -154,6 +154,9 @@
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="SequenceFlow_1coz885" sourceRef="datenValidieren" targetRef="ExclusiveGateway_Datenpruefung" />
     <bpmn:sequenceFlow id="SequenceFlow_1dff142" sourceRef="datenValidierenSGL" targetRef="ExclusiveGateway_1dolwiq" />
+    <bpmn:sequenceFlow id="SequenceFlow_0ji9cm2" name="Zur Bearbeitung freigeben" sourceRef="ExclusiveGateway_1dolwiq" targetRef="studentBenachrichtigenSGL">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich == 'edit'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:userTask id="datenValidierenSGL" name="Daten validieren" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="mitarbeiterAAA">
       <bpmn:extensionElements>
         <camunda:taskListener class="dhbw.mwi.Auslandsemesterportal2016.db.login_db" event="assignment" />
@@ -163,6 +166,7 @@
     </bpmn:userTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1dolwiq" name="Bewerbungsprüfung Ergebnis?">
       <bpmn:incoming>SequenceFlow_1dff142</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0ji9cm2</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0trilik</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0xy7yr5</bpmn:outgoing>
     </bpmn:exclusiveGateway>
@@ -205,6 +209,7 @@
     </bpmn:endEvent>
     <bpmn:sendTask id="studentBenachrichtigenSGL" name="Student benachrichtigen" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
       <bpmn:documentation>Student wird über Ablehnung informiert.</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_0ji9cm2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0env68s</bpmn:outgoing>
     </bpmn:sendTask>
   </bpmn:process>
@@ -494,6 +499,14 @@
       <bpmndi:BPMNEdge id="SequenceFlow_1dff142_di" bpmnElement="SequenceFlow_1dff142">
         <di:waypoint x="2202" y="362" />
         <di:waypoint x="2252" y="362" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ji9cm2_di" bpmnElement="SequenceFlow_0ji9cm2">
+        <di:waypoint x="2277" y="387" />
+        <di:waypoint x="2277" y="475" />
+        <di:waypoint x="2097" y="475" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2172" y="432" width="79" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0trilik_di" bpmnElement="SequenceFlow_0trilik">
         <di:waypoint x="2302" y="362" />
