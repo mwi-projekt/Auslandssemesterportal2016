@@ -33,9 +33,9 @@
       </bpmn:lane>
       <bpmn:lane id="Lane_05ro1a0" name="Studiengangsleiter">
         <bpmn:flowNodeRef>datenValidierenSGL</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_1dolwiq</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_false</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>studentBenachrichtigenSGL</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_1dolwiq</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_1" name="Bewerbung starten" camunda:formKey="app:start-form.html">
@@ -161,6 +161,11 @@
       <bpmn:incoming>SequenceFlow_0cmmyvv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1dff142</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1dolwiq" name="Bewerbungsprüfung Ergebnis?">
+      <bpmn:incoming>SequenceFlow_1dff142</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0trilik</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0xy7yr5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0trilik" name="Annehmen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="datenValidieren">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -200,16 +205,8 @@
     </bpmn:endEvent>
     <bpmn:sendTask id="studentBenachrichtigenSGL" name="Student benachrichtigen" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
       <bpmn:documentation>Student wird über Ablehnung informiert.</bpmn:documentation>
-      <bpmn:incoming>SequenceFlow_1r4yj46</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0env68s</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_1dolwiq" name="Bewerbungsprüfung Ergebnis?">
-      <bpmn:incoming>SequenceFlow_1dff142</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0trilik</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_0xy7yr5</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_1r4yj46</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_1r4yj46" name="else" sourceRef="ExclusiveGateway_1dolwiq" targetRef="studentBenachrichtigenSGL" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cl2lu7">
@@ -544,14 +541,6 @@
         <di:waypoint x="2771" y="315" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2341" y="295" width="46" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1r4yj46_di" bpmnElement="SequenceFlow_1r4yj46">
-        <di:waypoint x="2277" y="387" />
-        <di:waypoint x="2277" y="475" />
-        <di:waypoint x="2097" y="475" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2178" y="458" width="21" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
