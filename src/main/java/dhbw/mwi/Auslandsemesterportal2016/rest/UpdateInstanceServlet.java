@@ -22,9 +22,9 @@ public class UpdateInstanceServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		/*if (rolle < 1) {
+		if (rolle < 1) {
 			response.sendError(401);
-		} else {*/
+		} else {
 			PrintWriter toClient = response.getWriter();
 
 			String instanceID = request.getParameter("instance_id");
@@ -63,4 +63,4 @@ public class UpdateInstanceServlet extends HttpServlet {
 			}
 		}
 	}
-//}
+}
