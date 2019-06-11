@@ -15,9 +15,10 @@ function getList() {
             //'definition' : 'studentBewerben'
         },
         success: function (result) {
-            output = "";
-            completed = "";
-            validateAAA = "";
+            output = ""; 		//zu validierende Bewerbungen
+            completed = "";		//angenommene Bewerbungen
+            validateAAA = "";	//Bewerbungen, die vom Auslansdamt bearbeitet werden müssen
+            abgelehnt = "";		//abgelehnte Bewerbungen
             if (!result || result.data.length == 0) {
                 // substring bilden nicht möglich bei leerem String
             } else {
@@ -26,7 +27,6 @@ function getList() {
                 for (var i = 0; i < instances.length; i++) {
                     singleInstance = instances[i];
                     if (singleInstance.status === 'validateSGL') {
-                       
                     	output = output +
                             "<tr><td>" +
                             singleInstance.name +
@@ -60,7 +60,20 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td></tr>";
-                            
+                    } else if (singleInstance.status === 'abgelehnt') {
+                        abgelehnt = abgelehnt +
+                            "<tr><td>" +
+                            singleInstance.name +
+                            "</td><td>" +
+                            singleInstance.vname +
+                            "</td><td>" +
+                            singleInstance.aktuelleUni +
+                            "</td><td>" +
+                            singleInstance.kurs +
+                            "</td><td>" +
+                            singleInstance.uni +
+                            "</td></tr>";
+                                    
                     } else if (singleInstance.status === 'validate') {
                     	validateAAA = validateAAA +
                         "<tr><td>" +
@@ -97,13 +110,19 @@ function getList() {
                 } else {
                 	validateAAA = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
                        	validateAAA + "</tbody></table>";
-                }                
+                }      
+                if (abgelehnt === "") {
+                	abgelehnt = "<h2>Bisher wurden keine Bewerbungen abgelehnt</h2>";
+                } else {
+                	abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                   		abgelehnt + "</tbody></table>";
+                }
 
                 $(document).ready(function () {
                     $('.table').DataTable();
                 });
           
-            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<h1>Bewerbungen beim Auslandsamt</h1>' + validateAAA + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; 
+            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<h1>Bewerbungen beim Auslandsamt</h1>' + validateAAA + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt; 
         },
         error: function (result) {
             swal("Ein Fehler ist aufgetreten", "error");
