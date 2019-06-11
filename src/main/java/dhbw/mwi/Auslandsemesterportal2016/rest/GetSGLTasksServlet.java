@@ -58,7 +58,6 @@ public class GetSGLTasksServlet extends HttpServlet {
 					} else {
 						obj.put("status", "validate");
 					}
-
 					arr.put(obj);
 				}
 			}		
