@@ -206,7 +206,7 @@ function initBewerben() {
                     instance_info = result.data[i];
                     tabelle = tabelle + '<tr data-rid="' + (i + 1) + '"><td>' + instance_info.uni + '</td><td>' + instance_info.stepCounter + '</td>';
                     //Anlegen der Buttons
-                    if ((instance_info.stepCounter === "Abgeschlossen") || (instance_info.stepCounter === "Auf Rückmeldung warten")) {
+                    if ((instance_info.stepCounter === "Abgeschlossen") || (instance_info.stepCounter === "Auf Rückmeldung warten") || (instance_info.stepCounter === "Bewerbung wurde abgelehnt") ) {
                         //Übersicht
                         tabelle = tabelle + '<td align="center"><span class="btn glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '\'"></span></td>';
                     } else if (instance_info.stepCounter === "Daten prüfen") {
