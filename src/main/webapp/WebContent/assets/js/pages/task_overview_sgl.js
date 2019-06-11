@@ -103,7 +103,7 @@ function getList() {
                     $('.table').DataTable();
                 });
           
-            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; 
+            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<h1>Bewerbungen beim Auslandsamt</h1>' + validateAAA + '<br><h1>Abgeschlossene Bewerbungen</h1>' + completed; 
         },
         error: function (result) {
             swal("Ein Fehler ist aufgetreten", "error");
