@@ -29,9 +29,10 @@
         <bpmn:flowNodeRef>datenValidieren</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_true</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>bestaetigungVersenden</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>abgeschlossen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_0rz9mmk</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_false</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_0rz9mmk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abgeschlossen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abgelehnt</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_05ro1a0" name="Studiengangsleiter">
         <bpmn:flowNodeRef>datenValidierenSGL</bpmn:flowNodeRef>
@@ -203,22 +204,27 @@
       <bpmn:incoming>SequenceFlow_09m6nu0</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1gd2a3p</bpmn:outgoing>
     </bpmn:sendTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0kpssuu" name="Ablehnen" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="ExclusiveGateway_0rz9mmk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EndEvent_false" name="Bewerbung erfolglos abgeschlossen">
+      <bpmn:incoming>SequenceFlow_1jjp43i</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0rz9mmk">
+      <bpmn:incoming>SequenceFlow_0kpssuu</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0xy7yr5</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1o4gvd7</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:userTask id="abgeschlossen" name="Prozess abgeschlossen">
       <bpmn:incoming>SequenceFlow_1gd2a3p</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0fihakq</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0kpssuu" name="Ablehnen" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="ExclusiveGateway_0rz9mmk">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0ybybci" sourceRef="ExclusiveGateway_0rz9mmk" targetRef="EndEvent_false" />
-    <bpmn:exclusiveGateway id="ExclusiveGateway_0rz9mmk">
-      <bpmn:incoming>SequenceFlow_0kpssuu</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_0xy7yr5</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0ybybci</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="EndEvent_false" name="Bewerbung erfolglos abgeschlossen">
-      <bpmn:incoming>SequenceFlow_0ybybci</bpmn:incoming>
-    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1o4gvd7" sourceRef="ExclusiveGateway_0rz9mmk" targetRef="abgelehnt" />
+    <bpmn:sequenceFlow id="SequenceFlow_1jjp43i" sourceRef="abgelehnt" targetRef="EndEvent_false" />
+    <bpmn:userTask id="abgelehnt" name="Bewerbung abgelehnt">
+      <bpmn:incoming>SequenceFlow_1o4gvd7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1jjp43i</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cl2lu7">
@@ -348,7 +354,7 @@
         <dc:Bounds x="2340" y="131" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_1yss45q_di" bpmnElement="abgeschlossen">
-        <dc:Bounds x="2594" y="770" width="100" height="80" />
+        <dc:Bounds x="2624" y="770" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_12my7xt_di" bpmnElement="SequenceFlow_12my7xt">
         <di:waypoint x="1248" y="128" />
@@ -469,12 +475,12 @@
         <dc:Bounds x="2102" y="322" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0fihakq_di" bpmnElement="SequenceFlow_0fihakq">
-        <di:waypoint x="2694" y="810" />
+        <di:waypoint x="2724" y="810" />
         <di:waypoint x="2788" y="810" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1gd2a3p_di" bpmnElement="SequenceFlow_1gd2a3p">
         <di:waypoint x="2505" y="810" />
-        <di:waypoint x="2594" y="810" />
+        <di:waypoint x="2624" y="810" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_1dolwiq_di" bpmnElement="ExclusiveGateway_1dolwiq" isMarkerVisible="true">
         <dc:Bounds x="2252" y="337" width="50" height="50" />
@@ -555,24 +561,31 @@
       <bpmndi:BPMNEdge id="SequenceFlow_0xy7yr5_di" bpmnElement="SequenceFlow_0xy7yr5">
         <di:waypoint x="2277" y="337" />
         <di:waypoint x="2277" y="311" />
-        <di:waypoint x="2647" y="311" />
-        <di:waypoint x="2647" y="694" />
+        <di:waypoint x="2516" y="311" />
+        <di:waypoint x="2516" y="694" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2294" y="293" width="46" height="14" />
+          <dc:Bounds x="2280" y="293" width="46" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0rz9mmk_di" bpmnElement="ExclusiveGateway_0rz9mmk" isMarkerVisible="true">
-        <dc:Bounds x="2622" y="694" width="50" height="50" />
+        <dc:Bounds x="2491" y="694" width="50" height="50" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0kpssuu_di" bpmnElement="SequenceFlow_0kpssuu">
         <di:waypoint x="2385" y="719" />
-        <di:waypoint x="2622" y="719" />
+        <di:waypoint x="2491" y="719" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2481" y="701" width="46" height="14" />
+          <dc:Bounds x="2415" y="701" width="46" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0ybybci_di" bpmnElement="SequenceFlow_0ybybci">
-        <di:waypoint x="2672" y="719" />
+      <bpmndi:BPMNEdge id="SequenceFlow_1o4gvd7_di" bpmnElement="SequenceFlow_1o4gvd7">
+        <di:waypoint x="2541" y="719" />
+        <di:waypoint x="2624" y="719" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_16m5rie_di" bpmnElement="abgelehnt">
+        <dc:Bounds x="2624" y="679" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jjp43i_di" bpmnElement="SequenceFlow_1jjp43i">
+        <di:waypoint x="2724" y="719" />
         <di:waypoint x="2788" y="719" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
