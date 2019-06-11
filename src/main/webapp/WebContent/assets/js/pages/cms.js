@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	$('#adminBereich').hide();
     $('#normalBereich').show();
     $('.cms').show();
     $('.Admin').show();
