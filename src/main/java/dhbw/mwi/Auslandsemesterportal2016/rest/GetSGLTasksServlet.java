@@ -41,17 +41,18 @@ public class GetSGLTasksServlet extends HttpServlet {
 				List<String> activities = runtime.getActiveActivityIds(instanceId);
 				JSONObject obj = new JSONObject();
 				System.out.println(activities);
-				if (/*activities.get(0).equals("abgeschlossen") ||*/ activities.get(0).equals("datenValidierenSGL")) {
+				if (activities.get(0).equals("abgeschlossen") || activities.get(0).equals("datenValidierenSGL") || activities.get(0).equals("datenValidieren")) {
 					obj.put("id", instanceId);
 					obj.put("name", runtime.getVariable(instanceId, "bewNachname"));
 					obj.put("vname", runtime.getVariable(instanceId, "bewVorname"));
 					obj.put("aktuelleUni", runtime.getVariable(instanceId, "aktuelleUni"));
 					obj.put("kurs", runtime.getVariable(instanceId, "bewKurs"));
 					obj.put("uni", runtime.getVariable(instanceId, "uni"));
-					//zu Testzwecken hinzugefügt für AAA löschen 
 					obj.put("matrikelnummer", runtime.getVariable(instanceId, "matrikelnummer"));
 					if (activities.get(0).equals("abgeschlossen")) {
 						obj.put("status", "complete");
+					} else if (activities.get(0).equals("datenValidierenSGL")){
+						obj.put("status", "validateSGL");
 					} else {
 						obj.put("status", "validate");
 					}

@@ -17,6 +17,7 @@ function getList() {
         success: function (result) {
             output = "";
             completed = "";
+            validateAAA = "";
             if (!result || result.data.length == 0) {
                 // substring bilden nicht möglich bei leerem String
             } else {
@@ -24,7 +25,7 @@ function getList() {
 
                 for (var i = 0; i < instances.length; i++) {
                     singleInstance = instances[i];
-                    if (singleInstance.status === 'validate') {
+                    if (singleInstance.status === 'validateSGL') {
                        
                     	output = output +
                             "<tr><td>" +
@@ -46,7 +47,7 @@ function getList() {
                             "</td><td>" +
                             "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                  
-                    } else if (singleInstance[6] === 'complete') {
+                    } else if (singleInstance.status === 'complete') {
                         completed = completed +
                             "<tr><td>" +
                             singleInstance.name +
@@ -58,8 +59,22 @@ function getList() {
                             singleInstance.aktuelleUni +
                             "</td><td>" +
                             singleInstance.uni +
-                            "</td></tr>"
-                    } 
+                            "</td></tr>";
+                            
+                    } else if (singleInstance.status === 'validate') {
+                    	validateAAA = validateAAA +
+                        "<tr><td>" +
+                        singleInstance.name +
+                        "</td><td>" +
+                        singleInstance.vname +
+                        "</td><td>" +
+                        singleInstance.kurs +
+                        "</td><td>" +
+                        singleInstance.aktuelleUni +
+                        "</td><td>" +
+                        singleInstance.uni +
+                        "</td></tr>";
+                    }
                    
                 }
             }
@@ -77,6 +92,12 @@ function getList() {
                         completed + "</tbody></table>";
                 }
                 
+                if (validateAAA === "") {
+                	validateAAA = "<h2>Aktuell gibt es keine Bewerbungen, die von einem AAA überprüft werden müssen</h2>";
+                } else {
+                	validateAAA = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                       	validateAAA + "</tbody></table>";
+                }                
 
                 $(document).ready(function () {
                     $('.table').DataTable();
