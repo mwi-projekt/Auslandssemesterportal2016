@@ -54,9 +54,9 @@ function getList() {
                             "</td><td>" +
                             singleInstance.vname +
                             "</td><td>" +
-                            singleInstance.kurs +
-                            "</td><td>" +
                             singleInstance.aktuelleUni +
+                            "</td><td>" +
+                            singleInstance.kurs +
                             "</td><td>" +
                             singleInstance.uni +
                             "</td></tr>";
@@ -68,9 +68,9 @@ function getList() {
                         "</td><td>" +
                         singleInstance.vname +
                         "</td><td>" +
-                        singleInstance.kurs +
-                        "</td><td>" +
                         singleInstance.aktuelleUni +
+                        "</td><td>" +
+                        singleInstance.kurs +
                         "</td><td>" +
                         singleInstance.uni +
                         "</td></tr>";
