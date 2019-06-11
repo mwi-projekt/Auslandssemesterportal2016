@@ -56,7 +56,6 @@
 
 
 
-
         <div class="container">
             <div class="row content">
                 <div class="portalInfo inhaltBox row" id="portalInfo">

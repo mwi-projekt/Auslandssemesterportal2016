@@ -56,7 +56,7 @@ $(document).ready(function () {
         if (id === 'verwaltungIndex') {
             location.href = 'cms.html';
         } else if (id === 'verwaltungUser') {
-            location.href = 'nutzer.html';
+            location.href = 'nutzer.jsp';
         } else if (id === 'verwaltungPortal') {
             location.href = 'choose_diagram.html';
         }
