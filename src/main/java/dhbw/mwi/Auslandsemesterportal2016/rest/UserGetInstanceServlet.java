@@ -49,8 +49,10 @@ public class UserGetInstanceServlet extends HttpServlet {
 					String currentActivity = activityList.get(0);
 					if (currentActivity.equals("datenPruefen")) {
 						stepCounter = "Daten prüfen";
-					} else if (currentActivity.equals("datenValidieren")) {
+					} else if (currentActivity.equals("datenValidieren") || currentActivity.equals("datenValidierenSGL")) {
 						stepCounter = "Auf Rückmeldung warten";
+					} else if (currentActivity.equals("abgelehnt")) {
+						stepCounter = "Bewerbung wurde abgelehnt";
 					} else {
 						// Rufe Schrittzahl aus Tabelle ab
 						stepCounter = SQL_queries.getStepCounter(currentActivity, "studentBewerben");
