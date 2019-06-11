@@ -155,7 +155,7 @@ $(document).ready(function () {
                 }
 
                 if (data.required) {
-                    $('#field-git ')[0].checked = data.required;
+                    $('#field-req ')[0].checked = data.required;
                 }
 
                 $("[switch]").bootstrapSwitch({
