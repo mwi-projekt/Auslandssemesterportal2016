@@ -13,7 +13,7 @@ $(document).ready(function () {
         
 });
 
-// automatisc Ort erkennen bei PLZ Eingabe in Persönliche Daten
+// automatisch Ort erkennen bei PLZ Eingabe in Persönliche Daten
 $(document).on('keyup change', '#bewPLZ', function (e) {
     if ($(this).val().length > 4) {
         var ort = $('#bewOrt');
