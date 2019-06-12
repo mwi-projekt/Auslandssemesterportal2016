@@ -8,20 +8,6 @@ window.onbeforeunload = function(e) {
 	}
 }
 
-//function displayWarningUponPageExit() {
-//	swal({
-//		title: "Warnung",
-//		text: "Ungespeicherte Inhalte gehen verloren.\n Möchten Sie wirklich fortfahren?",
-//		type: "warning",
-//		showCancelButton: true,
-//        cancelButtonText: "Auf Seite bleiben",
-//        confirmButtonColor: "#EE0000",
-//        confirmButtonText: "Seite verlassen",
-//        closeOnConfirm: false,
-//        closeOnCancel: false
-//	})
-//}
-
 $(document).ready(function () {
 	
     var id = $.urlParam('id').trim();
@@ -88,8 +74,7 @@ $(document).ready(function () {
     });
 
     function openCheckboxPopup(data, cb, cbClose) {
-//    	siteHasUnsavedChanges = true;
-    	console.log("openCheckbox");
+    	siteHasUnsavedChanges = true;
         var success = false;
         $.sweetModal({
             title: 'Checkbox hinzufügen',
@@ -131,7 +116,7 @@ $(document).ready(function () {
     }
 
     function openSelectFormPopup(data, cb, cbClose) {
-    	console.log("openSelectForm");
+    	siteHasUnsavedChanges = true;
         var success = false;
         $.sweetModal({
             title: 'Auswahlfeld hinzufügen',
@@ -224,7 +209,7 @@ $(document).ready(function () {
     }
 
     function openUploadPopup(data, cb, cbClose) {
-    	console.log("openUpload");
+    	siteHasUnsavedChanges = true;
         var success = false;
         $.sweetModal({
             title: 'Upload hinzufügen',
@@ -261,7 +246,7 @@ $(document).ready(function () {
     }
 
     function openTextInputPopup(data, cb, cbClose) {
-    	console.log("openTextInput");
+    	siteHasUnsavedChanges = true;
         var success = false;
         $.sweetModal({
             title: 'Textfeld hinzufügen',
@@ -425,11 +410,11 @@ $(document).ready(function () {
                 }
 
                 if (type == 'title') {
-                    // add h1 class to elemtent
+                    // add h1 class to element
                     $elm.closest('.item').addClass('h1');
                     con = 'Page Title';
                 } else if (type == 'subtitle') {
-                    // add h2 class to elemtent
+                    // add h2 class to element
                     $elm.closest('.item').addClass('h2');
                     con = 'Subtitle';
                 }
