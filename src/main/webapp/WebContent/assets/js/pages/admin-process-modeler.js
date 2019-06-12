@@ -345,10 +345,11 @@ $(document).ready(function () {
             // on change update output element
             onchange: function(output) {
                 json = output;
-                console.log("Test");
+                siteHasUnsavedChanges = true;
             },
 
             onedit: function ($elm, type, cb, self) {
+            	console.log("on edit");
                 if (type == 'form-select') {
                     openSelectFormPopup($elm.data('cdata'), function (data) {
                         self.settings.oninit($elm, data, data.data, cb, self);
@@ -375,6 +376,7 @@ $(document).ready(function () {
             },
 
             oninit: function ($elm, outp, data, cb, self) {
+            	console.log("on init");
                 var type = $elm.data('type');
                 if (type == 'form-select') {
                     var con = '';
