@@ -42,7 +42,7 @@ $(document).on('keyup change', '#untPLZ', function (e) {
     }
 });
 
-if(document.getElementById("pizza").checked) {
+if(document.getElementById("gdprCompliance").checked) {
 	document.getElementById("saveData").setAttribute('disabled', false);
 	} else {
 		document.getElementById("saveData").setAttribute('disabled', 'disabled');
