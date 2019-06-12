@@ -88,6 +88,8 @@ $(document).ready(function () {
     });
 
     function openCheckboxPopup(data, cb, cbClose) {
+//    	siteHasUnsavedChanges = true;
+    	console.log("openCheckbox");
         var success = false;
         $.sweetModal({
             title: 'Checkbox hinzufügen',
@@ -129,6 +131,7 @@ $(document).ready(function () {
     }
 
     function openSelectFormPopup(data, cb, cbClose) {
+    	console.log("openSelectForm");
         var success = false;
         $.sweetModal({
             title: 'Auswahlfeld hinzufügen',
@@ -221,6 +224,7 @@ $(document).ready(function () {
     }
 
     function openUploadPopup(data, cb, cbClose) {
+    	console.log("openUpload");
         var success = false;
         $.sweetModal({
             title: 'Upload hinzufügen',
@@ -257,6 +261,7 @@ $(document).ready(function () {
     }
 
     function openTextInputPopup(data, cb, cbClose) {
+    	console.log("openTextInput");
         var success = false;
         $.sweetModal({
             title: 'Textfeld hinzufügen',
@@ -349,7 +354,6 @@ $(document).ready(function () {
             },
 
             onedit: function ($elm, type, cb, self) {
-            	console.log("on edit");
                 if (type == 'form-select') {
                     openSelectFormPopup($elm.data('cdata'), function (data) {
                         self.settings.oninit($elm, data, data.data, cb, self);
@@ -376,7 +380,6 @@ $(document).ready(function () {
             },
 
             oninit: function ($elm, outp, data, cb, self) {
-            	console.log("on init");
                 var type = $elm.data('type');
                 if (type == 'form-select') {
                     var con = '';
