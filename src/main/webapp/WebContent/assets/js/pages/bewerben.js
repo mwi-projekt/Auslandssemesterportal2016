@@ -11,9 +11,9 @@ $(document).ready(function () {
 
     parse();
     
-    if(document.getElementById("gdprCompliance")) {
-    document.getElementById("saveData").setAttribute('disabled', 'disabled');
-    }
+//    if(document.getElementById("gdprCompliance")) {
+//    document.getElementById("saveData").setAttribute('disabled', 'disabled');
+//    }
 });
 
 // automatisch Ort erkennen bei PLZ Eingabe in Persönliche Daten
@@ -46,13 +46,13 @@ $(document).on('keyup change', '#untPLZ', function (e) {
 });
 
 //$(':checkbox').change(function() {
-document.getElementById("gdprCompliance").change(function() {
-if(document.getElementById("gdprCompliance").checked) {
-	document.getElementById("saveData").setAttribute('disabled', false);
-	} else {
-		document.getElementById("saveData").setAttribute('disabled', 'disabled');
-		console.log("nicht angehakt");
-}
+//document.getElementById("gdprCompliance").change(function() {
+//if(document.getElementById("gdprCompliance").checked) {
+//	document.getElementById("saveData").setAttribute('disabled', false);
+//	} else {
+//		document.getElementById("saveData").setAttribute('disabled', 'disabled');
+//		console.log("nicht angehakt");
+//}
 
 function parse() {
     $.ajax({
