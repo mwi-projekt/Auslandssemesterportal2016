@@ -9,9 +9,7 @@ window.onbeforeunload = function(e) {
 }
 
 $(document).ready(function () {
-	
-	siteHasUnsavedChanges = false;
-	
+
     var id = $.urlParam('id').trim();
     var dia = $.urlParam('dia').trim();
     var type = $.urlParam('type').trim();
@@ -337,7 +335,7 @@ $(document).ready(function () {
             // on change update output element
             onchange: function(output) {
                 json = output;
-                siteHasUnsavedChanges = true;
+//                siteHasUnsavedChanges = true;
             },
 
             onedit: function ($elm, type, cb, self) {
