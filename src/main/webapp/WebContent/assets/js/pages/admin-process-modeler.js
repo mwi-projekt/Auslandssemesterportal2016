@@ -1,25 +1,26 @@
+var siteHasUnsavedChanges = false;
+
 window.onbeforeunload = function(e) {
-//	window.confirm("Sie sind dabei die Seite zu verlassen.\n Möchten Sie wirklich fortfahren?")
+	if(siteHasUnsavedChanges) {
 	return 'Sie sind dabei die Seite zu verlassen.\n Möchten Sie wirklich fortfahren?';
-	
-//	displayWarningUponPageExit();
-//	// e.preventDefaul();
-//    return null;
+	} else {
+		return null;
+	}
 }
 
-function displayWarningUponPageExit() {
-	swal({
-		title: "Warnung",
-		text: "Ungespeicherte Inhalte gehen verloren.\n Möchten Sie wirklich fortfahren?",
-		type: "warning",
-		showCancelButton: true,
-        cancelButtonText: "Auf Seite bleiben",
-        confirmButtonColor: "#EE0000",
-        confirmButtonText: "Seite verlassen",
-        closeOnConfirm: false,
-        closeOnCancel: false
-	})
-}
+//function displayWarningUponPageExit() {
+//	swal({
+//		title: "Warnung",
+//		text: "Ungespeicherte Inhalte gehen verloren.\n Möchten Sie wirklich fortfahren?",
+//		type: "warning",
+//		showCancelButton: true,
+//        cancelButtonText: "Auf Seite bleiben",
+//        confirmButtonColor: "#EE0000",
+//        confirmButtonText: "Seite verlassen",
+//        closeOnConfirm: false,
+//        closeOnCancel: false
+//	})
+//}
 
 $(document).ready(function () {
 	
@@ -82,6 +83,8 @@ $(document).ready(function () {
                 'success'
             )
         });
+        
+        siteHasUnsavedChanges = false;
     });
 
     function openCheckboxPopup(data, cb, cbClose) {
@@ -475,6 +478,8 @@ $(document).ready(function () {
                     content: con,
                     deleteable: deleteable
                 };
+                
+                siteHasUnsavedChanges = true;
             },
 
             // filter output
