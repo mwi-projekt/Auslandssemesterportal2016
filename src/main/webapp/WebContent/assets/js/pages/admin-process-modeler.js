@@ -1,5 +1,6 @@
 window.onbeforeunload = function(e) {
 	displayWarningUponPageExit();
+	// e.preventDefaul();
     return null;
 }
 
