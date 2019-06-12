@@ -10,7 +10,10 @@ $(document).ready(function () {
     uni = url.searchParams.get("uni");
 
     parse();
-        
+    
+    if(document.getElementById("gdprCompliance")) {
+    document.getElementById("saveData").setAttribute('disabled', 'disabled');
+    }
 });
 
 // automatisch Ort erkennen bei PLZ Eingabe in Persönliche Daten
@@ -42,6 +45,8 @@ $(document).on('keyup change', '#untPLZ', function (e) {
     }
 });
 
+//$(':checkbox').change(function() {
+document.getElementById("gdprCompliance").change(function() {
 if(document.getElementById("gdprCompliance").checked) {
 	document.getElementById("saveData").setAttribute('disabled', false);
 	} else {
@@ -255,7 +260,7 @@ function getDropzoneOptions(action, fileName) {
         sending: function (file, xhr, formData) {
             formData.append('action', action);
             formData.append('instance', instanceID);
-        },
+        },gtget
         accept: function (file, done) {
             if (file.name != fileName) {
                 swal("Fehler", "Bitte beachte die Syntax zur Benennung des Dokuments: " + fileName, "error");
