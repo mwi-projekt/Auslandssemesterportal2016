@@ -1,6 +1,6 @@
 window.onbeforeunload = function(e) {
-	window.confirm("Sie sind dabei die Seite zu verlassen.\n Möchten Sie wirklich fortfahren?")
-		
+//	window.confirm("Sie sind dabei die Seite zu verlassen.\n Möchten Sie wirklich fortfahren?")
+	return 'Sie sind dabei die Seite zu verlassen.\n Möchten Sie wirklich fortfahren?';
 	
 //	displayWarningUponPageExit();
 //	// e.preventDefaul();
