@@ -110,6 +110,7 @@ $(document).ready(function () {
 
                 $('#field-label').on('change keydown', function () {
                     $('#demo-label').text($(this).val());
+                    console.log("change keydown");
                 });
 
                 $('#field-save').on('click', function () {
@@ -126,6 +127,7 @@ $(document).ready(function () {
             },
             //theme: $.sweetModal.THEME_DARK
         });
+        console.log("I bims");
     }
 
     function openSelectFormPopup(data, cb, cbClose) {
@@ -478,8 +480,6 @@ $(document).ready(function () {
                     content: con,
                     deleteable: deleteable
                 };
-                
-                siteHasUnsavedChanges = true;
             },
 
             // filter output
