@@ -1,7 +1,10 @@
 window.onbeforeunload = function(e) {
-	displayWarningUponPageExit();
-	// e.preventDefaul();
-    return null;
+	window.confirm("Sie sind dabei die Seite zu verlassen.\n Möchten Sie wirklich fortfahren?")
+		
+	
+//	displayWarningUponPageExit();
+//	// e.preventDefaul();
+//    return null;
 }
 
 function displayWarningUponPageExit() {
