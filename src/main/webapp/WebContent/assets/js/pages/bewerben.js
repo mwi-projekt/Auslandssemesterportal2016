@@ -42,26 +42,10 @@ $(document).on('keyup change', '#untPLZ', function (e) {
     }
 });
 
-
-function showGDPRComplianceDialogue() {
-	swal({
-		title: "DSGVO zustimmen",
-		text: "Yo Bro, wir verkaufen deine Daten an Facebook.\n Ist das in Ordnung für dich?",
-		type: "warning",
-		showCancelButton: true,
-        cancelButtonText: "DSGVO ablehnen",
-        confirmButtonColor: "#228B22",
-        confirmButtonText: "DSGVO akzeptieren",
-        closeOnConfirm: false,
-        closeOnCancel: false
-	}, function (isConfirm) {
-		if(isConfirm === true) {
-			swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
-			flagGDPRConfirmed = true;
-		} else {
-			window.location.href = 'bewerbungsportal.html';
-		}
-	})
+if(document.getElementById("pizza").checked) {
+	saveData.setAttribute('disabled', 'disabled');
+	} else {
+		saveData.setAttribute('disabled', false);
 }
 
 function parse() {
