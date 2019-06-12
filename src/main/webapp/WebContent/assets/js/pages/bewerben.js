@@ -10,10 +10,7 @@ $(document).ready(function () {
     uni = url.searchParams.get("uni");
 
     parse();
-    
-//    if(document.getElementById("gdprCompliance")) {
-//    document.getElementById("saveData").setAttribute('disabled', 'disabled');
-//    }
+        
 });
 
 // automatisch Ort erkennen bei PLZ Eingabe in Persönliche Daten
@@ -31,7 +28,7 @@ $(document).on('keyup change', '#bewPLZ', function (e) {
 });
 
 
-//automatisc Ort erkennen bei PLZ Eingabe in Unternehmensdaten
+//automatische Ortserkennung bei PLZ-Eingabe in Unternehmensdaten
 $(document).on('keyup change', '#untPLZ', function (e) {
     if ($(this).val().length > 4) {
         var ort = $('#untOrt');
@@ -45,14 +42,27 @@ $(document).on('keyup change', '#untPLZ', function (e) {
     }
 });
 
-//$(':checkbox').change(function() {
-//document.getElementById("gdprCompliance").change(function() {
-//if(document.getElementById("gdprCompliance").checked) {
-//	document.getElementById("saveData").setAttribute('disabled', false);
-//	} else {
-//		document.getElementById("saveData").setAttribute('disabled', 'disabled');
-//		console.log("nicht angehakt");
-//}
+
+function showGDPRComplianceDialogue() {
+	swal({
+		title: "DSGVO zustimmen",
+		text: "Yo Bro, wir verkaufen deine Daten an Facebook.\n Ist das in Ordnung für dich?",
+		type: "warning",
+		showCancelButton: true,
+        cancelButtonText: "DSGVO ablehnen",
+        confirmButtonColor: "#228B22",
+        confirmButtonText: "DSGVO akzeptieren",
+        closeOnConfirm: false,
+        closeOnCancel: false
+	}, function (isConfirm) {
+		if(isConfirm === true) {
+			swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
+			flagGDPRConfirmed = true;
+		} else {
+			window.location.href = 'bewerbungsportal.html';
+		}
+	})
+}
 
 function parse() {
     $.ajax({
@@ -260,7 +270,7 @@ function getDropzoneOptions(action, fileName) {
         sending: function (file, xhr, formData) {
             formData.append('action', action);
             formData.append('instance', instanceID);
-        },gtget
+        },
         accept: function (file, done) {
             if (file.name != fileName) {
                 swal("Fehler", "Bitte beachte die Syntax zur Benennung des Dokuments: " + fileName, "error");
