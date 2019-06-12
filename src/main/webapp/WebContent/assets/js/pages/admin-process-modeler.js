@@ -10,6 +10,8 @@ window.onbeforeunload = function(e) {
 
 $(document).ready(function () {
 	
+	siteHasUnsavedChanges = false;
+	
     var id = $.urlParam('id').trim();
     var dia = $.urlParam('dia').trim();
     var type = $.urlParam('type').trim();
