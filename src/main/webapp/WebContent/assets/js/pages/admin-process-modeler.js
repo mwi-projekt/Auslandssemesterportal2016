@@ -9,9 +9,7 @@ window.onbeforeunload = function(e) {
 }
 
 $(document).ready(function () {
-	
-	siteHasUnsavedChanges = false;
-	
+
     var id = $.urlParam('id').trim();
     var dia = $.urlParam('dia').trim();
     var type = $.urlParam('type').trim();
@@ -77,6 +75,7 @@ $(document).ready(function () {
 
     function openCheckboxPopup(data, cb, cbClose) {
     	siteHasUnsavedChanges = true;
+    	console.log("Checkbox");
         var success = false;
         $.sweetModal({
             title: 'Checkbox hinzufügen',
@@ -119,6 +118,7 @@ $(document).ready(function () {
 
     function openSelectFormPopup(data, cb, cbClose) {
     	siteHasUnsavedChanges = true;
+    	console.log("select");
         var success = false;
         $.sweetModal({
             title: 'Auswahlfeld hinzufügen',
@@ -212,6 +212,7 @@ $(document).ready(function () {
 
     function openUploadPopup(data, cb, cbClose) {
     	siteHasUnsavedChanges = true;
+    	console.log("upload");
         var success = false;
         $.sweetModal({
             title: 'Upload hinzufügen',
@@ -249,6 +250,7 @@ $(document).ready(function () {
 
     function openTextInputPopup(data, cb, cbClose) {
     	siteHasUnsavedChanges = true;
+    	console.log("textinput");
         var success = false;
         $.sweetModal({
             title: 'Textfeld hinzufügen',
@@ -338,6 +340,7 @@ $(document).ready(function () {
             onchange: function(output) {
                 json = output;
                 siteHasUnsavedChanges = true;
+                console.log("onchange");
             },
 
             onedit: function ($elm, type, cb, self) {
