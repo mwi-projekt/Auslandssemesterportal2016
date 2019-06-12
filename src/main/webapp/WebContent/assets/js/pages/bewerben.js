@@ -43,9 +43,10 @@ $(document).on('keyup change', '#untPLZ', function (e) {
 });
 
 if(document.getElementById("pizza").checked) {
-	saveData.setAttribute('disabled', 'disabled');
+	document.getElementById("saveData").setAttribute('disabled', false);
 	} else {
-		saveData.setAttribute('disabled', false);
+		document.getElementById("saveData").setAttribute('disabled', 'disabled');
+		console.log("nicht angehakt");
 }
 
 function parse() {
