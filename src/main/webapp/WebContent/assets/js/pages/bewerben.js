@@ -59,7 +59,7 @@ $(document).on('keyup change', '#untPLZ', function (e) {
     }
 });
 
-$('#matrikelnummer').attr('readonly', false);
+$('#matrikelnummer').attr('readonly', true);
 
 function showGDPRComplianceDialogue() {
 	swal({
