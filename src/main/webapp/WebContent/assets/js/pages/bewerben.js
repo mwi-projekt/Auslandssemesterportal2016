@@ -10,23 +10,8 @@ $(document).ready(function () {
     uni = url.searchParams.get("uni");
     
     parse();
-    
     $('#matrikelnummer').attr('readonly', true);
 
-    if($('#gdprCompliance').length === 1) {
-
-		 $('#gdprCompliance').change(function() {
-		    	if($("#gdprCompliance").prop("checked")) {
-		    		$('#saveData').attr('disabled', false);
-		    	} else {
-		    		$('#saveData').attr('disabled', true);
-		    		
-		    	}
-		    })
-		
-		$('#saveData').attr('disabled', true);
-		
-		}
 });
 
 //function manipulateDOM() {
@@ -189,7 +174,6 @@ function parse() {
             alert('Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.');
         }
     });
-    $('#matrikelnummer').attr('readonly', true);
 }
 
 function saveData() {
@@ -275,7 +259,7 @@ function getData() {
             alert('Ein Fehler ist aufgetreten');
         }
     });
-
+    $('#matrikelnummer').attr('readonly', true);
 }
 
 function getDropzoneOptions(action, fileName) {
