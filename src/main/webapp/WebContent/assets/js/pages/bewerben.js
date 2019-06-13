@@ -15,13 +15,11 @@ $(document).ready(function () {
 });
 
 window.onload = function () {
-    $('#matrikelnummer').attr('readonly', true);
 }
 $(window).on("load", function() {
 	
 	console.log("läd überhaupt was")
 	
-    $('#matrikelnummer').attr('readonly', true);
     
 //	if($('#gdprCompliance').length === 1) {
 //
