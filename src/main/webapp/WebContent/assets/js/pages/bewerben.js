@@ -13,6 +13,8 @@ $(document).ready(function () {
     
     console.log("document ready function");
     
+    $('#matrikelnummer').attr('readonly', true);
+        
     if(document.getElementById("gdprCompliance")) {
     	console.log("ich bin teil der schleife --> doc ready");
 //    	document.getElementById("saveData").setAttribute('disabled', 'disabled');
@@ -59,7 +61,6 @@ $(document).on('keyup change', '#untPLZ', function (e) {
     }
 });
 
-$('#matrikelnummer').attr('readonly', true);
 
 function showGDPRComplianceDialogue() {
 	swal({
