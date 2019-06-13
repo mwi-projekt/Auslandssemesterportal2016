@@ -40,6 +40,15 @@ $(window).on("load", function() {
 //		}
 })
 
+$('#gdprCompliance').change(function() {
+		    	console.log("change event triggered")
+		    	if($("#gdprCompliance").prop("checked")) {
+		    		$('#saveData').attr('disabled', false);
+		    	} else {
+		    		$('#saveData').attr('disabled', true);
+		    		
+		    	}
+		    })
 
 
 // Automatische Ortserkennung bei PLZ-Eingabe in den persönlichen Daten
