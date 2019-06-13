@@ -12,9 +12,7 @@ $(document).ready(function () {
     parse();
     
     console.log("document ready function");
-    
-    $('#matrikelnummer').attr('readonly', true);
-        
+            
     if(document.getElementById("gdprCompliance")) {
     	console.log("ich bin teil der schleife --> doc ready");
 //    	document.getElementById("saveData").setAttribute('disabled', 'disabled');
@@ -24,13 +22,15 @@ $(document).ready(function () {
         
 });
 
-window.onload = function () {    
-	$('#matrikelnummer').attr('readonly', true);
-	document.getElementById("matrikelnummer").readonly = true;
- }
+//window.onload = function () {    
+//	$('#matrikelnummer').attr('readonly', true);
+//	document.getElementById("matrikelnummer").readonly = true;
+// }
 
 $(window).on("load", function() {
+	
     $('#matrikelnummer').attr('readonly', true);
+    
 	console.log("window on load");
 	if(document.getElementById("gdprCompliance")) {
 		console.log("objekt existiert --> window on laod"); } 
