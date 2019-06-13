@@ -12,12 +12,23 @@ $(document).ready(function () {
     parse();
     
     console.log("document ready function");
+    
     if(document.getElementById("gdprCompliance")) {
-    	console.log("ich bin teil der schleife");
-    	document.getElementById("saveData").setAttribute('disabled', 'disabled');
+    	console.log("ich bin teil der schleife --> doc ready");
+//    	document.getElementById("saveData").setAttribute('disabled', 'disabled');
+    } else {
+    	console.log("kein bock auf die schleife aldaaa --> doc ready");
     }
         
 });
+
+$(window).on("load", function() {
+	console.log("window on load");
+	if(document.getElementById("gdprCompliance")) {
+		console.log("objekt existiert --> window on laod"); } 
+	else {
+			console.log("objekt existiert nichz --> window on load"); }
+})
 
 // automatisch Ort erkennen bei PLZ Eingabe in Persönliche Daten
 $(document).on('keyup change', '#bewPLZ', function (e) {
