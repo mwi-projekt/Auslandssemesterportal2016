@@ -22,17 +22,12 @@ $(document).ready(function () {
         
 });
 
-//window.onload = function () {    
-//	$('#matrikelnummer').attr('readonly', true);
-//	document.getElementById("matrikelnummer").readonly = true;
-// }
-
 $(window).on("load", function() {
 	
     $('#matrikelnummer').attr('readonly', true);
     
 	console.log("window on load");
-	if(document.getElementById("gdprCompliance")) {
+	if($('#gdprComplianc').length === 1) {
 		console.log("objekt existiert --> window on laod"); } 
 	else {
 			console.log("objekt existiert nichz --> window on load"); }
