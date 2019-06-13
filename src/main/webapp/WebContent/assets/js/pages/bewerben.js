@@ -10,8 +10,6 @@ $(document).ready(function () {
     uni = url.searchParams.get("uni");
     
     parse();
-//    $('#matrikelnummer').attr('readonly', true);
-
 });
 
 function manipulateDOM() {
@@ -32,7 +30,6 @@ function manipulateDOM() {
 		$('#saveData').attr('disabled', true);
 		
 		}
-	
 }
 
 // Automatische Ortserkennung bei PLZ-Eingabe in den persönlichen Daten
