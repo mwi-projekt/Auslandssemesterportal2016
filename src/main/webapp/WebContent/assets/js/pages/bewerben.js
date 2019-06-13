@@ -9,7 +9,7 @@ $(document).ready(function () {
     instanceID = url.searchParams.get("instance_id");
     uni = url.searchParams.get("uni");
 
-//    $('#matrikelnummer').attr('readonly', true);
+    $('#matrikelnummer').attr('readonly', true);
     
     parse();
 });
@@ -21,7 +21,7 @@ $(window).on("load", function() {
 	
 	console.log("läd überhaupt was")
 	
-//    $('#matrikelnummer').attr('readonly', true);
+    $('#matrikelnummer').attr('readonly', true);
     
 //	if($('#gdprCompliance').length === 1) {
 //
