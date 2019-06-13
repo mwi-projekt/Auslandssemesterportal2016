@@ -149,6 +149,7 @@ function parse() {
                     document.getElementById("formular").innerHTML = output;
                     if (idList.length > 0) {
                         getData();
+                        manipulateDOM();
                     }
                     // init upload
                     for (var i = 0; i < json.length; i++) {
@@ -259,7 +260,6 @@ function getData() {
             alert('Ein Fehler ist aufgetreten');
         }
     });
-    manipulateDOM();
     }
 
 function getDropzoneOptions(action, fileName) {
