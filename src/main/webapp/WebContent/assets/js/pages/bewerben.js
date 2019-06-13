@@ -10,16 +10,6 @@ $(document).ready(function () {
     uni = url.searchParams.get("uni");
 
     parse();
-    
-    console.log("document ready function");
-            
-    if(document.getElementById("gdprCompliance")) {
-    	console.log("ich bin teil der schleife --> doc ready");
-//    	document.getElementById("saveData").setAttribute('disabled', 'disabled');
-    } else {
-    	console.log("kein bock auf die schleife aldaaa --> doc ready");
-    }
-        
 });
 
 $(window).on("load", function() {
@@ -28,11 +18,22 @@ $(window).on("load", function() {
     
 	if($('#gdprCompliance').length === 1) {
 		
+//		$('#saveData').setAttribute('disabled', 'disabled');
+//		Wenn Checkbox vorhanden, dann graue den Button 'saveData' aus
+		
 		} else {
+			
+//			Man muss else eigtl nichts tun, dann soll der Button einfach aktiv bleiben
 			
 		}
 })
 
+//$('#gdprCompliance').change(function() {
+//if($('#gdprCompliance').checked) {
+//	$('#saveData').removeAttribute('disabled');
+//	} else {
+//		$('#saveData').setAttribute('disabled', 'disabled');
+//}
 
 
 // Automatische Ortserkennung bei PLZ-Eingabe in den persönlichen Daten
