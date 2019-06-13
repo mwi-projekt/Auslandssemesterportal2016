@@ -17,14 +17,14 @@ $(window).on("load", function() {
     $('#matrikelnummer').attr('readonly', true);
     
 	if($('#gdprCompliance').length === 1) {
-		
+		console.log("disabled set to true")
 		$('#saveData').attr('disabled', true);
 		
 		}
 })
 
 $('#gdprCompliance').change(function() {
-	
+	console.log("change event triggered")
 	if($("#gdprCompliance").prop("checked")) {
 		$('#saveData').attr('disabled', false);
 	} else {
