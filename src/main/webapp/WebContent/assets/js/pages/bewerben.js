@@ -10,6 +10,10 @@ $(document).ready(function () {
     uni = url.searchParams.get("uni");
 
     parse();
+    
+    if(document.getElementById("gdprCompliance")) {
+    	document.getElementById("saveData").setAttribute('disabled', 'disabled');
+    }
         
 });
 
