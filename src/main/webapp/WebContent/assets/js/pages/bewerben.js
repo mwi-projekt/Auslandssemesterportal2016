@@ -9,9 +9,14 @@ $(document).ready(function () {
     instanceID = url.searchParams.get("instance_id");
     uni = url.searchParams.get("uni");
 
+    $('#matrikelnummer').attr('readonly', true);
+    
     parse();
 });
 
+window.onload = function () {
+    $('#matrikelnummer').attr('readonly', true);
+}
 $(window).on("load", function() {
 	
 	console.log("läd überhaupt was")
