@@ -24,7 +24,13 @@ $(document).ready(function () {
         
 });
 
+window.onload = function () {    
+	$('#matrikelnummer').attr('readonly', true);
+	document.getElementById("matrikelnummer").readonly = true;
+ }
+
 $(window).on("load", function() {
+    $('#matrikelnummer').attr('readonly', true);
 	console.log("window on load");
 	if(document.getElementById("gdprCompliance")) {
 		console.log("objekt existiert --> window on laod"); } 
