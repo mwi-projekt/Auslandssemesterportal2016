@@ -8,15 +8,14 @@ $(document).ready(function () {
     var url = new URL(window.location.href);
     instanceID = url.searchParams.get("instance_id");
     uni = url.searchParams.get("uni");
-
-    $('#matrikelnummer').attr('readonly', true);
     
     parse();
+    
+    $('#matrikelnummer').attr('readonly', true);
+
 });
 
-window.onload = function () {
-    $('#matrikelnummer').attr('readonly', true);
-}
+
 $(window).on("load", function() {
 	
 	console.log("läd überhaupt was")
@@ -190,6 +189,7 @@ function parse() {
             alert('Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.');
         }
     });
+    $('#matrikelnummer').attr('readonly', true);
 }
 
 function saveData() {
@@ -275,6 +275,7 @@ function getData() {
             alert('Ein Fehler ist aufgetreten');
         }
     });
+    $('#matrikelnummer').attr('readonly', true);
 
 }
 
