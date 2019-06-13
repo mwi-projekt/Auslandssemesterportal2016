@@ -16,6 +16,16 @@ $(window).on("load", function() {
 	
     $('#matrikelnummer').attr('readonly', true);
     
+    $('#gdprCompliance').change(function() {
+    	console.log("change event triggered")
+    	if($("#gdprCompliance").prop("checked")) {
+    		$('#saveData').attr('disabled', false);
+    	} else {
+    		$('#saveData').attr('disabled', true);
+    		
+    	}
+    })
+    
 	if($('#gdprCompliance').length === 1) {
 		console.log("disabled set to true")
 		$('#saveData').attr('disabled', true);
@@ -23,15 +33,7 @@ $(window).on("load", function() {
 		}
 })
 
-$('#gdprCompliance').change(function() {
-	console.log("change event triggered")
-	if($("#gdprCompliance").prop("checked")) {
-		$('#saveData').attr('disabled', false);
-	} else {
-		$('#saveData').attr('disabled', true);
-		
-	}
-})
+
 
 // Automatische Ortserkennung bei PLZ-Eingabe in den persönlichen Daten
 $(document).on('keyup change', '#bewPLZ', function (e) {
