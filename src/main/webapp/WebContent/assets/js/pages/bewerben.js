@@ -11,7 +11,9 @@ $(document).ready(function () {
 
     parse();
     
+    console.log("document ready function");
     if(document.getElementById("gdprCompliance")) {
+    	console.log("ich bin teil der schleife");
     	document.getElementById("saveData").setAttribute('disabled', 'disabled');
     }
         
