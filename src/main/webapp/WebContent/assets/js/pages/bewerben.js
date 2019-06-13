@@ -26,11 +26,11 @@ $(window).on("load", function() {
 	
     $('#matrikelnummer').attr('readonly', true);
     
-	console.log("window on load");
 	if($('#gdprCompliance').length === 1) {
-		console.log("objekt existiert --> window on laod"); } 
-	else {
-			console.log("objekt existiert nichz --> window on load"); }
+		
+		} else {
+			
+		}
 })
 
 // automatisch Ort erkennen bei PLZ Eingabe in Persönliche Daten
