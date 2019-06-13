@@ -18,23 +18,20 @@ $(window).on("load", function() {
     
 	if($('#gdprCompliance').length === 1) {
 		
-//		$('#saveData').setAttribute('disabled', 'disabled');
-//		Wenn Checkbox vorhanden, dann graue den Button 'saveData' aus
+		$('#saveData').attr('disabled', true);
 		
-		} else {
-			
-//			Man muss else eigtl nichts tun, dann soll der Button einfach aktiv bleiben
-			
 		}
 })
 
-//$('#gdprCompliance').change(function() {
-//if($('#gdprCompliance').checked) {
-//	$('#saveData').removeAttribute('disabled');
-//	} else {
-//		$('#saveData').setAttribute('disabled', 'disabled');
-//}
-
+$('#gdprCompliance').change(function() {
+	
+	if($("#gdprCompliance").prop("checked")) {
+		$('#saveData').attr('disabled', false);
+	} else {
+		$('#saveData').attr('disabled', true);
+		
+	}
+})
 
 // Automatische Ortserkennung bei PLZ-Eingabe in den persönlichen Daten
 $(document).on('keyup change', '#bewPLZ', function (e) {
