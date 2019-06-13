@@ -12,30 +12,27 @@ $(document).ready(function () {
     parse();
 });
 
-window.onload = function () { 
-    $('#matrikelnummer').attr('readonly', true);
-}
-
-
 $(window).on("load", function() {
+	
 	console.log("läd überhaupt was")
+	
     $('#matrikelnummer').attr('readonly', true);
     
-	if($('#gdprCompliance').length === 1) {
-
-		 $('#gdprCompliance').change(function() {
-		    	console.log("change event triggered")
-		    	if($("#gdprCompliance").prop("checked")) {
-		    		$('#saveData').attr('disabled', false);
-		    	} else {
-		    		$('#saveData').attr('disabled', true);
-		    		
-		    	}
-		    })
-		
-		$('#saveData').attr('disabled', true);
-		
-		}
+//	if($('#gdprCompliance').length === 1) {
+//
+//		 $('#gdprCompliance').change(function() {
+//		    	console.log("change event triggered")
+//		    	if($("#gdprCompliance").prop("checked")) {
+//		    		$('#saveData').attr('disabled', false);
+//		    	} else {
+//		    		$('#saveData').attr('disabled', true);
+//		    		
+//		    	}
+//		    })
+//		
+//		$('#saveData').attr('disabled', true);
+//		
+//		}
 })
 
 
