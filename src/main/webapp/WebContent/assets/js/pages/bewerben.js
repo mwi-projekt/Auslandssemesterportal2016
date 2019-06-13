@@ -33,7 +33,9 @@ $(window).on("load", function() {
 		}
 })
 
-// automatisch Ort erkennen bei PLZ Eingabe in Persönliche Daten
+
+
+// Automatische Ortserkennung bei PLZ-Eingabe in den persönlichen Daten
 $(document).on('keyup change', '#bewPLZ', function (e) {
     if ($(this).val().length > 4) {
         var ort = $('#bewOrt');
@@ -48,7 +50,7 @@ $(document).on('keyup change', '#bewPLZ', function (e) {
 });
 
 
-//automatische Ortserkennung bei PLZ-Eingabe in Unternehmensdaten
+// Automatische Ortserkennung bei PLZ-Eingabe in Unternehmensdaten
 $(document).on('keyup change', '#untPLZ', function (e) {
     if ($(this).val().length > 4) {
         var ort = $('#untOrt');
@@ -61,28 +63,6 @@ $(document).on('keyup change', '#untPLZ', function (e) {
         $('#untOrt').val('');
     }
 });
-
-
-function showGDPRComplianceDialogue() {
-	swal({
-		title: "DSGVO zustimmen",
-		text: "Yo Bro, wir verkaufen deine Daten an Facebook.\n Ist das in Ordnung für dich?",
-		type: "warning",
-		showCancelButton: true,
-        cancelButtonText: "DSGVO ablehnen",
-        confirmButtonColor: "#228B22",
-        confirmButtonText: "DSGVO akzeptieren",
-        closeOnConfirm: false,
-        closeOnCancel: false
-	}, function (isConfirm) {
-		if(isConfirm === true) {
-			swal('Vielen Dank!', 'Sie haben ihre Zustimmung zur Datenverarbeitung erteilt', 'success');
-			flagGDPRConfirmed = true;
-		} else {
-			window.location.href = 'bewerbungsportal.html';
-		}
-	})
-}
 
 function parse() {
     $.ajax({
