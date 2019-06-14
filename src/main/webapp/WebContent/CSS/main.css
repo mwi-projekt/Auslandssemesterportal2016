@@ -780,12 +780,3 @@ i {
 .swal2-popup {
 	font-size: 1.6rem !important;
 }
-
-#gdprCompliance {
-	min-height: 40px;
-	padding-left: 20px;
-	margin-bottom: 0;
-	font-weight: 700;
-	cursor: pointer;
-	font-size: 17px;
-}
