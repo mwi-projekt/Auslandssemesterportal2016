@@ -54,3 +54,12 @@ table td {
 /* #checkbox1 { */
 /* 	overflow: auto; */
 /* } */
+
+.checkbox input#gdprCompliance {
+	min-height: 40px;
+	margin-left: -158px;
+	margin-bottom: 0;
+	font-weight: 700;
+	cursor: pointer;
+	font-size: 17px;
+}
