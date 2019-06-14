@@ -2997,15 +2997,6 @@ input[type=search] {
 	cursor: pointer
 }
 
-.checkbox input#gdprCompliance {
-	min-height: 40px;
-	margin-left: -158px;
-	margin-bottom: 0;
-	font-weight: 700;
-	cursor: pointer;
-	font-size: 17px;
-}
-
 .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox],
 	.radio input[type=radio], .radio-inline input[type=radio] {
 	position: absolute;

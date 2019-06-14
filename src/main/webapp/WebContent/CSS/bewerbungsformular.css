@@ -57,7 +57,7 @@ table td {
 
 .checkbox input#gdprCompliance {
 	min-height: 40px;
-	margin-left: -158px;
+	padding-left: 20px;
 	margin-bottom: 0;
 	font-weight: 700;
 	cursor: pointer;
