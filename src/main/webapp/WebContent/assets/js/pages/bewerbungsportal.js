@@ -52,7 +52,7 @@ $(document).ready(function () {
                 
                 $.sweetModal({
                     title: 'Bitte wähle die Uni aus',
-                    content: popUpHtml + popUpHTML2,
+                    content: popUpHtml + popUpHTMl2,
                     width: '500px',
                     onOpen: function () {
                         $('#newBewProzessWahl').on('click', function () {
