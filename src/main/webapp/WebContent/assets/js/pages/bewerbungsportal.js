@@ -43,17 +43,20 @@ $(document).ready(function () {
                     if (splitUni.indexOf(result.data[l].uniTitel) != -1) continue;
                     popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
                 }
-                popUpHtml = popUpHtml + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
+                //popUpHtml = popUpHtml + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
                 if (popUpHtml.match('<option>') != '<option>') {
                     popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
                 }
                 
                 var popUpHtml2 = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
-                popUpHtml2 = popUpHtml2 + '<option> Zeitraum auswählen </option><option> Wintersemester 2019 </option>';
+                //Zeitraum muss hier noch automatisch generiert werden
+                popUpHtml2 = popUpHtml2 + '<option> Zeitraum auswählen </option><option> Sommersemester 2020 </option><option> Wintersemester 2020 </option><option> Sommersemester 2021 </option><option> Wintersemester 2021 </option>';
+                
+                popUpHtml3 = '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
                 
                 $.sweetModal({
                     title: 'Bitte wähle die Uni aus',
-                    content: popUpHtml + popUpHtml2,
+                    content: popUpHtml + popUpHtml2 + popUpHtml3,
                     width: '500px',
                     onOpen: function () {
                         $('#newBewProzessWahl').on('click', function () {
