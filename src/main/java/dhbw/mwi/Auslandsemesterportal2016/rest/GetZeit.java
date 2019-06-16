@@ -19,8 +19,18 @@ public class GetZeit extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter toClient = response.getWriter();
+		
+		//Aktuelles Jahr abfragen
 		int year = Calendar.getInstance().get(Calendar.YEAR);
-		toClient.print(year);
+		
+		//Liste enthält WS und SS für das aktuelle und die zwei darauffolgenden Jahre
+		String ls =  "";
+		for (int i=0; i < 3; i++) {
+			int yearCur = year + 1;
+			ls = "Wintersemester " + yearCur ;
+		}
+				
+		toClient.print(ls);
 	}
 
 }
