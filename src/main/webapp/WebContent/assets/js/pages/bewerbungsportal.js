@@ -46,7 +46,7 @@ $(document).ready(function () {
                 var popUpHtml2 = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
                 popUpHtml2 = popUpHtml2 + '<option> Zeitraum auswählen </option>';
                 
-                popUpHtml = popUpHtml + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
+                popUpHtml2 = popUpHtml2 + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
                 if (popUpHtml.match('<option>') != '<option>') {
                     popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
                 }
