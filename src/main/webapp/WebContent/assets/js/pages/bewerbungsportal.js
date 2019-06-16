@@ -41,7 +41,7 @@ $(document).ready(function () {
                 for (var l = 0; l < result.data.length - 1; l++) {
                     // filtern von schon beworbenen unis
                     if (splitUni.indexOf(result.data[l].uniTitel) != -1) continue;
-                    popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
+                    popUpHtml = popUpHtml + '<option> Zeitrauhm auswählen </option>';
                 }
                 var popUpHtml2 = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
                 popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
