@@ -38,11 +38,12 @@ $(document).ready(function () {
                 });
 
                 var popUpHtml = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
-                var popUpHtml2 = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectZeit">';
+                var test = 'test';
                 for (var l = 0; l < result.data.length - 1; l++) {
                     // filtern von schon beworbenen unis
                     if (splitUni.indexOf(result.data[l].uniTitel) != -1) continue;
-                    popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>' + '<option> Zeitraum wählen </option>';
+                    popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
+                    popUpHtml = popUpHtml + '<option>' +  test + '</option>';
                 }
                 popUpHtml = popUpHtml + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
                 if (popUpHtml.match('<option>') != '<option>') {
