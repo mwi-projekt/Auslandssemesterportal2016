@@ -48,7 +48,7 @@ $(document).ready(function () {
                 //Zeitraum muss hier noch automatisch generiert werden
                 popUpHtml2 = popUpHtml2 + '<option> Zeitraum auswählen </option><option> Sommersemester 2020 </option><option> Wintersemester 2020 </option><option> Sommersemester 2021 </option><option> Wintersemester 2021 </option>';
                 
-                popUpHtml = popUptHtml + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
+                popUpHtml = popUpHtml + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
                 if (popUpHtml.match('<option>') != '<option>') {
                     popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
                 }
