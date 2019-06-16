@@ -43,16 +43,19 @@ $(document).ready(function () {
                     if (splitUni.indexOf(result.data[l].uniTitel) != -1) continue;
                     popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
                 }
-                popUpHtml = popUpHtml + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
-                if (popUpHtml.match('<option>') != '<option>') {
-                    popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
-                }
                 var popUpHtml2 = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
                 popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
                 
+                popUpHtmlGes = popUpHtml + popUpHtml2 + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
+               // Hier muss noch geprüft werden ob Zeiten auch gleich sind
+                if (popUpHtml.match('<option>') != '<option>') {
+                    popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
+                }
+                
+                
                 $.sweetModal({
                     title: 'Bitte wähle die Uni aus',
-                    content: popUpHtml + popUpHtml2,
+                    content: popUpHtmlGes,
                     width: '500px',
                     onOpen: function () {
                         $('#newBewProzessWahl').on('click', function () {
