@@ -30,6 +30,9 @@ public class GetZeit extends HttpServlet {
 			ls = ls + "{\"zeit\":\"Wintersemester " + yearCur + "\"}";
 			if (i != 2)
 				ls = ls + ",";
+			ls = ls + "{\"zeit\":\"Sommersemester " + yearCur + "\"}";
+			if (i != 2)
+				ls = ls + ",";
 		}
 		ls = ls + "]";				
 		toClient.print(ls);
