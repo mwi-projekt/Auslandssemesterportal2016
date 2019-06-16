@@ -48,12 +48,12 @@ $(document).ready(function () {
                     popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
                 }
                 
-                var popUpHtml2 = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
+                var popUpHtml2 = '<div class="form-group"><div class="col-md-12"><select class="inBox" id="selectZeit">';
                 //Zeitraum muss hier noch automatisch generiert werden
                 popUpHtml2 = popUpHtml2 + '<option> Zeitraum auswählen </option><option> Sommersemester 2020 </option><option> Wintersemester 2020 </option><option> Sommersemester 2021 </option><option> Wintersemester 2021 </option>';
                 
                 $.sweetModal({
-                    title: 'Bitte wähle die Uni aus',
+                    title: 'Bitte wähle die Uni und den Zeitraum aus',
                     content: popUpHtml + popUpHtml2,
                     width: '500px',
                     onOpen: function () {
