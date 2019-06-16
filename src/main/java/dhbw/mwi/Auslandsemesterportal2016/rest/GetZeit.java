@@ -26,8 +26,8 @@ public class GetZeit extends HttpServlet {
 		//Liste enthält WS und SS für das aktuelle und die zwei darauffolgenden Jahre
 		String ls =  "";
 		for (int i=0; i < 3; i++) {
-			int yearCur = year + 1;
-			ls = "Wintersemester " + yearCur ;
+			int yearCur = year + i;
+			ls = ls + "Wintersemester " + yearCur ;
 		}
 				
 		toClient.print(ls);
