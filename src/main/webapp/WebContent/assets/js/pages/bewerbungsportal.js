@@ -56,7 +56,7 @@ $(document).ready(function () {
                 
                 $.sweetModal({
                     title: 'Bitte wähle die Uni und den Zeitraum aus',
-                    content: popUpHtml + popUpHtml2 + popupHtml3,
+                    content: popUpHtml + popUpHtml2 + popUpHtml3,
                     width: '500px',
                     onOpen: function () {
                         $('#newBewProzessWahl').on('click', function () {
