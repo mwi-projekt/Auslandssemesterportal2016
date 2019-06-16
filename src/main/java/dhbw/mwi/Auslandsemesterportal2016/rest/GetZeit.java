@@ -13,7 +13,7 @@ import java.util.Calendar;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
-@WebServlet(urlPatterns = { "/unis" })
+@WebServlet(urlPatterns = { "/zeit" })
 public class GetZeit extends HttpServlet {
 
 	@Override
