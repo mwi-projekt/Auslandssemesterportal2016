@@ -43,9 +43,6 @@ $(document).ready(function () {
         }
     });
     
-    console.log($(document).getElementById("muttersprache").value);
-    console.log($(document).getElementById("semesteradresseAnders").value);
-    
 });
 
 function parse() {
@@ -122,6 +119,8 @@ function parse() {
                                 break;
                         }
                     }
+                    
+                    console.log(idList);
 
                     if (innerOutput != '') {
                         if (stepName === "datenEingeben") {
@@ -131,13 +130,13 @@ function parse() {
                         } else if (stepName === "Task_1jq3nab") {
                             visibleStepName = "Semesteranschrift";
                         } else if (stepName === "englischNotePruefen") {
-                            visibleStepName = "Englischnote im Abitur in Punkten";
+                            visibleStepName = "Notenpunkte im Abitur";
                         } else {
                             visibleStepName = "Sonstige Angaben";
                         }
 
                         output = output +
-                            '<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
+                            '<div class="panel panel-default" id="'+visibleStepName+'"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
                             k + '">' + visibleStepName + '</a></h4></div>'; // Header
                         // des
                         // Accordions
@@ -218,7 +217,7 @@ function getData() {
                 $('#' + key).val(value);
                 if(key === 'muttersprache' || key === 'semesteradresseAnders'){
                 	$('#' + key).prop("checked", value);
-                	variableEnglishAndSemesteranschrift(key,value);
+//                	variableEnglishAndSemesteranschrift(key,value);
                 }
                 if (!(sendBew === "true")) {
                     $("#" + key).prop('readonly', true);
@@ -253,8 +252,7 @@ function saveChanges() {
             typeString = typeString + typeList[j] + "|";
         } else {
             keyString = keyString + idList[j] + "|";
-            valString = valString + document.getElementById(idList[j]).value +
-                "|";
+            valString = valString + document.getElementById(idList[j]).value + "|";
             typeString = typeString + typeList[j] + "|";
         }
     }
@@ -300,7 +298,6 @@ function saveChanges() {
 
 function validateBew() {
     validateString = $('#validierungErfolgreich').val();
-    console.log(validateString); //Ausgabe
     grund = $('#reason').text();
     resultString = "";
     if (validateString === "true") {
@@ -321,7 +318,6 @@ function validateBew() {
             confirmButtonText: "Ignorieren",
             cancelButtonText: "Abbrechen"
         });
-        console.log('Platzhalter gefunden');
     } else {
         console.log('In der Nachricht wurden keine Platzhalter gefunden');
     }
@@ -343,7 +339,7 @@ function validateBew() {
                 instance_id: instanceID,
                 key: 'validierungErfolgreich|mailText',
                 value: validateString + '|' + grund,
-                type: 'boolean|text'
+                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
             },
             success: function (result) {
                 swal({
