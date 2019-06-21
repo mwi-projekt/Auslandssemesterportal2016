@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.camunda.bpm.engine.impl.util.json.JSONArray;
-import org.camunda.bpm.engine.impl.util.json.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
@@ -28,24 +28,24 @@ public class ListFilesServlet extends HttpServlet {
 			File folder = new File(Config.UPLOAD_DIR);
 			File[] listOfFiles = folder.listFiles();
 
-			JSONObject json = new JSONObject();
-			json.put("name", "files");
-			json.put("type", "folder");
-			json.put("path", Config.UPLOAD_URL);
-			JSONArray arr = new JSONArray();
+			JsonObject json = new JsonObject();
+			json.addProperty("name", "files");
+			json.addProperty("type", "folder");
+			json.addProperty("path", Config.UPLOAD_URL);
+			JsonArray arr = new JsonArray();
 
 			for (int i = 0; i < listOfFiles.length; i++) {
 				if (listOfFiles[i].isFile()) {
-					JSONObject file = new JSONObject();
-					file.put("name", listOfFiles[i].getName());
-					file.put("type", "file");
-					file.put("path", Config.UPLOAD_URL + listOfFiles[i].getName());
-					file.put("size", listOfFiles[i].length());
-					arr.put(file);
+					JsonObject file = new JsonObject();
+					file.addProperty("name", listOfFiles[i].getName());
+					file.addProperty("type", "file");
+					file.addProperty("path", Config.UPLOAD_URL + listOfFiles[i].getName());
+					file.addProperty("size", listOfFiles[i].length());
+					arr.add(file);
 				}
 			}
 
-			json.put("items", arr);
+			json.add("items", arr);
 			Util.writeJson(response, json);
 		}
 	}

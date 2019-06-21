@@ -1,23 +1,21 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngines;
-import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.camunda.bpm.engine.impl.util.json.JSONObject;
-import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
-
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import java.io.IOException;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.util.List;
+
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
+
+import com.google.gson.JsonObject;
+
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetInstanceServlet", urlPatterns = { "/getInstance" })
@@ -56,9 +54,9 @@ public class GetInstanceServlet extends HttpServlet {
 				SQL_queries.createInstance(instance_id, uni, matnr, 10);
 			}
 
-			JSONObject json = new JSONObject();
-			json.put("instanceId", instance_id);
-			json.put("uni", uni);
+			JsonObject json = new JsonObject();
+			json.addProperty("instanceId", instance_id);
+			json.addProperty("uni", uni);
 			Util.writeJson(response, json);
 		}
 	}

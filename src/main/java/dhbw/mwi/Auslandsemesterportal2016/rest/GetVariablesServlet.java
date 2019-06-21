@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.impl.util.json.JSONObject;
+
+import com.google.gson.JsonObject;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
@@ -30,11 +31,11 @@ public class GetVariablesServlet extends HttpServlet {
 			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
 			RuntimeService runtime = engine.getRuntimeService();
 
-			JSONObject json = new JSONObject();
+			JsonObject json = new JsonObject();
 
 			for (int i = 0; i < keys.length; i++) {
 				Object obj = runtime.getVariable(instanceID, keys[i]);
-				json.put(keys[i], obj);
+				json.addProperty(keys[i], obj.toString());
 			}
 			Util.writeJson(response, json);
 
