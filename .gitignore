@@ -1,4 +1,13 @@
 /target/
 .idea
 *.iml
+/.vscode
 /.metadata/
+/.settings
+/*.springBeans
+
+# Eclipse Core      
+.project
+
+# JDT-specific (Eclipse Java Development Tools)     
+.classpath
