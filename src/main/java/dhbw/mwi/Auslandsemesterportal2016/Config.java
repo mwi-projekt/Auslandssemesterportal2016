@@ -11,6 +11,10 @@ public class Config {
 	public static final String USER = "mwi";
 	public static final String PASS = "mwi2014";
 	
+	public static final String MAIL_HOST = "smtp.gmail.com";
+	public static final String MAIL_USER = "mwiausland@gmail.com";
+	public static final String MAIL_PASS = "MWIAusland1";
+	
 	public static final String UPLOAD_DIR = "/var/www/files";
 	public static final String UPLOAD_URL = "http://10.3.15.45/files/";
 	
