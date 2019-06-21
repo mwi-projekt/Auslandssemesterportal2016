@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
@@ -49,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
 				String salt = Util.generateSalt();
 				String pw = Util.HashSha256(Util.HashSha256(request.getParameter("passwort")) + salt);
 
-				String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/?confirm=" + id;
+				String link = Config.MWI_URL + "/?confirm=" + id;
 
 				message.setContent("<h2>Hallo " + request.getParameter("vorname")
 						+ ",</h2> Du hast Dich auf der Seite des Auslandsportals registriert. "

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "ModelUploadServlet", urlPatterns = { "/model/upload" })
@@ -39,7 +40,7 @@ public class ModelUploadServlet extends HttpServlet {
 
 				if (filePart != null) {
 					String fileName = getFileName(filePart);
-					OutputStream outs = new FileOutputStream(new File("/var/www/files/" + fileName));
+					OutputStream outs = new FileOutputStream(new File(Config.UPLOAD_DIR + "/"  + fileName));
 					byte[] buf = new byte[1024];
 					int len;
 					InputStream is = filePart.getInputStream();
@@ -50,7 +51,7 @@ public class ModelUploadServlet extends HttpServlet {
 					is.close();
 
 					out.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction(" + action
-							+ ", 'http://193.196.7.215/files/" + fileName + "', '');</script>");
+							+ ", '" + Config.UPLOAD_URL + fileName + "', '');</script>");
 					out.flush();
 				} else {
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

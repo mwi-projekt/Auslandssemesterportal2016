@@ -1,14 +1,8 @@
 package dhbw.mwi.Auslandsemesterportal2016.db;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.DB;
-import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -152,7 +146,6 @@ public class SQL_queries {
 		String matrikelnummer = "";
 		String rolle = "";
 		String accessToken = "";
-		int userID;
 		String query = "SELECT verifiziert, matrikelnummer, studiengang, rolle, userID FROM user WHERE email = ? AND passwort = ?;";
 		String[] params = new String[] { mail, hashedPw };
 		String[] types = new String[] { "String", "String" };

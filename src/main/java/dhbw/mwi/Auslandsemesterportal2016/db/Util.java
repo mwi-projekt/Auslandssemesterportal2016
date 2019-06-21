@@ -16,7 +16,6 @@ import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletResponse;
 
 import org.camunda.bpm.engine.impl.util.json.JSONArray;
@@ -72,7 +71,6 @@ public class Util {
         */
         
      // Sender's email ID needs to be mentioned
-        String from = "mwiausland@gmail.com";// change accordingly
         final String username = "mwiausland@gmail.com";// change
         // accordingly
         final String password = "MWIAusland1";// change accordingly

@@ -3,21 +3,20 @@ package dhbw.mwi.Auslandsemesterportal2016.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import dhbw.mwi.Auslandsemesterportal2016.Config;
+
 public class DB {
 
-    static final String DB_URL="jdbc:mysql://193.196.7.215:3306/mwi?autoReconnect=true";
-    static final String USER = "mwi";
-    static final String PASS = "mwi2014";
     static Connection conn;
 
     public static Connection getInstance() {
         if (conn == null) {
             try {
                 // Register JDBC driver
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                Class.forName(Config.DB_DRIVER).getConstructor().newInstance();
 
                 // Open a connection with statement
-                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                conn = DriverManager.getConnection(Config.DB_URL, Config.USER, Config.PASS);
             }
             catch(Exception ex){
                 System.out.println( "Exception : " + ex.getMessage() );
