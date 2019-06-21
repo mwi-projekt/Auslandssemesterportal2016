@@ -7,16 +7,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
 
 import org.camunda.bpm.engine.impl.util.json.JSONArray;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
@@ -37,7 +35,7 @@ public class Util {
 
             byte[] hash = md.digest();
 
-            result = javax.xml.bind.DatatypeConverter.printHexBinary(hash).toLowerCase();
+            result = DatatypeConverter.printHexBinary(hash).toLowerCase();
 
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -50,7 +48,7 @@ public class Util {
         byte bytes[] = new byte[32];
         random.nextBytes(bytes);
 
-        String result = javax.xml.bind.DatatypeConverter.printHexBinary(bytes).toLowerCase();
+        String result = DatatypeConverter.printHexBinary(bytes).toLowerCase();
 
         return result;
     }
