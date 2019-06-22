@@ -16,10 +16,10 @@ public class DB {
                 Class.forName(Config.DB_DRIVER).getConstructor().newInstance();
 
                 // Open a connection with statement
-                conn = DriverManager.getConnection(Config.DB_URL, Config.USER, Config.PASS);
+                conn = DriverManager.getConnection(Config.DB_URL);
             }
             catch(Exception ex){
-                System.out.println( "Exception : " + ex.getMessage() );
+                ex.printStackTrace();
             }
         }
 
