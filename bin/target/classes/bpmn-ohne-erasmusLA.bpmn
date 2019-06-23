@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.14.0">
+  <bpmn:collaboration id="Collaboration_1cl2lu7">
+    <bpmn:participant id="Participant_00ci3jw" name="DHBW w/o Erasmus" processRef="bewerben_wo_erasmus" />
+  </bpmn:collaboration>
+  <bpmn:process id="bewerben_wo_erasmus" name="Bewerbungen nicht Erasmus" isExecutable="true">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_07n76w6" name="Student">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>downloadsAnbieten</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>datenEingeben</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_EnglischMutter</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>dualisHochladen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>motivationHochladen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>zustimmungHochladen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abiturHochladen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>datenPruefen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_EnglischEnd</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>daadHochladen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_EnglischStart</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>englischNotePruefen</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_05ro1a0" name="Mitarbeiter AAA">
+        <bpmn:flowNodeRef>datenValidieren</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>bestaetigungVersenden</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>studentBenachrichtigen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abgeschlossen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_Datenpruefung</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_0b01b6y</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Bewerbung starten" camunda:formKey="app:start-form.html">
+      <bpmn:documentation>Auf Front-End ist ein "Bewerbung"-Button hinterlegt.</bpmn:documentation>
+      <bpmn:outgoing>SequenceFlow_1jq11ro</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0qnexln" sourceRef="datenEingeben" targetRef="ExclusiveGateway_EnglischMutter" />
+    <bpmn:sequenceFlow id="SequenceFlow_1idui8b" sourceRef="ExclusiveGateway_EnglischEnd" targetRef="abiturHochladen" />
+    <bpmn:sequenceFlow id="SequenceFlow_19rmw5v" sourceRef="downloadsAnbieten" targetRef="datenEingeben" />
+    <bpmn:sequenceFlow id="SequenceFlow_1lh0fqr" sourceRef="studentBenachrichtigen" targetRef="downloadsAnbieten" />
+    <bpmn:sequenceFlow id="SequenceFlow_1jq11ro" sourceRef="StartEvent_1" targetRef="downloadsAnbieten" />
+    <bpmn:userTask id="downloadsAnbieten" name="Downloads anbieten">
+      <bpmn:incoming>SequenceFlow_1lh0fqr</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1jq11ro</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_19rmw5v</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_06jsa12" name="Ja" sourceRef="ExclusiveGateway_EnglischMutter" targetRef="ExclusiveGateway_EnglischEnd">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache=='Englisch'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1tpgdb5" sourceRef="daadHochladen" targetRef="ExclusiveGateway_EnglischEnd" />
+    <bpmn:sequenceFlow id="SequenceFlow_0qbs3g8" sourceRef="datenPruefen" targetRef="datenValidieren" />
+    <bpmn:userTask id="datenValidieren" name="Daten validieren" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="mitarbeiterAAA">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="dhbw.mwi.Auslandsemesterportal2016.db.login_db" event="assignment" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0qbs3g8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1coz885</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_Datenpruefung" name="Datenprüfung erfolgreich?">
+      <bpmn:incoming>SequenceFlow_1coz885</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_19mks64</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_03x4egt</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sendTask id="bestaetigungVersenden" name="Bestätigungs-email versenden" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
+      <bpmn:documentation>Student wird über Annahme bestätigt.</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_03x4egt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_11n15y3</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sendTask id="studentBenachrichtigen" name="Student benachrichtigen" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
+      <bpmn:documentation>Student wird über Ablehnung informiert.</bpmn:documentation>
+      <bpmn:incoming>SequenceFlow_19mks64</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1lh0fqr</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:endEvent id="EndEvent_0b01b6y" name="Bewerbung abgeschlossen">
+      <bpmn:incoming>SequenceFlow_0o42i2u</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="abgeschlossen" name="Prozess abgeschlossen">
+      <bpmn:incoming>SequenceFlow_11n15y3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0o42i2u</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1coz885" sourceRef="datenValidieren" targetRef="ExclusiveGateway_Datenpruefung" />
+    <bpmn:sequenceFlow id="SequenceFlow_19mks64" name="Nein" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="studentBenachrichtigen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_03x4egt" name="Ja" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="bestaetigungVersenden">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_11n15y3" sourceRef="bestaetigungVersenden" targetRef="abgeschlossen" />
+    <bpmn:sequenceFlow id="SequenceFlow_0o42i2u" sourceRef="abgeschlossen" targetRef="EndEvent_0b01b6y" />
+    <bpmn:userTask id="datenEingeben" name="Daten eingeben">
+      <bpmn:incoming>SequenceFlow_19rmw5v</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0qnexln</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischMutter" name="Englisch = Muttersprache?">
+      <bpmn:incoming>SequenceFlow_0qnexln</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_06jsa12</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_12my7xt</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="dualisHochladen" name="Dualisauszug hochladen">
+      <bpmn:incoming>SequenceFlow_0yksv3e</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_06b7u3b</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="motivationHochladen" name="Motivations-schreiben hochladen">
+      <bpmn:incoming>SequenceFlow_06b7u3b</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0r1y3rt</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="zustimmungHochladen" name="Zustimmungs-formular hochladen">
+      <bpmn:incoming>SequenceFlow_0r1y3rt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0h9aw8k</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="abiturHochladen" name="Abiturzeugnis hochladen">
+      <bpmn:incoming>SequenceFlow_1idui8b</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0yksv3e</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="datenPruefen" name="Daten prüfen">
+      <bpmn:incoming>SequenceFlow_0h9aw8k</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0qbs3g8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0yksv3e" sourceRef="abiturHochladen" targetRef="dualisHochladen" />
+    <bpmn:sequenceFlow id="SequenceFlow_06b7u3b" sourceRef="dualisHochladen" targetRef="motivationHochladen" />
+    <bpmn:sequenceFlow id="SequenceFlow_0r1y3rt" sourceRef="motivationHochladen" targetRef="zustimmungHochladen" />
+    <bpmn:sequenceFlow id="SequenceFlow_0h9aw8k" sourceRef="zustimmungHochladen" targetRef="datenPruefen" />
+    <bpmn:sequenceFlow id="SequenceFlow_12my7xt" name="Nein" sourceRef="ExclusiveGateway_EnglischMutter" targetRef="englischNotePruefen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">$(muttersprache!='Englisch')</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1p3sxt6" sourceRef="englischNotePruefen" targetRef="ExclusiveGateway_EnglischStart" />
+    <bpmn:sequenceFlow id="SequenceFlow_1d0ul03" name="Nein" sourceRef="ExclusiveGateway_EnglischStart" targetRef="daadHochladen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englischNote&lt;11}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischEnd">
+      <bpmn:incoming>SequenceFlow_1tpgdb5</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_06jsa12</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0d39a82</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1idui8b</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="daadHochladen" name="DAAD-Formular hochladen">
+      <bpmn:incoming>SequenceFlow_1d0ul03</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1tpgdb5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischStart" name="Englischnote &#62;= 11 Punkte?">
+      <bpmn:incoming>SequenceFlow_1p3sxt6</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1d0ul03</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0d39a82</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0d39a82" name="Ja" sourceRef="ExclusiveGateway_EnglischStart" targetRef="ExclusiveGateway_EnglischEnd">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englischNote&gt;=11}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="englischNotePruefen" name="Englischnote eintragen">
+      <bpmn:incoming>SequenceFlow_12my7xt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1p3sxt6</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cl2lu7">
+      <bpmndi:BPMNShape id="Participant_00ci3jw_di" bpmnElement="Participant_00ci3jw">
+        <dc:Bounds x="1169" y="43" width="2083" height="506" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="1246" y="110" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1219" y="146" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1mtx0ph_di" bpmnElement="ExclusiveGateway_Datenpruefung" isMarkerVisible="true">
+        <dc:Bounds x="2790" y="288" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2782" y="252" width="66" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_19mks64_di" bpmnElement="SequenceFlow_19mks64">
+        <di:waypoint x="2815" y="338" />
+        <di:waypoint x="2815" y="394" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2819" y="353" width="22" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1coz885_di" bpmnElement="SequenceFlow_1coz885">
+        <di:waypoint x="2728" y="313" />
+        <di:waypoint x="2790" y="313" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2845" y="303" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Lane_07n76w6_di" bpmnElement="Lane_07n76w6">
+        <dc:Bounds x="1199" y="43" width="2053" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_05ro1a0_di" bpmnElement="Lane_05ro1a0">
+        <dc:Bounds x="1199" y="243" width="2053" height="306" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0b01b6y_di" bpmnElement="EndEvent_0b01b6y">
+        <dc:Bounds x="3088" y="416" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3069" y="452" width="74" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_03enxy9_di" bpmnElement="datenValidieren">
+        <dc:Bounds x="2628" y="273" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_1536vi5_di" bpmnElement="studentBenachrichtigen">
+        <dc:Bounds x="2765" y="394" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_175drvz_di" bpmnElement="ExclusiveGateway_EnglischMutter" isMarkerVisible="true">
+        <dc:Bounds x="1600" y="103" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1587" y="66" width="77" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0yksv3e_di" bpmnElement="SequenceFlow_0yksv3e">
+        <di:waypoint x="2249" y="128" />
+        <di:waypoint x="2293" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1851" y="118" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0uvn9zu_di" bpmnElement="ExclusiveGateway_EnglischEnd" isMarkerVisible="true">
+        <dc:Bounds x="2015" y="152" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1915" y="167" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1tpgdb5_di" bpmnElement="SequenceFlow_1tpgdb5">
+        <di:waypoint x="2040" y="134" />
+        <di:waypoint x="2040" y="152" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2010" y="133" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_06jsa12_di" bpmnElement="SequenceFlow_06jsa12">
+        <di:waypoint x="1625" y="153" />
+        <di:waypoint x="1625" y="226" />
+        <di:waypoint x="2040" y="226" />
+        <di:waypoint x="2040" y="202" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1752" y="221" width="12" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1idui8b_di" bpmnElement="SequenceFlow_1idui8b">
+        <di:waypoint x="2066" y="177" />
+        <di:waypoint x="2099" y="177" />
+        <di:waypoint x="2099" y="128" />
+        <di:waypoint x="2149" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2069" y="142.5" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_06b7u3b_di" bpmnElement="SequenceFlow_06b7u3b">
+        <di:waypoint x="2393" y="128" />
+        <di:waypoint x="2443" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2438" y="118" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_19rmw5v_di" bpmnElement="SequenceFlow_19rmw5v">
+        <di:waypoint x="1432" y="128" />
+        <di:waypoint x="1461" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1401.5" y="103" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0qnexln_di" bpmnElement="SequenceFlow_0qnexln">
+        <di:waypoint x="1561" y="128" />
+        <di:waypoint x="1600" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1535.5" y="103" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0r1y3rt_di" bpmnElement="SequenceFlow_0r1y3rt">
+        <di:waypoint x="2543" y="128" />
+        <di:waypoint x="2602" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2528" y="118" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1lh0fqr_di" bpmnElement="SequenceFlow_1lh0fqr">
+        <di:waypoint x="2765" y="434" />
+        <di:waypoint x="1382" y="434" />
+        <di:waypoint x="1382" y="168" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2028.5" y="409" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_03x4egt_di" bpmnElement="SequenceFlow_03x4egt">
+        <di:waypoint x="2840" y="313" />
+        <di:waypoint x="2883" y="313" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2851" y="293" width="12" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="SendTask_14eopq4_di" bpmnElement="bestaetigungVersenden">
+        <dc:Bounds x="2883" y="273" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jq11ro_di" bpmnElement="SequenceFlow_1jq11ro">
+        <di:waypoint x="1282" y="128" />
+        <di:waypoint x="1332" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1244.5" y="118" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0ds5skw_di" bpmnElement="downloadsAnbieten">
+        <dc:Bounds x="1332" y="88" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1fwkyh9_di" bpmnElement="datenEingeben">
+        <dc:Bounds x="1461" y="88" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0tv0gv6_di" bpmnElement="abiturHochladen">
+        <dc:Bounds x="2149" y="88" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1mxzyty_di" bpmnElement="daadHochladen">
+        <dc:Bounds x="1990" y="54" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_08zndvo_di" bpmnElement="dualisHochladen">
+        <dc:Bounds x="2293" y="88" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1xluwsi_di" bpmnElement="motivationHochladen">
+        <dc:Bounds x="2443" y="88" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_03wdbk0_di" bpmnElement="zustimmungHochladen">
+        <dc:Bounds x="2602" y="88" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0h9aw8k_di" bpmnElement="SequenceFlow_0h9aw8k">
+        <di:waypoint x="2702" y="128" />
+        <di:waypoint x="2749" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2706" y="103" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0dqmp1o_di" bpmnElement="datenPruefen">
+        <dc:Bounds x="2749" y="88" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0qbs3g8_di" bpmnElement="SequenceFlow_0qbs3g8">
+        <di:waypoint x="2799" y="168" />
+        <di:waypoint x="2799" y="221" />
+        <di:waypoint x="2678" y="221" />
+        <di:waypoint x="2678" y="273" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2693.5" y="196" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1yss45q_di" bpmnElement="abgeschlossen">
+        <dc:Bounds x="3056" y="273" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_11n15y3_di" bpmnElement="SequenceFlow_11n15y3">
+        <di:waypoint x="2983" y="313" />
+        <di:waypoint x="3056" y="313" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2975" y="292" width="90" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0o42i2u_di" bpmnElement="SequenceFlow_0o42i2u">
+        <di:waypoint x="3106" y="353" />
+        <di:waypoint x="3106" y="416" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3076" y="379" width="90" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_12my7xt_di" bpmnElement="SequenceFlow_12my7xt">
+        <di:waypoint x="1650" y="128" />
+        <di:waypoint x="1690" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1659" y="107" width="22" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1prf2rl_di" bpmnElement="ExclusiveGateway_EnglischStart" isMarkerVisible="true">
+        <dc:Bounds x="1852" y="103" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1838" y="65" width="78" height="24" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1p3sxt6_di" bpmnElement="SequenceFlow_1p3sxt6">
+        <di:waypoint x="1790" y="128" />
+        <di:waypoint x="1852" y="128" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1776" y="107" width="90" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1d0ul03_di" bpmnElement="SequenceFlow_1d0ul03">
+        <di:waypoint x="1902" y="128" />
+        <di:waypoint x="1929" y="128" />
+        <di:waypoint x="1929" y="94" />
+        <di:waypoint x="1990" y="94" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1933" y="105" width="22" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0d39a82_di" bpmnElement="SequenceFlow_0d39a82">
+        <di:waypoint x="1877" y="153" />
+        <di:waypoint x="1877" y="177" />
+        <di:waypoint x="2015" y="177" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1886" y="159" width="12" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1dpy7qs_di" bpmnElement="englischNotePruefen">
+        <dc:Bounds x="1690" y="88" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
