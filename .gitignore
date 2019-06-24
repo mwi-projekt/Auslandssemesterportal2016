@@ -4,6 +4,7 @@
 /.vscode
 /.metadata/
 /.settings
+/bin
 /*.springBeans
 
 # Eclipse Core      
