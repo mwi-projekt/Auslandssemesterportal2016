@@ -46,6 +46,11 @@ $(document).on('keyup change', '#bewPLZ', function (e) {
     }
 });
 
+//Automatische Download des ausgefüllten Anmeldeformulars 
+$(document).on('click', '#downloadAnmeldeformular', function (e) {
+    console.log("Download");
+});
+
 
 // Automatische Ortserkennung bei PLZ-Eingabe in Unternehmensdaten
 $(document).on('keyup change', '#untPLZ', function (e) {
