@@ -56,14 +56,32 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 	doc.addImage(imgData, 'JPEG',0,0,210,297);
 	 
 	var name = "Thomas";
-	var company = "Thomas Shop";
+	var studiengang = "Thomas Shop";
+	var kurs = "Thomas";
+	var adresseTP = "Thomas Shop";
+	//var adressePP = "Thomas Shop";
+	var telefon = "Thomas";
+	var email = "Thomas Shop";
+	var unternehmen = "Thomas Shop";
+	var ansprName = "Thomas Shop";
+	var ansprTelefon = "Thomas Shop";
+	var ansprEmail = "Thomas Shop";
 	
 	doc.setFontSize(26);
 	doc.setTextColor(92, 76, 76);
 	
 	doc.text(80, 100, name);
-	doc.text(80, 110, company);
-	doc.save('test.pdf');
+	doc.text(80, 110, studiengang);
+	doc.text(80, 120, kurs);
+	doc.text(80, 120.7, adresseTP);
+	//doc.text(80, 110, adressePP);
+	doc.text(80, 110, telefon);
+	doc.text(80, 110, email);
+	doc.text(80, 110, unternehmen);
+	doc.text(80, 110, ansprName);
+	doc.text(80, 110, ansprTelefon);
+	doc.text(80, 110, ansprEmail);	
+	doc.save('Anmeldeformular.pdf');
 });
 
 
