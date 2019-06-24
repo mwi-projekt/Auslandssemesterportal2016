@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
@@ -30,7 +31,7 @@ public class ResetPasswordServlet extends HttpServlet {
 
 		String uuid = SQL_queries.forgetPassword(to);
 
-		String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/changePw.html?uuid=" + uuid;
+		String link = Config.MWI_URL + "/changePw.html?uuid=" + uuid;
 
 		try {
 			Message message = Util.getEmailMessage(to, "Passwortruecksetzung Auslandssemesterportal");

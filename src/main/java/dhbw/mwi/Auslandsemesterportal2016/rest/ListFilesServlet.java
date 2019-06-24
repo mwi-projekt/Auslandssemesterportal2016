@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.camunda.bpm.engine.impl.util.json.JSONArray;
 import org.camunda.bpm.engine.impl.util.json.JSONObject;
 
+import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
@@ -24,13 +25,13 @@ public class ListFilesServlet extends HttpServlet {
 		if (rolle != 1) {
 			response.sendError(401);
 		} else {
-			File folder = new File("/var/www/files");
+			File folder = new File(Config.UPLOAD_DIR);
 			File[] listOfFiles = folder.listFiles();
 
 			JSONObject json = new JSONObject();
 			json.put("name", "files");
 			json.put("type", "folder");
-			json.put("path", "http://193.196.7.215/files/");
+			json.put("path", Config.UPLOAD_URL);
 			JSONArray arr = new JSONArray();
 
 			for (int i = 0; i < listOfFiles.length; i++) {
@@ -38,7 +39,7 @@ public class ListFilesServlet extends HttpServlet {
 					JSONObject file = new JSONObject();
 					file.put("name", listOfFiles[i].getName());
 					file.put("type", "file");
-					file.put("path", "http://193.196.7.215/files/" + listOfFiles[i].getName());
+					file.put("path", Config.UPLOAD_URL + listOfFiles[i].getName());
 					file.put("size", listOfFiles[i].length());
 					arr.put(file);
 				}

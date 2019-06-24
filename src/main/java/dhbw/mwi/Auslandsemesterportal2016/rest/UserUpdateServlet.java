@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
@@ -64,7 +65,7 @@ public class UserUpdateServlet extends HttpServlet {
 					}
 
 					if (result == 1) {
-						String link = "http://193.196.7.215:8080/Auslandssemesterportal/WebContent/?confirm="
+						String link = Config.MWI_URL + "/?confirm="
 								+ SQL_queries.deactivateUser(mail);
 						Message message = Util.getEmailMessage(mail,
 								"Bestätigen: Geänderte E-Mail-Adresse Auslandssemesterportal");

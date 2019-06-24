@@ -1,6 +1,5 @@
 	package dhbw.mwi.Auslandsemesterportal2016;
 
-import org.camunda.bpm.application.PostDeploy;
 import org.camunda.bpm.application.ProcessApplication;
 import org.camunda.bpm.application.impl.ServletProcessApplication;
 import org.camunda.bpm.engine.ProcessEngine;

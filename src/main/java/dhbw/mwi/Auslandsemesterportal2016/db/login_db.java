@@ -1,43 +1,30 @@
 package dhbw.mwi.Auslandsemesterportal2016.db;
 
-import java.io.*;
-import java.util.HashMap;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
-import java.util.Properties;
-import java.util.UUID;
-import java.sql.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeUtility;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
-import org.apache.commons.codec.binary.Base64;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.DelegateTask;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.delegate.TaskListener;
-import org.camunda.bpm.engine.runtime.ProcessInstance;
-import org.camunda.bpm.engine.variable.Variables;
-import org.camunda.bpm.engine.variable.value.FileValue;
 
-import dhbw.mwi.Auslandsemesterportal2016.Auslandsemesterportal2016ProcessApplication;
+import dhbw.mwi.Auslandsemesterportal2016.Config;
 
 /**
  * Servlet implementation class prozess_db
@@ -49,11 +36,6 @@ import dhbw.mwi.Auslandsemesterportal2016.Auslandsemesterportal2016ProcessApplic
 public class login_db extends HttpServlet implements TaskListener, JavaDelegate {
 	private static final long serialVersionUID = 1L;
 
-	// JDBC driver name and database URL
-	final String DB_URL = "jdbc:mysql://193.196.7.215:3306/mwi";
-	// Database account
-	final String USER = "mwi";
-	final String PASS = "mwi2014";
 
 	Connection conn;
 	java.sql.Statement stmt;
@@ -85,10 +67,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		// }
 
 		try {
-			// Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			// Open a connection
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			conn = DB.getInstance();
 			// Execute SQL query
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
@@ -174,10 +154,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 		} 
 		try {
-			// Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			// Open a connection
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			conn = DB.getInstance();
 			// Execute SQL query
 			stmt = conn.createStatement();
 			System.out.println("Connect");
@@ -224,11 +202,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		java.sql.Statement statement = null;
 
 		try {
-			// Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-
 			// Open a connection
-			connection = DriverManager.getConnection(DB_URL, USER, PASS);
+			connection = DB.getInstance();
 
 			// Execute SQL query
 			statement = connection.createStatement();
@@ -283,11 +258,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		String sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '" + matrikelnummer + "' ";
 
 		try {
-			// Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-
 			// Open a connection
-			connection = DriverManager.getConnection(DB_URL, USER, PASS);
+			connection = DB.getInstance();
 
 			// Execute SQL query
 			statement = connection.createStatement();
@@ -303,16 +275,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			if (note >= 11) {
 				result = true;
 			}
-
-		} catch (InstantiationException e) {
-			System.out.print("ERROR - ProcessService.getProcessId - InstantiationException");
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			System.out.print("ERROR - ProcessService.getProcessId - IllegalAccessException");
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.out.print("ERROR - ProcessService.getProcessId - ClassNotFoundException");
-			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.print("ERROR - ProcessService.getProcessId -SQLException");
 			e.printStackTrace();
@@ -339,11 +301,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		String sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '" + matrikelnummer + "' ";
 
 		try {
-			// Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-
 			// Open a connection
-			connection = DriverManager.getConnection(DB_URL, USER, PASS);
+			connection = DB.getInstance();
 
 			// Execute SQL query
 			statement = connection.createStatement();
@@ -354,16 +313,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			while (resultSet.next()) {
 				note = resultSet.getString(1);
 			}
-
-		} catch (InstantiationException e) {
-			System.out.print("ERROR - ProcessService.getProcessId - InstantiationException");
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			System.out.print("ERROR - ProcessService.getProcessId - IllegalAccessException");
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.out.print("ERROR - ProcessService.getProcessId - ClassNotFoundException");
-			e.printStackTrace();
 		} catch (SQLException e) {
 			System.out.print("ERROR - ProcessService.getProcessId -SQLException");
 			e.printStackTrace();
@@ -389,10 +338,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			try {
 				String sql = "SELECT userID FROM user WHERE verifiziert='" + code + "'";
 				System.out.println(sql);
-				// Register JDBC driver
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				// Open a connection
-				conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				conn = DB.getInstance();
 				// Execute SQL query
 				stmt = conn.createStatement();
 				System.out.println("Connect");
@@ -452,7 +399,8 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 			message.setContent("Sehr geehrte Frau Dreischer," + "\n" + "\n"
 					+ "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n"
 					+ "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n"
-					+ "http://193.196.7.215:8080/camunda/app/tasklist/default/#/?task=" + delegateTask.getId(),
+					+ Config.CAMUNDA_URL
+					+ "/app/tasklist/default/#/?task=" + delegateTask.getId(),
 					"text/plain; charset=UTF-8");
 
 			// Send message
