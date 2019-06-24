@@ -68,7 +68,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 	var ansprEmail = "Thomas Shop";
 	
 	doc.setFontSize(26);
-	doc.setTextColor(92, 76, 76);
+	doc.setTextColor(0, 0, 0);
 	
 	doc.text(80, 100, name);
 	doc.text(80, 110, studiengang);
