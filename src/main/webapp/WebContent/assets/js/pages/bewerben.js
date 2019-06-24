@@ -48,6 +48,7 @@ $(document).on('keyup change', '#bewPLZ', function (e) {
 
 //Automatische Download des ausgefüllten Anmeldeformulars 
 $(document).on('click', '#downloadAnmeldeformular', function (e) {
+	e.preventDefault();
     console.log("Download");
 });
 
