@@ -23,9 +23,9 @@ public class GetOverviewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		/*if (rolle < 1) {
+		if (rolle < 1) {
 			response.sendError(401);
-		} else {*/
+		} else {
 			response.setCharacterEncoding("UTF-8");
 			String definition = request.getParameter("definition"); // Process Definition Key aus Camunda
 
@@ -58,4 +58,4 @@ public class GetOverviewServlet extends HttpServlet {
 			Util.writeJson(response, json);
 		}
 	}
-//}
+}
