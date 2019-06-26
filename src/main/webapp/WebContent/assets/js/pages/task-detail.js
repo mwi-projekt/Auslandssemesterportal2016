@@ -120,7 +120,7 @@ function parse() {
                         }
                     }
                     
-                    console.log(idList);
+                    //console.log(idList);
 
                     if (innerOutput != '') {
                         if (stepName === "datenEingeben") {
