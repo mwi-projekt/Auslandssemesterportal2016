@@ -72,19 +72,19 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 	doc.setFontSize(11);
 	doc.setTextColor(92, 76, 76);
 	
-	doc.text(30, 79, hochschule);
-	doc.text(10, 79, zeitraum);
-	doc.text(80, 100, name);
-	doc.text(80, 110, studiengang);
-	doc.text(80, 120, kurs);
+	doc.text(28, 76, hochschule);
+	doc.text(100, 76, zeitraum);
+	doc.text(80, 99, name);
+	doc.text(80, 108, studiengang);
+	doc.text(80, 117, kurs);
 	doc.text(80, 128, adresseTheorie);
-	doc.text(80, 153, adressePraxis);
-	doc.text(80, 178, tel);
-	doc.text(80, 187, mail);
+	doc.text(80, 155, adressePraxis);
+	doc.text(80, 180, tel);
+	doc.text(80, 191, mail);
 	doc.text(80, 200, unternehmen);
-	doc.text(80, 214, nameAnspr);
-	doc.text(80, 222, telAnspr);
-	doc.text(80, 231, mailAnspr);
+	doc.text(80, 219, nameAnspr);
+	doc.text(80, 227, telAnspr);
+	doc.text(80, 236, mailAnspr);
 	
 	doc.save('test.pdf');
 });
