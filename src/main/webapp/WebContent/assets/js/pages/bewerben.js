@@ -51,7 +51,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 	e.preventDefault();
     console.log("Download");
     
-    var keyString = "gdprCompliance%7CbewVorname%7CbewNachname%7CbewTelefon%7CbewStrasse%7CbewPLZ%7CbewOrt%7CbewLand%7CsemesteradresseAnders%7CaktuelleUni%7CbewStudiengang%7CbewKurs%7Cmatrikelnummer%7CbewEmail%7Cmuttersprache%7CuntName%7CuntStrasse%7CuntPLZ%7CuntOrt%7CuntLand%7CuntAnsprechpartner%7CuntEMail%7CsemStrasse%7CsemPLZ%7CsemOrt%7CsemLand%7CenglischNote";
+    var keyFix = "gdprCompliance%7CbewVorname%7CbewNachname%7CbewTelefon%7CbewStrasse%7CbewPLZ%7CbewOrt%7CbewLand%7CsemesteradresseAnders%7CaktuelleUni%7CbewStudiengang%7CbewKurs%7Cmatrikelnummer%7CbewEmail%7Cmuttersprache%7CuntName%7CuntStrasse%7CuntPLZ%7CuntOrt%7CuntLand%7CuntAnsprechpartner%7CuntEMail%7CsemStrasse%7CsemPLZ%7CsemOrt%7CsemLand%7CenglischNote";
     /*for (var l = 0; l < idList.length; l++) {
         keyString = keyString + idList[l] + "|";
     }
@@ -62,7 +62,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         url: baseUrl + "/getVariables",
         data: {
             instance_id: instanceID,
-            key: keyString
+            key: keyFix
         },
         success: function(result){
         	console.log("erfolg");
