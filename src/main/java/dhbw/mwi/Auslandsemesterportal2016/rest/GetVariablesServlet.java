@@ -20,10 +20,10 @@ public class GetVariablesServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		/*int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 		if (rolle < 1) {
 			response.sendError(401);
-		} else {
+		} else {*/
 			String instanceID = request.getParameter("instance_id");
 			String key = request.getParameter("key");
 			String[] keys = key.split("\\|", -1);
@@ -40,4 +40,4 @@ public class GetVariablesServlet extends HttpServlet {
 
 		}
 	}
-}
+//}
