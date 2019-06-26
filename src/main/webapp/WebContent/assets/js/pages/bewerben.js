@@ -51,6 +51,12 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 	e.preventDefault();
     console.log("Download");
     
+    var keyString = "";
+    for (var l = 0; l < idList.length; l++) {
+        keyString = keyString + idList[l] + "|";
+    }
+    keyString = keyString.substr(0, keyString.length - 1);
+    
     $.ajax({
         type: "GET",
         url: baseUrl + "/getVariables",
