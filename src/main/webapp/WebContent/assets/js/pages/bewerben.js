@@ -74,14 +74,14 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 	
 	doc.text(28, 76, hochschule);
 	doc.text(100, 76, zeitraum);
-	doc.text(80, 99, name);
-	doc.text(80, 109, studiengang);
+	doc.text(80, 99.3, name);
+	doc.text(80, 108.7, studiengang);
 	doc.text(80, 117.5, kurs);
 	doc.text(80, 128, adresseTheorie);
 	doc.text(80, 155, adressePraxis);
 	doc.text(80, 181, tel);
 	doc.text(80, 190, mail);
-	doc.text(80, 199, unternehmen);
+	doc.text(80, 199.2, unternehmen);
 	doc.text(80, 217.5, nameAnspr);
 	doc.text(80, 226.7, telAnspr);
 	doc.text(80, 235, mailAnspr);
