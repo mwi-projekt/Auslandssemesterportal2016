@@ -78,7 +78,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 	doc.text(80, 110, studiengang);
 	doc.text(80, 120, kurs);
 	doc.text(80, 128, adresseTheorie);
-	doc.text(80, 153, adressPraxis);
+	doc.text(80, 153, adressePraxis);
 	doc.text(80, 178, tel);
 	doc.text(80, 187, mail);
 	doc.text(80, 200, unternehmen);
