@@ -75,7 +75,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	
         	var hochschule = "Bulgaria";
         	var zeitraum = "von .. bis";
-        	var name = bewVorname;
+        	var name = 'bewVorname';
         	var studiengang = "Thomas Shop";
         	var kurs = "WWI";
         	var adresseTheorie = "Adresse1";
