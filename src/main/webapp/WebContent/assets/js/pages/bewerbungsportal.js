@@ -38,7 +38,7 @@ $(document).ready(function () {
                 });
 
                 var popUpHtml = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
-                for (var l = 0; l < result.data.length - 1; l++) {
+                for (var l = 0; l < result.data.length; l++) {
                     // filtern von schon beworbenen unis
                     if (splitUni.indexOf(result.data[l].uniTitel) != -1) continue;
                     popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
