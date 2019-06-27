@@ -51,7 +51,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 	e.preventDefault();
     console.log("Download");
     
-    var keyString= "";
+   /* var keyString= "";
     //var keyFix = "gdprCompliance%7CbewVorname%7CbewNachname%7CbewTelefon%7CbewStrasse%7CbewPLZ%7CbewOrt%7CbewLand%7CsemesteradresseAnders%7CaktuelleUni%7CbewStudiengang%7CbewKurs%7Cmatrikelnummer%7CbewEmail%7Cmuttersprache%7CuntName%7CuntStrasse%7CuntPLZ%7CuntOrt%7CuntLand%7CuntAnsprechpartner%7CuntEMail%7CsemStrasse%7CsemPLZ%7CsemOrt%7CsemLand%7CenglischNote";
     for (var l = 0; l < idList.length; l++) {
         keyString = keyString + idList[l] + "|";
@@ -65,8 +65,11 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
             instance_id: instanceID,
             key: keyString
         },
-        success: function(result){
-        	console.log("erfolg");
+        success: function(result){*/
+    getData();
+    console.log(getData());
+    
+    console.log("erfolg");
         	console.log("result");
         	
         	var doc = new jsPDF();
@@ -105,11 +108,11 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	doc.text(80, 235, mailAnspr);
         	
         	doc.save('Anmeldeformular.pdf');
-          	},
+          	/*},
           	error: function(result){
           		alert('Ein Fehler ist aufgetreten');
           	}
-        });
+        });*/
 });
 
 
