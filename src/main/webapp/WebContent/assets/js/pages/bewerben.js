@@ -51,7 +51,8 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 	e.preventDefault();
     console.log("Download");
     
-    var keyFix = "gdprCompliance%7CbewVorname%7CbewNachname%7CbewTelefon%7CbewStrasse%7CbewPLZ%7CbewOrt%7CbewLand%7CsemesteradresseAnders%7CaktuelleUni%7CbewStudiengang%7CbewKurs%7Cmatrikelnummer%7CbewEmail%7Cmuttersprache%7CuntName%7CuntStrasse%7CuntPLZ%7CuntOrt%7CuntLand%7CuntAnsprechpartner%7CuntEMail%7CsemStrasse%7CsemPLZ%7CsemOrt%7CsemLand%7CenglischNote";
+    //var keyFix = "gdprCompliance%7CbewVorname%7CbewNachname%7CbewTelefon%7CbewStrasse%7CbewPLZ%7CbewOrt%7CbewLand%7CsemesteradresseAnders%7CaktuelleUni%7CbewStudiengang%7CbewKurs%7Cmatrikelnummer%7CbewEmail%7Cmuttersprache%7CuntName%7CuntStrasse%7CuntPLZ%7CuntOrt%7CuntLand%7CuntAnsprechpartner%7CuntEMail%7CsemStrasse%7CsemPLZ%7CsemOrt%7CsemLand%7CenglischNote";
+    var keyFix = 'bewVorname|bewNachname|bewTelefon|bewStrasse|bewPLZ|bewOrt|bewLand|semesteradresseAnders|aktuelleUni|bewStudiengang|bewKurs|matrikelnummer|bewEmail|muttersprache|untName|untStrasse|untPLZ|untOrt|untLand|untAnsprechpartner|untEMail|semStrasse|semPLZ|semOrt|semLand|englischNote';
     /*for (var l = 0; l < idList.length; l++) {
         keyString = keyString + idList[l] + "|";
     }
@@ -74,7 +75,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	
         	var hochschule = "Bulgaria";
         	var zeitraum = "von .. bis";
-        	var name = "Thomas";
+        	var name = bewVorname;
         	var studiengang = "Thomas Shop";
         	var kurs = "WWI";
         	var adresseTheorie = "Adresse1";
