@@ -88,9 +88,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         		
         	doc.setFontSize(11);
         	doc.setTextColor(92, 76, 76);
-        	
-        	doc.addpage();
-        	
+        
         	doc.text(28, 76, hochschule);
         	doc.text(100, 76, zeitraum);
         	doc.text(80, 99.3, name);
