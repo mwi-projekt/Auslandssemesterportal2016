@@ -89,9 +89,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         		var adresseTheorie = result.bewStrasse + "\n" + result.bewPLZ + " " + result.bewOrt;
         	} 
         		
-        	//var tel = result.bewTelefon; führt zu Fehler
-             	
-        	var tel = result.bewTelefon.toString();
+            var tel = result.bewTelefon.toString();
         	var mail = result.bewEmail;
         	var unternehmen = result.untName;
         	var nameAnspr = result.untAnsprechpartner;
