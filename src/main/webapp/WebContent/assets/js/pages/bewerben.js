@@ -82,12 +82,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	
         	//Falls keine abweichende Semesteraddresse, dann gleich Praxisadresse
         	
-        	if(result.semesteradresseAnders){
-        		var adresseTheorie ="12345";
-        	}
-        	else {
-        		var adresseTheorie = result.bewStrasse + "\n" + result.bewPLZ + " " + result.bewOrt;
-        	} 
+        	var adresseTheorie ="12345"; 
         		
         	//var tel = result.bewTelefon; führt zu Fehler
         	var tel = "12345";
