@@ -74,26 +74,22 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	doc.addImage(imgData, 'JPEG',0,0,210,297);
         	
         	var hochschule = result.aktuelleUni;
-        	var zeitraum = "FixValue"; //Fehlt
+        	var zeitraum = "12345"; //Fehlt
         	var name = result.bewNachname + " " + result.bewVorname;
         	var studiengang = result.bewStudiengang;
         	var kurs = result.bewKurs;
         	var adressePraxis = result.bewStrasse + "\n" + result.bewPLZ + " " + result.bewOrt;
         	
         	//Falls keine abweichende Semesteraddresse, dann gleich Praxisadresse
-        	if (result.semesteradresseAnders){
-        		var adresseTheorie ="FixValue"; 
-        	}
-        	else {
-        		var adresseTheorie = adressePraxis;
-        	}
+        	
+        	var adresseTheorie ="12345"; 
         		
         	//var tel = result.bewTelefon; führt zu Fehler
-        	var tel = "FixValue";
+        	var tel = "12345";
         	var mail = result.bewEmail;
         	var unternehmen = result.untName;
         	var nameAnspr = result.untAnsprechpartner;
-        	var telAnspr = "FixValue"; //Fehlt
+        	var telAnspr = "12345"; //Fehlt
         	var mailAnspr = result.untEMail;
         		
         	doc.setFontSize(11);
