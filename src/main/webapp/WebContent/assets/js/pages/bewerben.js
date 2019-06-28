@@ -75,17 +75,19 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	
         	var hochschule = result.aktuelleUni;
         	var zeitraum = "von .. bis"; //Fehlt
-        	var name = 'bewVorname';
+        	var name = result.bewNachname + ", " + result.bewVorname;
         	var studiengang = result.bewStudiengang;
         	var kurs = result.bewKurs;
         	var adressePraxis = result.bewStrasse + "\n" + result.bewPLZ + " " + result.bewOrt;
         	
         	//Falls keine abweichende Semesteraddresse, dann gleich Praxisadresse
-        	if (result.semesteradresseAnders)
-        		var adresseTheorie ="Adresse1";
-        	else 
+        	if (result.semesteradresseAnders){
+        		var adresseTheorie ="Adresse1"; 
+        	}
+        	else {
         		var adresseTheorie = adressePraxis;
-        	
+        	}
+        		
         	var tel = result.bewTelefon;
         	var mail = result.bewEmail;
         	var unternehmen = result.untName;
