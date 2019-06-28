@@ -90,7 +90,8 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	} 
         		
         	//var tel = result.bewTelefon; führt zu Fehler
-        	var tel = "12345";
+             	
+        	var tel = result.bewTelefon.toString();
         	var mail = result.bewEmail;
         	var unternehmen = result.untName;
         	var nameAnspr = result.untAnsprechpartner;
