@@ -113,6 +113,8 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	doc.text(80, 226.7, telAnspr);
         	doc.text(80, 235, mailAnspr);
         	
+        	doc.addPage();
+        	
         	doc.save('Anmeldeformular.pdf');
           	},
           	error: function(result){
