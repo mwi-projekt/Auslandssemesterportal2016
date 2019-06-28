@@ -77,9 +77,10 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	var url_string = window.location.href;
         	var url = new URL(url_string);
         	var uni = url.searchParams.get("uni");
+        	var klammer = uni.indexOf("(");
+        	var stringUni = uni.slice(0,(klammer-1)) + "\n" + uni.slice(klammer,(uni.length));
         	
-        	
-        	var hochschule = uni; //Name der Hochschule & Land fehlt
+        	var hochschule = stringUni; //Name der Hochschule & Land fehlt
         	var zeitraum = "Sommersemester 2020"; //Fehlt
         	var name = result.bewNachname + " " + result.bewVorname;
         	var studiengang = result.bewStudiengang;
@@ -105,7 +106,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	doc.setFontSize(11);
         	doc.setTextColor(92, 76, 76);
         
-        	doc.text(23, 83, hochschule);
+        	doc.text(23, 76, hochschule);
         	doc.text(100, 76, zeitraum);
         	doc.text(80, 99.3, name);
         	doc.text(80, 108.7, studiengang);
