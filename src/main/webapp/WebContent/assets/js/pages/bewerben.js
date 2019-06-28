@@ -95,7 +95,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	var mail = result.bewEmail;
         	var unternehmen = result.untName;
         	var nameAnspr = result.untAnsprechpartner;
-        	var telAnspr = "12345"; //Fehlt
+        	var telAnspr = "-------"; //Fehlt
         	var mailAnspr = result.untEMail;
         		
         	doc.setFontSize(11);
