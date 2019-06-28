@@ -66,7 +66,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
             key: keyFix
         },
         success: function(result){
-        	console.log("erfolg");
+        	console.log("neueVersionOnline");
         	console.log("result");
         	
         	var doc = new jsPDF();
