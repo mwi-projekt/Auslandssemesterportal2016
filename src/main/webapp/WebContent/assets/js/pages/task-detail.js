@@ -66,6 +66,7 @@ function parse() {
                 if (data.search("id") != -1) {
                     var innerOutput = "";
                     var json = JSON.parse(decodeURI(data));
+                    console.log(json);
                     for (var i = 0; i < json.length; i++) {
                         var type = json[i]["type"];
                         // alert (type);
