@@ -61,19 +61,22 @@ $(document).ready(function () {
                     onOpen: function () {
                         $('#newBewProzessWahl').on('click', function () {
                             sessionStorage['uni'] = $('#selectUni').val();
+                            sessionStorage['zeitraum'] = $('#selectZeit').val();
                             $.ajax({
                                 type: "GET",
                                 url: baseUrl + "/getInstance",
                                 data: {
                                     matnr: sessionStorage['matrikelnr'],
                                     uni: $('#selectUni').val(),
+                                    zeitraum: $('#selectZeit').val(),                               
                                 },
                                 success: function (result) {
-                                    location.href = 'bewerben.html?instance_id=' + result.instanceId + '&uni=' + result.uni;
+                                    location.href = 'bewerben.html?instance_id=' + result.instanceId + '&uni=' + result.uni + '&zeitraum=' + result.zeitraum;
                                 }
                             });
                         });
                     }
+
                 });
             }
         });
