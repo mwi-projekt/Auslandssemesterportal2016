@@ -77,8 +77,44 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	var url_string = window.location.href;
         	var url = new URL(url_string);
         	var uni = url.searchParams.get("uni");
-        	var klammer = uni.indexOf("(");
-        	var stringUni = uni.slice(0,(klammer-1)) + "\n" + uni.slice(klammer,(uni.length));
+        	//Bulgarien
+        	if(uni == "American University in Bulgaria (Bulgarien)") {
+        		var klammer = uni.indexOf("(");
+        		var stringUni = uni.slice(0,(klammer-1)) + "\n" + uni.slice(klammer,(uni.length));
+        		//Schottland
+        	}else if(uni == "Abertay University of Dundee (Schottland)"){
+        		var klammer = uni.indexOf("(");
+        		var stringUni = uni.slice(0,(klammer-1)) + "\n" + uni.slice(klammer,(uni.length));
+        		//San Marcos
+        	}else if(uni == "California State University San Marcos (USA)"){
+        		var absatz = uni.indexOf("San");
+        		var stringUni = uni.slice(0,(absatz-1)) + "\n" + uni.slice(absatz-1,(uni.length));
+        		//Channel Islands
+        	}else if(uni == "California State University Channel Islands (USA)"){
+        		var absatz = uni.indexOf("Channel");
+        		var stringUni = uni.slice(0,(absatz-1)) + "\n" + uni.slice(absatz-1,(uni.length));
+        		//Costa Rica
+        	}else if(uni == "Costa Rica Institute of Technology (Costa Rica)"){
+        		var absatz = uni.indexOf("Technology");
+        		var stringUni = uni.slice(0,(absatz-1)) + "\n" + uni.slice(absatz-1,(uni.length));
+        		//Suedarfika
+        	}else if(uni == "Durban University of Technology (Suedafrika)"){
+        		var klammer = uni.indexOf("(");
+        		var stringUni = uni.slice(0,(klammer-1)) + "\n" + uni.slice(klammer,(uni.length));
+        		//Finnland
+        	}else if(uni == "South-Eastern Finland University of Applied Sciences (Finnland)"){
+        		var absatz1 = uni.indexOf("of");
+        		var absatz2 = uni.indexOf("(");
+        		var stringUni = uni.slice(0,(absatz1-1)) + "\n" + uni.slice(absatz-1,(absatz2-1)) + "\n" + uni.slice(absatz2-1,(uni.length));
+        		//Polen
+        	}else if(uni == "Technischen Universität Lodz (Polen)"){
+        		var klammer = uni.indexOf("(");
+        		var stringUni = uni.slice(0,(klammer-1)) + "\n" + uni.slice(klammer,(uni.length));
+        	}else{
+        		var klammer = uni.indexOf("(");
+        		var stringUni = uni.slice(0,(klammer-1)) + "\n" + uni.slice(klammer,(uni.length));
+        	}
+        	
         	
         	var hochschule = stringUni; //Name der Hochschule & Land fehlt
         	var zeitraum = "Sommersemester 2020"; //Fehlt
