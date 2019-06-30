@@ -17,10 +17,10 @@
         <bpmn:flowNodeRef>englischNotePruefen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_abweichendSemester</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1jq3nab</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>abiturHochladen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>zustimmungHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>dualisHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>motivationHochladen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>zustimmungHochladen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abiturHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>datenPruefen</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_190wn40" name="Mitarbeiter AAA">
@@ -101,11 +101,11 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1ikinnd" sourceRef="datenEingebenUnt" targetRef="ExclusiveGateway_abweichendSemester" />
     <bpmn:sequenceFlow id="SequenceFlow_1tpgdb5" sourceRef="daadHochladen" targetRef="ExclusiveGateway_EnglischEnd" />
-    <bpmn:sequenceFlow id="SequenceFlow_0tdd3mj" sourceRef="ExclusiveGateway_EnglischEnd" targetRef="abiturHochladen" />
-    <bpmn:sequenceFlow id="SequenceFlow_0h9aw8k" sourceRef="zustimmungHochladen" targetRef="datenPruefen" />
-    <bpmn:sequenceFlow id="SequenceFlow_0r1y3rt" sourceRef="motivationHochladen" targetRef="zustimmungHochladen" />
+    <bpmn:sequenceFlow id="SequenceFlow_0tdd3mj" sourceRef="ExclusiveGateway_EnglischEnd" targetRef="zustimmungHochladen" />
+    <bpmn:sequenceFlow id="SequenceFlow_0h9aw8k" sourceRef="abiturHochladen" targetRef="datenPruefen" />
+    <bpmn:sequenceFlow id="SequenceFlow_0r1y3rt" sourceRef="motivationHochladen" targetRef="abiturHochladen" />
     <bpmn:sequenceFlow id="SequenceFlow_06b7u3b" sourceRef="dualisHochladen" targetRef="motivationHochladen" />
-    <bpmn:sequenceFlow id="SequenceFlow_0yksv3e" sourceRef="abiturHochladen" targetRef="dualisHochladen" />
+    <bpmn:sequenceFlow id="SequenceFlow_0yksv3e" sourceRef="zustimmungHochladen" targetRef="dualisHochladen" />
     <bpmn:sequenceFlow id="SequenceFlow_0d39a82" name="Ja" sourceRef="ExclusiveGateway_EnglischStart" targetRef="ExclusiveGateway_EnglischEnd">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englischNote&gt;=11}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -122,7 +122,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_1g3gfo6" sourceRef="datenEingeben" targetRef="datenEingebenUnt" />
     <bpmn:sequenceFlow id="SequenceFlow_1jq11ro" sourceRef="StartEvent_1" targetRef="downloadsAnbieten" />
     <bpmn:sequenceFlow id="SequenceFlow_19rmw5v" sourceRef="downloadsAnbieten" targetRef="datenEingeben" />
-    <bpmn:userTask id="abiturHochladen" name="Abiturzeugnis hochladen">
+    <bpmn:userTask id="zustimmungHochladen" name="Zustimmungs-formular hochladen">
       <bpmn:incoming>SequenceFlow_0tdd3mj</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0yksv3e</bpmn:outgoing>
     </bpmn:userTask>
@@ -134,7 +134,7 @@
       <bpmn:incoming>SequenceFlow_06b7u3b</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0r1y3rt</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="zustimmungHochladen" name="Zustimmungs-formular hochladen">
+    <bpmn:userTask id="abiturHochladen" name="Abiturzeugnis hochladen">
       <bpmn:incoming>SequenceFlow_0r1y3rt</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0h9aw8k</bpmn:outgoing>
     </bpmn:userTask>
@@ -331,7 +331,7 @@
       <bpmndi:BPMNShape id="UserTask_1fwkyh9_di" bpmnElement="datenEingeben">
         <dc:Bounds x="461" y="88" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0tv0gv6_di" bpmnElement="abiturHochladen">
+      <bpmndi:BPMNShape id="UserTask_0tv0gv6_di" bpmnElement="zustimmungHochladen">
         <dc:Bounds x="1716" y="130" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_08zndvo_di" bpmnElement="dualisHochladen">
@@ -340,7 +340,7 @@
       <bpmndi:BPMNShape id="UserTask_1xluwsi_di" bpmnElement="motivationHochladen">
         <dc:Bounds x="2034" y="131" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_03wdbk0_di" bpmnElement="zustimmungHochladen">
+      <bpmndi:BPMNShape id="UserTask_03wdbk0_di" bpmnElement="abiturHochladen">
         <dc:Bounds x="2189" y="131" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0h9aw8k_di" bpmnElement="SequenceFlow_0h9aw8k">
