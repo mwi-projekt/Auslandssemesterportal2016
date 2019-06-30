@@ -17,5 +17,10 @@ pipeline {
                 sh 'docker build -t mwi .'
             }
         }
+        stage('Deploy Docker') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
     }
 }
