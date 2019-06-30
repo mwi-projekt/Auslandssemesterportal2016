@@ -7,9 +7,9 @@ public class Config {
 	public static final String MWI_URL = URL + "/Auslandssemesterportal/WebContent";
 	
 	public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-	public static final String DB_URL= System.getenv("DB_URL");
-	public static final String USER = System.getenv("DB_USER");
-	public static final String PASS = System.getenv("DB_PW");
+	public static final String DB_URL= System.getenv("MWI_DB_URL");
+	public static final String USER = System.getenv("MWI_DB_USER");
+	public static final String PASS = System.getenv("MWI_DB_PW");
 	
 	public static final String MAIL_HOST = "smtp.gmail.com";
 	public static final String MAIL_USER = "mwiausland@gmail.com";
