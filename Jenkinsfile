@@ -12,9 +12,9 @@ pipeline {
                 sh 'mvn install'
             }
         }
-        stage('Deploy') { 
+        stage('Build Docker') {
             steps {
-                sh 'mv target/Auslandssemesterportal.war $MWI_DEPLOY' 
+                sh 'docker build -t mwi .'
             }
         }
     }
