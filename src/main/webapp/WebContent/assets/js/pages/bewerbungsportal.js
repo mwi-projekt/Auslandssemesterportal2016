@@ -143,8 +143,8 @@ function loadAuslandsangeboteInhalt() {
                     i +
                     '1"><div class="row"><div class="col-md-7">' +
                     result[i].allgemeineInfos + '<br/>' + '<br/>' + '</div>'
-                    + '<div class="row"><div class="col-md-6">'
-                    + "Mögliche Studiengänge für diese Hochschule: " + result[i].studiengang 
+                    + '<div class="row"><div class="col-md-7">'
+                    + "  Mögliche Studiengänge für diese Hochschule: " + result[i].studiengang 
                     + '</div><div class="col-md-5">';
                 if (result[i].maps) {
                     htmlText = htmlText +
