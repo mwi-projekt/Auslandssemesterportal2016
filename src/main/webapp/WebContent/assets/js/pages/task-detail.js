@@ -28,6 +28,8 @@ $(document).ready(function () {
     $('#reason').hide();
     $('#reasonl').hide();
     $('#validateBtn').prop('disabled', true);
+    $("[id='Sonstige Angaben']").hide();
+
 
     $.ajax({
         type: "GET",
@@ -176,6 +178,7 @@ function parse() {
                 }
             }
             getData();
+            $("[id='Sonstige Angaben']").hide();
 
         },
         error: function (result) {
