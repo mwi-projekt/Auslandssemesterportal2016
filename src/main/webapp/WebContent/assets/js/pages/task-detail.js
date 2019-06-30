@@ -42,7 +42,6 @@ $(document).ready(function () {
             step_id = result.active;
             processDefinition = result.data;
             parse();
-            $("[id='Sonstige Angaben']").hide();
         }
     });
     
@@ -178,7 +177,6 @@ function parse() {
                 }
             }
             getData();
-            $("[id='Sonstige Angaben']").hide();
 
         },
         error: function (result) {
