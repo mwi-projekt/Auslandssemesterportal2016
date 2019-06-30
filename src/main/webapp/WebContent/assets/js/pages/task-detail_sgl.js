@@ -45,6 +45,12 @@ $(document).ready(function () {
     
 });
 
+function manipulateDOM() {
+	
+    $("[id='Sonstige Angaben']").hide();
+	
+}
+
 function parse() {
     var output = "";
     $.ajax({
@@ -175,7 +181,7 @@ function parse() {
                 }
             }
             getData();
-
+            manipulateDOM();
         },
         error: function (result) {
             alert('Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.');
