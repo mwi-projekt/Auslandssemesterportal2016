@@ -49,7 +49,7 @@ $(document).ready(function () {
 function manipulateDOM() {
 	
     $("[id='Sonstige Angaben']").hide();
-    $('platzhalterInfo').hide();
+    $('#platzhalterInfo').hide();
 
 }
 
