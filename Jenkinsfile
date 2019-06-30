@@ -4,7 +4,7 @@ pipeline {
     stages {
     	stage('Configure Server URL') {
             steps {
-                sh 'sed -i -e \'s#var baseUrl = "http://localhost:8080/Auslandssemesterportal";#var baseUrl = "http://10.3.15.45:8080/Auslandssemesterportal";#g\' src/main/webapp/WebContent/assets/js/app.js'
+                sh 'sed -i -e \'s#var baseUrl = "http://localhost:8080/Auslandssemesterportal";#var baseUrl = "http://10.3.15.45:8082/Auslandssemesterportal";#g\' src/main/webapp/WebContent/assets/js/app.js'
             }
         }
         stage('Build') {
