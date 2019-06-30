@@ -142,10 +142,10 @@ function loadAuslandsangeboteInhalt() {
                     '<div class="contentAng active" id="c' +
                     i +
                     '1"><div class="row"><div class="col-md-7">' +
-                    result[i].allgemeineInfos + '<br>' + '<br>' +
-                    + '<span>' + "Mögliche Studiengänge für diese Hochschule: " 
-                    + result[i].studiengang + '</span>' +
-                    '</div><div class="col-md-5">';
+                    result[i].allgemeineInfos + '<br/>' + '<br/>' + '</div>'
+                    + '<div class="row"><div class="col-md-7">'
+                    + "Mögliche Studiengänge für diese Hochschule: " + result[i].studiengang 
+                    + '</div><div class="col-md-5">';
                 if (result[i].maps) {
                     htmlText = htmlText +
                         '<iframe width="400" height="200" src="' +
