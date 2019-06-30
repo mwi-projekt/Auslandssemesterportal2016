@@ -27,7 +27,6 @@ $(document).ready(function () {
     $('#Sonstige Angaben').hide();
     $('#reason').hide();
     $('#reasonl').hide();
-    $('platzhalterInfo').hide();
     $('#validateBtn').prop('disabled', true);
 
 
@@ -50,7 +49,8 @@ $(document).ready(function () {
 function manipulateDOM() {
 	
     $("[id='Sonstige Angaben']").hide();
-	
+    $('platzhalterInfo').hide();
+
 }
 
 function parse() {
@@ -375,6 +375,7 @@ function change(obj) {
     if (selected === '') {
         $('#reason').hide();
         $('#reasonl').hide();
+        $('#platzhalterInfo').hide();
         $('#validateBtn').prop('disabled', true);
     } else {
         $.ajax({
