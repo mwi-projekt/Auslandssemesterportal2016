@@ -372,6 +372,7 @@ function change(obj) {
     if (selected === '') {
         $('#reason').hide();
         $('#reasonl').hide();
+        $('#platzhalterInfo').hide();
         $('#validateBtn').prop('disabled', true);
     } else {
         $.ajax({
@@ -386,6 +387,7 @@ function change(obj) {
                 $('#validateBtn').prop('disabled', false);
                 $('#reason').show();
                 $('#reasonl').show();
+                $('#platzhalterInfo').show();
             },
             error: function (result) {
                 alert('Fehler beim Abrufen des Mailtextes');
