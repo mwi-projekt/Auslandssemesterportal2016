@@ -125,7 +125,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	
         	doc.addImage(imgData2, 'JPEG',0,0,210,297);
         	
-        	doc.save('Anmeldeformular.pdf');41
+        	doc.save('Anmeldeformular.pdf');
           	},
           	error: function(result){
           		alert('Ein Fehler ist aufgetreten');
