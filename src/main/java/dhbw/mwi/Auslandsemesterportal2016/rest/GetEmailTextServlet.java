@@ -3,6 +3,8 @@ package dhbw.mwi.Auslandsemesterportal2016.rest;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import java.awt.font;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -110,6 +112,8 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "\n" + "Ihr Studiengangsleiter/in";
 				}
 			}
+			Font font = new Font ("Verdana", Font.BOLD, 18);
+			output.setFont(font);
 			toClient.print(output);
 		}
 	}
