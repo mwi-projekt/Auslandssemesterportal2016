@@ -29,6 +29,7 @@ $(document).ready(function () {
     $('#reasonl').hide();
     $('#validateBtn').prop('disabled', true);
 
+
     $.ajax({
         type: "GET",
         url: baseUrl + "/currentActivity",
@@ -44,6 +45,12 @@ $(document).ready(function () {
     });
     
 });
+
+function manipulateDOM() {
+	
+    $("[id='Sonstige Angaben']").hide();
+
+}
 
 function parse() {
     var output = "";
@@ -175,7 +182,8 @@ function parse() {
                 }
             }
             getData();
-
+            manipulateDOM();
+            
         },
         error: function (result) {
             alert('Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.');
@@ -366,6 +374,7 @@ function change(obj) {
     if (selected === '') {
         $('#reason').hide();
         $('#reasonl').hide();
+        $('#platzhalterInfo').hide();
         $('#validateBtn').prop('disabled', true);
     } else {
         $.ajax({
@@ -380,6 +389,7 @@ function change(obj) {
                 $('#validateBtn').prop('disabled', false);
                 $('#reason').show();
                 $('#reasonl').show();
+                $('#platzhalterInfo').show();
             },
             error: function (result) {
                 alert('Fehler beim Abrufen des Mailtextes');

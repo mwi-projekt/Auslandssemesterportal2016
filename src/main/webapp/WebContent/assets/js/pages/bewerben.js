@@ -105,7 +105,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	}else if(uni == "South-Eastern Finland University of Applied Sciences (Finnland)"){
         		var absatz1 = uni.indexOf("of");
         		var absatz2 = uni.indexOf("(");
-        		var stringUni = uni.slice(0,(absatz1-1)) + "\n" + uni.slice(absatz-1,(absatz2-1)) + "\n" + uni.slice(absatz2-1,(uni.length));
+        		var stringUni = uni.slice(0,(absatz1-1)) + "\n" + uni.slice(absatz1-1,(absatz2-1)) + "\n" + uni.slice(absatz2-1,(uni.length));
         		//Polen
         	}else if(uni == "Technischen Universität Lodz (Polen)"){
         		var klammer = uni.indexOf("(");
