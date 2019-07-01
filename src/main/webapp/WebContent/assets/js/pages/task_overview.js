@@ -37,7 +37,7 @@ function getList() {
                             "</td><td>" +
                             '<button class="btn glyphicon glyphicon-list" title="Details" onclick="location.href=\'task_detail.html?instance_id=' +
                             singleInstance.id +
-                            '&uni=' +
+                            '&uni='  +
                             singleInstance.uni +
                             '&verify=true\'\"> </button>' +
                             "</td><td>" +
