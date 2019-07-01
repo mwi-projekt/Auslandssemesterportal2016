@@ -167,7 +167,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0env68s" sourceRef="studentBenachrichtigenSGL" targetRef="downloadsAnbieten" />
-    <bpmn:exclusiveGateway id="ExclusiveGateway_Datenpruefung" name="Datenprüfung erfolgreich?">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_Datenpruefung" name="Datenprüfung erfolgreich?" default="SequenceFlow_0kpssuu">
       <bpmn:incoming>SequenceFlow_1coz885</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1wg9408</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_09m6nu0</bpmn:outgoing>
