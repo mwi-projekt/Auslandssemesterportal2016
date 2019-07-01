@@ -19,6 +19,11 @@ import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 @WebServlet(name = "RegisterServlet", urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8664029054622031120L;
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// NO AUTHENTIFICATION NEEDED
