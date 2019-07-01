@@ -55,7 +55,8 @@ function getList() {
                             singleInstance.kurs +
                             "</td><td>" +
                             singleInstance.uni +
-                            "</td></tr>"
+                            "</td><td>" +
+                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                     } else if (singleInstance.status === 'validateSGL') {
                     	validateSGL = validateSGL +
                     		"<tr><td>" +
@@ -68,7 +69,8 @@ function getList() {
                     		singleInstance.kurs +
                     		"</td><td>" +
                     		singleInstance.uni +
-                    		"</td></tr>"
+                    		"</td></td>" +
+                    		"<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                     } else if (singleInstance.status === 'abgelehnt') {
                     	abgelehnt = abgelehnt +
                 		"<tr><td>" +
@@ -81,7 +83,8 @@ function getList() {
                 		singleInstance.kurs +
                 		"</td><td>" +
                 		singleInstance.uni +
-                		"</td></tr>"
+                		"</td><td>" +
+                		"<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                 }
                    
                 }
@@ -94,19 +97,19 @@ function getList() {
                 if (completed === "") {
                     completed = "<h2>Es gibt noch keine abgeschlossenen Bewerbungen</h2>";
                 } else {
-                    completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                    completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
                         completed + "</tbody></table>";
                 }
                 if (validateSGL === "") {
                 	validateSGL = "<h2> Es gibt keine Bewebungen, die von einem Studiengangsleiter zu validieren sind</h2>";
                 } else {
-                	validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                	validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
                     	validateSGL + "</tbody></table>";
                 }
                 if (abgelehnt === "") {
                 	abgelehnt = "<h2> Es gibt abgelehnten Bewerbungen</h2>";
                 } else {
-                	abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                	abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
                 		abgelehnt + "</tbody></table>";
                 }
                 
