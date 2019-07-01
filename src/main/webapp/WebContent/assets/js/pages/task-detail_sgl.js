@@ -345,7 +345,7 @@ function validateBew() {
                 instance_id: instanceID,
                 key: 'validierungErfolgreich|mailText',
                 value: validateString + '|' + grund,
-                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
+                type: 'text|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
             },
             success: function (result) {
                 swal({
