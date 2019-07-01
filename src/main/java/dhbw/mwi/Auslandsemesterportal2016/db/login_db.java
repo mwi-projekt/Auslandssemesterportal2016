@@ -330,60 +330,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		return note;
 	}
 
-	public void confirm(String code) {
-
-		String userId = "_";
-		if (code != null) {
-
-			try {
-				String sql = "SELECT userID FROM user WHERE verifiziert='" + code + "'";
-				System.out.println(sql);
-				// Open a connection
-				conn = DB.getInstance();
-				// Execute SQL query
-				stmt = conn.createStatement();
-				System.out.println("Connect");
-				if (sql != "leer") {
-					rs = stmt.executeQuery(sql);
-					int spalten = rs.getMetaData().getColumnCount();
-					while (rs.next()) {
-						for (int k = 1; k <= spalten; k++) {
-
-							System.out.println(rs.getString(k) + ";");
-							userId = rs.getString(k);
-						}
-					}
-					sql = "leer";
-
-				}
-				if (userId != "_") {
-					String query = "UPDATE user SET verifiziert = 1 WHERE userID=" + userId;
-					rsupd = stmt.executeUpdate(query);
-
-				}
-			} catch (SQLException se) {
-				// Handle errors for JDBC
-				se.printStackTrace();
-				System.out.println("Fehler se");
-			} catch (Exception e) {
-				// Handle errors for Class.forName
-				e.printStackTrace();
-				System.out.println("Fehler e");
-			} finally {
-				System.out.println("Done doPost");
-				try {
-					// Clean-up environment
-					rs.close();
-					stmt.close();
-					conn.close();
-				} catch (Exception ex) {
-					System.out.println("Exception : " + ex.getMessage());
-				}
-			}
-
-		}
-	}
-
 	/**
 	 * TASK LISTENER ASSIGNMENT: Methode dient zum Benachrichtigen des
 	 * Auslandsmitarbeiter

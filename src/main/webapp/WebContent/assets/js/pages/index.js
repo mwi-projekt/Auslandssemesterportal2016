@@ -38,12 +38,19 @@ $(document).ready(function () {
 
     if ($.urlParam('confirm') != null && $.urlParam('confirm').trim() != '') {
         var link = $.urlParam('confirm');
-        swal({
-            title: "Nutzeraccount bestätigt",
-            text: "Ihre Mailadresse wurde bestätigt. Sie können sich jetzt einloggen",
-            type: "success",
-            confirmButtonText: "OK"
+        $.ajax({
+            type: "GET",
+            url: baseUrl + "/confirm?code=" + link,
+            success: function (result) {
+            	swal({
+                    title: "Nutzeraccount bestätigt",
+                    text: "Ihre Mailadresse wurde bestätigt. Sie können sich jetzt einloggen",
+                    type: "success",
+                    confirmButtonText: "OK"
+                });
+            }
         });
+        
     }
     loadPortalInfo();
     loadAuslandsangebote();
