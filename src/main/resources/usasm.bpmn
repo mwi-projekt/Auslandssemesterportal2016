@@ -147,7 +147,9 @@
     <bpmn:sequenceFlow id="SequenceFlow_0cmmyvv" sourceRef="datenPruefen" targetRef="datenValidierenSGL" />
     <bpmn:sequenceFlow id="SequenceFlow_1coz885" sourceRef="datenValidieren" targetRef="ExclusiveGateway_Datenpruefung" />
     <bpmn:sequenceFlow id="SequenceFlow_1dff142" sourceRef="datenValidierenSGL" targetRef="ExclusiveGateway_1dolwiq" />
-    <bpmn:sequenceFlow id="SequenceFlow_0ji9cm2" name="Zur Bearbeitung freigeben" sourceRef="ExclusiveGateway_1dolwiq" targetRef="studentBenachrichtigenSGL" />
+    <bpmn:sequenceFlow id="SequenceFlow_0ji9cm2" name="Zur Bearbeitung freigeben" sourceRef="ExclusiveGateway_1dolwiq" targetRef="studentBenachrichtigenSGL">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:userTask id="datenValidierenSGL" name="Daten validieren" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="mitarbeiterAAA">
       <bpmn:extensionElements>
         <camunda:taskListener class="dhbw.mwi.Auslandsemesterportal2016.db.login_db" event="assignment" />
@@ -155,7 +157,7 @@
       <bpmn:incoming>SequenceFlow_0cmmyvv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1dff142</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_1dolwiq" name="Bewerbungsprüfung Ergebnis?" default="SequenceFlow_0ji9cm2">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1dolwiq" name="Bewerbungsprüfung Ergebnis?">
       <bpmn:incoming>SequenceFlow_1dff142</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ji9cm2</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0trilik</bpmn:outgoing>
@@ -171,7 +173,9 @@
       <bpmn:outgoing>SequenceFlow_09m6nu0</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0kpssuu</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_1wg9408" name="Zur Bearbeitung freigeben" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="studentBenachrichtigen" />
+    <bpmn:sequenceFlow id="SequenceFlow_1wg9408" name="Zur Bearbeitung freigeben" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="studentBenachrichtigen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sendTask id="studentBenachrichtigen" name="Student benachrichtigen" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
       <bpmn:documentation>Student wird über Ablehnung informiert.</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_1wg9408</bpmn:incoming>
@@ -181,9 +185,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1bz128o" sourceRef="studentBenachrichtigen" targetRef="downloadsAnbieten" />
-    <bpmn:sequenceFlow id="SequenceFlow_0xy7yr5" name="Ablehnen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="ExclusiveGateway_0rz9mmk">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0xy7yr5" name="Ablehnen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="ExclusiveGateway_0rz9mmk" />
     <bpmn:userTask id="datenValidieren" name="Daten validieren" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="mitarbeiterAAA">
       <bpmn:extensionElements>
         <camunda:taskListener class="dhbw.mwi.Auslandsemesterportal2016.db.login_db" event="assignment" />
@@ -204,9 +206,7 @@
       <bpmn:incoming>SequenceFlow_09m6nu0</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1gd2a3p</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0kpssuu" name="Ablehnen" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="ExclusiveGateway_0rz9mmk">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0kpssuu" name="Ablehnen" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="ExclusiveGateway_0rz9mmk" />
     <bpmn:endEvent id="EndEvent_false" name="Bewerbung erfolglos abgeschlossen">
       <bpmn:incoming>SequenceFlow_1jjp43i</bpmn:incoming>
     </bpmn:endEvent>
