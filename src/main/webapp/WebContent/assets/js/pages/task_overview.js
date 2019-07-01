@@ -131,7 +131,7 @@ function getList() {
 function deleteProcessButtons(uni, matrikelnummer) {
 	swal({
             title: "Bist du sicher?",
-            text: "Der Prozess kann nicht wiederhergestellt werden!", 
+            text: "Der Prozess kann nicht wiederhergestellt werden!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
