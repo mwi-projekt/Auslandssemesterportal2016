@@ -162,7 +162,7 @@
       <bpmn:outgoing>SequenceFlow_0xy7yr5</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0trilik" name="Annehmen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="datenValidieren">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">validierungErfolgreich == "true"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0env68s" sourceRef="studentBenachrichtigenSGL" targetRef="downloadsAnbieten" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_Datenpruefung" name="Datenprüfung erfolgreich?" default="SequenceFlow_1wg9408">
@@ -178,11 +178,11 @@
       <bpmn:outgoing>SequenceFlow_1bz128o</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="SequenceFlow_09m6nu0" name="Annehmen" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="bestaetigungVersenden">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">validierungErfolgreich == "true"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1bz128o" sourceRef="studentBenachrichtigen" targetRef="downloadsAnbieten" />
     <bpmn:sequenceFlow id="SequenceFlow_0xy7yr5" name="Ablehnen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="ExclusiveGateway_0rz9mmk">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">validierungErfolgreich == "false"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:userTask id="datenValidieren" name="Daten validieren" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="mitarbeiterAAA">
       <bpmn:extensionElements>
@@ -205,7 +205,7 @@
       <bpmn:outgoing>SequenceFlow_1gd2a3p</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="SequenceFlow_0kpssuu" name="Ablehnen" sourceRef="ExclusiveGateway_Datenpruefung" targetRef="ExclusiveGateway_0rz9mmk">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">validierungErfolgreich == "false"</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="EndEvent_false" name="Bewerbung erfolglos abgeschlossen">
       <bpmn:incoming>SequenceFlow_1jjp43i</bpmn:incoming>
