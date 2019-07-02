@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 
-@WebServlet(name = "RegisterServlet", urlPatterns = { "/confirm" })
+@WebServlet(name = "ActivateUserServlet", urlPatterns = { "/confirm" })
 public class ActivateUserServlet extends HttpServlet {
 
 	@Override
