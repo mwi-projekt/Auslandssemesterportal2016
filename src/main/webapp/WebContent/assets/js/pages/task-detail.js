@@ -298,7 +298,7 @@ function saveChanges() {
                     });
                 },
                 error: function (result) {
-                    sweetAlert("Fehler", "Ein Fehler ist aufgetreten, die Telefonnumer darf maximal 11-stellig sein", "error");
+                    sweetAlert("Fehler", "Ein Fehler ist aufgetreten", "error");
                 }
             });
         });
