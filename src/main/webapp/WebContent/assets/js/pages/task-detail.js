@@ -278,27 +278,39 @@ function saveChanges() {
             closeOnConfirm: false
         },
         function () {
-            $.ajax({
+        	$.ajax({
                 type: "POST",
-                url: baseUrl + "/setVariable",
+                url: baseUrl + "/sendNewApplicationMail",
                 data: {
-                    instance_id: instanceID,
-                    key: keyString,
-                    value: valString,
-                    type: typeString
+                    instance_id: instanceID
                 },
                 success: function (result) {
-                    swal({
-                        title: "Bewerbung eingereicht",
-                        text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
-                        type: "success",
-                        confirmButtonText: "Ok"
-                    }, function () {
-                        location.href = 'bewerbungsportal.html';
+                	$.ajax({
+                        type: "POST",
+                        url: baseUrl + "/setVariable",
+                        data: {
+                            instance_id: instanceID,
+                            key: keyString,
+                            value: valString,
+                            type: typeString
+                        },
+                        success: function (result) {
+                            swal({
+                                title: "Bewerbung eingereicht",
+                                text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
+                                type: "success",
+                                confirmButtonText: "Ok"
+                            }, function () {
+                                location.href = 'bewerbungsportal.html';
+                            });
+                        },
+                        error: function (result) {
+                            sweetAlert("Fehler", "Ein Fehler ist aufgetreten", "error");
+                        }
                     });
                 },
                 error: function (result) {
-                    sweetAlert("Fehler", "Ein Fehler ist aufgetreten", "error");
+                    console.error(result);
                 }
             });
         });
@@ -340,6 +352,7 @@ function validateBew() {
         cancelButtonText: "Abbrechen",
         closeOnConfirm: false
     }, function () {
+    	// hier mail einfügen -> neue Ajax
         $.ajax({
             type: "POST",
             url: baseUrl + "/setVariable",
