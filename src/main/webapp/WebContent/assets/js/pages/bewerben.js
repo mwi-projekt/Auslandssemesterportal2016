@@ -352,7 +352,7 @@ function saveData() {
             location.reload();
         },
         error: function (result) {
-            alert('Ein Fehler ist aufgetreten: Die Telefonnummer darf maximal 11 Stellen besitzen'); //neuer Hinweis
+            alert('Ein Fehler ist aufgetreten'); 
         }
     });
 }
