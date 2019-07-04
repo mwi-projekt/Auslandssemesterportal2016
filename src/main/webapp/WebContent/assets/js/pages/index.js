@@ -32,7 +32,19 @@ $(document).ready(function () {
         }
     }
     
-    document.getElementById("zumPortal").href = "task_overview_sgl.html";
+    
+    if (sessionStorage['rolle'] === "1") {
+    	document.getElementById("zumPortal").href = "index.jsp";
+    }
+    else if (sessionStorag['rolle'] === "2") { 
+    	document.getElementById("zumPortal").href = "task_overview.html";
+    }
+    else if (sessionStorag['rolle'] === "3") {
+    	document.getElementById("zumPortal").href = "bewerbungsportal.html";
+    }
+    else if (sessionStorag['rolle'] === "4") {
+    	 document.getElementById("zumPortal").href = "task_overview_sgl.html";	
+    }
     
     // init ui
     initSlider();
