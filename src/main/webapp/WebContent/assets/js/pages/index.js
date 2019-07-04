@@ -31,7 +31,9 @@ $(document).ready(function () {
             $('.eingeloggt').css('display', 'inline');
         }
     }
-
+    
+    document.getElementById("zumPortal").href = "task_overview_sgl.html";
+    
     // init ui
     initSlider();
     initArrows();

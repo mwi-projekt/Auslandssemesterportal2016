@@ -34,7 +34,7 @@
                     <a class="btn btn-default navMargin" href="#erfahrungsBerichte">Erfahrungsberichte</a>
 
                     <a class="btn btn-default navMargin" href="#infoMaterial">Infomaterial</a>
-                    <div class="pull-right"><a class="btn cmsBtn eingeloggt" href="bewerbungsportal.html">Zum
+                    <div class="pull-right"><a class="btn cmsBtn eingeloggt" id="zumPortal" href="bewerbungsportal.html">Zum
                             Bewerbungsportal</a></div>
                     <div class="pull-right"> <label class="btn cms cmsBtn inline Admin" style="float: none"><a style="color: white"
                                 href="choose-diagram.html">Bewerbungsprozesse bearbeiten</a></label> </div>
