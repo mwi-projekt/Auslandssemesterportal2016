@@ -136,7 +136,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	var mail = result.bewEmail;
         	var unternehmen = result.untName;
         	var nameAnspr = result.untAnsprechpartner;
-        	var telAnspr = "-------"; //Fehlt
+        	//var telAnspr = ""; Fehlt
         	var mailAnspr = result.untEMail;
         		
         	doc.setFontSize(11);
@@ -153,7 +153,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	doc.text(80, 190, mail);
         	doc.text(80, 199.2, unternehmen);
         	doc.text(80, 217.5, nameAnspr);
-        	doc.text(80, 226.7, telAnspr);
+        	//doc.text(80, 226.7, telAnspr);
         	doc.text(80, 235, mailAnspr);
         	
         	doc.addPage();
