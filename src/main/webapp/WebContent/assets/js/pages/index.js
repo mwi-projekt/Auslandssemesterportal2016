@@ -36,13 +36,13 @@ $(document).ready(function () {
     if (sessionStorage['rolle'] === "1") {
     	document.getElementById("zumPortal").href = "index.jsp";
     }
-    else if (sessionStorag['rolle'] === "2") { 
+    else if (sessionStorage['rolle'] === "2") { 
     	document.getElementById("zumPortal").href = "task_overview.html";
     }
-    else if (sessionStorag['rolle'] === "3") {
+    else if (sessionStorage['rolle'] === "3") {
     	document.getElementById("zumPortal").href = "bewerbungsportal.html";
     }
-    else if (sessionStorag['rolle'] === "4") {
+    else if (sessionStorage['rolle'] === "4") {
     	 document.getElementById("zumPortal").href = "task_overview_sgl.html";	
     }
     
