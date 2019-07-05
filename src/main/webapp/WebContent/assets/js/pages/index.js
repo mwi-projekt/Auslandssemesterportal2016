@@ -38,12 +38,14 @@ $(document).ready(function () {
     }
     else if (sessionStorage['rolle'] === "2") { 
     	document.getElementById("zumPortal").href = "task_overview.html";
+    	document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }
     else if (sessionStorage['rolle'] === "3") {
     	document.getElementById("zumPortal").href = "bewerbungsportal.html";
     }
     else if (sessionStorage['rolle'] === "4") {
     	 document.getElementById("zumPortal").href = "task_overview_sgl.html";	
+    	 document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }
     
     // init ui
