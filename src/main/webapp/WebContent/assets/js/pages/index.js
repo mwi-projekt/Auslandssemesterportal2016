@@ -179,8 +179,9 @@ function loadAuslandsangeboteInhalt() {
                     '<div class="contentAng active" id="c' +
                     i +
                     '1"><div class="row"><div class="col-md-7">' +
-                    result[i].allgemeineInfos +
-                    '</div><div class="col-md-4">';
+                    result[i].allgemeineInfos + '<br/>' + '<br/>'
+                    + 'Mögliche Studiengänge für diese Hochschule: ' + result[i].studiengang 
+                    + '</div><div class="col-md-4">';
                 if (result[i].maps) {
                     htmlText = htmlText +
                         '<iframe width="400" height="200" src="' +
