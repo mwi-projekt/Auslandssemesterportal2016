@@ -21,7 +21,7 @@ public class SendApplicationMailServlet extends HttpServlet {
 		String instanceId = request.getParameter("instance_id");
 
 		try {
-			Message message = Util.getEmailMessage("hen.sey@t-online.de",
+			Message message = Util.getEmailMessage("support@fotobox-julius.de",
 					"Neue Bewerbung im Auslandssemesterportal");
 			String link = "http://10.3.15.45:8080/Auslandssemesterportal/WebContent/";
 				
