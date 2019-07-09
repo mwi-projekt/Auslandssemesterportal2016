@@ -10,6 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn install'
+                sh 'cp target/Auslandssemesterportal.war docker/mwi/'
             }
         }
         stage('Deploy Docker') {
