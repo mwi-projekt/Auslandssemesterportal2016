@@ -13,6 +13,11 @@ pipeline {
                 sh 'cp target/Auslandssemesterportal.war docker/mwi/'
             }
         }
+        stage('Build Docker') {
+            steps {
+                sh 'docker-compose build'
+            }
+        }
         stage('Deploy Docker') {
             steps {
                 sh 'docker-compose up -d'

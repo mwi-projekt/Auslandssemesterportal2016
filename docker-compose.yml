@@ -26,7 +26,7 @@ services:
       - '8083:80'
 
   web:
-    image: mysql:5.7
+    build: ./docker/web
     ports:
       - '8085:80'
     volumes:
