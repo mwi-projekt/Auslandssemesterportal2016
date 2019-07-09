@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DHBW Auslandsportal</title>
+
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="external/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="CSS/main.css">
+    <link rel="stylesheet" href="CSS/bewerbungsportal.css">
+    <link rel="stylesheet" href="CSS/bewerbungsformular.css">
+    <link rel="stylesheet" href="CSS/InfoBox.css">
+    <link rel="stylesheet" type="text/css" href="external/sweetalert-master/dist/sweetalert.css">
+    <link rel="stylesheet" href="assets/css/vendor/dataTables.bootstrap.min.css">
+       
+    <script src="assets/js/vendor/jquery.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <script src="assets/js/vendor/jquery.form-validator.min.js"></script>
+    <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script src="external/jquery-ui/jquery-ui.min.js"></script>
+    <script src="assets/js/vendor/jquery.dataTables.min.js"></script>
+    <script src="assets/js/vendor/dataTables.bootstrap.min.js"></script>
+    <script src="external/sweetalert-master/dist/sweetalert.min.js"></script>
+    
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/pages/task_overview_sgl.js"></script>
+</head>
+
+<body>
+
+      <!-- Navigationsleiste-------------------------------------------------------------------- -->
+    <div class="header">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+                <a href="index.jsp"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+                <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
+            </div>
+
+            <div class="col-md-3">
+
+            	<div class="logoutFenster">
+
+
+                        Eingeloggt als <b class="nutzerName"></b>
+
+                        <button type="button" class="btn btn-default navMargin"
+                     id="logout" data-target="#logout">Logout</button>
+
+            	</div>
+
+        	</div>
+
+    	</div>
+   	</div>
+
+
+<!-- Mittlerer Teil -->
+	
+<div>
+
+</div>
+
+<div class="row aufgaben">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="nav2">
+            <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
+            <div class="navEl nonCms current" id="nav2"><a style="background: #D60000; color: white;">Bewerbungen validieren</a></div>
+            <div class="navEl nonCms current" id="nav3"><a href="index" style="background: #D60000; color: white;">Startseite bearbeiten</a></div>
+            <a class="navEl current" onclick="window.print();" style="background: #D60000; color: white;">Übersicht drucken</a>
+            <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
+        </div>
+	
+        <div id="resultList"></div>
+        <!-- <div class="inhalt nonCms" id="in1">
+            <div class="col-md-12 inhaltBox">
+                <h2>Herzlich willkommen im Bewerbungsportal</h2>
+                <p>Hier kannst du dir noch einmal alle Auslandsuniversitäten
+                    ansehen, die für die jeweiligen Studiengänge zur Verfügung stehen.</p>
+                <p>Im Reiter "Bewerben" ist bereits eine Vorauswahl für dich
+                    getroffen. Hier kannst du dich nur noch auf Univerisäten bewerben,
+                    die für deinen Studiengang verfügbar sind.</p>
+                <p>
+                    <i>Das Auslandsportal-Team wünscht dir viel Erfolg bei deiner
+                        Bewerbung und eine tolle Zeit im Ausland!!!</i>
+                </p>
+            </div>
+        </div> -->
+            <iframe class="iFenster iF2" src="erfahrungsbericht1.html"
+                    style="width: 100%; height: 500px;"></iframe>
+
+        </div>
+    </div>
+    <!-- <div class="inhalt nonCms" id="in4">
+        <div class="col-md-8 inhaltBox" style="width: 99%">
+            <h2>Erfahrungsberichte</h2>
+            <select class="inBox zweiD" id="selBerichte">
+                <option>Gesamtbewertung</option>
+                <option>Einzelbewertungen</option>
+            </select>
+        </div>
+    </div> -->
+
+    <div class="inhalt cms" id="in3">
+        <div class="inhaltBox col-md-12">Das ist die Startseite. Hier
+            muss noch Fülltext zur Beschreibung der möglichen Funktionen rein.
+        </div>
+    </div>
+    <div class="inhalt cms" id="in5">
+        <div class="col-md-12 inhaltBox"></div>
+    </div>
+    <div class="inhalt cms" id="in6">
+        <div class="col-md-12 inhaltBox"></div>
+    </div>
+</div>
+</div>
+
+<!-- 	FuÃŸzeile -->
+	<div class="footer">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<div class="pull-right">
+					<p>
+                        <a href="index.jsp">Startseite</a>
+                        |
+                        <a href="impressum.html">Impressum</a>
+                        |
+                        <a href="faq.html">FAQs</a>
+                    </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

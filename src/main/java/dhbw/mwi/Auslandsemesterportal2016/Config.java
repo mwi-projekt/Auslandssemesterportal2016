@@ -4,7 +4,7 @@ public class Config {
 
 	public static final String URL = System.getenv("MWI_URL");
 	public static final String CAMUNDA_URL = URL + "/camunda";
-	public static final String MWI_URL = URL + "/WebContent";
+	public static final String MWI_URL = URL;
 	
 	public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
 	public static final String DB_URL= System.getenv("MWI_DB_URL");

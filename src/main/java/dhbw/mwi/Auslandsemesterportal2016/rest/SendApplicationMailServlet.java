@@ -23,7 +23,7 @@ public class SendApplicationMailServlet extends HttpServlet {
 		try {
 			Message message = Util.getEmailMessage("support@fotobox-julius.de",
 					"Neue Bewerbung im Auslandssemesterportal");
-			String link = "http://10.3.15.45:8080/Auslandssemesterportal/WebContent/";
+			String link = "http://10.3.15.45/";
 				
 			message.setContent("<h2>Sehr geehrter Herr Freytag"
 					+ ",</h2> es ist eine neue Bewerbung im Auslandssemesterportal."
