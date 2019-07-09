@@ -12,16 +12,6 @@ pipeline {
                 sh 'mvn install'
             }
         }
-        stage('Build Docker MWI') {
-            steps {
-                sh 'docker build -t mwi docker/mwi/.'
-            }
-        }
-        stage('Build Docker Nginx') {
-            steps {
-                sh 'docker build -t mwi-web docker/web/.'
-            }
-        }
         stage('Deploy Docker') {
             steps {
                 sh 'docker-compose up -d'
