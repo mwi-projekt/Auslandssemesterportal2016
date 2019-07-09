@@ -35,7 +35,9 @@ public class GetVariablesServlet extends HttpServlet {
 
 			for (int i = 0; i < keys.length; i++) {
 				Object obj = runtime.getVariable(instanceID, keys[i]);
-				json.addProperty(keys[i], obj.toString());
+				if (obj != null) {
+					json.addProperty(keys[i], obj.toString());
+				}
 			}
 			Util.writeJson(response, json);
 
