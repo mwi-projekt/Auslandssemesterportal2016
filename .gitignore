@@ -6,6 +6,7 @@
 /.settings
 /bin
 /*.springBeans
+.DS_Store
 
 # Eclipse Core      
 .project

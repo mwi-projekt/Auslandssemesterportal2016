@@ -1,7 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.camunda.bpm.engine.impl.util.json.JSONArray;
-import org.camunda.bpm.engine.impl.util.json.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
@@ -37,24 +36,24 @@ public class GetOverviewServlet extends HttpServlet {
 			activityString = activityString.substring(0, activityString.length() - 1);
 			String[] activities = activityString.split(";");
 
-			JSONArray arr = new JSONArray();
+			JsonArray arr = new JsonArray();
 
 			for (int i = 0; i < activities.length; i++) {
 				ResultSet rs = SQL_queries.getJson(activities[i], definition);
 				try {
 					rs.next();
-					JSONObject line = new JSONObject();
-					line.put("activity", activities[i]);
-					line.put("data", rs.getString("json"));
-					arr.put(line);
+					JsonObject line = new JsonObject();
+					line.addProperty("activity", activities[i]);
+					line.addProperty("data", rs.getString("json"));
+					arr.add(line);
 				} catch (Exception e) {
 					e.printStackTrace();
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				}
 			}
 
-			JSONObject json = new JSONObject();
-			json.put("data", arr);
+			JsonObject json = new JsonObject();
+			json.add("data", arr);
 			Util.writeJson(response, json);
 		}
 	}

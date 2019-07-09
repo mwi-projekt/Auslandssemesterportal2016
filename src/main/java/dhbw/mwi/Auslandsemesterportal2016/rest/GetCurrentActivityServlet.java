@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.impl.util.json.JSONObject;
+
+import com.google.gson.JsonObject;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
@@ -36,9 +37,9 @@ public class GetCurrentActivityServlet extends HttpServlet {
 			if (instanceID != null) {
 				List<String> activitiesList = runtime.getActiveActivityIds(instanceID);
 				String activeActivity = activitiesList.get(0);
-				JSONObject json = new JSONObject();
-				json.put("active", activeActivity);
-				json.put("data", model);
+				JsonObject json = new JsonObject();
+				json.addProperty("active", activeActivity);
+				json.addProperty("data", model);
 				Util.writeJson(response, json);
 			}
 		}

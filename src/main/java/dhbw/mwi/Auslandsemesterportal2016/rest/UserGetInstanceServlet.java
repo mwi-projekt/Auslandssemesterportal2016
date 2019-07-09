@@ -12,8 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.impl.util.json.JSONArray;
-import org.camunda.bpm.engine.impl.util.json.JSONObject;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
@@ -30,11 +31,11 @@ public class UserGetInstanceServlet extends HttpServlet {
 		String reply = "";
 		// Holt instanceId aus DB
 		ArrayList<String[]> instances = SQL_queries.getUserInstances(matnr);
-		JSONObject json = new JSONObject();
-		JSONArray data = new JSONArray();
+		JsonObject json = new JsonObject();
+		JsonArray data = new JsonArray();
 
 		for (int i = 0; i < instances.size(); i++) {
-			JSONObject row = new JSONObject();
+			JsonObject row = new JsonObject();
 			String[] listEntry = instances.get(i);
 			String uni = listEntry[0];
 			String instanceID = listEntry[1];
@@ -58,15 +59,15 @@ public class UserGetInstanceServlet extends HttpServlet {
 						stepCounter = SQL_queries.getStepCounter(currentActivity, "studentBewerben");
 					}
 				}
-				row.put("instanceID", instanceID);
-				row.put("uni", uni);
-				row.put("stepCounter", stepCounter);
-				data.put(row);
+				row.addProperty("instanceID", instanceID);
+				row.addProperty("uni", uni);
+				row.addProperty("stepCounter", stepCounter);
+				data.add(row);
 			} catch (Exception e) {
 
 			}
 		}
-		json.put("data", data);
+		json.add("data", data);
 		Util.writeJson(response, json);
 	}
 }
