@@ -12,11 +12,6 @@ pipeline {
                 sh 'mvn install'
             }
         }
-        stage('Build Docker') {
-            steps {
-                sh 'docker build -t mwi .'
-            }
-        }
         stage('Deploy Docker') {
             steps {
                 sh 'docker-compose up -d'
