@@ -13,6 +13,8 @@ services:
       MYSQL_DATABASE: camunda_db
     volumes:
       - /data/db:/var/lib/mysql
+    networks:
+      - mwi-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -24,6 +26,8 @@ services:
       PMA_ABSOLUTE_URI: http://10.3.15.45/phpmyadmin/
     ports:
       - '8083:80'
+    networks:
+      - mwi-network
 
   web:
     build: ./docker/web
@@ -31,6 +35,8 @@ services:
       - '8085:80'
     volumes:
       - /data/web:/etc/nginx/html
+    networks:
+      - mwi-network
 
   mwi:
     build: ./docker/mwi
@@ -44,3 +50,9 @@ services:
       MWI_URL: 'http://10.3.15.45'
       MWI_DB_URL: 'jdbc:mysql://10.3.15.45:3306/mwi?autoReconnect=true&user=mwi&password=mwi2014&serverTimezone=UTC'
     depends_on: [mysql]
+    networks:
+      - mwi-network
+
+
+networks:
+  mwi-network:
