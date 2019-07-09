@@ -21,6 +21,7 @@ services:
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
+      PMA_ABSOLUTE_URI: http://10.3.15.45/phpmyadmin/
     ports:
       - '8083:80'
 
