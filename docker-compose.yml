@@ -34,7 +34,7 @@ services:
       DB_USERNAME: mwi
       DB_PASSWORD: mwi2014
       DB_URL: jdbc:mysql://mysql:3306/camunda_db?autoReconnect=true
-      MWI_URL: 'http://10.3.15.45:8082'
+      MWI_URL: 'http://10.3.15.45'
       MWI_DB_URL: 'jdbc:mysql://10.3.15.45:3306/mwi?autoReconnect=true&user=mwi&password=mwi2014&serverTimezone=UTC'
     depends_on: [mysql]
 
