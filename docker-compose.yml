@@ -26,14 +26,14 @@ services:
       - '8083:80'
 
   web:
-    build: ./docker/web
+    image: mwi-web:latest
     ports:
       - '8085:80'
     volumes:
       - www-volume:/etc/nginx/html
 
   mwi:
-    build: ./docker/mwi
+    image: mwi:latest
     ports:
       - '8082:8080'
     environment:
