@@ -31,7 +31,7 @@ import dhbw.mwi.Auslandsemesterportal2016.Config;
  */
 @MultipartConfig(maxFileSize = 16177215) // file size up to 16MB
 @WebServlet(name = "login_db", description = "connection to DB for the prozess.jsp", urlPatterns = {
-		"/WebContent/login_db" })
+		"/login_db" })
 
 public class login_db extends HttpServlet implements TaskListener, JavaDelegate {
 	private static final long serialVersionUID = 1L;

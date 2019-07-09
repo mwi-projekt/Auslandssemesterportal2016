@@ -4,17 +4,23 @@ pipeline {
     stages {
     	stage('Configure Server URL') {
             steps {
-                sh 'sed -i -e \'s#var baseUrl = "http://localhost:8080/Auslandssemesterportal";#var baseUrl = "http://10.3.15.45:8080/Auslandssemesterportal";#g\' src/main/webapp/WebContent/assets/js/app.js'
+                sh 'sed -i -e \'s#var baseUrl = "http://localhost:8080/Auslandssemesterportal";#var baseUrl = "http://10.3.15.45";#g\' src/main/webapp/assets/js/app.js'
             }
         }
         stage('Build') {
             steps {
                 sh 'mvn install'
+                sh 'cp target/Auslandssemesterportal.war docker/mwi/'
             }
         }
-        stage('Deploy') { 
+        stage('Build Docker') {
             steps {
-                sh 'mv target/Auslandssemesterportal.war $MWI_DEPLOY' 
+                sh 'docker-compose build'
+            }
+        }
+        stage('Deploy Docker') {
+            steps {
+                sh 'docker-compose up -d'
             }
         }
     }

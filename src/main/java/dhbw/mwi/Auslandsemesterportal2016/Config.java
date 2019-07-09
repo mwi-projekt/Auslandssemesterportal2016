@@ -2,14 +2,12 @@ package dhbw.mwi.Auslandsemesterportal2016;
 
 public class Config {
 
-	public static final String URL = "http://10.3.15.45:8080";
+	public static final String URL = System.getenv("MWI_URL");
 	public static final String CAMUNDA_URL = URL + "/camunda";
-	public static final String MWI_URL = URL + "/Auslandssemesterportal/WebContent";
+	public static final String MWI_URL = URL;
 	
-	public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-	public static final String DB_URL="jdbc:mysql://10.3.15.45:3306/mwi?autoReconnect=true";
-	public static final String USER = "mwi";
-	public static final String PASS = "mwi2014";
+	public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
+	public static final String DB_URL= System.getenv("MWI_DB_URL");
 	
 	public static final String MAIL_HOST = "smtp.gmail.com";
 	public static final String MAIL_USER = "mwiausland@gmail.com";

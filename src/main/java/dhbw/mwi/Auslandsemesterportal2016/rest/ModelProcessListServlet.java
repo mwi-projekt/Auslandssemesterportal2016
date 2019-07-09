@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.camunda.bpm.engine.impl.util.json.JSONArray;
-
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
@@ -29,8 +27,6 @@ public class ModelProcessListServlet extends HttpServlet {
 			String model = request.getParameter("model");
 
 			if (model != null) {
-
-				JSONArray arr = new JSONArray();
 
 				String query = "SELECT step FROM processModel WHERE model = ?";
 				String[] args = new String[] { model };

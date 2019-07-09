@@ -16,8 +16,8 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 
-import org.camunda.bpm.engine.impl.util.json.JSONArray;
-import org.camunda.bpm.engine.impl.util.json.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 public class Util {
 
@@ -74,7 +74,7 @@ public class Util {
     	return getEmailMessage(emailTo, "noreply@dhbw-karlsruhe.de",  subject);
     }
 
-    public static void writeJson(HttpServletResponse response, JSONObject json) {
+    public static void writeJson(HttpServletResponse response, JsonObject json) {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out;
@@ -88,23 +88,23 @@ public class Util {
 	}
 
 	public static void writeJson(HttpServletResponse response, ResultSet rs) {
-		JSONArray arr = new JSONArray();
+		JsonArray arr = new JsonArray();
 		if (rs != null) {
 			try {
 				while (rs.next()) {
-					JSONObject json = new JSONObject();
+					JsonObject json = new JsonObject();
 					for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-						json.putOnce(rs.getMetaData().getColumnName(i), rs.getString(i));
+						json.addProperty(rs.getMetaData().getColumnName(i), rs.getString(i));
 					}
-					arr.put(json);
+					arr.add(json);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		JSONObject data = new JSONObject();
-		data.put("data", arr);
+		JsonObject data = new JsonObject();
+		data.add("data", arr);
 		writeJson(response, data);
 	}
 }
