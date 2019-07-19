@@ -14,3 +14,4 @@
 # JDT-specific (Eclipse Java Development Tools)     
 .classpath
 /bin/
+/docker/mwi/Auslandssemesterportal.war

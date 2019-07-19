@@ -13,7 +13,7 @@ public class Config {
 	public static final String MAIL_USER = "mwiausland@gmail.com";
 	public static final String MAIL_PASS = "MWIAusland1";
 	
-	public static final String UPLOAD_DIR = "/var/www/files";
-	public static final String UPLOAD_URL = "http://10.3.15.45/files/";
+	public static final String UPLOAD_DIR = "/camunda/upload";
+	public static final String UPLOAD_URL = URL + "/files/";
 	
 }
