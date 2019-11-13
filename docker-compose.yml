@@ -46,7 +46,7 @@ services:
     networks:
       - mwi-network
 
-   web:
+  web:
     build: ./docker/web
     restart: always
     ports:
@@ -59,7 +59,6 @@ services:
       - mysql
       - mwi
       - phpmyadmin
-
 
 networks:
   mwi-network:
