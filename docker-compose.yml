@@ -3,6 +3,7 @@ services:
   mysql:
     image: mysql:5.7
     container_name: mwi_mysql
+    restart: always
     ports:
       - '3306:3306'
     environment:
@@ -18,6 +19,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    restart: always
     links:
       - mysql
     environment:
@@ -33,6 +35,7 @@ services:
 
   mwi:
     build: ./docker/mwi
+    restart: always
     ports:
       - '8082:8080'
     environment:
