@@ -28,15 +28,8 @@ services:
       - '8083:80'
     networks:
       - mwi-network
-
-  web:
-    build: ./docker/web
-    ports:
-      - '8085:80'
-    volumes:
-      - /data/web:/etc/nginx/html
-    networks:
-      - mwi-network
+    depends_on:
+      - mysql
 
   mwi:
     build: ./docker/mwi
@@ -52,6 +45,20 @@ services:
     depends_on: [mysql]
     networks:
       - mwi-network
+
+   web:
+    build: ./docker/web
+    restart: always
+    ports:
+      - '8085:80'
+    volumes:
+      - /data/web:/etc/nginx/html
+    networks:
+      - mwi-network
+    depends_on:
+      - mysql
+      - mwi
+      - phpmyadmin
 
 
 networks:
