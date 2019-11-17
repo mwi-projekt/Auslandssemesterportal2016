@@ -1,4 +1,4 @@
-var baseUrl = "http://localhost:8080/Auslandssemesterportal";
+var baseUrl = "http://localhost";
 $.ajaxSetup({
     xhrFields: { withCredentials: true },
     crossDomain: true,
