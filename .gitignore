@@ -8,10 +8,13 @@
 /*.springBeans
 .DS_Store
 
-# Eclipse Core      
+# Eclipse Core
 .project
 
-# JDT-specific (Eclipse Java Development Tools)     
+# JDT-specific (Eclipse Java Development Tools)
 .classpath
 /bin/
 /docker/mwi/Auslandssemesterportal.war
+/docker/mwi-db
+/docker/mwi-web
+/docker/mwi-upload

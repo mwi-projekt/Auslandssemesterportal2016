@@ -33,7 +33,7 @@ services:
       - mwi_mysql
 
   mwi:
-    build: ./docker/mwi
+    image: mwi/app
     restart: always
     ports:
       - '8082:8080'
@@ -53,7 +53,7 @@ services:
 
   web:
     build: ./docker/web
-    restart: always  
+    restart: always
     ports:
       - '80:80'
     networks:
