@@ -1,0 +1,19 @@
+{
+  "name": "auslandssemesterportal2016",
+  "version": "1.0.0",
+  "description": "- docker-compose pull - docker-compose build - docker-compose up -d",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mwi-projekt/Auslandssemesterportal2016.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mwi-projekt/Auslandssemesterportal2016/issues"
+  },
+  "homepage": "https://github.com/mwi-projekt/Auslandssemesterportal2016#readme"
+}
