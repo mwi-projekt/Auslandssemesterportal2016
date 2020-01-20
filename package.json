@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mwi-projekt/Auslandssemesterportal2016/issues"
   },
-  "homepage": "https://github.com/mwi-projekt/Auslandssemesterportal2016#readme"
+  "homepage": "https://github.com/mwi-projekt/Auslandssemesterportal2016#readme",
+  "devDependencies": {
+    "typescript": "^3.7.5"
+  }
 }
