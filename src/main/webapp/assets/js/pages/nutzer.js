@@ -114,7 +114,7 @@ $(document).ready(function () {
                     $('.delete-button').click(function () {
                         var self = $(this);
 
-                        swal({
+                        Swal.fire({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
                             type: "warning",
@@ -124,10 +124,10 @@ $(document).ready(function () {
                         }).then((result) => {
                             if (result.value) {
                                 alert("Du hast auf Löschen gedrückt");
-                            	swal({
+                            	Swal.fire({
                                     title: 'Lösche User'
                                 });
-                                swal.showLoading();
+                                Swal.showLoading();
                                 $.ajax({
                                     type: "GET",
                                     url: baseUrl + "/user/delete",
@@ -135,13 +135,13 @@ $(document).ready(function () {
                                         matrikelnummer: self.data('matrikel')
                                     },
                                     success: function (result) {
-                                        swal.close();
+                                        Swal.close();
                                         $('#userStudShow').click();
-                                        swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                        Swal.fire('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
                                     },
                                     error: function (result) {
-                                        swal.close();
-                                        swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                        Swal.close();
+                                        Swal.fire('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
                                     }
                                 });
                             }
@@ -153,7 +153,7 @@ $(document).ready(function () {
 
                         var self = $(this);
 
-                        swal({
+                        Swal.fire({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
                             type: "warning",
@@ -162,10 +162,10 @@ $(document).ready(function () {
                             confirmButtonText: "Löschen!"
                         }).then((result) => {
                             if (result.value) {
-                                swal({
+                                Swal.fire({
                                     title: 'Lösche User'
                                 });
-                                swal.showLoading();
+                                Swal.showLoading();
                                 $.ajax({
                                     type: "POST",
                                     url: baseUrl + "/user/deleteSGL",
@@ -173,13 +173,13 @@ $(document).ready(function () {
                                     	mail: self.data('mail')
                                     },
                                     success: function (result) {
-                                        swal.close();
+                                        Swal.close();
                                         $('#userSGLShow').click();
-                                        swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                        Swal.fire('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
                                     },
                                     error: function (result) {
-                                        swal.close();
-                                        swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                        Swal.close();
+                                        Swal.fire('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
                                     }
                                 });
                             }
@@ -191,7 +191,7 @@ $(document).ready(function () {
 
                         var self = $(this);
 
-                        swal({
+                        Swal.fire({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
                             type: "warning",
@@ -200,10 +200,10 @@ $(document).ready(function () {
                             confirmButtonText: "Löschen!"
                         }).then((result) => {
                             if (result.value) {
-                                swal({
+                                Swal.fire({
                                     title: 'Lösche User'
                                 });
-                                swal.showLoading();
+                                Swal.showLoading();
                                 $.ajax({
                                     type: "POST",
                                     url: baseUrl + "/user/deleteAAA",
@@ -211,13 +211,13 @@ $(document).ready(function () {
                                         mail: self.data('mail')
                                     },
                                     success: function (result) {
-                                        swal.close();
+                                        Swal.close();
                                         $('#userMaShow').click();
-                                        swal('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                        Swal.fire('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
                                     },
                                     error: function (result) {
-                                        swal.close();
-                                        swal('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                                        Swal.close();
+                                        Swal.fire('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
                                     }
                                 });
                             }
@@ -278,7 +278,7 @@ $(document).ready(function () {
                 });
             },
             error: function (result) {
-                swal({
+                Swal.fire({
                     title: "Serverfehler",
                     text: "Die Serververbindung wurde unterbrochen. Bitte laden Sie die Seite erneut",
                     type: "error",
@@ -295,10 +295,10 @@ $(document).ready(function () {
         var nname = $('#AAANachname').val();
         var phone = $('#AAAPhone').val();
         var mobil = $('#AAAMobile').val();
-        swal({
+        Swal.fire({
             title: 'Speichere Änderungen'
         });
-        swal.showLoading();
+        Swal.showLoading();
         $.ajax({
             type: "POST",
             url: baseUrl + "/createAAA",
@@ -310,10 +310,10 @@ $(document).ready(function () {
                 mobil: mobil
             },
             success: function (data) {
-                swal.close();
+                Swal.close();
                 if (data == "mailError") {
 
-                    swal({
+                    Swal.fire({
                         title: "Fehler!",
                         text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
                         type: "error",
@@ -321,21 +321,21 @@ $(document).ready(function () {
                     });
 
                 } else if (data == "No account registered for this email adress") {
-                    swal({
+                    Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
                         type: "error",
                         confirmButtonText: "OK"
                     });
                 } else if (data == "registerError") {
-                    swal({
+                    Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
                         type: "error",
                         confirmButtonText: "OK"
                     });
                 } else {
-                    swal({
+                    Swal.fire({
                         title: "Account erfolgreich erstellt",
                         text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
                         type: "success",
@@ -359,10 +359,10 @@ $(document).ready(function () {
         var studiengang = $('#SGLStudiengang').val();
         var phone = $('#SGLPhone').val();
         var mobil = $('#SGLMobile').val();
-        swal({
+        Swal.fire({
             title: 'Speichere Änderungen'
         });
-        swal.showLoading();
+        Swal.showLoading();
         $.ajax({
             type: "POST",
             url: baseUrl + "/createSGL",
@@ -375,10 +375,10 @@ $(document).ready(function () {
                 mobil: mobil
             },
             success: function (data) {
-                swal.close();
+                Swal.close();
                 if (data == "mailError") {
 
-                    swal({
+                    Swal.fire({
                         title: "Fehler!",
                         text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
                         type: "error",
@@ -386,21 +386,21 @@ $(document).ready(function () {
                     });
 
                 } else if (data == "No account registered for this email adress") {
-                    swal({
+                    Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
                         type: "error",
                         confirmButtonText: "OK"
                     });
                 } else if (data == "registerError") {
-                    swal({
+                    Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
                         type: "error",
                         confirmButtonText: "OK"
                     });
                 } else {
-                    swal({
+                    Swal.fire({
                         title: "Account erfolgreich erstellt",
                         text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
                         type: "success",
@@ -433,10 +433,10 @@ $(document).ready(function () {
 		if ($('#inEditEmail').attr('data-value') != $('#inEditEmail').val()) {
 			var dataOldMail = $('#inEditEmail').attr('data-value');
 		}
-		swal({
+		Swal.fire({
 			title: 'Speichere Änderungen'
 		});
-		swal.showLoading();
+		Swal.showLoading();
 		if (dataRole == "2") {
 			$.ajax({
 				type: "POST",
@@ -451,8 +451,8 @@ $(document).ready(function () {
 					role: "2"
 				},
 				success: function (result) {
-					swal.close();
-					swal('Erfolgreich geändert.', 'Die Mitarbeiterdaten wurden aktualisiert.', 'success');
+					Swal.close();
+					Swal.fire('Erfolgreich geändert.', 'Die Mitarbeiterdaten wurden aktualisiert.', 'success');
 					$('#userEdit .close').click();
 
 					$('#userMaShow').click();
@@ -460,8 +460,8 @@ $(document).ready(function () {
 
 				},
 				error: function (result) {
-					swal.close();
-					swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
+					Swal.close();
+					Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
 				}
 			});
 		} else {
@@ -479,16 +479,16 @@ $(document).ready(function () {
 					role: "3"
 				},
 				success: function (result) {
-					swal.close();
-					swal('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
+					Swal.close();
+					Swal.fire('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
 					$('#userEdit .close').click();
 					$('#userStudShow').click();
 
 
 				},
 				error: function (result) {
-					swal.close();
-					swal('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
+					Swal.close();
+					Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
 				}
 			});
 		}

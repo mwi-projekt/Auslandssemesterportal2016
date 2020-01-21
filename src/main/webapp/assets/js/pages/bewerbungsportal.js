@@ -239,7 +239,7 @@ function initBewerben() {
             }
         },
         error: function (result) {
-            swal("Fehler", "Beim Abrufen der laufenden Prozesse ist ein Fehler aufgetreten", "error");
+            Swal.fire("Fehler", "Beim Abrufen der laufenden Prozesse ist ein Fehler aufgetreten", "error");
         }
     });
 }
@@ -248,7 +248,7 @@ function initDeleteProcessButtons() {
     $('.btn-delete').on('click', function () {
         var uni = $(this).attr("uni");
         var id = $(this).attr("rid");
-        swal({
+        Swal.fire({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden!",
             type: "warning",
@@ -269,10 +269,10 @@ function initDeleteProcessButtons() {
                 }
             }).done(function (data) {
                 $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
             }).error(function (error) {
                 console.error(error);
-                swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+                Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
             })
         });
     });

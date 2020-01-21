@@ -58,7 +58,7 @@ $(document).ready(function () {
             type: "GET",
             url: baseUrl + "/confirm?code=" + link,
             success: function (result) {
-            	swal({
+            	Swal.fire({
                     title: "Nutzeraccount bestätigt",
                     text: "Ihre Mailadresse wurde bestätigt. Sie können sich jetzt einloggen",
                     type: "success",
@@ -107,7 +107,7 @@ function loadPortalInfo() {
             }
         },
         error: function (result) {
-            swal({
+            Swal.fire({
                 title: "Serverfehler",
                 text: "Die Serververbindung wurde unterbrochen. Bitte laden Sie die Seite erneut",
                 type: "error",

@@ -301,7 +301,7 @@ function saveData() {
     var form = $('#formular');
 
     if (form && !form.isValid()) {
-        swal('Bitte füllen sie alle Felder korrekt aus.');
+        Swal.fire('Bitte füllen sie alle Felder korrekt aus.');
         return;
     }
 
@@ -311,7 +311,7 @@ function saveData() {
             case "form-upload":
                 var dropzoneForm = $('#' + json[i]["data"]["id"])[0].dropzone;
                 if (!dropzoneForm.getAcceptedFiles() || dropzoneForm.getAcceptedFiles().length <= 0) {
-                    swal('Bitte laden Sie zunächst eine Datei hoch');
+                    Swal.fire('Bitte laden Sie zunächst eine Datei hoch');
                     return;
                 }
         }
@@ -393,7 +393,7 @@ function getDropzoneOptions(action, fileName) {
         },
         accept: function (file, done) {
             if (file.name != fileName) {
-                swal("Fehler", "Bitte beachte die Syntax zur Benennung des Dokuments: " + fileName, "error");
+                Swal.fire("Fehler", "Bitte beachte die Syntax zur Benennung des Dokuments: " + fileName, "error");
                 this.removeFile(file);
             } else {
                 done();
@@ -406,7 +406,7 @@ function getDropzoneOptions(action, fileName) {
                 var message = response.message;
             }
 
-            swal('Fehler', message, 'error');
+            Swal.fire('Fehler', message, 'error');
             this.removeFile(file);
         }
     }

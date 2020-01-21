@@ -1,4 +1,5 @@
 var siteHasUnsavedChanges = false;
+var siteHasUnsavedChanges = false;
 
 window.onbeforeunload = function(e) {
 	if(siteHasUnsavedChanges) {
@@ -63,7 +64,7 @@ $(document).ready(function () {
             stepnumber: index,
             json: encodeURI(JSON.stringify(json))
         }, function (data) {
-            swal(
+            Swal.fire(
                 'Gespeichert!',
                 'Der Prozessschritt wurde erfolgreich abgespeichert.',
                 'success'

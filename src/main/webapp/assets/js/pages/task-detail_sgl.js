@@ -265,7 +265,7 @@ function saveChanges() {
     keyString = keyString.substr(0, keyString.length - 1);
     valString = valString.substr(0, valString.length - 1);
     typeString = typeString.substr(0, typeString.length - 1);
-    swal({
+    Swal.fire({
             title: "Bewerbung absenden",
             text: "Wenn Du die Bewerbung abschickst, kannst Du keine Änderungen mehr vornehmen. Fortfahren?",
             type: "warning",
@@ -286,7 +286,7 @@ function saveChanges() {
                     type: typeString
                 },
                 success: function (result) {
-                    swal({
+                    Swal.fire({
                         title: "Bewerbung eingereicht",
                         text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
                         type: "success",
@@ -315,7 +315,7 @@ function validateBew() {
     }
     if (grund.indexOf("Platzhalter") < 0 ||
         grund.indexOf("--") < 0) {
-        swal({
+        Swal.fire({
             title: "Platzhalter",
             text: "Mögliche Platzhalter im Email Text gefunden.",
             type: warning,
@@ -328,7 +328,7 @@ function validateBew() {
         console.log('In der Nachricht wurden keine Platzhalter gefunden');
     }
 
-    swal({
+    Swal.fire({
         title: "Bewerbung " + resultString,
         text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
         type: "warning",
@@ -348,7 +348,7 @@ function validateBew() {
                 type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
             },
             success: function (result) {
-                swal({
+                Swal.fire({
                     title: "Bewerbung " + resultString,
                     text: "Gespeichert",
                     type: "success",

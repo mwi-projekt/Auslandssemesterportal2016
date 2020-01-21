@@ -49,7 +49,7 @@ $(document).on('submit', '#regForm', function (e) {
 
     if (pw1 === pw2) {
         if (studiengang === "Studiengang*") {
-            swal({
+            Swal.fire({
                 title: "Studiengang auswählen",
                 text: "Bitte einen Studiengang aus der Liste auswählen",
                 type: "error",
@@ -74,21 +74,21 @@ $(document).on('submit', '#regForm', function (e) {
                 },
                 success: function (result) {
                     if (result == "mailError") {
-                        swal({
+                        Swal.fire({
                             title: "Mailadresse belegt",
                             text: "Die eingetragene Mailadresse wird bereits von einem Account verwendet",
                             type: "error",
                             confirmButtonText: "OK"
                         });
                     } else if (result == "matnrError") {
-                        swal({
+                        Swal.fire({
                             title: "Matrikelnummer belegt",
                             text: "Die eingetragene Matrikelnummer wird bereits von einem Account verwendet",
                             type: "error",
                             confirmButtonText: "OK"
                         });
                     } else {
-                        swal({
+                        Swal.fire({
                             title: "Registrierung erfolgreich",
                             text: "Bitte bestätigen deine Mailadresse (" + email + "), damit du dich im Portal einloggen kannst",
                             type: "success",
@@ -103,7 +103,7 @@ $(document).on('submit', '#regForm', function (e) {
 
                 },
                 error: function (result) {
-                    swal({
+                    Swal.fire({
                         title: "Fehler!",
                         text: "Bei der Registrierung ist ein Fehler aufgetreten",
                         type: "error",
@@ -128,21 +128,21 @@ $(document).on('submit', '#loginForm', function (e) {
         },
         success: function (data) {
             if (data.resultCode == 2) {
-                swal({
+                Swal.fire({
                     title: "Fehler!",
                     text: "Nutzername oder Passwort falsch",
                     type: "error",
                     confirmButtonText: "Erneut versuchen"
                 });
             } else if (data.resultCode == 3) {
-                swal({
+                Swal.fire({
                     title: "Mailadresse bestätigen",
                     text: "Dieser Nutzer ist nicht aktiviert. Bitte bestätige zuerst deine Mailadresse",
                     type: "error",
                     confirmButtonText: "OK"
                 });
             } else if (data.resultCode == 4) {
-                swal({
+                Swal.fire({
                     title: "Serverfehler",
                     text: "Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuche es später erneut",
                     type: "error",
@@ -167,7 +167,7 @@ $(document).on('submit', '#loginForm', function (e) {
 
         },
         error: function (data) {
-            swal("Fehler");
+            Swal.fire("Fehler");
         }
     });
 });

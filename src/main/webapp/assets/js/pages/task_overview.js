@@ -122,14 +122,14 @@ function getList() {
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Bewerbungen bei Studiengangsleitern</h1>' + validateSGL + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt;
         },
         error: function (result) {
-            swal("Ein Fehler ist aufgetreten", "error");
+            Swal.fire("Ein Fehler ist aufgetreten", "error");
         }
     });
   
 
 }
 function deleteProcessButtons(uni, matrikelnummer) {
-	swal({
+	Swal.fire({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden!",
             type: "warning",
@@ -146,7 +146,7 @@ function deleteProcessButtons(uni, matrikelnummer) {
                     uni: uni
                 }
             }).done(function (data) {
-                swal({
+                Swal.fire({
                 	title: 'Gelöscht!',
                 	text: 'Der Prozess wurde erfolgreich gelöscht.',
                 	type: 'success'
@@ -155,7 +155,7 @@ function deleteProcessButtons(uni, matrikelnummer) {
                 });
             }).error(function (error) {
                 console.error(error);
-                swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+                Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
             })
         });
 }
@@ -163,7 +163,7 @@ function initDeleteProcessButtonsTaskOverview() {
     $('.btn-delete').on('click', function () {
         var uni = $(this).attr("uni");
         var id = $(this).attr("rid");
-        swal({
+        Swal.fire({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden!",
             type: "warning",
@@ -184,10 +184,10 @@ function initDeleteProcessButtonsTaskOverview() {
                 }
             }).done(function (data) {
                 $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                swal('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
             }).error(function (error) {
                 console.error(error);
-                swal('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+                Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
             })
         });
     });
@@ -199,7 +199,7 @@ function deleteTask (taskID) {
 
     	var self = $(this);
 	
-        swal({
+        Swal.fire({
             title: "Bist du sicher?",
             text: "Die Bewerbung kann nicht wiederhergestellt werden!",
             type: "warning",
@@ -210,10 +210,10 @@ function deleteTask (taskID) {
         	alert("Du hast auf Löschen gedrückt");
         	if (result.value) {
                  alert("Auf Löschen gedrückt");
-        		 swal({
+        		 Swal.fire({
                      title: 'Lösche Bewerbung'
                  });
-                 swal.showLoading();
+                 Swal.showLoading();
                  $.ajax({
                      type: "POST",
                      url: baseUrl + "/task/delete",
@@ -221,13 +221,13 @@ function deleteTask (taskID) {
                          taskId: self.data(taskID)
                      },
                      success: function (result) {
-                         swal.close();
+                         Swal.close();
                          $('#userStudShow').click();
-                         swal('Gelöscht!', 'Die Bewerbung wurde erfolgreich gelöscht.', 'success');
+                         Swal.fire('Gelöscht!', 'Die Bewerbung wurde erfolgreich gelöscht.', 'success');
                      },
                      error: function (result) {
-                         swal.close();
-                         swal('Fehler', 'Die Bewerbung konnte nicht gelöscht werden', 'error');
+                         Swal.close();
+                         Swal.fire('Fehler', 'Die Bewerbung konnte nicht gelöscht werden', 'error');
                      }
                  });
         	 }

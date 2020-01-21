@@ -13,7 +13,7 @@ function resetpw() {
 			email: mail
 		},
 		success : function(result) {
-			swal({
+			Swal.fire({
 				title : "Kennwort zurückgesetzt",
 				text : "Falls diese Mailadresse uns bekannt ist, erhalten Sie eine Mail mit einem Link zum zurücksetzen des Passworts",
 				type : "success",
@@ -23,7 +23,7 @@ function resetpw() {
 			});
 		},
 		error : function(result) {
-			swal('Diese Mailadresse ist uns nicht bekannt');
+			Swal.fire('Diese Mailadresse ist uns nicht bekannt');
 		}
 	});
 }

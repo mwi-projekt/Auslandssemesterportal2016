@@ -62,7 +62,7 @@ $(document).ready(function () {
                     }
                     break;
                 case 'erfahrungsBerichte':
-                    //swal('Dieser Bereich kann noch nicht bearbeitet werden.');
+                    //Swal.fire('Dieser Bereich kann noch nicht bearbeitet werden.');
 
                     if ($(this).text() === "Bearbeiten") {
                         $('.kurzbericht').show();
@@ -233,7 +233,7 @@ $(document).ready(function () {
                                 $('.erfolgreich').fadeOut(7000);
                             },
                             error: function (result) {
-                                swal('Fehler');
+                                Swal.fire('Fehler');
                             }
                         });
                     break;
@@ -304,7 +304,7 @@ $(document).ready(function () {
                                     }
                                 });
                         } else {
-                            swal({
+                            Swal.fire({
                                 title: "Fehlende Angaben",
                                 text: "Bitte tragen Sie in alle mit * gekennzeichneten Feldern etwas ein",
                                 type: "error",
@@ -374,7 +374,7 @@ $(document).ready(function () {
                                     }
                                 });
                         } else {
-                            swal({
+                            Swal.fire({
                                 title: "Fehlende Angaben",
                                 text: "Bitte tragen Sie in alle mit * gekennzeichneten Feldern etwas ein",
                                 type: "error",
@@ -455,7 +455,7 @@ $(document).ready(function () {
     $('#cmsBtnInfoNeu').on('click', function () {
         var count = $('.inputsPortal .inBox').length;
         if (count > 6) {
-            swal('Warnung', 'Zum aktuellen Zeitpunkt können nicht mehr als 7 Infoelemente hinzugefügt werden', 'warning');
+            Swal.fire('Warnung', 'Zum aktuellen Zeitpunkt können nicht mehr als 7 Infoelemente hinzugefügt werden', 'warning');
         } else {
             $('.inputsPortal').append('<input class="inBox" id="inli' + (count + 1) +
                 '" value="" /><img class="small" id="delPoLi' +
@@ -634,7 +634,7 @@ $(document).ready(function () {
                     }
                 });
         } else {
-            swal("Sie dürfen das Feld nicht leer lassen.");
+            Swal.fire("Sie dürfen das Feld nicht leer lassen.");
         }
     });
     // Click-Listener für ein Angebot bearbeiten
