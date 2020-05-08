@@ -19,7 +19,7 @@ This Guide will explain how to setup the project with eclipse. If you are more f
 
 Be sure that you have installed the Eclipse IDE for Enterprise Java Developers otherwise the project will not build properly. You can download it [here](https://www.eclipse.org/downloads/packages/);
 
-# Configure Eclipse
+### Configure Eclipse
 After you have installed Eclipse, it's important to configure the location of your installed Java JDK.
 
 Open the Eclipse Settings and select on the Sidebar
@@ -28,7 +28,7 @@ Open the Eclipse Settings and select on the Sidebar
 
 Your JDK in windows is usally installed in `C:\Program Files\Java\jdk....`
 
-# Import Project
+### Import Project
 After you have checkouted the project in the last step, you need to import it in Eclipse.
 
 `File -> Import -> Existing Maven Projects -> Select the path -> Finish`
