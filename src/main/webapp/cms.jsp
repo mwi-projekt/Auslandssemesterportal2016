@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="partials/header.html" %>
-<script src="assets/js/pages/index.js"></script>
-<script src="assets/js/pages/cms.js"></script>
+<script src="js/pages/index.js"></script>
+<script src="js/pages/cms.js"></script>
 
 <!-- Mittlerer Teil --------------------------------------------------------------------------->
     <div class="container" id="adminBereich">
