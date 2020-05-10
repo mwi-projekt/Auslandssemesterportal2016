@@ -25,10 +25,12 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
+    "@types/bootstrap-switch": "0.0.32",
     "@types/ckeditor": "^4.9.9",
     "@types/datatables.net": "^1.10.19",
     "@types/dropzone": "^5.5.2",
     "bootstrap": "^4.4.1",
+    "bootstrap-switch": "^3.4.0",
     "bpmn-js": "^6.5.1",
     "ckeditor4": "^4.14.0",
     "cookieconsent": "^3.1.1",
