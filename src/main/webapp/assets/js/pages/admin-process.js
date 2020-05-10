@@ -88,9 +88,9 @@ $(document).ready(function () {
 
     function createEntry(id) {
         var index = $('button[data-mid='+id+']').data('index');
-        $.sweetModal({
+        Swal.fire({
             title: 'Prozesschritt hinzufügen',
-            content: '<div class="row">' +
+            html: '<div class="row">' +
             '<div class="col-lg-12">' +
             '<p>Bitte wählen Sie eine Vorlage für die Modellierung des Prozessschrittes aus:</p>' +
             '<a href="#" id="newFormBtn" class="btn btn-sq-lg btn-primary btn-red">' +
@@ -110,7 +110,8 @@ $(document).ready(function () {
             '</a>' +
             '</div>' +
             '</div>',
-            blocking: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
             width: '600px',
             onOpen: function () {
                 $('#newFormBtn').click(function () {
@@ -123,7 +124,6 @@ $(document).ready(function () {
                     location.href = 'admin-process-modeler.html?id=' + id + '&type=upload'+"&index="+index+'&dia='+dia;
                 });
             },
-            //theme: $.sweetModal.THEME_DARK
         });
     }
 

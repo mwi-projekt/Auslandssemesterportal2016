@@ -77,10 +77,11 @@ $(document).ready(function () {
     function openCheckboxPopup(data, cb, cbClose) {
     	siteHasUnsavedChanges = true;
         var success = false;
-        $.sweetModal({
+        Swal.fire({
             title: 'Checkbox hinzufügen',
-            content: checkboxForm,
-            blocking: true,
+            html: checkboxForm,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
             onClose: function () {
                 if (!success) cbClose();
             },
@@ -112,17 +113,17 @@ $(document).ready(function () {
                     $('.sweet-modal-close-link').trigger('click');
                 });
             },
-            //theme: $.sweetModal.THEME_DARK
         });
     }
 
     function openSelectFormPopup(data, cb, cbClose) {
     	siteHasUnsavedChanges = true;
         var success = false;
-        $.sweetModal({
+        Swal.fire({
             title: 'Auswahlfeld hinzufügen',
-            content: selectForm,
-            blocking: true,
+            html: selectForm,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
             onClose: function () {
                 if (!success) cbClose();
             },
@@ -205,17 +206,17 @@ $(document).ready(function () {
                     $('.sweet-modal-close-link').trigger('click');
                 });
             },
-            //theme: $.sweetModal.THEME_DARK
         });
     }
 
     function openUploadPopup(data, cb, cbClose) {
     	siteHasUnsavedChanges = true;
         var success = false;
-        $.sweetModal({
+        Swal.fire({
             title: 'Upload hinzufügen',
-            content: uploadForm,
-            blocking: true,
+            html: uploadForm,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
             onClose: function () {
                 if (!success) cbClose();
             },
@@ -242,17 +243,17 @@ $(document).ready(function () {
                     $('.sweet-modal-close-link').trigger('click');
                 });
             },
-            //theme: $.sweetModal.THEME_DARK
         });
     }
 
     function openTextInputPopup(data, cb, cbClose) {
     	siteHasUnsavedChanges = true;
         var success = false;
-        $.sweetModal({
+        Swal.fire({
             title: 'Textfeld hinzufügen',
-            content: textForm,
-            blocking: true,
+            html: textForm,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
             onClose: function () {
                 if (!success) cbClose();
             },
@@ -303,7 +304,6 @@ $(document).ready(function () {
                     $('.sweet-modal-close-link').trigger('click');
                 });
             },
-            //theme: $.sweetModal.THEME_DARK
         });
     }
 

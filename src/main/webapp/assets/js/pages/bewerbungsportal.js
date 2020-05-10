@@ -52,11 +52,10 @@ $(document).ready(function () {
                 if (popUpHtml.match('<option>') != '<option>') {
                     popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
                 }
-                
-                
-                $.sweetModal({
+
+                Swal.fire({
                     title: 'Bitte wähle die Uni und den Zeitraum aus',
-                    content: popUpHtml + popUpHtml2,
+                    html: popUpHtml + popUpHtml2,
                     width: '500px',
                     onOpen: function () {
                         $('#newBewProzessWahl').on('click', function () {
