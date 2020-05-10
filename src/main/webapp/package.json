@@ -32,6 +32,7 @@
     "bpmn-js": "^6.5.1",
     "ckeditor4": "^4.14.0",
     "cookieconsent": "^3.1.1",
+    "cypress": "^4.5.0",
     "datatables.net-bs4": "^1.10.20",
     "dropzone": "^5.7.0",
     "jquery": "^3.4.1",
