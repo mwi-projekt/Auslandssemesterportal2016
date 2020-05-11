@@ -744,7 +744,6 @@ i {
 }
 
 .panel-heading [data-toggle="collapse"]:after {
-	font-family: 'Glyphicons Halflings';
 	content: "\e072";
 	float: right;
 	color: #b0c5d8;
