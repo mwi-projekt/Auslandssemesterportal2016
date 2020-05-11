@@ -65,7 +65,7 @@ function parse() {
         success: function (result) {
             var steps = result.data;
             output = output +
-                '<div class="panel-group" id="accordion">';
+                '<div class="" id="accordion">';
             for (var k = 0; k < steps.length; k++) {
                 data = steps[k].data;
                 stepName = steps[k].activity;
@@ -143,23 +143,23 @@ function parse() {
                         }
 
                         output = output +
-                            '<div class="panel panel-default" id="'+visibleStepName+'"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
+                            '<div class="card" id="'+visibleStepName+'"><div class="card-header"><h4 class="card-title"><a data-toggle="collapse" href="#collapse' +
                             k + '">' + visibleStepName + '</a></h4></div>'; // Header
                         // des
                         // Accordions
                         output = output +
                             ' <div id="collapse' +
                             k +
-                            '" class="panel-collapse collapse in"><div class="panel-body">'
+                            '" class="collapse show"><div class="card-body">'
                         output = output + innerOutput;
                         output = output + '</div></div></div><br>';
                     }
                 }
             }
 
-            output = output + '<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse-downloads">Dateien</a></h4></div>'; // Header
+            output = output + '<div class="card"><div class="card-header"><h4 class="card-title"><a data-toggle="collapse" href="#collapse-downloads">Dateien</a></h4></div>'; // Header
             output = output +
-                ' <div id="collapse-downloads" class="panel-collapse collapse in"><div class="panel-body" id="downloadsBody">'
+                ' <div id="collapse-downloads" class="collapse show"><div class="card-body" id="downloadsBody">'
             output = output + '</div></div></div><br>';
 
             output = output + '</div>';
