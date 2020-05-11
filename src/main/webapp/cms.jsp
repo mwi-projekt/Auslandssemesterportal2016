@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ include file="partials/header.html" %>
-<script src="assets/js/pages/index.js"></script>
-<script src="assets/js/pages/cms.js"></script>
+<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
+<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
+<script src="js/pages/index.js"></script>
+<script src="js/pages/cms.js"></script>
 
 <!-- Mittlerer Teil --------------------------------------------------------------------------->
     <div class="container" id="adminBereich">
@@ -295,8 +297,8 @@
                         </div>
                     </div>
                     <div class="col-md-12" id="berichtPfeile">
-                        <span class="glyphicon glyphicon-menu-left arrow" id="arrLeft" style="font-size: 2.5em;"></span>
-                        <span class="glyphicon glyphicon-menu-right arrow" id="arrRight" style="font-size: 2.5em;"></span>
+                        <span class="fas fa-chevron-left arrow" id="arrLeft" style="font-size: 2.5em;"></span>
+                        <span class="fas fa-chevron-right arrow" id="arrRight" style="font-size: 2.5em;"></span>
                     </div>
                     <div class="col-md-12 cmsBerichte">
                         <label class="btn cmsBtn pull-right" id="cmsBtnBerichtNeu">Erfahrungsbericht
