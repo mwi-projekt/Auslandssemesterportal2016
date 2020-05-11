@@ -1,23 +1,19 @@
 
-
-
 $(document).ready(function () {
     getList();
 });
 
-
-
 function getList() {
     $.ajax({
         type: "GET",
-        url: baseUrl + "/getSGLTasks",
+        url: baseUrl + "/getTasks",
         data: {
             //'definition' : 'studentBewerben'
         },
         success: function (result) {
             output = ""; 		//zu validierende Bewerbungen
-            completed = "";		//angenommene Bewerbungen
-            validateAAA = "";	//Bewerbungen, die vom Auslansdamt bearbeitet werden müssen
+            completed = "";		//erfolgreich angenommene Bewerbungen
+            validateSGL = "";	//Bewerbungen, die noch vom SGL bearbeitet werden müssen
             abgelehnt = "";		//abgelehnte Bewerbungen
             if (!result || result.data.length == 0) {
                 // substring bilden nicht möglich bei leerem String
@@ -26,7 +22,7 @@ function getList() {
 
                 for (var i = 0; i < instances.length; i++) {
                     singleInstance = instances[i];
-                    if (singleInstance.status === 'validateSGL') {
+                    if (singleInstance.status === 'validate') {
                     	output = output +
                             "<tr><td>" +
                             singleInstance.name +
@@ -39,13 +35,13 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' +
+                            '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail.html?instance_id=' +
                             singleInstance.id +
-                            '&uni=' +
+                            '&uni='  +
                             singleInstance.uni +
                             '&verify=true\'\"> </button>' +
                             "</td><td>" +
-                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
+                            "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                  
                     } else if (singleInstance.status === 'complete') {
                         completed = completed +
@@ -59,39 +55,39 @@ function getList() {
                             singleInstance.kurs +
                             "</td><td>" +
                             singleInstance.uni +
-                            "</td></tr>";
+                            "</td><td>" +
+                            "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
+                    } else if (singleInstance.status === 'validateSGL') {
+                    	validateSGL = validateSGL +
+                    		"<tr><td>" +
+                    		singleInstance.name +
+                    		"</td><td>" +
+                    		singleInstance.vname +
+                    		"</td><td>" +
+                    		singleInstance.aktuelleUni +
+                    		"</td><td>" +
+                    		singleInstance.kurs +
+                    		"</td><td>" +
+                    		singleInstance.uni +
+                    		"</td></td>" +
+                    		"<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                     } else if (singleInstance.status === 'abgelehnt') {
-                        abgelehnt = abgelehnt +
-                            "<tr><td>" +
-                            singleInstance.name +
-                            "</td><td>" +
-                            singleInstance.vname +
-                            "</td><td>" +
-                            singleInstance.aktuelleUni +
-                            "</td><td>" +
-                            singleInstance.kurs +
-                            "</td><td>" +
-                            singleInstance.uni +
-                            "</td></tr>";
-                                    
-                    } else if (singleInstance.status === 'validate') {
-                    	validateAAA = validateAAA +
-                        "<tr><td>" +
-                        singleInstance.name +
-                        "</td><td>" +
-                        singleInstance.vname +
-                        "</td><td>" +
-                        singleInstance.aktuelleUni +
-                        "</td><td>" +
-                        singleInstance.kurs +
-                        "</td><td>" +
-                        singleInstance.uni +
-                        "</td></tr>";
-                    }
+                    	abgelehnt = abgelehnt +
+                		"<tr><td>" +
+                		singleInstance.name +
+                		"</td><td>" +
+                		singleInstance.vname +
+                		"</td><td>" +
+                		singleInstance.aktuelleUni +
+                		"</td><td>" +
+                		singleInstance.kurs +
+                		"</td><td>" +
+                		singleInstance.uni +
+                		"</td><td>" +
+                		"<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
+                }
                    
                 }
-            }
-               
                 if (output === "") {
                     output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
                 } else {
@@ -101,28 +97,29 @@ function getList() {
                 if (completed === "") {
                     completed = "<h2>Es gibt noch keine abgeschlossenen Bewerbungen</h2>";
                 } else {
-                    completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                    completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
                         completed + "</tbody></table>";
                 }
-                
-                if (validateAAA === "") {
-                	validateAAA = "<h2>Aktuell gibt es keine Bewerbungen, die von einem AAA überprüft werden müssen</h2>";
+                if (validateSGL === "") {
+                	validateSGL = "<h2> Es gibt keine Bewebungen, die von einem Studiengangsleiter zu validieren sind</h2>";
                 } else {
-                	validateAAA = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
-                       	validateAAA + "</tbody></table>";
-                }      
-                if (abgelehnt === "") {
-                	abgelehnt = "<h2>Bisher wurden keine Bewerbungen abgelehnt</h2>";
-                } else {
-                	abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
-                   		abgelehnt + "</tbody></table>";
+                	validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
+                    	validateSGL + "</tbody></table>";
                 }
+                if (abgelehnt === "") {
+                	abgelehnt = "<h2> Es gibt abgelehnten Bewerbungen</h2>";
+                } else {
+                	abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
+                		abgelehnt + "</tbody></table>";
+                }
+                
 
                 $(document).ready(function () {
                     $('.table').DataTable();
                 });
-          
-            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<h1>Bewerbungen beim Auslandsamt</h1>' + validateAAA + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt; 
+            }
+           
+            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Bewerbungen bei Studiengangsleitern</h1>' + validateSGL + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt;
         },
         error: function (result) {
             Swal.fire("Ein Fehler ist aufgetreten", "error");
@@ -134,13 +131,12 @@ function getList() {
 function deleteProcessButtons(uni, matrikelnummer) {
 	Swal.fire({
             title: "Bist du sicher?",
-            text: "Der Prozess kann nicht wiederhergestellt werden! Das hier wird angezeigt :-)",
-            type: "warning",
+            text: "Der Prozess kann nicht wiederhergestellt werden!",
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!",
-            closeOnConfirm: false
-        }, function () {
+            confirmButtonText: "Löschen!"
+        }).then(function () {
             $.ajax({
                 type: "GET",
                 url: baseUrl + "/process/delete",
@@ -152,8 +148,8 @@ function deleteProcessButtons(uni, matrikelnummer) {
                 Swal.fire({
                 	title: 'Gelöscht!',
                 	text: 'Der Prozess wurde erfolgreich gelöscht.',
-                	type: 'success'
-                }, function() {
+                    icon: 'success'
+                }).then(function() {
                 	location.reload();
                 });
             }).error(function (error) {
@@ -169,12 +165,11 @@ function initDeleteProcessButtonsTaskOverview() {
         Swal.fire({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden!",
-            type: "warning",
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!",
-            closeOnConfirm: false
-        }, function () {
+            confirmButtonText: "Löschen!"
+        }).then(function () {
             //var id = $('.btn-delete').closest('tr').data('rid');
             var matrikelnummer = sessionStorage['matrikelnr'];
 
@@ -205,11 +200,11 @@ function deleteTask (taskID) {
         Swal.fire({
             title: "Bist du sicher?",
             text: "Die Bewerbung kann nicht wiederhergestellt werden!",
-            type: "warning",
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"
-        }).then((result) => {
+        }).then(function(result) {
         	alert("Du hast auf Löschen gedrückt");
         	if (result.value) {
                  alert("Auf Löschen gedrückt");

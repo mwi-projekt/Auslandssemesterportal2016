@@ -65,7 +65,7 @@ function parse() {
         success: function (result) {
             var steps = result.data;
             output = output +
-                '<div class="panel-group" id="accordion">';
+                '<div class="" id="accordion">';
             for (var k = 0; k < steps.length; k++) {
                 data = steps[k].data;
                 stepName = steps[k].activity;
@@ -143,23 +143,23 @@ function parse() {
                         }
 
                         output = output +
-                            '<div class="panel panel-default" id="'+visibleStepName+'"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse' +
+                            '<div class="card" id="'+visibleStepName+'"><div class="card-header"><h4 class="card-title"><a data-toggle="collapse" href="#collapse' +
                             k + '">' + visibleStepName + '</a></h4></div>'; // Header
                         // des
                         // Accordions
                         output = output +
                             ' <div id="collapse' +
                             k +
-                            '" class="panel-collapse collapse in"><div class="panel-body">'
+                            '" class="collapse show"><div class="card-body">'
                         output = output + innerOutput;
                         output = output + '</div></div></div><br>';
                     }
                 }
             }
 
-            output = output + '<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a data-toggle="collapse" href="#collapse-downloads">Dateien</a></h4></div>'; // Header
+            output = output + '<div class="card"><div class="card-header"><h4 class="card-title"><a data-toggle="collapse" href="#collapse-downloads">Dateien</a></h4></div>'; // Header
             output = output +
-                ' <div id="collapse-downloads" class="panel-collapse collapse in"><div class="panel-body" id="downloadsBody">'
+                ' <div id="collapse-downloads" class="collapse show"><div class="card-body" id="downloadsBody">'
             output = output + '</div></div></div><br>';
 
             output = output + '</div>';
@@ -270,22 +270,20 @@ function saveChanges() {
     Swal.fire({
             title: "Bewerbung absenden",
             text: "Wenn Du die Bewerbung abschickst, kannst Du keine Änderungen mehr vornehmen. Fortfahren?",
-            type: "warning",
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Bewerbung absenden",
-            cancelButtonText: "Abbrechen",
-            closeOnConfirm: false
-        },
-        function () {
-        	$.ajax({
+            cancelButtonText: "Abbrechen"
+        }).then(function(result) {
+            $.ajax({
                 type: "POST",
                 url: baseUrl + "/sendNewApplicationMail",
                 data: {
                     instance_id: instanceID
                 },
                 success: function (result) {
-                	$.ajax({
+                    $.ajax({
                         type: "POST",
                         url: baseUrl + "/setVariable",
                         data: {
@@ -298,9 +296,9 @@ function saveChanges() {
                             Swal.fire({
                                 title: "Bewerbung eingereicht",
                                 text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
-                                type: "success",
+                                icon: "success",
                                 confirmButtonText: "Ok"
-                            }, function () {
+                            }).then( function (result) {
                                 location.href = 'bewerbungsportal.html';
                             });
                         },
@@ -332,7 +330,7 @@ function validateBew() {
         Swal.fire({
             title: "Platzhalter",
             text: "Mögliche Platzhalter im Email Text gefunden.",
-            type: warning,
+            icon: warning,
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Ignorieren",
@@ -345,13 +343,12 @@ function validateBew() {
     Swal.fire({
         title: "Bewerbung " + resultString,
         text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
-        type: "warning",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Bewerbung " + resultString,
-        cancelButtonText: "Abbrechen",
-        closeOnConfirm: false
-    }, function () {
+        cancelButtonText: "Abbrechen"
+    }).then(function (result) {
     	// hier mail einfügen -> neue Ajax
         $.ajax({
             type: "POST",
@@ -366,9 +363,9 @@ function validateBew() {
                 Swal.fire({
                     title: "Bewerbung " + resultString,
                     text: "Gespeichert",
-                    type: "success",
+                    icon: "success",
                     confirmButtonText: "Ok"
-                }, function () {
+                }).then(function (result) {
                     location.href = 'task_overview.html';
                 });
             },

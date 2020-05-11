@@ -41,9 +41,9 @@ $(document).ready(function () {
                             row.tel +
                             '</td><td class="mobil">' +
                             row.mobil +
-                            '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' + i +
+                            '</td><td><span class="btn fas fa-edit useredit-button" id="edit' + i +
                             '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td>' +
-                            '<td><span class="btn glyphicon glyphicon-trash deleteAAA-button" data-mail="' +
+                            '<td><span class="btn fas fa-trash deleteAAA-button" data-mail="' +
                             row.email +
                             '" id="delete' + i +
                             '" title="Löschen"></span></td></tr>';
@@ -71,9 +71,9 @@ $(document).ready(function () {
                             row.kurs +
                             '</td><td class="matrikelnr">' +
                             row.matrikelnummer +
-                            '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' +
+                            '</td><td><span class="btn fas fa-edit useredit-button" id="edit' +
                             i +
-                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="' + row.matrikelnummer + '" id="delete' +
+                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn fas fa-trash delete-button" data-matrikel="' + row.matrikelnummer + '" id="delete' +
                             i +
                             '" title="Löschen"></span></td></tr>';
                     }
@@ -99,9 +99,9 @@ $(document).ready(function () {
                             row.studiengang +
                             '</td><td class="kurs">' +
                             row.kurs +
-                            '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' +
+                            '</td><td><span class="btn fas fa-edit useredit-button" id="edit' +
                             i +
-                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash deleteSGL-button" data-mail="' + row.email + '" id="delete' +
+                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn fas fa-trash deleteSGL-button" data-mail="' + row.email + '" id="delete' +
                             i +
                             '" title="Löschen"></span></td></tr>';
                     }
@@ -117,11 +117,11 @@ $(document).ready(function () {
                         Swal.fire({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
-                            type: "warning",
+                            icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Löschen!"
-                        }).then((result) => {
+                        }).then(function(result) {
                             if (result.value) {
                                 alert("Du hast auf Löschen gedrückt");
                             	Swal.fire({
@@ -156,11 +156,11 @@ $(document).ready(function () {
                         Swal.fire({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
-                            type: "warning",
+                            icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Löschen!"
-                        }).then((result) => {
+                        }).then(function(result) {
                             if (result.value) {
                                 Swal.fire({
                                     title: 'Lösche User'
@@ -194,11 +194,11 @@ $(document).ready(function () {
                         Swal.fire({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
-                            type: "warning",
+                            icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Löschen!"
-                        }).then((result) => {
+                        }).then(function(result) {
                             if (result.value) {
                                 Swal.fire({
                                     title: 'Lösche User'
@@ -281,7 +281,7 @@ $(document).ready(function () {
                 Swal.fire({
                     title: "Serverfehler",
                     text: "Die Serververbindung wurde unterbrochen. Bitte laden Sie die Seite erneut",
-                    type: "error",
+                    icon: "error",
                     confirmButtonText: "OK"
                 });
             }
@@ -316,7 +316,7 @@ $(document).ready(function () {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
 
@@ -324,21 +324,21 @@ $(document).ready(function () {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
                 } else if (data == "registerError") {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
                 } else {
                     Swal.fire({
                         title: "Account erfolgreich erstellt",
                         text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
-                        type: "success",
+                        icon: "success",
                         confirmButtonText: "OK"
                     });
 
@@ -381,7 +381,7 @@ $(document).ready(function () {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
 
@@ -389,21 +389,21 @@ $(document).ready(function () {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
                 } else if (data == "registerError") {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
                 } else {
                     Swal.fire({
                         title: "Account erfolgreich erstellt",
                         text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
-                        type: "success",
+                        icon: "success",
                         confirmButtonText: "OK"
                     });
 

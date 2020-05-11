@@ -307,7 +307,7 @@ $(document).ready(function () {
                             Swal.fire({
                                 title: "Fehlende Angaben",
                                 text: "Bitte tragen Sie in alle mit * gekennzeichneten Feldern etwas ein",
-                                type: "error",
+                                icon: "error",
                                 confirmButtonText: "OK"
                             });
 
@@ -377,7 +377,7 @@ $(document).ready(function () {
                             Swal.fire({
                                 title: "Fehlende Angaben",
                                 text: "Bitte tragen Sie in alle mit * gekennzeichneten Feldern etwas ein",
-                                type: "error",
+                                icon: "error",
                                 confirmButtonText: "OK"
                             });
                         }

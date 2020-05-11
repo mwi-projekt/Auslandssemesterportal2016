@@ -64,9 +64,9 @@
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
   "include": [
-    "assets/js"
+    "js"
   ],
   "exclude": [
-    "assets/js/vendor"
+
   ]
 }
