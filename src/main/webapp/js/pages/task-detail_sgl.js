@@ -268,12 +268,11 @@ function saveChanges() {
     Swal.fire({
             title: "Bewerbung absenden",
             text: "Wenn Du die Bewerbung abschickst, kannst Du keine Änderungen mehr vornehmen. Fortfahren?",
-            type: "warning",
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Bewerbung absenden",
-            cancelButtonText: "Abbrechen",
-            closeOnConfirm: false
+            cancelButtonText: "Abbrechen"
         },
         function () {
             $.ajax({
@@ -289,7 +288,7 @@ function saveChanges() {
                     Swal.fire({
                         title: "Bewerbung eingereicht",
                         text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
-                        type: "success",
+                        icon: "success",
                         confirmButtonText: "Ok"
                     }, function () {
                         location.href = 'bewerbungsportal.html';
@@ -318,7 +317,7 @@ function validateBew() {
         Swal.fire({
             title: "Platzhalter",
             text: "Mögliche Platzhalter im Email Text gefunden.",
-            type: warning,
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Ignorieren",
@@ -331,12 +330,11 @@ function validateBew() {
     Swal.fire({
         title: "Bewerbung " + resultString,
         text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
-        type: "warning",
+        icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Bewerbung " + resultString,
-        cancelButtonText: "Abbrechen",
-        closeOnConfirm: false
+        cancelButtonText: "Abbrechen"
     }, function () {
         $.ajax({
             type: "POST",
@@ -351,7 +349,7 @@ function validateBew() {
                 Swal.fire({
                     title: "Bewerbung " + resultString,
                     text: "Gespeichert",
-                    type: "success",
+                    icon: "success",
                     confirmButtonText: "Ok"
                 }, function () {
                     location.href = 'task_overview_sgl.html';

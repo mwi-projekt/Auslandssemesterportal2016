@@ -56,7 +56,6 @@ $(document).ready(function () {
                 Swal.fire({
                     title: 'Bitte wähle die Uni und den Zeitraum aus',
                     html: popUpHtml + popUpHtml2,
-                    width: '500px',
                     onOpen: function () {
                         $('#newBewProzessWahl').on('click', function () {
                             sessionStorage['uni'] = $('#selectUni').val();
@@ -250,11 +249,10 @@ function initDeleteProcessButtons() {
         Swal.fire({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden!",
-            type: "warning",
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!",
-            closeOnConfirm: false
         }, function () {
             //var id = $('.btn-delete').closest('tr').data('rid');
             var matrikelnummer = sessionStorage['matrikelnr'];

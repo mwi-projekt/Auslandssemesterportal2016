@@ -112,7 +112,6 @@ $(document).ready(function () {
             '</div>',
             allowOutsideClick: false,
             allowEscapeKey: false,
-            width: '600px',
             onOpen: function () {
                 $('#newFormBtn').click(function () {
                     location.href = 'admin-process-modeler.html?id=' + id + '&type=form'+"&index="+index+'&dia='+dia;

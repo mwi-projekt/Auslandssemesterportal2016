@@ -52,7 +52,7 @@ $(document).on('submit', '#regForm', function (e) {
             Swal.fire({
                 title: "Studiengang auswählen",
                 text: "Bitte einen Studiengang aus der Liste auswählen",
-                type: "error",
+                icon: "error",
                 confirmButtonText: "OK"
             });
         } else if (vorname != "" && nachname != "" && email != "" && matrikelnummer != "" && kurs != "" && pw1 != "") {
@@ -77,21 +77,21 @@ $(document).on('submit', '#regForm', function (e) {
                         Swal.fire({
                             title: "Mailadresse belegt",
                             text: "Die eingetragene Mailadresse wird bereits von einem Account verwendet",
-                            type: "error",
+                            icon: "error",
                             confirmButtonText: "OK"
                         });
                     } else if (result == "matnrError") {
                         Swal.fire({
                             title: "Matrikelnummer belegt",
                             text: "Die eingetragene Matrikelnummer wird bereits von einem Account verwendet",
-                            type: "error",
+                            icon: "error",
                             confirmButtonText: "OK"
                         });
                     } else {
                         Swal.fire({
                             title: "Registrierung erfolgreich",
                             text: "Bitte bestätigen deine Mailadresse (" + email + "), damit du dich im Portal einloggen kannst",
-                            type: "success",
+                            icon: "success",
                             confirmButtonText: "OK",
                             timer: 8000
                         });
@@ -106,7 +106,7 @@ $(document).on('submit', '#regForm', function (e) {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Bei der Registrierung ist ein Fehler aufgetreten",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
                 }
@@ -131,21 +131,21 @@ $(document).on('submit', '#loginForm', function (e) {
                 Swal.fire({
                     title: "Fehler!",
                     text: "Nutzername oder Passwort falsch",
-                    type: "error",
+                    icon: "error",
                     confirmButtonText: "Erneut versuchen"
                 });
             } else if (data.resultCode == 3) {
                 Swal.fire({
                     title: "Mailadresse bestätigen",
                     text: "Dieser Nutzer ist nicht aktiviert. Bitte bestätige zuerst deine Mailadresse",
-                    type: "error",
+                    icon: "error",
                     confirmButtonText: "OK"
                 });
             } else if (data.resultCode == 4) {
                 Swal.fire({
                     title: "Serverfehler",
                     text: "Bei der Serververbindung ist ein Fehler aufgetreten. Bitte versuche es später erneut",
-                    type: "error",
+                    icon: "error",
                     confirmButtonText: "OK"
                 });
             } else {

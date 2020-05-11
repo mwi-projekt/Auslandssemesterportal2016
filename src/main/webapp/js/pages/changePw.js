@@ -22,7 +22,7 @@ function setpw() {
 				Swal.fire({
 					title : "Fehler",
 					text : "Kein passendes Nutzerkonto gefunden",
-					type : "error",
+					icon : "error",
 					confirmButtonText : "Ok"
 				}, function() {
 					location.href = 'index.jsp';
@@ -31,7 +31,7 @@ function setpw() {
 			Swal.fire({
 				title : "Kennwort zurückgesetzt",
 				text : "Kennwort zurückgesetzt. Sie können sich jetzt mit dem neuen Kennwort anmelden",
-				type : "success",
+				icon : "success",
 				confirmButtonText : "Ok"
 			}, function() {
 				location.href = 'index.jsp';
@@ -45,6 +45,6 @@ function setpw() {
 		Swal.fire({
 			title : "Fehler",
 			text : "Die Passwörter stimmen nicht überein",
-			type : "error"});
+			icon : "error"});
 	}
 }

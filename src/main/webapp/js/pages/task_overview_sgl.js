@@ -135,11 +135,10 @@ function deleteProcessButtons(uni, matrikelnummer) {
 	Swal.fire({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden! Das hier wird angezeigt :-)",
-            type: "warning",
+        icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!",
-            closeOnConfirm: false
+            confirmButtonText: "Löschen!"
         }, function () {
             $.ajax({
                 type: "GET",
@@ -152,7 +151,7 @@ function deleteProcessButtons(uni, matrikelnummer) {
                 Swal.fire({
                 	title: 'Gelöscht!',
                 	text: 'Der Prozess wurde erfolgreich gelöscht.',
-                	type: 'success'
+                    icon: 'success'
                 }, function() {
                 	location.reload();
                 });
@@ -169,11 +168,10 @@ function initDeleteProcessButtonsTaskOverview() {
         Swal.fire({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden!",
-            type: "warning",
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!",
-            closeOnConfirm: false
+            confirmButtonText: "Löschen!"
         }, function () {
             //var id = $('.btn-delete').closest('tr').data('rid');
             var matrikelnummer = sessionStorage['matrikelnr'];
@@ -205,7 +203,7 @@ function deleteTask (taskID) {
         Swal.fire({
             title: "Bist du sicher?",
             text: "Die Bewerbung kann nicht wiederhergestellt werden!",
-            type: "warning",
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"

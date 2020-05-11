@@ -117,7 +117,7 @@ $(document).ready(function () {
                         Swal.fire({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
-                            type: "warning",
+                            icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Löschen!"
@@ -156,7 +156,7 @@ $(document).ready(function () {
                         Swal.fire({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
-                            type: "warning",
+                            icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Löschen!"
@@ -194,7 +194,7 @@ $(document).ready(function () {
                         Swal.fire({
                             title: "Bist du sicher?",
                             text: "Der User kann nicht wiederhergestellt werden!",
-                            type: "warning",
+                            icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Löschen!"
@@ -281,7 +281,7 @@ $(document).ready(function () {
                 Swal.fire({
                     title: "Serverfehler",
                     text: "Die Serververbindung wurde unterbrochen. Bitte laden Sie die Seite erneut",
-                    type: "error",
+                    icon: "error",
                     confirmButtonText: "OK"
                 });
             }
@@ -316,7 +316,7 @@ $(document).ready(function () {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
 
@@ -324,21 +324,21 @@ $(document).ready(function () {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
                 } else if (data == "registerError") {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
                 } else {
                     Swal.fire({
                         title: "Account erfolgreich erstellt",
                         text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
-                        type: "success",
+                        icon: "success",
                         confirmButtonText: "OK"
                     });
 
@@ -381,7 +381,7 @@ $(document).ready(function () {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
 
@@ -389,21 +389,21 @@ $(document).ready(function () {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
                 } else if (data == "registerError") {
                     Swal.fire({
                         title: "Fehler!",
                         text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                        type: "error",
+                        icon: "error",
                         confirmButtonText: "OK"
                     });
                 } else {
                     Swal.fire({
                         title: "Account erfolgreich erstellt",
                         text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
-                        type: "success",
+                        icon: "success",
                         confirmButtonText: "OK"
                     });
 

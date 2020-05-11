@@ -16,7 +16,7 @@ function resetpw() {
 			Swal.fire({
 				title : "Kennwort zurückgesetzt",
 				text : "Falls diese Mailadresse uns bekannt ist, erhalten Sie eine Mail mit einem Link zum zurücksetzen des Passworts",
-				type : "success",
+				icon : "success",
 				confirmButtonText : "Ok"
 			}, function() {
 				location.href = 'index.jsp';
