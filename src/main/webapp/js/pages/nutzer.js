@@ -41,9 +41,9 @@ $(document).ready(function () {
                             row.tel +
                             '</td><td class="mobil">' +
                             row.mobil +
-                            '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' + i +
+                            '</td><td><span class="btn fas fa-edit useredit-button" id="edit' + i +
                             '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td>' +
-                            '<td><span class="btn glyphicon glyphicon-trash deleteAAA-button" data-mail="' +
+                            '<td><span class="btn fas fa-trash deleteAAA-button" data-mail="' +
                             row.email +
                             '" id="delete' + i +
                             '" title="Löschen"></span></td></tr>';
@@ -71,9 +71,9 @@ $(document).ready(function () {
                             row.kurs +
                             '</td><td class="matrikelnr">' +
                             row.matrikelnummer +
-                            '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' +
+                            '</td><td><span class="btn fas fa-edit useredit-button" id="edit' +
                             i +
-                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash delete-button" data-matrikel="' + row.matrikelnummer + '" id="delete' +
+                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn fas fa-trash delete-button" data-matrikel="' + row.matrikelnummer + '" id="delete' +
                             i +
                             '" title="Löschen"></span></td></tr>';
                     }
@@ -99,9 +99,9 @@ $(document).ready(function () {
                             row.studiengang +
                             '</td><td class="kurs">' +
                             row.kurs +
-                            '</td><td><span class="btn glyphicon glyphicon-edit useredit-button" id="edit' +
+                            '</td><td><span class="btn fas fa-edit useredit-button" id="edit' +
                             i +
-                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn glyphicon glyphicon-trash deleteSGL-button" data-mail="' + row.email + '" id="delete' +
+                            '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td><td><span class="btn fas fa-trash deleteSGL-button" data-mail="' + row.email + '" id="delete' +
                             i +
                             '" title="Löschen"></span></td></tr>';
                     }

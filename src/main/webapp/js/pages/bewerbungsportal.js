@@ -218,17 +218,17 @@ function initBewerben() {
                     //Anlegen der Buttons
                     if ((instance_info.stepCounter === "Abgeschlossen") || (instance_info.stepCounter === "Auf Rückmeldung warten") || (instance_info.stepCounter === "Bewerbung wurde abgelehnt") ) {
                         //Übersicht
-                        tabelle = tabelle + '<td align="center"><span class="btn glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '\'"></span></td>';
+                        tabelle = tabelle + '<td align="center"><span class="btn fas fa-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '\'"></span></td>';
                     } else if (instance_info.stepCounter === "Daten prüfen") {
                         //Übersicht
-                        tabelle = tabelle + '<td align="center"><span class="btn glyphicon glyphicon-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '&send_bew=true\'"></span><td align="center">';
+                        tabelle = tabelle + '<td align="center"><span class="btn fas fa-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '&send_bew=true\'"></span><td align="center">';
                         //Prozess löschen
-                        tabelle = tabelle + '<span uni="' + instance_info.uni + '" class="btn glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i + 1) + '"></span>';
+                        tabelle = tabelle + '<span uni="' + instance_info.uni + '" class="btn fas fa-trash btn-delete" title="Löschen" rid="' + (i + 1) + '"></span>';
                     } else {
                         //Fortsetzen
-                        tabelle = tabelle + '<td align="center"><span class="btn glyphicon glyphicon-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '\'"></span><td align="center">';
+                        tabelle = tabelle + '<td align="center"><span class="btn fas fa-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '\'"></span><td align="center">';
                         //Prozess löschen
-                        tabelle = tabelle + '<span uni="' + instance_info.uni + '" class="btn glyphicon glyphicon-trash btn-delete" title="Löschen" rid="' + (i + 1) + '"></span>';
+                        tabelle = tabelle + '<span uni="' + instance_info.uni + '" class="btn fas fa-trash btn-delete" title="Löschen" rid="' + (i + 1) + '"></span>';
                     }
                     tabelle = tabelle + '</td></tr>'
                 }

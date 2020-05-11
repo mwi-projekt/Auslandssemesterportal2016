@@ -39,13 +39,13 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td><td>" +
-                            '<button class="btn glyphicon glyphicon-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' +
+                            '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' +
                             singleInstance.id +
                             '&uni=' +
                             singleInstance.uni +
                             '&verify=true\'\"> </button>' +
                             "</td><td>" +
-                            "<button class=\"btn glyphicon glyphicon-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
+                            "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                  
                     } else if (singleInstance.status === 'complete') {
                         completed = completed +
