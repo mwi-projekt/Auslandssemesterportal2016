@@ -121,7 +121,7 @@ $(document).ready(function () {
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Löschen!"
-                        }).then((result) => {
+                        }).then(function(result) {
                             if (result.value) {
                                 alert("Du hast auf Löschen gedrückt");
                             	Swal.fire({
@@ -160,7 +160,7 @@ $(document).ready(function () {
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Löschen!"
-                        }).then((result) => {
+                        }).then(function(result) {
                             if (result.value) {
                                 Swal.fire({
                                     title: 'Lösche User'
@@ -198,7 +198,7 @@ $(document).ready(function () {
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
                             confirmButtonText: "Löschen!"
-                        }).then((result) => {
+                        }).then(function(result) {
                             if (result.value) {
                                 Swal.fire({
                                     title: 'Lösche User'

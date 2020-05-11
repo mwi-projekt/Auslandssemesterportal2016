@@ -253,7 +253,7 @@ function initDeleteProcessButtons() {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!",
-        }, function () {
+        }).then(function (result) {
             //var id = $('.btn-delete').closest('tr').data('rid');
             var matrikelnummer = sessionStorage['matrikelnr'];
 

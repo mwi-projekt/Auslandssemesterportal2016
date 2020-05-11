@@ -18,7 +18,7 @@ function resetpw() {
 				text : "Falls diese Mailadresse uns bekannt ist, erhalten Sie eine Mail mit einem Link zum zurücksetzen des Passworts",
 				icon : "success",
 				confirmButtonText : "Ok"
-			}, function() {
+			}).then(function(result) {
 				location.href = 'index.jsp';
 			});
 		},

@@ -24,7 +24,7 @@ function setpw() {
 					text : "Kein passendes Nutzerkonto gefunden",
 					icon : "error",
 					confirmButtonText : "Ok"
-				}, function() {
+				}).then(function(result) {
 					location.href = 'index.jsp';
 				});	
 			}
@@ -33,7 +33,7 @@ function setpw() {
 				text : "Kennwort zurückgesetzt. Sie können sich jetzt mit dem neuen Kennwort anmelden",
 				icon : "success",
 				confirmButtonText : "Ok"
-			}, function() {
+			}).then(function(result) {
 				location.href = 'index.jsp';
 			});
 		},

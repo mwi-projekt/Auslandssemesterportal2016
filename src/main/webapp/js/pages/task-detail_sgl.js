@@ -273,8 +273,7 @@ function saveChanges() {
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Bewerbung absenden",
             cancelButtonText: "Abbrechen"
-        },
-        function () {
+        }).then(function (result) {
             $.ajax({
                 type: "POST",
                 url: baseUrl + "/setVariable",
@@ -284,18 +283,18 @@ function saveChanges() {
                     value: valString,
                     type: typeString
                 },
-                success: function (result) {
+                success: function () {
                     Swal.fire({
                         title: "Bewerbung eingereicht",
                         text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
                         icon: "success",
                         confirmButtonText: "Ok"
-                    }, function () {
+                    }).then(function () {
                         location.href = 'bewerbungsportal.html';
                     });
                 },
-                error: function (result) {
-                    sweetAlert("Fehler", "Ein Fehler ist aufgetreten", "error");
+                error: function () {
+                    Swal.fire("Fehler", "Ein Fehler ist aufgetreten", "error");
                 }
             });
         });
@@ -335,7 +334,7 @@ function validateBew() {
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Bewerbung " + resultString,
         cancelButtonText: "Abbrechen"
-    }, function () {
+    }).then(function () {
         $.ajax({
             type: "POST",
             url: baseUrl + "/setVariable",
@@ -345,18 +344,18 @@ function validateBew() {
                 value: validateString + '|' + grund,
                 type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
             },
-            success: function (result) {
+            success: function () {
                 Swal.fire({
                     title: "Bewerbung " + resultString,
                     text: "Gespeichert",
                     icon: "success",
                     confirmButtonText: "Ok"
-                }, function () {
+                }).then(function () {
                     location.href = 'task_overview_sgl.html';
                 });
             },
-            error: function (result) {
-                alert('Ein Fehler ist aufgetreten');
+            error: function () {
+                Swal.fire('Ein Fehler ist aufgetreten');
             }
         });
     });

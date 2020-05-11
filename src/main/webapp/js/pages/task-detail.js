@@ -275,16 +275,15 @@ function saveChanges() {
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Bewerbung absenden",
             cancelButtonText: "Abbrechen"
-        },
-        function () {
-        	$.ajax({
+        }).then(function(result) {
+            $.ajax({
                 type: "POST",
                 url: baseUrl + "/sendNewApplicationMail",
                 data: {
                     instance_id: instanceID
                 },
                 success: function (result) {
-                	$.ajax({
+                    $.ajax({
                         type: "POST",
                         url: baseUrl + "/setVariable",
                         data: {
@@ -299,7 +298,7 @@ function saveChanges() {
                                 text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
                                 icon: "success",
                                 confirmButtonText: "Ok"
-                            }, function () {
+                            }).then( function (result) {
                                 location.href = 'bewerbungsportal.html';
                             });
                         },
@@ -349,7 +348,7 @@ function validateBew() {
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Bewerbung " + resultString,
         cancelButtonText: "Abbrechen"
-    }, function () {
+    }).then(function (result) {
     	// hier mail einfügen -> neue Ajax
         $.ajax({
             type: "POST",
@@ -366,7 +365,7 @@ function validateBew() {
                     text: "Gespeichert",
                     icon: "success",
                     confirmButtonText: "Ok"
-                }, function () {
+                }).then(function (result) {
                     location.href = 'task_overview.html';
                 });
             },

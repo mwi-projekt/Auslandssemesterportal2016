@@ -132,11 +132,11 @@ function deleteProcessButtons(uni, matrikelnummer) {
 	Swal.fire({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden!",
-        icon: "warning",
+            icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"
-        }, function () {
+        }).then(function () {
             $.ajax({
                 type: "GET",
                 url: baseUrl + "/process/delete",
@@ -149,7 +149,7 @@ function deleteProcessButtons(uni, matrikelnummer) {
                 	title: 'Gelöscht!',
                 	text: 'Der Prozess wurde erfolgreich gelöscht.',
                     icon: 'success'
-                }, function() {
+                }).then(function() {
                 	location.reload();
                 });
             }).error(function (error) {
@@ -169,7 +169,7 @@ function initDeleteProcessButtonsTaskOverview() {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"
-        }, function () {
+        }).then(function () {
             //var id = $('.btn-delete').closest('tr').data('rid');
             var matrikelnummer = sessionStorage['matrikelnr'];
 
@@ -204,7 +204,7 @@ function deleteTask (taskID) {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"
-        }).then((result) => {
+        }).then(function(result) {
         	alert("Du hast auf Löschen gedrückt");
         	if (result.value) {
                  alert("Auf Löschen gedrückt");
