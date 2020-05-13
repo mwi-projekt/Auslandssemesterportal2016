@@ -77,7 +77,7 @@ $(document).ready(function () {
     $('.tile').on('click', function () {
         var id = $(this).attr('id');
         if (id === 'verwaltungIndex') {
-            location.href = 'cms.jsp';
+            location.href = 'cms.html';
         } else if (id === 'verwaltungUser') {
             location.href = 'nutzer.html';
         } else if (id === 'verwaltungPortal') {
