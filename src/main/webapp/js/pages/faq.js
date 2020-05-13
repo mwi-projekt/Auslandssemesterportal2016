@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 var expandFAQ = function() {
 	$('.show').css('cursor', 'pointer');
 	$('.weg').hide();

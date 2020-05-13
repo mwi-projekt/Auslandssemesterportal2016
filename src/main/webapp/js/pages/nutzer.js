@@ -1,3 +1,6 @@
+import $ from "jquery";
+import {baseUrl} from "../config.js";
+
 $(document).ready(function () {
     // Click-Listener für Userverwaltung User anzeigen lassen
     $('.btnUser').on('click', function () {

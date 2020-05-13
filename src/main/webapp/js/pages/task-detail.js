@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 var instanceID;
 var url;
 var typeList;

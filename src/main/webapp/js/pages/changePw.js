@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 $(document).ready(function() {
 	url = new URL(window.location.href);
 	uuid_var = url.searchParams.get("uuid");

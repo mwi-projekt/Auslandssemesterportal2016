@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 var siteHasUnsavedChanges = false;
 var siteHasUnsavedChanges = false;
 

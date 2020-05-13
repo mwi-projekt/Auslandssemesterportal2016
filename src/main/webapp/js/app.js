@@ -1,4 +1,6 @@
-var baseUrl = "http://localhost:81";
+import $ from "jquery";
+import {baseUrl} from "./config.js";
+
 $.ajaxSetup({
     xhrFields: { withCredentials: true },
     crossDomain: true,

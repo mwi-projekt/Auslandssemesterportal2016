@@ -1,3 +1,10 @@
+import $ from "jquery";
+import {baseUrl} from "../config.js";
+import Swal from "sweetalert2";
+import image1 from "../../images/pan1.jpg";
+import image2 from "../../images/pan2.jpg";
+import image3 from "../../images/pan3.jpg";
+
 $(document).ready(function () {
     // check if logged in
     if (sessionStorage['User']) {
@@ -52,8 +59,8 @@ $(document).ready(function () {
     initSlider();
     initArrows();
 
-    if ($.urlParam('confirm') != null && $.urlParam('confirm').trim() != '') {
-        var link = $.urlParam('confirm');
+    if ($.param('confirm') != null && $.param('confirm').trim() != '') {
+        var link = $.param('confirm');
         $.ajax({
             type: "GET",
             url: baseUrl + "/confirm?code=" + link,
@@ -269,13 +276,14 @@ function loadInfoMaterial() {
 }
 
 function initSlider() {
-    var back = 1;
-    $('.imgSlider').css('background-image', 'url(images/pan' + back + '.jpg)');
+    var images = [image1, image2, image3];
+    var back = 0;
+    $('.imgSlider').css('background-image', 'url(' + images[back]+ ')');
     setInterval(function () {
         back++;
-        if (back == 4) back = 1;
+        if (back == 3) back = 0;
         $('.imgSlider').fadeTo('slow', 0, function () {
-            $('.imgSlider').css('background-image', 'url(images/pan' + back + '.jpg)');
+            $('.imgSlider').css('background-image', 'url(' + images[back]+ ')');
         }).fadeTo('800', 0.9);
     }, 6000);
 }

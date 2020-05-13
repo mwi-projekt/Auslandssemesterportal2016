@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 $(document).ready(function () {
     var dia = $.urlParam('dia').trim();
     var BpmnJS = window.BpmnJS;

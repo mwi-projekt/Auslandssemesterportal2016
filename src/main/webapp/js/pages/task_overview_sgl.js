@@ -1,11 +1,8 @@
-
-
+import $ from "jquery";
 
 $(document).ready(function () {
     getList();
 });
-
-
 
 function getList() {
     $.ajax({

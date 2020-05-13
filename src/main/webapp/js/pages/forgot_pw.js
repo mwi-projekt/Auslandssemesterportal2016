@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 $(document).ready(function() {
 	$(document).on('click', '#resetPassword', function() {
 		resetpw();
