@@ -25,7 +25,7 @@ function setpw() {
 					icon : "error",
 					confirmButtonText : "Ok"
 				}).then(function(result) {
-					location.href = 'index.jsp';
+					location.href = 'index.html';
 				});	
 			}
 			Swal.fire({
@@ -34,7 +34,7 @@ function setpw() {
 				icon : "success",
 				confirmButtonText : "Ok"
 			}).then(function(result) {
-				location.href = 'index.jsp';
+				location.href = 'index.html';
 			});
 		},
 		error : function(result) {
