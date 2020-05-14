@@ -1,5 +1,5 @@
 import $ from "jquery";
-import "../config";
+import _,{baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import Viewer from "bpmn-js";

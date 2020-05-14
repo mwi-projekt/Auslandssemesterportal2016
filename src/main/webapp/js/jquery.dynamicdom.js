@@ -1,4 +1,4 @@
-import "./config";
+import _,{baseUrl} from "./config";
 import $ from "jquery";
 /*
  DynamicDom

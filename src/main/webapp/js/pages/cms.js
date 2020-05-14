@@ -4,7 +4,7 @@ import "bootstrap";
 import "jquery-form-validator";
 import "datatables.net-bs4";
 import "cookieconsent";
-import "../config";
+import _,{baseUrl} from "../config";
 
 $(document).ready(function () {
 	$('#adminBereich').hide();
