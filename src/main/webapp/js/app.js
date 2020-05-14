@@ -1,5 +1,6 @@
 import $ from "jquery";
 import {baseUrl} from "./config.js";
+import Swal from "sweetalert2";
 
 $.ajaxSetup({
     xhrFields: { withCredentials: true },
