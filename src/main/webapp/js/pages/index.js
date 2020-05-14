@@ -1,5 +1,6 @@
 import $ from "jquery";
-import {baseUrl} from "../config.js";
+import {baseUrl} from "../config";
+import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
@@ -62,9 +63,6 @@ $(document).ready(function () {
     // init ui
     initSlider();
     initArrows();
-
-    let queryString = window.location.search;
-    var urlParams = new URLSearchParams(queryString);
 
     if (urlParams.get('confirm') != null && urlParams.get('confirm').trim() != '') {
         var link = $.param('confirm');

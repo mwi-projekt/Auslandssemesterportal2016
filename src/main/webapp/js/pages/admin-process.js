@@ -1,11 +1,12 @@
 import $ from "jquery";
-import {baseUrl} from "../config.js";
+import {baseUrl} from "../config";
+import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import "bpmn-js";
 import "jquery-ui-dist";
 
 $(document).ready(function () {
-    var dia = $.urlParam('dia').trim();
+    var dia = urlParams.get('dia').trim();
     var BpmnJS = window.BpmnJS;
 
     var viewer = new BpmnJS({

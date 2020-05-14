@@ -185,16 +185,6 @@ if (!String.prototype.startsWith) {
 function isEmpty(str) {
     return (!str || 0 === str.length);
 }
-$.urlParam = function (name) {
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)')
-        .exec(window.location.href);
-
-    if (results == null) {
-        return " ";
-    } else {
-        return results[1] || 0;
-    }
-};
 
 //Function to remove certain URL Parameters
 function removeQueryStringParameter(key, url) {
@@ -229,3 +219,5 @@ function logout() {
         }
     });
 }
+
+export var urlParams = new URLSearchParams(window.location.search);

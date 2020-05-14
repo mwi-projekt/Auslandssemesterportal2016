@@ -1,5 +1,6 @@
 import $ from "jquery";
-import {baseUrl} from "../config.js";
+import {baseUrl} from "../config";
+import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import "jquery-ui-dist";
 import "ckeditor4";
@@ -17,10 +18,10 @@ window.onbeforeunload = function(e) {
 
 $(document).ready(function () {
 
-    var id = $.urlParam('id').trim();
-    var dia = $.urlParam('dia').trim();
-    var type = $.urlParam('type').trim();
-    var index = $.urlParam('index').trim();
+    var id = urlParams.get('id').trim();
+    var dia = urlParams.get('dia').trim();
+    var type = urlParams.get('type').trim();
+    var index = urlParams.get('index').trim();
     var json = {};
 
     $.get(baseUrl + '/processmodel/get', {
