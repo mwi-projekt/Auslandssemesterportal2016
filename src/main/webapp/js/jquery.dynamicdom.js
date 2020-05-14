@@ -1,3 +1,5 @@
+import "../config";
+import $ from "jquery";
 /*
  DynamicDom
  description: build content with editable components

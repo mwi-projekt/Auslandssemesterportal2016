@@ -1,4 +1,5 @@
 import $ from "jquery";
+import "../config";
 
 $(function(){
 	var baseUrl = "http://localhost:81";

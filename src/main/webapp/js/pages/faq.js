@@ -4,6 +4,7 @@ import "jquery-form-validator";
 import "jquery-ui-dist";
 import "datatables.net-bs4";
 import "cookieconsent";
+import "../config";
 
 var expandFAQ = function() {
 	$('.show').css('cursor', 'pointer');

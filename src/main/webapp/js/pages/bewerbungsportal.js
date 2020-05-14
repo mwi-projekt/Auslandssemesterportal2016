@@ -1,4 +1,4 @@
-import {baseUrl} from "../config.js";
+import "../config";
 import $ from "jquery";
 import Swal from "sweetalert2";
 import "bootstrap";

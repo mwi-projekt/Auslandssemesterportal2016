@@ -1,5 +1,5 @@
 import $ from "jquery";
-import {baseUrl} from "../config";
+import "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import "bootstrap";
