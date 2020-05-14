@@ -63,7 +63,10 @@ $(document).ready(function () {
     initSlider();
     initArrows();
 
-    if ($.param('confirm') != null && $.param('confirm').trim() != '') {
+    let queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+
+    if (urlParams('confirm') != null && urlParams('confirm').trim() != '') {
         var link = $.param('confirm');
         $.ajax({
             type: "GET",

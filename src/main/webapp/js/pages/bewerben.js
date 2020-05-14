@@ -1,11 +1,10 @@
 import $ from "jquery";
 import {baseUrl} from "../config.js";
-import jsPDF from "jspdf";
+import "jspdf";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "dropzone";
 import "jquery-form-validator";
-import "js/app";
 
 var instanceID;
 var uni;
