@@ -66,7 +66,7 @@ $(document).ready(function () {
     let queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
 
-    if (urlParams('confirm') != null && urlParams('confirm').trim() != '') {
+    if (urlParams.get('confirm') != null && urlParams.get('confirm').trim() != '') {
         var link = $.param('confirm');
         $.ajax({
             type: "GET",
