@@ -1,5 +1,5 @@
 import $ from "jquery";
-import {baseUrl} from "./config.js";
+import "./config";
 import Swal from "sweetalert2";
 
 $.ajaxSetup({
