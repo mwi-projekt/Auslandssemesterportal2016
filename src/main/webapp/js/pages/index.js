@@ -1,6 +1,10 @@
 import $ from "jquery";
 import {baseUrl} from "../config.js";
 import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-form-validator";
+import "cookieconsent";
+import "datatables.net-bs4";
 import image1 from "../../images/pan1.jpg";
 import image2 from "../../images/pan2.jpg";
 import image3 from "../../images/pan3.jpg";

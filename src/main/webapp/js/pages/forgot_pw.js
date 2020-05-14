@@ -1,4 +1,10 @@
 import $ from "jquery";
+import {baseUrl} from "../config.js";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-form-validator";
+import "datatables.net-bs4";
+import "cookieconsent";
 
 $(document).ready(function() {
 	$(document).on('click', '#resetPassword', function() {

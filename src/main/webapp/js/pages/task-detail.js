@@ -1,4 +1,8 @@
 import $ from "jquery";
+import {baseUrl} from "../config.js";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-form-validator";
 
 var instanceID;
 var url;

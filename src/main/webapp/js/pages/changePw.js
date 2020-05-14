@@ -1,4 +1,9 @@
 import $ from "jquery";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-form-validator";
+import "datatables.net-bs4";
+import "cookieconsent";
 
 $(document).ready(function() {
 	url = new URL(window.location.href);

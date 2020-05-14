@@ -1,4 +1,8 @@
 import $ from "jquery";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-form-validator";
+import "dropzone";
 
 $(document).ready(function () {
     loadAuslandsangebote();

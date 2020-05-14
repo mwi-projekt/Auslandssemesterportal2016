@@ -1,5 +1,11 @@
 import $ from "jquery";
 import {baseUrl} from "../config.js";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-form-validator";
+import "jquery-ui-dist";
+import "datatables.net-bs4";
+import "cookieconsent";
 
 $(document).ready(function () {
     // Click-Listener für Userverwaltung User anzeigen lassen
