@@ -2,15 +2,15 @@ import $ from "jquery";
 import {baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
-import "bpmn-js";
+import Viewer from "bpmn-js";
 import "jquery-ui-dist";
 
 $(document).ready(function () {
     var dia = urlParams.get('dia').trim();
     var BpmnJS = window.BpmnJS;
 
-    var viewer = new BpmnJS({
-        container: '#diagram'
+    var viewer = new Viewer({
+        container: $('#diagram')
     });
 
     var possibleIds = [];
