@@ -1,4 +1,11 @@
 import $ from "jquery";
+import {baseUrl} from "../config.js";
+import Swal from "sweetalert2";
+import "jquery-ui";
+import "ckeditor4";
+import "bootstrap-switch";
+import "js/jquery.dynamicdom";
+import "js/app";
 
 var siteHasUnsavedChanges = false;
 var siteHasUnsavedChanges = false;

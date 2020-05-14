@@ -1,4 +1,9 @@
 import $ from "jquery";
+import {baseUrl} from "../config.js";
+import Swal from "sweetalert2";
+import BpmnModeler from "bpmn-js/lib/NavigatedViewer";
+import "jquery-ui";
+import "js/app";
 
 $(document).ready(function () {
     var dia = $.urlParam('dia').trim();
