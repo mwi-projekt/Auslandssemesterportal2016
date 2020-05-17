@@ -76,9 +76,12 @@ $(document).ready(function () {
         if (id === 'student') {
             location.href = 'HTML/admin/verwaltung_student.html';
         }
-         if (id === 'auslandsamt') {
+        if (id === 'auslandsamt') {
              location.href = 'HTML/admin/verwaltung_auslandsamt.html';
-                }
+          }
+        if (id === 'studiengangsleitung') {
+             location.href = 'HTML/admin/verwaltung_studiengangsleitung.html';
+           }
     });
 });
 

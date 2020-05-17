@@ -43,21 +43,23 @@
             <th>Vorname</th>
             <th>Nachname</th>
             <th>Email</th>
-            <th>Telefonnummer</th>
-            <th>Mobilfunknummer</th>
+            <th>DHBW Standort</th>
+            <th>Studiengang</th>
+            <th>Kurs</th>
         </tr>
         </thead>
     </table>
     <script>
         $(document).ready(function () {
             $('#example').DataTable({
-                ajax: '/getUser?rolle=2',
+                ajax: '/getUser?rolle=4',
                 columns: [
                     {data: 'vorname'},
                     {data: 'nachname'},
                     {data: 'email'},
-                    {data: 'tel'},
-                    {data: 'mobil'},
+                    {data: 'standort'},
+                    {data: 'studiengang'},
+                    {data: 'kurs'},
                 ]
             });
         });
