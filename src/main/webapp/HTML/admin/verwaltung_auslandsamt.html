@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>DHBW Auslandsportal</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="JS/faq.js"></script>
+    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no" charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="node_modules/jquery-form-validator/form-validator/theme-default.min.css">
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>
+    <script src="JS/main.js"></script>
+    <script type="text/javascript">
+        window.cookieconsent_options = {
+            "message": "Diese Webiste verwendet Cookies",
+            "dismiss": "Verstanden!",
+            "learnMore": "More info",
+            "link": null,
+            "theme": "light-top"
+        };
+    </script>
+    <script type="text/javascript" src="node_modules/cookieconsent/build/cookieconsent.min.js"></script>
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
+<div class="table-responsive-lg">
 
+    <table id="example" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>Email</th>
+            <th>Telefonnummer</th>
+            <th>Mobilfunknummer</th>
+        </tr>
+        </thead>
+    </table>
+    <script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                ajax: '/getUser?rolle=2',
+                columns: [
+                    {data: 'vorname'},
+                    {data: 'nachname'},
+                    {data: 'email'},
+                    {data: 'tel'},
+                    {data: 'mobil'},
+                ]
+            });
+        });
+    </script>
 </body>
 </html>

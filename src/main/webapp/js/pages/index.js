@@ -76,6 +76,9 @@ $(document).ready(function () {
         if (id === 'student') {
             location.href = 'HTML/admin/verwaltung_student.html';
         }
+         if (id === 'auslandsamt') {
+              location.href = 'verwaltung_auslandsamt';
+                }
     });
 });
 
