@@ -1,11 +1,15 @@
-import _,{baseUrl} from "./config";
 import $ from "jquery";
+window.$ = window.jQuery = $;
+import _,{baseUrl} from "./config";
+import "jquery-ui-dist/jquery-ui";
+import CKEDITOR from "ckeditor4";
+
 /*
  DynamicDom
  description: build content with editable components
  author: Andre Steudel <kontakt@andre-steudel.de>
  */
-;(function ( $, window, document, undefined ) {
+(function ( $, window, document, undefined ) {
 
     "use strict";
 

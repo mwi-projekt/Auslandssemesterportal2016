@@ -1,10 +1,17 @@
 import $ from "jquery";
+window.$ = window.jQuery = $;
 import _,{baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
+import Viewer from "bpmn-js";
 import "jquery-ui-dist";
-import "ckeditor4";
 import "bootstrap-switch";
+import "jquery";
+import "../jquery.dynamicdom.js";
+import selectform from "../../modals/select-form.html";
+import textform from "../../modals/text-form.html";
+import checkboxform from "../../modals/checkbox-form.html";
+import uploadform from "../../modals/upload-form.html";
 
 var siteHasUnsavedChanges = false;
 
@@ -18,10 +25,14 @@ window.onbeforeunload = function(e) {
 
 $(document).ready(function () {
 
-    var id = urlParams.get('id').trim();
-    var dia = urlParams.get('dia').trim();
+    // var id = urlParams.get('id').trim();
+    /*var dia = urlParams.get('dia').trim();
     var type = urlParams.get('type').trim();
-    var index = urlParams.get('index').trim();
+    var index = urlParams.get('index').trim(); */
+        var id = urlParams.get('id');
+        var dia = urlParams.get('dia');
+        var type = urlParams.get('type');
+        var index = urlParams.get('index');
     var json = {};
 
     $.get(baseUrl + '/processmodel/get', {
@@ -314,25 +325,14 @@ $(document).ready(function () {
         });
     }
 
-    var selectForm = '';
-    $.get('modals/select-form.html', {}, function (data) {
-        selectForm = data;
-    });
+    var selectForm = selectform;
 
-    var textForm = '';
-    $.get('modals/text-form.html', {}, function (data) {
-        textForm = data;
-    });
+    var textForm = textform;
 
-    var checkboxForm = '';
-    $.get('modals/checkbox-form.html', {}, function (data) {
-        checkboxForm = data;
-    });
+    var checkboxForm = checkboxform;
 
-    var uploadForm = '';
-    $.get('modals/upload-form.html', {}, function (data) {
-        uploadForm = data;
-    });
+    var uploadForm = uploadform;
+
 
     function init(data) {
         $('#cardSlots').dynamicdom({
@@ -404,7 +404,7 @@ $(document).ready(function () {
                 var editor = true;
                 var enableEdit = false;
                 var deleteable = true;
-
+                var con;
                 if (type == 'title' || type == 'subtitle') {
                     editor = {};
                     editor.toolbar = [

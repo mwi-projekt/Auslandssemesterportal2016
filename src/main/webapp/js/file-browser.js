@@ -1,8 +1,9 @@
 import $ from "jquery";
+window.$ = window.jQuery = $;
 import _,{baseUrl} from "./config";
+import "ckeditor4";
 
 $(function(){
-	var baseUrl = "http://localhost:81";
 
 	var filemanager = $('.filemanager'),
 		fileList = filemanager.find('.data');
@@ -64,6 +65,7 @@ $(function(){
 			if ($(this).prop('disabled') != true) {
                 var funcNum = getUrlParam( 'CKEditorFuncNum' );
                 var fileUrl = $('.filemanager .data li.active a').attr('title');
+                console.log(fileUrl);
                 window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl );
                 window.close();
 			}

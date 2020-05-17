@@ -1,13 +1,13 @@
 import $ from "jquery";
+window.$ = window.jQuery = $;
 import _,{baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import Viewer from "bpmn-js";
-import "jquery-ui-dist";
+import "jquery-ui-dist/jquery-ui";
 
 $(document).ready(function () {
     var dia = urlParams.get('dia').trim();
-    var BpmnJS = window.BpmnJS;
 
     var viewer = new Viewer({
         container: $('#diagram')

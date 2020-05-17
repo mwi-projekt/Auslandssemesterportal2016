@@ -1,6 +1,9 @@
 import $ from "jquery";
+window.$ = window.jQuery = $;
 import _,{baseUrl} from "./config";
 import Swal from "sweetalert2";
+import Viewer from "bpmn-js";
+import "jquery-ui-dist/jquery-ui";
 
 $.ajaxSetup({
     xhrFields: { withCredentials: true },
