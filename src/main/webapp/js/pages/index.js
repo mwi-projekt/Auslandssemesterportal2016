@@ -77,7 +77,7 @@ $(document).ready(function () {
             location.href = 'HTML/admin/verwaltung_student.html';
         }
          if (id === 'auslandsamt') {
-              location.href = 'verwaltung_auslandsamt';
+             location.href = 'HTML/admin/verwaltung_auslandsamt.html';
                 }
     });
 });
