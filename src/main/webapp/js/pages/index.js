@@ -74,7 +74,7 @@ $(document).ready(function () {
     $('.admintile').on('click', function () {
         var id = $(this).attr('id');
         if (id === 'student') {
-            location.href = 'verwaltung_student';
+            location.href = 'HTML/admin/verwaltung_student.html';
         }
     });
 });

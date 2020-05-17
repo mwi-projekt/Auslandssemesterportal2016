@@ -10,7 +10,7 @@ $.ajax({
     },
     success: function (result) {
         var auslesen = result.data;
-        if (rolle === 2) {
+        if (rolle === 3) {
             var tabelle =
                 '<h2>Registrierte ' + typ + '</h2>' +
                 '<table id="userTable" class="table table-striped table-bordered">' +
