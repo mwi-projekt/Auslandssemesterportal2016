@@ -1,5 +1,16 @@
 $(document).ready(function () {
 
+    const inputVorname = $("#vorname");
+    const inputNachname = $("#nachname");
+    const inputEmail = $("#email");
+    const inputTel = $("#telefonnummer");
+    const inputMobil = $("#mobilnummer");
+    const inputStudiengang = $("#studiengang");
+    const inputKurs = $("#kurs")
+    const inputMartikelnr = $("#martikelnummer");
+    const inputStandort = $("#standort");
+
+    // Erstelle die DataTable
     myTable = $('#example').DataTable({
         ajax: '/getUser?rolle=3',
         columns: [
@@ -27,16 +38,71 @@ $(document).ready(function () {
         responsive: true
     });
 
+    // Fülle die Modal-Felder
     $("#example").on("mousedown", "#edit", function (e) {
-        var myData = myTable.row($(this).parents('tr')).data();
-        $("#vorname").val(myData.vorname);
-        $("#nachname").val(myData.nachname);
-        $("#email").val(myData.email);
-        $("#telefonnummer").val(myData.tel);
-        $("#mobilnummer").val(myData.mobil);
-        $("#studiengang").val(myData.studiengang);
-        $("#kurs").val(myData.kurs);
-        $("#martikelnummer").val(myData.martikelnummer);
-        $("#standort").val(myData.standort);
-    })
+        const myData = myTable.row($(this).parents('tr')).data();
+        inputVorname.val(myData.vorname);
+        inputNachname.val(myData.nachname);
+        inputEmail.val(myData.email);
+        inputTel.val(myData.tel);
+        inputMobil.val(myData.mobil);
+        inputStudiengang.val(myData.studiengang);
+        inputKurs.val(myData.kurs);
+        inputMartikelnr.val(myData.matrikelnummer);
+        inputStandort.val(myData.standort);
+    });
+
+    // Submit-Button
+    $('#myFormSubmit').click(function (e) {
+        e.preventDefault();
+
+        console.log($('#myForm').serialize());
+
+        var vorname = inputVorname.val();
+        var nachname = inputNachname.val();
+        var email = inputEmail.val();
+        var telefonnummer = inputTel.val();
+        var mobilnummer = inputMobil.val();
+        var studiengang = inputStudiengang.val();
+        var kurs = inputKurs.val();
+        var martikelnummer = inputMartikelnr.val();
+        var standort = inputStandort.val();
+        var oldMail = "0";
+
+        if ($('#email').attr('data-value') != $('#email').val()) {
+            oldMail = $('#email').attr('data-value');
+        }
+
+        Swal.fire({
+            title: 'Speichere Änderungen'
+        });
+        Swal.showLoading();
+        $.ajax({
+            type: "POST",
+            url: baseUrl + "/user/update",
+            // url: baseUrl + "/test",
+            data: {
+                email: email,
+                oldmail: oldMail,
+                vorname: vorname,
+                nachname: nachname,
+                tel: telefonnummer,
+                mobil: mobilnummer,
+                studgang: studiengang,
+                kurs: kurs,
+                matnr: martikelnummer,
+                role: "3"
+            },
+            success: function (result) {
+                Swal.close();
+                Swal.fire('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
+                $('#exampleModal').modal('hide');
+            },
+            error: function (result) {
+                Swal.close();
+                Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
+                console.log(JSON.stringify(result));
+            }
+        });
+    });
 });
