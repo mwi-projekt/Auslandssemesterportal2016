@@ -7,7 +7,7 @@ import Viewer from "bpmn-js";
 import "jquery-ui-dist";
 import "bootstrap-switch";
 import "jquery";
-import "../jquery.dynamicdom.js";
+import "../jquery.dynamicdom";
 import selectform from "../../modals/select-form.html";
 import textform from "../../modals/text-form.html";
 import checkboxform from "../../modals/checkbox-form.html";

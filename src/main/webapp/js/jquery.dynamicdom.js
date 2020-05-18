@@ -2,8 +2,7 @@ import $ from "jquery";
 window.$ = window.jQuery = $;
 import _,{baseUrl} from "./config";
 import "jquery-ui-dist/jquery-ui";
-import CKEDITOR from "ckeditor4";
-
+import "ckeditor4/ckeditor";
 /*
  DynamicDom
  description: build content with editable components
@@ -62,7 +61,6 @@ import CKEDITOR from "ckeditor4";
                 items: ".item:not(.ui-state-disabled)",
                 handle: ".actions .fa-arrows",
             });
-
             // get output
             $el.on( "sortupdate", function() {
                 self.update();
