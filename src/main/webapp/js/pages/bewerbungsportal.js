@@ -63,6 +63,7 @@ $(document).ready(function () {
                 Swal.fire({
                     title: 'Bitte wähle die Uni und den Zeitraum aus',
                     html: popUpHtml + popUpHtml2,
+                    showConfirmButton: false,
                     onOpen: function () {
                         $('#newBewProzessWahl').on('click', function () {
                             sessionStorage['uni'] = $('#selectUni').val();
@@ -214,12 +215,12 @@ function initBewerben() {
             matnr: sessionStorage['matrikelnr']
         },
         success: function (result) {
-            tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th colspan="2">Aktionen</th></tr></thead>';
+            var tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th colspan="2">Aktionen</th></tr></thead>';
             if (result.data.length == 0) {
                 $('#tableBewProzess').html('<h2>Keine Bewerbungen vorhanden</h2>');
             } else {
                 for (var i = 0; i < result.data.length; i++) {
-                    instance_info = result.data[i];
+                    var instance_info = result.data[i];
                     tabelle = tabelle + '<tr data-rid="' + (i + 1) + '"><td>' + instance_info.uni + '</td><td>' + instance_info.stepCounter + '</td>';
                     //Anlegen der Buttons
                     if ((instance_info.stepCounter === "Abgeschlossen") || (instance_info.stepCounter === "Auf Rückmeldung warten") || (instance_info.stepCounter === "Bewerbung wurde abgelehnt") ) {

@@ -1,10 +1,11 @@
 import $ from "jquery";
+window.$ = window.jQuery = $;
 import _,{baseUrl} from "../config";
 import "jspdf";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "dropzone";
-import "jquery-form-validator";
+import "jquery-form-validator/form-validator/jquery.form-validator.min";
 
 var instanceID;
 var uni;
@@ -216,7 +217,7 @@ function parse() {
                 },
                 success: function (result) {
                     // generate html output
-                    json = JSON.parse(decodeURI(result));
+                    let json = JSON.parse(decodeURI(result));
                     for (var i = 0; i < json.length; i++) {
                         var type = json[i]["type"];
                         switch (type) {
