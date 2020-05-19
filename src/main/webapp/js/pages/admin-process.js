@@ -3,13 +3,13 @@ window.$ = window.jQuery = $;
 import _,{baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
-import Viewer from "bpmn-js";
+import BpmnNavigatedViewer from "bpmn-js/dist/bpmn-navigated-viewer.production.min";
 import "jquery-ui-dist/jquery-ui";
 
 $(document).ready(function () {
     var dia = urlParams.get('dia').trim();
 
-    var viewer = new Viewer({
+    var viewer = new BpmnNavigatedViewer({
         container: $('#diagram')
     });
 
@@ -25,13 +25,9 @@ $(document).ready(function () {
                 canvas = viewer.get('canvas'),
                 elementRegistry = viewer.get('elementRegistry');
 
-            console.log(elementRegistry._elements);
-
             $.each(elementRegistry._elements, function () {
                 var bo = this.element.businessObject;
                 if (bo.$type == "bpmn:Lane" && bo.name == 'Student') {
-
-                    console.log(bo);
 
                     var i = 0;
                     var found;
@@ -59,8 +55,6 @@ $(document).ready(function () {
                     }
                 }
             });
-
-
         });
     }
     
