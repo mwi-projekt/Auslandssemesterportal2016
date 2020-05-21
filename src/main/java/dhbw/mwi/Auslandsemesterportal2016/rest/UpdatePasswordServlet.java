@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 @WebServlet(name = "UpdatePasswordServlet", urlPatterns = { "/updatePassword" })
 public class UpdatePasswordServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.setResponseHeaders(request,response);
+
 		// NO AUTHENTIFICATION NEEDED
 		PrintWriter out = response.getWriter();
 		String uuid = request.getParameter("uuid");

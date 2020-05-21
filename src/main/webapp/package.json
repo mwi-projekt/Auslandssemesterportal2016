@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "parcel": "parcel *.html",
     "build": "tsc && parcel build *.html",
     "clean:dist": "rimraf dist",
     "clean:full": "rimraf dist && rimraf .cache && rimraf node_modules",
@@ -52,6 +53,7 @@
     "jquery": "^3.4.1",
     "jquery-form-validator": "^2.3.79",
     "jquery-ui-dist": "^1.12.1",
+    "jquery-validation": "^1.19.1",
     "jspdf": "^1.5.3",
     "sweetalert2": "^9.6.1"
   }

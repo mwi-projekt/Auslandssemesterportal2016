@@ -18,6 +18,7 @@ public class AuslandsAngebote extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String sql = "SELECT studiengang FROM cms_auslandsAngebote WHERE ID > 0";
 		ResultSet rs = SQL_queries.executeStatement(sql);
+		Util.setResponseHeaders(request,response);
 		Util.writeJson(response, rs);
 	}
 

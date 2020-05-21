@@ -7,17 +7,21 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import dhbw.mwi.Auslandsemesterportal2016.Config;
 
 public class Util {
 
@@ -72,6 +76,13 @@ public class Util {
     public static Message getEmailMessage(String emailTo, String subject) throws AddressException, MessagingException
     {
     	return getEmailMessage(emailTo, "noreply@dhbw-karlsruhe.de",  subject);
+    }
+
+    public static void setResponseHeaders(HttpServletRequest request, HttpServletResponse response){
+        String origin = request.getHeader("Origin");
+        response.setHeader("Access-Control-Allow-Origin", Config.AllowedOrigins.contains(origin) ? origin : "");
+        response.setHeader("Access-Control-Allow-Credentials","true");
+        response.setHeader("Vary", "Origin");
     }
 
     public static void writeJson(HttpServletResponse response, JsonObject json) {

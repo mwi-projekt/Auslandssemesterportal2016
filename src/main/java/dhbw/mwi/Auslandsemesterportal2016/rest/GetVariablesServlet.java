@@ -39,8 +39,8 @@ public class GetVariablesServlet extends HttpServlet {
 					json.addProperty(keys[i], obj.toString());
 				}
 			}
+			Util.setResponseHeaders(request,response);
 			Util.writeJson(response, json);
-
 		}
 	}
 }

@@ -46,6 +46,7 @@ public class ListFilesServlet extends HttpServlet {
 			}
 
 			json.add("items", arr);
+			Util.setResponseHeaders(request,response);
 			Util.writeJson(response, json);
 		}
 	}

@@ -25,6 +25,7 @@ public class GetUserServlet extends HttpServlet {
 			String sql = "SELECT nachname, vorname, email, tel, mobil, studiengang, kurs, matrikelnummer, standort FROM user WHERE rolle ='"
 					+ request.getParameter("rolle") + "'";
 			ResultSet rs = SQL_queries.executeStatement(sql);
+			Util.setResponseHeaders(request,response);
 			Util.writeJson(response, rs);
 		}
 	}
