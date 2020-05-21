@@ -4,6 +4,7 @@ import _,{baseUrl} from "./config";
 import Swal from "sweetalert2";
 import Viewer from "bpmn-js";
 import "jquery-ui-dist/jquery-ui";
+import "datatables.net/js/jquery.dataTables";
 
 $.ajaxSetup({
     xhrFields: { withCredentials: true },

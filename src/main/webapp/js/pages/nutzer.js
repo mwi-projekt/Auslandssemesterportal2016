@@ -1,10 +1,12 @@
 import $ from "jquery";
+window.$ = window.jQuery = $;
 import _,{baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
 import "jquery-ui-dist";
-import "datatables.net-bs4";
+import "datatables.net/js/jquery.dataTables";
+//import "datatables.net-bs4";
 import "cookieconsent";
 
 $(document).ready(function () {
