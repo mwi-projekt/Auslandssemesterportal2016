@@ -5,13 +5,12 @@ import "jspdf";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "dropzone";
-import "jquery-form-validator/form-validator/jquery.form-validator.min";
+import "jquery-form-validator";
 
 var instanceID;
 var uni;
 var idList = [];
 var typeList = [];
-
 
 $(document).ready(function () {
     var url = new URL(window.location.href);
@@ -287,12 +286,12 @@ function parse() {
                             $("#" + json[i]["data"]["id"]).dropzone(getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]));
                         }
                     }
-                    // init validation
+
                     $.validate({
-                        form: '#formular',
-                        lang: 'de',
-                        modules: 'html5'
-                    });
+                            form: '#formular',
+                            lang: 'de',
+                            modules: 'html5'
+                        });
                 },
                 error: function (result) {
                     alert('Ein Fehler ist aufgetreten: ' + result);
