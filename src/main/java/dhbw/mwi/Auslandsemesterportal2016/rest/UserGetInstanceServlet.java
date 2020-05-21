@@ -70,6 +70,7 @@ public class UserGetInstanceServlet extends HttpServlet {
 			}
 		}
 		json.add("data", data);
+		Util.setResponseHeaders(request,response);
 		Util.writeJson(response, json);
 	}
 }

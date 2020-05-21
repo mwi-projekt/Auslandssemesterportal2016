@@ -20,6 +20,8 @@ public class createAAAServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.setResponseHeaders(request,response);
+
 		PrintWriter out = response.getWriter();
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 

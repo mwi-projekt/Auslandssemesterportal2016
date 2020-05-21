@@ -20,7 +20,8 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+        Util.setResponseHeaders(request,response);
+		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
         if (rolle != 1 && rolle != 2) {
             response.sendError(401, "Rolle: " + rolle);
         } else {

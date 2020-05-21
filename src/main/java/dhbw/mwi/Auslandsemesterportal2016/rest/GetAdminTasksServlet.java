@@ -24,6 +24,8 @@ public class GetAdminTasksServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.setResponseHeaders(request,response);
+
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 1 && rolle != 2 && rolle != 4) {

@@ -33,6 +33,7 @@ public class LoginServlet extends HttpServlet {
 		json.addProperty("studiengang", result[1]);
 		json.addProperty("matrikelnummer", result[2]);
 		json.addProperty("rolle", result[3]);
+		Util.setResponseHeaders(request,response);
 		Util.writeJson(response, json);
 	}
 }

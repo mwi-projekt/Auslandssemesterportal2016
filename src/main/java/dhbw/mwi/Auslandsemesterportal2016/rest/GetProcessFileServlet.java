@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
@@ -21,6 +22,7 @@ public class GetProcessFileServlet extends HttpServlet {
 
 	@Override
 	protected void doHead(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.setResponseHeaders(request,response);
 		// checks if the file exists
 		String instanceID = request.getParameter("instance_id");
 		String key = request.getParameter("key");

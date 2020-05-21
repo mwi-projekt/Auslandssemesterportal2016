@@ -19,6 +19,7 @@ public class GetUnis extends HttpServlet {
 		String sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 				+ request.getParameter("studiengang") + "' ";
 		ResultSet rs = SQL_queries.executeStatement(sql);
+		Util.setResponseHeaders(request,response);
 		Util.writeJson(response, rs);
 	}
 
