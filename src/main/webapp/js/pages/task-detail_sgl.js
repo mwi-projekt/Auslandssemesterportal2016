@@ -1,4 +1,5 @@
 import $ from "jquery";
+window.$ = window.jQuery = $;
 import _,{baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
@@ -43,7 +44,7 @@ $(document).ready(function () {
             uni: uni
         },
         success: function (result) {
-            step_id = result.active;
+            var step_id = result.active;
             processDefinition = result.data;
             parse();
         }
@@ -72,8 +73,8 @@ function parse() {
             output = output +
                 '<div class="" id="accordion">';
             for (var k = 0; k < steps.length; k++) {
-                data = steps[k].data;
-                stepName = steps[k].activity;
+                var data = steps[k].data;
+                var stepName = steps[k].activity;
 
                 if (data.search("id") != -1) {
                     var innerOutput = "";
@@ -84,6 +85,7 @@ function parse() {
                         switch (type) {
                             case "form-select":
                                 var req = "";
+                                var dis = "";
                                 if (json[i]["data"]["required"] == true) {
                                     req = ' required="required"';
                                     dis = ' disabled ="disabled"';
@@ -133,7 +135,7 @@ function parse() {
                     }
                     
                     console.log(idList);
-
+                    var visibleStepName;
                     if (innerOutput != '') {
                         if (stepName === "datenEingeben") {
                             visibleStepName = "Persönliche Daten";
