@@ -1,10 +1,12 @@
 import $ from "jquery";
+window.$ = window.jQuery = $;
+var dt      = require( 'datatables.net' )(window, $);
+import "datatables.net-bs4";
 import _,{baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
-import "jquery-ui-dist";
-import "datatables.net-bs4";
+import "jquery-ui-dist/jquery-ui";
 
 $(document).ready(function () {
     getList();
@@ -28,7 +30,7 @@ function getList() {
                 var instances = result.data;
 
                 for (var i = 0; i < instances.length; i++) {
-                    singleInstance = instances[i];
+                    var singleInstance = instances[i];
                     if (singleInstance.status === 'validateSGL') {
                     	output = output +
                             "<tr><td>" +
