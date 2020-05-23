@@ -1,15 +1,9 @@
-import $ from "jquery";
-import _,{baseUrl} from "./config.js";
+import {$,baseUrl} from "./config";
 import Swal from "sweetalert2";
 import "jquery-ui-dist/jquery-ui";
 window.$ = window.jquery = $;
 var dt = require('datatables.net')(window, $);
 import "datatables.net-bs4";
-
-$.ajaxSetup({
-    xhrFields: { withCredentials: true },
-    crossDomain: true,
-});
 
 $(document).ready(function () {
     // logout
@@ -79,10 +73,6 @@ $(document).on('submit', '#regForm', function (e) {
                     mobil: mobil,
                     standort: standort,
                 },
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
                 success: function (result) {
                     if (result == "mailError") {
                         Swal.fire({
@@ -137,10 +127,6 @@ $(document).on('submit', '#loginForm', function (e) {
             email: email,
             pw: pw,
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (data) {
             if (data.resultCode == 2) {
                 Swal.fire({
@@ -225,10 +211,6 @@ function logout() {
     $.ajax({
         type: "GET",
         url: baseUrl + "/logout",
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         complete: function () {
             sessionStorage.clear();
             document.location.href = '/';

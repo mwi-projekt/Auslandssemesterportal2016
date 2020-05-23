@@ -1,9 +1,8 @@
-import $ from "jquery";
+import {$,baseUrl} from "../config";
+import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import BpmnNavigatedViewer from "bpmn-js/dist/bpmn-navigated-viewer.production.min";
 import "jquery-ui-dist/jquery-ui";
-import {urlParams} from "../app";
-import _,{baseUrl} from "../config.js";
 
 $(document).ready(function () {
     var dia = urlParams.get('dia').trim();

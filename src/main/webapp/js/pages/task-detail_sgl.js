@@ -1,8 +1,7 @@
-import $ from "jquery";
+import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
-import _,{baseUrl} from "../config.js";
 
 var instanceID;
 var url;
@@ -48,10 +47,6 @@ $(document).ready(function () {
             instance_id: instanceID,
             uni: uni
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             var step_id = result.active;
             processDefinition = result.data;
@@ -76,10 +71,6 @@ function parse() {
             instance_id: instanceID,
             definition: processDefinition
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             var steps = result.data;
             output = output +
@@ -218,10 +209,6 @@ function getAccordionFile(file) {
             instance_id: instanceID,
             key: file["data"]["id"]
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             $('#downloadsBody').append('<a href="' + baseUrl + '/getProcessFile?instance_id=' + instanceID + '&key=' +
                 file["data"]["id"] + '" target="blank">' + file["data"]["filename"] + '</a><br />');
@@ -243,10 +230,6 @@ function getData() {
             instance_id: instanceID,
             key: keyString
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             $.each(result, function (key, value) {
                 $('#' + key).val(value);
@@ -312,10 +295,6 @@ function saveChanges() {
                     value: valString,
                     type: typeString
                 },
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
                 success: function () {
                     Swal.fire({
                         title: "Bewerbung eingereicht",
@@ -375,10 +354,6 @@ function validateBew() {
                 data: {
                     instance_id: instanceID
                 },
-				xhrFields: {
-					withCredentials: true
-				},
-				crossDomain: true,
                 success: function (result) {
                     $.ajax({
                         type: "POST",
@@ -430,10 +405,6 @@ function change(obj) {
                 instance_id: instanceID,
                 validate: selected
             },
-            xhrFields: {
-                withCredentials: true
-            },
-            crossDomain: true,
             success: function (result) {
                 $('#reason').text(result);
                 $('#validateBtn').prop('disabled', false);

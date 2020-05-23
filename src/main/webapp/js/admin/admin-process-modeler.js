@@ -1,13 +1,10 @@
-import $ from "jquery";
+import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "jquery-ui-dist";
 import "ckeditor4/ckeditor";
 import "bootstrap-switch";
 import {urlParams} from "../app";
-import _,{baseUrl} from "../config.js";
 import "../jquery.dynamicdom";
-import "jquery";
-import "../jquery.dynamicdom.js";
 import selectForm from "../../modals/select-form.html";
 import textForm from "../../modals/text-form.html";
 import checkboxForm from "../../modals/checkbox-form.html";

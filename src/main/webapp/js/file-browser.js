@@ -1,5 +1,5 @@
-import $ from "jquery";
-import _,{baseUrl} from "./config.js";
+import {$,baseUrl} from "./config";
+import "ckeditor4";
 
 $(function(){
 	var filemanager = $('.filemanager'),

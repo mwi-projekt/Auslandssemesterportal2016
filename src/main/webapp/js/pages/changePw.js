@@ -1,10 +1,9 @@
-import $ from "jquery";
+import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
 import "datatables.net-bs4";
 import "cookieconsent";
-import _,{baseUrl} from "../config.js";
 
 $(document).ready(function() {
 	url = new URL(window.location.href);
@@ -25,10 +24,6 @@ function setpw() {
 			uuid: uuid_var,
 			password: pw_var
 		},
-		xhrFields: {
-			withCredentials: true
-		},
-		crossDomain: true,
 		success : function(result) {
 			if (result == '0'){
 				Swal.fire({

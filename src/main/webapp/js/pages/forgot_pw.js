@@ -1,10 +1,9 @@
-import $ from "jquery";
+import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
 import "datatables.net-bs4";
 import "cookieconsent";
-import _,{baseUrl} from "../config.js";
 
 $(document).ready(function() {
 	$(document).on('click', '#resetPassword', function() {
@@ -20,10 +19,6 @@ function resetpw() {
 		data : {
 			email: mail
 		},
-		xhrFields: {
-			withCredentials: true
-		},
-		crossDomain: true,
 		success : function(result) {
 			Swal.fire({
 				title : "Kennwort zurückgesetzt",

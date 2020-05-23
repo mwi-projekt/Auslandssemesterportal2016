@@ -1,9 +1,8 @@
-import $ from "jquery";
+import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
 import "dropzone";
-import _,{baseUrl} from "../config.js";
 
 $(document).ready(function () {
     loadAuslandsangebote();
@@ -37,10 +36,6 @@ $(document).ready(function () {
             data: {
                 studiengang: sessionStorage['studiengang'],
             },
-            xhrFields: {
-                withCredentials: true
-            },
-            crossDomain: true,
             success: function (result) {
                 // schon beworbene Unis filtern
                 var splitUni = [];
@@ -99,10 +94,6 @@ $(document).ready(function () {
                                     zeitraum: $('#selectZeit').val(),
                                     prio: $('#selectPrio').val(),
                                 },
-                                xhrFields: {
-                                    withCredentials: true
-                                },
-                                crossDomain: true,
                                 success: function (result) {
                                     location.href = 'bewerben.html?instance_id=' + result.instanceId + '&uni=' + result.uni + '&zeitraum=' + result.zeitraum;
                                 }
@@ -122,10 +113,6 @@ function loadAuslandsangebote() {
     $.ajax({
         type: "GET",
         url: baseUrl + "/auslandsAngebote",
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             for (var i = 0; i < result.data.length; i++) {
                 angeboteInhalt = angeboteInhalt + '<option>' + result.data[i].studiengang + '</option>';
@@ -149,10 +136,6 @@ function loadAuslandsangeboteInhalt() {
     $.ajax({
         type: "GET",
         url: baseUrl + "/auslandsAngebotsInhalte",
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (data) {
             var result = data.data;
             var htmlText = '';
@@ -251,10 +234,6 @@ function initBewerben() {
         data: {
             matnr: sessionStorage['matrikelnr']
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             var tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Priorität</th><th colspan="3">Aktionen</th></tr></thead>';
             if (result.data.length == 0) {
@@ -334,8 +313,7 @@ function initDeleteProcessButtons() {
         var id = $(this).attr("rid");
         Swal.fire({
             title: "Bist du sicher?",
-
-           text: "Der Prozess kann nicht wiederhergestellt werden!",
+           	text: "Der Prozess kann nicht wiederhergestellt werden!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -347,16 +325,14 @@ function initDeleteProcessButtons() {
             $.ajax({
                 type: "GET",
                 url: baseUrl + "/process/delete",
-
-
-               data: {
+               	data: {
                     matrikelnummer: matrikelnummer,
                     uni: uni
                 },
-                xhrFields: {
-                    withCredentials: true
+                success: function (data) {
+                    $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                    Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
                 },
-                crossDomain: true
             }).done(function (data) {
                 $('#tableBewProzess tr[data-rid=' + id + ']').remove();
                 Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
