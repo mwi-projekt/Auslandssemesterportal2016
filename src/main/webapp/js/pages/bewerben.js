@@ -3,20 +3,26 @@ import "jspdf";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "dropzone";
-var validate = require('jquery-validation');
+require("jquery-validation")($);
 
 var instanceID;
 var uni;
 var idList = [];
 var typeList = [];
+var json;
 
 $(document).ready(function () {
     var url = new URL(window.location.href);
     instanceID = url.searchParams.get("instance_id");
     uni = url.searchParams.get("uni");
-    
+
+    createEventListeners();
     parse();
 });
+
+function createEventListeners(){
+    document.getElementById("saveData").addEventListener("click", saveData);
+}
 
 function manipulateDOM() {
 	
@@ -214,7 +220,7 @@ function parse() {
                 },
                 success: function (result) {
                     // generate html output
-                    let json = JSON.parse(decodeURI(result));
+                    json = JSON.parse(decodeURI(result));
                     for (var i = 0; i < json.length; i++) {
                         var type = json[i]["type"];
                         switch (type) {
@@ -230,9 +236,9 @@ function parse() {
                             case "form-select":
                                 var req = "";
                                 if (json[i]["data"]["required"] == true) {
-                                    req = ' required="required"';
+                                    req = ' required';
                                 }
-                                output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + '</label><div class="col-sm-10"><select class="form-control" id="' + json[i]["data"]["id"] + '"' + req + '>';
+                                output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + '</label><div class="col-sm-10"><select class="form-control" id="' + json[i]["data"]["id"] + '"' + 'name="' + json[i]["data"]["id"] + '"' + req + '>';
                                 for (var j = 0; j < json[i]["data"]["values"].length; j++) {
                                     output = output + '<option>' + json[i]["data"]["values"][j] + '</option>';
                                 }
@@ -243,14 +249,14 @@ function parse() {
                             case "form-text":
                                 var req = "";
                                 if (json[i]["data"]["required"] == true) {
-                                    req = ' required="required"';
+                                    req = ' required';
                                 }
                                 output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + ' </label><div class="col-sm-10"><input class="form-control" type="' + json[i]["data"]["type"] + '" ';
 
                                 if (json[i]["data"]["numchars"]) {
                                     output += 'maxlength="' + json[i]["data"]["numchars"] + '" ';
                                 }
-                                output += 'id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
+                                output += 'id="' + json[i]["data"]["id"] + '"' + 'name="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
 
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push(json[i]["data"]["type"]);
@@ -258,9 +264,9 @@ function parse() {
                             case "form-checkbox":
                             	var req = "";
                                 if (json[i]["data"]["required"] == true) {
-                                    req = ' required="required"';
+                                    req = ' required';
                                 }                        	
-                            	output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' + json[i]["data"]["id"] + '"' + req + '>' + json[i]["data"]["label"] + ' </label></div></div></div>';
+                            	output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' + json[i]["data"]["id"] + '"'+ ' name="' + json[i]["data"]["id"] + '"' + req + '>' + json[i]["data"]["label"] + ' </label></div></div></div>';
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push("boolean");
                                 break;
@@ -284,12 +290,9 @@ function parse() {
                             $("#" + json[i]["data"]["id"]).dropzone(getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]));
                         }
                     }
-
-                    $.validate({
-                            form: '#formular',
-                            lang: 'de',
-                            modules: 'html5'
-                        });
+                    $("#formular").validate({
+                        debug: true
+                    });
                 },
                 error: function (result) {
                     alert('Ein Fehler ist aufgetreten: ' + result);
@@ -306,7 +309,7 @@ function parse() {
 function saveData() {
     var form = $('#formular');
 
-    if (form && !form.isValid()) {
+    if (form && !form.valid()) {
         Swal.fire('Bitte füllen sie alle Felder korrekt aus.');
         return;
     }
