@@ -367,7 +367,9 @@ function validateBew() {
 
 }
 
-function change(obj) {
+function initiate(){
+
+document.getElementById("validierungErfolgreich").onchange = function(obj) {
     var selectBox = obj;
     var selected = selectBox.options[selectBox.selectedIndex].value;
 
@@ -396,4 +398,5 @@ function change(obj) {
             }
         });
     }
+}
 }
