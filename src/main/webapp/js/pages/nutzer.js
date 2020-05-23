@@ -32,6 +32,10 @@ $(document).ready(function () {
             data: {
                 rolle: rolle,
             },
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success: function (result) {
                 var auslesen = result.data;
                 if (rolle === 2) {
@@ -145,6 +149,10 @@ $(document).ready(function () {
                                     data: {
                                         matrikelnummer: self.data('matrikel')
                                     },
+                                    xhrFields: {
+                                        withCredentials: true
+                                    },
+                                    crossDomain: true,
                                     success: function (result) {
                                         Swal.close();
                                         $('#userStudShow').click();
@@ -183,6 +191,10 @@ $(document).ready(function () {
                                     data: {
                                     	mail: self.data('mail')
                                     },
+                                    xhrFields: {
+                                        withCredentials: true
+                                    },
+                                    crossDomain: true,
                                     success: function (result) {
                                         Swal.close();
                                         $('#userSGLShow').click();
@@ -221,6 +233,10 @@ $(document).ready(function () {
                                     data: {
                                         mail: self.data('mail')
                                     },
+                                    xhrFields: {
+                                        withCredentials: true
+                                    },
+                                    crossDomain: true,
                                     success: function (result) {
                                         Swal.close();
                                         $('#userMaShow').click();
@@ -320,6 +336,10 @@ $(document).ready(function () {
                 phone: phone,
                 mobil: mobil
             },
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success: function (data) {
                 Swal.close();
                 if (data == "mailError") {
@@ -385,6 +405,10 @@ $(document).ready(function () {
                 phone: phone,
                 mobil: mobil
             },
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success: function (data) {
                 Swal.close();
                 if (data == "mailError") {
@@ -461,6 +485,10 @@ $(document).ready(function () {
 					mobil: dataNewMobil,
 					role: "2"
 				},
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
 				success: function (result) {
 					Swal.close();
 					Swal.fire('Erfolgreich geändert.', 'Die Mitarbeiterdaten wurden aktualisiert.', 'success');
@@ -489,6 +517,10 @@ $(document).ready(function () {
 					matnr: dataNewMatnr,
 					role: "3"
 				},
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
 				success: function (result) {
 					Swal.close();
 					Swal.fire('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');

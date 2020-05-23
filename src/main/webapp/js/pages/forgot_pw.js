@@ -20,6 +20,10 @@ function resetpw() {
 		data : {
 			email: mail
 		},
+		xhrFields: {
+			withCredentials: true
+		},
+		crossDomain: true,
 		success : function(result) {
 			Swal.fire({
 				title : "Kennwort zurückgesetzt",
