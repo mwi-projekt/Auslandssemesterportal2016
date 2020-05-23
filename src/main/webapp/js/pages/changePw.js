@@ -25,6 +25,10 @@ function setpw() {
 			uuid: uuid_var,
 			password: pw_var
 		},
+		xhrFields: {
+			withCredentials: true
+		},
+		crossDomain: true,
 		success : function(result) {
 			if (result == '0'){
 				Swal.fire({

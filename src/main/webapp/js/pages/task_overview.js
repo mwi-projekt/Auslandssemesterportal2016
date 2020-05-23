@@ -19,6 +19,10 @@ function getList() {
         data: {
             //'definition' : 'studentBewerben'
         },
+        xhrFields: {
+            withCredentials: true
+        },
+        crossDomain: true,
         success: function (result) {
             var output = ""; 		//zu validierende Bewerbungen
             var completed = "";		//erfolgreich angenommene Bewerbungen
@@ -152,7 +156,11 @@ function deleteProcessButtons(uni, matrikelnummer) {
                 data: {
                     matrikelnummer: matrikelnummer,
                     uni: uni
-                }
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true
             }).done(function (data) {
                 Swal.fire({
                 	title: 'Gelöscht!',
@@ -188,7 +196,11 @@ function initDeleteProcessButtonsTaskOverview() {
                 data: {
                     matrikelnummer: matrikelnummer,
                     uni: uni
-                }
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true
             }).done(function (data) {
                 $('#tableBewProzess tr[data-rid=' + id + ']').remove();
                 Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
@@ -227,6 +239,10 @@ function deleteTask (taskID) {
                      data: {
                          taskId: self.data(taskID)
                      },
+                     xhrFields: {
+                         withCredentials: true
+                     },
+                     crossDomain: true,
                      success: function (result) {
                          Swal.close();
                          $('#userStudShow').click();
