@@ -1,5 +1,4 @@
-import $ from "jquery";
-import _,{baseUrl} from "../config";
+import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
@@ -20,10 +19,6 @@ function resetpw() {
 		data : {
 			email: mail
 		},
-		xhrFields: {
-			withCredentials: true
-		},
-		crossDomain: true,
 		success : function(result) {
 			Swal.fire({
 				title : "Kennwort zurückgesetzt",

@@ -1,8 +1,6 @@
-import $ from "jquery";
-window.$ = window.jQuery = $;
+import {$,baseUrl} from "../config";
 var dt      = require( 'datatables.net' )(window, $);
 import "datatables.net-bs4";
-import _,{baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
@@ -19,10 +17,6 @@ function getList() {
         data: {
             //'definition' : 'studentBewerben'
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             var output = ""; 		//zu validierende Bewerbungen
             var completed = "";		//angenommene Bewerbungen
@@ -149,30 +143,28 @@ function deleteProcessButtons(uni, matrikelnummer) {
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"
         }).then(function () {
-            $.ajax({
-                type: "GET",
-                url: baseUrl + "/process/delete",
-                data: {
-                    matrikelnummer: matrikelnummer,
-                    uni: uni
-                },
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true
-            }).done(function (data) {
+        $.ajax({
+            type: "GET",
+            url: baseUrl + "/process/delete",
+            data: {
+                matrikelnummer: matrikelnummer,
+                uni: uni
+            },
+            success: function (data) {
                 Swal.fire({
-                	title: 'Gelöscht!',
-                	text: 'Der Prozess wurde erfolgreich gelöscht.',
+                    title: 'Gelöscht!',
+                    text: 'Der Prozess wurde erfolgreich gelöscht.',
                     icon: 'success'
-                }).then(function() {
-                	location.reload();
+                }).then(function () {
+                    location.reload();
                 });
-            }).error(function (error) {
+            },
+            error: function (error) {
                 console.error(error);
                 Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-            })
+            }
         });
+    });
 }
 function initDeleteProcessButtonsTaskOverview() {
     $('.btn-delete').on('click', function () {
@@ -196,17 +188,15 @@ function initDeleteProcessButtonsTaskOverview() {
                     matrikelnummer: matrikelnummer,
                     uni: uni
                 },
-                xhrFields: {
-                    withCredentials: true
+                success: function (data) {
+                    $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                    Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
                 },
-                crossDomain: true
-            }).done(function (data) {
-                $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
-            }).error(function (error) {
-                console.error(error);
-                Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-            })
+                error: function (error) {
+                    console.error(error);
+                    Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+                }
+            });
         });
     });
 }
@@ -238,10 +228,6 @@ function deleteTask (taskID) {
                      data: {
                          taskId: self.data(taskID)
                      },
-                     xhrFields: {
-                         withCredentials: true
-                     },
-                     crossDomain: true,
                      success: function (result) {
                          Swal.close();
                          $('#userStudShow').click();

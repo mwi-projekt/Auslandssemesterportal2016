@@ -1,10 +1,10 @@
-import $ from "jquery";
+import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
 import "datatables.net-bs4";
 import "cookieconsent";
-import _,{baseUrl} from "../config";
+
 
 $(document).ready(function () {
 	$('#adminBereich').hide();

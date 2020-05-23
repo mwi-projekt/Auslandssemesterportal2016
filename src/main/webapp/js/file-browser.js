@@ -1,6 +1,4 @@
-import $ from "jquery";
-window.$ = window.jQuery = $;
-import _,{baseUrl} from "./config";
+import {$,baseUrl} from "./config";
 import "ckeditor4";
 
 $(function(){

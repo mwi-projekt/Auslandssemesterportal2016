@@ -1,11 +1,9 @@
-import $ from "jquery";
-window.$ = window.jQuery = $;
-import _,{baseUrl} from "../config";
+import {$,baseUrl} from "../config";
 import "jspdf";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "dropzone";
-var validate = require('jquery-form-validator');
+var validate = require('jquery-validation');
 
 var instanceID;
 var uni;
@@ -73,10 +71,6 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
             instance_id: instanceID,
             key: keyFix
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function(result){
         	console.log("neueVersionOnline");
         	console.log("result");
@@ -204,10 +198,6 @@ function parse() {
             instance_id: instanceID,
             uni: uni
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             var output = "";
             var step_id = result.active;
@@ -222,10 +212,6 @@ function parse() {
                     model: model,
                     step: step_id
                 },
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
                 success: function (result) {
                     // generate html output
                     let json = JSON.parse(decodeURI(result));
@@ -368,10 +354,6 @@ function saveData() {
             value: valString,
             type: typeString
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             location.reload();
         },
@@ -395,10 +377,6 @@ function getData() {
             instance_id: instanceID,
             key: keyString
         },
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             $.each(result, function(key, value) {
                 $('#' + key).val(value);

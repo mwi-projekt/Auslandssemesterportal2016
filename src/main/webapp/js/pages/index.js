@@ -1,5 +1,4 @@
-import $ from "jquery";
-import _,{baseUrl} from "../config";
+import {$,baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import "bootstrap";
@@ -69,10 +68,6 @@ $(document).ready(function () {
         $.ajax({
             type: "GET",
             url: baseUrl + "/confirm?code=" + link,
-            xhrFields: {
-                withCredentials: true
-            },
-            crossDomain: true,
             success: function (result) {
             	Swal.fire({
                     title: "Nutzeraccount bestätigt",
@@ -107,10 +102,6 @@ function loadPortalInfo() {
     $.ajax({
         type: "GET",
         url: baseUrl + "/portalInfo",
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (data) {
             var result = data.data[0];
             if (result.titel) {
@@ -143,10 +134,6 @@ function loadAuslandsangebote() {
     $.ajax({
         type: "GET",
         url: baseUrl + "/auslandsAngebote",
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (result) {
             for (var i = 0; i < result.data.length; i++) {
                 angeboteInhalt = angeboteInhalt + '<option>' + result.data[i].studiengang + '</option>';
@@ -170,10 +157,6 @@ function loadAuslandsangeboteInhalt() {
     $.ajax({
         type: "GET",
         url: baseUrl + "/auslandsAngebotsInhalte",
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (data) {
             var result = data.data;
             var htmlText = '';
@@ -279,10 +262,6 @@ function loadInfoMaterial() {
     $.ajax({
         type: "GET",
         url: baseUrl + "/infoMaterial",
-        xhrFields: {
-            withCredentials: true
-        },
-        crossDomain: true,
         success: function (data) {
             var result = data.data;
             $('#infoMaterialTitel').text(result.titel);

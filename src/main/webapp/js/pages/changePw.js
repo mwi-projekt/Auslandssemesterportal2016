@@ -1,5 +1,4 @@
-import $ from "jquery";
-import _,{baseUrl} from "../config";
+import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
@@ -25,10 +24,6 @@ function setpw() {
 			uuid: uuid_var,
 			password: pw_var
 		},
-		xhrFields: {
-			withCredentials: true
-		},
-		crossDomain: true,
 		success : function(result) {
 			if (result == '0'){
 				Swal.fire({

@@ -1,6 +1,4 @@
-import $ from "jquery";
-window.$ = window.jQuery = $;
-import _,{baseUrl} from "../config";
+import {$,baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import BpmnNavigatedViewer from "bpmn-js/dist/bpmn-navigated-viewer.production.min";

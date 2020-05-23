@@ -1,10 +1,9 @@
-import $ from "jquery";
+import {$} from "../config";
 import "bootstrap";
 import "jquery-form-validator";
 import "jquery-ui-dist";
 import "datatables.net-bs4";
 import "cookieconsent";
-import _,{baseUrl} from "../config";
 
 var expandFAQ = function() {
 	$('.show').css('cursor', 'pointer');
