@@ -1,5 +1,5 @@
 $(function(){
-	var baseUrl = "http://localhost";
+	var baseUrl = "http://localhost:82";
 
 	var filemanager = $('.filemanager'),
 		fileList = filemanager.find('.data');
