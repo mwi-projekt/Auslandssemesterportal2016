@@ -16,9 +16,9 @@ public class AuslandsAngebotsInhalte extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.setResponseHeaders(request,response);
 		String sql = "SELECT studiengang, uniTitel, allgemeineInfos, faq, erfahrungsbericht, maps FROM cms_auslandsAngeboteInhalt";
 		ResultSet rs = SQL_queries.executeStatement(sql);
-		Util.setResponseHeaders(request,response);
 		Util.writeJson(response, rs);
 	}
 

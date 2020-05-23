@@ -24,6 +24,8 @@ public class UserGetInstanceServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.setResponseHeaders(request,response);
+
 		int matnr = Integer.parseInt(request.getParameter("matnr"));
 
 		ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
@@ -68,7 +70,6 @@ public class UserGetInstanceServlet extends HttpServlet {
 			}
 		}
 		json.add("data", data);
-		Util.setResponseHeaders(request,response);
 		Util.writeJson(response, json);
 	}
 }

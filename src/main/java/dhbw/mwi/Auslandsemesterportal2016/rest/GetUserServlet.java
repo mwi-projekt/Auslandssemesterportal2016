@@ -17,6 +17,8 @@ public class GetUserServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.setResponseHeaders(request,response);
+
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 1 && rolle != 2) {
@@ -25,7 +27,6 @@ public class GetUserServlet extends HttpServlet {
 			String sql = "SELECT nachname, vorname, email, tel, mobil, studiengang, kurs, matrikelnummer, standort FROM user WHERE rolle ='"
 					+ request.getParameter("rolle") + "'";
 			ResultSet rs = SQL_queries.executeStatement(sql);
-			Util.setResponseHeaders(request,response);
 			Util.writeJson(response, rs);
 		}
 	}

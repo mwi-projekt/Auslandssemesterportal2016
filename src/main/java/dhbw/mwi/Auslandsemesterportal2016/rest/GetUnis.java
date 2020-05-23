@@ -16,10 +16,10 @@ public class GetUnis extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.setResponseHeaders(request,response);
 		String sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
 				+ request.getParameter("studiengang") + "' ";
 		ResultSet rs = SQL_queries.executeStatement(sql);
-		Util.setResponseHeaders(request,response);
 		Util.writeJson(response, rs);
 	}
 

@@ -18,6 +18,8 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.setResponseHeaders(request,response);
+
 		String salt = "";
 		String mail = "";
 
@@ -33,7 +35,6 @@ public class LoginServlet extends HttpServlet {
 		json.addProperty("studiengang", result[1]);
 		json.addProperty("matrikelnummer", result[2]);
 		json.addProperty("rolle", result[3]);
-		Util.setResponseHeaders(request,response);
 		Util.writeJson(response, json);
 	}
 }

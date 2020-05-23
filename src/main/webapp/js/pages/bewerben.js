@@ -5,7 +5,7 @@ import "jspdf";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "dropzone";
-import "jquery-form-validator";
+var validate = require('jquery-form-validator');
 
 var instanceID;
 var uni;
