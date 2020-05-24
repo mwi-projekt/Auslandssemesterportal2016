@@ -29,14 +29,28 @@
             "link": null,
             "theme": "light-top"
         };
+
     </script>
     <script type="text/javascript" src="../../node_modules/cookieconsent/build/cookieconsent.min.js"></script>
     <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="../../node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../../js/admin/student_tabelle.js"></script>
+
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
+    <script>
+  $(function(){
+    var includes = $('[data-include]');
+    jQuery.each(includes, function(){
+      var file = 'partials/' + $(this).data('include') + '.html';
+      $(this).load(file);
+    });
+  });
+    </script>
 </head>
 <body>
+
+<div data-include="header"></div>
 
 <div style="margin: 200px">
     <div style="width: 100%; margin-bottom: 50px; height: 50px">
@@ -123,6 +137,8 @@
         </div>
     </div>
 </div>
+
+<div data-include="footer"></div>
 
 </body>
 </html>

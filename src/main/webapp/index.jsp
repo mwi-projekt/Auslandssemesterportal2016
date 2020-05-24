@@ -5,7 +5,7 @@
 <script src="js/pages/index.js"></script>
 
 <!-- Mittlerer Teil --------------------------------------------------------------------------->
-<div class="container" id="adminBereich">
+<div class="container" id="adminBereich" style="text-align: center">
     <%@ include file="HTML/admin/landing-page.html" %>
 </div>
 
