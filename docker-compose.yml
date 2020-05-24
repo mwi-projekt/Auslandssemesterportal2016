@@ -55,7 +55,7 @@ services:
     build: ./docker/web
     restart: always
     ports:
-      - '80:80'
+      - '82:80'
     networks:
       - mwi-network-new
     volumes:
