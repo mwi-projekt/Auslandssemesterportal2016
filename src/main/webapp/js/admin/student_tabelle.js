@@ -12,6 +12,29 @@ $(document).ready(function () {
 
     // Erstelle die DataTable
     myTable = $('#example').DataTable({
+        dom: '<"top"f> rt <"bottom"lp>',
+        language: {
+            processing:     "Bitte warten ...",
+            search:         "Suchen ",
+            lengthMenu:     "_MENU_ Einträge anzeigen",
+            info:           "_START_ bis _END_ von _TOTAL_ Einträgen",
+            infoEmpty:      "Keine Daten vorhanden",
+            infoFiltered:   "(gefiltert von _MAX_ Einträgen)",
+            infoPostFix:    "",
+            loadingRecords: "Wird geladen ...",
+            zeroRecords:    "Es sind keine Einträge vorhanden.",
+            emptyTable:     "Die Tabelle ist leer",
+            paginate: {
+                first:      "Erste",
+                previous:   "Zurück",
+                next:       "Nächste",
+                last:       "Letzte"
+            },
+            aria: {
+                sortAscending:  ": aktivieren, um Spalte aufsteigend zu sortieren",
+                sortDescending: ": aktivieren, um Spalte absteigend zu sortieren"
+            }
+        },
         ajax: '/getUser?rolle=3',
         columns: [
             {data: 'vorname'},
