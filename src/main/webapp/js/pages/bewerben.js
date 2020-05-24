@@ -1,5 +1,5 @@
 import {$,baseUrl} from "../config";
-import "jspdf";
+const jsPDF = require('jspdf');
 import Swal from "sweetalert2";
 import "bootstrap";
 import "dropzone";
