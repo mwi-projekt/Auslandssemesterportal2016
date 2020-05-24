@@ -28,7 +28,7 @@ services:
     ports:
       - '8087:80'
     networks:
-      - mwi-network
+      - mwi-network-new
     depends_on:
       - mwi_mysql
 
@@ -57,7 +57,7 @@ services:
     ports:
       - '80:80'
     networks:
-      - mwi-network
+      - mwi-network-new
     volumes:
       - ${VOLUME_UPLOAD}:/etc/nginx/html/files
     depends_on:
