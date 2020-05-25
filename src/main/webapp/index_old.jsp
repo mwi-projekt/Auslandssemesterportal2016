@@ -6,7 +6,20 @@
 
 <!-- Mittlerer Teil --------------------------------------------------------------------------->
 <div class="container" id="adminBereich">
-    <%@ include file="HTML/admin/landing-page.html" %>
+    <div class="col-md-12">
+        <div class="tile" id="verwaltungIndex">
+            <img src="images/homescreen.svg" class="tileImg"> <img src="images/Edit.png" class="smallImg">
+            <p>Startseite bearbeiten</p>
+        </div>
+        <div class="tile" id="verwaltungUser">
+            <img src="images/user.svg" class="tileImg"> <img src="images/Edit.png" class="smallImg">
+            <p>Benutzer verwalten</p>
+        </div>
+        <div class="tile" id="verwaltungPortal">
+            <img src="images/edit-process.svg" class="tileImg"> <img src="images/Edit.png" class="smallImg">
+            <p>Bewerbungsprozess bearbeiten</p>
+        </div>
+    </div>
 </div>
 
 <a href="#">
