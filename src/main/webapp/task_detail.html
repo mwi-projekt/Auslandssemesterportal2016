@@ -70,7 +70,7 @@
             </div>
            
             <div class="row">
-                <button id="backbutton" type="button" class="btn cms cmsBtn" onclick="location.href='task_overview.html'" style="margin-top:10px; margin-left:7px; margin-bottom: 10px">Zurück zur Übersicht</button>
+                <button id="backbutton" type="button" class="btn cms cmsBtn" style="margin-top:10px; margin-left:7px; margin-bottom: 10px">Zurück zur Übersicht</button>
             </div>
            
             <div id="taskDetails"></div>
@@ -78,7 +78,7 @@
                 <form>
                     <label id="platzhalterInfo" style="margin-left: 20px; margin-bottom: 10px;color:green; display:none;">Beachten Sie bitte den automatisch eingefügten Platzhalter in der E-Mail Vorlage!</label>
                     <br>
-                    <select style="margin-left: 20px" class="selectpicker" id="validierungErfolgreich" onchange="change(this)">
+                    <select style="margin-left: 20px" class="selectpicker" id="validierungErfolgreich">
                         <option value="">-- Auswählen --</option>
                         <option value="edit">Zur Bearbeitung</option>
                         <option value="true">Bestätigen</option>
@@ -89,7 +89,7 @@
 
                     <textarea class="form-control" rows="16" id="reason"></textarea>
                     <br>
-                    <button type="button" style="margin-left: 20px" class="btn btn-success" id="validateBtn" onClick="validateBew()">Absenden</button>
+                    <button type="button" style="margin-left: 20px" class="btn btn-success" id="validateBtn">Absenden</button>
                 </form>
             </div>
             <div id="">

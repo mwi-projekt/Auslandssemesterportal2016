@@ -60,13 +60,14 @@ $(document).ready(function () {
 });
 
 function manipulateDOM() {
-	
     $("[id='Sonstige Angaben']").hide();
-
 }
 
 function createEventListeners(){
     document.getElementById("saveChanges").addEventListener("click", saveChanges);
+    document.getElementById("validateBtn").addEventListener("click", validateBew);
+    document.getElementById("validierungErfolgreich").addEventListener("change", change(document.getElementById("validierungErfolgreich")));
+    document.getElementById("backbutton").addEventListener("click", () => location.href='task_overview.html');
 }
 
 function parse() {

@@ -12,6 +12,7 @@ var sendBew;
 var processDefinition;
 
 $(document).ready(function () {
+    createEventListeners();
     idList = [];
     typeList = [];
     url = new URL(window.location.href);
@@ -49,6 +50,13 @@ $(document).ready(function () {
     });
     
 });
+
+function createEventListeners(){
+    document.getElementById("saveChanges").addEventListener("click", saveChanges);
+    document.getElementById("validateBtn").addEventListener("click", validateBew);
+    document.getElementById("validierungErfolgreich").addEventListener("change", change(document.getElementById("validierungErfolgreich")));
+    document.getElementById("backbutton").addEventListener("click", () => location.href='task_overview_sgl.html');
+}
 
 function manipulateDOM() {
 	
@@ -130,8 +138,6 @@ function parse() {
                                 break;
                         }
                     }
-                    
-                    console.log(idList);
                     var visibleStepName;
                     if (innerOutput != '') {
                         if (stepName === "datenEingeben") {
@@ -367,9 +373,8 @@ function validateBew() {
 
 }
 
-function initiate(){
-
-document.getElementById("validierungErfolgreich").onchange = function(obj) {
+function change(obj) {
+    console.log("changed");
     var selectBox = obj;
     var selected = selectBox.options[selectBox.selectedIndex].value;
 
@@ -398,5 +403,4 @@ document.getElementById("validierungErfolgreich").onchange = function(obj) {
             }
         });
     }
-}
 }
