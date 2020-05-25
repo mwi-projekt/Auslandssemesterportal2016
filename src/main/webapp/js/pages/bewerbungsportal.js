@@ -260,26 +260,36 @@ function initDeleteProcessButtons() {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!",
+            cancelButtonText: "Abbrechen",
         }).then(function (result) {
-            //var id = $('.btn-delete').closest('tr').data('rid');
-            var matrikelnummer = sessionStorage['matrikelnr'];
+            if(result.value) {
+                //var id = $('.btn-delete').closest('tr').data('rid');
+                var matrikelnummer = sessionStorage['matrikelnr'];
 
-            $.ajax({
-                type: "GET",
-                url: baseUrl + "/process/delete",
-                data: {
-                    matrikelnummer: matrikelnummer,
-                    uni: uni
-                },
-                success: function (data) {
-                    $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                    Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
-                },
-                error: function (error) {
-                    console.error(error);
-                    Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-                }
-            });
+                $.ajax({
+                    type: "GET",
+                    url: baseUrl + "/process/delete",
+                    data: {
+                        matrikelnummer: matrikelnummer,
+                        uni: uni
+                    },
+                    success: function (data) {
+                        $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                        Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                    },
+                    error: function (error) {
+                        console.error(error);
+                        Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+                    }
+                });
+            }
+            else{
+                Swal.fire({
+                    title: "Abgebrochen",
+                    icon: "info",
+                    confirmButtonText: "Ok"
+                });
+            }
         });
     });
 }

@@ -130,10 +130,10 @@ $(document).ready(function () {
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "Löschen!"
+                            confirmButtonText: "Löschen!",
+                            cancelButtonText: "Abbrechen"
                         }).then(function(result) {
                             if (result.value) {
-                                alert("Du hast auf Löschen gedrückt");
                             	Swal.fire({
                                     title: 'Lösche User'
                                 });
@@ -153,6 +153,12 @@ $(document).ready(function () {
                                         Swal.close();
                                         Swal.fire('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
                                     }
+                                });
+                            } else{
+                                Swal.fire({
+                                    title: "Abgebrochen",
+                                    icon: "info",
+                                    confirmButtonText: "Ok"
                                 });
                             }
                         });

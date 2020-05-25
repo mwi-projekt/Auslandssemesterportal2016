@@ -1,6 +1,8 @@
 import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
+require("jquery-validation")($);
+require("jquery-validation/dist/localization/messages_de.min");
 
 var instanceID;
 var url;
@@ -66,7 +68,7 @@ function manipulateDOM() {
 function createEventListeners(){
     document.getElementById("saveChanges").addEventListener("click", saveChanges);
     document.getElementById("validateBtn").addEventListener("click", validateBew);
-    document.getElementById("validierungErfolgreich").addEventListener("change", change(document.getElementById("validierungErfolgreich")));
+    $("body").on("change","#validierungErfolgreich",{"param": document.getElementById("validierungErfolgreich")}, (event) => {change(event.data.param)});
     document.getElementById("backbutton").addEventListener("click", () => location.href='task_overview.html');
 }
 
@@ -97,14 +99,14 @@ function parse() {
                             case "form-select":
                                 var req = "";
                                 if (json[i]["data"]["required"] == true) {
-                                    req = ' required="required"';
-                                    dis = ' disabled ="disabled"';
+                                    req = ' required';
+                                    dis = ' disabled';
                                 }
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><label class="col-sm-2 control-label">' +
                                     json[i]["data"]["label"] +
                                     '</label><div class="col-sm-10"><select class="form-control" id="' +
-                                    json[i]["data"]["id"] + '"' + req + dis +
+                                    json[i]["data"]["id"] + '"' + req + dis + ' name="' + json[i]["data"]["id"] + '"' +
                                     '>';
                                 for (var j = 0; j < json[i]["data"]["values"].length; j++) {
                                     innerOutput = innerOutput + '<option>' +
@@ -118,7 +120,7 @@ function parse() {
                             case "form-text":
                                 var req = "";
                                 if (json[i]["data"]["required"] == true) {
-                                    req = ' required="required"';
+                                    req = ' required';
                                 }
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><label class="col-sm-2 control-label">' +
@@ -126,14 +128,14 @@ function parse() {
                                     ' </label><div class="col-sm-10"><input class="form-control" type="' +
                                     json[i]["data"]["type"] +
                                     '" id="' + json[i]["data"]["id"] +
-                                    '"' + req + '></div></div>';
+                                    '"' + req + ' name="' + json[i]["data"]["id"] + '"' +'></div></div>';
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push(json[i]["data"]["type"]);
                                 break;
                             case "form-checkbox":
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' +
-                                    json[i]["data"]["id"] +  '"disabled> ' + 
+                                    json[i]["data"]["id"] +  '" disabled' + ' name="' + json[i]["data"]["id"] + '"' + '> ' +
                                     json[i]["data"]["label"] +
                                     ' </label></div></div></div>';
                                 idList.push(json[i]["data"]["id"]);
@@ -143,8 +145,6 @@ function parse() {
                                 break;
                         }
                     }
-                    
-                    //console.log(idList);
 
                     if (innerOutput != '') {
                         if (stepName === "datenEingeben") {
@@ -200,7 +200,10 @@ function parse() {
             }
             getData();
             manipulateDOM();
-            
+
+            $("#taskDetails").validate({
+                debug: true
+            });
         },
         error: function (result) {
             alert('Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.');
@@ -265,6 +268,13 @@ function variableEnglishAndSemesteranschrift(key, value){
 }
 
 function saveChanges() {
+    var form = $('#taskDetails');
+
+    if (form && !form.valid()) {
+        Swal.fire('Bitte füllen sie alle Felder korrekt aus.');
+        return;
+    }
+
     var keyString = "";
     var valString = "";
     var typeString = "";
@@ -293,6 +303,7 @@ function saveChanges() {
             confirmButtonText: "Bewerbung absenden",
             cancelButtonText: "Abbrechen"
         }).then(function(result) {
+        if(result.value) {
             $.ajax({
                 type: "POST",
                 url: baseUrl + "/sendNewApplicationMail",
@@ -315,7 +326,7 @@ function saveChanges() {
                                 text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
                                 icon: "success",
                                 confirmButtonText: "Ok"
-                            }).then( function (result) {
+                            }).then(function (result) {
                                 location.href = 'bewerbungsportal.html';
                             });
                         },
@@ -328,10 +339,24 @@ function saveChanges() {
                     console.error(result);
                 }
             });
+        }else{
+            Swal.fire({
+                title: "Abgebrochen",
+                icon: "info",
+                confirmButtonText: "Ok"
+            }).then(() => location.href = 'bewerbungsportal.html');
+        }
         });
 }
 
 function validateBew() {
+    var form = $('#taskDetails');
+
+    if (form && !form.valid()) {
+        Swal.fire('Bitte füllen sie alle Felder korrekt aus.');
+        return;
+    }
+
     validateString = $('#validierungErfolgreich').val();
     grund = $('#reason').text();
     resultString = "";
@@ -366,30 +391,38 @@ function validateBew() {
         confirmButtonText: "Bewerbung " + resultString,
         cancelButtonText: "Abbrechen"
     }).then(function (result) {
-    	// hier mail einfügen -> neue Ajax
-        $.ajax({
-            type: "POST",
-            url: baseUrl + "/setVariable",
-            data: {
-                instance_id: instanceID,
-                key: 'validierungErfolgreich|mailText',
-                value: validateString + '|' + grund,
-                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
-            },
-            success: function (result) {
-                Swal.fire({
-                    title: "Bewerbung " + resultString,
-                    text: "Gespeichert",
-                    icon: "success",
-                    confirmButtonText: "Ok"
-                }).then(function (result) {
-                    location.href = 'task_overview.html';
-                });
-            },
-            error: function (result) {
-                alert('Ein Fehler ist aufgetreten');
-            }
-        });
+        if(result.value) {
+            // hier mail einfügen -> neue Ajax
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "/setVariable",
+                data: {
+                    instance_id: instanceID,
+                    key: 'validierungErfolgreich|mailText',
+                    value: validateString + '|' + grund,
+                    type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
+                },
+                success: function (result) {
+                    Swal.fire({
+                        title: "Bewerbung " + resultString,
+                        text: "Gespeichert",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    }).then(function (result) {
+                        location.href = 'task_overview.html';
+                    });
+                },
+                error: function (result) {
+                    alert('Ein Fehler ist aufgetreten');
+                }
+            });
+        }else{
+            Swal.fire({
+                title: "Abgebrochen",
+                icon: "info",
+                confirmButtonText: "Ok"
+            });
+        }
     });
 
 }

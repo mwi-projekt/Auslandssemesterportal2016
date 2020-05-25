@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="css/bewerbungsformular.css">
     <link rel="stylesheet" href="css/InfoBox.css">
     <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="node_modules/jquery-form-validator/form-validator/theme-default.min.css">
-
     <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>
@@ -64,9 +62,9 @@
                 <button id="backbutton" type="button" class="btn cms cmsBtn" style="margin-top:10px; margin-left:7px; margin-bottom: 10px">Zurück zur Übersicht</button>
             </div>
            
-            <div id="taskDetails"></div>
+            <form id="taskDetails"></form>
             <div id="validate" class="form-group">
-                <form>
+                <div>
                     <label id="platzhalterInfo" style="margin-left: 20px; margin-bottom: 10px;color:green; display:none;">Beachten Sie bitte den automatisch eingefügten Platzhalter in der E-Mail Vorlage!</label>
                     <br>
                     <select style="margin-left: 20px" class="selectpicker" id="validierungErfolgreich">
@@ -81,7 +79,7 @@
                     <textarea class="form-control" rows="16" id="reason"></textarea>
                     <br>
                     <button type="button" style="margin-left: 20px" class="btn btn-success" id="validateBtn">Absenden</button>
-                </form>
+                </div>
             </div>
             <div id="">
                 <button type="button" class="btn btn-success" id="saveChanges">Mail versenden</button>

@@ -3,12 +3,16 @@ var dt      = require( 'datatables.net' )(window, $);
 import "datatables.net-bs4";
 import Swal from "sweetalert2";
 import "bootstrap";
-import "jquery-form-validator";
 import "jquery-ui-dist/jquery-ui";
 
 $(document).ready(function () {
+    createEventListeners();
     getList();
 });
+
+function createEventListeners(){
+    document.getElementById("printBtn").addEventListener("click", () => window.print());
+}
 
 function getList() {
     $.ajax({
@@ -142,8 +146,10 @@ function deleteProcessButtons(uni, matrikelnummer) {
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!"
-        }).then(function () {
+            confirmButtonText: "Löschen!",
+            cancelButtonText: "Abbrechen"
+        }).then(function (result) {
+        if(result.value) {
             $.ajax({
                 type: "GET",
                 url: baseUrl + "/process/delete",
@@ -156,7 +162,7 @@ function deleteProcessButtons(uni, matrikelnummer) {
                         title: 'Gelöscht!',
                         text: 'Der Prozess wurde erfolgreich gelöscht.',
                         icon: 'success'
-                    }).then(function() {
+                    }).then(function () {
                         location.reload();
                     });
                 },
@@ -164,7 +170,14 @@ function deleteProcessButtons(uni, matrikelnummer) {
                     console.error(error);
                     Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
                 }
-        });
+            });
+        }else{
+            Swal.fire({
+                title: "Abgebrochen",
+                icon: "info",
+                confirmButtonText: "Ok"
+            });
+        }
     });
 }
 
@@ -178,27 +191,36 @@ function initDeleteProcessButtonsTaskOverview() {
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!"
-        }).then(function () {
-            //var id = $('.btn-delete').closest('tr').data('rid');
-            var matrikelnummer = sessionStorage['matrikelnr'];
+            confirmButtonText: "Löschen!",
+            cancelButtonText: "Abbrechen"
+        }).then(function (result) {
+            if(result.value) {
+                //var id = $('.btn-delete').closest('tr').data('rid');
+                var matrikelnummer = sessionStorage['matrikelnr'];
 
-            $.ajax({
-                type: "GET",
-                url: baseUrl + "/process/delete",
-                data: {
-                    matrikelnummer: matrikelnummer,
-                    uni: uni
-                },
-                success: function (data) {
-                    $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                    Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
-                },
-                error: function (error) {
-                    console.error(error);
-                    Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-                }
-            });
+                $.ajax({
+                    type: "GET",
+                    url: baseUrl + "/process/delete",
+                    data: {
+                        matrikelnummer: matrikelnummer,
+                        uni: uni
+                    },
+                    success: function (data) {
+                        $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                        Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                    },
+                    error: function (error) {
+                        console.error(error);
+                        Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+                    }
+                });
+            }else{
+                Swal.fire({
+                    title: "Abgebrochen",
+                    icon: "info",
+                    confirmButtonText: "Ok"
+                });
+            }
         });
     });
 }
@@ -215,11 +237,10 @@ function deleteTask (taskID) {
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!"
+            confirmButtonText: "Löschen!",
+            cancelButtonText: "Abbrechen"
         }).then(function(result) {
-        	alert("Du hast auf Löschen gedrückt");
         	if (result.value) {
-                 alert("Auf Löschen gedrückt");
         		 Swal.fire({
                      title: 'Lösche Bewerbung'
                  });
@@ -240,7 +261,12 @@ function deleteTask (taskID) {
                          Swal.fire('Fehler', 'Die Bewerbung konnte nicht gelöscht werden', 'error');
                      }
                  });
-        	 }
-        }); 
-
+        	 }else{
+                Swal.fire({
+                    title: "Abgebrochen",
+                    icon: "info",
+                    confirmButtonText: "Ok"
+                });
+            }
+        });
    }
