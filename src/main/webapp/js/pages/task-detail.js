@@ -16,6 +16,8 @@ var visibleStepName;
 var validateString;
 var grund;
 var resultString;
+var data;
+var dis;
 
 $(document).ready(function () {
     idList = [];
