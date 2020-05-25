@@ -2,8 +2,9 @@ import {$,baseUrl} from "../config";
 const jsPDF = require('jspdf');
 import Swal from "sweetalert2";
 import "bootstrap";
-import * as Dropzone from "dropzone";
+import "dropzone";
 require("jquery-validation")($);
+require("jquery-validation/dist/localization/messages_de.min");
 
 var instanceID;
 var uni;
@@ -395,7 +396,6 @@ function getDropzoneOptions(action, fileName) {
         addRemoveLinks: true,
         withCredentials: true,
         uploadMultiple: false,
-
         sending: function (file, xhr, formData) {
             formData.append('action', action);
             formData.append('instance', instanceID);
