@@ -2,7 +2,7 @@ import {$,baseUrl} from "../config";
 const jsPDF = require('jspdf');
 import Swal from "sweetalert2";
 import "bootstrap";
-import "dropzone";
+import * as Dropzone from "dropzone";
 require("jquery-validation")($);
 
 var instanceID;
@@ -271,7 +271,7 @@ function parse() {
                                 typeList.push("boolean");
                                 break;
                             case "form-upload":
-                                output = output + '<form action="' + baseUrl + '/upload" class="dropzone" id="' + json[i]["data"]["id"] + '"></form>';
+                                output = output + '<div class="dropzone" id="' + json[i]["data"]["id"] + '"></div>';
                                 break;
                         }
                     }
@@ -287,12 +287,14 @@ function parse() {
                     for (var i = 0; i < json.length; i++) {
                         var type = json[i]["type"];
                         if (type == 'form-upload') {
+                            console.log(json[i]["data"]["id"]);
+                            console.log(json[i]["data"]["filename"]);
                             $("#" + json[i]["data"]["id"]).dropzone(getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]));
                         }
                     }
-                    $("#formular").validate({
+                    /*$("#formular").validate({
                         debug: true
-                    });
+                    });*/
                 },
                 error: function (result) {
                     alert('Ein Fehler ist aufgetreten: ' + result);
@@ -393,9 +395,14 @@ function getData() {
 
 function getDropzoneOptions(action, fileName) {
     return {
+        url: baseUrl + "/upload",
         acceptedFiles: 'application/pdf',
         maxFilesize: 16,
+        method: "post",
         addRemoveLinks: true,
+        withCredentials: true,
+        uploadMultiple: false,
+
         sending: function (file, xhr, formData) {
             formData.append('action', action);
             formData.append('instance', instanceID);

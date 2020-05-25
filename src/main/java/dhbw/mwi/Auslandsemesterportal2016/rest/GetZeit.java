@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.Calendar;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 @WebServlet(urlPatterns = { "/zeit" })
@@ -18,7 +17,7 @@ public class GetZeit extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.setResponseHeaders(request,response);
+		Util.addResponseHeaders(request,response);
 
 		PrintWriter toClient = response.getWriter();
 		

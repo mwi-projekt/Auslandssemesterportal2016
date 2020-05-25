@@ -1,8 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Config {
