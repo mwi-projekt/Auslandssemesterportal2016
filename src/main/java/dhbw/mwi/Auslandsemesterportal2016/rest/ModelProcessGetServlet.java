@@ -17,7 +17,7 @@ public class ModelProcessGetServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.setResponseHeaders(request,response);
+		Util.addResponseHeaders(request,response);
 		// NO AUTHENTIFICATION NEEDED
 		PrintWriter toClient = response.getWriter();
 

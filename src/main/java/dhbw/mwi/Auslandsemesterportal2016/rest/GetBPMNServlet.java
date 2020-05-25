@@ -16,7 +16,7 @@ public class GetBPMNServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.setResponseHeaders(request,response);
+		Util.addResponseHeaders(request,response);
 
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 

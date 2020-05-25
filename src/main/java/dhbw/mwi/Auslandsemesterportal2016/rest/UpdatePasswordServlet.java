@@ -16,7 +16,7 @@ public class UpdatePasswordServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.setResponseHeaders(request,response);
+		Util.addResponseHeaders(request,response);
 
 		// NO AUTHENTIFICATION NEEDED
 		PrintWriter out = response.getWriter();
