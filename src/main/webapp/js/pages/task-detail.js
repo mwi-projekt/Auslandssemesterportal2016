@@ -1,7 +1,6 @@
 import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
-import "jquery-form-validator";
 
 var instanceID;
 var url;
@@ -20,6 +19,7 @@ var data;
 var dis;
 
 $(document).ready(function () {
+    createEventListeners();
     idList = [];
     typeList = [];
     url = new URL(window.location.href);
@@ -63,6 +63,10 @@ function manipulateDOM() {
 	
     $("[id='Sonstige Angaben']").hide();
 
+}
+
+function createEventListeners(){
+    document.getElementById("saveChanges").addEventListener("click", saveChanges);
 }
 
 function parse() {
