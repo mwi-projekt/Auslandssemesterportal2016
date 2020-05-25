@@ -6,8 +6,14 @@
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.min.css">
     <link rel="stylesheet" href="node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../main.css">
     <link rel="stylesheet" href="node_modules/jquery-form-validator/form-validator/theme-default.min.css">
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
 
     <script type="text/javascript">
         window.cookieconsent_options = {
@@ -157,33 +163,33 @@
     <!-- Navigationsleiste-------------------------------------------------------------------- -->
     <div class="header">
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-2">
-                <a href="index.jsp"> <img style="width:100%;height:auto" class="img-rounded img-responsive"
-                        src="images/DHBW-Logo.svg" /></a>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3">
-                <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
-            </div>
-
-            <div class="col-md-3">
-                <div class="logFenster">
-                    <button type="button" class="btn btn-default navMargin loginMain" data-toggle="modal" id="loginMain"
-                        data-target="#login">Login</button>
-
-                    <button type="button" class="btn btn-default navMargin" data-toggle="modal" id="register"
-                        data-target="#register">Registrieren</button>
-                </div>
-                <div class="logoutFenster">
-
-
-                    Eingeloggt als <b class="nutzerName"></b>
-
-                    <button type="button" class="btn btn-default navMargin" id="logout" data-target="#logout">Logout</button>
-
+            <header class="header-container">
+                <div class="dhbwLogo-container">
+                    <img id="dhbwLogo"src="images/DHBW-Logo.svg" alt="DHBW Logo">
                 </div>
 
-            </div>
+
+                <div class="container-buttons">
+
+                    <div class="col-md-3">
+                        <div class="logFenster">
+                            <button type="button" class="btn btn-danger" data-toggle="modal" id="loginMain"
+                                    data-target="#login">Login</button>
+
+                            <button type="button" class="btn btn-light" data-toggle="modal" id="register"
+                                    data-target="#register">Registrieren</button>
+                        </div>
+                        <div class="logoutFenster">
+
+
+                            Eingeloggt als <b class="nutzerName"></b>
+
+                            <button type="button" class="btn btn-default navMargin" id="logout" data-target="#logout">Logout</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </header>
         </div>
     </div>

@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no" charset="UTF-8">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.min.css">
-    <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="node_modules/jquery-form-validator/form-validator/theme-default.min.css">
 
     <script type="text/javascript">
@@ -26,12 +25,10 @@
     <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/pages/changePw.js"></script>
+    <script src="../js/app.js"></script>
 </head>
 
 <body>
-
     <!--  PopupFeld für Registrierung --------------------------------------------------------------->
     <div class="erfolgreich"></div>
     <div class="popUpBack"></div>
@@ -190,88 +187,3 @@
             </div>
         </div>
     </div>
-
-<!-- Mittlerer Teil -->
-<div class="row aufgaben">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <div class="nav2">
-            <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
-            <div class="navEl nonCms current" id="nav2"><a style="color:white" href="index.jsp">Index</a></div>
-            <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
-        </div>
-        <div id="formular" class="form-horizontal">
-        <label for="pw">Passwort</label>
-        <input type="password" class="form-control" id="pw">
-        <label for="pw_repeat">Wiederholen</label>
-        <input type="password" class="form-control" id="pw_repeat">
-        </div>
-        <div id="nextStep">
-        <button id="savePassword" class="btn btn-success navMargin">Speichern</button>
-        </div>
-        <!-- <div class="inhalt nonCms" id="in1">
-            <div class="col-md-12 inhaltBox">
-                <h2>Herzlich willkommen im Bewerbungsportal</h2>
-                <p>Hier kannst du dir noch einmal alle Auslandsuniversitäten
-                    ansehen, die für die jeweiligen Studiengänge zur Verfügung stehen.</p>
-                <p>Im Reiter "Bewerben" ist bereits eine Vorauswahl für dich
-                    getroffen. Hier kannst du dich nur noch auf Univerisäten bewerben,
-                    die für deinen Studiengang verfügbar sind.</p>
-                <p>
-                    <i>Das Auslandsportal-Team wünscht dir viel Erfolg bei deiner
-                        Bewerbung und eine tolle Zeit im Ausland!!!</i>
-                </p>
-            </div>
-        </div> -->
-               <div class="iFenster iF1 col-xs-6" id="bewFormular"
-                     style="width: 100%; height: 100%;">
-                    <div style="width: 100%; margin-top: 0px;" class="container">
-                        <form role="form" id="frmContact">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="pull-left">
-                                    </div>
-                                    <!-- 	<div class="pull-right">
-                                        <a class="backToBewView">Zurück zur Prozessübersicht</a>
-                                    </div>-->
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <form class="row dat" id="bewFormular0">
-                    </form>
-                    
-                <div id="einschreibungsProzess"></div>
-            </div>
-
-        </div>
-    </div>
-    <!-- <div class="inhalt nonCms" id="in4">
-        <div class="col-md-8 inhaltBox" style="width: 99%">
-            <h2>Erfahrungsberichte</h2>
-            <select class="inBox zweiD" id="selBerichte">
-                <option>Gesamtbewertung</option>
-                <option>Einzelbewertungen</option>
-            </select>
-        </div>
-    </div> -->
-
-<!-- 	Fußzeile -->
-	<div class="footer">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<div class="pull-right">
-					<p>
-						<a href="index.jsp">Startseite</a> | <a href="impressum.html">Impressum</a>
-						| <a href="faq.html">FAQs</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-<!-- test -->
-
-<!-- test -->
-</body>
-</html>

@@ -1,8 +1,3 @@
-<%@ include file="partials/header.html" %>
-
-
-<!DOCTYPE html>
-<html>
 <head>
     <title>DHBW Auslandsinfo</title>
     <meta charset="utf-8" />
@@ -15,20 +10,46 @@
             crossorigin="anonymous"
     />
 </head>
-<body>
 
+
+
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ include file="partials/header.html" %>
+<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
+<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
+<script src="js/pages/index.js"></script>
 
 <!-- Mittlerer Teil --------------------------------------------------------------------------->
-
+    <div class="container" id="adminBereich">
+        <div class="col-md-12">
+            <div class="tile" id="verwaltungIndex">
+                <img src="images/homescreen.svg" class="tileImg"> <img src="images/Edit.png" class="smallImg">
+                <p>Startseite bearbeiten</p>
+            </div>
+            <div class="tile" id="verwaltungUser">
+                <img src="images/user.svg" class="tileImg"> <img src="images/Edit.png" class="smallImg">
+                <p>Benutzer verwalten</p>
+            </div>
+            <div class="tile" id="verwaltungPortal">
+                <img src="images/edit-process.svg" class="tileImg"> <img src="images/Edit.png" class="smallImg">
+                <p>Bewerbungsprozess bearbeiten</p>
+            </div>
+        </div>
+    </div>
+    
+    <a href="#">
+		<img src="images/chevron.png" id="chevronup" class="chevronup"  style="opacity:0; transition-duration: 1s;position:fixed; z-index: 999; bottom:25px; right:11%;" alt="Pfeil nach oben" />
+	</a>
+    
     <div class="inhalt" id="normalBereich">
         <!-- Navigation -->
         <div class="pos-f-t">
             <div class="collapse" id="navbarToggleExternalContent">
                 <div class="bg-dark p-4">
-                    <a class="text-white" href="#auslandsAngebote">Auslandsangebote</a>
+                    <a class="text-white" href="#">Auslandsangebote</a>
                     <br />
                     <br />
-                    <a class="text-white" href="#erfahrungsBerichte">Erfahrungsberichte</a>
+                    <a class="text-white" href="#">Erfahrungsberichte</a>
                 </div>
             </div>
             <nav class="navbar navbar-dark bg-dark">
@@ -91,26 +112,20 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        <br />
+
 
         <!-- Auslandsangebote -->
-        <div class="auslandsangebote-container" id="auslandsAngebote">
-            <div class="grid-container">
-                <div >
+        <div class="auslandsangebote-container">
+            <div class="container">
+                <div class="row">
                     <div class="auslandsangebote-heading-container">
                         <h1 class="auslandsangebote-heading">Auslandsangebote</h1>
                     </div>
-                    <div class="auslandsangebote-image-left-text-right ">
-                        <img src="images/dundee.jpg"  />
-                        <div class="auslandsangebote-text-block">
+                    <div class="auslandsangebote-image-left-text-right">
+                        <img src="dundee.jpg" class="col-md-6" />
+                        <div class="auslandsangebote-text-block col-md-5">
                             <p>
                                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                                 diam nonumy eirmod tempor invidunt ut labore et dolore magna
                                 aliquyam erat, sed diam voluptua. At vero eos et accusam et
                                 justo duo dolores et ea rebum. Stet clita
@@ -123,15 +138,9 @@
                         </div>
                     </div>
                     <div class="auslandsangebote-text-left-image-right">
-                        <div class="auslandsangebote-text-block mobile-order-swap">
+                        <div class="auslandsangebote-text-block col-md-5 ">
                             <p>
                                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                                 diam nonumy eirmod tempor invidunt ut labore et dolore magna
                                 aliquyam erat, sed diam voluptua. At vero eos et accusam et
                                 justo duo dolores et ea rebum. Stet clita
@@ -142,19 +151,13 @@
                                 <li>Nur 5000 Studierende</li>
                             </ul>
                         </div>
-                        <img src="images/dundee.jpg"  />
+                        <img src="dundee.jpg" class="col-md-6 " />
                     </div>
                     <div class="auslandsangebote-image-left-text-right">
-                        <img src="images/dundee.jpg" />
-                        <div class="auslandsangebote-text-block" >
+                        <img src="dundee.jpg" class="col-md-6" />
+                        <div class="auslandsangebote-text-block col-md-5">
                             <p>
                                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                                 diam nonumy eirmod tempor invidunt ut labore et dolore magna
                                 aliquyam erat, sed diam voluptua. At vero eos et accusam et
                                 justo duo dolores et ea rebum. Stet clita
@@ -166,16 +169,10 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="auslandsangebote-text-left-image-right ">
-                        <div class="auslandsangebote-text-block mobile-order-swap">
+                    <div class="auslandsangebote-text-left-image-right">
+                        <div class="auslandsangebote-text-block col-md-5">
                             <p>
                                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                                 diam nonumy eirmod tempor invidunt ut labore et dolore magna
                                 aliquyam erat, sed diam voluptua. At vero eos et accusam et
                                 justo duo dolores et ea rebum. Stet clita
@@ -186,19 +183,13 @@
                                 <li>Nur 5000 Studierende</li>
                             </ul>
                         </div>
-                        <img src="images/dundee.jpg" />
+                        <img src="dundee.jpg" class="col-md-6" />
                     </div>
                     <div class="auslandsangebote-image-left-text-right">
-                        <img src="images/dundee.jpg"  />
-                        <div class="auslandsangebote-text-block ">
+                        <img src="dundee.jpg" class="col-md-6" />
+                        <div class="auslandsangebote-text-block col-md-5">
                             <p>
                                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                                aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                                justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                                 diam nonumy eirmod tempor invidunt ut labore et dolore magna
                                 aliquyam erat, sed diam voluptua. At vero eos et accusam et
                                 justo duo dolores et ea rebum. Stet clita
@@ -213,48 +204,6 @@
                 </div>
             </div>
         </div>
-
-
-
-        <!--- Erfahrungsberichte ---->
-        <div class="erfahrungsBerichte-container" id="erfahrungsBerichte">
-            <div class="auslandsangebote-heading-container">
-                <h1 class="auslandsangebote-heading">Erfahrungsberichte</h1>
-            </div>
-            <div class="erfahrungsBerichte-grid-container">
-                <div class="erfahrungsBerichte-image-container">
-                    <img src="images/dundee.jpg" style="width: 100%;">
-                    <div class="erfahrungsBerichte-text-container"> Sergio Perez</div>
-                </div>
-
-                <div class="erfahrungsBerichte-image-container">
-                    <img src="images/dundee.jpg" style="width: 100%;">
-                    <div class="erfahrungsBerichte-text-container"> Sergio Perez</div>
-                </div>
-
-                <div class="erfahrungsBerichte-image-container">
-                    <img src="images/dundee.jpg" style="width: 100%;">
-                    <div class="erfahrungsBerichte-text-container"> Sergio Perez</div>
-                </div>
-
-                <div class="erfahrungsBerichte-image-container">
-                    <img src="images/dundee.jpg" style="width: 100%;">
-                    <div class="erfahrungsBerichte-text-container"> Sergio Perez</div>
-                </div>
-
-                <div class="erfahrungsBerichte-image-container">
-                    <img src="images/dundee.jpg" style="width: 100%;">
-                    <div class="erfahrungsBerichte-text-container"> Sergio Perez</div>
-                </div>
-
-                <div class="erfahrungsBerichte-image-container">
-                    <img src="images/dundee.jpg" style="width: 100%;">
-                    <div class="erfahrungsBerichte-text-container"> Sergio Perez</div>
-                </div>
-
-            </div>
-        </div>
-
         <script
                 src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
                 integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -270,8 +219,10 @@
                 integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
                 crossorigin="anonymous"
         ></script>
-</body>
-</html>
+
+
+    </div>
+
 
 
 
