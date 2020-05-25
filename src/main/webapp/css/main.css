@@ -1,5 +1,11 @@
-body {
-	
+/*Allgemeine Settings*/
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+html {
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
@@ -37,6 +43,7 @@ input {
 	/* background: #005353; */
 	border: 1px solid #005353;
 	color: #005353;
+	font-size: .75rem !important;
 	/* -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
 	/* box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
 }
@@ -88,7 +95,15 @@ input {
 	text-align: center;
 }
 
-/* Header */
+/* Header Settings*/
+
+.header-container{
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+}
+
 .header {
 	color: #e2001d;
 	padding: 5px;
@@ -97,10 +112,165 @@ input {
 	background: white;
 	-webkit-box-shadow: 0 0px 6px rgba(0, 0, 0, .5);
 	box-shadow: 0 0px 6px rgba(0, 0, 0, .5);
+	padding-bottom: 10px;
 }
 
-#logo {
-	
+#dhbwLogo {
+	height:4vh;
+
+}
+#loginButton{
+	margin-left: 5px;
+}
+
+
+/*Auslandsangebote*/
+
+
+.grid-container{
+	display: grid;
+
+}
+.auslandsangebote-image-left-text-right{
+	display: grid;
+	grid-template-rows: 1fr ;
+}
+
+.auslandsangebote-text-left-image-right{
+	display: grid;
+	grid-template-rows: 1fr;
+}
+
+.mobile-order-swap{
+	grid-row: -1/2;
+}
+
+.auslandsangebote-heading-container{
+	width:100%
+}
+
+.auslandsangebote-heading{
+	font-size: 2rem;
+	text-align: center;
+
+}
+
+.auslandsangebote-text-block{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 16px;
+}
+.auslandsangebote-text-left-image-right img{
+	margin-top:80px;
+	max-height: 100%;
+	max-width: 100%;
+}
+.auslandsangebote-image-left-text-right img{
+	margin-top:80px;
+	max-height: 100%;
+	max-width: 100%;
+
+}
+
+.container-buttons{
+	align-self:center;
+}
+
+/* Erfahrungsberichte*/
+
+.erfahrungsBerichte-grid-container{
+	display: grid;
+	grid-template-rows: repeat(6, 1fr);
+}
+
+.erfahrungsBerichte-image-container{
+	position: relative;
+	text-align: center;
+	color: white;
+	opacity: 0.7;
+}
+
+.erfahrungsBerichte-text-container{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@media(min-width:640px){
+	.btn{
+		font-size: 1.2rem !important;
+		margin-right: 10px;
+	}
+
+	#dhbwLogo {
+		height:6vh;
+
+	}
+
+	.auslandsangebote-text-block{
+		font-size: 1.2rem;
+	}
+	.erfahrungsBerichte-container{
+		margin: 0 auto;
+		max-width:1200px;
+	}
+
+	.erfahrungsBerichte-grid-container{
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: unset;
+
+
+	}
+}
+
+@media(min-width:1024px){
+	.auslandsangebote-container{
+		margin: 0 auto;
+		max-width:1200px;
+	}
+
+	#dhbwLogo {
+		height:8vh;
+	}
+
+	.auslandsangebote-heading{
+		font-size: 2.5rem;
+	}
+	.grid-container{
+		display: grid;
+
+	}
+	.auslandsangebote-image-left-text-right{
+		display: grid;
+		grid-gap: 24px;
+		margin-bottom:100px ;
+
+	}
+	.auslandsangebote-image-left-text-right img{
+		grid-row:1/1;
+	}
+	.auslandsangebote-image-left-text-right .auslandsangebote-text-block{
+		grid-row:1/2;
+	}
+
+
+	.auslandsangebote-text-left-image-right{
+		display: grid;
+		grid-gap:24px;
+		margin-bottom: 100px;
+	}
+	.auslandsangebote-text-left-image-right img{
+
+		grid-row: 2/1;
+	}
+
+	.auslandsangebote-text-left-image-right .auslandsangebote-text-block{
+
+		grid-row:1/2;
+	}
+
 }
 
 .ueberschrift {
