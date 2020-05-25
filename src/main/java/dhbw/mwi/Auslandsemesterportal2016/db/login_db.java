@@ -62,10 +62,6 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		PrintWriter out = response.getWriter();
 		String sql = "";
 
-		// if (action.equals("get_files") ){
-		// sql = "SELECT id, name, comment FROM prozess_files";
-		// }
-
 		try {
 			// Open a connection
 			conn = DB.getInstance();
