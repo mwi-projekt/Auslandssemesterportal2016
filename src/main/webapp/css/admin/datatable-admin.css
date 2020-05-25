@@ -1,0 +1,16 @@
+.dataTables_filter {
+    float: left;
+}
+
+.dataTables_paginate {
+    margin-left: auto !important;
+}
+
+.bottom {
+    display: flex;
+}
+
+.dataTables_length > label {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

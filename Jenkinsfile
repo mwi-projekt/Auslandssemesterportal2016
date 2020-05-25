@@ -4,8 +4,8 @@ pipeline {
     stages {
     	stage('Configure Server URL') {
             steps {
-                sh 'sed -i -e \'s#var baseUrl = "http://localhost";#var baseUrl = "http://10.3.15.45";#g\' src/main/webapp/js/app.js'
-                sh 'sed -i -e \'s#var baseUrl = "http://localhost";#var baseUrl = "http://10.3.15.45";#g\' src/main/webapp/js/file-browser.js'
+                sh 'sed -i -e \'s#var baseUrl = "http://localhost:82";#var baseUrl = "http://10.3.15.45:82";#g\' src/main/webapp/js/app.js'
+                sh 'sed -i -e \'s#var baseUrl = "http://localhost:82";#var baseUrl = "http://10.3.15.45:82";#g\' src/main/webapp/js/file-browser.js'
             }
         }
         stage('Build') {

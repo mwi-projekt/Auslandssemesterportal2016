@@ -37,7 +37,7 @@
 <body>
 <div style="margin: 200px">
     <div style="width: 100%; margin-bottom: 50px; height: 50px">
-        <span style="float: left; font-size: 1.5rem;">Auslandsamtmitarbeiter bearbeiten</span>
+        <span style="float: left; font-size: 1.5rem;">Studiengangsleitung bearbeiten</span>
         <span style="float: right; font-size: 1.5rem;">
             <a href="../../index.jsp" style="text-decoration: none">&larr; Zurück</a>
         </span>
@@ -51,21 +51,23 @@
                 <th>Vorname</th>
                 <th>Nachname</th>
                 <th>Email</th>
-                <th>Telefonnummer</th>
-                <th>Mobilfunknummer</th>
+                <th>DHBW Standort</th>
+                <th>Studiengang</th>
+                <th>Kurs</th>
             </tr>
             </thead>
         </table>
         <script>
             $(document).ready(function () {
                 $('#example').DataTable({
-                    ajax: '/getUser?rolle=2',
+                    ajax: '/getUser?rolle=4',
                     columns: [
                         {data: 'vorname'},
                         {data: 'nachname'},
                         {data: 'email'},
-                        {data: 'tel'},
-                        {data: 'mobil'},
+                        {data: 'standort'},
+                        {data: 'studiengang'},
+                        {data: 'kurs'},
                     ]
                 });
             });
