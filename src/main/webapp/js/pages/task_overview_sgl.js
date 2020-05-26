@@ -7,10 +7,31 @@ import "jquery-form-validator";
 import "jquery-ui-dist/jquery-ui";
 
 $(document).ready(function () {
+    createEventListeners();
     getList();
 });
 
+function createEventListeners(){
+    document.getElementById("printBtn").addEventListener("click", () => window.print());
+}
+
+function createButtonEventListeners(buttons){
+    buttons.forEach(button => {
+        if(button.type==="details"){
+            document.getElementById(button.elementId).addEventListener("click", () => {location.href= "task_detail.html?instance_id=" + button.id + '&uni=' + button.uni + '&verify=true'});
+        }
+        else if(button.type==="delete"){
+            document.getElementById(button.elementId).addEventListener("click", ()=> {deleteProcessButtons(button.uni ,button.matrikelnummer)});
+        }
+        else{
+            console.log("Unknown Buttontype: " + button.type);
+        }
+    });
+}
+
 function getList() {
+    var buttons = [];
+
     $.ajax({
         type: "GET",
         url: baseUrl + "/getSGLTasks",
@@ -42,14 +63,11 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td><td>" +
-                            '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' +
-                            singleInstance.id +
-                            '&uni=' +
-                            singleInstance.uni +
-                            '&verify=true\'\"> </button>' +
+                            '<button id="details-' + singleInstance.id +'" class="btn fas fa-list" title="Details"></button>' +
                             "</td><td>" +
-                            "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
-                 
+                            "<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
+                            buttons.push({type: "details", elementId: "details-" + singleInstance.id, id: singleInstance.id, uni: singleInstance.uni});
+                            buttons.push({type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer});
                     } else if (singleInstance.status === 'complete') {
                         completed = completed +
                             "<tr><td>" +
@@ -125,8 +143,10 @@ function getList() {
                     $('.table').DataTable();
                 });
           
-            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<h1>Bewerbungen beim Auslandsamt</h1>' + validateAAA + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt; 
-        },
+            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<h1>Bewerbungen beim Auslandsamt</h1>' + validateAAA + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt;
+            console.log(buttons);
+            createButtonEventListeners(buttons);
+            },
         error: function (result) {
             Swal.fire("Ein Fehler ist aufgetreten", "error");
         }

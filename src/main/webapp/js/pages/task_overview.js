@@ -1,5 +1,5 @@
 import {$,baseUrl} from "../config";
-var dt      = require( 'datatables.net' )(window, $);
+var dt = require( 'datatables.net' )(window, $);
 import "datatables.net-bs4";
 import Swal from "sweetalert2";
 import "bootstrap";
@@ -14,7 +14,23 @@ function createEventListeners(){
     document.getElementById("printBtn").addEventListener("click", () => window.print());
 }
 
+function createButtonEventListeners(buttons){
+    buttons.forEach(button => {
+        if(button.type==="details"){
+            document.getElementById(button.elementId).addEventListener("click", () => {location.href= "task_detail.html?instance_id=" + button.id + '&uni=' + button.uni + '&verify=true'});
+        }
+        else if(button.type==="delete"){
+            document.getElementById(button.elementId).addEventListener("click", ()=> {deleteProcessButtons(button.uni ,button.matrikelnummer)});
+        }
+        else{
+            console.log("Unknown Buttontype: " + button.type);
+        }
+    });
+}
+
 function getList() {
+    var buttons = [];
+
     $.ajax({
         type: "GET",
         url: baseUrl + "/getTasks",
@@ -46,14 +62,12 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td><td>" +
-                            '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail.html?instance_id=' +
-                            singleInstance.id +
-                            '&uni='  +
-                            singleInstance.uni +
-                            '&verify=true\'\"> </button>' +
+                            '<button id="details-' + singleInstance.id +'" class="btn fas fa-list" title="Details"></button>' +
                             "</td><td>" +
-                            "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
-                 
+                            "<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
+
+                            buttons.push({type: "details", elementId: "details-" + singleInstance.id, id: singleInstance.id, uni: singleInstance.uni});
+                            buttons.push({type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer});
                     } else if (singleInstance.status === 'complete') {
                         completed = completed +
                             "<tr><td>" +
@@ -67,7 +81,8 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td><td>" +
-                            "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
+                            "<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
+                            buttons.push({type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer});
                     } else if (singleInstance.status === 'validateSGL') {
                     	validateSGL = validateSGL +
                     		"<tr><td>" +
@@ -81,7 +96,8 @@ function getList() {
                     		"</td><td>" +
                     		singleInstance.uni +
                     		"</td><td>" +
-                    		"<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
+                    		"<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
+                            buttons.push({type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer});
                     } else if (singleInstance.status === 'abgelehnt') {
                     	abgelehnt = abgelehnt +
                 		"<tr><td>" +
@@ -95,9 +111,9 @@ function getList() {
                 		"</td><td>" +
                 		singleInstance.uni +
                 		"</td><td>" +
-                		"<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
-                }
-                   
+                		"<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
+                        buttons.push({type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer});
+                    }
                 }
                 if (output === "") {
                     output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
@@ -123,21 +139,18 @@ function getList() {
                 	abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
                 		abgelehnt + "</tbody></table>";
                 }
-                
-
                 $(document).ready(function () {
                     $('.table').DataTable();
                 });
             }
-           
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Bewerbungen bei Studiengangsleitern</h1>' + validateSGL + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt;
+            console.log(buttons);
+            createButtonEventListeners(buttons);
         },
         error: function (result) {
             Swal.fire("Ein Fehler ist aufgetreten", "error");
         }
     });
-  
-
 }
 function deleteProcessButtons(uni, matrikelnummer) {
 	Swal.fire({
