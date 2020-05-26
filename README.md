@@ -46,4 +46,7 @@ First start docker, build your project and then you start the server by using th
 docker-compose pull
 docker-compose build
 docker-compose up -d
+
+# Dev Deployment
+mvn tomcat7:deploy -P dev
 ```
