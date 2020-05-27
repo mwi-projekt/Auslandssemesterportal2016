@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 import Viewer from "bpmn-js";
 import "jquery-ui-dist";
 import "bootstrap-switch";
-import "jquery";
 import "../jquery.dynamicdom";
 import selectform from "../../modals/select-form.html";
 import textform from "../../modals/text-form.html";
