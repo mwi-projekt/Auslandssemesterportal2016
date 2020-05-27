@@ -1,346 +1,108 @@
-/*Allgemeine Settings*/
-html, body {
+/* wird aktuell nicht benutzt */
+
+
+body {
+
+}
+
+button {
+a: visited{
+	color: none;
+}
+
+}
+a:visited {
+	color: grey;
+}
+
+input {
+	/* width: 300px; */
+
+}
+
+.sweet-modal-content select {
 	width: 100%;
-	height: 100%;
-	margin: 0;
-}
-html {
-	font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
-/* Header Settings*/
-
-.header-container{
-	display:flex;
-	flex-direction: row;
-	justify-content: space-between;
-
-}
-
-header{
-	padding-bottom: 10px;
-}
-#dhbwLogo {
-	height:4vh;
-
-}
-
-.btn{
-	font-size: .75rem !important;
-}
-
-#loginButton{
-	margin-left: 5px;
-}
-
-
-
-/*Auslandsangebote*/
-
-
-.grid-container{
-	display: grid;
-
-}
-.auslandsangebote-image-left-text-right{
-	display: grid;
-	grid-template-rows: 1fr ;
-}
-
-.auslandsangebote-text-left-image-right{
-	display: grid;
-	grid-template-rows: 1fr;
-}
-
-.mobile-order-swap{
-	grid-row: -1/2;
-}
-
-.auslandsangebote-heading-container{
-	width:100%
-}
-
-.auslandsangebote-heading{
-	font-size: 2rem;
-	text-align: center;
-
-}
-
-.auslandsangebote-text-block{
-	display: inline-block;
-	vertical-align: middle;
-	margin-top: 16px;
-}
-.auslandsangebote-text-left-image-right img{
-	margin-top:80px;
-	max-height: 100%;
-	max-width: 100%;
-}
-.auslandsangebote-image-left-text-right img{
-	margin-top:80px;
-	max-height: 100%;
-	max-width: 100%;
-
-}
-
-.container-buttons{
-	align-self:center;
-}
-
-/* Erfahrungsberichte*/
-
-
-.erfahrungsBerichte-grid-container{
-	display: grid;
-	grid-template-rows: repeat(6, 1fr);
-}
-
-.erfahrungsBerichte-image-container{
-	position: relative;
-	text-align: center;
-	color: white;
-	opacity: 0.7;
-}
-
-.erfahrungsBerichte-text-container{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-/* Footer*/
-.page-footer{
-	-webkit-tap-highlight-color: transparent;
-	line-height: 1.42857;
-	font-family: GenerisSansW01-Regular,sans-serif;
-	font-size: 1em;
-	box-sizing: border-box;
-	padding-top: 4em;
-	padding-bottom: 1em;
-	background-color: #2b2b2b;
-	margin-top:2em;
-}
-
-.page-footer h3{
-	font-family: GenerisSerifW01-Regular,serif;
-	margin-top: 0;
-	margin-bottom: 1.66em;
-	color: gray;
-}
-
-.container-fluid{
-	-webkit-tap-highlight-color: transparent;
-	line-height: 1.42857;
-	font-family: GenerisSansW01-Regular,sans-serif;
-	font-size: 1em;
-	box-sizing: border-box;
-	margin-right: auto;
-	margin-left: auto;
+.form-group:after {
+	content: ".";
 	clear: both;
-	max-width: 1360px;
-	padding-right: 1em;
-	padding-left: 1em;
+	display: block;
+	visibility: hidden;
+	height: 0px;
 }
 
-.quicklinks{
-	-webkit-tap-highlight-color: transparent;
-	line-height: 1.42857;
-	font-family: GenerisSansW01-Regular,sans-serif;
-	font-size: 1em;
-	color: #000;
-	box-sizing: border-box;
-	display: block;
+/* Allgemeine Elemente */
+.btn {
+	font-size: medium;
+	border: 1px solid white;
+	font-weight: bold;
+	/* background: #005353; */
+	border: 1px solid #005353;
+	color: #005353;
+	/* -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
+	/* box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
 }
 
-
-.sociallinks{
-	line-height: 1.42857;
-	font-family: GenerisSansW01-Regular,sans-serif;
-	font-size: 1em;
-	color: gray;
-	box-sizing: border-box;
-	display: block;
+.btn-primary {
+	background-color: #d3d3d3;
 }
 
-.sociallinks li{
-	line-height: 33px;
-	display: block;
-	margin-bottom: 1.25em;
-}
-.quicklinks a{
-	display: block;
-	padding: 1em 0;
+.btn-success {
 	color: #fff;
 }
 
-.quicklinks li a{
-	display: block;
-	padding: 1em 0;
-	color: #fff;
+.btn:hover {
+	background: #D60000;
+	color: white;
 }
 
-.quicklinks li{
-	float: left;
-	width: 50%;
-	width: -webkit-calc(50% - 4em);
-	width: calc(50% - 4em);
-	margin-right: -webkit-calc(2em);
-	margin-right: calc(2em);
-	margin-left: -webkit-calc(2em);
-	margin-left: calc(2em);
-	display: block;
-	border-bottom: solid 1px #414141;
-}
-.quicklinks li a::after {
-	content: " ›";
+.btn-success:hover {
+	background-color: #47a447;
 }
 
-.quicklinks ul{
-	position: relative;
-	margin-top: -1em;
-	margin-bottom: 4em;
+.inBox {
+	font-weight: bold;
+	font-size: medium;
+	border-radius: 5px;
+	border: 1px solid white;
+	padding: 5px;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, .5);
+	margin-bottom: 10px;
+	color: black;
 }
 
-.page-footer-bottom{
-	-webkit-tap-highlight-color: transparent;
-	line-height: 1.42857;
-	font-family: GenerisSansW01-Regular,sans-serif;
-	font-size: 1em;
-	box-sizing: border-box;
-	padding: 1em 0;
-	color: gray;
-	background-color: #262626;
+.navbar-brand {
+	line-height: 28px;
 }
 
-.page-footer-bottom p.copyright{
-	-webkit-tap-highlight-color: transparent;
-	font-family: GenerisSansW01-Regular,sans-serif;
-	color: gray;
-	box-sizing: border-box;
-	font-size: .7em;
-	line-height: 50px;
-	margin: 0;
-	display: inline-block;
-	text-align: left;
-	vertical-align: top;
+.red {
+	color: #e2001d;
 }
 
-.metalinks-footer{
-	-webkit-tap-highlight-color: transparent;
-	font-family: GenerisSansW01-Regular,sans-serif;
-	font-size: 1em;
-	color: gray;
-	box-sizing: border-box;
-	display: block;
-	line-height: 0;
-	text-align: right;
-}
-.metalinks-footer a {
-	font-family: 'Generis Sans W01 Bold',sans-serif;
-	font-size: 1em;
-	color: #fff;
+.tuerkis {
+	background: #AFEEEE;
+	width: 100%;
+	padding: 10px;
 }
 
-.icon-logo-inverted svg path{
-	fill:gray;
-}
-.page-footer a {
-	font-size: 1em;
-	color: #fff;
-}
-
-.sociallinks span.icon {
-	display: inline-block;
-	width: 2.25em;
-	margin-right: 1em;
+.mittig {
 	text-align: center;
 }
-.sociallinks svg path {
-	-webkit-transition: fill .2s cubic-bezier(.165,.84,.44,1);
-	transition: fill .2s cubic-bezier(.165,.84,.44,1);
-	fill: #fff;
-}
-.sociallinks span.link-title:after {
-	content: ' ›';
-}
 
-@media(min-width:640px){
-	.btn{
-		font-size: 1.2rem !important;
-		margin-right: 10px;
-	}
-
-	#dhbwLogo {
-		height:6vh;
-
-	}
-
-	.auslandsangebote-text-block{
-		font-size: 1.2rem;
-	}
-	.erfahrungsBerichte-container{
-		margin: 0 auto;
-		max-width:1200px;
-	}
-
-	.erfahrungsBerichte-grid-container{
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: unset;
-
-
-	}
+/* Header */
+.header {
+	color: #e2001d;
+	padding: 5px;
+	width: 100%;
+	z-index: 101;
+	background: white;
+	-webkit-box-shadow: 0 0px 6px rgba(0, 0, 0, .5);
+	box-shadow: 0 0px 6px rgba(0, 0, 0, .5);
 }
 
-@media(min-width:1024px){
-	.auslandsangebote-container{
-		margin: 0 auto;
-		max-width:1200px;
-	}
-
-	#dhbwLogo {
-		height:8vh;
-	}
-
-	.auslandsangebote-heading{
-		font-size: 2.5rem;
-	}
-	.grid-container{
-		display: grid;
-
-	}
-	.auslandsangebote-image-left-text-right{
-		display: grid;
-		grid-gap: 24px;
-		margin-bottom:100px ;
-
-	}
-	.auslandsangebote-image-left-text-right img{
-		grid-row:1/1;
-	}
-	.auslandsangebote-image-left-text-right .auslandsangebote-text-block{
-		grid-row:1/2;
-	}
-
-
-	.auslandsangebote-text-left-image-right{
-		display: grid;
-		grid-gap:24px;
-		margin-bottom: 100px;
-	}
-	.auslandsangebote-text-left-image-right img{
-
-		grid-row: 2/1;
-	}
-
-	.auslandsangebote-text-left-image-right .auslandsangebote-text-block{
-
-		grid-row:1/2;
-	}
-
+#logo {
 
 }
 
@@ -542,9 +304,9 @@ header{
 /* imgSlider */
 @media only screen and (max-width: 800px) { //
 	this css will only be used when the screen size is max 800px
-	.imgSlider {
-		display: none;
-	}
+															  .imgSlider {
+																  display: none;
+															  }
 }
 
 .imgSlider {
@@ -631,7 +393,7 @@ header{
 
 /* portalInfo */
 .portalInfo {
-	
+
 }
 
 .portalInfo p {
@@ -1020,4 +782,3 @@ i {
 .swal2-popup {
 	font-size: 1.6rem !important;
 }
-
