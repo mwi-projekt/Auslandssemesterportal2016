@@ -1,4 +1,5 @@
 import {$,baseUrl} from "../config";
+import "../app";
 var dt = require( 'datatables.net' )(window, $);
 import "datatables.net-bs4";
 import Swal from "sweetalert2";

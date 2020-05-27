@@ -1,4 +1,5 @@
 import {$,baseUrl} from "../config";
+import "../app";
 var dt = require( 'datatables.net' )(window, $);
 import "datatables.net-bs4";
 import Swal from "sweetalert2";
@@ -144,7 +145,6 @@ function getList() {
                 });
             }
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Bewerbungen bei Studiengangsleitern</h1>' + validateSGL + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt;
-            console.log(buttons);
             createButtonEventListeners(buttons);
         },
         error: function (result) {

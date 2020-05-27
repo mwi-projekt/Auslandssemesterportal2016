@@ -1,4 +1,5 @@
 import {$,baseUrl} from "../config";
+import "../app";
 const jsPDF = require('jspdf');
 import Swal from "sweetalert2";
 import "bootstrap";

@@ -1,5 +1,6 @@
 import {$,baseUrl} from "../config";
-var dt      = require( 'datatables.net' )(window, $);
+import "../app";
+var dt = require( 'datatables.net' )(window, $);
 import "datatables.net-bs4";
 import Swal from "sweetalert2";
 import "bootstrap";
@@ -17,7 +18,7 @@ function createEventListeners(){
 function createButtonEventListeners(buttons){
     buttons.forEach(button => {
         if(button.type==="details"){
-            document.getElementById(button.elementId).addEventListener("click", () => {location.href= "task_detail.html?instance_id=" + button.id + '&uni=' + button.uni + '&verify=true'});
+            document.getElementById(button.elementId).addEventListener("click", () => {location.href= "task_detail_sgl.html?instance_id=" + button.id + '&uni=' + button.uni + '&verify=true'});
         }
         else if(button.type==="delete"){
             document.getElementById(button.elementId).addEventListener("click", ()=> {deleteProcessButtons(button.uni ,button.matrikelnummer)});
@@ -143,7 +144,6 @@ function getList() {
                 });
           
             document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<h1>Bewerbungen beim Auslandsamt</h1>' + validateAAA + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt;
-            console.log(buttons);
             createButtonEventListeners(buttons);
             },
         error: function (result) {
