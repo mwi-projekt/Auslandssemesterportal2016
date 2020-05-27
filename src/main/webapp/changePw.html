@@ -101,16 +101,11 @@
                     </div>
                 </form>
             </div>
-
-
-
         </div>
-
     </div>
     <!-- Modal -->
     <div id="login" class="modal fade" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -132,13 +127,10 @@
                 </div>
                 <div class="modal-footer">
                     <input form="loginForm" type="submit" class="btn" id="btnLogin" value="Login" style="width: auto;">
-
                 </div>
             </div>
-
         </div>
     </div>
-
     <!-- Navigationsleiste-------------------------------------------------------------------- -->
     <div class="header">
         <div class="row">
@@ -151,24 +143,17 @@
             <div class="col-md-3">
                 <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
             </div>
-
             <div class="col-md-3">
                 <div class="logFenster">
                     <button type="button" class="btn btn-default navMargin loginMain" data-toggle="modal" id="loginMain"
                         data-target="#login">Login</button>
-
                     <button type="button" class="btn btn-default navMargin" data-toggle="modal" id="register"
                         data-target="#register">Registrieren</button>
                 </div>
                 <div class="logoutFenster">
-
-
                     Eingeloggt als <b class="nutzerName"></b>
-
                     <button type="button" class="btn btn-default navMargin" id="logout" data-target="#logout">Logout</button>
-
                 </div>
-
             </div>
         </div>
     </div>
@@ -182,12 +167,12 @@
             <div class="navEl nonCms current" id="nav2"><a style="color:white" href="index.html">Index</a></div>
             <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
         </div>
-        <div id="formular" class="form-horizontal">
+        <form id="formular" class="form-horizontal">
         <label for="pw">Passwort</label>
-        <input type="password" class="form-control" id="pw">
+        <input type="password" class="form-control" id="pw" name="pw" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
         <label for="pw_repeat">Wiederholen</label>
-        <input type="password" class="form-control" id="pw_repeat">
-        </div>
+        <input type="password" class="form-control" id="pw_repeat" name="pw_repeat" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+        </form>
         <div id="nextStep">
         <button id="savePassword" class="btn btn-success navMargin">Speichern</button>
         </div>
