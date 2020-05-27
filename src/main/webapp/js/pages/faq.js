@@ -1,4 +1,5 @@
 import {$} from "../config";
+import "../app";
 import "bootstrap";
 import "jquery-ui-dist";
 

@@ -1,4 +1,5 @@
-import {$} from "../config";
+import {$,baseUrl} from "../config";
+import "../app";
 import Swal from "sweetalert2";
 import "bootstrap";
 

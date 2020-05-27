@@ -1,11 +1,24 @@
 import {$,baseUrl} from "./config";
 import Swal from "sweetalert2";
 import "jquery-ui-dist/jquery-ui";
-window.$ = window.jquery = $;
-var dt = require('datatables.net')(window, $);
-import "datatables.net-bs4";
+import "cookieconsent";
 
 $(document).ready(function () {
+    //cookies
+    window.cookieconsent.initialise({
+        content: {
+            message: "Diese Website verwendet Cookies!",
+            dismiss: "Verstanden!",
+            link: ""
+        },
+        theme: "classic",
+        palette: {
+            popup: {background: '#E8E8E8', text: '#000', link: '#fff', border: '#000'},
+            button: {background: 'transparent', border: '#D60000', text: '#D60000'},
+            highlight: {background: '#D60000', border: '#000000', text: '#000000'},
+        }
+    });
+
     // logout
     $('#logout').on('click', logout);
 
@@ -101,7 +114,6 @@ $(document).on('submit', '#regForm', function (e) {
                         $('.modal').fadeOut();
                         $('.modal').modal('hide');
                     }
-
                 },
                 error: function (result) {
                     Swal.fire({
@@ -165,7 +177,6 @@ $(document).on('submit', '#loginForm', function (e) {
                     window.location.reload();
                 }
             }
-
         },
         error: function (data) {
             Swal.fire("Fehler");
@@ -203,7 +214,6 @@ function removeQueryStringParameter(key, url) {
         if (typeof hashParts[1] !== 'undefined' && hashParts[1] !== null)
             url += '#' + hashParts[1];
     }
-
     return url;
 }
 
