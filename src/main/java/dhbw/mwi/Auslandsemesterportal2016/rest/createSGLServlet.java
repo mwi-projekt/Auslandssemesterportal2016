@@ -35,6 +35,7 @@ public class createSGLServlet extends HttpServlet {
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
 				out.print("mailError");
 				out.flush();
+				out.close();
 			} else {
 				try {
 					Message message = Util.getEmailMessage(request.getParameter("email"),
@@ -55,12 +56,15 @@ public class createSGLServlet extends HttpServlet {
 					if (rsupd == 0) {
 						out.print("registerError");
 						out.flush();
+						out.close();
 					} else {
 						RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
 						rd.forward(request, response);
+						out.close();
 					}
 
 				} catch (Exception e) {
+					response.sendError(500, "Fehler beim Anlegen: " + e.getMessage());
 					e.printStackTrace();
 					throw new RuntimeException(e);
 

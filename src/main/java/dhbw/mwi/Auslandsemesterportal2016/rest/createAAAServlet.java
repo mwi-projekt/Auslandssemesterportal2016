@@ -33,6 +33,7 @@ public class createAAAServlet extends HttpServlet {
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
 				out.print("mailError");
 				out.flush();
+				out.close();
 			} else {
 				try {
 					Message message = Util.getEmailMessage(request.getParameter("email"),
@@ -48,24 +49,21 @@ public class createAAAServlet extends HttpServlet {
 					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
 							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), aa, aa, -1,
 							request.getParameter("phone"), request.getParameter("mobil"), aa, "1");
-
 					if (rsupd == 0) {
 						out.print("registerError");
 						out.flush();
+						out.close();
 					} else {
 						RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
 						rd.forward(request, response);
+						out.close();
 					}
-
 				} catch (Exception e) {
+					response.sendError(500, "Fehler beim Anlegen: " + e.getMessage());
 					e.printStackTrace();
 					throw new RuntimeException(e);
-
 				}
-
 			}
-
 		}
-
 	}
 }
