@@ -24,6 +24,7 @@ public class UpdatePasswordServlet extends HttpServlet {
 		String pw = request.getParameter("password");
 		int rowCount = SQL_queries.setPassword(uuid, pw);
 		out.print(rowCount);
+		out.close();
 	}
 
 }

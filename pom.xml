@@ -283,12 +283,12 @@
 					</execution>
 
 					<execution>
-						<id>npm run clean:dist</id>
+						<id>npm run clean:parcel</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
 						<configuration>
-							<arguments>run clean:dist</arguments>
+							<arguments>run clean:parcel</arguments>
 						</configuration>
 					</execution>
 

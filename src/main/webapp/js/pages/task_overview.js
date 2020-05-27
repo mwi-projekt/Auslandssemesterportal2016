@@ -4,7 +4,6 @@ var dt = require( 'datatables.net' )(window, $);
 import "datatables.net-bs4";
 import Swal from "sweetalert2";
 import "bootstrap";
-import "jquery-form-validator";
 import "jquery-ui-dist/jquery-ui";
 
 $(document).ready(function () {
