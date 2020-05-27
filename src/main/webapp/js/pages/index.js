@@ -2,9 +2,6 @@ import {$,baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import "bootstrap";
-import "jquery-form-validator";
-import "cookieconsent";
-import "datatables.net-bs4";
 
 $(document).ready(function () {
     // check if logged in

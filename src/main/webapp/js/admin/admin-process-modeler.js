@@ -3,7 +3,6 @@ import Swal from "sweetalert2";
 import "jquery-ui-dist";
 import "ckeditor4/ckeditor";
 import "bootstrap-switch";
-import {urlParams} from "../app";
 import "../jquery.dynamicdom";
 import selectForm from "../../modals/select-form.html";
 import textForm from "../../modals/text-form.html";

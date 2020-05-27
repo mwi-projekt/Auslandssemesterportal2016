@@ -3,9 +3,7 @@ var dt = require( 'datatables.net' )(window, $);
 import "datatables.net-bs4";
 import Swal from "sweetalert2";
 import "bootstrap";
-import "jquery-form-validator";
 import "jquery-ui-dist/jquery-ui";
-import "cookieconsent";
 
 $(document).ready(function () {
     // Click-Listener für Userverwaltung User anzeigen lassen
