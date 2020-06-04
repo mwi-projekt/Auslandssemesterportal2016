@@ -540,8 +540,8 @@ header{
 }
 
 /* imgSlider */
-@media only screen and (max-width: 800px) { //
-	this css will only be used when the screen size is max 800px
+@media only screen and (max-width: 800px) {
+	/* this css will only be used when the screen size is max 800px */
 	.imgSlider {
 		display: none;
 	}
@@ -579,33 +579,26 @@ header{
 	background: #FB2020;
 }
 
-#adminBereich .tile {
-	padding: 5px;
-	display: inline-block;
-	max-width: 30%;
-	max-height: 15%;
-	background: #D60000;
-	text-align: center;
-	margin-left: 15px;
-	margin-top: 10px;
+.admincol {
+	padding: 20px;
+	display: inline;
+}
+
+.admintile {
+	padding: 40px;
+	background: #D0D0D0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 200px;
 	font-weight: bold;
-	color: white;
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+	transition: 0.3s;
 	cursor: pointer;
+	border-radius: 20px;
 }
 
-#adminBereich .tile:hover {
-	background: #FB2020;
-}
-
-#adminBereich .tileImg {
-	max-width: 80%;
-}
-
-#adminBereich .smallImg {
-	position: absolute;
-	width: 30px;
-	height: 30px;
+.admintile:hover {
+	background: #C0C0C0;
 }
 
 /* Inhalt Boxen */
