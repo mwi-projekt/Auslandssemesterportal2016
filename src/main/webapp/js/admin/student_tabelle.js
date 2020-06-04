@@ -3,8 +3,6 @@ $(document).ready(function () {
     const inputVorname = $("#vorname");
     const inputNachname = $("#nachname");
     const inputEmail = $("#email");
-    // const inputTel = $("#telefonnummer");
-    // const inputMobil = $("#mobilnummer");
     const inputStudiengang = $("#studiengang");
     const inputKurs = $("#kurs")
     const inputMatrikelnr = $("#matrikelnummer");
@@ -40,8 +38,6 @@ $(document).ready(function () {
             {data: 'vorname'},
             {data: 'nachname'},
             {data: 'email'},
-            // {data: 'tel'},
-            // {data: 'mobil'},
             {data: 'studiengang'},
             {data: 'kurs'},
             {data: 'matrikelnummer'},
@@ -70,8 +66,6 @@ $(document).ready(function () {
         inputNachname.val(myData.nachname);
         currentEmail = myData.email;
         inputEmail.val(myData.email);
-        // inputTel.val(myData.tel);
-        // inputMobil.val(myData.mobil);
         inputStudiengang.val(myData.studiengang);
         inputKurs.val(myData.kurs);
         inputMatrikelnr.val(myData.matrikelnummer);
@@ -87,8 +81,6 @@ $(document).ready(function () {
         var vorname = inputVorname.val();
         var nachname = inputNachname.val();
         var email = inputEmail.val();
-        // var telefonnummer = inputTel.val();
-        // var mobilnummer = inputMobil.val();
         var studiengang = inputStudiengang.val();
         var kurs = inputKurs.val();
         var matrikelnummer = inputMatrikelnr.val();
@@ -111,8 +103,6 @@ $(document).ready(function () {
                 oldmail: oldMail,
                 vorname: vorname,
                 nachname: nachname,
-                // tel: telefonnummer,
-                // mobil: mobilnummer,
                 studgang: studiengang,
                 kurs: kurs,
                 matnr: matrikelnummer,
