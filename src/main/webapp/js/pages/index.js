@@ -34,7 +34,7 @@ $(document).ready(function () {
 
 
     if (sessionStorage['rolle'] === "1") {
-        document.getElementById("zumPortal").href = "index.jsp";
+        // document.getElementById("zumPortal").href = "index.jsp";
     } else if (sessionStorage['rolle'] === "2") {
         document.getElementById("zumPortal").href = "task_overview.html";
         document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
@@ -44,6 +44,20 @@ $(document).ready(function () {
         document.getElementById("zumPortal").href = "task_overview_sgl.html";
         document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }
+
+    // Click Listener für die Tiles im AdminBereich
+    $('.admintile').on('click', function () {
+        let id = $(this).attr('id');
+        if (id === 'student') {
+            location.href = 'HTML/admin/verwaltung_student.html';
+        }
+        if (id === 'auslandsamt') {
+            location.href = 'HTML/admin/verwaltung_auslandsamt.html';
+        }
+        if (id === 'studiengangsleitung') {
+            location.href = 'HTML/admin/verwaltung_studiengangsleitung.html';
+        }
+    });
 
     // init ui
     initSlider();
@@ -69,20 +83,6 @@ $(document).ready(function () {
     loadAuslandsangebote();
     loadAuslandsangeboteInhalt();
     loadInfoMaterial();
-
-    // Click Listener für die Tiles im AdminBereich
-    $('.admintile').on('click', function () {
-        var id = $(this).attr('id');
-        if (id === 'student') {
-            location.href = 'HTML/admin/verwaltung_student.html';
-        }
-        if (id === 'auslandsamt') {
-             location.href = 'HTML/admin/verwaltung_auslandsamt.html';
-          }
-        if (id === 'studiengangsleitung') {
-             location.href = 'HTML/admin/verwaltung_studiengangsleitung.html';
-           }
-    });
 });
 
 // Laden der Daten der PortalInfo Box

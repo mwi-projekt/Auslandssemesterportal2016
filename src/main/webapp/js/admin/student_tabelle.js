@@ -3,35 +3,35 @@ $(document).ready(function () {
     const inputVorname = $("#vorname");
     const inputNachname = $("#nachname");
     const inputEmail = $("#email");
-    const inputTel = $("#telefonnummer");
-    const inputMobil = $("#mobilnummer");
+    // const inputTel = $("#telefonnummer");
+    // const inputMobil = $("#mobilnummer");
     const inputStudiengang = $("#studiengang");
     const inputKurs = $("#kurs")
-    const inputMartikelnr = $("#martikelnummer");
+    const inputMatrikelnr = $("#matrikelnummer");
     const inputStandort = $("#standort");
 
     // Erstelle die DataTable
     myTable = $('#example').DataTable({
         dom: '<"top"f> rt <"bottom"lp>',
         language: {
-            processing:     "Bitte warten ...",
-            search:         "Suchen ",
-            lengthMenu:     "_MENU_ Einträge anzeigen",
-            info:           "_START_ bis _END_ von _TOTAL_ Einträgen",
-            infoEmpty:      "Keine Daten vorhanden",
-            infoFiltered:   "(gefiltert von _MAX_ Einträgen)",
-            infoPostFix:    "",
+            processing: "Bitte warten ...",
+            search: "Suchen ",
+            lengthMenu: "_MENU_ Einträge anzeigen",
+            info: "_START_ bis _END_ von _TOTAL_ Einträgen",
+            infoEmpty: "Keine Daten vorhanden",
+            infoFiltered: "(gefiltert von _MAX_ Einträgen)",
+            infoPostFix: "",
             loadingRecords: "Wird geladen ...",
-            zeroRecords:    "Es sind keine Einträge vorhanden.",
-            emptyTable:     "Die Tabelle ist leer",
+            zeroRecords: "Es sind keine Einträge vorhanden.",
+            emptyTable: "Die Tabelle ist leer",
             paginate: {
-                first:      "Erste",
-                previous:   "Zurück",
-                next:       "Nächste",
-                last:       "Letzte"
+                first: "Erste",
+                previous: "Zurück",
+                next: "Nächste",
+                last: "Letzte"
             },
             aria: {
-                sortAscending:  ": aktivieren, um Spalte aufsteigend zu sortieren",
+                sortAscending: ": aktivieren, um Spalte aufsteigend zu sortieren",
                 sortDescending: ": aktivieren, um Spalte absteigend zu sortieren"
             }
         },
@@ -40,8 +40,8 @@ $(document).ready(function () {
             {data: 'vorname'},
             {data: 'nachname'},
             {data: 'email'},
-            {data: 'tel'},
-            {data: 'mobil'},
+            // {data: 'tel'},
+            // {data: 'mobil'},
             {data: 'studiengang'},
             {data: 'kurs'},
             {data: 'matrikelnummer'},
@@ -61,17 +61,20 @@ $(document).ready(function () {
         responsive: true
     });
 
+    let currentEmail;
+
     // Fülle die Modal-Felder
     $("#example").on("mousedown", "#edit", function (e) {
         const myData = myTable.row($(this).parents('tr')).data();
         inputVorname.val(myData.vorname);
         inputNachname.val(myData.nachname);
+        currentEmail = myData.email;
         inputEmail.val(myData.email);
-        inputTel.val(myData.tel);
-        inputMobil.val(myData.mobil);
+        // inputTel.val(myData.tel);
+        // inputMobil.val(myData.mobil);
         inputStudiengang.val(myData.studiengang);
         inputKurs.val(myData.kurs);
-        inputMartikelnr.val(myData.matrikelnummer);
+        inputMatrikelnr.val(myData.matrikelnummer);
         inputStandort.val(myData.standort);
     });
 
@@ -84,16 +87,16 @@ $(document).ready(function () {
         var vorname = inputVorname.val();
         var nachname = inputNachname.val();
         var email = inputEmail.val();
-        var telefonnummer = inputTel.val();
-        var mobilnummer = inputMobil.val();
+        // var telefonnummer = inputTel.val();
+        // var mobilnummer = inputMobil.val();
         var studiengang = inputStudiengang.val();
         var kurs = inputKurs.val();
-        var martikelnummer = inputMartikelnr.val();
+        var matrikelnummer = inputMatrikelnr.val();
         var standort = inputStandort.val();
         var oldMail = "0";
 
-        if ($('#email').attr('data-value') != $('#email').val()) {
-            oldMail = $('#email').attr('data-value');
+        if (currentEmail != $('#email').val()) {
+            oldMail = currentEmail;
         }
 
         Swal.fire({
@@ -103,17 +106,16 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: baseUrl + "/user/update",
-            // url: baseUrl + "/test",
             data: {
                 email: email,
                 oldmail: oldMail,
                 vorname: vorname,
                 nachname: nachname,
-                tel: telefonnummer,
-                mobil: mobilnummer,
+                // tel: telefonnummer,
+                // mobil: mobilnummer,
                 studgang: studiengang,
                 kurs: kurs,
-                matnr: martikelnummer,
+                matnr: matrikelnummer,
                 role: "3"
             },
             success: function (result) {
