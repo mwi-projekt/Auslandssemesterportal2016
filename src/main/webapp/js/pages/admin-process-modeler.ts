@@ -1,36 +1,37 @@
 import {$,baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
+// @ts-ignore
 import Viewer from "bpmn-js";
 import "jquery-ui-dist";
 import "bootstrap-switch";
 import "../jquery.dynamicdom";
+// @ts-ignore
 import selectform from "../../modals/select-form.html";
+// @ts-ignore
 import textform from "../../modals/text-form.html";
+// @ts-ignore
 import checkboxform from "../../modals/checkbox-form.html";
+// @ts-ignore
 import uploadform from "../../modals/upload-form.html";
 
-var siteHasUnsavedChanges = false;
+let siteHasUnsavedChanges = false;
 
-window.onbeforeunload = function(e) {
+window.onbeforeunload = function(e : any) {
 	if(siteHasUnsavedChanges) {
 	return 'Sie sind dabei die Seite zu verlassen.\n Möchten Sie wirklich fortfahren?';
 	} else {
 		return null;
 	}
-}
+};
 
 $(document).ready(function () {
 
-    // var id = urlParams.get('id').trim();
-    /*var dia = urlParams.get('dia').trim();
-    var type = urlParams.get('type').trim();
-    var index = urlParams.get('index').trim(); */
-        var id = urlParams.get('id');
-        var dia = urlParams.get('dia');
-        var type = urlParams.get('type');
-        var index = urlParams.get('index');
-    var json = {};
+        let id = urlParams.get('id');
+        let dia = urlParams.get('dia');
+        let type = urlParams.get('type');
+        let index = urlParams.get('index');
+    let json = {};
 
     $.get(baseUrl + '/processmodel/get', {
         model: dia,
@@ -89,9 +90,9 @@ $(document).ready(function () {
         siteHasUnsavedChanges = false;
     });
 
-    function openCheckboxPopup(data, cb, cbClose) {
+    function openCheckboxPopup(data : any, cb : any, cbClose : any) {
     	siteHasUnsavedChanges = true;
-        var success = false;
+        let success = false;
         Swal.fire({
             title: 'Checkbox hinzufügen',
             html: checkboxForm,
@@ -113,11 +114,11 @@ $(document).ready(function () {
 
 
                 $('#field-label').on('change keydown', function () {
-                    $('#demo-label').text($(this).val());
+                    $('#demo-label').text($(this).val()!.toString);
                 });
 
                 $('#field-save').on('click', function () {
-                    var data = {
+                    let data = {
                         data: {
                             label: $('#field-label').val(),
                             id: $('#field-id').val(),
@@ -131,9 +132,9 @@ $(document).ready(function () {
         });
     }
 
-    function openSelectFormPopup(data, cb, cbClose) {
+    function openSelectFormPopup(data : any, cb : any, cbClose : any) {
     	siteHasUnsavedChanges = true;
-        var success = false;
+        let success = false;
         Swal.fire({
             title: 'Auswahlfeld hinzufügen',
             html: selectForm,
@@ -150,7 +151,7 @@ $(document).ready(function () {
                     });
                 }
 
-                function addListItem(val) {
+                function addListItem(val : any) {
                     $('#field-values').append('<li class="list-group-item"><span>'+val+'</span><i class="fa fa-close"></i></li>');
                 }
 
@@ -167,7 +168,7 @@ $(document).ready(function () {
                 }
 
                 if (data.required) {
-                    $('#field-req ')[0].checked = data.required;
+                    $('#field-req ')[0].setAttribute("checked", data.required);
                 }
 
                 $("[switch]").bootstrapSwitch({
@@ -180,10 +181,10 @@ $(document).ready(function () {
                 }
 
                 $('#field-label').on('change keydown', function () {
-                    $('#demo-label').text($(this).val());
+                    $('#demo-label').text($(this).val()!.toString);
                 });
 
-                $('#field-val').on('keydown', function () {
+                $('#field-val').on('keydown', function (event) {
                     if(event.keyCode == 13){
                         $('#add-btn').click();
                     }
@@ -203,16 +204,16 @@ $(document).ready(function () {
                 });
 
                 $('#field-save').on('click', function () {
-                    var values = [];
+                    let values : any = [];
                     $('#field-values').children().each(function () {
                         values.push($(this).find('span').text());
                     });
-                    var data = {
+                    let data = {
                         data: {
                             values: values,
                             label: $('#field-label').val(),
                             id: $('#field-id').val(),
-                            required: $('#field-req')[0].checked
+                            required: $('#field-req')[0].getAttribute("checked")
                         },
                         content: $('#demo').html()
                     };
@@ -224,9 +225,9 @@ $(document).ready(function () {
         });
     }
 
-    function openUploadPopup(data, cb, cbClose) {
+    function openUploadPopup(data : any, cb : any, cbClose : any) {
     	siteHasUnsavedChanges = true;
-        var success = false;
+        let success = false;
         Swal.fire({
             title: 'Upload hinzufügen',
             html: uploadForm,
@@ -246,7 +247,7 @@ $(document).ready(function () {
                 }
 
                 $('#field-save').on('click', function () {
-                    var data = {
+                    let data = {
                         data: {
                             filename: $('#field-filename').val(),
                             id: $('#field-id').val()
@@ -261,9 +262,9 @@ $(document).ready(function () {
         });
     }
 
-    function openTextInputPopup(data, cb, cbClose) {
+    function openTextInputPopup(data : any, cb : any, cbClose : any) {
     	siteHasUnsavedChanges = true;
-        var success = false;
+        let success = false;
         Swal.fire({
             title: 'Textfeld hinzufügen',
             html: textForm,
@@ -292,7 +293,7 @@ $(document).ready(function () {
                 }
 
                 if (data.required) {
-                    $('#field-req')[0].checked = data.required;
+                    $('#field-req')[0].setAttribute("checked",data.required);
                 }
 
                 $("[switch]").bootstrapSwitch({
@@ -301,17 +302,17 @@ $(document).ready(function () {
                 });
 
                 $('#field-label').on('change keydown', function () {
-                    $('#demo-label').text($(this).val());
+                    $('#demo-label').text($(this).val()!.toString);
                 });
 
                 $('#field-save').on('click', function () {
-                    var data = {
+                    let data = {
                         data: {
                             label: $('#field-label').val(),
                             type: $('#field-type').val(),
                             numchars: $('#field-numchars').val(),
                             id: $('#field-id').val(),
-                            required: $('#field-req')[0].checked
+                            required: $('#field-req')[0].getAttribute("checked")
                         }
                     };
                     success = true;
@@ -322,57 +323,58 @@ $(document).ready(function () {
         });
     }
 
-    var selectForm = selectform;
+    let selectForm = selectform;
 
-    var textForm = textform;
+    let textForm = textform;
 
-    var checkboxForm = checkboxform;
+    let checkboxForm = checkboxform;
 
-    var uploadForm = uploadform;
+    let uploadForm = uploadform;
 
 
-    function init(data) {
+    function init(data : any) {
+        // @ts-ignore
         $('#cardSlots').dynamicdom({
 
             // initalize
             data: data,
 
             // on change update output element
-            onchange: function(output) {
+            onchange: function(output : any) {
                 json = output;
 //                siteHasUnsavedChanges = true;
             },
 
-            onedit: function ($elm, type, cb, self) {
+            onedit: function ($elm : any, type: any, cb: any, self: any) {
                 if (type == 'form-select') {
-                    openSelectFormPopup($elm.data('cdata'), function (data) {
+                    openSelectFormPopup($elm.data('cdata'), function (data: any) {
                         self.settings.oninit($elm, data, data.data, cb, self);
                     }, function () {
                     });
                 } else if (type == 'form-text') {
-                    openTextInputPopup($elm.data('cdata'), function (data) {
+                    openTextInputPopup($elm.data('cdata'), function (data: any) {
                         self.settings.oninit($elm, data, data.data, cb, self);
                     }, function () {
                     });
                 } else if (type == 'form-checkbox') {
-                    openCheckboxPopup($elm.data('cdata'), function (data) {
+                    openCheckboxPopup($elm.data('cdata'), function (data: any) {
                         data.content = '<div class="form-group"><label><input type="checkbox" /> '+ data.data.label +'</label></div>';
                         data.editor = false;
                         cb(self, $elm, data);
                     }, function () {
                     });
                 } else if (type == 'form-upload') {
-                    openUploadPopup($elm.data('cdata'), function (data) {
+                    openUploadPopup($elm.data('cdata'), function (data: any) {
                         self.settings.oninit($elm, data, data.data, cb, self);
                     }, function () {
                     });
                 }
             },
 
-            oninit: function ($elm, outp, data, cb, self) {
-                var type = $elm.data('type');
+            oninit: function ($elm: any, outp: any, data: any, cb: any, self: any) {
+                let type = $elm.data('type');
                 if (type == 'form-select') {
-                    var con = '';
+                    let con = '';
                     $.each(data.values, function () {
                         con += '<option>'+this+'</option>';
                     });
@@ -395,13 +397,13 @@ $(document).ready(function () {
             },
 
             // set suitable content for type
-            render: function($elm, type) {
+            render: function($elm: any, type: any) {
 
                 // use default options when editor = true
-                var editor = true;
-                var enableEdit = false;
-                var deleteable = true;
-                var con;
+                let editor : any = true;
+                let enableEdit = false;
+                let deleteable = true;
+                let con;
                 if (type == 'title' || type == 'subtitle') {
                     editor = {};
                     editor.toolbar = [
@@ -426,9 +428,9 @@ $(document).ready(function () {
 
                 if (type == 'form-select') {
                     enableEdit = true;
-                    con = function (elm, outp, cb, self) {
+                    con = function (elm:any, outp:any, cb:any, self:any) {
                         outp.content = 'Hallo Welt';
-                        openSelectFormPopup({}, function (data) {
+                        openSelectFormPopup({}, function (data:any) {
                             self.settings.oninit(elm, data, data.data, cb, self);
                         }, function () {
                             elm.parent().find('.actions .fa-trash').trigger('click');
@@ -436,9 +438,9 @@ $(document).ready(function () {
                     };
                 } else if (type == 'form-text') {
                     enableEdit = true;
-                    con = function (elm, outp, cb, self) {
+                    con = function (elm:any, outp:any, cb:any, self:any) {
                         outp.content = 'Hallo Welt';
-                        openTextInputPopup({}, function (data) {
+                        openTextInputPopup({}, function (data:any) {
                             self.settings.oninit(elm, data, data.data, cb, self);
                         }, function () {
                             elm.parent().find('.actions .fa-trash').trigger('click');
@@ -446,9 +448,9 @@ $(document).ready(function () {
                     };
                 } else if (type == 'form-checkbox') {
                     enableEdit = true;
-                    con = function (elm, outp, cb, self) {
+                    con = function (elm:any, outp:any, cb:any, self:any) {
                         outp.content = 'Hallo Welt';
-                        openCheckboxPopup({}, function (data) {
+                        openCheckboxPopup({}, function (data:any) {
                             data.content = '<div class="checkbox"><label><input type="checkbox" /> '+ data.data.label +'</label></div>';
                             data.editor = false;
                             cb(self, elm, data);
@@ -458,9 +460,9 @@ $(document).ready(function () {
                     };
                 } else if (type == 'form-upload') {
                     enableEdit = true;
-                    con = function (elm, outp, cb, self) {
+                    con = function (elm:any, outp:any, cb:any, self:any) {
                         outp.content = 'Hallo Welt';
-                        openUploadPopup({}, function (data) {
+                        openUploadPopup({}, function (data:any) {
                             self.settings.oninit(elm, data, data.data, cb, self);
                         }, function () {
                             elm.parent().find('.actions .fa-trash').trigger('click');
@@ -477,7 +479,7 @@ $(document).ready(function () {
             },
 
             // filter output
-            filter: function(content, type) {
+            filter: function(content:any, type:any) {
                 if (type == 'title') {
                     //content = $(content).unwrap().html();
                 }
