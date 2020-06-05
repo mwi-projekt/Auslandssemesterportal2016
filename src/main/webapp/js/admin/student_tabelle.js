@@ -50,7 +50,7 @@ $(document).ready(function () {
             {
                 data: null,
                 className: "center",
-                defaultContent: '<i style="cursor: pointer" id="delete" class="fas fa-trash"></i>'
+                defaultContent: '<i style="cursor: pointer" id="deleteButton" class="fas fa-trash"></i>'
             }
         ],
         select: 'single',
@@ -72,12 +72,9 @@ $(document).ready(function () {
         inputStandort.val(myData.standort);
     });
 
-    // Submit-Button
+    // Submit-Button in Modal Dialog
     $('#myFormSubmit').click(function (e) {
         e.preventDefault();
-
-        console.log($('#myForm').serialize());
-
         var vorname = inputVorname.val();
         var nachname = inputNachname.val();
         var email = inputEmail.val();
@@ -117,6 +114,44 @@ $(document).ready(function () {
                 Swal.close();
                 Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
                 console.log(JSON.stringify(result));
+            }
+        });
+    });
+
+    // Delete-Button
+    $("#example").on("mousedown", "#deleteButton", function (e) {
+        const myData = myTable.row($(this).parents('tr')).data();
+        const martikelnummer = myData.matrikelnummer;
+        Swal.fire({
+            title: "Bist du sicher?",
+            text: "Der User kann nicht wiederhergestellt werden!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Löschen!"
+        }).then(function (result) {
+            if (result.value) {
+                alert("Du hast auf Löschen gedrückt");
+                Swal.fire({
+                    title: 'Lösche User'
+                });
+                Swal.showLoading();
+                $.ajax({
+                    type: "GET",
+                    url: baseUrl + "/user/delete",
+                    data: {
+                        matrikelnummer: martikelnummer
+                    },
+                    success: function (result) {
+                        Swal.close();
+                        $('#userStudShow').click();
+                        Swal.fire('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                    },
+                    error: function (result) {
+                        Swal.close();
+                        Swal.fire('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                    }
+                });
             }
         });
     });
