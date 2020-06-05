@@ -60,13 +60,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="images/Karussell1.jpg" alt="First slide" />
+                <img class="d-block w-100" src="images/SanDiego_Hintergrund.png" alt="First slide" />
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="images/Karussell2.jpg" alt="Second slide" />
+                <img class="d-block w-100" src="images/Teipei_Hintergrund.png" alt="Second slide" />
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="images/Karussell3.jpg" alt="Third slide" />
+                <img class="d-block w-100" src="images/Teiwan_Hintergrund.png" alt="Third slide" />
             </div>
         </div>
         <a
@@ -98,7 +98,7 @@
                     <h1 class="auslandsangebote-heading">Auslandsangebote</h1>
                 </div>
                 <div class="auslandsangebote-image-left-text-right ">
-                    <img src="images/dundee.jpg"  />
+                    <img src="images/Dundee.png"  />
                     <div class="auslandsangebote-text-block">
                         <p>
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
@@ -139,10 +139,10 @@
                             <li>Nur 5000 Studierende</li>
                         </ul>
                     </div>
-                    <img src="images/dundee.jpg"  />
+                    <img src="images/Bulgaria.png"  />
                 </div>
                 <div class="auslandsangebote-image-left-text-right">
-                    <img src="images/dundee.jpg" />
+                    <img src="images/NDHU.png" />
                     <div class="auslandsangebote-text-block" >
                         <p>
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
@@ -183,7 +183,7 @@
                             <li>Nur 5000 Studierende</li>
                         </ul>
                     </div>
-                    <img src="images/dundee.jpg" />
+                    <img src="images/SanMarcos.png" />
                 </div>
                 <div class="auslandsangebote-image-left-text-right">
                     <img src="images/dundee.jpg"  />
