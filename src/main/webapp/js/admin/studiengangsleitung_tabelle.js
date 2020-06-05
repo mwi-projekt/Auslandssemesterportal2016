@@ -107,11 +107,11 @@ $(document).ready(function () {
                 Swal.close();
                 Swal.fire('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
                 $('#exampleModal').modal('hide');
+                myTable.ajax.reload();
             },
             error: function (result) {
                 Swal.close();
                 Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
-                console.log(JSON.stringify(result));
             }
         });
     });
