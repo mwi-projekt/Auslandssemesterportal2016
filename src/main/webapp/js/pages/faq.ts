@@ -3,7 +3,7 @@ import "../app";
 import "bootstrap";
 import "jquery-ui-dist";
 
-var expandFAQ = function() {
+let expandFAQ = function() {
 	$('.show').css('cursor', 'pointer');
 	$('.weg').hide();
 	$('.show').on('click', function() {
