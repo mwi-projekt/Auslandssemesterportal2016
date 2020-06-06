@@ -48,7 +48,7 @@ $(document).ready(function () {
             {
                 data: null,
                 className: "center",
-                defaultContent: '<i style="cursor: pointer" id="delete" class="fas fa-trash"></i>'
+                defaultContent: '<i style="cursor: pointer" id="deleteButton" class="fas fa-trash"></i>'
             }
         ],
         select: 'single',
@@ -115,4 +115,43 @@ $(document).ready(function () {
             }
         });
     });
+
+    // Delete-Button
+            $("#example").on("mousedown", "#deleteButton", function (e) {
+                const myData = myTable.row($(this).parents('tr')).data();
+                const email = myData.email;
+                Swal.fire({
+                    title: "Bist du sicher?",
+                    text: "Der User kann nicht wiederhergestellt werden!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Löschen!"
+                }).then(function (result) {
+                    if (result.value) {
+                        alert("Du hast auf Löschen gedrückt");
+                        Swal.fire({
+                            title: 'Lösche User'
+                        });
+                        Swal.showLoading();
+                        $.ajax({
+                            type: "POST",
+                            url: baseUrl + "/user/deleteSGL",
+                            data: {
+                                mail: email
+                            },
+                            success: function (result) {
+                                Swal.close();
+                                $('#userSGLShow').click();
+                                Swal.fire('Gelöscht!', 'Der User wurde erfolgreich gelöscht.', 'success');
+                                myTable.ajax.reload();
+                            },
+                            error: function (result) {
+                                Swal.close();
+                                Swal.fire('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
+                            }
+                        });
+                    }
+                });
+            });
 });

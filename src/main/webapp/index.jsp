@@ -15,6 +15,7 @@
 
 <div class="container" id="adminBereich">
  <%@ include file="HTML/admin/landing-page.html" %>
+ <%@ include file="partials/footer.html" %>
 </div>
 
 <div class="inhalt" id="normalBereich">
