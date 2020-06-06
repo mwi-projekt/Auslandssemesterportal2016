@@ -595,6 +595,7 @@ header{
 	transition: 0.3s;
 	cursor: pointer;
 	border-radius: 20px;
+	text-align: center;
 }
 
 .admintile:hover {
