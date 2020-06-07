@@ -11,12 +11,12 @@ $(document).ready(function () {
         $('.navEl').removeClass('current');
         $(this).addClass('current');
         $('.inhalt').hide();
-        var id = $(this).attr('id');
+        let id = $(this).attr('id')!;
         id = id.substring(3, 4);
         $('#in' + id).show();
 
         // Bewerben
-        if (id == 2) {
+        if (id === "2") {
             initBewerben();
         }
     });
@@ -37,23 +37,24 @@ $(document).ready(function () {
             },
             success: function (result) {
                 // schon beworbene Unis filtern
-                var splitUni = [];
+                let splitUni : string[] = [];
                 $('#tableBewProzess tr[data-rid] td:first-child').each(function() {
                     splitUni.push($(this).text());
                 });
 
-                var popUpHtml = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
-                for (var l = 0; l < result.data.length; l++) {
+                let popUpHtml = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
+                for (let l = 0; l < result.data.length; l++) {
                     // filtern von schon beworbenen unis
                     if (splitUni.indexOf(result.data[l].uniTitel) != -1) continue;
                     popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
                 }
                 
-                var popUpHtml2 = '<div class="form-group"><div class="col-md-12"><select class="inBox" id="selectZeit">';
+                let popUpHtml2 = '<div class="form-group"><div class="col-md-12"><select class="inBox" id="selectZeit">';
                 //Zeitraum muss hier noch automatisch generiert werden
                 popUpHtml2 = popUpHtml2 + '<option> Zeitraum auswählen </option><option> Sommersemester 2020 </option>';
                 
                 popUpHtml = popUpHtml + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
+                // @ts-ignore
                 if (popUpHtml.match('<option>') != '<option>') {
                     popUpHtml = '<b id="popClose"><img src="images/button_delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
                 }
@@ -89,12 +90,12 @@ $(document).ready(function () {
 
 // Lädt die Daten zu den Auslandsangeboten aus der Datenbank
 function loadAuslandsangebote() {
-    var angeboteInhalt = '<option>Alle Angebote</option>';
+    let angeboteInhalt = '<option>Alle Angebote</option>';
     $.ajax({
         type: "GET",
         url: baseUrl + "/auslandsAngebote",
         success: function (result) {
-            for (var i = 0; i < result.data.length; i++) {
+            for (let i = 0; i < result.data.length; i++) {
                 angeboteInhalt = angeboteInhalt + '<option>' + result.data[i].studiengang + '</option>';
             }
             $('#selStudiengang').html(angeboteInhalt);
@@ -117,9 +118,9 @@ function loadAuslandsangeboteInhalt() {
         type: "GET",
         url: baseUrl + "/auslandsAngebotsInhalte",
         success: function (data) {
-            var result = data.data;
-            var htmlText = '';
-            for (var i = 0; i < result.length; i++) {
+            let result = data.data;
+            let htmlText = '';
+            for (let i = 0; i < result.length; i++) {
                 if (!result[i].erfahrungsbericht) {
                     result[i].erfahrungsbericht = "Keine Erfahrungsberichte vorhanden.";
                 }
@@ -176,14 +177,12 @@ function loadAuslandsangeboteInhalt() {
 
             }
             $('#angebote-wrapper').html(htmlText);
-            for (var i = 0; i < result.length; i++) {
-                for (var j = 1; j <= 4; j++) {
-                    document
-                        .getElementById('n' + i + j)
-                        .addEventListener(
+            for (let i = 0; i < result.length; i++) {
+                for (let j = 1; j <= 4; j++) {
+                    document.getElementById('n' + i + j)?.addEventListener(
                             'click',
                             function (event) {
-                                var id = $(this).parent()
+                                let id = $(this).parent()
                                     .parent().parent()
                                     .attr('id');
                                 $('#' + id).children()
@@ -195,8 +194,7 @@ function loadAuslandsangeboteInhalt() {
                                     .children()
                                     .children('.contentAng')
                                     .removeClass('active');
-                                id = $(this).attr('id')
-                                    .replace('n', '');
+                                id = $(this).attr('id')!.replace('n', '');
                                 $('#c' + id).addClass('active');
                             });
                 }
@@ -213,12 +211,12 @@ function initBewerben() {
             matnr: sessionStorage['matrikelnr']
         },
         success: function (result) {
-            var tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th colspan="2">Aktionen</th></tr></thead>';
+            let tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th colspan="2">Aktionen</th></tr></thead>';
             if (result.data.length == 0) {
                 $('#tableBewProzess').html('<h2>Keine Bewerbungen vorhanden</h2>');
             } else {
-                for (var i = 0; i < result.data.length; i++) {
-                    var instance_info = result.data[i];
+                for (let i = 0; i < result.data.length; i++) {
+                    let instance_info = result.data[i];
                     tabelle = tabelle + '<tr data-rid="' + (i + 1) + '"><td>' + instance_info.uni + '</td><td>' + instance_info.stepCounter + '</td>';
                     //Anlegen der Buttons
                     if ((instance_info.stepCounter === "Abgeschlossen") || (instance_info.stepCounter === "Auf Rückmeldung warten") || (instance_info.stepCounter === "Bewerbung wurde abgelehnt") ) {
@@ -250,8 +248,8 @@ function initBewerben() {
 
 function initDeleteProcessButtons() {
     $('.btn-delete').on('click', function () {
-        var uni = $(this).attr("uni");
-        var id = $(this).attr("rid");
+        let uni = $(this).attr("uni");
+        let id = $(this).attr("rid");
         Swal.fire({
             title: "Bist du sicher?",
             text: "Der Prozess kann nicht wiederhergestellt werden!",
@@ -262,8 +260,8 @@ function initDeleteProcessButtons() {
             cancelButtonText: "Abbrechen",
         }).then(function (result) {
             if(result.value) {
-                //var id = $('.btn-delete').closest('tr').data('rid');
-                var matrikelnummer = sessionStorage['matrikelnr'];
+                //let id = $('.btn-delete').closest('tr').data('rid');
+                let matrikelnummer = sessionStorage['matrikelnr'];
 
                 $.ajax({
                     type: "GET",
