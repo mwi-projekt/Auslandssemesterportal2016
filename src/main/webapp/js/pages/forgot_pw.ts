@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 function resetpw() {
-	var mail = $('#mail').val();
+	let mail = $('#mail').val();
 	$.ajax({
 		type : "POST",
 		url : baseUrl + "/resetPassword",
