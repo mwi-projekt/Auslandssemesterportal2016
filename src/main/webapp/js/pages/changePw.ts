@@ -2,15 +2,19 @@ import {$,baseUrl} from "../config";
 import "../app";
 import Swal from "sweetalert2";
 import "bootstrap";
+// @ts-ignore
 require("jquery-validation")($);
+// @ts-ignore
 require("jquery-validation/dist/localization/messages_de.min");
 
-var uuid_var;
-var url;
+let uuid_var : any;
+let url;
 
+// @ts-ignore
 $.validator.addMethod("pattern", function(value, element, params){
 	console.log(params);
 	let pattern = new RegExp(params);
+	// @ts-ignore
 	return this.optional(element) || pattern.test(value);
 }, "Ungültige Zeichenfolge.");
 
@@ -18,6 +22,7 @@ $(document).ready(function() {
 	url = new URL(window.location.href);
 	uuid_var = url.searchParams.get("uuid");
 
+	// @ts-ignore
 	$("#formular").validate({
 		debug: true
 	});
@@ -28,11 +33,12 @@ $(document).ready(function() {
 });
 
 function setpw() {
-	var pw_var = $('#pw').val();
-	var pw_repeat = $('#pw_repeat').val();
+	let pw_var = $('#pw').val();
+	let pw_repeat = $('#pw_repeat').val();
 	if (pw_var === pw_repeat){
-		var form = $('#formular');
+		let form = $('#formular');
 
+		// @ts-ignore
 		if (form && !form.valid()) {
 			Swal.fire('Bitte füllen sie alle Felder korrekt aus.');
 			return;
