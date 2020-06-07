@@ -7,9 +7,12 @@ $(document).ready(function () {
     const inputKurs = $("#kurs")
     const inputStandort = $("#standort");
 
+    let currentEmail;
+    let isEdit = false;
+
     // Erstelle die DataTable
     myTable = $('#example').DataTable({
-        dom: '<"top"f> rt <"bottom"lp>',
+        dom: '<"top"fB> rt <"bottom"lp>',
         language: {
             processing: "Bitte warten ...",
             search: "Suchen ",
@@ -32,6 +35,15 @@ $(document).ready(function () {
                 sortDescending: ": aktivieren, um Spalte absteigend zu sortieren"
             }
         },
+       buttons: [
+                   {
+                       text: '<i class="fas fa-user-plus" id="create"></i> Neue/r Studiengangsleiter/in',
+                       action: function (e, node, config) {
+                           $('#exampleModal').modal('show')
+                           isEdit = false;
+                           clearModal();
+                       }
+                   }],
         ajax: '/getUser?rolle=4',
         columns: [
             {data: 'vorname'},
@@ -55,8 +67,6 @@ $(document).ready(function () {
         responsive: true
     });
 
-    let currentEmail;
-
     // Fülle die Modal-Felder
     $("#example").on("mousedown", "#edit", function (e) {
         const myData = myTable.row($(this).parents('tr')).data();
@@ -67,13 +77,13 @@ $(document).ready(function () {
         inputStudiengang.val(myData.studiengang);
         inputKurs.val(myData.kurs);
         inputStandort.val(myData.standort);
+        isEdit = true;
     });
 
     // Submit-Button
     $('#myFormSubmit').click(function (e) {
         e.preventDefault();
 
-        console.log($('#myForm').serialize());
 
         var vorname = inputVorname.val();
         var nachname = inputNachname.val();
@@ -83,38 +93,100 @@ $(document).ready(function () {
         var standort = inputStandort.val();
         var oldMail = "0";
 
-        if (currentEmail != $('#email').val()) {
-            oldMail = currentEmail;
-        }
+        if (isEdit) {
+               if (currentEmail != $('#email').val()) {
+                     oldMail = currentEmail;
+               }
+                    Swal.fire({
+                        title: 'Speichere Änderungen'
+                    });
+                    Swal.showLoading();
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl + "/user/update",
+                        data: {
+                            email: email,
+                            oldmail: oldMail,
+                            vorname: vorname,
+                            nachname: nachname,
+                            studgang: studiengang,
+                            kurs: kurs,
+                            standort: standort,
+                            role: "4"
+                            },
+                        success: function (result) {
+                            Swal.close();
+                            Swal.fire('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
+                            $('#exampleModal').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
+                            myTable.ajax.reload();
+                            isEdit = false;
+                        },
+                        error: function (result) {
+                            Swal.close();
+                            Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
+                            isEdit = false;
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Speichere Änderungen'
+                    });
+                    Swal.showLoading();
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl + "/createSGL",
+                        data: {
+                            email: email,
+                            vorname: vorname,
+                            nachname: nachname,
+                            studgang: studiengang,
+                            kurs: kurs,
+                            standort: standort
+                        },
+                        success: function (data) {
+                            Swal.close();
+                            if (data == "mailError") {
 
-        Swal.fire({
-            title: 'Speichere Änderungen'
-        });
-        Swal.showLoading();
-        $.ajax({
-            type: "POST",
-            url: baseUrl + "/user/update",
-            data: {
-                email: email,
-                oldmail: oldMail,
-                vorname: vorname,
-                nachname: nachname,
-                studgang: studiengang,
-                kurs: kurs,
-                role: "4"
-            },
-            success: function (result) {
-                Swal.close();
-                Swal.fire('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
-                $('#exampleModal').modal('hide');
-                myTable.ajax.reload();
-            },
-            error: function (result) {
-                Swal.close();
-                Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
-            }
-        });
-    });
+                                Swal.fire({
+                                    title: "Fehler!",
+                                    text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
+                                    icon: "error",
+                                    confirmButtonText: "OK"
+                                });
+
+                            } else if (data == "No account registered for this email adress") {
+                                Swal.fire({
+                                    title: "Fehler!",
+                                    text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                                    icon: "error",
+                                    confirmButtonText: "OK"
+                                });
+                            } else if (data == "registerError") {
+                                Swal.fire({
+                                    title: "Fehler!",
+                                    text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                                    icon: "error",
+                                    confirmButtonText: "OK"
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Account erfolgreich erstellt",
+                                    text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
+                                    icon: "success",
+                                    confirmButtonText: "OK"
+                                });
+                            }
+                            $('#exampleModal').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
+                            myTable.ajax.reload();
+                            isEdit = false;
+                        }
+                    });
+                }
+            });
 
     // Delete-Button
             $("#example").on("mousedown", "#deleteButton", function (e) {
@@ -155,3 +227,15 @@ $(document).ready(function () {
                 });
             });
 });
+
+function clearModal() {
+    $('#exampleModal').on('hidden.bs.modal', function (e) {
+        $(this)
+            .find("input,textarea,select")
+            .val('')
+            .end()
+            .find("input[type=checkbox], input[type=radio]")
+            .prop("checked", "")
+            .end();
+    })
+}

@@ -25,7 +25,6 @@
   });
     </script>
 
-
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="../../node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>
@@ -44,6 +43,7 @@
     <script type="text/javascript" src="../../node_modules/cookieconsent/build/cookieconsent.min.js"></script>
     <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="../../node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
     <script src="../../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../../js/admin/studiengangsleitung_tabelle.js"></script>
 </head>
@@ -51,17 +51,16 @@
 
 <div data-include="header"></div>
 
-<div style="margin: 200px">
-    <div style="width: 100%; margin-bottom: 50px; height: 50px">
-        <span style="float: left; font-size: 1.5rem;">Studiengangsleitung bearbeiten</span>
-        <span style="float: right; font-size: 1.5rem;">
-            <a href="../../index.jsp" style="text-decoration: none">&larr; Zurück</a>
+<div class="verwaltung-container">
+    <div class="table-header-container">
+        <span class="big-text float-left">Studiengangsleiter/innen bearbeiten</span>
+        <span class="big-text float-right">
+            <a href="../../index.jsp">&larr; Zurück</a>
         </span>
     </div>
-
-    <div class="table-responsive-lg">
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
-            <thead>
+    <<div class="table-responsive-lg">
+    <table id="example" class="table table-striped table-bordered">
+        <thead>
             <tr>
                 <th>Vorname</th>
                 <th>Nachname</th>

@@ -113,11 +113,15 @@ $(document).ready(function () {
                     Swal.close();
                     Swal.fire('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
                     $('#exampleModal').modal('hide');
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                    myTable.ajax.reload();
+                    isEdit = false;
                 },
                 error: function (result) {
                     Swal.close();
                     Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
-                    console.log(JSON.stringify(result));
+                    isEdit = false;
                 }
             });
         } else {
