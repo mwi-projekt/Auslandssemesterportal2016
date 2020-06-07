@@ -3,6 +3,7 @@ package dhbw.mwi.Auslandsemesterportal2016.db;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.UUID;
 
 public class SQL_queries {
 
-//Ersetzt durch executeStatement
+	// Ersetzt durch executeStatement
 	/*
 	 * private static ResultSet executeQuery(String query){ //Führt Query auf
 	 * Datenbankanbindung aus DB.java aus Connection connection = DB.getInstance();
@@ -71,7 +72,7 @@ public class SQL_queries {
 	}
 
 	public static boolean isMatnrUsed(int matNr) { // Prüft ob Matrikelnummer bereits verwendet wird
-		String queryString = "SELECT 1 FROM user WHERE matrikelnummer = ?;";
+		String queryString = "SELECT 1 FROM User WHERE matrikelnummer = ?;";
 		String[] params = new String[] { "" + matNr };
 		String[] types = new String[] { "int" };
 		boolean resultExists = true;
@@ -86,7 +87,7 @@ public class SQL_queries {
 	}
 
 	public static boolean isEmailUsed(String mail) { // Prüft ob Mailadresse bereits verwendet wird
-		String queryString = "SELECT 1 FROM user WHERE email = ?;";
+		String queryString = "SELECT 1 FROM User WHERE email = ?;";
 		boolean resultExists = true;
 		String[] args = new String[] { mail };
 		String[] types = new String[] { "String" };
@@ -101,7 +102,7 @@ public class SQL_queries {
 	}
 
 	public static String getSalt(String mail) {// Ermittelt das zur Mailadresse hinterlegte Salt
-		String queryString = "SELECT salt FROM user WHERE email = ?;";
+		String queryString = "SELECT salt FROM User WHERE email = ?;";
 		String salt = "";
 		String[] args = new String[] { mail };
 		String[] types = new String[] { "String" };
@@ -121,12 +122,12 @@ public class SQL_queries {
 		String accessToken = Util.generateSalt();
 
 		if (userSessionExists(userID)) {
-			String query_ = "UPDATE loginSessions SET sessionID = ? WHERE userID = ?";
+			String query_ = "UPDATE LoginSession SET sessionID = ? WHERE userID = ?";
 			String[] params_ = new String[] { accessToken, "" + userID };
 			String[] types_ = new String[] { "String", "int" };
 			executeUpdate(query_, params_, types_);
 		} else {
-			String query_ = "INSERT INTO loginSessions (sessionID, userID) VALUES " + "(?,?)";
+			String query_ = "INSERT INTO LoginSession (sessionID, userID) VALUES " + "(?,?)";
 			String[] params_ = new String[] { accessToken, "" + userID };
 			String[] types_ = new String[] { "String", "int" };
 			executeUpdate(query_, params_, types_);
@@ -146,7 +147,7 @@ public class SQL_queries {
 		String matrikelnummer = "";
 		String rolle = "";
 		String accessToken = "";
-		String query = "SELECT verifiziert, matrikelnummer, studiengang, rolle, userID FROM user WHERE email = ? AND passwort = ?;";
+		String query = "SELECT verifiziert, matrikelnummer, studiengang, rolle, ID FROM User WHERE email = ? AND passwort = ?;";
 		String[] params = new String[] { mail, hashedPw };
 		String[] types = new String[] { "String", "String" };
 		ResultSet ergebnis = executeStatement(query, params, types);
@@ -156,7 +157,7 @@ public class SQL_queries {
 				matrikelnummer = ergebnis.getString("matrikelnummer");
 				rolle = ergebnis.getString("rolle");
 				if (ergebnis.getString("verifiziert").equals("1")) {
-					accessToken = createUserSession(ergebnis.getInt("userID"));
+					accessToken = createUserSession(ergebnis.getInt("ID"));
 					resultCode = 1;
 				} else {
 					resultCode = 3;
@@ -172,7 +173,7 @@ public class SQL_queries {
 	}
 
 	public static boolean userSessionExists(int userID) {
-		String queryString = "SELECT 1 FROM loginSessions WHERE userID = ?;";
+		String queryString = "SELECT 1 FROM LoginSession WHERE userID = ?;";
 		boolean resultExists = true;
 		String[] args = new String[] { "" + userID };
 		String[] types = new String[] { "int" };
@@ -187,7 +188,7 @@ public class SQL_queries {
 	}
 
 	public static boolean checkUserSession(String sessionID, String mail) {
-		String queryString = "SELECT loginSessions.sessionID, user.email FROM loginSessions,user WHERE user.userID = loginSessions.userID and user.email = ? and loginSessions.sessionID = ?;";
+		String queryString = "SELECT LoginSession.sessionID, User.email FROM LoginSession,User WHERE User.ID = LoginSession.userID and User.email = ? and LoginSession.sessionID = ?;";
 		String[] args = new String[] { mail, sessionID };
 		String[] types = new String[] { "String", "String" };
 		boolean isCorrect = false;
@@ -201,9 +202,9 @@ public class SQL_queries {
 		return isCorrect;
 	}
 
-//Rolle für User: 1 = Admin ; 2 = Mitarbeiter ; 3 = Student ; 0 = Fehler
+	// Rolle für User: 1 = Admin ; 2 = Mitarbeiter ; 3 = Student ; 0 = Fehler
 	public static int getRoleForUser(String mail) {
-		String queryString = "SELECT rolle FROM user WHERE email = ?;";
+		String queryString = "SELECT rolle FROM User WHERE email = ?;";
 		String[] args = new String[] { mail };
 		String[] types = new String[] { "String" };
 		ResultSet ergebnis = executeStatement(queryString, args, types);
@@ -221,9 +222,9 @@ public class SQL_queries {
 
 	}
 
-//DO NOT USE IN ANY SERVLET. DO NOT GIVE USERIDs TO PUBLIC
+	// DO NOT USE IN ANY SERVLET. DO NOT GIVE USERIDs TO PUBLIC
 	public static int getUserID(String mail) {
-		String queryString = "SELECT userID FROM user WHERE email = ?;";
+		String queryString = "SELECT ID FROM User WHERE email = ?;";
 		String[] args = new String[] { mail };
 		String[] types = new String[] { "String" };
 		ResultSet ergebnis = executeStatement(queryString, args, types);
@@ -242,7 +243,7 @@ public class SQL_queries {
 	}
 
 	public static int userLogout(String sessionID) {
-		String query_ = "DELETE FROM loginSessions WHERE sessionID = ?";
+		String query_ = "DELETE FROM LoginSession WHERE sessionID = ?";
 		String[] params_ = new String[] { sessionID };
 		String[] types_ = new String[] { "String" };
 		return executeUpdate(query_, params_, types_);
@@ -251,7 +252,7 @@ public class SQL_queries {
 	public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle,
 			String email, String studiengang, String kurs, int matrikelnummer, String tel, String mobil,
 			String standort, String verifiziert) {
-		String query = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert, resetToken) VALUES "
+		String query = "INSERT INTO User (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert, resetToken) VALUES "
 				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		String[] args = new String[] { vorname, nachname, passwort, salt, "" + rolle, email, studiengang, kurs,
 				"" + matrikelnummer, tel, mobil, standort, verifiziert, "" };
@@ -262,7 +263,7 @@ public class SQL_queries {
 
 	public static int updateUser(String vorname, String nachname, String email, String studiengang, String kurs,
 			String matrikelnummer) {
-		String query = "UPDATE user SET vorname = ?, nachname = ?, studiengang = ?, kurs = ?, matrikelnummer = ? WHERE email = ?";
+		String query = "UPDATE User SET vorname = ?, nachname = ?, studiengang = ?, kurs = ?, matrikelnummer = ? WHERE email = ?";
 		String[] args = new String[] { vorname, nachname, studiengang, kurs, "" + matrikelnummer, email };
 		String[] types = new String[] { "String", "String", "String", "String", "int", "String" };
 		return executeUpdate(query, args, types);
@@ -270,14 +271,14 @@ public class SQL_queries {
 
 	public static int updateUser(String vorname, String nachname, String email, String studiengang, String kurs,
 			String matrikelnummer, String newmail) {
-		String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, studiengang = ?, kurs = ?, matrikelnummer = ? WHERE email = ?";
+		String query = "UPDATE User SET vorname = ?, nachname = ?, email = ?, studiengang = ?, kurs = ?, matrikelnummer = ? WHERE email = ?";
 		String[] args = new String[] { vorname, nachname, newmail, studiengang, kurs, "" + matrikelnummer, email };
 		String[] types = new String[] { "String", "String", "String", "String", "String", "int", "String" };
 		return executeUpdate(query, args, types);
 	}
 
 	public static int updateMA(String vorname, String nachname, String email, String tel, String mobil) {
-		String query = "UPDATE user SET vorname = ?, nachname = ?, tel = ?, mobil = ? WHERE email = ?";
+		String query = "UPDATE User SET vorname = ?, nachname = ?, tel = ?, mobil = ? WHERE email = ?";
 		String[] args = new String[] { vorname, nachname, tel, mobil, email };
 		String[] types = new String[] { "String", "String", "String", "String", "String" };
 		return executeUpdate(query, args, types);
@@ -285,7 +286,7 @@ public class SQL_queries {
 
 	public static int updateMA(String vorname, String nachname, String email, String tel, String mobil,
 			String newmail) {
-		String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, tel = ?, mobil = ? WHERE email = ?";
+		String query = "UPDATE User SET vorname = ?, nachname = ?, email = ?, tel = ?, mobil = ? WHERE email = ?";
 		String[] args = new String[] { vorname, nachname, newmail, tel, mobil, email };
 		String[] types = new String[] { "String", "String", "String", "String", "String", "String" };
 		return executeUpdate(query, args, types);
@@ -358,7 +359,7 @@ public class SQL_queries {
 
 	public static String[] getUserData(int matNr) { // Gibt Name|Vorname|Mailadresse|aktuelleUni|bewStudiengang|Kurs
 													// zurück
-		String queryString = "SELECT nachname,vorname,email,standort,studiengang,kurs FROM user WHERE matrikelnummer = ?;";
+		String queryString = "SELECT nachname,vorname,email,standort,studiengang,kurs FROM User WHERE matrikelnummer = ?;";
 		String[] params = new String[] { "" + matNr };
 		String[] types = new String[] { "int" };
 		ResultSet ergebnis = executeStatement(queryString, params, types);
@@ -445,7 +446,7 @@ public class SQL_queries {
 
 	public static String forgetPassword(String mail) {
 		UUID uuid = UUID.randomUUID();
-		String query = "UPDATE user SET resetToken = ? WHERE email = ?";
+		String query = "UPDATE User SET resetToken = ? WHERE email = ?";
 		String[] params = new String[] { "" + uuid, mail };
 		String[] types = new String[] { "String", "String" };
 		executeUpdate(query, params, types);
@@ -454,7 +455,7 @@ public class SQL_queries {
 
 	public static String deactivateUser(String mail) {
 		UUID uuid = UUID.randomUUID();
-		String query = "UPDATE user SET verifiziert = ? WHERE email = ?";
+		String query = "UPDATE User SET verifiziert = ? WHERE email = ?";
 		String[] params = new String[] { "" + uuid, mail };
 		String[] types = new String[] { "String", "String" };
 		executeUpdate(query, params, types);
@@ -464,10 +465,9 @@ public class SQL_queries {
 	public static int setPassword(String uuid, String pwd) {
 		String salt = Util.generateSalt();
 		String hashedpw = Util.HashSha256(Util.HashSha256(pwd) + salt);
-		String query = "UPDATE user SET passwort = ?, salt = ?, resetToken = ''  WHERE resetToken = ?";
+		String query = "UPDATE User SET passwort = ?, salt = ?, resetToken = ''  WHERE resetToken = ?";
 		String[] params = new String[] { hashedpw, salt, uuid };
 		String[] types = new String[] { "String", "String", "String" };
 		return executeUpdate(query, params, types);
 	}
-
 }
