@@ -779,3 +779,13 @@ i {
 .swal2-popup {
 	font-size: 1.6rem !important;
 }
+
+.error {
+	color: red;
+	border-color: red;
+}
+
+.valid {
+	color: green;
+	border-color: green;
+}
