@@ -141,9 +141,9 @@ $(document).ready(function () {
                             email: email,
                             vorname: vorname,
                             nachname: nachname,
+                            standort: standort,
                             studgang: studiengang,
-                            kurs: kurs,
-                            standort: standort
+                            kurs: kurs
                         },
                         success: function (data) {
                             Swal.close();

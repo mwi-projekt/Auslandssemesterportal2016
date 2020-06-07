@@ -43,9 +43,10 @@ public class UserUpdateServlet extends HttpServlet {
                         String mobil = request.getParameter("mobil");
                         result = SQL_queries.updateMA(vorname, nachname, mail, tel, mobil);
                     } else if (role.equals("4")) {
+                        String standort = request.getParameter("standort");
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");
-                        result = SQL_queries.updateStud(vorname, nachname, mail, studgang, kurs);
+                        result = SQL_queries.updateStud(vorname, nachname, mail, standort, studgang, kurs);
                     } else {
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");
@@ -67,9 +68,10 @@ public class UserUpdateServlet extends HttpServlet {
                         String mobil = request.getParameter("mobil");
                         result = SQL_queries.updateMA(vorname, nachname, oldmail, tel, mobil, mail);
                     } else if (role.equals("4")) {
+                        String standort = request.getParameter("standort");
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");
-                        result = SQL_queries.updateStud(vorname, nachname, mail, studgang, kurs, oldmail);
+                        result = SQL_queries.updateStud(vorname, nachname, mail, standort, studgang, kurs, oldmail);
                     } else {
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");

@@ -276,17 +276,17 @@ public class SQL_queries {
 		return executeUpdate(query, args, types);
 	}
 
-	public static int updateStud(String vorname, String nachname, String email, String studiengang, String kurs) {
-		String query = "UPDATE user SET vorname = ?, nachname = ?, studiengang = ?, kurs = ? WHERE email = ?";
-		String[] args = new String[] { vorname, nachname, studiengang, kurs, email };
-		String[] types = new String[] { "String", "String", "String", "String", "String" };
+	public static int updateStud(String vorname, String nachname, String email, String standort, String studiengang, String kurs) {
+		String query = "UPDATE user SET vorname = ?, nachname = ?, standort = ?, studiengang = ?, kurs = ? WHERE email = ?";
+		String[] args = new String[] { vorname, nachname, standort, studiengang, kurs, email };
+		String[] types = new String[] { "String", "String", "String", "String", "String", "String" };
 		return executeUpdate(query, args, types);
 	}
 
-	public static int updateStud(String vorname, String nachname, String email, String studiengang, String kurs, String newmail) {
-		String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, studiengang = ?, kurs = ? WHERE email = ?";
-		String[] args = new String[] { vorname, nachname, newmail, studiengang, kurs, email };
-		String[] types = new String[] { "String", "String", "String", "String", "String", "String" };
+	public static int updateStud(String vorname, String nachname, String email, String standort, String studiengang, String kurs, String newmail) {
+		String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, standort = ?, studiengang = ?, kurs = ? WHERE email = ?";
+		String[] args = new String[] { vorname, nachname, newmail, standort, studiengang, kurs, email };
+		String[] types = new String[] { "String", "String", "String", "String", "String", "String", "String" };
 		return executeUpdate(query, args, types);
 	}
 
