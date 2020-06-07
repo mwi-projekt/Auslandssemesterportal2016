@@ -58,6 +58,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Util.addResponseHeaders(request,response);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String sql = "";
@@ -107,6 +108,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Util.addResponseHeaders(request,response);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");

@@ -229,3 +229,4 @@ function logout() {
 }
 
 export var urlParams = new URLSearchParams(window.location.search);
+export {isEmpty};
