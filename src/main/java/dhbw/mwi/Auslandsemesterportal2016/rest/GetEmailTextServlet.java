@@ -19,9 +19,9 @@ public class GetEmailTextServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle != 1 && rolle != 2 && rolle != 4) {
+		if (role != 1 && role != 2 && role != 4) {
 			response.sendError(401);
 		} else {
 			response.setCharacterEncoding("UTF-8");
@@ -36,7 +36,7 @@ public class GetEmailTextServlet extends HttpServlet {
 			String uni = runtime.getVariable(instanceID, "uni").toString();
 			String output = "";
 
-			if (rolle == 2) {
+			if (role == 2) {
 
 				if (validation_result.equals("true")) {
 					// Text für erfolgreiche Bewerbung
@@ -72,10 +72,10 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "\n" + "Ihr Akademisches Auslandsamt";
 				}
 
-			} else if (rolle == 3){
+			} else if (role == 3){
 				//Hier muss eine Mail an den SGL generiert werden, wenn der Student die Bewerbung abschickt
 			}
-		      else if (rolle == 4) {
+		      else if (role == 4) {
 				if (validation_result.equals("true")) {
 					// Text für erfolgreiche Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"

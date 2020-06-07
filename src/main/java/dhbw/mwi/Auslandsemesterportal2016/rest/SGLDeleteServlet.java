@@ -16,10 +16,10 @@ public class SGLDeleteServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if ((rolle != 1 && rolle != 2) && rolle != 3) {
-			response.sendError(401, "Rolle: " + rolle);
+		if ((role != 1 && role != 2) && role != 3) {
+			response.sendError(401, "Rolle: " + role);
 		} else {
 			String mail = request.getParameter("mail");
 			PrintWriter toClient = response.getWriter();

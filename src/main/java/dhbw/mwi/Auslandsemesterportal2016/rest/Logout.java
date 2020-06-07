@@ -17,9 +17,9 @@ public class Logout extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// ONLY VALID SESSIONS CAN LOGOUT
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle > 1) {
+		if (role > 1) {
 			Cookie[] cookies = request.getCookies();
 
 			for (Cookie c : cookies) {

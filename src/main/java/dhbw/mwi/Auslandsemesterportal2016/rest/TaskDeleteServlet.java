@@ -24,18 +24,18 @@ public class TaskDeleteServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle !=2) {
-			response.sendError(401, "Rolle: " + rolle);
+		if (role !=2) {
+			response.sendError(401, "Rolle: " + role);
 		} else {
 			
-			String matrikelnummer = request.getParameter("matrikelnummer");
+			String matrnumber = request.getParameter("matrnumber");
 			String uni = request.getParameter("uni");
 			PrintWriter toClient = response.getWriter();
 
-			if (matrikelnummer != null && uni != null) {
-				String id = ProcessService.getProcessId(matrikelnummer, uni);
+			if (matrnumber != null && uni != null) {
+				String id = ProcessService.getProcessId(matrnumber, uni);
 
 				if (id != null && id != "leer") {
 					Connection connection = DB.getInstance();

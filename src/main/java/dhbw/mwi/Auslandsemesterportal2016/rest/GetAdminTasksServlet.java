@@ -24,10 +24,10 @@ public class GetAdminTasksServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle != 1 && rolle != 2 && rolle != 4) {
-			response.sendError(401, "Rolle: " + rolle);
+		if (role != 1 && role != 2 && role != 4) {
+			response.sendError(401, "Rolle: " + role);
 		} else {
 
 			JsonObject json = new JsonObject();
@@ -48,7 +48,7 @@ public class GetAdminTasksServlet extends HttpServlet {
 					obj.addProperty("aktuelleUni", runtime.getVariable(instanceId, "aktuelleUni").toString());
 					obj.addProperty("kurs", runtime.getVariable(instanceId, "bewKurs").toString());
 					obj.addProperty("uni", runtime.getVariable(instanceId, "uni").toString()); 
-					obj.addProperty("matrikelnummer", runtime.getVariable(instanceId, "matrikelnummer").toString());
+					obj.addProperty("matrnumber", runtime.getVariable(instanceId, "matrnumber").toString());
 					if (activities.get(0).equals("abgeschlossen")) {
 						obj.addProperty("status", "complete");
 					} else if (activities.get(0).equals("datenValidieren")){

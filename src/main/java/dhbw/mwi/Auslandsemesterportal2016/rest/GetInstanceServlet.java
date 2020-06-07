@@ -23,9 +23,9 @@ public class GetInstanceServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle < 1) {
+		if (role < 1) {
 			response.sendError(401);
 		} else {
 			int matnr = Integer.parseInt(request.getParameter("matnr"));
@@ -45,7 +45,7 @@ public class GetInstanceServlet extends HttpServlet {
 					runtime.setVariable(instance_id, "bewNachname", user[0]);
 					runtime.setVariable(instance_id, "bewVorname", user[1]);
 					runtime.setVariable(instance_id, "bewEmail", user[2]);
-					runtime.setVariable(instance_id, "matrikelnummer", matnr);
+					runtime.setVariable(instance_id, "matrnumber", matnr);
 					runtime.setVariable(instance_id, "aktuelleUni", user[3]);
 					runtime.setVariable(instance_id, "bewStudiengang", user[4]);
 					runtime.setVariable(instance_id, "bewKurs", user[5]);

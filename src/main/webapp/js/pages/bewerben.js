@@ -132,7 +132,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         		var adresseTheorie = result.bewStrasse + "\n" + result.bewPLZ + " " + result.bewOrt;
         	} 
         		
-            var tel = result.bewTelefon.toString();
+            var phone = result.bewTelefon.toString();
         	var mail = result.bewEmail;
         	var unternehmen = result.untName;
         	var nameAnspr = result.untAnsprechpartner;
@@ -149,7 +149,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         	doc.text(80, 117.5, kurs);
         	doc.text(80, 128, adresseTheorie);
         	doc.text(80, 155, adressePraxis);
-        	doc.text(80, 181, tel);
+        	doc.text(80, 181, phone);
         	doc.text(80, 190, mail);
         	doc.text(80, 199.2, unternehmen);
         	doc.text(80, 217.5, nameAnspr);

@@ -1,13 +1,13 @@
 $(document).ready(function () {
     // check if logged in
     if (sessionStorage['User']) {
-        if (sessionStorage['rolle'] === "2") {
+        if (sessionStorage['role'] === "2") {
             $('.cms').show();
             $('.nonCms').show();
             $('.Admin').hide();
             $('.Mitarbeiter').show();
             $('.portalInfo').show();
-        } else if (sessionStorage['rolle'] === "1") {
+        } else if (sessionStorage['role'] === "1") {
             if (sessionStorage['verwaltung'] === "0" ||
                 sessionStorage['verwaltung'] === undefined) {
                 $('#normalBereich').hide();
@@ -33,17 +33,17 @@ $(document).ready(function () {
     }
     
     
-    if (sessionStorage['rolle'] === "1") {
+    if (sessionStorage['role'] === "1") {
     	document.getElementById("zumPortal").href = "index.jsp";
     }
-    else if (sessionStorage['rolle'] === "2") { 
+    else if (sessionStorage['role'] === "2") { 
     	document.getElementById("zumPortal").href = "task_overview.html";
     	document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }
-    else if (sessionStorage['rolle'] === "3") {
+    else if (sessionStorage['role'] === "3") {
     	document.getElementById("zumPortal").href = "bewerbungsportal.html";
     }
-    else if (sessionStorage['rolle'] === "4") {
+    else if (sessionStorage['role'] === "4") {
     	 document.getElementById("zumPortal").href = "task_overview_sgl.html";	
     	 document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }

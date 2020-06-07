@@ -245,13 +245,13 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		return processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getName();
 	}
 
-	public boolean getEnglischBoolean(String matrikelnummer) {
+	public boolean getEnglischBoolean(String matrnumber) {
 		Connection connection = null;
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
 		boolean result = false;
 
-		String sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '" + matrikelnummer + "' ";
+		String sql = "SELECT englischAbi FROM englischnote WHERE matrNumber = '" + matrnumber + "' ";
 
 		try {
 			// Open a connection
@@ -288,13 +288,13 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		return result;
 	}
 
-	public String getEnglischNote(String matrikelnummer) {
+	public String getEnglischNote(String matrnumber) {
 		Connection connection = null;
 		java.sql.Statement statement = null;
 		ResultSet resultSet = null;
 		String note = "leer";
 
-		String sql = "SELECT englischAbi FROM englischnote WHERE matrikelnummer = '" + matrikelnummer + "' ";
+		String sql = "SELECT englischAbi FROM englischnote WHERE matrNumber = '" + matrnumber + "' ";
 
 		try {
 			// Open a connection

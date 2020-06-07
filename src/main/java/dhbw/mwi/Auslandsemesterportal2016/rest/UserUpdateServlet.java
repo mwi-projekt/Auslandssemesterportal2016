@@ -20,30 +20,30 @@ public class UserUpdateServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle != 1 && rolle != 2) {
-			response.sendError(401, "Rolle: " + rolle);
+		if (role != 1 && role != 2) {
+			response.sendError(401, "Rolle: " + role);
 		} else {
 			PrintWriter toClient = response.getWriter();
 			try {
 				String mail = request.getParameter("email");
 				String oldmail = request.getParameter("oldmail");
-				String vorname = request.getParameter("vorname");
-				String nachname = request.getParameter("nachname");
+				String firstName = request.getParameter("firstName");
+				String name = request.getParameter("name");
 				String role = request.getParameter("role");
 
 				if (oldmail.equals("0")) {
 					int result;
 					if (role.equals("2")) {
-						String tel = request.getParameter("tel");
-						String mobil = request.getParameter("mobil");
-						result = SQL_queries.updateMA(vorname, nachname, mail, tel, mobil);
+						String phone = request.getParameter("phone");
+						String mobile = request.getParameter("mobile");
+						result = SQL_queries.updateMA(firstName, name, mail, phone, mobile);
 					} else {
 						String studgang = request.getParameter("studgang");
 						String kurs = request.getParameter("kurs");
 						String matnr = request.getParameter("matnr");
-						result = SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr);
+						result = SQL_queries.updateUser(firstName, name, mail, studgang, kurs, matnr);
 					}
 
 					if (result == 1) {
@@ -54,14 +54,14 @@ public class UserUpdateServlet extends HttpServlet {
 				} else {
 					int result;
 					if (role.equals("2")) {
-						String tel = request.getParameter("tel");
-						String mobil = request.getParameter("mobil");
-						result = SQL_queries.updateMA(vorname, nachname, oldmail, tel, mobil, mail);
+						String phone = request.getParameter("phone");
+						String mobile = request.getParameter("mobile");
+						result = SQL_queries.updateMA(firstName, name, oldmail, phone, mobile, mail);
 					} else {
 						String studgang = request.getParameter("studgang");
 						String kurs = request.getParameter("kurs");
 						String matnr = request.getParameter("matnr");
-						result = SQL_queries.updateUser(vorname, nachname, oldmail, studgang, kurs, matnr, mail);
+						result = SQL_queries.updateUser(firstName, name, oldmail, studgang, kurs, matnr, mail);
 					}
 
 					if (result == 1) {

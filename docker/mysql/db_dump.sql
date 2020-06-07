@@ -655,22 +655,22 @@ INSERT INTO `Studiengang` (`ID`, `Name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `user` (
   `userID` int(11) NOT NULL AUTO_INCREMENT,
-  `rolle` int(1) NOT NULL,
-  `nachname` varchar(64) COLLATE utf8_bin NOT NULL,
-  `vorname` varchar(64) COLLATE utf8_bin NOT NULL,
-  `passwort` varchar(64) COLLATE utf8_bin NOT NULL,
+  `role` int(1) NOT NULL,
+  `name` varchar(64) COLLATE utf8_bin NOT NULL,
+  `firstName` varchar(64) COLLATE utf8_bin NOT NULL,
+  `password` varchar(64) COLLATE utf8_bin NOT NULL,
   `salt` varchar(64) COLLATE utf8_bin NOT NULL,
   `email` varchar(64) COLLATE utf8_bin NOT NULL,
-  `tel` varchar(32) COLLATE utf8_bin DEFAULT NULL,
-  `mobil` varchar(32) COLLATE utf8_bin DEFAULT NULL,
-  `standort` varchar(100) COLLATE utf8_bin NOT NULL,
+  `phone` varchar(32) COLLATE utf8_bin DEFAULT NULL,
+  `mobile` varchar(32) COLLATE utf8_bin DEFAULT NULL,
+  `location` varchar(100) COLLATE utf8_bin NOT NULL,
   `studiengang` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `kurs` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   `matrikelnummer` int(12) DEFAULT NULL,
   `verifiziert` varchar(65) COLLATE utf8_bin NOT NULL,
   `resetToken` varchar(65) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`userID`),
-  KEY `rolleID` (`rolle`),
+  KEY `rolleID` (`role`),
   KEY `matrikelnummer` (`matrikelnummer`)
 ) ENGINE=InnoDB AUTO_INCREMENT=477 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -678,7 +678,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Daten für Tabelle `user`
 --
 
-INSERT INTO `user` (`userID`, `rolle`, `nachname`, `vorname`, `passwort`, `salt`, `email`, `tel`, `mobil`, `standort`, `studiengang`, `kurs`, `matrikelnummer`, `verifiziert`, `resetToken`) VALUES
+INSERT INTO `user` (`userID`, `role`, `name`, `firstName`, `password`, `salt`, `email`, `phone`, `mobile`, `location`, `studiengang`, `kurs`, `matrikelnummer`, `verifiziert`, `resetToken`) VALUES
 (6, 1, 'admin', 'admin', '19b73d7079e870b103d73e77e32999188ebcc559768d8920b494c9f3159f0c9c', 'c198fa0c8f4b339230682a57d61b669238cec61aba8f3df20a7a76b472972807', 'admin@admin.de', '123', '123', '', '', '', 123, '1', ''),
 (351, 2, 'Mitarbeiter', 'Auslands', '6b91492fe7d367c0917efe67e1bbe55dd87ceaa6ed812b9ae6b762a13032267f', '568c9acc0fd5a276b67fa93f772fe62a73188641fcf9c43647708fd4b9e5852b', 'auslandsamt@dh-karlsruhe.de', '', '', 'DHBW_Karlsruhe', 'Wirtschaftsinformatik', '', 4154562, '1', ''),
 (359, 2, 'admin', 'admin', '19b73d7079e870b103d73e77e32999188ebcc559768d8920b494c9f3159f0c9c', 'c198fa0c8f4b339230682a57d61b669238cec61aba8f3df20a7a76b472972807', 'aaa', '', '', '', '', '', 0, '1', ''),

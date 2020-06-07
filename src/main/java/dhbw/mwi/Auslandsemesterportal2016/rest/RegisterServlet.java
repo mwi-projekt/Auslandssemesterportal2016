@@ -29,20 +29,20 @@ public class RegisterServlet extends HttpServlet {
 		// NO AUTHENTIFICATION NEEDED
 		PrintWriter out = response.getWriter();
 
-		int rolle = 0;
+		int role = 0;
 
 		if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
 			out.print("mailError");
 			out.flush();
-		} else if (SQL_queries.isMatnrUsed(Integer.parseInt(request.getParameter("matrikelnummer")))) {
+		} else if (SQL_queries.isMatnrUsed(Integer.parseInt(request.getParameter("matrnumber")))) {
 			out.print("matnrError");
 			out.flush();
 		} else {
 
-			if (request.getParameter("rolle").equals("Studierender")) {
-				rolle = 3;
-			} else if (request.getParameter("rolle").equals("Auslandsmitarbeiter")) {
-				rolle = 2;
+			if (request.getParameter("role").equals("Studierender")) {
+				role = 3;
+			} else if (request.getParameter("role").equals("Auslandsmitarbeiter")) {
+				role = 2;
 			}
 
 			try {
@@ -53,11 +53,11 @@ public class RegisterServlet extends HttpServlet {
 
 				// Zufälliges Salt generieren und Passwort hashen
 				String salt = Util.generateSalt();
-				String pw = Util.HashSha256(Util.HashSha256(request.getParameter("passwort")) + salt);
+				String pw = Util.HashSha256(Util.HashSha256(request.getParameter("password")) + salt);
 
 				String link = Config.MWI_URL + "/?confirm=" + id;
 
-				message.setContent("<h2>Hallo " + request.getParameter("vorname")
+				message.setContent("<h2>Hallo " + request.getParameter("firstName")
 						+ ",</h2> Du hast Dich auf der Seite des Auslandsportals registriert. "
 						+ "Um Deine Registrierung abzuschlie&szlig;en, klicke bitte auf folgenden Link. <br><br> "
 						+ "<a href=\"" + link + "\" target=\"new\">Anmeldung best&auml;tigen</a>", "text/html");
@@ -68,10 +68,10 @@ public class RegisterServlet extends HttpServlet {
 				// Verbindung zur DB um neuen Nutzer zu speichern
 				// Statement statement = connection.createStatement();
 				// int rsupd = statement.executeUpdate(sqlupd);
-				int rsupd = SQL_queries.userRegister(request.getParameter("vorname"), request.getParameter("nachname"),
-						pw, salt, rolle, request.getParameter("email"), request.getParameter("studiengang"),
-						request.getParameter("kurs"), Integer.parseInt(request.getParameter("matrikelnummer")),
-						request.getParameter("tel"), request.getParameter("mobil"), request.getParameter("standort"),
+				int rsupd = SQL_queries.userRegister(request.getParameter("firstName"), request.getParameter("name"),
+						pw, salt, role, request.getParameter("email"), request.getParameter("studiengang"),
+						request.getParameter("kurs"), Integer.parseInt(request.getParameter("matrnumber")),
+						request.getParameter("phone"), request.getParameter("mobile"), request.getParameter("location"),
 						"" + id);
 				out.println(rsupd);
 				// statement.close();

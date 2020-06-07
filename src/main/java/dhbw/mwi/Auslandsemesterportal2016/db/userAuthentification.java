@@ -7,7 +7,7 @@ public class userAuthentification {
 	// Rolle für User: 1 = Admin ; 2 = Mitarbeiter ; 3 = Student ; 0 = Invalid
 	// Session; -1 = No Session at all
 	public static int isUserAuthentifiedByCookie(HttpServletRequest request) {
-		int rolle = 0;
+		int role = 0;
 		Cookie[] cookies = request.getCookies();
 		String sessionId = null, mail = null;
 		if (cookies != null) {
@@ -23,10 +23,10 @@ public class userAuthentification {
 			if (sessionId != null && mail != null) {
 				// check if a sessionId matching to the mail was found in DB
 				if (SQL_queries.checkUserSession(sessionId, mail)) {
-					rolle = SQL_queries.getRoleForUser(mail);
+					role = SQL_queries.getRoleForUser(mail);
 				}
 			}
-			return rolle;
+			return role;
 
 		}
 		// Rolle für User: 1 = Admin ; 2 = Mitarbeiter ; 3 = Student ; 0 = Fehler

@@ -16,17 +16,17 @@ public class UserDeleteServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if ((rolle != 1 && rolle != 2) && rolle != 3) {
-			response.sendError(401, "Rolle: " + rolle);
+		if ((role != 1 && role != 2) && role != 3) {
+			response.sendError(401, "Rolle: " + role);
 		} else {
-			String matrikelnummer = request.getParameter("matrikelnummer");
+			String matrnumber = request.getParameter("matrnumber");
 			PrintWriter toClient = response.getWriter();
 
-			if (matrikelnummer != null) {
-				String query = "DELETE FROM user WHERE matrikelnummer = ?";
-				String[] args = new String[] { matrikelnummer };
+			if (matrnumber != null) {
+				String query = "DELETE FROM user WHERE matrNumber = ?";
+				String[] args = new String[] { matrnumber };
 				String[] types = new String[] { "int" };
 				SQL_queries.executeUpdate(query, args, types);
 			} else {

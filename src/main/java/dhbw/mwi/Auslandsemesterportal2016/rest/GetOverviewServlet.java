@@ -20,9 +20,9 @@ public class GetOverviewServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle < 1) {
+		if (role < 1) {
 			response.sendError(401);
 		} else {
 			response.setCharacterEncoding("UTF-8");

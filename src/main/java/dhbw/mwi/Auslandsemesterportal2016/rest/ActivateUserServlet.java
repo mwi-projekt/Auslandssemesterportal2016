@@ -24,7 +24,7 @@ public class ActivateUserServlet extends HttpServlet {
 		if (code != null) {
 
 			try {
-				String sql = "SELECT ID FROM User WHERE verifiziert='" + code + "'";
+				String sql = "SELECT ID FROM User WHERE verified='" + code + "'";
 				System.out.println(sql);
 				// Open a connection
 				Connection conn = DB.getInstance();
@@ -45,7 +45,7 @@ public class ActivateUserServlet extends HttpServlet {
 
 				}
 				if (userId != "_") {
-					String query = "UPDATE User SET verifiziert = 1 WHERE ID=" + userId;
+					String query = "UPDATE User SET verified = 1 WHERE ID=" + userId;
 					int rsupd = stmt.executeUpdate(query);
 
 				}

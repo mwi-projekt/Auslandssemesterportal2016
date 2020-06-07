@@ -3,27 +3,27 @@ $(document).ready(function () {
     $('.btnUser').on('click', function () {
         var id = $(this).attr('id');
 
-        var rolle = 0;
+        var role = 0;
         var typ = '';
         if (id === 'userStudShow') {
-            rolle = 3;
+            role = 3;
             typ = "Studierende";
         } else if (id === 'userMaShow') {
-            rolle = 2;
+            role = 2;
             typ = "Auslandsmitarbeiter";
         } else if (id == 'userSGLShow'){
-        	rolle = 4;
+        	role = 4;
         	typ = "Studiengangsleiter";
         }
         $.ajax({
             type: "GET", 
             url: baseUrl + "/getUser",
             data: {
-                rolle: rolle,
+                role: role,
             },
             success: function (result) {
                 var auslesen = result.data;
-                if (rolle === 2) {
+                if (role === 2) {
                     var tabelle = '<h2>Registrierte ' + typ +
                         '</h2><table id="userTable" class="table table-striped table-bordered"> <thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th><th></th></tr></thead>';
                     for (var i = 0; i < auslesen.length; i++) {
@@ -31,16 +31,16 @@ $(document).ready(function () {
 
                         tabelle = tabelle +
                             '<tr id="row' + i +
-                            '"><td class="vorname">' +
-                            row.vorname +
-                            '</td><td class="nachname">' +
-                            row.nachname +
+                            '"><td class="firstName">' +
+                            row.firstName +
+                            '</td><td class="name">' +
+                            row.name +
                             '</td><td class="email">' +
                             row.email +
                             '</td><td class="telnummer">' +
-                            row.tel +
-                            '</td><td class="mobil">' +
-                            row.mobil +
+                            row.phone +
+                            '</td><td class="mobile">' +
+                            row.mobile +
                             '</td><td><span class="btn fas fa-edit useredit-button" id="edit' + i +
                             '" title="Bearbeiten" data-toggle="modal" href="#userEdit"> </span></td>' +
                             '<td><span class="btn fas fa-trash deleteAAA-button" data-mail="' +
@@ -48,7 +48,7 @@ $(document).ready(function () {
                             '" id="delete' + i +
                             '" title="Löschen"></span></td></tr>';
                     }
-                } else if (rolle === 3) {
+                } else if (role === 3) {
                     var tabelle = '<h2>Registrierte ' +
                         typ +
                         '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
@@ -57,14 +57,14 @@ $(document).ready(function () {
                         var row = auslesen[i];
                         tabelle = tabelle +
                             '<tr id="row' + i +
-                            '"><td class="vorname">' +
-                            row.vorname +
-                            '</td><td class="nachname">' +
-                            row.nachname +
+                            '"><td class="firstName">' +
+                            row.firstName +
+                            '</td><td class="name">' +
+                            row.name +
                             '</td><td class="email">' +
                             row.email +
                             '</td><td>' +
-                            row.standort +
+                            row.location +
                             '<td class="studgang">' +
                             row.studiengang +
                             '</td><td class="kurs">' +
@@ -78,7 +78,7 @@ $(document).ready(function () {
                             '" title="Löschen"></span></td></tr>';
                     }
                 }
-                else if (rolle === 4) {
+                else if (role === 4) {
                     var tabelle = '<h2>Registrierte ' +
                         typ +
                         '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th></th><th></th></tr></thead>';
@@ -87,14 +87,14 @@ $(document).ready(function () {
                         var row = auslesen[i];
                         tabelle = tabelle +
                             '<tr id="row' + i +
-                            '"><td class="vorname">' +
-                            row.vorname +
-                            '</td><td class="nachname">' +
-                            row.nachname +
+                            '"><td class="firstName">' +
+                            row.firstName +
+                            '</td><td class="name">' +
+                            row.name +
                             '</td><td class="email">' +
                             row.email +
                             '</td><td>' +
-                            row.standort +
+                            row.location +
                             '<td class="studgang">' +
                             row.studiengang +
                             '</td><td class="kurs">' +
@@ -108,7 +108,7 @@ $(document).ready(function () {
                 }    
                 tabelle = tabelle + '</table>';
                 $('#userTabelle').html(tabelle)
-                var nonSortable = (rolle == 3 ? [7, 8] : [5, 6]);
+                var nonSortable = (role == 3 ? [7, 8] : [5, 6]);
 
                 var setClickListeners = function () {
                     $('.delete-button').click(function () {
@@ -233,16 +233,16 @@ $(document).ready(function () {
                         } else {
                             id = id.substring(4, 6);
                         }
-                        $('#inEditVorname').val($('#row' + id).children('.vorname').text().trim());
+                        $('#inEditVorname').val($('#row' + id).children('.firstName').text().trim());
                         $('#inEditVorname').attr('data-value', $('#inEditVorname').val());
-                        $('#inEditNachname').val($('#row' + id).children('.nachname').text().trim());
+                        $('#inEditNachname').val($('#row' + id).children('.name').text().trim());
                         $('#inEditNachname').attr('data-value', $('#inEditNachname').val());
                         $('#inEditEmail').val($('#row' + id).children('.email').text().trim());
                         $('#inEditEmail').attr('data-value', $('#inEditEmail').val());
-                        $('#inEditEmail').attr('data-role', rolle);
+                        $('#inEditEmail').attr('data-role', role);
                         $('#inEditTel').val($('#row' + id).children('.telnummer').text().trim());
                         $('#inEditTel').attr('data-value', $('#inEditTel').val());
-                        $('#inEditMobil').val($('#row' + id).children('.mobil').text().trim());
+                        $('#inEditMobil').val($('#row' + id).children('.mobile').text().trim());
                         $('#inEditMobil').attr('data-value', $('#inEditMobil').val());
                         $('#inEditStudgang').val($('#row' + id).children('.studgang').text().trim());
                         $('#inEditStudgang').attr('data-value', $('#inEditStudgang').val());
@@ -250,7 +250,7 @@ $(document).ready(function () {
                         $('#inEditKurs').attr('data-value', $('#inEditKurs').val());
                         $('#inEditMatnr').val($('#row' + id).children('.matrikelnr').text().trim());
                         $('#inEditMatnr').attr('data-value', $('#inEditMatnr').val());
-                        if (rolle === 2) {
+                        if (role === 2) {
                             $('#inEditTel').show();
                             $('#inEditMobil').show();
                             $('#inEditStudgang').hide();
@@ -294,7 +294,7 @@ $(document).ready(function () {
         var vname = $('#AAAVorname').val();
         var nname = $('#AAANachname').val();
         var phone = $('#AAAPhone').val();
-        var mobil = $('#AAAMobile').val();
+        var mobile = $('#AAAMobile').val();
         Swal.fire({
             title: 'Speichere Änderungen'
         });
@@ -304,10 +304,10 @@ $(document).ready(function () {
             url: baseUrl + "/createAAA",
             data: {
                 email: email,
-                vorname: vname,
-                nachname: nname,
+                firstName: vname,
+                name: nname,
                 phone: phone,
-                mobil: mobil
+                mobile: mobile
             },
             success: function (data) {
                 Swal.close();
@@ -358,7 +358,7 @@ $(document).ready(function () {
         var nname = $('#SGLNachname').val();
         var studiengang = $('#SGLStudiengang').val();
         var phone = $('#SGLPhone').val();
-        var mobil = $('#SGLMobile').val();
+        var mobile = $('#SGLMobile').val();
         Swal.fire({
             title: 'Speichere Änderungen'
         });
@@ -368,11 +368,11 @@ $(document).ready(function () {
             url: baseUrl + "/createSGL",
             data: {
                 email: email,
-                vorname: vname,
-                nachname: nname,
+                firstName: vname,
+                name: nname,
                 studiengang: studiengang,
                 phone: phone,
-                mobil: mobil
+                mobile: mobile
             },
             success: function (data) {
                 Swal.close();
@@ -444,10 +444,10 @@ $(document).ready(function () {
 				data: {
 					email: dataMail,
 					oldmail: dataOldMail,
-					vorname: dataNewVorname,
-					nachname: dataNewNachaname,
-					tel: dataNewTel,
-					mobil: dataNewMobil,
+					firstName: dataNewVorname,
+					name: dataNewNachaname,
+					phone: dataNewTel,
+					mobile: dataNewMobil,
 					role: "2"
 				},
 				success: function (result) {
@@ -471,8 +471,8 @@ $(document).ready(function () {
 				data: {
 					email: dataMail,
 					oldmail: dataOldMail,
-					vorname: dataNewVorname,
-					nachname: dataNewNachaname,
+					firstName: dataNewVorname,
+					name: dataNewNachaname,
 					studgang: dataNewStudgang,
 					kurs: dataNewKurs,
 					matnr: dataNewMatnr,

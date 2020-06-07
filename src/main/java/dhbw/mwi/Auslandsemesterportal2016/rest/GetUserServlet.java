@@ -17,13 +17,13 @@ public class GetUserServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle != 1 && rolle != 2) {
+		if (role != 1 && role != 2) {
 			response.sendError(401);
 		} else {
-			String sql = "SELECT nachname, vorname, email, tel, mobil, studiengang, kurs, matrikelnummer, standort FROM user WHERE rolle ='"
-					+ request.getParameter("rolle") + "'";
+			String sql = "SELECT name, firstName, email, phone, mobile, studiengang, kurs, matrNumber, location FROM User WHERE role ='"
+					+ request.getParameter("role") + "'";
 			ResultSet rs = SQL_queries.executeStatement(sql);
 			Util.writeJson(response, rs);
 		}

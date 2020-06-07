@@ -25,17 +25,17 @@ public class ProcessDeleteServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle < 1) {
+		if (role < 1) {
 			response.sendError(401);
 		} else {
-			String matrikelnummer = request.getParameter("matrikelnummer");
+			String matrnumber = request.getParameter("matrnumber");
 			String uni = request.getParameter("uni");
 			PrintWriter toClient = response.getWriter();
 
-			if (matrikelnummer != null && uni != null) {
-				String id = ProcessService.getProcessId(matrikelnummer, uni);
+			if (matrnumber != null && uni != null) {
+				String id = ProcessService.getProcessId(matrnumber, uni);
 
 				if (id != null && id != "leer") {
 					Connection connection = DB.getInstance();
@@ -49,10 +49,10 @@ public class ProcessDeleteServlet extends HttpServlet {
 					}
 
 					// SQL-Befehl für das Löschen der Bewerbung aus der MySQL-DB
-					String deleteStatement = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + matrikelnummer
+					String deleteStatement = "DELETE FROM bewerbungsprozess WHERE matrNumber = '" + matrnumber
 							+ "' AND uniName = '" + uni + "' ";
 
-					String deleteStatement2 = "DELETE FROM MapUserInstanz WHERE matrikelnummer = '" + matrikelnummer
+					String deleteStatement2 = "DELETE FROM MapUserInstanz WHERE matrNumber = '" + matrnumber
 							+ "' AND uni = '" + uni + "' ";
 
 					try {

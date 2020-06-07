@@ -21,7 +21,7 @@ public class validationFailure implements JavaDelegate{
 		Session session = Mail.getInstance();
 		
 		String email = (String) execution.getVariable("studentEmail");
-		String nachname = (String) execution.getVariable("studentNachname");
+		String name = (String) execution.getVariable("studentNachname");
 		String uni = (String) execution.getVariable("uni");
 		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
 		String fehlerUrsache = (String) execution.getVariable("fehlerUrsache");
@@ -35,7 +35,7 @@ public class validationFailure implements JavaDelegate{
 			if(erfolgreich){
 				message.setSubject(
 						MimeUtility.encodeText("Eingereichte Bewerbung für Auslandssemester validiert", "utf-8", "B"));
-				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
+				message.setContent("Sehr geehrte/r Herr/Frau " + name + (",") + 
 				"\n"+ 
 				"\n"+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "+ uni +" wurde erfolgreich an das Akademisches Auslandsamt versendet."+
 				"\n"+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnahe um die Bearbeitung Ihrer Bewerbung kümmern und entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen"+ 
@@ -50,7 +50,7 @@ public class validationFailure implements JavaDelegate{
 				else{
 					message.setSubject(
 							MimeUtility.encodeText("Bei der Validierung Ihrer Bewerbung ist ein Fehler aufgetreten", "utf-8", "B"));
-				message.setContent("Sehr geehrte/r Herr/Frau " + nachname + (",") + 
+				message.setContent("Sehr geehrte/r Herr/Frau " + name + (",") + 
 				"\n"+ 
 				"\n"+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: "+ uni + 
 				"\n"+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + 

@@ -34,17 +34,17 @@ $(document).on('keyup', '#inPwSt2', function(){
 $(document).on('submit', '#regForm', function (e) {
     e.preventDefault();
     var telefon = $('#inTel').val();
-    var mobil = $('#inMobil').val();
-    var rolle = "Studierender";
+    var mobile = $('#inMobil').val();
+    var role = "Studierender";
 
     var pw1 = $('#inPwSt1').val();
     var pw2 = $('#inPwSt2').val();
     var matrikelnummer = $('#inMatrikel').val();
     var studiengang = $('#inStudiengang').val();
     var kurs = $('#inKurs').val();
-    var standort = $('#inStandort').val();
-    var vorname = $('#inVorname').val();
-    var nachname = $('#inNachname').val();
+    var location = $('#inStandort').val();
+    var firstName = $('#inVorname').val();
+    var name = $('#inNachname').val();
     var email = $('#inMail').val();
 
     if (pw1 === pw2) {
@@ -55,22 +55,22 @@ $(document).on('submit', '#regForm', function (e) {
                 icon: "error",
                 confirmButtonText: "OK"
             });
-        } else if (vorname != "" && nachname != "" && email != "" && matrikelnummer != "" && kurs != "" && pw1 != "") {
+        } else if (firstName != "" && name != "" && email != "" && matrikelnummer != "" && kurs != "" && pw1 != "") {
             $.ajax({
                 type: "POST",
                 url: baseUrl + "/register",
                 data: {
-                    rolle: rolle,
-                    passwort: pw1,
-                    vorname: vorname,
-                    nachname: nachname,
+                    role: role,
+                    password: pw1,
+                    firstName: firstName,
+                    name: name,
                     email: email,
                     matrikelnummer: matrikelnummer,
                     studiengang: studiengang,
                     kurs: kurs,
-                    tel: telefon,
-                    mobil: mobil,
-                    standort: standort,
+                    phone: telefon,
+                    mobile: mobile,
+                    location: location,
                 },
                 success: function (result) {
                     if (result == "mailError") {
@@ -149,16 +149,16 @@ $(document).on('submit', '#loginForm', function (e) {
                     confirmButtonText: "OK"
                 });
             } else {
-                sessionStorage['rolle'] = data.rolle;
+                sessionStorage['role'] = data.role;
                 sessionStorage['matrikelnr'] = data.matrikelnummer;
                 sessionStorage['studiengang'] = data.studiengang;
                 sessionStorage['User'] = email;
 
-                if (sessionStorage['rolle'] == 2) {
+                if (sessionStorage['role'] == 2) {
                     window.location.href = 'task_overview.html'
-                } else if (sessionStorage['rolle'] == 3) {
+                } else if (sessionStorage['role'] == 3) {
                     window.location.href = 'bewerbungsportal.html';
-                } else if (sessionStorage['rolle'] == 4) {
+                } else if (sessionStorage['role'] == 4) {
                 	window.location.href = 'task_overview_sgl.html';
                 } else {
                     window.location.reload();

@@ -72,7 +72,7 @@ public class SQL_queries {
 	}
 
 	public static boolean isMatnrUsed(int matNr) { // Prüft ob Matrikelnummer bereits verwendet wird
-		String queryString = "SELECT 1 FROM User WHERE matrikelnummer = ?;";
+		String queryString = "SELECT 1 FROM User WHERE matrNumber = ?;";
 		String[] params = new String[] { "" + matNr };
 		String[] types = new String[] { "int" };
 		boolean resultExists = true;
@@ -144,19 +144,19 @@ public class SQL_queries {
 		String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);
 		int resultCode = 4;
 		String studiengang = "";
-		String matrikelnummer = "";
-		String rolle = "";
+		String matrnumber = "";
+		String role = "";
 		String accessToken = "";
-		String query = "SELECT verifiziert, matrikelnummer, studiengang, rolle, ID FROM User WHERE email = ? AND passwort = ?;";
+		String query = "SELECT verified, matrNumber, studiengang, role, ID FROM User WHERE email = ? AND password = ?;";
 		String[] params = new String[] { mail, hashedPw };
 		String[] types = new String[] { "String", "String" };
 		ResultSet ergebnis = executeStatement(query, params, types);
 		try {
 			if (ergebnis.next()) {
 				studiengang = ergebnis.getString("studiengang");
-				matrikelnummer = ergebnis.getString("matrikelnummer");
-				rolle = ergebnis.getString("rolle");
-				if (ergebnis.getString("verifiziert").equals("1")) {
+				matrnumber = ergebnis.getString("matrNumber");
+				role = ergebnis.getString("role");
+				if (ergebnis.getString("verified").equals("1")) {
 					accessToken = createUserSession(ergebnis.getInt("ID"));
 					resultCode = 1;
 				} else {
@@ -169,7 +169,7 @@ public class SQL_queries {
 			e.printStackTrace();
 		}
 
-		return new String[] { ("" + resultCode), studiengang, matrikelnummer, rolle, accessToken };
+		return new String[] { ("" + resultCode), studiengang, matrnumber, role, accessToken };
 	}
 
 	public static boolean userSessionExists(int userID) {
@@ -204,7 +204,7 @@ public class SQL_queries {
 
 	// Rolle für User: 1 = Admin ; 2 = Mitarbeiter ; 3 = Student ; 0 = Fehler
 	public static int getRoleForUser(String mail) {
-		String queryString = "SELECT rolle FROM User WHERE email = ?;";
+		String queryString = "SELECT role FROM User WHERE email = ?;";
 		String[] args = new String[] { mail };
 		String[] types = new String[] { "String" };
 		ResultSet ergebnis = executeStatement(queryString, args, types);
@@ -249,45 +249,45 @@ public class SQL_queries {
 		return executeUpdate(query_, params_, types_);
 	}
 
-	public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle,
-			String email, String studiengang, String kurs, int matrikelnummer, String tel, String mobil,
-			String standort, String verifiziert) {
-		String query = "INSERT INTO User (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert, resetToken) VALUES "
+	public static int userRegister(String firstName, String name, String password, String salt, int role,
+			String email, String studiengang, String kurs, int matrnumber, String phone, String mobile,
+			String location, String verified) {
+		String query = "INSERT INTO User (firstName, name, password, salt, role, email, studiengang, kurs, matrNumber, phone, mobile, location, verified, resetToken) VALUES "
 				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		String[] args = new String[] { vorname, nachname, passwort, salt, "" + rolle, email, studiengang, kurs,
-				"" + matrikelnummer, tel, mobil, standort, verifiziert, "" };
+		String[] args = new String[] { firstName, name, password, salt, "" + role, email, studiengang, kurs,
+				"" + matrnumber, phone, mobile, location, verified, "" };
 		String[] types = new String[] { "String", "String", "String", "String", "int", "String", "String", "String",
 				"int", "String", "String", "String", "String", "String" };
 		return executeUpdate(query, args, types);
 	}
 
-	public static int updateUser(String vorname, String nachname, String email, String studiengang, String kurs,
-			String matrikelnummer) {
-		String query = "UPDATE User SET vorname = ?, nachname = ?, studiengang = ?, kurs = ?, matrikelnummer = ? WHERE email = ?";
-		String[] args = new String[] { vorname, nachname, studiengang, kurs, "" + matrikelnummer, email };
+	public static int updateUser(String firstName, String name, String email, String studiengang, String kurs,
+			String matrnumber) {
+		String query = "UPDATE User SET firstName = ?, name = ?, studiengang = ?, kurs = ?, matrNumber = ? WHERE email = ?";
+		String[] args = new String[] { firstName, name, studiengang, kurs, "" + matrnumber, email };
 		String[] types = new String[] { "String", "String", "String", "String", "int", "String" };
 		return executeUpdate(query, args, types);
 	}
 
-	public static int updateUser(String vorname, String nachname, String email, String studiengang, String kurs,
-			String matrikelnummer, String newmail) {
-		String query = "UPDATE User SET vorname = ?, nachname = ?, email = ?, studiengang = ?, kurs = ?, matrikelnummer = ? WHERE email = ?";
-		String[] args = new String[] { vorname, nachname, newmail, studiengang, kurs, "" + matrikelnummer, email };
+	public static int updateUser(String firstName, String name, String email, String studiengang, String kurs,
+			String matrnumber, String newmail) {
+		String query = "UPDATE User SET firstName = ?, name = ?, email = ?, studiengang = ?, kurs = ?, matrNumber = ? WHERE email = ?";
+		String[] args = new String[] { firstName, name, newmail, studiengang, kurs, "" + matrnumber, email };
 		String[] types = new String[] { "String", "String", "String", "String", "String", "int", "String" };
 		return executeUpdate(query, args, types);
 	}
 
-	public static int updateMA(String vorname, String nachname, String email, String tel, String mobil) {
-		String query = "UPDATE User SET vorname = ?, nachname = ?, tel = ?, mobil = ? WHERE email = ?";
-		String[] args = new String[] { vorname, nachname, tel, mobil, email };
+	public static int updateMA(String firstName, String name, String email, String phone, String mobile) {
+		String query = "UPDATE User SET firstName = ?, name = ?, phone = ?, mobile = ? WHERE email = ?";
+		String[] args = new String[] { firstName, name, phone, mobile, email };
 		String[] types = new String[] { "String", "String", "String", "String", "String" };
 		return executeUpdate(query, args, types);
 	}
 
-	public static int updateMA(String vorname, String nachname, String email, String tel, String mobil,
+	public static int updateMA(String firstName, String name, String email, String phone, String mobile,
 			String newmail) {
-		String query = "UPDATE User SET vorname = ?, nachname = ?, email = ?, tel = ?, mobil = ? WHERE email = ?";
-		String[] args = new String[] { vorname, nachname, newmail, tel, mobil, email };
+		String query = "UPDATE User SET firstName = ?, name = ?, email = ?, phone = ?, mobile = ? WHERE email = ?";
+		String[] args = new String[] { firstName, name, newmail, phone, mobile, email };
 		String[] types = new String[] { "String", "String", "String", "String", "String", "String" };
 		return executeUpdate(query, args, types);
 	}
@@ -307,7 +307,7 @@ public class SQL_queries {
 	}
 
 	public static String getInstanceId(int matNr, String uni) {
-		String query = "SELECT processInstance FROM MapUserInstanz WHERE matrikelnummer = ? AND uni = ?";
+		String query = "SELECT processInstance FROM MapUserInstanz WHERE matrNumber = ? AND uni = ?";
 		String[] params = new String[] { "" + matNr, uni };
 		String[] types = new String[] { "int", "String" };
 		ResultSet ergebnis = executeStatement(query, params, types);
@@ -325,7 +325,7 @@ public class SQL_queries {
 
 	public static void createInstance(String instanceID, String uni, int matNr, int stepCount) {
 		// Nutzerinstanz eintragen}
-		String query = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status) VALUES (?,?,?,?)";
+		String query = "INSERT INTO MapUserInstanz (matrNumber, uni, processInstance, status) VALUES (?,?,?,?)";
 		String[] params = new String[] { "" + matNr, uni, instanceID, "1" };
 		String[] types = new String[] { "int", "String", "String", "String" };
 		executeUpdate(query, params, types);
@@ -334,7 +334,7 @@ public class SQL_queries {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String dateString = dateFormat.format(date);
-		query = "INSERT INTO bewerbungsprozess (matrikelnummer, uniName, startDatum, Schritte_aktuell, Schritte_gesamt) VALUES (?,?,?,?,?)";
+		query = "INSERT INTO bewerbungsprozess (matrNumber, uniName, startDatum, Schritte_aktuell, Schritte_gesamt) VALUES (?,?,?,?,?)";
 		params = new String[] { "" + matNr, uni, dateString, "0", "" + stepCount };
 		types = new String[] { "int", "String", "date", "int", "int" };
 		executeUpdate(query, params, types);
@@ -359,14 +359,14 @@ public class SQL_queries {
 
 	public static String[] getUserData(int matNr) { // Gibt Name|Vorname|Mailadresse|aktuelleUni|bewStudiengang|Kurs
 													// zurück
-		String queryString = "SELECT nachname,vorname,email,standort,studiengang,kurs FROM User WHERE matrikelnummer = ?;";
+		String queryString = "SELECT name,firstName,email,location,studiengang,kurs FROM User WHERE matrNumber = ?;";
 		String[] params = new String[] { "" + matNr };
 		String[] types = new String[] { "int" };
 		ResultSet ergebnis = executeStatement(queryString, params, types);
 		try {
 			if (ergebnis.next()) {
-				return new String[] { ergebnis.getString("nachname"), ergebnis.getString("vorname"),
-						ergebnis.getString("email"), ergebnis.getString("standort").replace('_', ' '),
+				return new String[] { ergebnis.getString("name"), ergebnis.getString("firstName"),
+						ergebnis.getString("email"), ergebnis.getString("location").replace('_', ' '),
 						ergebnis.getString("studiengang"), ergebnis.getString("kurs") };
 			} else {
 				return new String[0];
@@ -397,7 +397,7 @@ public class SQL_queries {
 
 	public static ArrayList<String[]> getUserInstances(int matNr) { // Uni|instanceID für alles Instanzen zurück
 																	// (Getrennt nach List-Entries)
-		String queryString = "SELECT uni,processInstance FROM MapUserInstanz WHERE matrikelnummer = ?;";
+		String queryString = "SELECT uni,processInstance FROM MapUserInstanz WHERE matrNumber = ?;";
 		String[] params = new String[] { "" + matNr };
 		String[] types = new String[] { "int" };
 		ResultSet ergebnis = executeStatement(queryString, params, types);
@@ -455,7 +455,7 @@ public class SQL_queries {
 
 	public static String deactivateUser(String mail) {
 		UUID uuid = UUID.randomUUID();
-		String query = "UPDATE User SET verifiziert = ? WHERE email = ?";
+		String query = "UPDATE User SET verified = ? WHERE email = ?";
 		String[] params = new String[] { "" + uuid, mail };
 		String[] types = new String[] { "String", "String" };
 		executeUpdate(query, params, types);
@@ -465,7 +465,7 @@ public class SQL_queries {
 	public static int setPassword(String uuid, String pwd) {
 		String salt = Util.generateSalt();
 		String hashedpw = Util.HashSha256(Util.HashSha256(pwd) + salt);
-		String query = "UPDATE User SET passwort = ?, salt = ?, resetToken = ''  WHERE resetToken = ?";
+		String query = "UPDATE User SET password = ?, salt = ?, resetToken = ''  WHERE resetToken = ?";
 		String[] params = new String[] { hashedpw, salt, uuid };
 		String[] types = new String[] { "String", "String", "String" };
 		return executeUpdate(query, params, types);

@@ -21,10 +21,10 @@ public class createSGLServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PrintWriter out = response.getWriter();
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int role = userAuthentification.isUserAuthentifiedByCookie(request);
 		
-		if (rolle != 1 && rolle != 2) {
-			response.sendError(401, "Rolle: " + rolle);
+		if (role != 1 && role != 2) {
+			response.sendError(401, "Rolle: " + role);
 		} else {
 		
 			//Rolle SGL Eintragen
@@ -46,9 +46,9 @@ public class createSGLServlet extends HttpServlet {
 					String aa = "--";
 					// Verbindung zur DB um neuen Nutzer zu speichern
 					//Hier fehlt noch die Übergabe des Studiengangs
-					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
-							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), request.getParameter("studiengang"), aa, -1,
-							request.getParameter("phone"), request.getParameter("mobil"), aa, "1");
+					int rsupd = SQL_queries.userRegister(request.getParameter("firstName"),
+							request.getParameter("name"), pw, salt, role, request.getParameter("email"), request.getParameter("studiengang"), aa, -1,
+							request.getParameter("phone"), request.getParameter("mobile"), aa, "1");
 
 					if (rsupd == 0) {
 						out.print("registerError");
