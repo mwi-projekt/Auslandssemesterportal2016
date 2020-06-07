@@ -38,7 +38,7 @@ $(document).ready(function () {
         },
         buttons: [
             {
-                text: '<i class="fas fa-user-plus" id="create"></i> Neuer Student',
+                text: '<i class="fas fa-user-plus" id="create"></i> Neue/r Student/in',
                 action: function (e, node, config) {
                     $('#exampleModal').modal('show')
                     isEdit = false;
