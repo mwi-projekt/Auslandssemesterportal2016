@@ -22,7 +22,7 @@ public class GetUserServlet extends HttpServlet {
 		if (role != 1 && role != 2) {
 			response.sendError(401);
 		} else {
-			String sql = "SELECT name, firstName, email, phone, mobile, studiengang, kurs, matrNumber, location FROM User WHERE role ='"
+			String sql = "SELECT name, firstName, email, phone, mobile, courseID, kurs, matrNumber, location FROM User WHERE role ='"
 					+ request.getParameter("role") + "'";
 			ResultSet rs = SQL_queries.executeStatement(sql);
 			Util.writeJson(response, rs);

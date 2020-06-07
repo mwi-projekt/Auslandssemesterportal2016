@@ -143,17 +143,17 @@ public class SQL_queries {
 		// Studiengang;Matrikelnummer;Rolle (Nummer die in der DB steht)
 		String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);
 		int resultCode = 4;
-		String studiengang = "";
+		String courseID = "";
 		String matrnumber = "";
 		String role = "";
 		String accessToken = "";
-		String query = "SELECT verified, matrNumber, studiengang, role, ID FROM User WHERE email = ? AND password = ?;";
+		String query = "SELECT verified, matrNumber, courseID, role, ID FROM User WHERE email = ? AND password = ?;";
 		String[] params = new String[] { mail, hashedPw };
 		String[] types = new String[] { "String", "String" };
 		ResultSet ergebnis = executeStatement(query, params, types);
 		try {
 			if (ergebnis.next()) {
-				studiengang = ergebnis.getString("studiengang");
+				courseID = ergebnis.getString("courseID");
 				matrnumber = ergebnis.getString("matrNumber");
 				role = ergebnis.getString("role");
 				if (ergebnis.getString("verified").equals("1")) {
@@ -169,7 +169,7 @@ public class SQL_queries {
 			e.printStackTrace();
 		}
 
-		return new String[] { ("" + resultCode), studiengang, matrnumber, role, accessToken };
+		return new String[] { ("" + resultCode), courseID, matrnumber, role, accessToken };
 	}
 
 	public static boolean userSessionExists(int userID) {
@@ -250,29 +250,29 @@ public class SQL_queries {
 	}
 
 	public static int userRegister(String firstName, String name, String password, String salt, int role,
-			String email, String studiengang, String kurs, int matrnumber, String phone, String mobile,
+			String email, String courseID, String kurs, int matrnumber, String phone, String mobile,
 			String location, String verified) {
-		String query = "INSERT INTO User (firstName, name, password, salt, role, email, studiengang, kurs, matrNumber, phone, mobile, location, verified, resetToken) VALUES "
+		String query = "INSERT INTO User (firstName, name, password, salt, role, email, courseID, kurs, matrNumber, phone, mobile, location, verified, resetToken) VALUES "
 				+ "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		String[] args = new String[] { firstName, name, password, salt, "" + role, email, studiengang, kurs,
+		String[] args = new String[] { firstName, name, password, salt, "" + role, email, courseID, kurs,
 				"" + matrnumber, phone, mobile, location, verified, "" };
 		String[] types = new String[] { "String", "String", "String", "String", "int", "String", "String", "String",
 				"int", "String", "String", "String", "String", "String" };
 		return executeUpdate(query, args, types);
 	}
 
-	public static int updateUser(String firstName, String name, String email, String studiengang, String kurs,
+	public static int updateUser(String firstName, String name, String email, String courseID, String kurs,
 			String matrnumber) {
-		String query = "UPDATE User SET firstName = ?, name = ?, studiengang = ?, kurs = ?, matrNumber = ? WHERE email = ?";
-		String[] args = new String[] { firstName, name, studiengang, kurs, "" + matrnumber, email };
+		String query = "UPDATE User SET firstName = ?, name = ?, courseID = ?, kurs = ?, matrNumber = ? WHERE email = ?";
+		String[] args = new String[] { firstName, name, courseID, kurs, "" + matrnumber, email };
 		String[] types = new String[] { "String", "String", "String", "String", "int", "String" };
 		return executeUpdate(query, args, types);
 	}
 
-	public static int updateUser(String firstName, String name, String email, String studiengang, String kurs,
+	public static int updateUser(String firstName, String name, String email, String courseID, String kurs,
 			String matrnumber, String newmail) {
-		String query = "UPDATE User SET firstName = ?, name = ?, email = ?, studiengang = ?, kurs = ?, matrNumber = ? WHERE email = ?";
-		String[] args = new String[] { firstName, name, newmail, studiengang, kurs, "" + matrnumber, email };
+		String query = "UPDATE User SET firstName = ?, name = ?, email = ?, courseID = ?, kurs = ?, matrNumber = ? WHERE email = ?";
+		String[] args = new String[] { firstName, name, newmail, courseID, kurs, "" + matrnumber, email };
 		String[] types = new String[] { "String", "String", "String", "String", "String", "int", "String" };
 		return executeUpdate(query, args, types);
 	}
@@ -359,7 +359,7 @@ public class SQL_queries {
 
 	public static String[] getUserData(int matNr) { // Gibt Name|Vorname|Mailadresse|aktuelleUni|bewStudiengang|Kurs
 													// zurück
-		String queryString = "SELECT name,firstName,email,location,studiengang,kurs FROM User WHERE matrNumber = ?;";
+		String queryString = "SELECT name,firstName,email,location,courseID,kurs FROM User WHERE matrNumber = ?;";
 		String[] params = new String[] { "" + matNr };
 		String[] types = new String[] { "int" };
 		ResultSet ergebnis = executeStatement(queryString, params, types);
@@ -367,7 +367,7 @@ public class SQL_queries {
 			if (ergebnis.next()) {
 				return new String[] { ergebnis.getString("name"), ergebnis.getString("firstName"),
 						ergebnis.getString("email"), ergebnis.getString("location").replace('_', ' '),
-						ergebnis.getString("studiengang"), ergebnis.getString("kurs") };
+						ergebnis.getString("courseID"), ergebnis.getString("kurs") };
 			} else {
 				return new String[0];
 			}
