@@ -1,10 +1,12 @@
 import {$,baseUrl} from "./config";
 import Swal from "sweetalert2";
 import "jquery-ui-dist/jquery-ui";
+// @ts-ignore
 import "cookieconsent";
 
 $(document).ready(function () {
     //cookies
+    // @ts-ignore
     window.cookieconsent.initialise({
         content: {
             message: "Diese Website verwendet Cookies!",
@@ -35,13 +37,13 @@ $(document).ready(function () {
 
 //Check ob Passwörter übereinstimmen
 $(document).on('keyup', '#inPwSt2', function(){
-    var inPwSt1 = document.getElementById("inPwSt1")
-      , inPwSt2 = document.getElementById("inPwSt2");
+    var inPwSt1 = <HTMLSelectElement>document.getElementById("inPwSt1")
+      , inPwSt2 = <HTMLSelectElement>document.getElementById("inPwSt2");
 
-    if(inPwSt1.value != inPwSt2.value) {
-        inPwSt2.setCustomValidity("Die Passwörter stimmen nicht überein");
+    if(inPwSt1?.value != inPwSt2?.value) {
+        inPwSt2?.setCustomValidity("Die Passwörter stimmen nicht überein");
     } else {
-        inPwSt2.setCustomValidity('');
+        inPwSt2?.setCustomValidity('');
     }
 });
 
@@ -191,12 +193,12 @@ if (!String.prototype.startsWith) {
     };
 }
 
-function isEmpty(str) {
+function isEmpty(str:any) {
     return (!str || 0 === str.length);
 }
 
 //Function to remove certain URL Parameters
-function removeQueryStringParameter(key, url) {
+function removeQueryStringParameter(key:any, url:any) {
     if (!url) url = window.location.href;
 
     var hashParts = url.split('#');
