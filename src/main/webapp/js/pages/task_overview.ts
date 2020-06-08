@@ -1,6 +1,7 @@
-import {$,baseUrl} from "../config";
+import { $, baseUrl } from "../config";
 import "../app";
-var dt = require( 'datatables.net' )(window, $);
+// @ts-ignore
+var dt = require('datatables.net')(window, $);
 import "datatables.net-bs4";
 import Swal from "sweetalert2";
 import "bootstrap";
@@ -11,26 +12,26 @@ $(document).ready(function () {
     getList();
 });
 
-function createEventListeners(){
-    document.getElementById("printBtn").addEventListener("click", () => window.print());
+function createEventListeners() {
+    document.getElementById("printBtn")?.addEventListener("click", () => window.print());
 }
 
-function createButtonEventListeners(buttons){
-    buttons.forEach(button => {
-        if(button.type==="details"){
-            document.getElementById(button.elementId).addEventListener("click", () => {location.href= "task_detail.html?instance_id=" + button.id + '&uni=' + button.uni + '&verify=true'});
+function createButtonEventListeners(buttons: any) {
+    buttons.forEach((button: any) => {
+        if (button.type === "details") {
+            document.getElementById(button.elementId)?.addEventListener("click", () => { location.href = "task_detail.html?instance_id=" + button.id + '&uni=' + button.uni + '&verify=true' });
         }
-        else if(button.type==="delete"){
-            document.getElementById(button.elementId).addEventListener("click", ()=> {deleteProcessButtons(button.uni ,button.matrikelnummer)});
+        else if (button.type === "delete") {
+            document.getElementById(button.elementId)?.addEventListener("click", () => { deleteProcessButtons(button.uni, button.matrikelnummer) });
         }
-        else{
+        else {
             console.log("Unknown Buttontype: " + button.type);
         }
     });
 }
 
 function getList() {
-    var buttons = [];
+    var buttons: any[] = [];
 
     $.ajax({
         type: "GET",
@@ -51,7 +52,7 @@ function getList() {
                 for (var i = 0; i < instances.length; i++) {
                     var singleInstance = instances[i];
                     if (singleInstance.status === 'validate') {
-                    	output = output +
+                        output = output +
                             "<tr><td>" +
                             singleInstance.name +
                             "</td><td>" +
@@ -63,12 +64,12 @@ function getList() {
                             "</td><td>" +
                             singleInstance.uni +
                             "</td><td>" +
-                            '<button id="details-' + singleInstance.id +'" class="btn fas fa-list" title="Details"></button>' +
+                            '<button id="details-' + singleInstance.id + '" class="btn fas fa-list" title="Details"></button>' +
                             "</td><td>" +
                             "<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
 
-                            buttons.push({type: "details", elementId: "details-" + singleInstance.id, id: singleInstance.id, uni: singleInstance.uni});
-                            buttons.push({type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer});
+                        buttons.push({ type: "details", elementId: "details-" + singleInstance.id, id: singleInstance.id, uni: singleInstance.uni });
+                        buttons.push({ type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer });
                     } else if (singleInstance.status === 'complete') {
                         completed = completed +
                             "<tr><td>" +
@@ -83,37 +84,37 @@ function getList() {
                             singleInstance.uni +
                             "</td><td>" +
                             "<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
-                            buttons.push({type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer});
+                        buttons.push({ type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer });
                     } else if (singleInstance.status === 'validateSGL') {
-                    	validateSGL = validateSGL +
-                    		"<tr><td>" +
-                    		singleInstance.name +
-                    		"</td><td>" +
-                    		singleInstance.vname +
-                    		"</td><td>" +
-                    		singleInstance.aktuelleUni +
-                    		"</td><td>" +
-                    		singleInstance.kurs +
-                    		"</td><td>" +
-                    		singleInstance.uni +
-                    		"</td><td>" +
-                    		"<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
-                            buttons.push({type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer});
+                        validateSGL = validateSGL +
+                            "<tr><td>" +
+                            singleInstance.name +
+                            "</td><td>" +
+                            singleInstance.vname +
+                            "</td><td>" +
+                            singleInstance.aktuelleUni +
+                            "</td><td>" +
+                            singleInstance.kurs +
+                            "</td><td>" +
+                            singleInstance.uni +
+                            "</td><td>" +
+                            "<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
+                        buttons.push({ type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer });
                     } else if (singleInstance.status === 'abgelehnt') {
-                    	abgelehnt = abgelehnt +
-                		"<tr><td>" +
-                		singleInstance.name +
-                		"</td><td>" +
-                		singleInstance.vname +
-                		"</td><td>" +
-                		singleInstance.aktuelleUni +
-                		"</td><td>" +
-                		singleInstance.kurs +
-                		"</td><td>" +
-                		singleInstance.uni +
-                		"</td><td>" +
-                		"<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
-                        buttons.push({type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer});
+                        abgelehnt = abgelehnt +
+                            "<tr><td>" +
+                            singleInstance.name +
+                            "</td><td>" +
+                            singleInstance.vname +
+                            "</td><td>" +
+                            singleInstance.aktuelleUni +
+                            "</td><td>" +
+                            singleInstance.kurs +
+                            "</td><td>" +
+                            singleInstance.uni +
+                            "</td><td>" +
+                            "<button id=\"delete-" + singleInstance.id + "\" class=\"btn fas fa-trash btn-delete\" title=\"Delete\"></button></td></tr>";
+                        buttons.push({ type: "delete", elementId: "delete-" + singleInstance.id, uni: singleInstance.uni, matrikelnummer: singleInstance.matrikelnummer });
                     }
                 }
                 if (output === "") {
@@ -129,22 +130,22 @@ function getList() {
                         completed + "</tbody></table>";
                 }
                 if (validateSGL === "") {
-                	validateSGL = "<h2> Es gibt keine Bewebungen, die von einem Studiengangsleiter zu validieren sind</h2>";
+                    validateSGL = "<h2> Es gibt keine Bewebungen, die von einem Studiengangsleiter zu validieren sind</h2>";
                 } else {
-                	validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
-                    	validateSGL + "</tbody></table>";
+                    validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
+                        validateSGL + "</tbody></table>";
                 }
                 if (abgelehnt === "") {
-                	abgelehnt = "<h2> Es gibt abgelehnten Bewerbungen</h2>";
+                    abgelehnt = "<h2> Es gibt abgelehnten Bewerbungen</h2>";
                 } else {
-                	abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
-                		abgelehnt + "</tbody></table>";
+                    abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
+                        abgelehnt + "</tbody></table>";
                 }
                 $(document).ready(function () {
                     $('.table').DataTable();
                 });
             }
-            document.getElementById("resultList").innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Bewerbungen bei Studiengangsleitern</h1>' + validateSGL + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt;
+            document.getElementById("resultList")!.innerHTML = '<h1>Zu validierende Bewerbungen</h1>' + output + '<br><h1>Bewerbungen bei Studiengangsleitern</h1>' + validateSGL + '<br><h1>Angenommene Bewerbungen</h1>' + completed + '<br><h1>Abgelehnte Bewerbungen</h1>' + abgelehnt;
             createButtonEventListeners(buttons);
         },
         error: function (result) {
@@ -152,17 +153,17 @@ function getList() {
         }
     });
 }
-function deleteProcessButtons(uni, matrikelnummer) {
-	Swal.fire({
-            title: "Bist du sicher?",
-            text: "Der Prozess kann nicht wiederhergestellt werden!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!",
-            cancelButtonText: "Abbrechen"
-        }).then(function (result) {
-        if(result.value) {
+function deleteProcessButtons(uni: any, matrikelnummer: any) {
+    Swal.fire({
+        title: "Bist du sicher?",
+        text: "Der Prozess kann nicht wiederhergestellt werden!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Löschen!",
+        cancelButtonText: "Abbrechen"
+    }).then(function (result) {
+        if (result.value) {
             $.ajax({
                 type: "GET",
                 url: baseUrl + "/process/delete",
@@ -184,7 +185,7 @@ function deleteProcessButtons(uni, matrikelnummer) {
                     Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
                 }
             });
-        }else{
+        } else {
             Swal.fire({
                 title: "Abgebrochen",
                 icon: "info",
@@ -207,7 +208,7 @@ function initDeleteProcessButtonsTaskOverview() {
             confirmButtonText: "Löschen!",
             cancelButtonText: "Abbrechen"
         }).then(function (result) {
-            if(result.value) {
+            if (result.value) {
                 //var id = $('.btn-delete').closest('tr').data('rid');
                 var matrikelnummer = sessionStorage['matrikelnr'];
 
@@ -227,7 +228,7 @@ function initDeleteProcessButtonsTaskOverview() {
                         Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
                     }
                 });
-            }else{
+            } else {
                 Swal.fire({
                     title: "Abgebrochen",
                     icon: "info",
@@ -238,48 +239,48 @@ function initDeleteProcessButtonsTaskOverview() {
     });
 }
 
-function deleteTask (taskID) {
+function deleteTask(this: any, taskID: any) {
     //$('.taskdelete').click(function () {
-    	alert(taskID);
+    alert(taskID);
 
-    	var self = $(this);
-	
-        Swal.fire({
-            title: "Bist du sicher?",
-            text: "Die Bewerbung kann nicht wiederhergestellt werden!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Löschen!",
-            cancelButtonText: "Abbrechen"
-        }).then(function(result) {
-        	if (result.value) {
-        		 Swal.fire({
-                     title: 'Lösche Bewerbung'
-                 });
-                 Swal.showLoading();
-                 $.ajax({
-                     type: "POST",
-                     url: baseUrl + "/task/delete",
-                     data: {
-                         taskId: self.data(taskID)
-                     },
-                     success: function (result) {
-                         Swal.close();
-                         $('#userStudShow').click();
-                         Swal.fire('Gelöscht!', 'Die Bewerbung wurde erfolgreich gelöscht.', 'success');
-                     },
-                     error: function (result) {
-                         Swal.close();
-                         Swal.fire('Fehler', 'Die Bewerbung konnte nicht gelöscht werden', 'error');
-                     }
-                 });
-        	 }else{
-                Swal.fire({
-                    title: "Abgebrochen",
-                    icon: "info",
-                    confirmButtonText: "Ok"
-                });
-            }
-        });
-   }
+    var self = $(this);
+
+    Swal.fire({
+        title: "Bist du sicher?",
+        text: "Die Bewerbung kann nicht wiederhergestellt werden!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Löschen!",
+        cancelButtonText: "Abbrechen"
+    }).then(function (result) {
+        if (result.value) {
+            Swal.fire({
+                title: 'Lösche Bewerbung'
+            });
+            Swal.showLoading();
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "/task/delete",
+                data: {
+                    taskId: self.data(taskID)
+                },
+                success: function (result) {
+                    Swal.close();
+                    $('#userStudShow').click();
+                    Swal.fire('Gelöscht!', 'Die Bewerbung wurde erfolgreich gelöscht.', 'success');
+                },
+                error: function (result) {
+                    Swal.close();
+                    Swal.fire('Fehler', 'Die Bewerbung konnte nicht gelöscht werden', 'error');
+                }
+            });
+        } else {
+            Swal.fire({
+                title: "Abgebrochen",
+                icon: "info",
+                confirmButtonText: "Ok"
+            });
+        }
+    });
+}
