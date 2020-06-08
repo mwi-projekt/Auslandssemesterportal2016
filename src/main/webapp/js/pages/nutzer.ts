@@ -251,22 +251,22 @@ $(document).ready(function () {
                             id = id.substring(4, 6);
                         }
                         $('#inEditVorname').val($('#row' + id).children('.vorname').text().trim());
-                        //$('#inEditVorname').attr('data-value', $('#inEditVorname').val()?);
+                        $('#inEditVorname').attr('data-value', $('#inEditVorname').val()!.toString());
                         $('#inEditNachname').val($('#row' + id).children('.nachname').text().trim());
-                        //$('#inEditNachname').attr('data-value', $('#inEditNachname').val());
+                        $('#inEditNachname').attr('data-value', $('#inEditNachname').val()!.toString());
                         $('#inEditEmail').val($('#row' + id).children('.email').text().trim());
-                        //$('#inEditEmail').attr('data-value', $('#inEditEmail').val());
+                        $('#inEditEmail').attr('data-value', $('#inEditEmail').val()!.toString());
                         $('#inEditEmail').attr('data-role', rolle);
                         $('#inEditTel').val($('#row' + id).children('.telnummer').text().trim());
-                        //$('#inEditTel').attr('data-value', $('#inEditTel').val());
+                        $('#inEditTel').attr('data-value', $('#inEditTel').val()!.toString());
                         $('#inEditMobil').val($('#row' + id).children('.mobil').text().trim());
-                        //$('#inEditMobil').attr('data-value', $('#inEditMobil').val());
+                        $('#inEditMobil').attr('data-value', $('#inEditMobil').val()!.toString());
                         $('#inEditStudgang').val($('#row' + id).children('.studgang').text().trim());
-                        //$('#inEditStudgang').attr('data-value', $('#inEditStudgang').val());
+                        $('#inEditStudgang').attr('data-value', $('#inEditStudgang').val()!.toString());
                         $('#inEditKurs').val($('#row' + id).children('.kurs').text().trim());
-                        //$('#inEditKurs').attr('data-value', $('#inEditKurs').val());
+                        $('#inEditKurs').attr('data-value', $('#inEditKurs').val()!.toString());
                         $('#inEditMatnr').val($('#row' + id).children('.matrikelnr').text().trim());
-                        //$('#inEditMatnr').attr('data-value', $('#inEditMatnr').val());
+                        $('#inEditMatnr').attr('data-value', $('#inEditMatnr').val()!.toString());
                         if (rolle === 2) {
                             $('#inEditTel').show();
                             $('#inEditMobil').show();
@@ -446,6 +446,7 @@ $(document).ready(function () {
 		let dataNewStudgang = $('#inEditStudgang').val();
 		let dataNewKurs = $('#inEditKurs').val();
 		let dataNewMatnr = $('#inEditMatnr').val();
+		debugger;
 		if ($('#inEditEmail').attr('data-value') != $('#inEditEmail').val()) {
 			dataOldMail = $('#inEditEmail').attr('data-value')!;
 		}
