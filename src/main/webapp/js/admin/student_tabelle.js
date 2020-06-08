@@ -1,3 +1,17 @@
+$.validator.setDefaults({
+    errorElement: "span",
+    errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+    }
+});
+
 $(document).ready(function () {
 
     const inputVorname = $("#vorname");
@@ -83,112 +97,143 @@ $(document).ready(function () {
         isEdit = true;
     });
 
-    // Submit-Button in Modal Dialog
-    $('#myFormSubmit').click(function (e) {
-        e.preventDefault();
-        var vorname = inputVorname.val();
-        var nachname = inputNachname.val();
-        var email = inputEmail.val();
-        var studiengang = inputStudiengang.val();
-        var kurs = inputKurs.val();
-        var matrikelnummer = inputMatrikelnr.val();
-        var standort = inputStandort.val();
-        var oldMail = "0";
+    $("#myForm").validate({
+        rules: {
+            vorname: "required",
+            nachname: "required",
+            email: {
+                required: true,
+                email: true
+            },
+            studiengang: "required",
+            kurs: "required",
+            matrikelnummer: {
+                required: true,
+                digits: true,
+                maxlength: 7,
+                minlength: 7
+            },
+            standort: "required"
+        },
+        messages: {
+            vorname: "Bitte geben Sie ihren Vornamen ein",
+            nachname: "Bitte geben Sie ihren Nachnamen ein",
+            email: "Bitte geben Sie ihre E-Mail ein",
+            studiengang: "Bitte wählen Sie ihren Studiengang aus",
+            kurs: "Bitte geben Sie ihren Kursnamen ein",
+            matrikelnummer: {
+                required: "Bitte geben Sie ihre Matrikelnummer ein",
+                digits: "Bitte geben Sie nur Zahlen ein",
+                maxlength: jQuery.validator.format("Die Matrikelnummer muss genau {0} Zeichen haben"),
+                minlength: jQuery.validator.format("Die Matrikelnummer muss genau {0} Zeichen haben"),
+            },
+            standort: "Bitte wählen Sie ihren Standort aus"
+        },
+        submitHandler: function () {
+            var vorname = inputVorname.val();
+            var nachname = inputNachname.val();
+            var email = inputEmail.val();
+            var studiengang = inputStudiengang.val();
+            var kurs = inputKurs.val();
+            var matrikelnummer = inputMatrikelnr.val();
+            var standort = inputStandort.val();
+            var oldMail = "0";
 
-        if (isEdit) {
-            if (currentEmail != $('#email').val()) {
-                oldMail = currentEmail;
-            }
-
-            Swal.fire({
-                title: 'Speichere Änderungen'
-            });
-            Swal.showLoading();
-            $.ajax({
-                type: "POST",
-                url: baseUrl + "/user/update",
-                data: {
-                    email: email,
-                    oldmail: oldMail,
-                    vorname: vorname,
-                    nachname: nachname,
-                    studgang: studiengang,
-                    kurs: kurs,
-                    matnr: matrikelnummer,
-                    role: "3"
-                },
-                success: function (result) {
-                    Swal.close();
-                    Swal.fire('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
-                    $('#exampleModal').modal('hide');
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
-                    myTable.ajax.reload();
-                    isEdit = false;
-                },
-                error: function (result) {
-                    Swal.close();
-                    Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
-                    isEdit = false;
+            if (isEdit) {
+                if (currentEmail != $('#email').val()) {
+                    oldMail = currentEmail;
                 }
-            });
-        } else {
-            Swal.fire({
-                title: 'Speichere Änderungen'
-            });
-            Swal.showLoading();
-            $.ajax({
-                type: "POST",
-                url: baseUrl + "/createStudent",
-                data: {
-                    email: email,
-                    vorname: vorname,
-                    nachname: nachname,
-                    studgang: studiengang,
-                    kurs: kurs,
-                    matnr: matrikelnummer,
-                    standort: standort
-                },
-                success: function (data) {
-                    Swal.close();
-                    if (data == "mailError") {
 
-                        Swal.fire({
-                            title: "Fehler!",
-                            text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
-                            icon: "error",
-                            confirmButtonText: "OK"
-                        });
-
-                    } else if (data == "No account registered for this email adress") {
-                        Swal.fire({
-                            title: "Fehler!",
-                            text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                            icon: "error",
-                            confirmButtonText: "OK"
-                        });
-                    } else if (data == "registerError") {
-                        Swal.fire({
-                            title: "Fehler!",
-                            text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
-                            icon: "error",
-                            confirmButtonText: "OK"
-                        });
-                    } else {
-                        Swal.fire({
-                            title: "Account erfolgreich erstellt",
-                            text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
-                            icon: "success",
-                            confirmButtonText: "OK"
-                        });
+                Swal.fire({
+                    title: 'Speichere Änderungen'
+                });
+                Swal.showLoading();
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "/user/update",
+                    data: {
+                        email: email,
+                        oldmail: oldMail,
+                        vorname: vorname,
+                        nachname: nachname,
+                        studgang: studiengang,
+                        kurs: kurs,
+                        matnr: matrikelnummer,
+                        role: "3"
+                    },
+                    success: function (result) {
+                        Swal.close();
+                        Swal.fire('Erfolgreich geändert.', 'Die Benutzerdaten wurden aktualisiert.', 'success');
+                        $('#exampleModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                        myTable.ajax.reload();
+                        isEdit = false;
+                    },
+                    error: function (result) {
+                        Swal.close();
+                        Swal.fire('Fehler', 'Es ist ein Fehler beim Aktualisieren aufgetreten. Überprüfen Sie die Eingaben.', 'error');
+                        isEdit = false;
                     }
-                    $('#exampleModal').modal('hide');
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
-                    myTable.ajax.reload();
-                    isEdit = false;
-                }
-            });
+                });
+            } else {
+                Swal.fire({
+                    title: 'Speichere Änderungen'
+                });
+                Swal.showLoading();
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "/createStudent",
+                    data: {
+                        email: email,
+                        vorname: vorname,
+                        nachname: nachname,
+                        studgang: studiengang,
+                        kurs: kurs,
+                        matnr: matrikelnummer,
+                        standort: standort
+                    },
+                    success: function (data) {
+                        Swal.close();
+                        if (data == "mailError") {
+
+                            Swal.fire({
+                                title: "Fehler!",
+                                text: "Ein Account mit dieser Mail existiert bereits! Bitte benutzen Sie eine andere.",
+                                icon: "error",
+                                confirmButtonText: "OK"
+                            });
+
+                        } else if (data == "No account registered for this email adress") {
+                            Swal.fire({
+                                title: "Fehler!",
+                                text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                                icon: "error",
+                                confirmButtonText: "OK"
+                            });
+                        } else if (data == "registerError") {
+                            Swal.fire({
+                                title: "Fehler!",
+                                text: "Es ist ein Fehler beim Erstellen des Accounts aufgetreten. Versuchen Sie es später erneut.",
+                                icon: "error",
+                                confirmButtonText: "OK"
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Account erfolgreich erstellt",
+                                text: "An die Mailadresse wurde ein Link zum setzen des Passwords geschickt.",
+                                icon: "success",
+                                confirmButtonText: "OK"
+                            });
+                        }
+                        $('#exampleModal').modal('hide');
+                        $('body').removeClass('modal-open');
+                        $('.modal-backdrop').remove();
+                        myTable.ajax.reload();
+                        isEdit = false;
+                    }
+                });
+            }
         }
     });
 

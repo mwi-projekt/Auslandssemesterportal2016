@@ -26,7 +26,8 @@
         });
     </script>
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../../node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>
+    <!--    <script src="../../node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
     <script src="../../js/app.js"></script>
     <script src="../../js/pages/nutzer.js"></script>
 
@@ -87,47 +88,47 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form id="myForm" method="post">
+            <form id="myForm" method="post">
+                <div class="modal-body">
                     <div class="form-group">
-                        <label for="vorname" class="col-form-label">Vorname:</label>
-                        <input type="text" class="form-control" id="vorname">
+                        <label for="vorname" class="control-label">Vorname:</label>
+                        <input type="text" class="form-control" name="vorname" id="vorname">
                     </div>
                     <div class="form-group">
-                        <label for="nachname" class="col-form-label">Nachname:</label>
-                        <input type="text" class="form-control" id="nachname">
+                        <label for="nachname" class="control-label">Nachname:</label>
+                        <input type="text" class="form-control" name="nachname" id="nachname">
                     </div>
                     <div class="form-group">
-                        <label for="email" class="col-form-label">Email:</label>
-                        <input type="email" class="form-control" id="email">
+                        <label for="email" class="control-label">Email:</label>
+                        <input type="email" class="form-control" name="email" id="email">
                     </div>
                     <div class="form-group">
-                        <label for="studiengang" class="col-form-label">Studiengang:</label>
-                        <select class="form-control" id="studiengang">
+                        <label for="studiengang" class="control-label">Studiengang:</label>
+                        <select class="form-control" name="studiengang" id="studiengang">
                             <option>Wirtschaftsinformatik</option>
                             <option>Angewandte Informatik</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="kurs" class="col-form-label">Kurs:</label>
-                        <input type="text" class="form-control" id="kurs">
+                        <label for="kurs" class="control-label">Kurs:</label>
+                        <input type="text" class="form-control" name="kurs" id="kurs">
                     </div>
                     <div class="form-group">
-                        <label for="matrikelnummer" class="col-form-label">Matrikelnummer:</label>
-                        <input type="number" class="form-control" id="matrikelnummer">
+                        <label for="matrikelnummer" class="control-label">Matrikelnummer:</label>
+                        <input type="number" class="form-control" name="matrikelnummer" id="matrikelnummer">
                     </div>
                     <div class="form-group">
-                        <label for="standort" class="col-form-label">Standort:</label>
-                        <select class="form-control" id="standort">
+                        <label for="standort" class="control-label">Standort:</label>
+                        <select class="form-control" name="standort" id="standort">
                             <option>DHBW Karlsruhe</option>
                         </select>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="myFormSubmit" class="btn btn-primary" type="submit">Save changes</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="myFormSubmit" class="btn btn-primary" type="submit">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
