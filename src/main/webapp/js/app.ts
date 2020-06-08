@@ -37,7 +37,7 @@ $(document).ready(function () {
 
 //Check ob Passwörter übereinstimmen
 $(document).on('keyup', '#inPwSt2', function(){
-    var inPwSt1 = <HTMLSelectElement>document.getElementById("inPwSt1")
+    let inPwSt1 = <HTMLSelectElement>document.getElementById("inPwSt1")
       , inPwSt2 = <HTMLSelectElement>document.getElementById("inPwSt2");
 
     if(inPwSt1?.value != inPwSt2?.value) {
@@ -49,19 +49,19 @@ $(document).on('keyup', '#inPwSt2', function(){
 
 $(document).on('submit', '#regForm', function (e) {
     e.preventDefault();
-    var telefon = $('#inTel').val();
-    var mobil = $('#inMobil').val();
-    var rolle = "Studierender";
+    let telefon = $('#inTel').val();
+    let mobil = $('#inMobil').val();
+    let rolle = "Studierender";
 
-    var pw1 = $('#inPwSt1').val();
-    var pw2 = $('#inPwSt2').val();
-    var matrikelnummer = $('#inMatrikel').val();
-    var studiengang = $('#inStudiengang').val();
-    var kurs = $('#inKurs').val();
-    var standort = $('#inStandort').val();
-    var vorname = $('#inVorname').val();
-    var nachname = $('#inNachname').val();
-    var email = $('#inMail').val();
+    let pw1 = $('#inPwSt1').val();
+    let pw2 = $('#inPwSt2').val();
+    let matrikelnummer = $('#inMatrikel').val();
+    let studiengang = $('#inStudiengang').val();
+    let kurs = $('#inKurs').val();
+    let standort = $('#inStandort').val();
+    let vorname = $('#inVorname').val();
+    let nachname = $('#inNachname').val();
+    let email = $('#inMail').val();
 
     if (pw1 === pw2) {
         if (studiengang === "Studiengang*") {
@@ -132,8 +132,8 @@ $(document).on('submit', '#regForm', function (e) {
 
 $(document).on('submit', '#loginForm', function (e) {
     e.preventDefault();
-    var email = $('#inEmail').val();
-    var pw = $('#inPasswort').val();
+    let email = $('#inEmail').val();
+    let pw = $('#inPasswort').val();
     $.ajax({
         type: "POST",
         url: baseUrl + "/login",
@@ -201,9 +201,9 @@ function isEmpty(str:any) {
 function removeQueryStringParameter(key:any, url:any) {
     if (!url) url = window.location.href;
 
-    var hashParts = url.split('#');
+    let hashParts = url.split('#');
 
-    var regex = new RegExp("([?&])" + key + "=.*?(&|#|$)", "i");
+    let regex = new RegExp("([?&])" + key + "=.*?(&|#|$)", "i");
 
     if (hashParts[0].match(regex)) {
         //REMOVE KEY AND VALUE
@@ -230,5 +230,5 @@ function logout() {
     });
 }
 
-export var urlParams = new URLSearchParams(window.location.search);
+export let urlParams = new URLSearchParams(window.location.search);
 export {isEmpty};
