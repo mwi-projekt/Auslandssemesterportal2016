@@ -243,7 +243,7 @@ function deleteTask(this: any, taskID: any) {
     //$('.taskdelete').click(function () {
     alert(taskID);
 
-    var self = $(this);
+    let self = $(this);
 
     Swal.fire({
         title: "Bist du sicher?",
