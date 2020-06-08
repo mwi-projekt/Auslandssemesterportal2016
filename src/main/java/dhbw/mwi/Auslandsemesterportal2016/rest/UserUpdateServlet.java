@@ -21,8 +21,6 @@ public class UserUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
-        System.out.println(rolle);
-
         if (rolle != 1 && rolle != 2) {
             response.sendError(401, "Rolle: " + rolle);
         } else {
@@ -33,9 +31,6 @@ public class UserUpdateServlet extends HttpServlet {
                 String vorname = request.getParameter("vorname");
                 String nachname = request.getParameter("nachname");
                 String role = request.getParameter("role");
-
-                System.out.println("OldMail " + oldmail);
-
                 if (oldmail.equals("0")) {
                     int result;
                     if (role.equals("2")) {
@@ -51,11 +46,9 @@ public class UserUpdateServlet extends HttpServlet {
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");
                         String matnr = request.getParameter("matnr");
-                        result = SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr);
+                        String standort = request.getParameter("standort");
+                        result = SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, standort);
                     }
-
-                    System.out.println("Result: " + result);
-
                     if (result == 1) {
                         toClient.println("success");
                     } else {
@@ -76,9 +69,9 @@ public class UserUpdateServlet extends HttpServlet {
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");
                         String matnr = request.getParameter("matnr");
-                        result = SQL_queries.updateUser(vorname, nachname, oldmail, studgang, kurs, matnr, mail);
+                        String standort = request.getParameter("standort");
+                        result = SQL_queries.updateUser(vorname, nachname, oldmail, studgang, kurs, matnr, mail, standort);
                     }
-
                     if (result == 1) {
                         String link = Config.MWI_URL + "/?confirm="
                                 + SQL_queries.deactivateUser(mail);
@@ -96,7 +89,6 @@ public class UserUpdateServlet extends HttpServlet {
                         response.sendError(500, "UpdateError");
                     }
                 }
-
             } catch (Exception e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                 toClient.println(e.toString());

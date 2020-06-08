@@ -159,6 +159,7 @@ $(document).ready(function () {
                         studgang: studiengang,
                         kurs: kurs,
                         matnr: matrikelnummer,
+                        standort: standort,
                         role: "3"
                     },
                     success: function (result) {
