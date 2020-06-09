@@ -28,6 +28,9 @@
                 <br/>
                 <br/>
                 <a class="text-white" href="#erfahrungsBerichte">Erfahrungsberichte</a>
+                <br/>
+                <br/>
+                <a class="text-white" href="bewerbungsportal.html">Meine Bewerbungen</a>
             </div>
         </div>
         <nav class="navbar navbar-dark bg-dark">
@@ -102,47 +105,35 @@
                 <div class="auslandsangebote-image-left-text-right ">
                     <img src="images/Dundee.png"/>
                     <div class="auslandsangebote-text-block">
+                        <br>
+                        <h4>
+                            University of Abertay Dundee - Schottland
+                        </h4>
+                        <br>
                         <p>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita
+                            Studiere im Land der Highlands, Gletschertäler und Seen und schnuppere Luft an einer britischen Universität.
                         </p>
                         <ul>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
+                            <li>Moderne Universität mit ca. 5.000 Studierenden</li>
+                            <li>Hafen- und Studentenstadt mit großem Kulturangebot</li>
+                            <li>Angebotene Studienbereiche: Wirtschaftsinformatik, Betriebswirtschaftslehre</li>
                         </ul>
                     </div>
                 </div>
                 <div class="auslandsangebote-text-left-image-right">
                     <div class="auslandsangebote-text-block mobile-order-swap">
+                        <br>
+                        <h4>
+                            American University in Bulgarien
+                        </h4>
+                        <br>
                         <p>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita
+                            Schnuppere die Luft einer amerikanischen Hochschule innerhalb der Europäischen Union und lerne dabei die reiche Kultur Bulgariens lieben.
                         </p>
                         <ul>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
+                            <li>Private Hochschule mit nur 1.100 Studierenden</li>
+                            <li>Aufgebaut wie eine amerikanische Hochschule</li>
+                            <li>Angebotene Studienbereiche: Informatik, Wirtschaftswissenschaften</li>
                         </ul>
                     </div>
                     <img src="images/Bulgaria.png"/>
@@ -150,74 +141,38 @@
                 <div class="auslandsangebote-image-left-text-right">
                     <img src="images/NDHU.png"/>
                     <div class="auslandsangebote-text-block">
+                        <br>
+                        <h4>
+                            National Dong Hwa University
+                        </h4>
+                        <br>
                         <p>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita
+                            Entdecke die Moderne und Kultur des asiatischen Inselstaats und genieße Studienqualität auf höchstem Niveau.
                         </p>
                         <ul>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
+                            <li>Über 10.000 Studierende</li>
+                            <li>Campus zwischen Meer und Nationalpark</li>
+                            <li>Angebotene Studienbereiche: Wirtschaft, Ingenieurswissenschaften, Informatik</li>
                         </ul>
                     </div>
                 </div>
                 <div class="auslandsangebote-text-left-image-right ">
                     <div class="auslandsangebote-text-block mobile-order-swap">
+                        <br>
+                        <h4>
+                            California State University San Marcos
+                        </h4>
+                        <br>
                         <p>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita
+                            Werde Teil des Lebensstils der amerikanischen Westküste und studiere in den Vereinigten Staaten.
                         </p>
                         <ul>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
+                            <li>Größtes staatliches Hochschulnetzwerk Kaliforniens</li>
+                            <li>Ca. 9.000 Studierende auf dem Campus in San Marcos </li>
+                            <li>Angebotene Studienbereiche: Wirtschaftsinformatik</li>
                         </ul>
                     </div>
                     <img src="images/SanMarcos.png"/>
-                </div>
-                <div class="auslandsangebote-image-left-text-right">
-                    <img src="images/dundee.jpg"/>
-                    <div class="auslandsangebote-text-block ">
-                        <p>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
-                            elitr, sed
-                            diam nonumy eirmod tempor invidunt ut labore et dolore magna
-                            aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita
-                        </p>
-                        <ul>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
-                            <li>Nur 5000 Studierende</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
