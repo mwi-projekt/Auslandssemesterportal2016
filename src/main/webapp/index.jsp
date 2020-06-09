@@ -347,11 +347,12 @@
                         <p class="cmsInfo cmsBtn btn" id="cmsBtnSave" style="clear: both; float: right">Änderungen
                             speichern</p>
                     </div>
-                    <script src="https://cdn.cai.tools.sap/webchat/webchat.js"
-                        channelId="41472d18-8d28-4e83-b8de-b82d5239cac9"
-                        token="7de3cda9d2726de1cde854c3c76f929b"
-                        id="cai-webchat">
-                    </script>
+                    <script 
+			src="https://cdn.cai.tools.sap/webchat/webchat.js"
+			channelId="e04af381-f585-41f4-9b6d-3fce6834ad0e"
+			token="9c3fbc66d92d9346b34b0f4ed95c8611"
+			id="cai-webchat">
+		    </script>
                 </div>
             </div>
         </div>
