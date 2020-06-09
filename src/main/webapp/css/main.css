@@ -104,6 +104,12 @@ header{
 	opacity: 0.7;
 }
 
+.erfahrungsBerichte-image-container:hover{
+	transform: scale(1.05);
+	filter: grayscale(70%);
+
+}
+
 .erfahrungsBerichte-text-container{
 	position: absolute;
 	top: 50%;
