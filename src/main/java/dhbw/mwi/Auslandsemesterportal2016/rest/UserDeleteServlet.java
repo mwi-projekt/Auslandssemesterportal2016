@@ -25,7 +25,7 @@ public class UserDeleteServlet extends HttpServlet {
 			PrintWriter toClient = response.getWriter();
 
 			if (matrnumber != null) {
-				String query = "DELETE FROM user WHERE matrNumber = ?";
+				String query = "DELETE FROM User WHERE matrNumber = ?";
 				String[] args = new String[] { matrnumber };
 				String[] types = new String[] { "int" };
 				SQL_queries.executeUpdate(query, args, types);

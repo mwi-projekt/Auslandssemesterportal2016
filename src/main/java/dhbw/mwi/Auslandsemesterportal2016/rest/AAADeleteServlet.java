@@ -25,7 +25,7 @@ public class AAADeleteServlet extends HttpServlet {
 			PrintWriter toClient = response.getWriter();
 
 			if (mail != null) {
-				String query = "DELETE FROM user WHERE email = ?";
+				String query = "DELETE FROM User WHERE email = ?";
 				String[] args = new String[] { mail };
 				String[] types = new String[] { "String" };
 				int result = SQL_queries.executeUpdate(query, args, types);
