@@ -40,7 +40,7 @@
 			"response": []
 		},
 		{
-			"name": "GET }/auslandsAngebotsInhalte",
+			"name": "GET /auslandsAngebotsInhalte",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -51,6 +51,23 @@
 					],
 					"path": [
 						"auslandsAngebotsInhalte"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /auslandsAngebote",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/auslandsAngebote",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"auslandsAngebote"
 					]
 				}
 			},
