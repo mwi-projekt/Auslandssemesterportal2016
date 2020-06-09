@@ -7,11 +7,11 @@
 
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.min.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/InfoBox.css">
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/admin-process.css">
-	<link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
@@ -23,63 +23,64 @@
 <body>
 
 
+<!-- Navigationsleiste-------------------------------------------------------------------- -->
+<div class="header">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <a href="index.jsp"> <img style="width:100%;height:auto" class="img-rounded img-responsive"
+                                      src="images/DHBW-Logo.svg"/></a>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
+        </div>
 
-    <!-- Navigationsleiste-------------------------------------------------------------------- -->
-    <div class="header">
-        <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-2">
-                <a href="index.jsp"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
+        <div class="col-md-3">
+
+            <div class="logoutFenster">
+
+
+                Eingeloggt als <b class="nutzerName"></b>
+
+                <button type="button" class="btn btn-default navMargin"
+                        id="logout" data-target="#logout">Logout
+                </button>
+
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3">
-                <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
-            </div>
 
-            <div class="col-md-3">
+        </div>
 
-            	<div class="logoutFenster">
+    </div>
+</div>
 
 
-                        Eingeloggt als <b class="nutzerName"></b>
-
-                        <button type="button" class="btn btn-default navMargin"
-                     id="logout" data-target="#logout">Logout</button>
-
-            	</div>
-
-        	</div>
-
-    	</div>
-   	</div>
-
-	
 <div class="container admin-process">
-	<div class="row">
-		<div class="col-md-10"></div>
-		<div class="col-md-2"><a href="index.jsp" class="btn cmsBtn">Zurück zum Hauptmenü</a></div>
-	</div>   
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2"><a href="index.jsp" class="btn cmsBtn">Zurück zum Hauptmenü</a></div>
+    </div>
     <div class="row">
 
-    <h1>Bewerbungsprozess wählen</h1>
-    <form action="admin-process.html">
-    
-    <div class="col-md-6">
-  	<select class="form-control" name="dia">
-    	<option value="schottland">Abertay University of Dundee (Schottland)</option>
-    	<option value="usasm">California State University San Marcos (USA)</option>
-    	<option value="usaci">California State University Channel Islands (USA)</option>
-    	<option value="costarica">Costa Rica Institute of Technology (Costa Rica)</option>
-    	<option value="polen">Technische Universität Lodz (Polen)</option>
-    	<option value="kroatien">Universität Zadar (Kroatien)</option>
-    	<option value="bulgarien">American University in Bulgaria (Bulgarien)</option>
-    	<option value="suedafrika">Durban University of Technology (Südafrika)</option>
-    	<option value="finnland">South-Eastern Finland University of Applied Sciences (Finnland)</option>
-  	</select>
-  	</div>
-	<button class="btn cmsBtn" type="submit">Bestätigen</button>
-  
-  </form>
+        <h1>Bewerbungsprozess wählen</h1>
+        <form action="admin-process.html">
+
+            <div class="col-md-6">
+                <select class="form-control" name="dia">
+                    <option value="schottland">Abertay University of Dundee (Schottland)</option>
+                    <option value="usasm">California State University San Marcos (USA)</option>
+                    <option value="usaci">California State University Channel Islands (USA)</option>
+                    <option value="costarica">Costa Rica Institute of Technology (Costa Rica)</option>
+                    <option value="polen">Technische Universität Lodz (Polen)</option>
+                    <option value="kroatien">Universität Zadar (Kroatien)</option>
+                    <option value="bulgarien">American University in Bulgaria (Bulgarien)</option>
+                    <option value="suedafrika">Durban University of Technology (Südafrika)</option>
+                    <option value="finnland">South-Eastern Finland University of Applied Sciences (Finnland)</option>
+                </select>
+            </div>
+            <button class="btn cmsBtn" type="submit">Bestätigen</button>
+
+        </form>
     </div>
 
 </div>

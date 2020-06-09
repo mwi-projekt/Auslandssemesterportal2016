@@ -1,21 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ include file="partials/header.html" %>
 <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
 <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
-<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/admin/landingpage.css"/>
 <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-            crossorigin="anonymous"
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
 />
 <script src="js/pages/index.js"></script>
 
 <!-- Mittlerer Teil --------------------------------------------------------------------------->
 
-<div class="container" id="adminBereich">
- <%@ include file="HTML/admin/landing-page.html" %>
- <%@ include file="partials/footer.html" %>
+<div id="adminBereich">
+    <%@ include file="HTML/admin/landing-page.html" %>
+    <%@ include file="partials/footer.html" %>
 </div>
 
 <div class="inhalt" id="normalBereich">
@@ -24,8 +25,8 @@
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
                 <a class="text-white" href="#auslandsAngebote">Auslandsangebote</a>
-                <br />
-                <br />
+                <br/>
+                <br/>
                 <a class="text-white" href="#erfahrungsBerichte">Erfahrungsberichte</a>
             </div>
         </div>
@@ -61,13 +62,13 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="images/SanDiego_Hintergrund.png" alt="First slide" />
+                <img class="d-block w-100" src="images/SanDiego_Hintergrund.png" alt="First slide"/>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="images/Teipei_Hintergrund.png" alt="Second slide" />
+                <img class="d-block w-100" src="images/Teipei_Hintergrund.png" alt="Second slide"/>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" src="images/Teiwan_Hintergrund.png" alt="Third slide" />
+                <img class="d-block w-100" src="images/Teiwan_Hintergrund.png" alt="Third slide"/>
             </div>
         </div>
         <a
@@ -89,26 +90,28 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <br />
+    <br/>
 
     <!-- Auslandsangebote -->
     <div class="auslandsangebote-container" id="auslandsAngebote">
         <div class="grid-container">
-            <div >
+            <div>
                 <div class="auslandsangebote-heading-container">
                     <h1 class="auslandsangebote-heading">Auslandsangebote</h1>
                 </div>
                 <div class="auslandsangebote-image-left-text-right ">
-                    <img src="images/Dundee.png"  />
+                    <img src="images/Dundee.png"/>
                     <div class="auslandsangebote-text-block">
                         <p>
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
                             justo duo dolores et ea rebum. Stet clita
@@ -126,10 +129,12 @@
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
                             justo duo dolores et ea rebum. Stet clita
@@ -140,19 +145,21 @@
                             <li>Nur 5000 Studierende</li>
                         </ul>
                     </div>
-                    <img src="images/Bulgaria.png"  />
+                    <img src="images/Bulgaria.png"/>
                 </div>
                 <div class="auslandsangebote-image-left-text-right">
-                    <img src="images/NDHU.png" />
-                    <div class="auslandsangebote-text-block" >
+                    <img src="images/NDHU.png"/>
+                    <div class="auslandsangebote-text-block">
                         <p>
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
                             justo duo dolores et ea rebum. Stet clita
@@ -170,10 +177,12 @@
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
                             justo duo dolores et ea rebum. Stet clita
@@ -184,19 +193,21 @@
                             <li>Nur 5000 Studierende</li>
                         </ul>
                     </div>
-                    <img src="images/SanMarcos.png" />
+                    <img src="images/SanMarcos.png"/>
                 </div>
                 <div class="auslandsangebote-image-left-text-right">
-                    <img src="images/dundee.jpg"  />
+                    <img src="images/dundee.jpg"/>
                     <div class="auslandsangebote-text-block ">
                         <p>
                             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clita Lorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                            justo duo dolores et ea rebum. Stet clitaLorem ipsum dolor sit amet, consetetur sadipscing
+                            elitr, sed
                             diam nonumy eirmod tempor invidunt ut labore et dolore magna
                             aliquyam erat, sed diam voluptua. At vero eos et accusam et
                             justo duo dolores et ea rebum. Stet clita
@@ -211,7 +222,6 @@
             </div>
         </div>
     </div>
-
 
 
     <!--- Erfahrungsberichte ---->
