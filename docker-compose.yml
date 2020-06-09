@@ -44,7 +44,7 @@ services:
       WAIT_FOR: mwi_mysql:3306
       DB_URL: jdbc:mysql://mwi_mysql:3306/camunda_db?autoReconnect=true
       MWI_URL: ${SERVER_URL}
-      MWI_DB_URL: 'jdbc:mysql://mwi_mysql:3306/mwi?autoReconnect=true&user=${DB_USER}&password=${DB_PW}&serverTimezone=UTC'
+      MWI_DB_URL: 'jdbc:mysql://mwi_mysql:3306/mwi_v1?autoReconnect=true&user=${DB_USER}&password=${DB_PW}&serverTimezone=UTC'
     depends_on: [mwi_mysql]
     volumes:
       - ${VOLUME_UPLOAD}:/camunda/upload
