@@ -55,7 +55,7 @@ public class createAAAServlet extends HttpServlet {
 						out.close();
 					} else {
 						RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
-						rd.forward(request, response);
+						rd.include(request, response);
 						out.close();
 					}
 				} catch (Exception e) {
