@@ -127,7 +127,6 @@ header{
 	padding-top: 4em;
 	padding-bottom: 1em;
 	background-color: #2b2b2b;
-	margin-top:2em;
 }
 
 .page-footer h3{
@@ -527,8 +526,8 @@ header{
 }
 
 .inhalt {
-	margin-top: 70px;
-	margin-bottom: 20px;
+	/*margin-top: 70px;*/
+	/*margin-bottom: 20px;*/
 }
 
 /* Navigationsleiste */
