@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "a281deb2-fe4f-4778-ae9c-655e6c08ca1f",
+		"name": "Auslandssemesterportal API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /infoMaterial",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/portalInfo",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"portalInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /portalInfo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/portalInfo",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"portalInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET }/auslandsAngebotsInhalte",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/auslandsAngebotsInhalte",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"auslandsAngebotsInhalte"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST /login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "admin@admin.de",
+							"type": "text"
+						},
+						{
+							"key": "pw",
+							"value": "admin",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
