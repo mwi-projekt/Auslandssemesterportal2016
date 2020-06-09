@@ -1,3 +1,17 @@
+$.validator.setDefaults({
+    errorElement: "span",
+    errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+    }
+});
+
 $(document).ready(function () {
 
     const inputVorname = $("#vorname");
@@ -78,15 +92,43 @@ $(document).ready(function () {
     });
 
     // Submit-Button
-    $('#myFormSubmit').click(function (e) {
-        e.preventDefault();
-
-        var vorname = inputVorname.val();
-        var nachname = inputNachname.val();
-        var email = inputEmail.val();
-        var tel = inputTelefonnummer.val();
-        var mobil = inputMobilnummer.val();
-        var oldMail = "0";
+   $("#myForm").validate({
+           rules: {
+               vorname: "required",
+               nachname: "required",
+               email: {
+                   required: true,
+                   email: true
+               },
+               telefonnummer: {
+                   required: true,
+                   digits: true
+               },
+               mobilfunknummer: {
+                   required: true,
+                   digits: true
+               },
+           },
+           messages: {
+               vorname: "Bitte geben Sie ihren Vornamen ein",
+               nachname: "Bitte geben Sie ihren Nachnamen ein",
+               email: "Bitte geben Sie ihre E-Mail ein",
+               telefonnummer: {
+                   required: "Bitte geben Sie ihre Telefonnummer ein",
+                   digits: "Bitte geben Sie nur Zahlen ein",
+               },
+                mobilfunknummer: {
+                 required: "Bitte geben Sie ihre Mobilfunknummer ein",
+                 digits: "Bitte geben Sie nur Zahlen ein"
+               }
+           },
+           submitHandler: function () {
+               var vorname = inputVorname.val();
+               var nachname = inputNachname.val();
+               var email = inputEmail.val();
+               var tel = inputTelefonnummer.val();
+               var mobil = inputMobilnummer.val();
+               var oldMail = "0";
 
         if (isEdit) {
             if (currentEmail != $('#email').val()) {
@@ -180,7 +222,8 @@ $(document).ready(function () {
                 }
             });
         }
-    });
+     }
+   });
 
     // Delete-Button
     $("#example").on("mousedown", "#deleteButton", function (e) {
