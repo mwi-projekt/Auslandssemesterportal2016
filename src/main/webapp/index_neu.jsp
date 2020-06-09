@@ -334,7 +334,6 @@
                     <p class="cmsInfo cmsBtn btn" id="cmsBtnSave" style="clear: both; float: right">Änderungen
                         speichern</p>
                 </div>
-
                 <script src="https://cdn.cai.tools.sap/webchat/webchat.js"
                         channelId="41472d18-8d28-4e83-b8de-b82d5239cac9"
                         token="7de3cda9d2726de1cde854c3c76f929b"
