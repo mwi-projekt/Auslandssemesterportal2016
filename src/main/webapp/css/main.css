@@ -69,9 +69,9 @@ header{
 }
 
 
-.auslandsangebote-href{
+.auslandsangebote-href a{
 	border: none;
-	color: black;
+	color: black !important;
 	text-decoration: none;
 }
 

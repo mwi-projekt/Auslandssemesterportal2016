@@ -98,11 +98,11 @@
     <!-- Auslandsangebote -->
     <div class="auslandsangebote-container" id="auslandsAngebote">
         <div class="grid-container">
-            <div>
+            <div class="auslandsangebote-href a" >
                 <div class="auslandsangebote-heading-container">
                     <h1 class="auslandsangebote-heading">Auslandsangebote</h1>
                 </div>
-                <a class="auslandsangebote-href" href="details-auslandsangebote.html">
+                <a href="details-auslandsangebote.html">
                     <div class="auslandsangebote-image-left-text-right ">
                         <img src="images/Dundee.png"/>
                         <div class="auslandsangebote-text-block">
