@@ -68,6 +68,13 @@ header{
 
 }
 
+
+.auslandsangebote-href{
+	border: none;
+	color: black;
+	text-decoration: none;
+}
+
 .auslandsangebote-text-block{
 	display: inline-block;
 	vertical-align: middle;
@@ -127,6 +134,7 @@ header{
 	padding-top: 4em;
 	padding-bottom: 1em;
 	background-color: #2b2b2b;
+	margin-top:2em;
 }
 
 .page-footer h3{

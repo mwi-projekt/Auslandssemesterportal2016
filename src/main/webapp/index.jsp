@@ -102,78 +102,86 @@
                 <div class="auslandsangebote-heading-container">
                     <h1 class="auslandsangebote-heading">Auslandsangebote</h1>
                 </div>
-                <div class="auslandsangebote-image-left-text-right ">
-                    <img src="images/Dundee.png"/>
-                    <div class="auslandsangebote-text-block">
-                        <br>
-                        <h4>
-                            University of Abertay Dundee - Schottland
-                        </h4>
-                        <br>
-                        <p>
-                            Studiere im Land der Highlands, Gletschertäler und Seen und schnuppere Luft an einer britischen Universität.
-                        </p>
-                        <ul>
-                            <li>Moderne Universität mit ca. 5.000 Studierenden</li>
-                            <li>Hafen- und Studentenstadt mit großem Kulturangebot</li>
-                            <li>Angebotene Studienbereiche: Wirtschaftsinformatik, Betriebswirtschaftslehre</li>
-                        </ul>
+                <a class="auslandsangebote-href" href="details-auslandsangebote.html">
+                    <div class="auslandsangebote-image-left-text-right ">
+                        <img src="images/Dundee.png"/>
+                        <div class="auslandsangebote-text-block">
+                            <br>
+                            <h4>
+                                University of Abertay Dundee - Schottland
+                            </h4>
+                            <br>
+                            <p>
+                                Studiere im Land der Highlands, Gletschertäler und Seen und schnuppere Luft an einer britischen Universität.
+                            </p>
+                            <ul>
+                                <li>Moderne Universität mit ca. 5.000 Studierenden</li>
+                                <li>Hafen- und Studentenstadt mit großem Kulturangebot</li>
+                                <li>Angebotene Studienbereiche: Wirtschaftsinformatik, Betriebswirtschaftslehre</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="auslandsangebote-text-left-image-right">
-                    <div class="auslandsangebote-text-block mobile-order-swap">
-                        <br>
-                        <h4>
-                            American University in Bulgarien
-                        </h4>
-                        <br>
-                        <p>
-                            Schnuppere die Luft einer amerikanischen Hochschule innerhalb der Europäischen Union und lerne dabei die reiche Kultur Bulgariens lieben.
-                        </p>
-                        <ul>
-                            <li>Private Hochschule mit nur 1.100 Studierenden</li>
-                            <li>Aufgebaut wie eine amerikanische Hochschule</li>
-                            <li>Angebotene Studienbereiche: Informatik, Wirtschaftswissenschaften</li>
-                        </ul>
+                </a>
+                <a href="details-auslandsangebote.html">
+                    <div class="auslandsangebote-text-left-image-right">
+                        <div class="auslandsangebote-text-block mobile-order-swap">
+                            <br>
+                            <h4>
+                                American University in Bulgarien
+                            </h4>
+                            <br>
+                            <p>
+                                Schnuppere die Luft einer amerikanischen Hochschule innerhalb der Europäischen Union und lerne dabei die reiche Kultur Bulgariens lieben.
+                            </p>
+                            <ul>
+                                <li>Private Hochschule mit nur 1.100 Studierenden</li>
+                                <li>Aufgebaut wie eine amerikanische Hochschule</li>
+                                <li>Angebotene Studienbereiche: Informatik, Wirtschaftswissenschaften</li>
+                            </ul>
+                        </div>
+                        <img src="images/Bulgaria.png"/>
                     </div>
-                    <img src="images/Bulgaria.png"/>
-                </div>
-                <div class="auslandsangebote-image-left-text-right">
-                    <img src="images/NDHU.png"/>
-                    <div class="auslandsangebote-text-block">
-                        <br>
-                        <h4>
-                            National Dong Hwa University
-                        </h4>
-                        <br>
-                        <p>
-                            Entdecke die Moderne und Kultur des asiatischen Inselstaats und genieße Studienqualität auf höchstem Niveau.
-                        </p>
-                        <ul>
-                            <li>Über 10.000 Studierende</li>
-                            <li>Campus zwischen Meer und Nationalpark</li>
-                            <li>Angebotene Studienbereiche: Wirtschaft, Ingenieurswissenschaften, Informatik</li>
-                        </ul>
+                </a>
+                <a href="details-auslandsangebote.html">
+                    <div class="auslandsangebote-image-left-text-right">
+                        <img src="images/NDHU.png"/>
+                        <div class="auslandsangebote-text-block">
+                            <br>
+                            <h4>
+                                National Dong Hwa University
+                            </h4>
+                            <br>
+                            <p>
+                                Entdecke die Moderne und Kultur des asiatischen Inselstaats und genieße Studienqualität auf höchstem Niveau.
+                            </p>
+                            <ul>
+                                <li>Über 10.000 Studierende</li>
+                                <li>Campus zwischen Meer und Nationalpark</li>
+                                <li>Angebotene Studienbereiche: Wirtschaft, Ingenieurswissenschaften, Informatik</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="auslandsangebote-text-left-image-right ">
-                    <div class="auslandsangebote-text-block mobile-order-swap">
-                        <br>
-                        <h4>
-                            California State University San Marcos
-                        </h4>
-                        <br>
-                        <p>
-                            Werde Teil des Lebensstils der amerikanischen Westküste und studiere in den Vereinigten Staaten.
-                        </p>
-                        <ul>
-                            <li>Größtes staatliches Hochschulnetzwerk Kaliforniens</li>
-                            <li>Ca. 9.000 Studierende auf dem Campus in San Marcos </li>
-                            <li>Angebotene Studienbereiche: Wirtschaftsinformatik</li>
-                        </ul>
+                </a>
+                <a href="details-auslandsangebote.html">
+                    <div class="auslandsangebote-text-left-image-right ">
+                        <div class="auslandsangebote-text-block mobile-order-swap">
+                            <br>
+                            <h4>
+                                California State University San Marcos
+                            </h4>
+                            <br>
+                            <p>
+                                Werde Teil des Lebensstils der amerikanischen Westküste und studiere in den Vereinigten Staaten.
+                            </p>
+                            <ul>
+                                <li>Größtes staatliches Hochschulnetzwerk Kaliforniens</li>
+                                <li>Ca. 9.000 Studierende auf dem Campus in San Marcos </li>
+                                <li>Angebotene Studienbereiche: Wirtschaftsinformatik</li>
+                            </ul>
+                        </div>
+                        <img src="images/SanMarcos.png"/>
                     </div>
-                    <img src="images/SanMarcos.png"/>
-                </div>
+                </a>
             </div>
         </div>
     </div>
@@ -217,7 +225,8 @@
 
         </div>
     </div>
-
+    </br>
+    </br>
     <script
             src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
