@@ -8,18 +8,9 @@
         <link rel="stylesheet" href="css/main.css">
         <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no" charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
-        <link rel="stylesheet" href="node_modules/jquery-form-validator/form-validator/theme-default.min.css">
+        <link rel="stylesheet" href="node_modules/cookieconsent/build/cookieconsent.min.css">
 
-        <script src="node_modules/jquery/dist/jquery.min.js"></script>
-        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>
-        <script src="js/app.js"></script>
-        <script type="text/javascript">
-            window.cookieconsent_options = {"message":"Diese Webiste verwendet Cookies","dismiss":"Verstanden!","learnMore":"More info","link":null,"theme":"light-top"};
-        </script>
-        <script type="text/javascript" src="node_modules/cookieconsent/build/cookieconsent.min.js"></script>
-        <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-        <meta charset "UTF-8"/>
+        <script src="js/app.ts"></script>
 	</head>
 
     <!--  PopupFeld für Registrierung --------------------------------------------------------------->
@@ -122,7 +113,7 @@
                         <p class="falsch"></p>
                 </div>
                 <div class="nutzerBearbeiten">
-                    <b id="closeBearb"><img src="images/Button Delete.png"
+                    <b id="closeBearb"><img src="images/button_delete.png"
                         id="smallImg"></b>
                     <h2>Benutzerdaten bearbeiten</h2>
                     <input class="inBox" type="text" id="inEditVorname"
@@ -186,7 +177,7 @@
         <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-2">
-                <a href="index.jsp"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
+                <a href="index.html"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-3">
@@ -245,7 +236,7 @@
 					Friedrichstr. 14<br>
 					70174 Stuttgart<br>
 					<br>
-					<a href="info@dhbw-karlsruhe.de">info@dhbw-karlsruhe.de</a><br>
+					<a href="mailto:info@dhbw-karlsruhe.de">info@dhbw-karlsruhe.de</a><br>
 					<a href="http://www.dhbw-karlsruhe.de">http://www.dhbw-karlsruhe.de</a><br>
 					<br>
 					Redaktion und Verantwortung für die Homepage:<br>
@@ -281,7 +272,7 @@
 				<div class="col-md-8">
 					<div class="pull-right">
 						<p>
-							<a href="index.jsp">Startseite</a>
+							<a href="index.html">Startseite</a>
 							|
 							<a href="impressum.html">Impressum</a>
 							|

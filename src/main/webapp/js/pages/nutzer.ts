@@ -1,10 +1,20 @@
+import {$,baseUrl} from "../config";
+import "../app";
+// @ts-ignore
+let dt = require( 'datatables.net' )(window, $);
+import "datatables.net-bs4";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-ui-dist/jquery-ui";
+
+
 $(document).ready(function () {
     // Click-Listener für Userverwaltung User anzeigen lassen
     $('.btnUser').on('click', function () {
-        var id = $(this).attr('id');
+        let id = $(this).attr('id');
 
-        var rolle = 0;
-        var typ = '';
+        let rolle = 0;
+        let typ = '';
         if (id === 'userStudShow') {
             rolle = 3;
             typ = "Studierende";
@@ -22,12 +32,13 @@ $(document).ready(function () {
                 rolle: rolle,
             },
             success: function (result) {
-                var auslesen = result.data;
+                let auslesen = result.data;
+                let tabelle : string = "";
                 if (rolle === 2) {
-                    var tabelle = '<h2>Registrierte ' + typ +
+                    tabelle = '<h2>Registrierte ' + typ +
                         '</h2><table id="userTable" class="table table-striped table-bordered"> <thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>Telefonnummer</th><th>Mobilfunknummer</th><th></th><th></th></tr></thead>';
-                    for (var i = 0; i < auslesen.length; i++) {
-                        var row = auslesen[i];
+                    for (let i = 0; i < auslesen.length; i++) {
+                        let row = auslesen[i];
 
                         tabelle = tabelle +
                             '<tr id="row' + i +
@@ -49,12 +60,12 @@ $(document).ready(function () {
                             '" title="Löschen"></span></td></tr>';
                     }
                 } else if (rolle === 3) {
-                    var tabelle = '<h2>Registrierte ' +
+                    tabelle = '<h2>Registrierte ' +
                         typ +
                         '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th>Matrikelnummer</th><th></th><th></th></tr></thead>';
 
-                    for (var i = 0; i < auslesen.length; i++) {
-                        var row = auslesen[i];
+                    for (let i = 0; i < auslesen.length; i++) {
+                        let row = auslesen[i];
                         tabelle = tabelle +
                             '<tr id="row' + i +
                             '"><td class="vorname">' +
@@ -79,12 +90,12 @@ $(document).ready(function () {
                     }
                 }
                 else if (rolle === 4) {
-                    var tabelle = '<h2>Registrierte ' +
+                    tabelle = '<h2>Registrierte ' +
                         typ +
                         '</h2><table id="userTable" class="table table-striped table-bordered"><thead><tr class="titleRow"><th>Vorname</th><th>Nachname</th><th>Email</th><th>DHBW Standort</th><th>Studiengang</th><th>Kurs</th><th></th><th></th></tr></thead>';
 
-                    for (var i = 0; i < auslesen.length; i++) {
-                        var row = auslesen[i];
+                    for (let i = 0; i < auslesen.length; i++) {
+                        let row = auslesen[i];
                         tabelle = tabelle +
                             '<tr id="row' + i +
                             '"><td class="vorname">' +
@@ -108,11 +119,11 @@ $(document).ready(function () {
                 }    
                 tabelle = tabelle + '</table>';
                 $('#userTabelle').html(tabelle)
-                var nonSortable = (rolle == 3 ? [7, 8] : [5, 6]);
+                let nonSortable = (rolle == 3 ? [7, 8] : [5, 6]);
 
-                var setClickListeners = function () {
+                let setClickListeners = function () {
                     $('.delete-button').click(function () {
-                        var self = $(this);
+                        let self = $(this);
 
                         Swal.fire({
                             title: "Bist du sicher?",
@@ -120,10 +131,10 @@ $(document).ready(function () {
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "Löschen!"
+                            confirmButtonText: "Löschen!",
+                            cancelButtonText: "Abbrechen"
                         }).then(function(result) {
                             if (result.value) {
-                                alert("Du hast auf Löschen gedrückt");
                             	Swal.fire({
                                     title: 'Lösche User'
                                 });
@@ -144,6 +155,12 @@ $(document).ready(function () {
                                         Swal.fire('Fehler', 'Der User konnte nicht gelöscht werden', 'error');
                                     }
                                 });
+                            } else{
+                                Swal.fire({
+                                    title: "Abgebrochen",
+                                    icon: "info",
+                                    confirmButtonText: "Ok"
+                                });
                             }
                         });
 
@@ -151,7 +168,7 @@ $(document).ready(function () {
                     
                     $('.deleteSGL-button').click(function () {
 
-                        var self = $(this);
+                        let self = $(this);
 
                         Swal.fire({
                             title: "Bist du sicher?",
@@ -189,7 +206,7 @@ $(document).ready(function () {
 
                     $('.deleteAAA-button').click(function () {
 
-                        var self = $(this);
+                        let self = $(this);
 
                         Swal.fire({
                             title: "Bist du sicher?",
@@ -226,30 +243,30 @@ $(document).ready(function () {
                     });
 
                     $('.useredit-button').click(function () {
-                        var id = $(this).attr('id');
-                        var laenge = id.length;
+                        let id = $(this).attr('id')!;
+                        let laenge = id.length;
                         if (laenge === 5) {
                             id = id.substring(4, 5);
                         } else {
                             id = id.substring(4, 6);
                         }
                         $('#inEditVorname').val($('#row' + id).children('.vorname').text().trim());
-                        $('#inEditVorname').attr('data-value', $('#inEditVorname').val());
+                        $('#inEditVorname').attr('data-value', $('#inEditVorname').val()!.toString());
                         $('#inEditNachname').val($('#row' + id).children('.nachname').text().trim());
-                        $('#inEditNachname').attr('data-value', $('#inEditNachname').val());
+                        $('#inEditNachname').attr('data-value', $('#inEditNachname').val()!.toString());
                         $('#inEditEmail').val($('#row' + id).children('.email').text().trim());
-                        $('#inEditEmail').attr('data-value', $('#inEditEmail').val());
+                        $('#inEditEmail').attr('data-value', $('#inEditEmail').val()!.toString());
                         $('#inEditEmail').attr('data-role', rolle);
                         $('#inEditTel').val($('#row' + id).children('.telnummer').text().trim());
-                        $('#inEditTel').attr('data-value', $('#inEditTel').val());
+                        $('#inEditTel').attr('data-value', $('#inEditTel').val()!.toString());
                         $('#inEditMobil').val($('#row' + id).children('.mobil').text().trim());
-                        $('#inEditMobil').attr('data-value', $('#inEditMobil').val());
+                        $('#inEditMobil').attr('data-value', $('#inEditMobil').val()!.toString());
                         $('#inEditStudgang').val($('#row' + id).children('.studgang').text().trim());
-                        $('#inEditStudgang').attr('data-value', $('#inEditStudgang').val());
+                        $('#inEditStudgang').attr('data-value', $('#inEditStudgang').val()!.toString());
                         $('#inEditKurs').val($('#row' + id).children('.kurs').text().trim());
-                        $('#inEditKurs').attr('data-value', $('#inEditKurs').val());
+                        $('#inEditKurs').attr('data-value', $('#inEditKurs').val()!.toString());
                         $('#inEditMatnr').val($('#row' + id).children('.matrikelnr').text().trim());
-                        $('#inEditMatnr').attr('data-value', $('#inEditMatnr').val());
+                        $('#inEditMatnr').attr('data-value', $('#inEditMatnr').val()!.toString());
                         if (rolle === 2) {
                             $('#inEditTel').show();
                             $('#inEditMobil').show();
@@ -286,15 +303,14 @@ $(document).ready(function () {
                 });
             }
         });
-
     });
 
     $('#AAACreateForm').submit(function (event) {
-        var email = $('#AAAMail').val();
-        var vname = $('#AAAVorname').val();
-        var nname = $('#AAANachname').val();
-        var phone = $('#AAAPhone').val();
-        var mobil = $('#AAAMobile').val();
+        let email = $('#AAAMail').val();
+        let vname = $('#AAAVorname').val();
+        let nname = $('#AAANachname').val();
+        let phone = $('#AAAPhone').val();
+        let mobil = $('#AAAMobile').val();
         Swal.fire({
             title: 'Speichere Änderungen'
         });
@@ -353,12 +369,12 @@ $(document).ready(function () {
     });
     
     $('#SGLCreateForm').submit(function (event) {
-        var email = $('#SGLMail').val();
-        var vname = $('#SGLVorname').val();
-        var nname = $('#SGLNachname').val();
-        var studiengang = $('#SGLStudiengang').val();
-        var phone = $('#SGLPhone').val();
-        var mobil = $('#SGLMobile').val();
+        let email = $('#SGLMail').val();
+        let vname = $('#SGLVorname').val();
+        let nname = $('#SGLNachname').val();
+        let studiengang = $('#SGLStudiengang').val();
+        let phone = $('#SGLPhone').val();
+        let mobil = $('#SGLMobile').val();
         Swal.fire({
             title: 'Speichere Änderungen'
         });
@@ -420,18 +436,19 @@ $(document).ready(function () {
 
     
     $('#btnUserEditSave').click(function () {
-		var dataMail = $('#inEditEmail').val();
-		var dataOldMail = "0";
-		var dataRole = $('#inEditEmail').attr('data-role');
-		var dataNewVorname = $('#inEditVorname').val();
-		var dataNewNachaname = $('#inEditNachname').val();
-		var dataNewTel = $('#inEditTel').val();
-		var dataNewMobil = $('#inEditMobil').val();
-		var dataNewStudgang = $('#inEditStudgang').val();
-		var dataNewKurs = $('#inEditKurs').val();
-		var dataNewMatnr = $('#inEditMatnr').val();
+		let dataMail = $('#inEditEmail').val();
+		let dataOldMail = "0";
+		let dataRole = $('#inEditEmail').attr('data-role');
+		let dataNewVorname = $('#inEditVorname').val();
+		let dataNewNachaname = $('#inEditNachname').val();
+		let dataNewTel = $('#inEditTel').val();
+		let dataNewMobil = $('#inEditMobil').val();
+		let dataNewStudgang = $('#inEditStudgang').val();
+		let dataNewKurs = $('#inEditKurs').val();
+		let dataNewMatnr = $('#inEditMatnr').val();
+		debugger;
 		if ($('#inEditEmail').attr('data-value') != $('#inEditEmail').val()) {
-			var dataOldMail = $('#inEditEmail').attr('data-value');
+			dataOldMail = $('#inEditEmail').attr('data-value')!;
 		}
 		Swal.fire({
 			title: 'Speichere Änderungen'

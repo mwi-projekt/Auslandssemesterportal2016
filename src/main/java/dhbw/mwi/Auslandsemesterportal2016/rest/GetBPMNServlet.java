@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "GetBPMNServlet", urlPatterns = { "/bpmn/get" })
@@ -15,6 +16,7 @@ public class GetBPMNServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.addResponseHeaders(request,response);
 
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
@@ -39,14 +41,17 @@ public class GetBPMNServlet extends HttpServlet {
 						java.io.BufferedReader reader = new java.io.BufferedReader(
 								new java.io.InputStreamReader(fis, "UTF8"));
 						response.setContentType("application/octet-stream");
+
 						String s = null;
 						while ((s = reader.readLine()) != null) {
 							toClient.println(s);
 						}
+						toClient.close();
 						reader.close();
 					} else {
 						response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 						toClient.println("file not found");
+						toClient.close();
 					}
 				} catch (Exception e) {
 
@@ -55,6 +60,7 @@ public class GetBPMNServlet extends HttpServlet {
 			} else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				toClient.println("Error: missing parameters");
+				toClient.close();
 			}
 		}
 	}

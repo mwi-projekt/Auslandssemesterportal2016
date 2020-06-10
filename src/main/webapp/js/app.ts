@@ -1,10 +1,26 @@
-var baseUrl = "http://localhost:81";
-$.ajaxSetup({
-    xhrFields: { withCredentials: true },
-    crossDomain: true,
-});
+import {$,baseUrl} from "./config";
+import Swal from "sweetalert2";
+import "jquery-ui-dist/jquery-ui";
+// @ts-ignore
+import "cookieconsent";
 
 $(document).ready(function () {
+    //cookies
+    // @ts-ignore
+    window.cookieconsent.initialise({
+        content: {
+            message: "Diese Website verwendet Cookies!",
+            dismiss: "Verstanden!",
+            link: ""
+        },
+        theme: "classic",
+        palette: {
+            popup: {background: '#E8E8E8', text: '#000', link: '#fff', border: '#000'},
+            button: {background: 'transparent', border: '#D60000', text: '#D60000'},
+            highlight: {background: '#D60000', border: '#000000', text: '#000000'},
+        }
+    });
+
     // logout
     $('#logout').on('click', logout);
 
@@ -21,31 +37,31 @@ $(document).ready(function () {
 
 //Check ob Passwörter übereinstimmen
 $(document).on('keyup', '#inPwSt2', function(){
-    var inPwSt1 = document.getElementById("inPwSt1")
-      , inPwSt2 = document.getElementById("inPwSt2");
+    let inPwSt1 = <HTMLSelectElement>document.getElementById("inPwSt1")
+      , inPwSt2 = <HTMLSelectElement>document.getElementById("inPwSt2");
 
-    if(inPwSt1.value != inPwSt2.value) {
-        inPwSt2.setCustomValidity("Die Passwörter stimmen nicht überein");
+    if(inPwSt1?.value != inPwSt2?.value) {
+        inPwSt2?.setCustomValidity("Die Passwörter stimmen nicht überein");
     } else {
-        inPwSt2.setCustomValidity('');
+        inPwSt2?.setCustomValidity('');
     }
 });
 
 $(document).on('submit', '#regForm', function (e) {
     e.preventDefault();
-    var telefon = $('#inTel').val();
-    var mobil = $('#inMobil').val();
-    var rolle = "Studierender";
+    let telefon = $('#inTel').val();
+    let mobil = $('#inMobil').val();
+    let rolle = "Studierender";
 
-    var pw1 = $('#inPwSt1').val();
-    var pw2 = $('#inPwSt2').val();
-    var matrikelnummer = $('#inMatrikel').val();
-    var studiengang = $('#inStudiengang').val();
-    var kurs = $('#inKurs').val();
-    var standort = $('#inStandort').val();
-    var vorname = $('#inVorname').val();
-    var nachname = $('#inNachname').val();
-    var email = $('#inMail').val();
+    let pw1 = $('#inPwSt1').val();
+    let pw2 = $('#inPwSt2').val();
+    let matrikelnummer = $('#inMatrikel').val();
+    let studiengang = $('#inStudiengang').val();
+    let kurs = $('#inKurs').val();
+    let standort = $('#inStandort').val();
+    let vorname = $('#inVorname').val();
+    let nachname = $('#inNachname').val();
+    let email = $('#inMail').val();
 
     if (pw1 === pw2) {
         if (studiengang === "Studiengang*") {
@@ -100,7 +116,6 @@ $(document).on('submit', '#regForm', function (e) {
                         $('.modal').fadeOut();
                         $('.modal').modal('hide');
                     }
-
                 },
                 error: function (result) {
                     Swal.fire({
@@ -117,8 +132,8 @@ $(document).on('submit', '#regForm', function (e) {
 
 $(document).on('submit', '#loginForm', function (e) {
     e.preventDefault();
-    var email = $('#inEmail').val();
-    var pw = $('#inPasswort').val();
+    let email = $('#inEmail').val();
+    let pw = $('#inPasswort').val();
     $.ajax({
         type: "POST",
         url: baseUrl + "/login",
@@ -164,7 +179,6 @@ $(document).on('submit', '#loginForm', function (e) {
                     window.location.reload();
                 }
             }
-
         },
         error: function (data) {
             Swal.fire("Fehler");
@@ -179,27 +193,17 @@ if (!String.prototype.startsWith) {
     };
 }
 
-function isEmpty(str) {
+function isEmpty(str:any) {
     return (!str || 0 === str.length);
 }
-$.urlParam = function (name) {
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)')
-        .exec(window.location.href);
-
-    if (results == null) {
-        return " ";
-    } else {
-        return results[1] || 0;
-    }
-};
 
 //Function to remove certain URL Parameters
-function removeQueryStringParameter(key, url) {
+function removeQueryStringParameter(key:any, url:any) {
     if (!url) url = window.location.href;
 
-    var hashParts = url.split('#');
+    let hashParts = url.split('#');
 
-    var regex = new RegExp("([?&])" + key + "=.*?(&|#|$)", "i");
+    let regex = new RegExp("([?&])" + key + "=.*?(&|#|$)", "i");
 
     if (hashParts[0].match(regex)) {
         //REMOVE KEY AND VALUE
@@ -212,7 +216,6 @@ function removeQueryStringParameter(key, url) {
         if (typeof hashParts[1] !== 'undefined' && hashParts[1] !== null)
             url += '#' + hashParts[1];
     }
-
     return url;
 }
 
@@ -222,7 +225,10 @@ function logout() {
         url: baseUrl + "/logout",
         complete: function () {
             sessionStorage.clear();
-            document.location.href = 'index.jsp';
+            document.location.href = 'index.html';
         }
     });
 }
+
+export let urlParams = new URLSearchParams(window.location.search);
+export {isEmpty};

@@ -20,6 +20,8 @@ public class GetOverviewServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.addResponseHeaders(request,response);
+
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle < 1) {

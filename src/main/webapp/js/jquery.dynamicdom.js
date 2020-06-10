@@ -1,9 +1,12 @@
+import {$,baseUrl} from "./config";
+import "jquery-ui-dist/jquery-ui";
+import "ckeditor4/ckeditor";
 /*
  DynamicDom
  description: build content with editable components
  author: Andre Steudel <kontakt@andre-steudel.de>
  */
-;(function ( $, window, document, undefined ) {
+(function ( $, window, document, undefined ) {
 
     "use strict";
 
@@ -56,7 +59,6 @@
                 items: ".item:not(.ui-state-disabled)",
                 handle: ".actions .fa-arrows",
             });
-
             // get output
             $el.on( "sortupdate", function() {
                 self.update();

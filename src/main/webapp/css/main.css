@@ -3,7 +3,7 @@ body {
 }
 
 button {
-	a: visited{  
+	a:visited{
 		color: none;
 }
 
@@ -778,4 +778,14 @@ i {
 
 .swal2-popup {
 	font-size: 1.6rem !important;
+}
+
+.error {
+	color: red;
+	border-color: red;
+}
+
+.valid {
+	color: green;
+	border-color: green;
 }

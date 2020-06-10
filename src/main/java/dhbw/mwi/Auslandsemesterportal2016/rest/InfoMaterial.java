@@ -16,6 +16,7 @@ public class InfoMaterial extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.addResponseHeaders(request,response);
 		String sql = "SELECT titel, listelement1, link1, listelement2, link2, listelement3, link3, listelement4, link4, listelement5, link5, listelement6, link6, listelement7, link7 FROM cms_infoMaterial";
 		ResultSet rs = SQL_queries.executeStatement(sql);
 		Util.writeJson(response, rs);

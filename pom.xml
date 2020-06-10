@@ -283,6 +283,16 @@
 					</execution>
 
 					<execution>
+						<id>npm run clean:parcel</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run clean:parcel</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
 						<id>npm run build</id>
 						<goals>
 							<goal>npm</goal>
@@ -293,6 +303,15 @@
 					</execution>
 				</executions>
 			</plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <warSourceDirectory>${basedir}/src/main/webapp/dist</warSourceDirectory>
+                </configuration>
+            </plugin>
 
 			<plugin>
 			  <groupId>io.fabric8</groupId>

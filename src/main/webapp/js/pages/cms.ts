@@ -1,3 +1,13 @@
+import {$,baseUrl} from "../config";
+import {isEmpty} from "../app";
+import Swal from "sweetalert2";
+import "bootstrap";
+// @ts-ignore
+import buttonDeleteImage from "../../images/button_delete.png";
+// @ts-ignore
+import noImgImage from "../../images/noimg.jpg";
+
+
 $(document).ready(function () {
 	$('#adminBereich').hide();
     $('#normalBereich').show();
@@ -6,7 +16,7 @@ $(document).ready(function () {
     $('.cmsBtn').on('click', function () {
         if ($(this).text() === "Bearbeiten" ||
             $(this).text() === "Abbrechen") {
-            var id = $(this).parent().parent().attr('id');
+            let id = $(this).parent().parent().attr('id');
             switch (id) {
                 case 'portalInfo':
                     if ($(this).text() === "Bearbeiten") {
@@ -15,12 +25,12 @@ $(document).ready(function () {
                         $('.cmsPortal').show();
                         $('#portalInfo').children('.col-md-6')
                             .children('.titel').hide();
-                        var titel = $('#portalInfo').children(
+                        let titel = $('#portalInfo').children(
                                 '.col-md-6').children('.titel')
                             .text();
                         $('#inPortalTitel').val(titel);
                         $('.inputsPortal').empty();
-                        for (var i = 1; $('#li' + i).text() != ""; i++) {
+                        for (let i = 1; $('#li' + i).text() != ""; i++) {
                             $('.inputsPortal')
                                 .append(
                                     '<input class="inBox" id="inli' +
@@ -30,7 +40,7 @@ $(document).ready(function () {
                                     .text() +
                                     '" /><img class="small" id="delPoLi' +
                                     i +
-                                    '" src="images/Button Delete.png" />');
+                                    '" src="' + buttonDeleteImage + '" />');
                             $('#delPoLi' + i).click(function (event) {
                                 delPoLi(event);
                             });
@@ -89,19 +99,17 @@ $(document).ready(function () {
                         $('#infoMaterial').children().children(
                             '.nonCms').hide();
                         $('.cmsInfo').show();
-                        var titel = $('#infoMaterial').children(
+                        let titel = $('#infoMaterial').children(
                                 '.col-md-6').children('.titel')
                             .text();
                         $('#inInfoTitel').val(titel);
-                        var htmlText = '';
-                        for (var i = 1; $('#infoli' + i).children(
+                        let htmlText = '';
+                        for (let i = 1; $('#infoli' + i).children(
                                 'a').text() != ""; i++) {
                             $('#inInfoLi' + i).val(
                                 $('#infoli' + i).children('a')
                                 .text());
-                            $('#inInfoLink' + i).val(
-                                $('#infoli' + i).children('a')
-                                .attr('href'));
+                            $('#inInfoLink' + i)?.val($('#infoli' + i)?.children('a')!.attr('href')!.toString);
                             htmlText = htmlText +
                                 '<input class="inBox" id="inInfoLi' +
                                 i +
@@ -110,7 +118,7 @@ $(document).ready(function () {
                                 .children('a').text() +
                                 '" /><img class="small" id="delInLi' +
                                 i +
-                                '" src="images/Button Delete.png" /><br>' +
+                                '" src="' + buttonDeleteImage + '" /><br>' +
                                 '<b style="margin-right: 5px">Link</b><input class="inBox infoLink" id="inInfoLink' +
                                 i +
                                 '" value="' +
@@ -119,33 +127,28 @@ $(document).ready(function () {
                                     'href') +
                                 '"><img class="small" id="delLink' +
                                 i +
-                                '" src="images/Button Delete.png" />';
+                                '" src="' + buttonDeleteImage + '" />';
                         }
                         $('.inputsInfo').html(htmlText);
-                        for (var i = 1; $('#infoli' + i).children(
+                        for (let i = 1; $('#infoli' + i).children(
                                 'a').text() != ""; i++) {
-                            document
-                                .getElementById('delInLi' + i)
-                                .addEventListener(
+                            document.getElementById('delInLi' + i)?.addEventListener(
                                     'click',
                                     function (event) {
-                                        var id = $(this)
+                                        let id = $(this)
                                             .attr('id');
-                                        id = id.substring(
+                                        id = id!.substring(
                                             7, 8);
                                         $('#inInfoLi' + id)
                                             .val('');
                                     });
                         }
-                        for (var i = 1; $('#infoli' + i).children(
+                        for (let i = 1; $('#infoli' + i).children(
                                 'a').text() != ""; i++) {
-                            document
-                                .getElementById('delLink' + i)
-                                .addEventListener(
+                            document.getElementById('delLink' + i)?.addEventListener(
                                     'click',
                                     function (event) {
-                                        var id = $(this)
-                                            .attr('id');
+                                        let id = $(this).attr('id')!;
                                         id = id.substring(
                                             7, 8);
                                         $(
@@ -154,17 +157,14 @@ $(document).ready(function () {
                                             .val('');
                                     });
                         }
-                        for (var i = 1; $('#infoli' + i).children(
+                        for (let i = 1; $('#infoli' + i).children(
                                 'a').text() != ""; i++) {
-                            document.getElementById('inInfoLi' + i)
-                                .addEventListener('click',
+                            document.getElementById('inInfoLi' + i)?.addEventListener('click',
                                     function (event) {});
                         }
-                        for (var i = 1; $('#infoli' + i).children(
+                        for (let i = 1; $('#infoli' + i).children(
                                 'a').text() != ""; i++) {
-                            document.getElementById(
-                                    'inInfoLink' + i)
-                                .addEventListener('click',
+                            document.getElementById('inInfoLink' + i)?.addEventListener('click',
                                     function (event) {});
                         }
                         $(this).text('Abbrechen');
@@ -177,13 +177,13 @@ $(document).ready(function () {
                     break;
             }
         } else if ($(this).text() === "&aumlnderungen speichern") {
-            var klasse = $(this).attr('class');
+            let klasse = $(this).attr('class')!;
             klasse = klasse.replace('btn', "");
             klasse = klasse.replace('cmsBtn', "");
             klasse = klasse.trim();
             switch (klasse) {
                 case ('cmsPortal'):
-                    var titel, listelement1, listelement2, listelement3, listelement4, listelement5, listelement6, listelement7;
+                    let titel, listelement1, listelement2, listelement3, listelement4, listelement5, listelement6, listelement7;
                     titel = $('#inPortalTitel').val();
                     listelement1 = $('#inli1').val();
                     listelement2 = $('#inli2').val();
@@ -213,7 +213,7 @@ $(document).ready(function () {
                     $
                         .ajax({
                             type: "POST",
-                            url: "login_db",
+                            url: baseUrl + "/login_db",
                             data: {
                                 action: "post_portalInfo",
                                 titel: titel,
@@ -246,8 +246,8 @@ $(document).ready(function () {
                             isEmpty($('#inMaps1').val()) != true &&
                             isEmpty($('#inMaps2').val()) != true &&
                             isEmpty($('#inMaps3').val()) != true) {
-                            var faqs = '';
-                            for (var i = 1; isEmpty($(
+                            let faqs = '';
+                            for (let i = 1; isEmpty($(
                                     '#inNeuFaqFr' + i).val()) != true; i++) {
                                 faqs = faqs +
                                     '<b>' +
@@ -257,24 +257,24 @@ $(document).ready(function () {
                                     $('#inNeuFaqAn' + i)
                                     .val() + '<br>';
                             }
-                            var erfahrungsbericht = $(
+                            let erfahrungsbericht = $(
                                     '#inNeuAngebotErfahrungsbericht')
                                 .val() +
                                 '<br><i>' +
                                 $('#inNeuAngebotErfAutor')
                                 .val() + '</i>';
-                            var maps = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyA76FO67-tqO0XWItx9KtXDgcta9mYHjrM&q=' +
+                            let maps = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyA76FO67-tqO0XWItx9KtXDgcta9mYHjrM&q=' +
                                 $('#inMaps1').val() +
                                 ',' +
-                                $('#inMaps2').val().replace(
+                                $('#inMaps2').val()!.toString().replace(
                                     ' ', '') +
                                 '+' +
-                                $('#inMaps3').val().replace(
+                                $('#inMaps3').val()!.toString().replace(
                                     ' ', '');
                             $
                                 .ajax({
                                     type: "POST",
-                                    url: "login_db",
+                                    url: baseUrl + "/login_db",
                                     data: {
                                         action: "post_newAuslandsangebot",
                                         studiengang: $(
@@ -319,8 +319,8 @@ $(document).ready(function () {
                             isEmpty($('#inEditMaps1').val()) != true &&
                             isEmpty($('#inEditMaps2').val()) != true &&
                             isEmpty($('#inEditMaps3').val()) != true) {
-                            var faqs = '';
-                            for (var i = 1; isEmpty($(
+                            let faqs = '';
+                            for (let i = 1; isEmpty($(
                                     '#inEditFaqFr' + i).val()) != true; i++) {
                                 faqs = faqs +
                                     '<b>' +
@@ -330,24 +330,23 @@ $(document).ready(function () {
                                     $('#inEditFaqAn' + i)
                                     .val() + '<br>';
                             }
-                            var erfahrungsbericht = $(
+                            let erfahrungsbericht = $(
                                     '#inEditAngebotErfahrungsbericht')
                                 .val() +
                                 '<br><i>' +
                                 $('#inEditAngebotErfAutor')
                                 .val() + '</i>';
-                            var maps = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyA76FO67-tqO0XWItx9KtXDgcta9mYHjrM&q=' +
+                            let maps = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyA76FO67-tqO0XWItx9KtXDgcta9mYHjrM&q=' +
                                 $('#inEditMaps1').val() +
                                 ',' +
-                                $('#inEditMaps2').val()
-                                .replace(' ', '') +
+                                $('#inEditMaps2').val()!.toString().replace(' ', '') +
                                 '+' +
-                                $('#inEditMaps3').val()
+                                $('#inEditMaps3').val()!.toString()
                                 .replace(' ', '');
                             $
                                 .ajax({
                                     type: "POST",
-                                    url: "login_db",
+                                    url: baseUrl + "/login_db",
                                     data: {
                                         action: "post_editAuslandsangebot",
                                         studiengang: $(
@@ -384,7 +383,7 @@ $(document).ready(function () {
                     }
                     break;
                 case ('cmsInfo'):
-                    for (var i = 1; i <= 7; i++) {
+                    for (let i = 1; i <= 7; i++) {
                         if (isEmpty($('#inInfoLi' + i).val()) === true) {
                             $('#inInfoLi' + i).val('null');
                         }
@@ -395,7 +394,7 @@ $(document).ready(function () {
                     $
                         .ajax({
                             type: "POST",
-                            url: "login_db",
+                            url: baseUrl + "/login_db",
                             data: {
                                 action: "post_infoMaterial",
                                 titel: $('#inInfoTitel').val(),
@@ -432,11 +431,11 @@ $(document).ready(function () {
         }
     });
 
-    function delPoLi(event) {
-        var id = event.target.id;
+    function delPoLi(event : any) {
+        let id = event.target.id;
         id = id.substring(
             7, 8);
-        var el = $('#inli' + id);
+        let el = $('#inli' + id);
         if (el.val() == "" || el.val() == undefined) {
             el.remove();
             $('#delPoLi' + id).remove();
@@ -447,20 +446,20 @@ $(document).ready(function () {
     }
     // Click Listener für die Bild ändern Buttons
     $('.upload').on('click', function () {
-        var id = $(this).attr('id');
+        let id = $(this).attr('id')!;
         id = id.trim();
-        loop1(id);
+        //loop1(id);
     });
     // Click-Listener für neues Infoselement in Box PortalInfo
     $('#cmsBtnInfoNeu').on('click', function () {
-        var count = $('.inputsPortal .inBox').length;
+        let count = $('.inputsPortal .inBox').length;
         if (count > 6) {
             Swal.fire('Warnung', 'Zum aktuellen Zeitpunkt können nicht mehr als 7 Infoelemente hinzugefügt werden', 'warning');
         } else {
             $('.inputsPortal').append('<input class="inBox" id="inli' + (count + 1) +
                 '" value="" /><img class="small" id="delPoLi' +
                 (count + 1) +
-                '" src="images/Button Delete.png" />');
+                '" src="' + buttonDeleteImage + '" />');
             $('#delPoLi' + (count + 1)).click(function (event) {
                 delPoLi(event);
             });
@@ -468,15 +467,15 @@ $(document).ready(function () {
     });
     // Click-Listener für neuen Erfahrungsbericht in Box Erfahrungsbericht
     $('#cmsBtnBerichtNeu').on('click', function () {
-        var count = 0;
-        for (var i = 1; $('#kb' + i).html() !== undefined; i++) {
+        let count = 0;
+        for (let i = 1; $('#kb' + i).html() !== undefined; i++) {
             count = i;
         }
         $('.berichte')
             .append(
                 '<div class="row kurzbericht" id="kb' +
                 (count + 1) +
-                '"><div class="col-md-6"><img src="images/noimg.jpg" id="imgWorld" /><label class="btn cmsBtn cmsBerichte btnBild" id="btnberichtBild' +
+                '"><div class="col-md-6"><img src="' + noImgImage + '" id="imgWorld" /><label class="btn cmsBtn cmsBerichte btnBild" id="btnberichtBild' +
                 (count + 1) +
                 '" style="float: right">Bild ändern<input class="upload" type="file" id="berichtBild' +
                 (count + 1) +
@@ -486,8 +485,8 @@ $(document).ready(function () {
     });
     // Click-Listener für neuen Link in Box InfoMaterial
     $('#cmsBtnLinkNeu').on('click', function () {
-        var count = 0;
-        for (var j = 1; isEmpty($('#infoli' + j).children('a')
+        let count = 0;
+        for (let j = 1; isEmpty($('#infoli' + j).children('a')
                 .text()) != true; j++) {
             count = j;
         }
@@ -498,11 +497,11 @@ $(document).ready(function () {
                 (count + 1) +
                 '" value="" /><img class="small" id="delInLi' +
                 (count + 1) +
-                '" src="images/Button Delete.png" /><br><b style="margin-right: 5px">Link</b><input class="inBox infoLink" id="inInfoLink' +
+                '" src="' + buttonDeleteImage + '" /><br><b style="margin-right: 5px">Link</b><input class="inBox infoLink" id="inInfoLink' +
                 (count + 1) +
                 '" value=""><img class="small" id="delLink' +
                 (count + 1) +
-                '" src="images/Button Delete.png" />');
+                '" src="' + buttonDeleteImage + '" />');
         $('#cmsBtnLinkNeu').hide();
     });
     // Click-Listener f�r CMS Buttons im Bereich Auslandsangebote
@@ -519,14 +518,12 @@ $(document).ready(function () {
                 $('#selStudiengang').html().replace(
                     "Alle Angebote",
                     "Studiengang wählen*"));
-            for (var i = 1; i <= 1; i++) {
-                for (var j = 1; j <= 4; j++) {
-                    document
-                        .getElementById('nNeu' + i + j)
-                        .addEventListener(
+            for (let i = 1; i <= 1; i++) {
+                for (let j = 1; j <= 4; j++) {
+                    document.getElementById('nNeu' + i + j)?.addEventListener(
                             'click',
                             function (event) {
-                                var id = $(this)
+                                let id = $(this)
                                     .parent()
                                     .parent()
                                     .parent().attr(
@@ -546,7 +543,7 @@ $(document).ready(function () {
                                         '.contentAng')
                                     .removeClass(
                                         'active');
-                                id = $(this).attr('id')
+                                id = $(this).attr('id')!
                                     .replace(
                                         'nNeu',
                                         '');
@@ -560,8 +557,8 @@ $(document).ready(function () {
             $('#cmsAddStudgang').hide();
             $('#cmsAddAngebot').hide();
             $('#cmsEditAngebot').show();
-            var options = '<option>Angebot wählen</option>';
-            for (var i = 1; isEmpty($('#angebot' + i)
+            let options = '<option>Angebot wählen</option>';
+            for (let i = 1; isEmpty($('#angebot' + i)
                     .children().children('.uniName').text()) != true; i++) {
                 options = options +
                     '<option>' +
@@ -570,14 +567,12 @@ $(document).ready(function () {
                     '</option>';
             }
             $('#selEditAngebot').html(options);
-            for (var i = 1; i <= 1; i++) {
-                for (var j = 1; j <= 4; j++) {
-                    document
-                        .getElementById('nEdit' + i + j)
-                        .addEventListener(
+            for (let i = 1; i <= 1; i++) {
+                for (let j = 1; j <= 4; j++) {
+                    document.getElementById('nEdit' + i + j)?.addEventListener(
                             'click',
                             function (event) {
-                                var id = $(this)
+                                let id = $(this)
                                     .parent()
                                     .parent()
                                     .parent().attr(
@@ -597,8 +592,7 @@ $(document).ready(function () {
                                         '.contentAng')
                                     .removeClass(
                                         'active');
-                                id = $(this)
-                                    .attr('id')
+                                id = $(this).attr('id')!
                                     .replace(
                                         'nEdit',
                                         '');
@@ -616,7 +610,7 @@ $(document).ready(function () {
             $
                 .ajax({
                     type: "POST",
-                    url: "login_db",
+                    url: baseUrl + "/login_db",
                     data: {
                         action: "post_newStudiengang",
                         studiengang: $('#inNewStudiengang')
@@ -639,7 +633,7 @@ $(document).ready(function () {
     });
     // Click-Listener für ein Angebot bearbeiten
     $('#selEditAngebot').on('click', function (event) {
-        for (var i = 1; isEmpty($('#angebot' + i)) != true; i++) {
+        for (let i = 1; isEmpty($('#angebot' + i)) != true; i++) {
             if ($('#angebot' + i).children().children(
                     '.uniName').text().trim() === $(this).val()) {
                 $('#EditAngebot').text(
@@ -653,12 +647,12 @@ $(document).ready(function () {
                         .children('#c' + i + '1').children(
                             '.pull-right').children().attr(
                             'src')) != true) {
-                    var maps = $('#angebot' + i).children()
+                    let maps = $('#angebot' + i).children()
                         .children('#c' + i + '1').children(
                             '.pull-right').children()
-                        .attr('src').split('q=');
+                        .attr('src')!.split('q=');
                     maps = maps[1].split(',');
-                    var help = maps[1].split('+');
+                    let help = maps[1].split('+');
                     maps[1] = help[0];
                     maps[2] = help[1];
                     $('#inEditMaps1').val(maps[0]);
@@ -672,7 +666,7 @@ $(document).ready(function () {
                 // Erfahrungsbericht in input Felder eintragen
                 if (isEmpty($('#angebot' + i).children()
                         .children('#c' + i + '3').html()) != true) {
-                    var erfahrungsbericht = $('#angebot' + i)
+                    let erfahrungsbericht = $('#angebot' + i)
                         .children()
                         .children('#c' + i + '3').html()
                         .split('<br>');
@@ -693,7 +687,7 @@ $(document).ready(function () {
                 // FAQs in InputFelder �bernehmen
                 if (isEmpty($('#angebot' + i).children()
                         .children('#c' + i + '2').html()) != true) {
-                    var faqs = $('#angebot' + i).children()
+                    let faqs : any = $('#angebot' + i).children()
                         .children('#c' + i + '2').html()
                         .replace(/<b>/g, ';');
                     faqs = faqs.replace(/<br>/g, '');
@@ -701,10 +695,10 @@ $(document).ready(function () {
                     faqs = faqs.replace(/b>/g, ';');
                     faqs = faqs.trim();
                     faqs = faqs.split(';');
-                    var hilfe = [];
-                    var k = 0;
-                    var frage = 1;
-                    for (var j = 0; j < faqs.length; j++) {
+                    let hilfe = [];
+                    let k = 0;
+                    let frage = 1;
+                    for (let j = 0; j < faqs.length; j++) {
                         if (isEmpty(faqs[j].trim()) != true) {
                             hilfe[k] = faqs[j].trim();
                             if ((k + 1) % 2 === 1) {
@@ -719,24 +713,24 @@ $(document).ready(function () {
                             k++;
                         }
                         if (faqs.length < 4) {
-                            for (var m = 2; m <= 4; m++) {
+                            for (let m = 2; m <= 4; m++) {
                                 $('#inEditFaqFr' + m).val('');
                                 $('#inEditFaqAn' + m).val('');
                             }
                         } else if (faqs.length < 6) {
-                            for (var m = 3; m <= 4; m++) {
+                            for (let m = 3; m <= 4; m++) {
                                 $('#inEditFaqFr' + m).val('');
                                 $('#inEditFaqAn' + m).val('');
                             }
                         } else if (faqs.length < 8) {
-                            for (var m = 4; m <= 4; m++) {
+                            for (let m = 4; m <= 4; m++) {
                                 $('#inEditFaqFr' + m).val('');
                                 $('#inEditFaqAn' + m).val('');
                             }
                         }
                     }
                 } else {
-                    for (var l = 1; l <= 4; l++) {
+                    for (let l = 1; l <= 4; l++) {
                         $('#inEditFaqFr' + l).val('');
                         $('#inEditFaqAn' + l).val('');
                     }

@@ -1,3 +1,8 @@
+import {$,baseUrl} from "../config";
+import "../app";
+import Swal from "sweetalert2";
+import "bootstrap";
+
 $(document).ready(function() {
 	$(document).on('click', '#resetPassword', function() {
 		resetpw();
@@ -5,7 +10,7 @@ $(document).ready(function() {
 });
 
 function resetpw() {
-	var mail = $('#mail').val();
+	let mail = $('#mail').val();
 	$.ajax({
 		type : "POST",
 		url : baseUrl + "/resetPassword",
@@ -19,7 +24,7 @@ function resetpw() {
 				icon : "success",
 				confirmButtonText : "Ok"
 			}).then(function(result) {
-				location.href = 'index.jsp';
+				location.href = 'index.html';
 			});
 		},
 		error : function(result) {

@@ -1,33 +1,34 @@
-$(document).ready(function () {
-    var dia = $.urlParam('dia').trim();
-    var BpmnJS = window.BpmnJS;
+import {$,baseUrl} from "../config";
+import {urlParams} from "../app";
+import Swal from "sweetalert2";
+// @ts-ignore
+import BpmnNavigatedViewer from "bpmn-js/dist/bpmn-navigated-viewer.production.min";
+import "jquery-ui-dist/jquery-ui";
 
-    var viewer = new BpmnJS({
-        container: '#diagram'
+$(document).ready(function () {
+    let dia : string = urlParams.get('dia')?.trim()!;
+
+    let viewer = new BpmnNavigatedViewer({
+        container: $('#diagram')
     });
 
-    var possibleIds = [];
-    var filled = [];
+    let possibleIds : any = [];
+    let filled : any = [];
 
-    function showDiagram(diagramXML) {
+    function showDiagram(diagramXML : any) {
 
         viewer.importXML(diagramXML, function() {
 
-            var overlays = viewer.get('overlays'),
-                eventBus = viewer.get('eventBus'),
+            let eventBus = viewer.get('eventBus'),
                 canvas = viewer.get('canvas'),
                 elementRegistry = viewer.get('elementRegistry');
 
-            console.log(elementRegistry._elements);
-
             $.each(elementRegistry._elements, function () {
-                var bo = this.element.businessObject;
+                let bo = this.element.businessObject;
                 if (bo.$type == "bpmn:Lane" && bo.name == 'Student') {
 
-                    console.log(bo);
-
-                    var i = 0;
-                    var found;
+                    let i : number = 0;
+                    let found : any;
                     $.each(bo.flowNodeRef, function () {
                         if (this.$type == "bpmn:StartEvent") {
                             found = this;
@@ -41,8 +42,8 @@ $(document).ready(function () {
 
             viewer.get('canvas').zoom('fit-viewport');
 
-            eventBus.on('element.click', function(e) {
-                var elm = e.element;
+            eventBus.on('element.click', function(e : any) {
+                let elm = e.element;
 
                 if (elm.type == "bpmn:UserTask" && $.inArray(elm.id, possibleIds) > -1) {
                     if ($.inArray(elm.id, filled) > -1) {
@@ -52,12 +53,10 @@ $(document).ready(function () {
                     }
                 }
             });
-
-
         });
     }
     
-    function checkModelEntries(found, i, canvas) {
+    function checkModelEntries(found: any, i: number, canvas: any) {
 		if (found.$type == 'bpmn:UserTask') {
 			if ($.inArray(found.id, possibleIds) !== -1) return;
             i++;
@@ -75,7 +74,7 @@ $(document).ready(function () {
             return;
         }
         
-        for (var j = 0; j < found.outgoing.length; j++) {
+        for (let j = 0; j < found.outgoing.length; j++) {
             found = found.outgoing[j].targetRef;
 
             if (found.lanes[0].name != "Student") {
@@ -86,8 +85,8 @@ $(document).ready(function () {
         }
 	}
 
-    function createEntry(id) {
-        var index = $('button[data-mid='+id+']').data('index');
+    function createEntry(id : any) {
+        let index = $('button[data-mid='+id+']').data('index');
         Swal.fire({
             title: 'Prozesschritt hinzufügen',
             html: '<div class="row">' +
@@ -126,8 +125,8 @@ $(document).ready(function () {
         });
     }
 
-    function editEntry(id) {
-        var index = $('button[data-mid='+id+']').data('index');
+    function editEntry(id : any) {
+        let index = $('button[data-mid='+id+']').data('index');
         location.href = 'admin-process-modeler.html?id=' + id+"&index="+index+'&dia='+dia;
     }
 
@@ -137,9 +136,9 @@ $(document).ready(function () {
         $.get( baseUrl + "/processmodel/list", {
             model: dia
         }, function( data ) {
-            var arr = data.split(';');
+            let arr = data.split(';');
             if (arr.length > 1) {
-                for (var i = 0; i < arr.length-1; i++) {
+                for (let i = 0; i < arr.length-1; i++) {
                     filled.push(arr[i]);
                 }
             }

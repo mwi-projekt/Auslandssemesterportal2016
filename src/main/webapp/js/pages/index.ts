@@ -1,3 +1,14 @@
+import {$,baseUrl} from "../config";
+import {urlParams} from "../app";
+import Swal from "sweetalert2";
+import "bootstrap";
+// @ts-ignore
+import image1 from "../../images/pan1.jpg";
+// @ts-ignore
+import image2 from "../../images/pan2.jpg";
+// @ts-ignore
+import image3 from "../../images/pan3.jpg";
+
 $(document).ready(function () {
     // check if logged in
     if (sessionStorage['User']) {
@@ -34,26 +45,26 @@ $(document).ready(function () {
     
     
     if (sessionStorage['rolle'] === "1") {
-    	document.getElementById("zumPortal").href = "index.jsp";
+        document.getElementById("zumPortal")?.setAttribute("href", "index.html");
     }
     else if (sessionStorage['rolle'] === "2") { 
-    	document.getElementById("zumPortal").href = "task_overview.html";
-    	document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
+    	document.getElementById("zumPortal")?.setAttribute("href","task_overview.html");
+    	document.getElementById("zumPortal")!.innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }
     else if (sessionStorage['rolle'] === "3") {
-    	document.getElementById("zumPortal").href = "bewerbungsportal.html";
+    	document.getElementById("zumPortal")?.setAttribute("href","bewerbungsportal.html");
     }
     else if (sessionStorage['rolle'] === "4") {
-    	 document.getElementById("zumPortal").href = "task_overview_sgl.html";	
-    	 document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
+    	 document.getElementById("zumPortal")?.setAttribute("href","task_overview_sgl.html");
+         document.getElementById("zumPortal")!.innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }
     
     // init ui
     initSlider();
     initArrows();
 
-    if ($.urlParam('confirm') != null && $.urlParam('confirm').trim() != '') {
-        var link = $.urlParam('confirm');
+    if (urlParams.get('confirm') != null && urlParams.get('confirm')?.trim() != '') {
+        let link = $.param(['confirm']);
         $.ajax({
             type: "GET",
             url: baseUrl + "/confirm?code=" + link,
@@ -77,7 +88,7 @@ $(document).ready(function () {
     $('.tile').on('click', function () {
         var id = $(this).attr('id');
         if (id === 'verwaltungIndex') {
-            location.href = 'cms.jsp';
+            location.href = 'cms.html';
         } else if (id === 'verwaltungUser') {
             location.href = 'nutzer.html';
         } else if (id === 'verwaltungPortal') {
@@ -124,7 +135,7 @@ function loadAuslandsangebote() {
         type: "GET",
         url: baseUrl + "/auslandsAngebote",
         success: function (result) {
-            for (var i = 0; i < result.data.length; i++) {
+            for (let i = 0; i < result.data.length; i++) {
                 angeboteInhalt = angeboteInhalt + '<option>' + result.data[i].studiengang + '</option>';
             }
             $('#selStudiengang').html(angeboteInhalt);
@@ -147,9 +158,9 @@ function loadAuslandsangeboteInhalt() {
         type: "GET",
         url: baseUrl + "/auslandsAngebotsInhalte",
         success: function (data) {
-            var result = data.data;
-            var htmlText = '';
-            for (var i = 0; i < result.length; i++) {
+            let result = data.data;
+            let htmlText = '';
+            for (let i = 0; i < result.length; i++) {
                 if (!result[i].erfahrungsbericht) {
                     result[i].erfahrungsbericht = "Keine Erfahrungsberichte vorhanden.";
                 }
@@ -206,11 +217,9 @@ function loadAuslandsangeboteInhalt() {
 
             }
             $('#angebotLinkUp').before(htmlText);
-            for (var i = 0; i < result.length; i++) {
-                for (var j = 1; j <= 4; j++) {
-                    document
-                        .getElementById('n' + i + j)
-                        .addEventListener(
+            for (let i = 0; i < result.length; i++) {
+                for (let j = 1; j <= 4; j++) {
+                    document.getElementById('n' + i + j)?.addEventListener(
                             'click',
                             function (event) {
                                 var id = $(this).parent()
@@ -225,8 +234,7 @@ function loadAuslandsangeboteInhalt() {
                                     .children()
                                     .children('.contentAng')
                                     .removeClass('active');
-                                id = $(this).attr('id')
-                                    .replace('n', '');
+                                id = $(this)?.attr('id')?.replace('n', '');
                                 $('#c' + id).addClass('active');
                             });
                 }
@@ -254,7 +262,7 @@ function loadInfoMaterial() {
         success: function (data) {
             var result = data.data;
             $('#infoMaterialTitel').text(result.titel);
-            for (var i = 1; i <= 7; i++) {
+            for (let i = 1; i <= 7; i++) {
                 if (result['listelement' + i]) {
                     $('#infoli' + i).children('a').text(
                         result['listelement' + i]);
@@ -269,21 +277,26 @@ function loadInfoMaterial() {
 }
 
 function initSlider() {
-    var back = 1;
-    $('.imgSlider').css('background-image', 'url(images/pan' + back + '.jpg)');
+    let images = [image1, image2, image3];
+    let back = 0;
+    $('.imgSlider').css('background-image', 'url(' + images[back]+ ')');
     setInterval(function () {
         back++;
-        if (back == 4) back = 1;
+        if (back == 3) back = 0;
         $('.imgSlider').fadeTo('slow', 0, function () {
-            $('.imgSlider').css('background-image', 'url(images/pan' + back + '.jpg)');
-        }).fadeTo('800', 0.9);
+            $('.imgSlider').css('background-image', 'url(' + images[back]+ ')');
+        }).fadeTo(800, 0.9);
     }, 6000);
 }
 
 function initArrows() {
     $('.arrow').on('click', function () {
-        var dir = $(this).attr('id');
-        var id = parseInt($('.zeig').attr('id').substring(2, 3));
+        let dir = $(this).attr('id');
+        let idString = $('.zeig')?.attr('id');
+        if( idString== undefined){
+            return;
+        }
+        let id = parseInt(idString.substring(2, 3));
         if (dir === "arrLeft") {
             id--;
             if (id == 0) {

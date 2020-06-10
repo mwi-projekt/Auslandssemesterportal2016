@@ -11,12 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 @WebServlet(name = "ActivateUserServlet", urlPatterns = { "/confirm" })
 public class ActivateUserServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		Util.addResponseHeaders(request,response);
 		
 		String code = request.getParameter("code");
 		

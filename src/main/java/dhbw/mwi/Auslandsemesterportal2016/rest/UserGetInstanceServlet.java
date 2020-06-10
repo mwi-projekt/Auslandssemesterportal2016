@@ -24,6 +24,8 @@ public class UserGetInstanceServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.addResponseHeaders(request,response);
+
 		int matnr = Integer.parseInt(request.getParameter("matnr"));
 
 		ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
