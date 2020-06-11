@@ -37,25 +37,42 @@ $(document).ready(function () {
                     splitUni.push($(this).text());
                 });
 
-                var popUpHtml = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
-                for (var l = 0; l < result.data.length; l++) {
-                    // filtern von schon beworbenen unis
-                    if (splitUni.indexOf(result.data[l].uniTitel) != -1) continue;
-                    popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
-                }
-                
-                var popUpHtml2 = '<div class="form-group"><div class="col-md-12"><select class="inBox" id="selectZeit">';
-                //Zeitraum muss hier noch automatisch generiert werden
-                popUpHtml2 = popUpHtml2 + '<option> Zeitraum auswählen </option><option> Sommersemester 2020 </option>';
-                
-                popUpHtml = popUpHtml + '</select></div></div><div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
-                if (popUpHtml.match('<option>') != '<option>') {
+                if (result.data.length == 0) {
                     popUpHtml = '<b id="popClose"><img src="images/Button Delete.png" id="smallImg"></b><br><p>Sie haben sich bereits für alle verfügbaren Auslandsuniversitäten für ihren Studiengang beworben.</p>';
+                } else {
+                    var popUpHtml = '<div class="form-horizontal"><div class="form-group"><div class="col-md-12"><select class="inBox" id="selectUni">';
+                    for (var l = 0; l < result.data.length; l++) {
+                        // filtern von schon beworbenen unis
+                        if (splitUni.indexOf(result.data[l].uniTitel) != -1) continue;
+                        popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
+                    }
+    
+                    popUpHtml = popUpHtml + '</select></div></div>';
+                    
+                    popUpHtml += '<div class="form-group"><div class="col-md-12"><select class="inBox" id="selectZeit">';
+                    //Zeitraum muss hier noch automatisch generiert werden
+                    popUpHtml = popUpHtml + '<option> Zeitraum auswählen </option><option> Sommersemester 2021 </option>';
+                    
+                    popUpHtml = popUpHtml + '</select></div></div>';
+    
+                    popUpHtml += '<div class="form-group"><div class="col-md-12"><select class="inBox" id="selectPrio">';
+    
+                    popUpHtml += '<option value="0"> Priorität auswählen </option>';
+
+                    for (var i = 1; i <= 5; i++) {
+                        popUpHtml += '<option>' + i + '</option>';
+                    }
+
+                    popUpHtml = popUpHtml + '</select></div></div>';
+    
+                    popUpHtml += '<div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
                 }
 
+              
                 Swal.fire({
                     title: 'Bitte wähle die Uni und den Zeitraum aus',
-                    html: popUpHtml + popUpHtml2,
+                    html: popUpHtml,
+                    confirmButtonText: 'Abbrechen',
                     onOpen: function () {
                         $('#newBewProzessWahl').on('click', function () {
                             sessionStorage['uni'] = $('#selectUni').val();
@@ -67,6 +84,7 @@ $(document).ready(function () {
                                     matnr: sessionStorage['matrikelnr'],
                                     uni: $('#selectUni').val(),
                                     zeitraum: $('#selectZeit').val(),                               
+                                    prio: $('#selectPrio').val(),                               
                                 },
                                 success: function (result) {
                                     location.href = 'bewerben.html?instance_id=' + result.instanceId + '&uni=' + result.uni + '&zeitraum=' + result.zeitraum;
@@ -207,13 +225,14 @@ function initBewerben() {
             matnr: sessionStorage['matrikelnr']
         },
         success: function (result) {
-            tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th colspan="2">Aktionen</th></tr></thead>';
+            tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Priorität</th><th>Status</th><th colspan="2">Aktionen</th></tr></thead>';
             if (result.data.length == 0) {
                 $('#tableBewProzess').html('<h2>Keine Bewerbungen vorhanden</h2>');
             } else {
                 for (var i = 0; i < result.data.length; i++) {
                     instance_info = result.data[i];
                     tabelle = tabelle + '<tr data-rid="' + (i + 1) + '"><td>' + instance_info.uni + '</td><td>' + instance_info.stepCounter + '</td>';
+                    tabelle += '<td>'+instance_info.prioritaet+'</td>';
                     //Anlegen der Buttons
                     if ((instance_info.stepCounter === "Abgeschlossen") || (instance_info.stepCounter === "Auf Rückmeldung warten") || (instance_info.stepCounter === "Bewerbung wurde abgelehnt") ) {
                         //Übersicht

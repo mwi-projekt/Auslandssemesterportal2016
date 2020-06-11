@@ -48,6 +48,7 @@ public class GetSGLTasksServlet extends HttpServlet {
 					obj.addProperty("aktuelleUni", runtime.getVariable(instanceId, "aktuelleUni").toString());
 					obj.addProperty("kurs", runtime.getVariable(instanceId, "bewKurs").toString());
 					obj.addProperty("uni", runtime.getVariable(instanceId, "uni").toString());
+					obj.addProperty("prioritaet", runtime.getVariable(instanceId, "prioritaet").toString());
 					obj.addProperty("matrikelnummer", runtime.getVariable(instanceId, "matrikelnummer").toString());
 					if (activities.get(0).equals("abgeschlossen")) {
 						obj.addProperty("status", "complete");

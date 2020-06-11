@@ -30,6 +30,7 @@ public class GetInstanceServlet extends HttpServlet {
 		} else {
 			int matnr = Integer.parseInt(request.getParameter("matnr"));
 			String uni = request.getParameter("uni");
+			int prio = Integer.parseInt(request.getParameter("prio"));
 			String model = SQL_queries.getmodel(uni);
 
 			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
@@ -49,9 +50,10 @@ public class GetInstanceServlet extends HttpServlet {
 					runtime.setVariable(instance_id, "aktuelleUni", user[3]);
 					runtime.setVariable(instance_id, "bewStudiengang", user[4]);
 					runtime.setVariable(instance_id, "bewKurs", user[5]);
+					runtime.setVariable(instance_id, "prioritaet", prio);
 				}
 				runtime.setVariable(instance_id, "uni", uni);
-				SQL_queries.createInstance(instance_id, uni, matnr, 10);
+				SQL_queries.createInstance(instance_id, uni, matnr, prio, 10);
 			}
 
 			JsonObject json = new JsonObject();

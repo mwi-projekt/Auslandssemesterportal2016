@@ -35,6 +35,8 @@ function getList() {
                             "</td><td>" +
                             singleInstance.kurs +
                             "</td><td>" +
+                            singleInstance.prioritaet +
+                            "</td><td>" +
                             singleInstance.aktuelleUni +
                             "</td><td>" +
                             singleInstance.uni +
@@ -82,6 +84,8 @@ function getList() {
                         singleInstance.vname +
                         "</td><td>" +
                         singleInstance.aktuelleUni +
+                        "</td><td>" +
+                        singleInstance.prioritaet +
                         "</td><td>" +
                         singleInstance.kurs +
                         "</td><td>" +
