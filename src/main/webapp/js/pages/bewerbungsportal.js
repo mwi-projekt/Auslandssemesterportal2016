@@ -225,7 +225,7 @@ function initBewerben() {
             matnr: sessionStorage['matrikelnr']
         },
         success: function (result) {
-            tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Priorität</th><th>Status</th><th colspan="2">Aktionen</th></tr></thead>';
+            tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Priorität</th><th colspan="2">Aktionen</th></tr></thead>';
             if (result.data.length == 0) {
                 $('#tableBewProzess').html('<h2>Keine Bewerbungen vorhanden</h2>');
             } else {
