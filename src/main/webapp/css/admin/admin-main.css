@@ -1,0 +1,30 @@
+.admin-landingpage-link {
+    text-decoration: none;
+    color: black;
+}
+
+.verwaltung-container {
+    margin: 100px;
+}
+
+.table-header-container {
+    width: 100%;
+    margin-bottom: 50px;
+    height: 50px;
+}
+
+.big-text {
+    font-size: 1.5rem;
+}
+
+.big-text > a {
+    text-decoration: none;
+}
+
+.left-float {
+    float: left;
+}
+
+.right-float {
+    float: right;
+}

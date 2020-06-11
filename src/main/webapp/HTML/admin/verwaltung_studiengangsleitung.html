@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="../../css/admin/datatable-admin.css">
+    <link rel="stylesheet" href="../../css/admin/admin-main.css">
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no" charset="UTF-8">
     <link rel="stylesheet" href="../../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../node_modules/jquery-form-validator/form-validator/theme-default.min.css">
@@ -16,13 +17,13 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <script src="../../node_modules/jquery/dist/jquery.js"></script>
     <script>
-  $(function(){
-    var includes = $('[data-include]');
-    jQuery.each(includes, function(){
-      var file = '/../../partials/' + $(this).data('include') + '.html';
-      $(this).load(file);
-    });
-  });
+        $(function () {
+            var includes = $('[data-include]');
+            jQuery.each(includes, function () {
+                var file = '/../../partials/' + $(this).data('include') + '.html';
+                $(this).load(file);
+            });
+        });
     </script>
 
     <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
@@ -43,39 +44,43 @@
     <script type="text/javascript" src="../../node_modules/cookieconsent/build/cookieconsent.min.js"></script>
     <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="../../node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
-    <!--    <script src="../../node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>-->
     <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
     <script src="../../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../../js/admin/studiengangsleitung_tabelle.js"></script>
 </head>
 <body>
 
-<div data-include="header"></div>
-
-<div class="verwaltung-container">
-    <div class="table-header-container">
-        <span class="big-text float-left">Studiengangsleiter/innen bearbeiten</span>
-        <span class="big-text float-right">
-            <a href="../../index.jsp">&larr; Zurück</a>
+<div class="sticky-footer-container">
+    <div data-include="header"></div>
+    <div class="sticky-footer-padding">
+        <div class="verwaltung-container">
+            <div class="table-header-container">
+                <span class="big-text float-left">Studiengangsleiter/innen bearbeiten</span>
+                <span class="big-text float-right">
+            <a class="admin-landingpage-link" href="../../index.jsp">&larr; Zurück</a>
         </span>
+            </div>
+            <div class="table-responsive-lg">
+                <table id="example" class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Vorname</th>
+                        <th>Nachname</th>
+                        <th>Email</th>
+                        <th>DHBW Standort</th>
+                        <th>Studiengang</th>
+                        <th>Kurs</th>
+                        <th>Bearbeiten</th>
+                        <th>Löschen</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="table-responsive-lg">
-    <table id="example" class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Vorname</th>
-                <th>Nachname</th>
-                <th>Email</th>
-                <th>DHBW Standort</th>
-                <th>Studiengang</th>
-                <th>Kurs</th>
-                <th>Bearbeiten</th>
-                <th>Löschen</th>
-            </tr>
-            </thead>
-        </table>
-    </div>
+    <div data-include="footer"></div>
 </div>
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -116,26 +121,24 @@
                         <label for="standort" class="control-label">Standort:</label>
                         <select class="form-control" name="standort" id="standort">
                             <option>DHBW Karlsruhe</option>
-                            <option DHBW Stuttgart</option>
-                            <option DHBW Mannheim</option>
-                            <option DHBW Mosbach</option>
-                            <option DHBW Lörrach</option>
-                            <option DHBW Ravensburg</option>
-                            <option DHBW Heidenheim</option>
-                            <option DHBW Villingen-Schwenningen</option>
+                            <option>DHBW Stuttgart</option>
+                            <option>DHBW Mannheim</option>
+                            <option>DHBW Mosbach</option>
+                            <option>DHBW Lörrach</option>
+                            <option>DHBW Ravensburg</option>
+                            <option>DHBW Heidenheim</option>
+                            <option>DHBW Villingen-Schwenningen</option>
                         </select>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button id="myFormSubmit" class="btn btn-primary" type="submit">Save changes</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="myFormSubmit" class="btn btn-primary" type="submit">Save changes</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
-<div data-include="footer"></div>
 
 </body>
 </html>

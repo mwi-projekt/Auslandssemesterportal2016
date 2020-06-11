@@ -3,13 +3,13 @@
  description: build content with editable components
  author: Andre Steudel <kontakt@andre-steudel.de>
  */
-;(function ( $, window, document, undefined ) {
+;(function ($, window, document, undefined) {
 
     "use strict";
 
     var pluginName = "dynamicdom",
         defaults = {
-            template: '<div class="item ui-state-disabled"><div class="content">Drag it here</div><div class="actions"><i class="fa fa-pencil hidden"></i><i class="fa fa-trash"></i><i class="fa fa-arrows"></i></div><div class="hover"></div></div>',
+            template: '<div class="item ui-state-disabled"><div class="content">Drag it here</div><div class="actions"><i class="fas fa-edit hidden"></i></i><i class="fa fa-trash"></i><i class="fas fa-arrows-alt-v ui-sortable-handle"></i></div><div class="hover"></div></div>',
             sidebar: '#sidebar .square',
             onchange: null,
             onedit: null,
@@ -19,9 +19,9 @@
             data: null
         };
 
-    function Plugin ( element, options ) {
+    function Plugin(element, options) {
         this.element = element;
-        this.settings = $.extend( {}, defaults, options );
+        this.settings = $.extend({}, defaults, options);
         this._defaults = defaults;
         this._name = pluginName;
         this.limits = [];
@@ -34,14 +34,14 @@
                 $el = $(this.element);
 
             // enable dragging of sidebar cards
-            $(this.settings.sidebar).each(function() {
+            $(this.settings.sidebar).each(function () {
                 self.limits[$(this).data('type')] = {limit: $(this).data('limit'), num: 0};
-                $(this).draggable( {
+                $(this).draggable({
                     cursor: 'move',
                     revert: true,
                     opacity: 0.75,
                     helper: 'clone'
-                } )
+                })
             });
 
             if (this.settings.data != null) {
@@ -58,7 +58,7 @@
             });
 
             // get output
-            $el.on( "sortupdate", function() {
+            $el.on("sortupdate", function () {
                 self.update();
             });
 
@@ -66,18 +66,18 @@
             CKEDITOR.disableAutoInline = true;
 
         },
-        addPlaceholder: function() {
+        addPlaceholder: function () {
             var self = this;
 
-            return $(this.settings.template).droppable( {
+            return $(this.settings.template).droppable({
                 accept: this.settings.sidebar,
                 hoverClass: 'hovered',
-                drop: function( event, ui ) {
-                    self.handleCardDrop( this, event, ui);
+                drop: function (event, ui) {
+                    self.handleCardDrop(this, event, ui);
                 }
-            } );
+            });
         },
-        handleCardDrop: function(that, event, ui, content, init) {
+        handleCardDrop: function (that, event, ui, content, init) {
 
             var outerThis = this;
             var self = $(that);
@@ -89,7 +89,7 @@
                 var type = ui.draggable.data('type');
 
                 if (this.limitReached(type)) {
-                    console.error('no more nodes of type: '+ type + ' are allowed!');
+                    console.error('no more nodes of type: ' + type + ' are allowed!');
                     return;
                 }
 
@@ -114,16 +114,16 @@
             self.addClass('active').removeClass('ui-state-disabled');
 
             // set action listeners
-            self.find('.actions .fa-trash').click(function() {
+            self.find('.actions .fa-trash').click(function () {
                 var item = $(this).closest('.item');
                 var type = item.find('.content').data('type');
                 item.remove();
                 outerThis.update();
                 outerThis.limits[type].num--;
-                $(outerThis.settings.sidebar + '[data-type='+type+']').draggable( 'option', 'disabled', false );
+                $(outerThis.settings.sidebar + '[data-type=' + type + ']').draggable('option', 'disabled', false);
             });
 
-            self.find('.actions .fa-pencil').click(function() {
+            self.find('.actions .fa-pencil').click(function () {
                 var item = $(this).closest('.item').find('.content');
                 var type = item.data('type');
 
@@ -135,34 +135,34 @@
 
             // disable and reenable revert option, to hide animation
             if (typeof ui === 'object') {
-                ui.draggable.draggable( 'option', 'revert', false );
-                setTimeout(function() {
-                    ui.draggable.draggable( 'option', 'revert', true );
+                ui.draggable.draggable('option', 'revert', false);
+                setTimeout(function () {
+                    ui.draggable.draggable('option', 'revert', true);
                     if (outerThis.limitReached(type)) {
-                        ui.draggable.draggable( 'option', 'disabled', true );
+                        ui.draggable.draggable('option', 'disabled', true);
                     }
                 }, 100);
             } else if (outerThis.limitReached(type)) {
-                $(outerThis.settings.sidebar + '[data-type='+type+']').draggable( 'option', 'disabled', true );
+                $(outerThis.settings.sidebar + '[data-type=' + type + ']').draggable('option', 'disabled', true);
             }
 
             this.update();
 
         },
-        limitReached: function(type) {
+        limitReached: function (type) {
             return this.limits[type].limit != null && this.limits[type].limit <= this.limits[type].num;
         },
-        update: function() {
+        update: function () {
             if (typeof this.settings.onchange == 'function') {
                 this.settings.onchange.call(this, this.generateOutput());
             }
         },
-        generateOutput: function() {
+        generateOutput: function () {
             var outp = [];
             var $el = $(this.element);
             var self = this;
 
-            $el.find('.item').each(function() {
+            $el.find('.item').each(function () {
                 if (!$(this).hasClass('ui-state-disabled')) {
                     var elm = $(this).find('.content');
                     var content = self.trim(elm.html());
@@ -183,7 +183,7 @@
 
             return outp;
         },
-        setCardContent: function(elm, type, content, init) {
+        setCardContent: function (elm, type, content, init) {
             var self = this;
 
             // set type of node
@@ -232,11 +232,11 @@
                 elm.attr('contenteditable', true);
 
                 if (typeof outp.editor === 'object') {
-                    CKEDITOR.inline(elm[0], outp.editor).on('change', function() {
+                    CKEDITOR.inline(elm[0], outp.editor).on('change', function () {
                         self.update();
                     });
                 } else {
-                    CKEDITOR.inline(elm[0]).on('change', function() {
+                    CKEDITOR.inline(elm[0]).on('change', function () {
                         self.update();
                     });
                 }
@@ -244,11 +244,11 @@
 
             self.update();
         },
-        import: function(arr) {
+        import: function (arr) {
             var $el = $(this.element);
             var self = this;
 
-            $.each(arr, function() {
+            $.each(arr, function () {
                 var tmp = self.addPlaceholder();
                 $el.append(tmp);
                 tmp.find('.content').data('cdata', this.data);
@@ -258,17 +258,17 @@
         nl2br: function (str) {
             return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
         },
-        trim: function(str) {
+        trim: function (str) {
             return this.nl2br($.trim(str.replace(/<br\s*[\/]?>/gi, "\n")))
         }
     });
 
-    $.fn[ pluginName ] = function ( options ) {
-        return this.each(function() {
-            if ( !$.data( this, "plugin_" + pluginName ) ) {
-                $.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
+    $.fn[pluginName] = function (options) {
+        return this.each(function () {
+            if (!$.data(this, "plugin_" + pluginName)) {
+                $.data(this, "plugin_" + pluginName, new Plugin(this, options));
             }
         });
     };
 
-})( jQuery, window, document );
+})(jQuery, window, document);

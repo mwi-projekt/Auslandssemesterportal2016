@@ -9,6 +9,14 @@ $(document).ready(function () {
     var possibleIds = [];
     var filled = [];
 
+    $(function () {
+        var includes = $('[data-include]');
+        jQuery.each(includes, function () {
+            var file = '/../../partials/' + $(this).data('include') + '.html';
+            $(this).load(file);
+        });
+    });
+
     function showDiagram(diagramXML) {
 
         viewer.importXML(diagramXML, function() {
