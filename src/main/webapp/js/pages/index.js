@@ -49,7 +49,7 @@ $(document).ready(function () {
     $('.admintile').on('click', function () {
         let id = $(this).attr('id');
         if (id === 'bewerbungsprozess') {
-            location.href = 'choose_diagram.html';
+            location.href = 'HTML/admin/prozess.html';
         }
         if (id === 'student') {
             location.href = 'HTML/admin/verwaltung_student.html';
