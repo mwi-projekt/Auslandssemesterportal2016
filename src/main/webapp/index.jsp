@@ -22,7 +22,7 @@
         <%@ include file="HTML/admin/landing-page.html" %>
     </div>
 
-    <div class="inhalt" id="normalBereich" class="sticky-footer-padding">
+    <div class="inhalt sticky-footer-padding" id="normalBereich">
         <!-- Navigation -->
         <div class="pos-f-t">
             <div class="collapse" id="navbarToggleExternalContent">
