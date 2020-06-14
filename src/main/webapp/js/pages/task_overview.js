@@ -73,7 +73,7 @@ function getList() {
                     		singleInstance.kurs +
                     		"</td><td>" +
                     		singleInstance.uni +
-                    		"</td></td>" +
+                    		"</td><td>" +
                     		"<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                     } else if (singleInstance.status === 'abgelehnt') {
                     	abgelehnt = abgelehnt +

@@ -60,7 +60,9 @@ $(document).ready(function () {
                     popUpHtml += '<option value="0"> Priorität auswählen </option>';
 
                     for (var i = 1; i <= 5; i++) {
-                        popUpHtml += '<option>' + i + '</option>';
+                        if (prioArr.indexOf(i) < 0) {
+                            popUpHtml += '<option>' + i + '</option>';
+                        }
                     }
 
                     popUpHtml = popUpHtml + '</select></div></div>';
@@ -217,6 +219,8 @@ function loadAuslandsangeboteInhalt() {
     });
 }
 
+const prioArr = [];
+
 function initBewerben() {
     $.ajax({
         type: "GET",
@@ -233,6 +237,7 @@ function initBewerben() {
                     instance_info = result.data[i];
                     tabelle = tabelle + '<tr data-rid="' + (i + 1) + '"><td>' + instance_info.uni + '</td><td>' + instance_info.stepCounter + '</td>';
                     tabelle += '<td>'+instance_info.prioritaet+'</td>';
+                    prioArr.push(instance_info.prioritaet);
                     //Anlegen der Buttons
                     if ((instance_info.stepCounter === "Abgeschlossen") || (instance_info.stepCounter === "Auf Rückmeldung warten") || (instance_info.stepCounter === "Bewerbung wurde abgelehnt") ) {
                         //Übersicht
