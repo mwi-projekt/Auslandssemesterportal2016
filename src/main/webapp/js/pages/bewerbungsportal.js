@@ -60,7 +60,7 @@ $(document).ready(function () {
                     popUpHtml += '<option value="0"> Priorität auswählen </option>';
 
                     for (var i = 1; i <= 5; i++) {
-                        if (prioArr.indexOf(i) < 0) {
+                        if (prioArr.indexOf(""+i) < 0) {
                             popUpHtml += '<option>' + i + '</option>';
                         }
                     }
