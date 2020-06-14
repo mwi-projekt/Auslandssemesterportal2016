@@ -16,6 +16,7 @@ html {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
 
 }
 
@@ -554,9 +555,6 @@ header {
 }
 
 /* Navigationsleiste */
-.navBar {
-    margin-bottom: 20px;
-}
 
 .navBar label {
     padding: 10px;
