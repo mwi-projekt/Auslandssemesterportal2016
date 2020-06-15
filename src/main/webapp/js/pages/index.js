@@ -31,23 +31,37 @@ $(document).ready(function () {
             $('.eingeloggt').css('display', 'inline');
         }
     }
-    
-    
+
+
     if (sessionStorage['rolle'] === "1") {
-    	document.getElementById("zumPortal").href = "index.jsp";
+        // document.getElementById("zumPortal").href = "index.jsp";
+    } else if (sessionStorage['rolle'] === "2") {
+        document.getElementById("zumPortal").href = "task_overview.html";
+        document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
+    } else if (sessionStorage['rolle'] === "3") {
+        document.getElementById("zumPortal").href = "bewerbungsportal.html";
+    } else if (sessionStorage['rolle'] === "4") {
+        document.getElementById("zumPortal").href = "task_overview_sgl.html";
+        document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }
-    else if (sessionStorage['rolle'] === "2") { 
-    	document.getElementById("zumPortal").href = "task_overview.html";
-    	document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
-    }
-    else if (sessionStorage['rolle'] === "3") {
-    	document.getElementById("zumPortal").href = "bewerbungsportal.html";
-    }
-    else if (sessionStorage['rolle'] === "4") {
-    	 document.getElementById("zumPortal").href = "task_overview_sgl.html";	
-    	 document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
-    }
-    
+
+    // Click Listener für die Tiles im AdminBereich
+    $('.admintile').on('click', function () {
+        let id = $(this).attr('id');
+        if (id === 'bewerbungsprozess') {
+            location.href = 'HTML/admin/prozess.html';
+        }
+        if (id === 'student') {
+            location.href = 'HTML/admin/verwaltung_student.html';
+        }
+        if (id === 'auslandsamt') {
+            location.href = 'HTML/admin/verwaltung_auslandsamt.html';
+        }
+        if (id === 'studiengangsleitung') {
+            location.href = 'HTML/admin/verwaltung_studiengangsleitung.html';
+        }
+    });
+
     // init ui
     initSlider();
     initArrows();
@@ -58,7 +72,7 @@ $(document).ready(function () {
             type: "GET",
             url: baseUrl + "/confirm?code=" + link,
             success: function (result) {
-            	Swal.fire({
+                Swal.fire({
                     title: "Nutzeraccount bestätigt",
                     text: "Ihre Mailadresse wurde bestätigt. Sie können sich jetzt einloggen",
                     icon: "success",
@@ -66,24 +80,12 @@ $(document).ready(function () {
                 });
             }
         });
-        
+
     }
     loadPortalInfo();
     loadAuslandsangebote();
     loadAuslandsangeboteInhalt();
     loadInfoMaterial();
-
-    // Click Listener für die Tiles im AdminBereich
-    $('.tile').on('click', function () {
-        var id = $(this).attr('id');
-        if (id === 'verwaltungIndex') {
-            location.href = 'cms.jsp';
-        } else if (id === 'verwaltungUser') {
-            location.href = 'nutzer.html';
-        } else if (id === 'verwaltungPortal') {
-            location.href = 'choose_diagram.html';
-        }
-    });
 });
 
 // Laden der Daten der PortalInfo Box
@@ -180,7 +182,7 @@ function loadAuslandsangeboteInhalt() {
                     i +
                     '1"><div class="row"><div class="col-md-7">' +
                     result[i].allgemeineInfos + '<br/>' + '<br/>'
-                    + 'Mögliche Studiengänge für diese Hochschule: ' + result[i].studiengang 
+                    + 'Mögliche Studiengänge für diese Hochschule: ' + result[i].studiengang
                     + '</div><div class="col-md-4">';
                 if (result[i].maps) {
                     htmlText = htmlText +
@@ -218,7 +220,7 @@ function loadAuslandsangeboteInhalt() {
                                     .attr('id');
                                 $('#' + id).children()
                                     .children().children(
-                                        '.navelAng')
+                                    '.navelAng')
                                     .removeClass('active');
                                 $(this).addClass('active');
                                 $('#' + id)
@@ -236,15 +238,15 @@ function loadAuslandsangeboteInhalt() {
 }
 
 // Setzt den back to top Pfeil auf invisible wenn man sich ganz oben auf der Seite befindet
-$(document).scroll(function() { 
-	   if($(window).scrollTop() === 0) {
-	     $(".chevronup").css('opacity', '0');
-	     $(".chevronup").css('cursor', 'initial');
-	   }else{
-		 $(".chevronup").css('opacity', '1');
-	     $(".chevronup").css('cursor', 'pointer');
-	   }
-	});
+$(document).scroll(function () {
+    if ($(window).scrollTop() === 0) {
+        $(".chevronup").css('opacity', '0');
+        $(".chevronup").css('cursor', 'initial');
+    } else {
+        $(".chevronup").css('opacity', '1');
+        $(".chevronup").css('cursor', 'pointer');
+    }
+});
 
 // Läd die Daten für die Infomaterialien auf die Seite
 function loadInfoMaterial() {

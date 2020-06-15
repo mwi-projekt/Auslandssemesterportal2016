@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>DHBW Auslandsportal</title>
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <script src="JS/faq.js"></script>
-    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <title>DHBW Auslandsinfo</title>
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../node_modules/jquery-ui-dist/jquery-ui.min.css">
+    <link rel="stylesheet" href="../../node_modules/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/admin/admin-main.css">
+    <link rel="stylesheet" href="../../css/admin/datatable-admin.css">
     <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no" charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="node_modules/jquery-form-validator/form-validator/theme-default.min.css">
+    <link rel="stylesheet" href="../../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../node_modules/jquery-form-validator/form-validator/theme-default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>
-    <script src="JS/main.js"></script>
+    <script src="../../node_modules/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            var includes = $('[data-include]');
+            jQuery.each(includes, function () {
+                var file = '/../../partials/' + $(this).data('include') + '.html';
+                $(this).load(file);
+            });
+        });
+    </script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
+    <script src="../../js/app.js"></script>
+    <script src="../../js/pages/nutzer.js"></script>
+
     <script type="text/javascript">
         window.cookieconsent_options = {
             "message": "Diese Webiste verwendet Cookies",
@@ -22,47 +39,109 @@
             "link": null,
             "theme": "light-top"
         };
+
     </script>
-    <script type="text/javascript" src="node_modules/cookieconsent/build/cookieconsent.min.js"></script>
-    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/cookieconsent/build/cookieconsent.min.js"></script>
+    <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="../../node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script src="../../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../../js/admin/student_tabelle.js"></script>
 </head>
 <body>
-<div class="table-responsive-lg">
-
-    <table id="example" class="display" style="width:100%">
-        <thead>
-        <tr>
-            <th>Vorname</th>
-            <th>Nachname</th>
-            <th>Email</th>
-            <th>Telefonnummer</th>
-            <th>Mobilfunknummer</th>
-            <th>Studiengang</th>
-            <th>Kurs</th>
-            <th>Martikelnummer</th>
-            <th>Standort</th>
-        </tr>
-        </thead>
-    </table>
-
-    <script>
-        $(document).ready(function () {
-            $('#example').DataTable({
-                ajax: '/getUser?rolle=3',
-                columns: [
-                    {data: 'vorname'},
-                    {data: 'nachname'},
-                    {data: 'email'},
-                    {data: 'tel'},
-                    {data: 'mobil'},
-                    {data: 'studiengang'},
-                    {data: 'kurs'},
-                    {data: 'matrikelnummer'},
-                    {data: 'standort'},
-                ]
-            });
-        });
-    </script>
+<div class="sticky-footer-container">
+    <div data-include="header"></div>
+    <div class="sticky-footer-padding">
+        <div class="verwaltung-container">
+            <div class="table-header-container">
+                <span class="big-text float-left">Studenten/Studentinnen bearbeiten</span>
+                <span class="big-text float-right">
+            <a class="admin-landingpage-link" href="../../index.jsp">&larr; Zurück</a>
+        </span>
+            </div>
+            <div class="table-responsive-lg">
+                <table id="example" class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Vorname</th>
+                        <th>Nachname</th>
+                        <th>Email</th>
+                        <th>Studiengang</th>
+                        <th>Kurs</th>
+                        <th>Matrikelnummer</th>
+                        <th>Standort</th>
+                        <th>Bearbeiten</th>
+                        <th>Löschen</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div data-include="footer"></div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Student bearbeiten</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="myForm" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="vorname" class="control-label">Vorname:</label>
+                        <input type="text" class="form-control" name="vorname" id="vorname">
+                    </div>
+                    <div class="form-group">
+                        <label for="nachname" class="control-label">Nachname:</label>
+                        <input type="text" class="form-control" name="nachname" id="nachname">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">Email:</label>
+                        <input type="email" class="form-control" name="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="studiengang" class="control-label">Studiengang:</label>
+                        <select class="form-control" name="studiengang" id="studiengang">
+                            <option>Wirtschaftsinformatik</option>
+                            <option>Wirtschaftsingenieurwesen</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="kurs" class="control-label">Kurs:</label>
+                        <input type="text" class="form-control" name="kurs" id="kurs">
+                    </div>
+                    <div class="form-group">
+                        <label for="matrikelnummer" class="control-label">Matrikelnummer:</label>
+                        <input type="number" class="form-control" name="matrikelnummer" id="matrikelnummer">
+                    </div>
+                    <div class="form-group">
+                        <label for="standort" class="control-label">Standort:</label>
+                        <select class="form-control" name="standort" id="standort">
+                            <option>DHBW Karlsruhe</option>
+                            <option>DHBW Stuttgart</option>
+                            <option>DHBW Mannheim</option>
+                            <option>DHBW Mosbach</option>
+                            <option>DHBW Lörrach</option>
+                            <option>DHBW Ravensburg</option>
+                            <option>DHBW Heidenheim</option>
+                            <option>DHBW Villingen-Schwenningen</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                    <button id="myFormSubmit" class="btn btn-primary" type="submit">Speichern</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -1,0 +1,54 @@
+
+.verwaltung-container {
+    margin: 100px;
+}
+
+.table-header-container {
+    width: 100%;
+    margin-bottom: 50px;
+    height: 50px;
+}
+
+.big-text {
+    font-size: 1.5rem;
+}
+
+.big-text > a {
+    text-decoration: none;
+}
+
+.left-float {
+    float: left;
+}
+
+.right-float {
+    float: right;
+}
+
+#example {
+    width: 100%
+}
+
+.dt-button {
+    margin-left: 30px;
+    height: 31px;
+    border: none;
+    border-radius: 10px;
+}
+
+.dataTables_filter {
+    float: left;
+}
+
+.dataTables_paginate {
+    margin-left: auto !important;
+}
+
+.bottom {
+    display: flex;
+}
+
+.dataTables_length > label {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

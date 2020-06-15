@@ -43,12 +43,12 @@ public class createSGLServlet extends HttpServlet {
 					// Zufälliges Salt generieren und Passwort hashen
 					String salt = Util.generateSalt();
 					String pw = Util.HashSha256(Util.HashSha256(id.toString()) + salt);
-					String aa = "--";
+					String help = "--";
 					// Verbindung zur DB um neuen Nutzer zu speichern
 					//Hier fehlt noch die Übergabe des Studiengangs
 					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
-							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), request.getParameter("studiengang"), aa, -1,
-							request.getParameter("phone"), request.getParameter("mobil"), aa, "1");
+							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), request.getParameter("studgang"),
+							request.getParameter("kurs"), -1, help, help, request.getParameter("standort"), "1");
 
 					if (rsupd == 0) {
 						out.print("registerError");

@@ -1,0 +1,19 @@
+#upper-left-tile {
+    float: right;
+}
+
+.tile-width {
+    width: 340px;
+}
+
+#upper-row {
+    margin-top: 100px;
+}
+
+#lower-row {
+    margin-bottom: 100px;
+}
+
+span {
+    font-size: x-large;
+}

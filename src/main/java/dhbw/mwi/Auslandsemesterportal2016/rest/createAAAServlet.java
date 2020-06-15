@@ -45,7 +45,7 @@ public class createAAAServlet extends HttpServlet {
 					// Verbindung zur DB um neuen Nutzer zu speichern
 					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
 							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), aa, aa, -1,
-							request.getParameter("phone"), request.getParameter("mobil"), aa, "1");
+							request.getParameter("tel"), request.getParameter("mobil"), aa, "1");
 
 					if (rsupd == 0) {
 						out.print("registerError");
