@@ -336,11 +336,11 @@ public class SQL_queries {
         }
     }
 
-    public static void createInstance(String instanceID, String uni, int matNr, int stepCount) {
+    public static void createInstance(String instanceID, String uni, int matNr, int prio, int stepCount) {
         // Nutzerinstanz eintragen}
-        String query = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status) VALUES (?,?,?,?)";
-        String[] params = new String[]{"" + matNr, uni, instanceID, "1"};
-        String[] types = new String[]{"int", "String", "String", "String"};
+        String query = "INSERT INTO MapUserInstanz (matrikelnummer, uni, processInstance, status, prioritaet) VALUES (?,?,?,?,?)";
+        String[] params = new String[]{"" + matNr, uni, instanceID, "1", "" + prio};
+        String[] types = new String[]{"int", "String", "String", "String", "int"};
         executeUpdate(query, params, types);
         // Bewerbungsprozess eintragen
         System.out.println("InsertIntoBewerbungsprozess");
@@ -410,14 +410,14 @@ public class SQL_queries {
 
     public static ArrayList<String[]> getUserInstances(int matNr) { // Uni|instanceID für alles Instanzen zurück
         // (Getrennt nach List-Entries)
-        String queryString = "SELECT uni,processInstance FROM MapUserInstanz WHERE matrikelnummer = ?;";
+        String queryString = "SELECT uni,processInstance,prioritaet FROM MapUserInstanz WHERE matrikelnummer = ?;";
         String[] params = new String[]{"" + matNr};
         String[] types = new String[]{"int"};
         ResultSet ergebnis = executeStatement(queryString, params, types);
         ArrayList<String[]> antwort = new ArrayList<String[]>();
         try {
             while (ergebnis.next()) {
-                antwort.add(new String[]{ergebnis.getString("uni"), ergebnis.getString("processInstance")});
+                antwort.add(new String[]{ergebnis.getString("uni"), ergebnis.getString("processInstance"), ergebnis.getString("prioritaet")});
             }
             return antwort;
         } catch (Exception e) {
