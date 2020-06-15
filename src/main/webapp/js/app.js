@@ -1,4 +1,4 @@
-var baseUrl = "http://localhost:82";
+var baseUrl = "http://localhost";
 $.ajaxSetup({
     xhrFields: { withCredentials: true },
     crossDomain: true,

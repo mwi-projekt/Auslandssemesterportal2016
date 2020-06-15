@@ -4,7 +4,7 @@ services:
     build: ./docker/mysql
     restart: always
     ports:
-      - '3308:3308'
+      - '3306:3306'
     environment:
       MYSQL_ROOT_HOST: '%'
       MYSQL_ROOT_PASSWORD: ${DB_PW}
@@ -14,7 +14,7 @@ services:
     volumes:
       - ${VOLUME_DB}:/var/lib/mysql
     networks:
-      - mwi-network-new
+      - mwi-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -26,9 +26,9 @@ services:
       PMA_PORT: 3306
       PMA_ABSOLUTE_URI: '${SERVER_URL}/phpmyadmin/'
     ports:
-      - '8087:80'
+      - '8083:80'
     networks:
-      - mwi-network-new
+      - mwi-network
     depends_on:
       - mwi_mysql
 
@@ -36,7 +36,7 @@ services:
     image: mwi/app
     restart: always
     ports:
-      - '8088:8080'
+      - '8082:8080'
     environment:
       DB_DRIVER: com.mysql.jdbc.Driver
       DB_USERNAME: ${DB_USER}
@@ -49,15 +49,15 @@ services:
     volumes:
       - ${VOLUME_UPLOAD}:/camunda/upload
     networks:
-      - mwi-network-new
+      - mwi-network
 
   web:
     build: ./docker/web
     restart: always
     ports:
-      - '82:80'
+      - '80:80'
     networks:
-      - mwi-network-new
+      - mwi-network
     volumes:
       - ${VOLUME_UPLOAD}:/etc/nginx/html/files
     depends_on:
@@ -66,4 +66,4 @@ services:
       - phpmyadmin
 
 networks:
-  mwi-network-new:
+  mwi-network:
