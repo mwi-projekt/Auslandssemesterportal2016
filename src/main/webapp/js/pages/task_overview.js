@@ -31,6 +31,8 @@ function getList() {
                             "</td><td>" +
                             singleInstance.kurs +
                             "</td><td>" +
+                            singleInstance.prioritaet +
+                            "</td><td>" +
                             singleInstance.aktuelleUni +
                             "</td><td>" +
                             singleInstance.uni +
@@ -65,11 +67,13 @@ function getList() {
                     		singleInstance.vname +
                     		"</td><td>" +
                     		singleInstance.aktuelleUni +
-                    		"</td><td>" +
+                            "</td><td>" +
+                            singleInstance.prioritaet +
+                            "</td><td>" +
                     		singleInstance.kurs +
                     		"</td><td>" +
                     		singleInstance.uni +
-                    		"</td></td>" +
+                    		"</td><td>" +
                     		"<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('"+singleInstance.uni+"','"+singleInstance.matrikelnummer+"')\"></button></td></tr>";
                     } else if (singleInstance.status === 'abgelehnt') {
                     	abgelehnt = abgelehnt +
@@ -91,7 +95,7 @@ function getList() {
                 if (output === "") {
                     output = "<h2>Aktuell gibt es keine Bewerbungen, die überprüft werden müssen</h2>";
                 } else {
-                    output = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Prüfen</th><th>Löschen</th></tr></thead><tbody>' +
+                    output = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Priorität</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Prüfen</th><th>Löschen</th></tr></thead><tbody>' +
                         output + "</tbody></table>";
                 }
                 if (completed === "") {
@@ -103,7 +107,7 @@ function getList() {
                 if (validateSGL === "") {
                 	validateSGL = "<h2> Es gibt keine Bewebungen, die von einem Studiengangsleiter zu validieren sind</h2>";
                 } else {
-                	validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
+                	validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
                     	validateSGL + "</tbody></table>";
                 }
                 if (abgelehnt === "") {
