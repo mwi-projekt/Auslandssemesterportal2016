@@ -166,8 +166,7 @@
                                 <ul>
                                     <li>Über 10.000 Studierende</li>
                                     <li>Campus zwischen Meer und Nationalpark</li>
-                                    <li>Angebotene Studienbereiche: Wirtschaft, Ingenieurswissenschaften, Informatik
-                                    </li>
+                                    <li>Angebotene Studienbereiche: Wirtschaft, Ingenieurswissenschaften, Informatik</li>
                                 </ul>
                             </div>
                         </div>
@@ -192,6 +191,66 @@
                                 </ul>
                             </div>
                             <img src="images/SanMarcos.png"/>
+                        </div>
+                    </a>
+                    <a href="details-auslandsangebote.html">
+                        <div class="auslandsangebote-image-left-text-right ">
+                            <img src="images/CostaRica.png"/>
+                            <div class="auslandsangebote-text-block">
+                                <br>
+                                <h4>
+                                    Costa Rica Institute of Technology
+                                </h4>
+                                <br>
+                                <p>
+                                    Erlebe die erfrischende Kultur Costa Ricas und studiere an einer der renommiertesten Hochschule des Kontinents.
+                                </p>
+                                <ul>
+                                    <li>Eine der angesehensten technischen Bildungseinrichtungen Zentralamerikas</li>
+                                    <li>Unterrichtssprache: Spanisch, teilweise Englisch</li>
+                                    <li>Angebotene Studienbereiche: Wirtschaft, Technik, Informatik</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="details-auslandsangebote.html">
+                        <div class="auslandsangebote-text-left-image-right">
+                            <div class="auslandsangebote-text-block mobile-order-swap">
+                                <br>
+                                <h4>
+                                    South-Eastern Finland University of Applied Sciences
+                                </h4>
+                                <br>
+                                <p>
+                                    Lass dich von der kulturellen Vielfalt und der unberührten Natur des Nordens begeistern und studiere auf höchstem europäischen Niveau.
+                                </p>
+                                <ul>
+                                    <li>Moderne Hochschule mit 4.500 Studierenden</li>
+                                    <li>Studentenstadt inmitten finnischer Natur</li>
+                                    <li>Angebotene Studienbereiche: Wirtschaft, Wirtschaftsingenieurwesen</li>
+                                </ul>
+                            </div>
+                            <img src="images/South-Eastern.png"/>
+                        </div>
+                    </a>
+                    <a href="details-auslandsangebote.html">
+                        <div class="auslandsangebote-image-left-text-right">
+                            <img src="images/durban.png"/>
+                            <div class="auslandsangebote-text-block">
+                                <br>
+                                <h4>
+                                    National Dong Hwa University
+                                </h4>
+                                <br>
+                                <p>
+                                    Neben wilden Safari und traumhaften Stränden bietet Südafrika unzählige Möglichkeiten für dein nächstes Abenteuer voll kultureller Vielfalt und wertvollem Wissen.
+                                </p>
+                                <ul>
+                                    <li>33.000 Studierende & sechs Fakultäten</li>
+                                    <li>Küstenstadt mit subtropischem Klima</li>
+                                    <li>Angebotene Studienbereiche: Wirtschaftswissenschaften</li>
+                                </ul>
+                            </div>
                         </div>
                     </a>
                 </div>
