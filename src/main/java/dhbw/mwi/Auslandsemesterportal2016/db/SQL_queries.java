@@ -221,6 +221,31 @@ public class SQL_queries {
 
     }
 
+	public static User getUserInfo(String mail) {
+        String queryString = "SELECT userID,rolle,vorname,nachname,matrikelnummer FROM user WHERE email = ?;";
+        String[] args = new String[]{mail};
+        String[] types = new String[]{"String"};
+        ResultSet ergebnis = executeStatement(queryString, args, types);
+
+        try {
+            if (ergebnis.next()) {
+				User user = new User();
+				user.id = ergebnis.getInt("userID");
+				user.rolle = ergebnis.getInt("rolle");
+				user.vorname = ergebnis.getString("vorname");
+				user.nachname = ergebnis.getString("nachname");
+				user.matrikelnummer = ergebnis.getString("matrikelnummer");
+				return user;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
     //DO NOT USE IN ANY SERVLET. DO NOT GIVE USERIDs TO PUBLIC
     public static int getUserID(String mail) {
         String queryString = "SELECT userID FROM user WHERE email = ?;";

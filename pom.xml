@@ -19,10 +19,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
-	
+
 	<dependencyManagement>
 		<dependencies>
-			
+
 			<dependency>
 				<groupId>org.camunda.bpm</groupId>
 				<artifactId>camunda-bom</artifactId>
@@ -30,7 +30,7 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.camunda.bpm.dmn</groupId>
 				<artifactId>camunda-engine-dmn-bom</artifactId>
@@ -38,7 +38,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
@@ -60,7 +60,7 @@
 			<artifactId>camunda-engine</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<!-- decision engine -->
 			<groupId>org.camunda.bpm.dmn</groupId>
@@ -75,7 +75,7 @@
 			<version>2.0-alpha2</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -88,7 +88,7 @@
 			<artifactId>camunda-spin-dataformat-all</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.camunda.bpm</groupId>
 			<artifactId>camunda-engine-plugin-spin</artifactId>
@@ -101,7 +101,7 @@
 			<artifactId>camunda-connect-connectors-all</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.camunda.bpm</groupId>
 			<artifactId>camunda-engine-plugin-connect</artifactId>
@@ -120,7 +120,7 @@
 			<artifactId>junit</artifactId>
 			<version>4.13-beta-3</version>
 		</dependency>
-		
+
 
 		<dependency>
 			<!-- Needed for InMemoryH2Test -->
@@ -128,8 +128,8 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.199</version>
 			<scope>test</scope>
-		</dependency> 
-		
+		</dependency>
+
 		<dependency>
 			<!-- Used to generate test coverage reports, see https://github.com/camunda/camunda-consulting/tree/master/snippets/process-test-coverage -->
 			<groupId>org.camunda.consulting.snippets</groupId>
@@ -183,7 +183,7 @@
 			</exclusions>
 		</dependency>
 
-		<!-- Add your own dependencies here, if in compile scope, they are added 
+		<!-- Add your own dependencies here, if in compile scope, they are added
 			to the war -->
 		<dependency>
 			<groupId>commons-digester</groupId>
@@ -195,7 +195,7 @@
 			<artifactId>mail</artifactId>
 			<version>1.5.0-b01</version>
 		</dependency>
-		
+
 		<dependency>
 		    <groupId>javax.xml.bind</groupId>
 		    <artifactId>jaxb-api</artifactId>
@@ -217,7 +217,7 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.powermock</groupId>
 			<artifactId>powermock-api-mockito2</artifactId>
@@ -298,7 +298,7 @@
 			  <groupId>io.fabric8</groupId>
 			  <artifactId>docker-maven-plugin</artifactId>
 			  <version>0.32.0</version>
-			
+
 			  <configuration>
 			     <images>
 			        <!-- A single's image configuration -->
@@ -325,13 +325,13 @@
 			     </images>
 			  </configuration>
 			</plugin>
-			
+
 			<plugin>
 			  <groupId>org.apache.tomcat.maven</groupId>
 			  <artifactId>tomcat7-maven-plugin</artifactId>
 			  <version>2.0</version>
 			  <configuration>
-			    <url>http://localhost:8086/manager/text</url>
+			    <url>http://localhost:8082/manager/text</url>
 			   	<username>war-deployer</username>
 	  			<password>maven-tomcat-plugin</password>
 			    <path>/Auslandssemesterportal</path>
