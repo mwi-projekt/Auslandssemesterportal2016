@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        SONARQUBE_TOKEN = credentials('sonarqube')
+    }
+    
     stages {
     	stage('Configure Server URL') {
             steps {
@@ -11,8 +15,7 @@ pipeline {
         stage('SonarQube') {
             steps {
                 withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'SonarQube') {
-                    KEY = credentials('sonarqube')
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=$KEY"
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=$SONARQUBE_TOKEN"
                 }
             }
         }
