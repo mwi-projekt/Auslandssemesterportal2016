@@ -46,17 +46,17 @@ $(document).ready(function () {
                         if (splitUni.indexOf(result.data[l].uniTitel) != -1) continue;
                         popUpHtml = popUpHtml + '<option>' + result.data[l].uniTitel + '</option>';
                     }
-    
+
                     popUpHtml = popUpHtml + '</select></div></div>';
-                    
+
                     popUpHtml += '<div class="form-group"><div class="col-md-12"><select class="inBox" id="selectZeit">';
                     //Zeitraum muss hier noch automatisch generiert werden
                     popUpHtml = popUpHtml + '<option> Zeitraum auswählen </option><option> Sommersemester 2021 </option>';
-                    
+
                     popUpHtml = popUpHtml + '</select></div></div>';
-    
+
                     popUpHtml += '<div class="form-group"><div class="col-md-12"><select class="inBox" id="selectPrio">';
-    
+
                     popUpHtml += '<option value="0"> Priorität auswählen </option>';
 
                     for (var i = 1; i <= 5; i++) {
@@ -66,11 +66,11 @@ $(document).ready(function () {
                     }
 
                     popUpHtml = popUpHtml + '</select></div></div>';
-    
+
                     popUpHtml += '<div class="form-group"><div class="col-md-12"><button id="newBewProzessWahl" class="btn btn-success">Bestätigen</button></div></div></div>';
                 }
 
-              
+
                 Swal.fire({
                     title: 'Bitte wähle die Uni und den Zeitraum aus',
                     html: popUpHtml,
@@ -85,8 +85,8 @@ $(document).ready(function () {
                                 data: {
                                     matnr: sessionStorage['matrikelnr'],
                                     uni: $('#selectUni').val(),
-                                    zeitraum: $('#selectZeit').val(),                               
-                                    prio: $('#selectPrio').val(),                               
+                                    zeitraum: $('#selectZeit').val(),
+                                    prio: $('#selectPrio').val(),
                                 },
                                 success: function (result) {
                                     location.href = 'bewerben.html?instance_id=' + result.instanceId + '&uni=' + result.uni + '&zeitraum=' + result.zeitraum;
@@ -164,7 +164,7 @@ function loadAuslandsangeboteInhalt() {
                     i +
                     '1"><div class="row"><div class="col-md-7">' +
                     result[i].allgemeineInfos + '<br/>' + '<br/>'
-                    + 'Mögliche Studiengänge für diese Hochschule: ' + result[i].studiengang 
+                    + 'Mögliche Studiengänge für diese Hochschule: ' + result[i].studiengang
                     + '</div><div class="col-md-5">';
                 if (result[i].maps) {
                     htmlText = htmlText +
@@ -229,7 +229,7 @@ function initBewerben() {
             matnr: sessionStorage['matrikelnr']
         },
         success: function (result) {
-            tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Priorität</th><th colspan="2">Aktionen</th></tr></thead>';
+            tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Priorität</th><th colspan="3">Aktionen</th></tr></thead>';
             if (result.data.length == 0) {
                 $('#tableBewProzess').html('<h2>Keine Bewerbungen vorhanden</h2>');
             } else {
@@ -244,20 +244,25 @@ function initBewerben() {
                         tabelle = tabelle + '<td align="center"><span class="btn fas fa-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '\'"></span></td>';
                     } else if (instance_info.stepCounter === "Daten prüfen") {
                         //Übersicht
-                        tabelle = tabelle + '<td align="center"><span class="btn fas fa-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '&send_bew=true\'"></span><td align="center">';
+                        tabelle = tabelle + '<td align="center"><span class="btn fas fa-list" title="Übersicht" onclick="location.href=\'task_detail.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '&send_bew=true\'"></span></td>';
                         //Prozess löschen
-                        tabelle = tabelle + '<span uni="' + instance_info.uni + '" class="btn fas fa-trash btn-delete" title="Löschen" rid="' + (i + 1) + '"></span>';
+						tabelle = tabelle + '<td align="center"><span uni="' + instance_info.uni + '" class="btn fas fa-trash btn-delete" title="Löschen" rid="' + (i + 1) + '"></span></td>';
+						//Prozess bearbeiten
+						tabelle = tabelle + '<td align="center"><span instance="' + instance_info.instanceID + '" class="btn btn-edit fas fa-edit" title="Bearbeiten"></span></td>';
                     } else {
                         //Fortsetzen
-                        tabelle = tabelle + '<td align="center"><span class="btn fas fa-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '\'"></span><td align="center">';
+                        tabelle = tabelle + '<td align="center"><span class="btn fas fa-arrow-right" title="fortsetzen" onclick="location.href=\'bewerben.html?instance_id=' + instance_info.instanceID + '&uni=' + instance_info.uni + '\'"></span></td>';
                         //Prozess löschen
-                        tabelle = tabelle + '<span uni="' + instance_info.uni + '" class="btn fas fa-trash btn-delete" title="Löschen" rid="' + (i + 1) + '"></span>';
+						tabelle = tabelle + '<td align="center"><span uni="' + instance_info.uni + '" class="btn fas fa-trash btn-delete" title="Löschen" rid="' + (i + 1) + '"></span></td>';
+						//Prozess bearbeiten
+						tabelle = tabelle + '<td align="center"><span instance="' + instance_info.instanceID + '" class="btn btn-edit fas fa-edit" title="Bearbeiten"></span></td>';
                     }
-                    tabelle = tabelle + '</td></tr>'
+                    tabelle = tabelle + '</tr>'
                 }
                 tabelle = tabelle + '</table>';
                 $('#tableBewProzess').html(tabelle);
                 initDeleteProcessButtons();
+                initEditProcessButtons();
             }
         },
         error: function (result) {
@@ -266,13 +271,44 @@ function initBewerben() {
     });
 }
 
+function initEditProcessButtons() {
+    $('.btn-edit').on('click', function () {
+		var instance = $(this).attr("instance");
+		var popUpHtml = '<div class="form-group"><div class="col-md-12"><select class="inBox" id="selectEditPrio">';
+		popUpHtml += '<option value="0"> Priorität auswählen </option>';
+
+		for (var i = 1; i <= 5; i++) {
+			popUpHtml += '<option>' + i + '</option>';
+		}
+
+		popUpHtml = popUpHtml + '</select></div></div>';
+		Swal.fire({
+			title: 'Bitte wählen Sie eine neue Priorität aus',
+			html: popUpHtml,
+		}).then(function (result) {
+			$.ajax({
+                type: "GET",
+                url: baseUrl + "/changePriority",
+                data: {
+                    instance: instance,
+                    prio: $('#selectEditPrio').val(),
+                }
+            }).done(function (data) {
+                location.reload();
+            });
+		});
+	});
+}
+
+
 function initDeleteProcessButtons() {
     $('.btn-delete').on('click', function () {
         var uni = $(this).attr("uni");
         var id = $(this).attr("rid");
         Swal.fire({
             title: "Bist du sicher?",
-            text: "Der Prozess kann nicht wiederhergestellt werden!",
+
+           text: "Der Prozess kann nicht wiederhergestellt werden!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -284,7 +320,9 @@ function initDeleteProcessButtons() {
             $.ajax({
                 type: "GET",
                 url: baseUrl + "/process/delete",
-                data: {
+
+
+               data: {
                     matrikelnummer: matrikelnummer,
                     uni: uni
                 }
@@ -294,7 +332,9 @@ function initDeleteProcessButtons() {
             }).error(function (error) {
                 console.error(error);
                 Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-            })
+
+
+           })
         });
     });
 }
