@@ -12,7 +12,7 @@ pipeline {
                 sh 'sed -i -e \'s#var baseUrl = "http://localhost";#var baseUrl = "http://10.3.15.45";#g\' src/main/webapp/js/file-browser.js'
             }
         }
-        stage('SonarQube') {
+        stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh "mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=$SONARQUBE_TOKEN"
