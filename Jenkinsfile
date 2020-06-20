@@ -9,8 +9,10 @@ pipeline {
             }
         }
         stage('SonarQube') {
-            withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'SonarQube') {
-                sh "mvn sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=8f7b2b5a643675feeb2562ee6825ebc8e96c99eb"
+            steps {
+                withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'SonarQube') {
+                    sh "mvn sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=8f7b2b5a643675feeb2562ee6825ebc8e96c99eb"
+                }
             }
         }
         stage('Build') {
