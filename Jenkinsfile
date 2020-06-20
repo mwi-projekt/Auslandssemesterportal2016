@@ -10,8 +10,9 @@ pipeline {
         }
         stage('SonarQube') {
             steps {
-                withSonarQubeEnv([usernamePassword(credentialsId: 'sonarqube', passwordVariable: 'pass', usernameVariable: 'user')], installationName: 'SonarQube') {
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=$pass"
+                withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'SonarQube') {
+                    KEY = credentials('sonarqube')
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=$KEY"
                 }
             }
         }
