@@ -2,10 +2,16 @@ pipeline {
     agent any
 
     stages {
+        stage('SonarQube') {
+            def scannerhome = tool 'sonarScanner';
+            withSonarQubeEnv(credentialsId: 'sonarqube', installationName: 'SonarQube') {
+                sh "mvn sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=8f7b2b5a643675feeb2562ee6825ebc8e96c99eb"
+            }
+        }
     	stage('Configure Server URL') {
             steps {
-                sh 'sed -i -e \'s#var baseUrl = "http://localhost:85";#var baseUrl = "http://10.3.15.45:85";#g\' src/main/webapp/js/app.js'
-                sh 'sed -i -e \'s#var baseUrl = "http://localhost:85";#var baseUrl = "http://10.3.15.45:85";#g\' src/main/webapp/js/file-browser.js'
+                sh 'sed -i -e \'s#var baseUrl = "http://localhost";#var baseUrl = "http://10.3.15.45";#g\' src/main/webapp/js/app.js'
+                sh 'sed -i -e \'s#var baseUrl = "http://localhost";#var baseUrl = "http://10.3.15.45";#g\' src/main/webapp/js/file-browser.js'
             }
         }
         stage('Build') {
