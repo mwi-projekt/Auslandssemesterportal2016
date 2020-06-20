@@ -26,7 +26,7 @@ public class createAAAServlet extends HttpServlet {
 		if (role != 1 && role != 2) {
 			response.sendError(401, "Rolle: " + role);
 		} else {
-			int role = 2;
+			role = 2;
 
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
 				out.print("mailError");

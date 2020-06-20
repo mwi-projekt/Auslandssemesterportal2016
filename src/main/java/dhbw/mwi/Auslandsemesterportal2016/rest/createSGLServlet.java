@@ -28,7 +28,7 @@ public class createSGLServlet extends HttpServlet {
 		} else {
 		
 			//Rolle SGL Eintragen
-			int role = 4;
+			role = 4;
 
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
 				out.print("mailError");
