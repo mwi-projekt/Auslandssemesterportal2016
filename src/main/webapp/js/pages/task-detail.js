@@ -276,41 +276,43 @@ function saveChanges() {
             confirmButtonText: "Bewerbung absenden",
             cancelButtonText: "Abbrechen"
         }).then(function(result) {
-            $.ajax({
-                type: "POST",
-                url: baseUrl + "/sendNewApplicationMail",
-                data: {
-                    instance_id: instanceID
-                },
-                success: function (result) {
-                    $.ajax({
-                        type: "POST",
-                        url: baseUrl + "/setVariable",
-                        data: {
-                            instance_id: instanceID,
-                            key: keyString,
-                            value: valString,
-                            type: typeString
-                        },
-                        success: function (result) {
-                            Swal.fire({
-                                title: "Bewerbung eingereicht",
-                                text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
-                                icon: "success",
-                                confirmButtonText: "Ok"
-                            }).then( function (result) {
-                                location.href = 'bewerbungsportal.html';
-                            });
-                        },
-                        error: function (result) {
-                            sweetAlert("Fehler", "Ein Fehler ist aufgetreten", "error");
-                        }
-                    });
-                },
-                error: function (result) {
-                    console.error(result);
-                }
-            });
+            if (result) {
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "/sendNewApplicationMail",
+                    data: {
+                        instance_id: instanceID
+                    },
+                    success: function (result) {
+                        $.ajax({
+                            type: "POST",
+                            url: baseUrl + "/setVariable",
+                            data: {
+                                instance_id: instanceID,
+                                key: keyString,
+                                value: valString,
+                                type: typeString
+                            },
+                            success: function (result) {
+                                Swal.fire({
+                                    title: "Bewerbung eingereicht",
+                                    text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
+                                    icon: "success",
+                                    confirmButtonText: "Ok"
+                                }).then( function (result) {
+                                    location.href = 'bewerbungsportal.html';
+                                });
+                            },
+                            error: function (result) {
+                                sweetAlert("Fehler", "Ein Fehler ist aufgetreten", "error");
+                            }
+                        });
+                    },
+                    error: function (result) {
+                        console.error(result);
+                    }
+                });
+            }
         });
 }
 

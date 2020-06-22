@@ -334,30 +334,44 @@ function validateBew() {
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Bewerbung " + resultString,
         cancelButtonText: "Abbrechen"
-    }).then(function () {
-        $.ajax({
-            type: "POST",
-            url: baseUrl + "/setVariable",
-            data: {
-                instance_id: instanceID,
-                key: 'validierungErfolgreich|mailText',
-                value: validateString + '|' + grund,
-                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
-            },
-            success: function () {
-                Swal.fire({
-                    title: "Bewerbung " + resultString,
-                    text: "Gespeichert",
-                    icon: "success",
-                    confirmButtonText: "Ok"
-                }).then(function () {
-                    location.href = 'task_overview_sgl.html';
-                });
-            },
-            error: function () {
-                Swal.fire('Ein Fehler ist aufgetreten');
-            }
-        });
+    }).then(function (result) {
+        if (result) {
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "/sendSqlApplicationMail",
+                data: {
+                    instance_id: instanceID
+                },
+                success: function (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl + "/setVariable",
+                        data: {
+                            instance_id: instanceID,
+                            key: 'validierungErfolgreich|mailText',
+                            value: validateString + '|' + grund,
+                            type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
+                        },
+                        success: function () {
+                            Swal.fire({
+                                title: "Bewerbung " + resultString,
+                                text: "Gespeichert",
+                                icon: "success",
+                                confirmButtonText: "Ok"
+                            }).then(function () {
+                                location.href = 'task_overview_sgl.html';
+                            });
+                        },
+                        error: function () {
+                            Swal.fire('Ein Fehler ist aufgetreten');
+                        }
+                    });
+                },
+                error: function (result) {
+                    console.error(result);
+                }
+            });
+        }
     });
 
 }

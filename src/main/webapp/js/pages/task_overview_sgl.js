@@ -112,7 +112,7 @@ function getList() {
                 if (validateAAA === "") {
                 	validateAAA = "<h2>Aktuell gibt es keine Bewerbungen, die von einem AAA überprüft werden müssen</h2>";
                 } else {
-                	validateAAA = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                	validateAAA = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
                        	validateAAA + "</tbody></table>";
                 }      
                 if (abgelehnt === "") {
