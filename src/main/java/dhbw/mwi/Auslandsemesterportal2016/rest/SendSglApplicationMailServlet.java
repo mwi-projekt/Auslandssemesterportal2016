@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
-@WebServlet(name = "SendSqlApplicationMailServlet", urlPatterns = { "/sendSqlApplicationMail" })
-public class SendSqlApplicationMailServlet extends HttpServlet {
+@WebServlet(name = "SendSglApplicationMailServlet", urlPatterns = { "/sendSqlApplicationMail" })
+public class SendSglApplicationMailServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
