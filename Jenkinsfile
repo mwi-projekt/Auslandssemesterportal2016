@@ -36,14 +36,11 @@ pipeline {
                 sh 'docker-compose up -d'
             }
         }
-<<<<<<< Updated upstream
-=======
         stage("Dynamic Test"){
             steps {
                 sh "docker exec Zap zap-cli --verbose quick-scan --self-contained --start-options '-config api.disablekey=true' http://http://10.3.15.45:80"
             }
         }
         
->>>>>>> Stashed changes
     }
 }
