@@ -106,9 +106,10 @@
                     <div class="auslandsangebote-heading-container">
                         <h1 class="auslandsangebote-heading">Auslandsangebote</h1>
                     </div>
-                    <a href="details-auslandsangebote.html">
+                    <a href="detailsSchottland-auslandsangebote.html">
                         <div class="auslandsangebote-image-left-text-right ">
                             <img src="images/Dundee.png"/>
+                            <div class="bottom-left" style="position: absolute;bottom: 71%;left: 19%;background-color: #dc3545;padding: 5px;">Deadline: 15.07</div>
                             <div class="auslandsangebote-text-block">
                                 <br>
                                 <h4>
@@ -127,7 +128,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="details-auslandsangebote.html">
+                    <a href="detailsBulgarien-auslandsangebote.html">
                         <div class="auslandsangebote-text-left-image-right">
                             <div class="auslandsangebote-text-block mobile-order-swap">
                                 <br>
@@ -147,11 +148,13 @@
                                 </ul>
                             </div>
                             <img src="images/Bulgaria.png"/>
+                            <!--<div class="bottom-left" style="position: absolute;bottom: 63.5%;left: 58%;background-color: #dc3545;padding: 5px;">Deadline: 15.07</div>-->
                         </div>
                     </a>
-                    <a href="details-auslandsangebote.html">
+                    <a href="detailsTaiwan-auslandsangebote.html">
                         <div class="auslandsangebote-image-left-text-right">
                             <img src="images/NDHU.png"/>
+                            <!--<div class="bottom-left" style="position: absolute;bottom: 54.7%;left: 19%;background-color: #dc3545;padding: 5px;">Deadline: 15.07</div>-->
                             <div class="auslandsangebote-text-block">
                                 <br>
                                 <h4>
@@ -171,7 +174,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="details-auslandsangebote.html">
+                    <a href="detailsSanMarcos-auslandsangebote.html">
                         <div class="auslandsangebote-text-left-image-right ">
                             <div class="auslandsangebote-text-block mobile-order-swap">
                                 <br>
@@ -191,11 +194,13 @@
                                 </ul>
                             </div>
                             <img src="images/SanMarcos.png"/>
+                            <!--<div class="bottom-left" style="position: absolute;bottom: 45.6%;left: 57%;background-color: #dc3545;padding: 5px;">Deadline: 15.07</div>-->
                         </div>
                     </a>
-                    <a href="details-auslandsangebote.html">
+                    <a href="detailsCostaRica-auslandsangebote.html">
                         <div class="auslandsangebote-image-left-text-right ">
                             <img src="images/CostaRica.png"/>
+                            <!--<div class="bottom-left">Deadline: 15.07</div>-->
                             <div class="auslandsangebote-text-block">
                                 <br>
                                 <h4>
@@ -213,7 +218,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="details-auslandsangebote.html">
+                    <a href="detailsFinnland-auslandsangebote.html">
                         <div class="auslandsangebote-text-left-image-right">
                             <div class="auslandsangebote-text-block mobile-order-swap">
                                 <br>
@@ -231,15 +236,17 @@
                                 </ul>
                             </div>
                             <img src="images/South-Eastern.png"/>
+                            <!--<div class="bottom-left">Deadline: 15.07</div>-->
                         </div>
                     </a>
-                    <a href="details-auslandsangebote.html">
+                    <a href="detailsDurban-auslandsangebote.html">
                         <div class="auslandsangebote-image-left-text-right">
                             <img src="images/durban.png"/>
+                            <!--<div class="bottom-left">Deadline: 01.07</div>-->
                             <div class="auslandsangebote-text-block">
                                 <br>
                                 <h4>
-                                    National Dong Hwa University
+                                    Durban University of Technology
                                 </h4>
                                 <br>
                                 <p>
@@ -257,9 +264,8 @@
             </div>
         </div>
 
-
         <!--- Erfahrungsberichte ---->
-        <div class="erfahrungsBerichte-container" id="erfahrungsBerichte">
+        <!--<div class="erfahrungsBerichte-container" id="erfahrungsBerichte">
             <div class="auslandsangebote-heading-container">
                 <h1 class="auslandsangebote-heading">Erfahrungsberichte</h1>
             </div>
@@ -295,8 +301,52 @@
                 </div>
 
             </div>
+        </div>-->
+
+        <section id="team" class="bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="team-member"><img class="rounded-circle mx-auto" src="images/Erfahrungsberichte_Profil/1.jpg" />
+                            <h4>Student Ausland Nr.1</h4>
+                            <p>DH Karlsruhe - Durban</p>
+                            <p class="text-muted">Wirtschaftsinformatik</p>
+                            <ul class="list-inline social-buttons">
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="team-member"><img class="rounded-circle mx-auto" src="images/Erfahrungsberichte_Profil/2.jpg" />
+                            <h4>Student Ausland Nr.2</h4>
+                            <p>DH Karlsruhe - AUBG</p>
+                            <p class="text-muted">Wirtschaftsinformatik</p>
+                            <ul class="list-inline social-buttons">
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="team-member"><img class="rounded-circle mx-auto" src="images/Erfahrungsberichte_Profil/3.jpg" />
+                            <h4>Student Ausland Nr.3</h4>
+                            <p>DH Karlsruhe - University of Abertay</p>
+                            <p class="text-muted">Betriebswirtschaftslehre</p>
+                            <ul class="list-inline social-buttons">
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         </div>
-    </div>
     </br>
     </br>
     <script
