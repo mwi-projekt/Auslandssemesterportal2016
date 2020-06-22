@@ -129,4 +129,7 @@ dist/
 tmp/
 temp/
 
+# System files
+*.icloud
+
 # End of https://www.gitignore.io/api/node
