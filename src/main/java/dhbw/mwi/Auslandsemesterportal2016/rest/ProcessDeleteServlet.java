@@ -49,6 +49,8 @@ public class ProcessDeleteServlet extends HttpServlet {
 					}
 
 					// SQL-Befehl für das Löschen der Bewerbung aus der MySQL-DB
+					//TODO: Split up prepared Statement for database refactoring (new Attributes: User.matrNumber, Application.startDate, ForeignUniversity.name, Step.number, Offering.totalSteps rest ist eliminated)
+
 					String deleteStatement = "DELETE FROM bewerbungsprozess WHERE matrNumber = '" + matrnumber
 							+ "' AND uniName = '" + uni + "' ";
 

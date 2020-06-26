@@ -294,6 +294,8 @@ public class SQL_queries {
 
 	public static ResultSet getJson(String step, String model) {
 		// Gibt JSON-Dokument für die Eingabemaske zurück
+
+		//TODO Refactor prepared statements to fit new database model. processModel is now integrated in Offering and Step
 		String query = "SELECT json FROM processModel WHERE step = ? AND model = ?;";
 		String[] params = new String[] { step, model };
 		String[] types = new String[] { "String", "String" };
@@ -334,6 +336,7 @@ public class SQL_queries {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		String dateString = dateFormat.format(date);
+		//TODO: Split up prepared Statement for database refactoring (new Attributes: User.matrNumber, Application.startDate, ForeignUniversity.name, Step.number, Offering.totalSteps rest ist eliminated)
 		query = "INSERT INTO bewerbungsprozess (matrNumber, uniName, startDatum, Schritte_aktuell, Schritte_gesamt) VALUES (?,?,?,?,?)";
 		params = new String[] { "" + matNr, uni, dateString, "0", "" + stepCount };
 		types = new String[] { "int", "String", "date", "int", "int" };
@@ -341,6 +344,7 @@ public class SQL_queries {
 	}
 
 	public static String getAllActivities(String definitionKey) {
+		//TODO Refactor prepared statements to fit new database model. processModel is now integrated in Offering and Step
 		String query = "SELECT `step` FROM `processModel` WHERE `model` = ? ORDER BY `stepNumber`";
 		String[] params = new String[] { definitionKey };
 		String[] types = new String[] { "String" };
@@ -414,6 +418,7 @@ public class SQL_queries {
 	}
 
 	private static int getTotalSteps(String model) {
+		//TODO Refactor prepared statements to fit new database model. processModel is now integrated in Offering and Step
 		String query = "SELECT max(stepNumber) FROM processModel WHERE model = ?";
 		String[] params = new String[] { model };
 		String[] types = new String[] { "String" };

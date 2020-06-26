@@ -27,7 +27,7 @@ public class ModelProcessListServlet extends HttpServlet {
 			String model = request.getParameter("model");
 
 			if (model != null) {
-
+				//TODO Refactor prepared statements to fit new database model. processModel is now integrated in Offering and Step
 				String query = "SELECT step FROM processModel WHERE model = ?";
 				String[] args = new String[] { model };
 				String[] types = new String[] { "String" };
