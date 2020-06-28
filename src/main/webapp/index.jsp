@@ -109,7 +109,7 @@
                     <a href="detailsSchottland-auslandsangebote.html">
                         <div class="auslandsangebote-image-left-text-right ">
                             <img src="images/Dundee.png"/>
-                            <div class="bottom-left" style="position: absolute;bottom: 71%;left: 19%;background-color: #dc3545;padding: 5px;">Deadline: 15.07</div>
+                            <div style="background-color: #dc3545;color: white;float: right;display: grid;position: relative;right: 0;bottom: 90%;left: 197%;" class="col-4">Deadline: 15.07</div>
                             <div class="auslandsangebote-text-block">
                                 <br>
                                 <h4>
@@ -148,13 +148,13 @@
                                 </ul>
                             </div>
                             <img src="images/Bulgaria.png"/>
-                            <!--<div class="bottom-left" style="position: absolute;bottom: 63.5%;left: 58%;background-color: #dc3545;padding: 5px;">Deadline: 15.07</div>-->
+                            <div style="background-color: #dc3545;color: white;float: left;display: grid;position: relative;right: 0;bottom: 90%;left: 2%;" class="col-4">Deadline: 15.07</div>
                         </div>
                     </a>
                     <a href="detailsTaiwan-auslandsangebote.html">
                         <div class="auslandsangebote-image-left-text-right">
                             <img src="images/NDHU.png"/>
-                            <!--<div class="bottom-left" style="position: absolute;bottom: 54.7%;left: 19%;background-color: #dc3545;padding: 5px;">Deadline: 15.07</div>-->
+                            <div style="background-color: #dc3545;color: white;float: right;display: grid;position: relative;right: 0;bottom: 90%;left: 197%;" class="col-4">Deadline: 15.07</div>
                             <div class="auslandsangebote-text-block">
                                 <br>
                                 <h4>
@@ -194,13 +194,13 @@
                                 </ul>
                             </div>
                             <img src="images/SanMarcos.png"/>
-                            <!--<div class="bottom-left" style="position: absolute;bottom: 45.6%;left: 57%;background-color: #dc3545;padding: 5px;">Deadline: 15.07</div>-->
+                            <div style="background-color: #dc3545;color: white;float: left;display: grid;position: relative;right: 0;bottom: 90%;left: 2%;" class="col-4">Deadline: 15.07</div>
                         </div>
                     </a>
                     <a href="detailsCostaRica-auslandsangebote.html">
                         <div class="auslandsangebote-image-left-text-right ">
                             <img src="images/CostaRica.png"/>
-                            <!--<div class="bottom-left">Deadline: 15.07</div>-->
+                            <div style="background-color: #dc3545;color: white;float: right;display: grid;position: relative;right: 0;bottom: 90%;left: 197%;" class="col-4">Deadline: 15.07</div>
                             <div class="auslandsangebote-text-block">
                                 <br>
                                 <h4>
@@ -236,13 +236,13 @@
                                 </ul>
                             </div>
                             <img src="images/South-Eastern.png"/>
-                            <!--<div class="bottom-left">Deadline: 15.07</div>-->
+                            <div style="background-color: #dc3545;color: white;float: left;display: grid;position: relative;right: 0;bottom: 90%;left: 2%;" class="col-4">Deadline: 15.07</div>
                         </div>
                     </a>
                     <a href="detailsDurban-auslandsangebote.html">
                         <div class="auslandsangebote-image-left-text-right">
                             <img src="images/durban.png"/>
-                            <!--<div class="bottom-left">Deadline: 01.07</div>-->
+                            <div style="background-color: #dc3545;color: white;float: right;display: grid;position: relative;right: 0;bottom: 90%;left: 197%;" class="col-4">Deadline: 01.07</div>
                             <div class="auslandsangebote-text-block">
                                 <br>
                                 <h4>
@@ -303,48 +303,132 @@
             </div>
         </div>-->
 
-        <section id="team" class="bg-light">
+        <section id="erfahrungsBerichte" class="bg-light">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
+                        <a data-target="#eBericht1Modal" data-toggle="modal" id="aTagB1Modal" href="#eBericht1Modal">
                         <div class="team-member"><img class="rounded-circle mx-auto" src="images/Erfahrungsberichte_Profil/1.jpg" />
-                            <h4>Student Ausland Nr.1</h4>
-                            <p>DH Karlsruhe - Durban</p>
+                            <h4>Erfahrungsbericht 1</h4>
+                            <p>DH Karlsruhe - Dundee</p>
                             <p class="text-muted">Wirtschaftsinformatik</p>
-                            <ul class="list-inline social-buttons">
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
                         </div>
+                        </a>
                     </div>
                     <div class="col-sm-4">
+                        <a data-target="#eBericht2Modal" data-toggle="modal" id="aTagB2Modal" href="#eBericht2Modal">
                         <div class="team-member"><img class="rounded-circle mx-auto" src="images/Erfahrungsberichte_Profil/2.jpg" />
-                            <h4>Student Ausland Nr.2</h4>
-                            <p>DH Karlsruhe - AUBG</p>
+                            <h4>Erfahrungsbericht 2</h4>
+                            <p>DH Karlsruhe - Dundee</p>
                             <p class="text-muted">Wirtschaftsinformatik</p>
-                            <ul class="list-inline social-buttons">
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
                         </div>
+                        </a>
                     </div>
                     <div class="col-sm-4">
+                        <a data-target="#eBericht3Modal" data-toggle="modal" id="aTagB3Modal" href="#eBericht3Modal">
                         <div class="team-member"><img class="rounded-circle mx-auto" src="images/Erfahrungsberichte_Profil/3.jpg" />
-                            <h4>Student Ausland Nr.3</h4>
-                            <p>DH Karlsruhe - University of Abertay</p>
-                            <p class="text-muted">Betriebswirtschaftslehre</p>
-                            <ul class="list-inline social-buttons">
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
+                            <h4>Erfahrungsbericht 3</h4>
+                            <p>DH Karlsruhe - Dundee</p>
+                            <p class="text-muted">Wirtschaftsinformatik</p>
                         </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!--Erfahrungsbericht NR.1-->
+        <div class="modal fade bottom" id="eBericht1Modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+            <div class="modal-dialog modal-frame modal-bottom modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--<div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>-->
+                        <h4 class="modal-title">Tolle Erfahrung!</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Eine Stadt von der wahrscheinlich die wenigsten gehört haben, jedoch mit ihren knapp 150.000 Einwohnern zu den größten in Schottland zählt.
+                            Ca. 60 Meilen Nordöstlich von Edinburgh befindet sich das ruhige Städtchen Dundee, in welchem sich die University of Abertay befindet.
+                            Die Vorlesungszeit ist im Vergleich zur DHBW viel lockerer. Man belegt drei Module und hat im Normalfall eine Vorlesung und eine Übung für jedes Modul in der Woche.
+                            Oft wird es zeitlich so gelegt, dass man Vorlesung und Übung am gleichen Tag hat und somit nur drei Tage in der Woche Programm hat.
+                            Jedoch legt man dort viel mehr Wert aufs Selbststudium und darf dies nicht automatisch als Urlaub betrachten.
+                            Die drei Module die wir besuchten hatten keine Prüfung am Ende des Semesters wie man es von der DHBW gewohnt ist.
+                            Eins der Module setzte wöchentliche Abgaben voraus die benotet werden und gemeinsam die Endnote bilden.
+                            Bei den zwei anderen Modulen musste man gegen Ende des Semesters jeweils ein selbst erarbeitetes Projekt abgeben, welche von der Größenordnung nicht mit denen an der DHBW verglichen werden können, da dort schließlich die Zeit für solche umfangreichen Projekte fehlt.
+                            Schottland ist ein sehenswürdiges Land, das man auf jeden Fall mal besucht haben sollte.
+                            Auch wenn das Wetter etwas deprimierend sein kein, kann man hier trotzdem eine schöne Zeit verbringen.
+                            Die University of Abertay bietet spannende Module, die einem ermöglichen das klassische Studieren kennen zu lernen.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Schließen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Erfahrungsbericht NR.2-->
+        <div class="modal fade bottom" id="eBericht2Modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+            <div class="modal-dialog modal-frame modal-bottom modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--<div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>-->
+                        <h4 class="modal-title">Viele verschiedene Aktivitäten!</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>In meinem 4. Semester des Studiengangs Wirtschaftsinformatik nutzte ich die Möglichkeit ein Auslandssemester an der Abertay University in Dundee (Schottland) zu absolvieren.
+                            Aus meiner Sicht war es eine sehr wertvolle Erfahrung. Es war sehr spannend, sich auf eigene Faust in einem neuen universitären Umfeld zurechtfinden zu müssen.
+                            Es umfasste ein anderes Notensystem, ein anderes Vorlesungskonzept sowie ein riesiges Netz an Studentenvereinen. Diese reichen vom „Rugby-Club“ über den „Koch-Club“ bis zum „Star-Wars-Club“.
+                            Die Studenten und Schotten im Allgemeinen waren unglaublich offen und gastfreundlich. So lernte ich viele neue Leute kennen.
+                            Vor allem durch Aktivitäten in Clubs lernt man ganz einfach „Locals“ kennen, denn jeder Club hat auch sein wöchentliches „Social“ in einem Pub.
+                            Daneben wurde viel mit den Erasmusstudenten unternommen. Von abendlichen Pub-Besuchen bis zu Roadtrips durch die schottischen Highlands war alles dabei.
+                            Auch nach meiner Zeit in Schottland habe ich den Kontakt zu manchen Erasmusstudenten erhalten. Das Auslandssemester hat mir einen vielfältigen Einblick in die schottische Kultur und Lebensweise, wie auch Zugang zu anderen
+                            europäischen Nationen ermöglicht. Rückblickend waren es vielleicht die intensivsten und erlebnisreichsten vier Monate, die ich erlebt habe und würde es jedem
+                            empfehlen, der die Möglichkeit dafür hat.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Schließen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Erfahrungsbericht NR.3-->
+        <div class="modal fade bottom" id="eBericht3Modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+            <div class="modal-dialog modal-frame modal-bottom modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--<div class="icon-box">
+                            <i class="material-icons">&#xE5CD;</i>
+                        </div>-->
+                        <h4 class="modal-title">Erweiterung meiner Kenntnisse!</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Ich bin überzeugt, dass mir das Auslandssemester in meiner weiteren Entwicklung helfen wird.
+                            Hierbei habe ich als sehr positiv wahrgenommen, dass die Prüfungsleistungen mir die Freiheit gaben, mich auf das zu fokussieren, was mich interessiert bzw. was für meinen Beruf wichtig ist.
+                            So habe ich viel Neues gelernt, ohne dass es sich wie „klassisches Lernen“ anfühlte. Als herausfordernd habe ich empfunden, dass das Modul CMP 202 Vorkenntnisse in der Programmiersprache c++ voraussetzte.
+                            Daher galt es, die fehlenden c++ Kenntnisse im Laufe des Semesters in Verbindung mit dem eigentlichen Unterrichtsinhalt zu erlernen.
+                            Dennoch würde ich auch im Nachhinein dieses Modul erneut wählen, da ich sehr daran wachsen konnte und ich mehr meine Interessen einbringen konnte als es bei alternativen Modulen der Fall gewesen wäre.
+                            Manchmal lohnt es sich ein paar Schritte mehr zu machen, wenn es bedeutet, dass man das tut, was einen interessiert. Positiv hat sich das Auslandssemester auch auf die Sprachkenntnisse ausgewirkt.
+                            Zwar war der Sprechanteil in allen Modulen relativ gering, da ein Großteil der Arbeit im Selbststudium erfolgt ist.
+                            Nichtsdestotrotz hat mir insbesondere die Onlinediskussion Sicherheit beim Formulieren englischer Texte und der Darlegung eigener Meinung gegeben.
+                            Auch im Alltag fühlte ich mich zunehmend sicherer und konnte meinen Wortschatz erweitern. Wenngleich mich der schottische Dialekt anfangs vor eine kleine Herausforderung gestellt hat und er erst
+                            einiger Eingewöhnung bedurfte.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Schließen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         </div>
     </br>

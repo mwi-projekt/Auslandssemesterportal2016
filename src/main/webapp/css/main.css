@@ -1062,3 +1062,15 @@ i {
     height: 225px;
     border: 7px solid #fff;
 }
+
+.containerImg {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
