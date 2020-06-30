@@ -7,17 +7,33 @@
 
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.min.css">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/bewerbungsportal.css">
     <link rel="stylesheet" href="css/bewerbungsformular.css">
     <link rel="stylesheet" href="css/InfoBox.css">
+    <link rel="stylesheet" href="css/admin/datatable-admin.css">
     <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
     <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
     <link rel="stylesheet" href="node_modules/jquery-form-validator/form-validator/theme-default.min.css">
+    <style>
+        #task_wrapper {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+    </style>
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var includes = $('[data-include]');
+            jQuery.each(includes, function () {
+                var file = '/../../partials/' + $(this).data('include') + '.html';
+                $(this).load(file);
+            });
+        });
+    </script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="node_modules/jquery-form-validator/form-validator/jquery.form-validator.min.js"></script>
     <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
@@ -30,115 +46,38 @@
 </head>
 
 <body>
-
-      <!-- Navigationsleiste-------------------------------------------------------------------- -->
-    <div class="header">
-        <div class="row">
+<div class="sticky-footer-container">
+    <div data-include="header"></div>
+    <div class="sticky-footer-padding">
+        <div class="row aufgaben">
             <div class="col-md-2"></div>
-            <div class="col-md-2">
-                <a href="index.jsp"> <img style="width:100%;height:auto" class="img-rounded img-responsive" src="images/DHBW-Logo.svg" /></a>
+            <div class="col-md-8">
+                <div class="nav2">
+                    <div class="navEl nonCms current" id="nav2"><a style="background: #dc3545; color: white;">Bewerbungen
+                        validieren</a></div>
+                    <a class="navEl current" onclick="window.print();" style="background: #dc3545; color: white;">Übersicht
+                        drucken</a>
+                </div>
+
+                <div id="resultList"></div>
+                <iframe class="iFenster iF2" src="erfahrungsbericht1.html" style="width: 100%; height: 500px;"></iframe>
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-3">
-                <h3 class="headerWebsite">Auslandsstudienportal DHBW Karlsruhe</h3>
+        </div>
+
+        <div class="inhalt cms" id="in3">
+            <div class="inhaltBox col-md-12">Das ist die Startseite. Hier muss noch Fülltext zur Beschreibung der
+                möglichen Funktionen rein.
             </div>
-
-            <div class="col-md-3">
-
-            	<div class="logoutFenster">
-
-
-                        Eingeloggt als <b class="nutzerName"></b>
-
-                        <button type="button" class="btn btn-default navMargin"
-                     id="logout" data-target="#logout">Logout</button>
-
-            	</div>
-
-        	</div>
-
-    	</div>
-   	</div>
-
-
-<!-- Mittlerer Teil -->
-	
-<div>
-
+        </div>
+        <div class="inhalt cms" id="in5">
+            <div class="col-md-12 inhaltBox"></div>
+        </div>
+        <div class="inhalt cms" id="in6">
+            <div class="col-md-12 inhaltBox"></div>
+        </div>
+    </div>
+    <div data-include="footer"></div>
 </div>
-
-<div class="row aufgaben">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <div class="nav2">
-            <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
-            <div class="navEl nonCms current" id="nav2"><a style="background: #D60000; color: white;">Bewerbungen validieren</a></div>
-            <div class="navEl nonCms current" id="nav3"><a href="index" style="background: #D60000; color: white;">Startseite bearbeiten</a></div>
-            <a class="navEl current" onclick="window.print();" style="background: #D60000; color: white;">Übersicht drucken</a>
-            <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
-        </div>
-	
-        <div id="resultList"></div>
-        <!-- <div class="inhalt nonCms" id="in1">
-            <div class="col-md-12 inhaltBox">
-                <h2>Herzlich willkommen im Bewerbungsportal</h2>
-                <p>Hier kannst du dir noch einmal alle Auslandsuniversitäten
-                    ansehen, die für die jeweiligen Studiengänge zur Verfügung stehen.</p>
-                <p>Im Reiter "Bewerben" ist bereits eine Vorauswahl für dich
-                    getroffen. Hier kannst du dich nur noch auf Univerisäten bewerben,
-                    die für deinen Studiengang verfügbar sind.</p>
-                <p>
-                    <i>Das Auslandsportal-Team wünscht dir viel Erfolg bei deiner
-                        Bewerbung und eine tolle Zeit im Ausland!!!</i>
-                </p>
-            </div>
-        </div> -->
-            <iframe class="iFenster iF2" src="erfahrungsbericht1.html"
-                    style="width: 100%; height: 500px;"></iframe>
-
-        </div>
-    </div>
-    <!-- <div class="inhalt nonCms" id="in4">
-        <div class="col-md-8 inhaltBox" style="width: 99%">
-            <h2>Erfahrungsberichte</h2>
-            <select class="inBox zweiD" id="selBerichte">
-                <option>Gesamtbewertung</option>
-                <option>Einzelbewertungen</option>
-            </select>
-        </div>
-    </div> -->
-
-    <div class="inhalt cms" id="in3">
-        <div class="inhaltBox col-md-12">Das ist die Startseite. Hier
-            muss noch Fülltext zur Beschreibung der möglichen Funktionen rein.
-        </div>
-    </div>
-    <div class="inhalt cms" id="in5">
-        <div class="col-md-12 inhaltBox"></div>
-    </div>
-    <div class="inhalt cms" id="in6">
-        <div class="col-md-12 inhaltBox"></div>
-    </div>
-</div>
-</div>
-
-<!-- 	FuÃŸzeile -->
-	<div class="footer">
-		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<div class="pull-right">
-					<p>
-                        <a href="index.jsp">Startseite</a>
-                        |
-                        <a href="impressum.html">Impressum</a>
-                        |
-                        <a href="faq.html">FAQs</a>
-                    </p>
-				</div>
-			</div>
-		</div>
-	</div>
 
 </body>
 </html>

@@ -43,12 +43,12 @@ th {
 }
 
 .navEl:hover {
-	background: #D60000;
+	background: #dc3945;
 	color: white;
 }
 
 .current {
-	background: #D60000;
+	background: #dc3545;
 	color: white;
 }
 

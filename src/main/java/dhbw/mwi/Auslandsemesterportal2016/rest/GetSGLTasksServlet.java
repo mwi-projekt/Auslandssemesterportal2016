@@ -40,8 +40,7 @@ public class GetSGLTasksServlet extends HttpServlet {
 				String instanceId = results.get(i).getId();
 				List<String> activities = runtime.getActiveActivityIds(instanceId);
 				JsonObject obj = new JsonObject();
-				System.out.println(activities);
-				if (activities.get(0).equals("abgeschlossen") || activities.get(0).equals("datenValidierenSGL") || activities.get(0).equals("datenValidieren") || activities.get(0).equals("abgelehnt")) {
+				if (activities.get(0).equals("abgeschlossen") || activities.get(0).equals("datenValidierenSGL") || activities.get(0).equals("downloadsAnbieten") || activities.get(0).equals("datenValidieren") || activities.get(0).equals("abgelehnt")) {
 					obj.addProperty("id", instanceId);
 					obj.addProperty("name", runtime.getVariable(instanceId, "bewNachname").toString());
 					obj.addProperty("vname", runtime.getVariable(instanceId, "bewVorname").toString());
@@ -54,15 +53,16 @@ public class GetSGLTasksServlet extends HttpServlet {
 						obj.addProperty("status", "complete");
 					} else if (activities.get(0).equals("datenValidierenSGL")){
 						obj.addProperty("status", "validateSGL");
-					} else if (activities.get(0).equals("abgelehnt")) {
+					} else if (activities.get(0).equals("downloadsAnbieten")){
+                        obj.addProperty("status", "edit");
+                    } else if (activities.get(0).equals("abgelehnt")) {
 						obj.addProperty("status", "abgelehnt");
 					} else {
 						obj.addProperty("status", "validate");
 					}
 					arr.add(obj);
 				}
-			}		
-			System.out.println(arr);
+			}
 			json.add("data", arr);
 			Util.writeJson(response, json);
 		}

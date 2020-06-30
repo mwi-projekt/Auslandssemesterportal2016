@@ -25,7 +25,7 @@ $(document).ready(function () {
         $('#nav3').hide();
     }
 
-    $('#reason').hide();
+    // $('#reason').hide();
     $('#reasonl').hide();
     $('#validateBtn').prop('disabled', true);
 
