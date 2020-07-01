@@ -42,6 +42,7 @@ function getList() {
                             "<td>" + singleInstance.name + "</td>" +
                             "<td>" + singleInstance.vname + "</td>" +
                             "<td>" + singleInstance.aktuelleUni + "</td>" +
+                            "<td>" + singleInstance.prioritaet + "</td>" +
                             "<td>" + singleInstance.kurs + "</td>" +
                             "<td>" + singleInstance.uni + "</td>" +
                             "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('" + singleInstance.uni + "','" + singleInstance.matrikelnummer + "')\"></button></td>" +
@@ -78,7 +79,7 @@ function getList() {
                 if (completed === "") {
                     completed = "<p>Es gibt noch keine abgeschlossenen Bewerbungen</p>";
                 } else {
-                    completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
+                    completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
                         completed + "</tbody></table>";
                 }
                 if (validateSGL === "") {
