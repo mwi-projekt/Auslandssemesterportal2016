@@ -41,6 +41,7 @@ public class UserGetInstanceServlet extends HttpServlet {
 			String[] listEntry = instances.get(i);
 			String uni = listEntry[0];
 			String instanceID = listEntry[1];
+			String prio = listEntry[2];
 			String stepCounter = "";
 			List<String> activityList;
 			try {
@@ -64,6 +65,7 @@ public class UserGetInstanceServlet extends HttpServlet {
 				row.addProperty("instanceID", instanceID);
 				row.addProperty("uni", uni);
 				row.addProperty("stepCounter", stepCounter);
+				row.addProperty("prioritaet", prio);
 				data.add(row);
 			} catch (Exception e) {
 

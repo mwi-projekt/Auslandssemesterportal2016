@@ -5,11 +5,22 @@ pipeline {
         SONARQUBE_TOKEN = credentials('sonarqube')
     }
 
+    environment {
+        SONARQUBE_TOKEN = credentials('sonarqube')
+    }
+    
     stages {
     	stage('Configure Server URL') {
             steps {
                 sh 'sed -i -e \'s#var baseUrl = "http://localhost:81";#var baseUrl = "http://10.3.15.45:81";#g\' src/main/webapp/js/app.ts'
                 sh 'sed -i -e \'s#var baseUrl = "http://localhost:81";#var baseUrl = "http://10.3.15.45:81";#g\' src/main/webapp/js/file-browser.ts'
+            }
+        }
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=$SONARQUBE_TOKEN"
+                }
             }
         }
         stage('SonarQube analysis') {
