@@ -1,9 +1,9 @@
 pipeline {
     agent any
     
-    /*environment {
+    environment {
         SONARQUBE_TOKEN = credentials('sonarqube')
-    }*/
+    }
     
     stages {
     	stage('Configure Server URL') {
@@ -12,13 +12,13 @@ pipeline {
                 sh 'sed -i -e \'s#var baseUrl = "http://localhost:81";#var baseUrl = "http://10.3.15.45:81";#g\' src/main/webapp/js/file-browser.ts'
             }
         }
-        /*stage('SonarQube analysis') {
+        stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh "mvn clean verify sonar:sonar -Dsonar.projectKey=jenkins-pipeline -Dsonar.host.url=http://localhost:22770 -Dsonar.login=$SONARQUBE_TOKEN"
                 }
             }
-        }*/
+        }
         stage('Build') {
             steps {
                 sh 'mvn install'
