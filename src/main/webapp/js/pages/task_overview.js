@@ -45,6 +45,9 @@ function getList() {
                             "<td>" + singleInstance.prioritaet + "</td>" +
                             "<td>" + singleInstance.kurs + "</td>" +
                             "<td>" + singleInstance.uni + "</td>" +
+                            "<td>" + '<button class="btn fas fa-list" title="Details" ' +
+                            'onclick="location.href=\'task_detail.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
+                            "</td>" +
                             "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('" + singleInstance.uni + "','" + singleInstance.matrikelnummer + "')\"></button></td>" +
                             "</tr>";
                     } else if (singleInstance.status === 'validateSGL') {
@@ -56,6 +59,9 @@ function getList() {
                             "<td>" + singleInstance.prioritaet + "</td>" +
                             "<td>" + singleInstance.kurs + "</td>" +
                             "<td>" + singleInstance.uni + "</td>" +
+                            "<td>" + '<button class="btn fas fa-list" title="Details" ' +
+                            'onclick="location.href=\'task_detail.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
+                            "</td>" +
                             "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('" + singleInstance.uni + "','" + singleInstance.matrikelnummer + "')\"></button></td>" +
                             "</tr>";
                     } else if (singleInstance.status === 'abgelehnt') {
@@ -66,6 +72,9 @@ function getList() {
                             "<td>" + singleInstance.aktuelleUni + "</td>" +
                             "<td>" + singleInstance.kurs + "</td>" +
                             "<td>" + singleInstance.uni + "</td>" +
+                            "<td>" + '<button class="btn fas fa-list" title="Details" ' +
+                            'onclick="location.href=\'task_detail.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
+                            "</td>" +
                             "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('" + singleInstance.uni + "','" + singleInstance.matrikelnummer + "')\"></button></td>" +
                             "</tr>";
                     }
@@ -79,19 +88,19 @@ function getList() {
                 if (completed === "") {
                     completed = "<p>Es gibt noch keine abgeschlossenen Bewerbungen</p>";
                 } else {
-                    completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
+                    completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th><th>Löschen</th></tr></thead><tbody>' +
                         completed + "</tbody></table>";
                 }
                 if (validateSGL === "") {
                     validateSGL = "<p> Es gibt keine Bewebungen, die von einem Studiengangsleiter zu validieren sind</p>";
                 } else {
-                    validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
+                    validateSGL = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th><th>Löschen</th></tr></thead><tbody>' +
                         validateSGL + "</tbody></table>";
                 }
                 if (abgelehnt === "") {
                     abgelehnt = "<p> Es gibt abgelehnten Bewerbungen</p>";
                 } else {
-                    abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Löschen</th></tr></thead><tbody>' +
+                    abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th><th>Löschen</th></tr></thead><tbody>' +
                         abgelehnt + "</tbody></table>";
                 }
 

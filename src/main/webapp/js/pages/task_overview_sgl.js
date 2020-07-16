@@ -50,6 +50,9 @@ function getList() {
                             "<td>" + singleInstance.prioritaet + "</td>" +
                             "<td>" + singleInstance.aktuelleUni + "</td>" +
                             "<td>" + singleInstance.uni + "</td>" +
+                            "<td>" +
+                            '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
+                            "</td>" +
                             "<td>" + '<button class="btn fas fa-redo" disabled></button' + "</td>" +
                             "</tr>";
                     } else if (singleInstance.status === 'complete') {
@@ -66,6 +69,8 @@ function getList() {
                             singleInstance.kurs +
                             "</td><td>" +
                             singleInstance.uni +
+                            "</td><td>" +
+                            '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
                             "</td></tr>";
                     } else if (singleInstance.status === 'abgelehnt') {
                         abgelehnt = abgelehnt +
@@ -79,6 +84,8 @@ function getList() {
                             singleInstance.kurs +
                             "</td><td>" +
                             singleInstance.uni +
+                            "</td><td>" +
+                            '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
                             "</td></tr>";
                     } else if (singleInstance.status === 'validate') {
                         validateAAA = validateAAA +
@@ -94,6 +101,8 @@ function getList() {
                             singleInstance.kurs +
                             "</td><td>" +
                             singleInstance.uni +
+                            "</td><td>" +
+                            '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
                             "</td></tr>";
                     }
                 }
@@ -108,26 +117,26 @@ function getList() {
             if (edit === "") {
                 edit = "<p>Aktuell gibt es keine Bewerbungen, die zur erneuten Überprüfung durch den Studenten zurückgesendet wurden</p>";
             } else {
-                edit = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Priorität</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Erinnerung senden</th></tr></thead><tbody>' +
+                edit = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Priorität</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Details</th><th>Erinnerung senden</th></tr></thead><tbody>' +
                     edit + "</tbody></table>";
             }
             if (completed === "") {
                 completed = "<p>Es gibt noch keine abgeschlossenen Bewerbungen</p>";
             } else {
-                completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th></tr></thead><tbody>' +
                     completed + "</tbody></table>";
             }
 
             if (validateAAA === "") {
                 validateAAA = "<p>Aktuell gibt es keine Bewerbungen, die von einem AAA überprüft werden müssen</p>";
             } else {
-                validateAAA = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                validateAAA = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th></tr></thead><tbody>' +
                     validateAAA + "</tbody></table>";
             }
             if (abgelehnt === "") {
                 abgelehnt = "<p>Bisher wurden keine Bewerbungen abgelehnt</p>";
             } else {
-                abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th></tr></thead><tbody>' +
+                abgelehnt = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th></tr></thead><tbody>' +
                     abgelehnt + "</tbody></table>";
             }
 

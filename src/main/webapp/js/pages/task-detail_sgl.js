@@ -2,6 +2,7 @@ var instanceID;
 var url;
 var typeList;
 var verify;
+var readOnly;
 var idList;
 var sendBew;
 var processDefinition;
@@ -12,6 +13,7 @@ $(document).ready(function () {
     url = new URL(window.location.href);
     instanceID = url.searchParams.get("instance_id");
     verify = url.searchParams.get("verify");
+    readOnly = url.searchParams.get("read") === "true";
     sendBew = url.searchParams.get("send_bew");
     var uni = url.searchParams.get("uni");
     if (!(verify === "true")) {
