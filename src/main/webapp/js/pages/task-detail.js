@@ -16,7 +16,11 @@ $(document).ready(function () {
     readOnly = url.searchParams.get("read");
     sendBew = url.searchParams.get("send_bew");
     var uni = url.searchParams.get("uni");
-    if (!(verify === "true")) {
+    if (readOnly) {
+        $('#saveChanges').hide();
+        $('#nav3').hide();
+        $('#validate').hide();
+    } else if (!(verify === "true")) {
         if (!(sendBew === "true")) {
             $('#saveChanges').hide();
         }
