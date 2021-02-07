@@ -19,7 +19,7 @@ function resetpw() {
 				icon : "success",
 				confirmButtonText : "Ok"
 			}).then(function(result) {
-				location.href = 'index.jsp';
+				location.href = '/';
 			});
 		},
 		error : function(result) {

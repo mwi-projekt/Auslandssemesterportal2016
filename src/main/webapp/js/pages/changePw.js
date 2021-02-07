@@ -25,8 +25,8 @@ function setpw() {
 					icon : "error",
 					confirmButtonText : "Ok"
 				}).then(function(result) {
-					location.href = 'index.jsp';
-				});	
+					location.href = '/';
+				});
 			}
 			Swal.fire({
 				title : "Kennwort zurückgesetzt",
@@ -34,7 +34,7 @@ function setpw() {
 				icon : "success",
 				confirmButtonText : "Ok"
 			}).then(function(result) {
-				location.href = 'index.jsp';
+				location.href = '/';
 			});
 		},
 		error : function(result) {

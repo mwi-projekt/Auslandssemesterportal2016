@@ -34,7 +34,7 @@ $(document).ready(function () {
 
 
     if (sessionStorage['rolle'] === "1") {
-        // document.getElementById("zumPortal").href = "index.jsp";
+        // document.getElementById("zumPortal").href = "/";
     } else if (sessionStorage['rolle'] === "2") {
         document.getElementById("zumPortal").href = "task_overview.html";
         document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";

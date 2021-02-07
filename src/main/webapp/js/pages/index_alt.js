@@ -31,12 +31,12 @@ $(document).ready(function () {
             $('.eingeloggt').css('display', 'inline');
         }
     }
-    
-    
+
+
     if (sessionStorage['rolle'] === "1") {
-    	document.getElementById("zumPortal").href = "index.jsp";
+    	document.getElementById("zumPortal").href = "/";
     }
-    else if (sessionStorage['rolle'] === "2") { 
+    else if (sessionStorage['rolle'] === "2") {
     	document.getElementById("zumPortal").href = "task_overview.html";
     	document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }
@@ -44,10 +44,10 @@ $(document).ready(function () {
     	document.getElementById("zumPortal").href = "bewerbungsportal.html";
     }
     else if (sessionStorage['rolle'] === "4") {
-    	 document.getElementById("zumPortal").href = "task_overview_sgl.html";	
+    	 document.getElementById("zumPortal").href = "task_overview_sgl.html";
     	 document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
     }
-    
+
     // init ui
     initSlider();
     initArrows();
@@ -66,7 +66,7 @@ $(document).ready(function () {
                 });
             }
         });
-        
+
     }
     loadPortalInfo();
     loadAuslandsangebote();
@@ -180,7 +180,7 @@ function loadAuslandsangeboteInhalt() {
                     i +
                     '1"><div class="row"><div class="col-md-7">' +
                     result[i].allgemeineInfos + '<br/>' + '<br/>'
-                    + 'Mögliche Studiengänge für diese Hochschule: ' + result[i].studiengang 
+                    + 'Mögliche Studiengänge für diese Hochschule: ' + result[i].studiengang
                     + '</div><div class="col-md-4">';
                 if (result[i].maps) {
                     htmlText = htmlText +
@@ -236,7 +236,7 @@ function loadAuslandsangeboteInhalt() {
 }
 
 // Setzt den back to top Pfeil auf invisible wenn man sich ganz oben auf der Seite befindet
-$(document).scroll(function() { 
+$(document).scroll(function() {
 	   if($(window).scrollTop() === 0) {
 	     $(".chevronup").css('opacity', '0');
 	     $(".chevronup").css('cursor', 'initial');
