@@ -283,6 +283,16 @@
 					</execution>
 
 					<execution>
+						<id>npm run clean:dist</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run clean:dist</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
 						<id>npm run build</id>
 						<goals>
 							<goal>npm</goal>
