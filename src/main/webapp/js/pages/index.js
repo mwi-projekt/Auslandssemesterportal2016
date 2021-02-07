@@ -58,16 +58,16 @@ $(document).ready(function () {
     $('.admintile').on('click', function () {
         let id = $(this).attr('id');
         if (id === 'bewerbungsprozess') {
-            location.href = 'HTML/admin/prozess.html';
+            location.href = 'prozess.html';
         }
         if (id === 'student') {
-            location.href = 'HTML/admin/verwaltung_student.html';
+            location.href = 'verwaltung_student.html';
         }
         if (id === 'auslandsamt') {
-            location.href = 'HTML/admin/verwaltung_auslandsamt.html';
+            location.href = 'verwaltung_auslandsamt.html';
         }
         if (id === 'studiengangsleitung') {
-            location.href = 'HTML/admin/verwaltung_studiengangsleitung.html';
+            location.href = 'verwaltung_studiengangsleitung.html';
         }
     });
 
