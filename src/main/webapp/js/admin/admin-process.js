@@ -1,14 +1,14 @@
 import $ from "jquery";
 import Swal from "sweetalert2";
-import Viewer from "bpmn-js";
-import "jquery-ui-dist";
+import BpmnNavigatedViewer from "bpmn-js/dist/bpmn-navigated-viewer.production.min";
+import "jquery-ui-dist/jquery-ui";
 import {urlParams} from "../app";
 import _,{baseUrl} from "../config.js";
 
 $(document).ready(function () {
     var dia = urlParams.get('dia').trim();
 
-    var viewer = new Viewer({
+    var viewer = new BpmnNavigatedViewer({
         container: $('#diagram')
     });
 

@@ -1,10 +1,17 @@
 import $ from "jquery";
 import Swal from "sweetalert2";
 import "jquery-ui-dist";
-import "ckeditor4";
+import "ckeditor4/ckeditor";
 import "bootstrap-switch";
 import {urlParams} from "../app";
 import _,{baseUrl} from "../config.js";
+import "../jquery.dynamicdom";
+import "jquery";
+import "../jquery.dynamicdom.js";
+import selectForm from "../../modals/select-form.html";
+import textForm from "../../modals/text-form.html";
+import checkboxForm from "../../modals/checkbox-form.html";
+import uploadForm from "../../modals/upload-form.html";
 
 var siteHasUnsavedChanges = false;
 
@@ -321,26 +328,6 @@ $(document).ready(function () {
         });
     }
 
-    var selectForm = '';
-    $.get('../../modals/select-form.html', {}, function (data) {
-        selectForm = data;
-    });
-
-    var textForm = '';
-    $.get('../../modals/text-form.html', {}, function (data) {
-        textForm = data;
-    });
-
-    var checkboxForm = '';
-    $.get('../../modals/checkbox-form.html', {}, function (data) {
-        checkboxForm = data;
-    });
-
-    var uploadForm = '';
-    $.get('../../modals/upload-form.html', {}, function (data) {
-        uploadForm = data;
-    });
-
     function init(data) {
         $('#cardSlots').dynamicdom({
 
@@ -410,7 +397,8 @@ $(document).ready(function () {
                 // use default options when editor = true
                 var editor = true;
                 var enableEdit = false;
-                var deleteable = true;
+				var deleteable = true;
+				var con;
 
                 if (type == 'title' || type == 'subtitle') {
                     editor = {};

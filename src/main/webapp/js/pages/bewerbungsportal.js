@@ -236,12 +236,12 @@ function initBewerben() {
             matnr: sessionStorage['matrikelnr']
         },
         success: function (result) {
-            tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Priorität</th><th colspan="3">Aktionen</th></tr></thead>';
+            var tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Priorität</th><th colspan="3">Aktionen</th></tr></thead>';
             if (result.data.length == 0) {
                 $('#tableBewProzess').html('<h2>Keine Bewerbungen vorhanden</h2>');
             } else {
                 for (var i = 0; i < result.data.length; i++) {
-                    instance_info = result.data[i];
+                   	var instance_info = result.data[i];
                     tabelle = tabelle + '<tr data-rid="' + (i + 1) + '"><td>' + instance_info.uni + '</td><td>' + instance_info.stepCounter + '</td>';
                     tabelle += '<td>'+instance_info.prioritaet+'</td>';
                     prioArr.push(instance_info.prioritaet);
