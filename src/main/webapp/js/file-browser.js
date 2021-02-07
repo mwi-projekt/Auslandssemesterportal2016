@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 $(function(){
 	var baseUrl = "http://localhost";
 
@@ -56,7 +58,7 @@ $(function(){
                 $('#chooseFile').prop("disabled", false);
 			}
         });
-		
+
 		$('#chooseFile').click(function () {
 			if ($(this).prop('disabled') != true) {
                 var funcNum = getUrlParam( 'CKEditorFuncNum' );

@@ -1,4 +1,9 @@
-var siteHasUnsavedChanges = false;
+import $ from "jquery";
+import Swal from "sweetalert2";
+import "jquery-ui-dist";
+import "ckeditor4";
+import "bootstrap-switch";
+
 var siteHasUnsavedChanges = false;
 
 window.onbeforeunload = function (e) {
@@ -11,10 +16,10 @@ window.onbeforeunload = function (e) {
 
 $(document).ready(function () {
 
-    var id = $.urlParam('id').trim();
-    var dia = $.urlParam('dia').trim();
-    var type = $.urlParam('type').trim();
-    var index = $.urlParam('index').trim();
+    var id = $.param('id').trim();
+    var dia = $.param('dia').trim();
+    var type = $.param('type').trim();
+    var index = $.param('index').trim();
     var json = {};
 
     $.get(baseUrl + '/processmodel/get', {

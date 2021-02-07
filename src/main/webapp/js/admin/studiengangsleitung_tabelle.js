@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 $.validator.setDefaults({
     errorElement: "span",
     errorPlacement: function (error, element) {

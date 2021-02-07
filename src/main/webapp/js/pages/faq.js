@@ -1,3 +1,10 @@
+import $ from "jquery";
+import "bootstrap";
+import "jquery-form-validator";
+import "jquery-ui-dist";
+import "datatables.net-bs4";
+import "cookieconsent";
+
 var expandFAQ = function() {
 	$('.show').css('cursor', 'pointer');
 	$('.weg').hide();

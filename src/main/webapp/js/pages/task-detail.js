@@ -1,3 +1,8 @@
+import $ from "jquery";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-form-validator";
+
 var instanceID;
 var url;
 var typeList;
@@ -49,11 +54,11 @@ $(document).ready(function () {
             parse();
         }
     });
-    
+
 });
 
 function manipulateDOM() {
-	
+
     $("[id='Sonstige Angaben']").hide();
 
 }
@@ -122,7 +127,7 @@ function parse() {
                             case "form-checkbox":
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' +
-                                    json[i]["data"]["id"] +  '"disabled> ' + 
+                                    json[i]["data"]["id"] +  '"disabled> ' +
                                     json[i]["data"]["label"] +
                                     ' </label></div></div></div>';
                                 idList.push(json[i]["data"]["id"]);
@@ -132,7 +137,7 @@ function parse() {
                                 break;
                         }
                     }
-                    
+
                     //console.log(idList);
 
                     if (innerOutput != '') {
@@ -189,7 +194,7 @@ function parse() {
             }
             getData();
             manipulateDOM();
-            
+
         },
         error: function (result) {
             alert('Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.');
@@ -250,7 +255,7 @@ function variableEnglishAndSemesteranschrift(key, value){
 	}else if(key === 'semesteradresseAnders' && value === false){
 		document.getElementById("Semesteranschrift").remove();
 	}
-	
+
 }
 
 function saveChanges() {
@@ -365,7 +370,7 @@ function validateBew() {
                 instance_id: instanceID,
                 key: 'validierungErfolgreich|mailText',
                 value: validateString + '|' + grund,
-                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
+                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
             },
             success: function (result) {
                 Swal.fire({

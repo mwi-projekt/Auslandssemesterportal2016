@@ -1,4 +1,7 @@
-var baseUrl = "http://localhost";
+import $ from "jquery";
+import {baseUrl} from "./config.js";
+import Swal from "sweetalert2";
+
 $.ajaxSetup({
     xhrFields: { withCredentials: true },
     crossDomain: true,
@@ -182,16 +185,6 @@ if (!String.prototype.startsWith) {
 function isEmpty(str) {
     return (!str || 0 === str.length);
 }
-$.urlParam = function (name) {
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)')
-        .exec(window.location.href);
-
-    if (results == null) {
-        return " ";
-    } else {
-        return results[1] || 0;
-    }
-};
 
 //Function to remove certain URL Parameters
 function removeQueryStringParameter(key, url) {

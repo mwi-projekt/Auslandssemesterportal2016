@@ -1,3 +1,10 @@
+import $ from "jquery";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-form-validator";
+import "jquery-ui-dist";
+import "datatables.net-bs4";
+
 $(document).ready(function () {
     getList();
 });

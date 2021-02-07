@@ -1,3 +1,10 @@
+import $ from "jquery";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "dropzone";
+import "jquery-form-validator";
+import "jspdf";
+
 var instanceID;
 var uni;
 var idList = [];
@@ -46,7 +53,7 @@ $(document).on('keyup change', '#bewPLZ', function (e) {
     }
 });
 
-//Automatische Download des ausgefüllten Anmeldeformulars 
+//Automatische Download des ausgefüllten Anmeldeformulars
 $(document).on('click', '#downloadAnmeldeformular', function (e) {
     e.preventDefault();
     console.log("Download");

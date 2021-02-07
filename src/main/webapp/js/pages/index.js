@@ -1,3 +1,10 @@
+import $ from "jquery";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-form-validator";
+import "cookieconsent";
+import "datatables.net-bs4";
+
 $(document).ready(function () {
     // check if logged in
     if (sessionStorage['User']) {
@@ -66,8 +73,10 @@ $(document).ready(function () {
     initSlider();
     initArrows();
 
-    if ($.urlParam('confirm') != null && $.urlParam('confirm').trim() != '') {
-        var link = $.urlParam('confirm');
+	let queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    if (urlParams('confirm') != null && urlParams('confirm').trim() != '') {
+        var link = $.param('confirm');
         $.ajax({
             type: "GET",
             url: baseUrl + "/confirm?code=" + link,

@@ -1,5 +1,11 @@
+import $ from "jquery";
+import Swal from "sweetalert2";
+import "bpmn-js";
+import "jquery-ui-dist";
+
+
 $(document).ready(function () {
-    var dia = $.urlParam('dia').trim();
+    var dia = $.param('dia').trim();
     var BpmnJS = window.BpmnJS;
 
     var viewer = new BpmnJS({
@@ -64,7 +70,7 @@ $(document).ready(function () {
 
         });
     }
-    
+
     function checkModelEntries(found, i, canvas) {
 		if (found.$type == 'bpmn:UserTask') {
 			if ($.inArray(found.id, possibleIds) !== -1) return;
@@ -82,7 +88,7 @@ $(document).ready(function () {
             found = null;
             return;
         }
-        
+
         for (var j = 0; j < found.outgoing.length; j++) {
             found = found.outgoing[j].targetRef;
 
@@ -162,7 +168,7 @@ $(document).ready(function () {
     $('#processSteps').on('click', '.btn-primary', function () {
         editEntry($(this).data('mid'));
     });
-    
+
 });
 
 
