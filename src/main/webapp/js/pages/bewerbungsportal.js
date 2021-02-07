@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
 import "dropzone";
+import _,{baseUrl} from "../config.js";
 
 $(document).ready(function () {
     loadAuslandsangebote();

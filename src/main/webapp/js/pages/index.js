@@ -4,6 +4,8 @@ import "bootstrap";
 import "jquery-form-validator";
 import "cookieconsent";
 import "datatables.net-bs4";
+import {urlParams} from "../app";
+import _,{baseUrl} from "../config.js";
 
 $(document).ready(function () {
     // check if logged in
@@ -73,10 +75,8 @@ $(document).ready(function () {
     initSlider();
     initArrows();
 
-	let queryString = window.location.search;
-    var urlParams = new URLSearchParams(queryString);
-    if (urlParams('confirm') != null && urlParams('confirm').trim() != '') {
-        var link = $.param('confirm');
+    if (urlParams.get('confirm') != null && urlParams.get('confirm').trim() != '') {
+        var link = urlParams.get('confirm');
         $.ajax({
             type: "GET",
             url: baseUrl + "/confirm?code=" + link,

@@ -1,4 +1,5 @@
 import $ from "jquery";
+import "../config";
 
 $(function () {
     var includes = $('[data-include]');

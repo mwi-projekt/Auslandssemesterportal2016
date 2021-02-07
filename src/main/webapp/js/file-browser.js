@@ -1,8 +1,7 @@
 import $ from "jquery";
+import _,{baseUrl} from "./config.js";
 
 $(function(){
-	var baseUrl = "http://localhost";
-
 	var filemanager = $('.filemanager'),
 		fileList = filemanager.find('.data');
 

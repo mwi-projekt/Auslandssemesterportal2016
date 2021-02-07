@@ -5,6 +5,7 @@ import "jquery-form-validator";
 import "jquery-ui-dist";
 import "datatables.net-bs4";
 import "cookieconsent";
+import _,{baseUrl} from "../config.js";
 
 $(document).ready(function () {
     // Click-Listener für Userverwaltung User anzeigen lassen

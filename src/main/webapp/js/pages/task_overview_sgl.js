@@ -4,6 +4,7 @@ import "bootstrap";
 import "jquery-form-validator";
 import "jquery-ui-dist";
 import "datatables.net-bs4";
+import _,{baseUrl} from "../config.js";
 
 $(document).ready(function () {
     getList();
@@ -17,11 +18,11 @@ function getList() {
             //'definition' : 'studentBewerben'
         },
         success: function (result) {
-            output = ""; 		//zu validierende Bewerbungen
-            edit = ""; 		    //zur Bearbeitung zurückgesendet
-            completed = "";		//angenommene Bewerbungen
-            validateAAA = "";	//Bewerbungen, die vom Auslansdamt bearbeitet werden müssen
-            abgelehnt = "";		//abgelehnte Bewerbungen
+            var output = ""; 		//zu validierende Bewerbungen
+            var edit = ""; 		    //zur Bearbeitung zurückgesendet
+            var completed = "";		//angenommene Bewerbungen
+            var validateAAA = "";	//Bewerbungen, die vom Auslansdamt bearbeitet werden müssen
+            var abgelehnt = "";		//abgelehnte Bewerbungen
             if (!result || result.data.length == 0) {
                 // substring bilden nicht möglich bei leerem String
             } else {

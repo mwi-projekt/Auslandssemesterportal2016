@@ -4,6 +4,7 @@ import "bootstrap";
 import "dropzone";
 import "jquery-form-validator";
 import "jspdf";
+import _,{baseUrl} from "../config.js";
 
 var instanceID;
 var uni;

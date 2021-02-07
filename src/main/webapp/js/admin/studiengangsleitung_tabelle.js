@@ -1,4 +1,5 @@
 import $ from "jquery";
+import _,{baseUrl} from "../config.js";
 
 $.validator.setDefaults({
     errorElement: "span",

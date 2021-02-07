@@ -4,6 +4,7 @@ import "bootstrap";
 import "jquery-form-validator";
 import "datatables.net-bs4";
 import "cookieconsent";
+import _,{baseUrl} from "../config.js";
 
 $(document).ready(function() {
 	$(document).on('click', '#resetPassword', function() {

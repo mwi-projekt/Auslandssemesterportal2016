@@ -4,6 +4,7 @@ import "bootstrap";
 import "jquery-form-validator";
 import "jquery-ui-dist";
 import "datatables.net-bs4";
+import _,{baseUrl} from "../config.js";
 
 $(document).ready(function () {
     getList();
@@ -17,10 +18,10 @@ function getList() {
             //'definition' : 'studentBewerben'
         },
         success: function (result) {
-            output = ""; 		//zu validierende Bewerbungen
-            completed = "";		//erfolgreich angenommene Bewerbungen
-            validateSGL = "";	//Bewerbungen, die noch vom SGL bearbeitet werden müssen
-            abgelehnt = "";		//abgelehnte Bewerbungen
+            var output = ""; 		//zu validierende Bewerbungen
+            var completed = "";		//erfolgreich angenommene Bewerbungen
+            var validateSGL = "";	//Bewerbungen, die noch vom SGL bearbeitet werden müssen
+            var abgelehnt = "";		//abgelehnte Bewerbungen
             if (!result || result.data.length == 0) {
                 // substring bilden nicht möglich bei leerem String
             } else {

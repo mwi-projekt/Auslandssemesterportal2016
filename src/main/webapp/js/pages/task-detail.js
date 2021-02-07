@@ -2,6 +2,7 @@ import $ from "jquery";
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-form-validator";
+import _,{baseUrl} from "../config.js";
 
 var instanceID;
 var url;

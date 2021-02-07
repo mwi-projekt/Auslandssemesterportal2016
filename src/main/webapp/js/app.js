@@ -1,5 +1,5 @@
 import $ from "jquery";
-import {baseUrl} from "./config.js";
+import _,{baseUrl} from "./config.js";
 import Swal from "sweetalert2";
 
 $.ajaxSetup({
@@ -219,3 +219,5 @@ function logout() {
         }
     });
 }
+
+export var urlParams = new URLSearchParams(window.location.search);
