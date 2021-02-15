@@ -52,7 +52,6 @@
     "datatables.net-buttons": "^1.6.2",
     "dropzone": "^5.7.0",
     "jquery": "^3.4.1",
-    "jquery-form-validator": "^2.3.79",
     "jquery-ui-dist": "^1.12.1",
     "jquery-validation": "^1.19.1",
     "js": "^0.1.0",
