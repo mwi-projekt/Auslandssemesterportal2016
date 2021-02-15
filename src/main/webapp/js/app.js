@@ -1,6 +1,10 @@
 import $ from "jquery";
 import _,{baseUrl} from "./config.js";
 import Swal from "sweetalert2";
+import "jquery-ui-dist/jquery-ui";
+window.$ = window.jquery = $;
+var dt = require('datatables.net')(window, $);
+import "datatables.net-bs4";
 
 $.ajaxSetup({
     xhrFields: { withCredentials: true },

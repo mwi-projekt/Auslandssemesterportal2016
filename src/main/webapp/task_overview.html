@@ -23,23 +23,6 @@
             margin-bottom: 20px;
         }
     </style>
-
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script>
-        $(function () {
-            var includes = $('[data-include]');
-            jQuery.each(includes, function () {
-                var file = '/../../partials/' + $(this).data('include') + '.html';
-                $(this).load(file);
-            });
-        });
-    </script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-    <script src="node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
-    <script src="node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/pages/task_overview.js"></script>
 </head>
