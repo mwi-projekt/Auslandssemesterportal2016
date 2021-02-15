@@ -1,9 +1,9 @@
 import {$,baseUrl} from "../config";
-import "jspdf";
+const jsPDF = require('jspdf');
 import Swal from "sweetalert2";
 import "bootstrap";
 import "dropzone";
-var validate = require('jquery-validation');
+require('jquery-validation')($);
 
 var instanceID;
 var uni;
@@ -271,10 +271,8 @@ function parse() {
                         }
                     }
                     // init validation
-                    $.validate({
-                        form: '#formular',
-                        lang: 'de',
-                        modules: 'html5'
+					$("#formular").validate({
+                        debug: true
                     });
                 },
                 error: function (result) {
@@ -292,7 +290,7 @@ function parse() {
 function saveData() {
     var form = $('#formular');
 
-    if (form && !form.isValid()) {
+    if (form && !form.valid()) {
         Swal.fire('Bitte füllen sie alle Felder korrekt aus.');
         return;
     }
