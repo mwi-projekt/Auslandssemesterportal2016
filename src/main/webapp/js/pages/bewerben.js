@@ -2,8 +2,9 @@ import {$,baseUrl} from "../config";
 const jsPDF = require('jspdf');
 import Swal from "sweetalert2";
 import "bootstrap";
-import * as Dropzone from "dropzone";
+import "dropzone";
 require("jquery-validation")($);
+require("jquery-validation/dist/localization/messages_de.min");
 
 var instanceID;
 var uni;
@@ -272,9 +273,9 @@ function parse() {
                             $("#" + json[i]["data"]["id"]).dropzone(getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]));
                         }
                     }
-                    /*$("#formular").validate({
+                    $("#formular").validate({
                         debug: true
-                    });*/
+                    });
                 },
                 error: function (result) {
                     alert('Ein Fehler ist aufgetreten: ' + result);

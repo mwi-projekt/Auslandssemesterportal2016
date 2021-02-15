@@ -1,8 +1,6 @@
 import {$,baseUrl} from "../config";
 import Swal from "sweetalert2";
 import "bootstrap";
-import "jquery-form-validator";
-import "dropzone";
 
 $(document).ready(function () {
     loadAuslandsangebote();
