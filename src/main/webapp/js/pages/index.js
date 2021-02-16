@@ -89,7 +89,6 @@ $(document).ready(function () {
     }
     loadPortalInfo();
     loadAuslandsangebote();
-    loadAuslandsangeboteInhalt();
     loadInfoMaterial();
 });
 
@@ -144,100 +143,6 @@ function loadAuslandsangebote() {
             $('.' + $(this).val()).show();
         } else {
             $('.angebote').show();
-        }
-    });
-}
-
-// Läd die Auslandsangebote auf die Seite
-function loadAuslandsangeboteInhalt() {
-    $.ajax({
-        type: "GET",
-        url: baseUrl + "/auslandsAngebotsInhalte",
-        success: function (data) {
-            var result = data.data;
-            var htmlText = '';
-            for (var i = 0; i < result.length; i++) {
-                if (!result[i].erfahrungsbericht) {
-                    result[i].erfahrungsbericht = "Keine Erfahrungsberichte vorhanden.";
-                }
-
-                htmlText = htmlText +
-                    '<div class="nonCms angebote ' +
-                    result[i].studiengang +
-                    '" id="angebot' + i +
-                    '" style="margin-right: 5px;"><div class="col-md-12">' +
-                    '<h3 class="uniName">' +
-                    result[i].uniTitel +
-                    '</h2>' +
-                    '<div class="navBarAng">' +
-                    '<div class="navelAng active" id="n' +
-                    i +
-                    '1">Infos</div>' +
-                    '<div class="navelAng" id="n' +
-                    i +
-                    '2">FAQs</div>' +
-                    '<div class="navelAng" id="n' +
-                    i +
-                    '3">Erfahrungsbericht</div>' +
-                    '<div class="navelAng" id="n' +
-                    i +
-                    '4">Bilder</div>' +
-                    '</div>' +
-                    '<div class="contentAng active" id="c' +
-                    i +
-                    '1"><div class="row"><div class="col-md-7">' +
-                    result[i].allgemeineInfos + '<br/>' + '<br/>'
-                    + 'Mögliche Studiengänge für diese Hochschule: ' + result[i].studiengang
-                    + '</div><div class="col-md-4">';
-                if (result[i].maps) {
-                    htmlText = htmlText +
-                        '<iframe width="400" height="200" src="' +
-                        result[i].maps +
-                        '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>';
-                } else {
-                    htmlText = htmlText +
-                        '<p>Keine Kartendaten gefunden.</p>';
-                }
-                htmlText = htmlText + '</div></div></div>' +
-                    '<div class="contentAng" id="c' + i +
-                    '2">' +
-                    result[i].faq +
-                    '</div>' +
-                    '<div class="contentAng" id="c' + i +
-                    '3">' +
-                    result[i].erfahrungsbericht +
-                    '</div>' +
-                    '<div class="contentAng" id="c' + i +
-                    '4">Keine Bilder vorhanden.</div>' +
-                    '</div>' + '</div>';
-
-            }
-            $('#angebotLinkUp').before(htmlText);
-            for (var i = 0; i < result.length; i++) {
-                for (var j = 1; j <= 4; j++) {
-                    document
-                        .getElementById('n' + i + j)
-                        .addEventListener(
-                            'click',
-                            function (event) {
-                                var id = $(this).parent()
-                                    .parent().parent()
-                                    .attr('id');
-                                $('#' + id).children()
-                                    .children().children(
-                                    '.navelAng')
-                                    .removeClass('active');
-                                $(this).addClass('active');
-                                $('#' + id)
-                                    .children()
-                                    .children('.contentAng')
-                                    .removeClass('active');
-                                id = $(this).attr('id')
-                                    .replace('n', '');
-                                $('#c' + id).addClass('active');
-                            });
-                }
-            }
         }
     });
 }

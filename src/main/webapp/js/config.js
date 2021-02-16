@@ -7,5 +7,5 @@ $.ajaxSetup({
 });
 window.$ = window.jQuery = $;
 
-export const baseUrl = "http://localhost:81";
+export const baseUrl = "http://localhost";
 export {$};
