@@ -1,5 +1,9 @@
 import $ from "jquery";
 import _,{baseUrl} from "../config.js";
+var dt = require( 'datatables.net' )(window, $);
+import "datatables.net-bs4";
+require("jquery-validation")($);
+require("jquery-validation/dist/localization/messages_de.min");
 
 $.validator.setDefaults({
     errorElement: "span",
@@ -27,7 +31,7 @@ $(document).ready(function () {
     let isEdit = false;
 
     // Erstelle die DataTable
-    myTable = $('#example').DataTable({
+    let myTable = $('#example').DataTable({
         dom: '<"top"fB> rt <"bottom"lp>',
         language: {
             processing: "Bitte warten ...",
@@ -60,7 +64,7 @@ $(document).ready(function () {
                     clearModal();
                 }
             }],
-        ajax: '/getUser?rolle=2',
+        ajax: baseUrl + '/getUser?rolle=2',
         columns: [
             {data: 'vorname'},
             {data: 'nachname'},

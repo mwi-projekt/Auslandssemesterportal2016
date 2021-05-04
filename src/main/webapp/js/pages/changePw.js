@@ -1,7 +1,6 @@
 import {$,baseUrl} from "../config";
 import "../app";
 import Swal from "sweetalert2";
-import "bootstrap";
 import "cookieconsent";
 
 $(document).ready(function() {

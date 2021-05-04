@@ -588,10 +588,6 @@ header {
 }
 
 /* Admin Bereich */
-#adminBereich {
-    display: none;
-}
-
 #adminBereich .col-md-12 {
     text-align: center;
 }
@@ -633,6 +629,10 @@ header {
     cursor: pointer;
     border-radius: 20px;
     text-align: center;
+}
+
+.admintile span {
+    font-size: x-large;
 }
 
 .admintile:hover {

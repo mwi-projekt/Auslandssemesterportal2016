@@ -2,6 +2,7 @@ import {$,baseUrl} from "./config";
 import Swal from "sweetalert2";
 import "jquery-ui-dist/jquery-ui";
 import "cookieconsent";
+import "bootstrap";
 
 $(document).ready(function () {
     //cookies
@@ -174,7 +175,7 @@ $(document).on('submit', '#loginForm', function (e) {
                 } else if (sessionStorage['rolle'] == 4) {
                 	window.location.href = 'task_overview_sgl.html';
                 } else {
-                    window.location.reload();
+                    window.location.href = 'cms.html';
                 }
             }
         },

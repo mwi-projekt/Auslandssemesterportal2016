@@ -1,4 +1,5 @@
 import {$,baseUrl} from "../config";
+import {urlParams} from "../app";
 import Swal from "sweetalert2";
 import "jquery-ui-dist";
 import "ckeditor4/ckeditor";
@@ -23,7 +24,7 @@ $(document).ready(function () {
 
     var id = urlParams.get('id').trim();
     var dia = urlParams.get('dia').trim();
-    var type = urlParams.get('type').trim();
+    var type = urlParams.get('type') && urlParams.get('type').trim();
     var index = urlParams.get('index').trim();
     var json = {};
 

@@ -1,71 +1,18 @@
 import {$,baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
-import "bootstrap";
 
 $(document).ready(function () {
-    // check if logged in
+    // check role and redirect
     if (sessionStorage['User']) {
-        if (sessionStorage['rolle'] === "2") {
-            $('.cms').show();
-            $('.nonCms').show();
-            $('.Admin').hide();
-            $('.Mitarbeiter').show();
-            $('.portalInfo').show();
-        } else if (sessionStorage['rolle'] === "1") {
-            if (sessionStorage['verwaltung'] === "0" ||
-                sessionStorage['verwaltung'] === undefined) {
-                $('#normalBereich').hide();
-                $('#adminBereich').show();
-            } else if (sessionStorage['verwaltung'] === "1") {
-                $('#normalBereich').show();
-                $('.cms').show();
-                $('#adminBereich').hide();
-                $('.Admin').show();
-                $('.Mitarbeiter').hide();
-            } else if (sessionStorage['verwaltung'] === "2") {
-                $('#adminBereich').hide();
-                //$('#nutzerVerwaltung').show();
-                $('#normalBereich').hide();
-            }
-            $('.Mitarbeiter').hide();
-            $('.portalInfo').show();
-        } else {
-            $('.cms').hide();
-            $('.nonCms').show();
-            $('.eingeloggt').css('display', 'inline');
+        if (sessionStorage['rolle'] == 2) {
+            window.location.href = 'task_overview.html'
+        } else if (sessionStorage['rolle'] == 4) {
+            window.location.href = 'task_overview_sgl.html';
+        } else if (sessionStorage['rolle'] == 1) {
+            window.location.href = 'cms.html';
         }
     }
-
-
-    if (sessionStorage['rolle'] === "1") {
-        // document.getElementById("zumPortal").href = "/";
-    } else if (sessionStorage['rolle'] === "2") {
-        document.getElementById("zumPortal").href = "task_overview.html";
-        document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
-    } else if (sessionStorage['rolle'] === "3") {
-        document.getElementById("zumPortal").href = "bewerbungsportal.html";
-    } else if (sessionStorage['rolle'] === "4") {
-        document.getElementById("zumPortal").href = "task_overview_sgl.html";
-        document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
-    }
-
-    // Click Listener für die Tiles im AdminBereich
-    $('.admintile').on('click', function () {
-        let id = $(this).attr('id');
-        if (id === 'bewerbungsprozess') {
-            location.href = 'prozess.html';
-        }
-        if (id === 'student') {
-            location.href = 'verwaltung_student.html';
-        }
-        if (id === 'auslandsamt') {
-            location.href = 'verwaltung_auslandsamt.html';
-        }
-        if (id === 'studiengangsleitung') {
-            location.href = 'verwaltung_studiengangsleitung.html';
-        }
-    });
 
     // init ui
     initSlider();

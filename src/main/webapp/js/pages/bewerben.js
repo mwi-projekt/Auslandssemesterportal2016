@@ -2,7 +2,6 @@ import {$,baseUrl} from "../config";
 import "../app";
 const jsPDF = require('jspdf');
 import Swal from "sweetalert2";
-import "bootstrap";
 import "dropzone";
 require("jquery-validation")($);
 require("jquery-validation/dist/localization/messages_de.min");
