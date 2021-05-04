@@ -43,8 +43,8 @@ If you want to start the Server locally, you can use docker-compose.
 First start docker, build your project and then you start the server by using these three commands in the bash:
 
 ```
-docker-compose pull
 docker-compose build
+docker-compose pull
 docker-compose up -d
 
 # Dev Deployment
