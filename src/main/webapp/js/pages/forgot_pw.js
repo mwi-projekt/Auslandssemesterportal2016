@@ -1,3 +1,7 @@
+import {$,baseUrl} from "../config";
+import "../app";
+import Swal from "sweetalert2";
+
 $(document).ready(function() {
 	$(document).on('click', '#resetPassword', function() {
 		resetpw();
@@ -19,7 +23,7 @@ function resetpw() {
 				icon : "success",
 				confirmButtonText : "Ok"
 			}).then(function(result) {
-				location.href = 'index.jsp';
+				location.href = '/';
 			});
 		},
 		error : function(result) {

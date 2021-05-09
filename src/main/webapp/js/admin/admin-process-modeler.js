@@ -1,4 +1,15 @@
-var siteHasUnsavedChanges = false;
+import {$,baseUrl} from "../config";
+import {urlParams} from "../app";
+import Swal from "sweetalert2";
+import "jquery-ui-dist";
+import "ckeditor4/ckeditor";
+import "bootstrap-switch";
+import "../jquery.dynamicdom";
+import selectForm from "../../modals/select-form.html";
+import textForm from "../../modals/text-form.html";
+import checkboxForm from "../../modals/checkbox-form.html";
+import uploadForm from "../../modals/upload-form.html";
+
 var siteHasUnsavedChanges = false;
 
 window.onbeforeunload = function (e) {
@@ -11,10 +22,10 @@ window.onbeforeunload = function (e) {
 
 $(document).ready(function () {
 
-    var id = $.urlParam('id').trim();
-    var dia = $.urlParam('dia').trim();
-    var type = $.urlParam('type').trim();
-    var index = $.urlParam('index').trim();
+    var id = urlParams.get('id').trim();
+    var dia = urlParams.get('dia').trim();
+    var type = urlParams.get('type') && urlParams.get('type').trim();
+    var index = urlParams.get('index').trim();
     var json = {};
 
     $.get(baseUrl + '/processmodel/get', {
@@ -314,26 +325,6 @@ $(document).ready(function () {
         });
     }
 
-    var selectForm = '';
-    $.get('../../modals/select-form.html', {}, function (data) {
-        selectForm = data;
-    });
-
-    var textForm = '';
-    $.get('../../modals/text-form.html', {}, function (data) {
-        textForm = data;
-    });
-
-    var checkboxForm = '';
-    $.get('../../modals/checkbox-form.html', {}, function (data) {
-        checkboxForm = data;
-    });
-
-    var uploadForm = '';
-    $.get('../../modals/upload-form.html', {}, function (data) {
-        uploadForm = data;
-    });
-
     function init(data) {
         $('#cardSlots').dynamicdom({
 
@@ -403,7 +394,8 @@ $(document).ready(function () {
                 // use default options when editor = true
                 var editor = true;
                 var enableEdit = false;
-                var deleteable = true;
+				var deleteable = true;
+				var con;
 
                 if (type == 'title' || type == 'subtitle') {
                     editor = {};

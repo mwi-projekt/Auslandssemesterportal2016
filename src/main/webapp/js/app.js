@@ -1,10 +1,25 @@
-var baseUrl = "http://localhost";
-$.ajaxSetup({
-    xhrFields: { withCredentials: true },
-    crossDomain: true,
-});
+import {$,baseUrl} from "./config";
+import Swal from "sweetalert2";
+import "jquery-ui-dist/jquery-ui";
+import "cookieconsent";
+import "bootstrap";
 
 $(document).ready(function () {
+    //cookies
+    window.cookieconsent.initialise({
+        content: {
+            message: "Diese Website verwendet Cookies!",
+            dismiss: "Verstanden!",
+            link: ""
+        },
+        theme: "classic",
+        palette: {
+            popup: {background: '#E8E8E8', text: '#000', link: '#fff', border: '#000'},
+            button: {background: 'transparent', border: '#D60000', text: '#D60000'},
+            highlight: {background: '#D60000', border: '#000000', text: '#000000'},
+        }
+    });
+
     // logout
     $('#logout').on('click', logout);
 
@@ -100,7 +115,6 @@ $(document).on('submit', '#regForm', function (e) {
                         $('.modal').fadeOut();
                         $('.modal').modal('hide');
                     }
-
                 },
                 error: function (result) {
                     Swal.fire({
@@ -161,10 +175,9 @@ $(document).on('submit', '#loginForm', function (e) {
                 } else if (sessionStorage['rolle'] == 4) {
                 	window.location.href = 'task_overview_sgl.html';
                 } else {
-                    window.location.reload();
+                    window.location.href = 'cms.html';
                 }
             }
-
         },
         error: function (data) {
             Swal.fire("Fehler");
@@ -182,16 +195,6 @@ if (!String.prototype.startsWith) {
 function isEmpty(str) {
     return (!str || 0 === str.length);
 }
-$.urlParam = function (name) {
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)')
-        .exec(window.location.href);
-
-    if (results == null) {
-        return " ";
-    } else {
-        return results[1] || 0;
-    }
-};
 
 //Function to remove certain URL Parameters
 function removeQueryStringParameter(key, url) {
@@ -212,7 +215,6 @@ function removeQueryStringParameter(key, url) {
         if (typeof hashParts[1] !== 'undefined' && hashParts[1] !== null)
             url += '#' + hashParts[1];
     }
-
     return url;
 }
 
@@ -222,7 +224,9 @@ function logout() {
         url: baseUrl + "/logout",
         complete: function () {
             sessionStorage.clear();
-            document.location.href = 'index.jsp';
+            document.location.href = '/index.html';
         }
     });
 }
+
+export var urlParams = new URLSearchParams(window.location.search);

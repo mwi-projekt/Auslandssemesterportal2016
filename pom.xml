@@ -266,8 +266,8 @@
 						</goals>
 						<configuration>
 							<!-- See https://nodejs.org/en/download/ for latest node and npm (lts) versions -->
-							<nodeVersion>v8.11.1</nodeVersion>
-							<npmVersion>5.6.0</npmVersion>
+							<nodeVersion>v14.16.1</nodeVersion>
+							<npmVersion>6.14.12</npmVersion>
 						</configuration>
 					</execution>
 
@@ -283,6 +283,16 @@
 					</execution>
 
 					<execution>
+						<id>npm run clean:parcel</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<configuration>
+							<arguments>run clean:parcel</arguments>
+						</configuration>
+					</execution>
+
+					<execution>
 						<id>npm run build</id>
 						<goals>
 							<goal>npm</goal>
@@ -292,6 +302,15 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.2</version>
+					<configuration>
+							<warSourceDirectory>${basedir}/src/main/webapp/dist</warSourceDirectory>
+					</configuration>
 			</plugin>
 
 			<plugin>

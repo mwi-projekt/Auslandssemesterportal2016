@@ -1,3 +1,7 @@
+import {$} from "../config";
+import "../app";
+import "jquery-ui-dist";
+
 var expandFAQ = function() {
 	$('.show').css('cursor', 'pointer');
 	$('.weg').hide();

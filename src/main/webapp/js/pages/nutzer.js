@@ -1,3 +1,11 @@
+import {$,baseUrl} from "../config";
+import "../app";
+var dt = require( 'datatables.net' )(window, $);
+import "datatables.net-bs4";
+import Swal from "sweetalert2";
+import "bootstrap";
+import "jquery-ui-dist/jquery-ui";
+
 $(document).ready(function () {
     // Click-Listener für Userverwaltung User anzeigen lassen
     $('.btnUser').on('click', function () {
@@ -16,7 +24,7 @@ $(document).ready(function () {
         	typ = "Studiengangsleiter";
         }
         $.ajax({
-            type: "GET", 
+            type: "GET",
             url: baseUrl + "/getUser",
             data: {
                 rolle: rolle,
@@ -105,7 +113,7 @@ $(document).ready(function () {
                             i +
                             '" title="Löschen"></span></td></tr>';
                     }
-                }    
+                }
                 tabelle = tabelle + '</table>';
                 $('#userTabelle').html(tabelle)
                 var nonSortable = (rolle == 3 ? [7, 8] : [5, 6]);
@@ -148,7 +156,7 @@ $(document).ready(function () {
                         });
 
                     });
-                    
+
                     $('.deleteSGL-button').click(function () {
 
                         var self = $(this);
@@ -185,7 +193,7 @@ $(document).ready(function () {
                             }
                         });
 
-                    });                    
+                    });
 
                     $('.deleteAAA-button').click(function () {
 
@@ -351,7 +359,7 @@ $(document).ready(function () {
 
         event.preventDefault();
     });
-    
+
     $('#SGLCreateForm').submit(function (event) {
         var email = $('#SGLMail').val();
         var vname = $('#SGLVorname').val();
@@ -416,9 +424,9 @@ $(document).ready(function () {
 
         event.preventDefault();
     });
-    
 
-    
+
+
     $('#btnUserEditSave').click(function () {
 		var dataMail = $('#inEditEmail').val();
 		var dataOldMail = "0";

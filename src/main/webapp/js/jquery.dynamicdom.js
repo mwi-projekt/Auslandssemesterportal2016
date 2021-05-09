@@ -1,3 +1,6 @@
+import {$,baseUrl} from "./config";
+import "jquery-ui-dist/jquery-ui";
+import "ckeditor4/ckeditor";
 /*
  DynamicDom
  description: build content with editable components

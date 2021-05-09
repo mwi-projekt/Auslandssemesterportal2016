@@ -1,3 +1,7 @@
+import {$,baseUrl} from "../config";
+import "../app";
+import Swal from "sweetalert2";
+
 var instanceID;
 var url;
 var typeList;
@@ -43,18 +47,18 @@ $(document).ready(function () {
             uni: uni
         },
         success: function (result) {
-            step_id = result.active;
+            var step_id = result.active;
             processDefinition = result.data;
             parse();
         }
     });
-    
+
 });
 
 function manipulateDOM() {
-	
+
     $("[id='Sonstige Angaben']").hide();
-	
+
 }
 
 function parse() {
@@ -66,14 +70,13 @@ function parse() {
             instance_id: instanceID,
             definition: processDefinition
         },
-
         success: function (result) {
             var steps = result.data;
             output = output +
                 '<div class="" id="accordion">';
             for (var k = 0; k < steps.length; k++) {
-                data = steps[k].data;
-                stepName = steps[k].activity;
+                var data = steps[k].data;
+                var stepName = steps[k].activity;
 
                 if (data.search("id") != -1) {
                     var innerOutput = "";
@@ -84,7 +87,8 @@ function parse() {
                         switch (type) {
                             case "form-select":
                                 var req = "";
-                                if (json[i]["data"]["required"] == true) {
+                                var dis = "";
+								if (json[i]["data"]["required"] == true) {
                                     req = ' required="required"';
                                     dis = ' disabled ="disabled"';
                                 }
@@ -121,7 +125,7 @@ function parse() {
                             case "form-checkbox":
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' +
-                                    json[i]["data"]["id"] +  '"disabled> ' + 
+                                    json[i]["data"]["id"] +  '"disabled> ' +
                                     json[i]["data"]["label"] +
                                     ' </label></div></div></div>';
                                 idList.push(json[i]["data"]["id"]);
@@ -131,8 +135,9 @@ function parse() {
                                 break;
                         }
                     }
-                    
+
                     console.log(idList);
+					var visibleStepName;
 
                     if (innerOutput != '') {
                         if (stepName === "datenEingeben") {
@@ -248,7 +253,7 @@ function variableEnglishAndSemesteranschrift(key, value){
 	}else if(key === 'semesteradresseAnders' && value === false){
 		document.getElementById("Semesteranschrift").remove();
 	}
-	
+
 }
 
 function saveChanges() {
@@ -356,7 +361,7 @@ function validateBew() {
                             instance_id: instanceID,
                             key: 'validierungErfolgreich|mailText',
                             value: validateString + '|' + grund,
-                            type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
+                            type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
                         },
                         success: function () {
                             Swal.fire({

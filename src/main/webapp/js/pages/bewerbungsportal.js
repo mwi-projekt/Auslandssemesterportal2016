@@ -1,3 +1,7 @@
+import {$,baseUrl} from "../config";
+import "../app";
+import Swal from "sweetalert2";
+
 $(document).ready(function () {
     loadAuslandsangebote();
     loadAuslandsangeboteInhalt();
@@ -5,7 +9,7 @@ $(document).ready(function () {
     $('.navEl').on('click', function (event) {
         $('.navEl').removeClass('current');
         $(this).addClass('current');
-        $('.inhalt').hide();
+        $('.aufgaben .inhalt').hide();
         var id = $(this).attr('id');
         id = id.substring(3, 4);
         $('#in' + id).show();
@@ -192,27 +196,23 @@ function loadAuslandsangeboteInhalt() {
             $('#angebote-wrapper').html(htmlText);
             for (var i = 0; i < result.length; i++) {
                 for (var j = 1; j <= 4; j++) {
-                    document
-                        .getElementById('n' + i + j)
-                        .addEventListener(
-                            'click',
-                            function (event) {
-                                var id = $(this).parent()
-                                    .parent().parent()
-                                    .attr('id');
-                                $('#' + id).children()
-                                    .children().children(
-                                        '.navelAng')
-                                    .removeClass('active');
-                                $(this).addClass('active');
-                                $('#' + id)
-                                    .children()
-                                    .children('.contentAng')
-                                    .removeClass('active');
-                                id = $(this).attr('id')
-                                    .replace('n', '');
-                                $('#c' + id).addClass('active');
-                            });
+                    $('#n'+i+j).on('click', function (event) {
+                        var id = $(this).parent()
+                            .parent().parent()
+                            .attr('id');
+                        $('#' + id).children()
+                            .children().children(
+                                '.navelAng')
+                            .removeClass('active');
+                        $(this).addClass('active');
+                        $('#' + id)
+                            .children()
+                            .children('.contentAng')
+                            .removeClass('active');
+                        id = $(this).attr('id')
+                            .replace('n', '');
+                        $('#c' + id).addClass('active');
+                    });
                 }
             }
         }
@@ -229,12 +229,12 @@ function initBewerben() {
             matnr: sessionStorage['matrikelnr']
         },
         success: function (result) {
-            tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Priorität</th><th colspan="3">Aktionen</th></tr></thead>';
+            var tabelle = '<table class="table table-bordered table-hover"><thead><tr><th>Universität</th><th>Status</th><th>Priorität</th><th colspan="3">Aktionen</th></tr></thead>';
             if (result.data.length == 0) {
                 $('#tableBewProzess').html('<h2>Keine Bewerbungen vorhanden</h2>');
             } else {
                 for (var i = 0; i < result.data.length; i++) {
-                    instance_info = result.data[i];
+                   	var instance_info = result.data[i];
                     tabelle = tabelle + '<tr data-rid="' + (i + 1) + '"><td>' + instance_info.uni + '</td><td>' + instance_info.stepCounter + '</td>';
                     tabelle += '<td>'+instance_info.prioritaet+'</td>';
                     prioArr.push(instance_info.prioritaet);
@@ -307,8 +307,7 @@ function initDeleteProcessButtons() {
         var id = $(this).attr("rid");
         Swal.fire({
             title: "Bist du sicher?",
-
-           text: "Der Prozess kann nicht wiederhergestellt werden!",
+           	text: "Der Prozess kann nicht wiederhergestellt werden!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
@@ -320,12 +319,14 @@ function initDeleteProcessButtons() {
             $.ajax({
                 type: "GET",
                 url: baseUrl + "/process/delete",
-
-
-               data: {
+               	data: {
                     matrikelnummer: matrikelnummer,
                     uni: uni
-                }
+                },
+                success: function (data) {
+                    $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                    Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                },
             }).done(function (data) {
                 $('#tableBewProzess tr[data-rid=' + id + ']').remove();
                 Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');

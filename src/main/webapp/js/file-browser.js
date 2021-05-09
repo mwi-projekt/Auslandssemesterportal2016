@@ -1,6 +1,7 @@
-$(function(){
-	var baseUrl = "http://localhost";
+import {$,baseUrl} from "./config";
+import "ckeditor4";
 
+$(function(){
 	var filemanager = $('.filemanager'),
 		fileList = filemanager.find('.data');
 
@@ -56,7 +57,7 @@ $(function(){
                 $('#chooseFile').prop("disabled", false);
 			}
         });
-		
+
 		$('#chooseFile').click(function () {
 			if ($(this).prop('disabled') != true) {
                 var funcNum = getUrlParam( 'CKEditorFuncNum' );

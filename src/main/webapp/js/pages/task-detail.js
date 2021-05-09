@@ -1,3 +1,7 @@
+import {$,baseUrl} from "../config";
+import "../app";
+import Swal from "sweetalert2";
+
 var instanceID;
 var url;
 var typeList;
@@ -6,6 +10,12 @@ var readOnly;
 var idList;
 var sendBew;
 var processDefinition;
+var step_id;
+var stepName;
+var visibleStepName;
+var validateString;
+var grund;
+var resultString;
 
 $(document).ready(function () {
     idList = [];
@@ -49,11 +59,11 @@ $(document).ready(function () {
             parse();
         }
     });
-    
+
 });
 
 function manipulateDOM() {
-	
+
     $("[id='Sonstige Angaben']").hide();
 
 }
@@ -67,7 +77,6 @@ function parse() {
             instance_id: instanceID,
             definition: processDefinition
         },
-
         success: function (result) {
             var steps = result.data;
             output = output +
@@ -122,7 +131,7 @@ function parse() {
                             case "form-checkbox":
                                 innerOutput = innerOutput +
                                     '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' +
-                                    json[i]["data"]["id"] +  '"disabled> ' + 
+                                    json[i]["data"]["id"] +  '"disabled> ' +
                                     json[i]["data"]["label"] +
                                     ' </label></div></div></div>';
                                 idList.push(json[i]["data"]["id"]);
@@ -132,7 +141,7 @@ function parse() {
                                 break;
                         }
                     }
-                    
+
                     //console.log(idList);
 
                     if (innerOutput != '') {
@@ -189,7 +198,7 @@ function parse() {
             }
             getData();
             manipulateDOM();
-            
+
         },
         error: function (result) {
             alert('Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.');
@@ -250,7 +259,7 @@ function variableEnglishAndSemesteranschrift(key, value){
 	}else if(key === 'semesteradresseAnders' && value === false){
 		document.getElementById("Semesteranschrift").remove();
 	}
-	
+
 }
 
 function saveChanges() {
@@ -299,6 +308,10 @@ function saveChanges() {
                                 value: valString,
                                 type: typeString
                             },
+							xhrFields: {
+								withCredentials: true
+							},
+							crossDomain: true,
                             success: function (result) {
                                 Swal.fire({
                                     title: "Bewerbung eingereicht",
@@ -365,7 +378,7 @@ function validateBew() {
                 instance_id: instanceID,
                 key: 'validierungErfolgreich|mailText',
                 value: validateString + '|' + grund,
-                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern. 
+                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
             },
             success: function (result) {
                 Swal.fire({

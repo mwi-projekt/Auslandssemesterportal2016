@@ -1,9 +1,14 @@
-$(document).ready(function () {
-    var dia = $.urlParam('dia').trim();
-    var BpmnJS = window.BpmnJS;
+import {$,baseUrl} from "../config";
+import {urlParams} from "../app";
+import Swal from "sweetalert2";
+import BpmnNavigatedViewer from "bpmn-js/dist/bpmn-navigated-viewer.production.min";
+import "jquery-ui-dist/jquery-ui";
 
-    var viewer = new BpmnJS({
-        container: '#diagram'
+$(document).ready(function () {
+    var dia = urlParams.get('dia').trim();
+
+    var viewer = new BpmnNavigatedViewer({
+        container: $('#diagram')
     });
 
     var possibleIds = [];
@@ -64,7 +69,7 @@ $(document).ready(function () {
 
         });
     }
-    
+
     function checkModelEntries(found, i, canvas) {
 		if (found.$type == 'bpmn:UserTask') {
 			if ($.inArray(found.id, possibleIds) !== -1) return;
@@ -82,7 +87,7 @@ $(document).ready(function () {
             found = null;
             return;
         }
-        
+
         for (var j = 0; j < found.outgoing.length; j++) {
             found = found.outgoing[j].targetRef;
 
@@ -162,7 +167,7 @@ $(document).ready(function () {
     $('#processSteps').on('click', '.btn-primary', function () {
         editEntry($(this).data('mid'));
     });
-    
+
 });
 
 

@@ -1,3 +1,10 @@
+import {$,baseUrl} from "../config";
+import "../app";
+var dt = require( 'datatables.net' )(window, $);
+import "datatables.net-bs4";
+import Swal from "sweetalert2";
+import "jquery-ui-dist/jquery-ui";
+
 $(document).ready(function () {
     getList();
 });
@@ -10,17 +17,17 @@ function getList() {
             //'definition' : 'studentBewerben'
         },
         success: function (result) {
-            output = ""; 		//zu validierende Bewerbungen
-            completed = "";		//erfolgreich angenommene Bewerbungen
-            validateSGL = "";	//Bewerbungen, die noch vom SGL bearbeitet werden müssen
-            abgelehnt = "";		//abgelehnte Bewerbungen
+            var output = ""; 		//zu validierende Bewerbungen
+            var completed = "";		//erfolgreich angenommene Bewerbungen
+            var validateSGL = "";	//Bewerbungen, die noch vom SGL bearbeitet werden müssen
+            var abgelehnt = "";		//abgelehnte Bewerbungen
             if (!result || result.data.length == 0) {
                 // substring bilden nicht möglich bei leerem String
             } else {
                 var instances = result.data;
 
                 for (var i = 0; i < instances.length; i++) {
-                    singleInstance = instances[i];
+                    var singleInstance = instances[i];
                     if (singleInstance.status === 'validate') {
                         output = output +
                             "<tr>" +
@@ -155,7 +162,7 @@ function deleteProcessButtons(uni, matrikelnummer) {
             data: {
                 matrikelnummer: matrikelnummer,
                 uni: uni
-            }
+            },
         }).done(function (data) {
             Swal.fire({
                 title: 'Gelöscht!',
@@ -192,14 +199,16 @@ function initDeleteProcessButtonsTaskOverview() {
                 data: {
                     matrikelnummer: matrikelnummer,
                     uni: uni
+                },
+                success: function (data) {
+                    $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                    Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                },
+                error: function (error) {
+                    console.error(error);
+                    Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
                 }
-            }).done(function (data) {
-                $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
-            }).error(function (error) {
-                console.error(error);
-                Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-            })
+            });
         });
     });
 }

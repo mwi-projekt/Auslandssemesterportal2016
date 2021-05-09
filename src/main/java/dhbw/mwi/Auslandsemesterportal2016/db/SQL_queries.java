@@ -57,7 +57,13 @@ public class SQL_queries {
                 if (types[i] == "String") {
                     statement.setString(i + 1, data[i]);
                 } else if (types[i] == "int") {
-                    statement.setInt(i + 1, Integer.parseInt(data[i]));
+                    int parsed;
+                    try {
+                        parsed = Integer.parseInt(data[i]);
+                    } catch(Exception e) {
+                        parsed = 0;
+                    }
+                    statement.setInt(i + 1, parsed);
                 } else if (types[i] == "date") {
                     java.sql.Date date = java.sql.Date.valueOf(data[i]);
                     statement.setDate(i + 1, date);

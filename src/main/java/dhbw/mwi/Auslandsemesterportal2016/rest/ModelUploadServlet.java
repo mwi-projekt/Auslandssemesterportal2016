@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import dhbw.mwi.Auslandsemesterportal2016.Config;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "ModelUploadServlet", urlPatterns = { "/model/upload" })
@@ -23,6 +24,8 @@ public class ModelUploadServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.addResponseHeaders(request,response);
+
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 1) {

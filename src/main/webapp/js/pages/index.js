@@ -1,73 +1,25 @@
+import {$,baseUrl} from "../config";
+import {urlParams} from "../app";
+import Swal from "sweetalert2";
+
 $(document).ready(function () {
-    // check if logged in
+    // check role and redirect
     if (sessionStorage['User']) {
-        if (sessionStorage['rolle'] === "2") {
-            $('.cms').show();
-            $('.nonCms').show();
-            $('.Admin').hide();
-            $('.Mitarbeiter').show();
-            $('.portalInfo').show();
-        } else if (sessionStorage['rolle'] === "1") {
-            if (sessionStorage['verwaltung'] === "0" ||
-                sessionStorage['verwaltung'] === undefined) {
-                $('#normalBereich').hide();
-                $('#adminBereich').show();
-            } else if (sessionStorage['verwaltung'] === "1") {
-                $('#normalBereich').show();
-                $('.cms').show();
-                $('#adminBereich').hide();
-                $('.Admin').show();
-                $('.Mitarbeiter').hide();
-            } else if (sessionStorage['verwaltung'] === "2") {
-                $('#adminBereich').hide();
-                //$('#nutzerVerwaltung').show();
-                $('#normalBereich').hide();
-            }
-            $('.Mitarbeiter').hide();
-            $('.portalInfo').show();
-        } else {
-            $('.cms').hide();
-            $('.nonCms').show();
-            $('.eingeloggt').css('display', 'inline');
+        if (sessionStorage['rolle'] == 2) {
+            window.location.href = 'task_overview.html'
+        } else if (sessionStorage['rolle'] == 4) {
+            window.location.href = 'task_overview_sgl.html';
+        } else if (sessionStorage['rolle'] == 1) {
+            window.location.href = 'cms.html';
         }
     }
-
-
-    if (sessionStorage['rolle'] === "1") {
-        // document.getElementById("zumPortal").href = "index.jsp";
-    } else if (sessionStorage['rolle'] === "2") {
-        document.getElementById("zumPortal").href = "task_overview.html";
-        document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
-    } else if (sessionStorage['rolle'] === "3") {
-        document.getElementById("zumPortal").href = "bewerbungsportal.html";
-    } else if (sessionStorage['rolle'] === "4") {
-        document.getElementById("zumPortal").href = "task_overview_sgl.html";
-        document.getElementById("zumPortal").innerHTML = "<a style= \"color: white \">Bewerbungen Validieren</a>";
-    }
-
-    // Click Listener für die Tiles im AdminBereich
-    $('.admintile').on('click', function () {
-        let id = $(this).attr('id');
-        if (id === 'bewerbungsprozess') {
-            location.href = 'HTML/admin/prozess.html';
-        }
-        if (id === 'student') {
-            location.href = 'HTML/admin/verwaltung_student.html';
-        }
-        if (id === 'auslandsamt') {
-            location.href = 'HTML/admin/verwaltung_auslandsamt.html';
-        }
-        if (id === 'studiengangsleitung') {
-            location.href = 'HTML/admin/verwaltung_studiengangsleitung.html';
-        }
-    });
 
     // init ui
     initSlider();
     initArrows();
 
-    if ($.urlParam('confirm') != null && $.urlParam('confirm').trim() != '') {
-        var link = $.urlParam('confirm');
+    if (urlParams.get('confirm') != null && urlParams.get('confirm').trim() != '') {
+        var link = urlParams.get('confirm');
         $.ajax({
             type: "GET",
             url: baseUrl + "/confirm?code=" + link,
@@ -84,7 +36,6 @@ $(document).ready(function () {
     }
     loadPortalInfo();
     loadAuslandsangebote();
-    loadAuslandsangeboteInhalt();
     loadInfoMaterial();
 });
 
@@ -139,100 +90,6 @@ function loadAuslandsangebote() {
             $('.' + $(this).val()).show();
         } else {
             $('.angebote').show();
-        }
-    });
-}
-
-// Läd die Auslandsangebote auf die Seite
-function loadAuslandsangeboteInhalt() {
-    $.ajax({
-        type: "GET",
-        url: baseUrl + "/auslandsAngebotsInhalte",
-        success: function (data) {
-            var result = data.data;
-            var htmlText = '';
-            for (var i = 0; i < result.length; i++) {
-                if (!result[i].erfahrungsbericht) {
-                    result[i].erfahrungsbericht = "Keine Erfahrungsberichte vorhanden.";
-                }
-
-                htmlText = htmlText +
-                    '<div class="nonCms angebote ' +
-                    result[i].studiengang +
-                    '" id="angebot' + i +
-                    '" style="margin-right: 5px;"><div class="col-md-12">' +
-                    '<h3 class="uniName">' +
-                    result[i].uniTitel +
-                    '</h2>' +
-                    '<div class="navBarAng">' +
-                    '<div class="navelAng active" id="n' +
-                    i +
-                    '1">Infos</div>' +
-                    '<div class="navelAng" id="n' +
-                    i +
-                    '2">FAQs</div>' +
-                    '<div class="navelAng" id="n' +
-                    i +
-                    '3">Erfahrungsbericht</div>' +
-                    '<div class="navelAng" id="n' +
-                    i +
-                    '4">Bilder</div>' +
-                    '</div>' +
-                    '<div class="contentAng active" id="c' +
-                    i +
-                    '1"><div class="row"><div class="col-md-7">' +
-                    result[i].allgemeineInfos + '<br/>' + '<br/>'
-                    + 'Mögliche Studiengänge für diese Hochschule: ' + result[i].studiengang
-                    + '</div><div class="col-md-4">';
-                if (result[i].maps) {
-                    htmlText = htmlText +
-                        '<iframe width="400" height="200" src="' +
-                        result[i].maps +
-                        '" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>';
-                } else {
-                    htmlText = htmlText +
-                        '<p>Keine Kartendaten gefunden.</p>';
-                }
-                htmlText = htmlText + '</div></div></div>' +
-                    '<div class="contentAng" id="c' + i +
-                    '2">' +
-                    result[i].faq +
-                    '</div>' +
-                    '<div class="contentAng" id="c' + i +
-                    '3">' +
-                    result[i].erfahrungsbericht +
-                    '</div>' +
-                    '<div class="contentAng" id="c' + i +
-                    '4">Keine Bilder vorhanden.</div>' +
-                    '</div>' + '</div>';
-
-            }
-            $('#angebotLinkUp').before(htmlText);
-            for (var i = 0; i < result.length; i++) {
-                for (var j = 1; j <= 4; j++) {
-                    document
-                        .getElementById('n' + i + j)
-                        .addEventListener(
-                            'click',
-                            function (event) {
-                                var id = $(this).parent()
-                                    .parent().parent()
-                                    .attr('id');
-                                $('#' + id).children()
-                                    .children().children(
-                                    '.navelAng')
-                                    .removeClass('active');
-                                $(this).addClass('active');
-                                $('#' + id)
-                                    .children()
-                                    .children('.contentAng')
-                                    .removeClass('active');
-                                id = $(this).attr('id')
-                                    .replace('n', '');
-                                $('#c' + id).addClass('active');
-                            });
-                }
-            }
         }
     });
 }

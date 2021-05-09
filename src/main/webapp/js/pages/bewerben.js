@@ -1,3 +1,12 @@
+import {$,baseUrl} from "../config";
+import "../app";
+const jsPDF = require('jspdf');
+import Swal from "sweetalert2";
+import "dropzone";
+require("jquery-validation")($);
+require("jquery-validation/dist/localization/messages_de.min");
+import "jquery-ui-dist";
+
 var instanceID;
 var uni;
 var idList = [];
@@ -46,7 +55,7 @@ $(document).on('keyup change', '#bewPLZ', function (e) {
     }
 });
 
-//Automatische Download des ausgefüllten Anmeldeformulars 
+//Automatische Download des ausgefüllten Anmeldeformulars
 $(document).on('click', '#downloadAnmeldeformular', function (e) {
     e.preventDefault();
     console.log("Download");
@@ -169,6 +178,8 @@ $(document).on('keyup change', '#untPLZ', function (e) {
     }
 });
 
+var json;
+
 function parse() {
     $.ajax({
         type: "GET",
@@ -211,7 +222,7 @@ function parse() {
                                 if (json[i]["data"]["required"] == true) {
                                     req = ' required="required"';
                                 }
-                                output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + '</label><div class="col-sm-10"><select class="form-control" id="' + json[i]["data"]["id"] + '"' + req + '>';
+                                output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + '</label><div class="col-sm-10"><select class="form-control" name="' + json[i]["data"]["id"] + '" id="' + json[i]["data"]["id"] + '"' + req + '>';
                                 for (var j = 0; j < json[i]["data"]["values"].length; j++) {
                                     output = output + '<option>' + json[i]["data"]["values"][j] + '</option>';
                                 }
@@ -229,7 +240,7 @@ function parse() {
                                 if (json[i]["data"]["numchars"]) {
                                     output += 'maxlength="' + json[i]["data"]["numchars"] + '" ';
                                 }
-                                output += 'id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
+                                output += 'name="' + json[i]["data"]["id"] + '" id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
 
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push(json[i]["data"]["type"]);
@@ -239,12 +250,12 @@ function parse() {
                                 if (json[i]["data"]["required"] == true) {
                                     req = ' required="required"';
                                 }
-                                output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' + json[i]["data"]["id"] + '"' + req + '>' + json[i]["data"]["label"] + ' </label></div></div></div>';
+                                output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input name="' + json[i]["data"]["id"] + '" type="checkbox" id="' + json[i]["data"]["id"] + '"' + req + '>' + json[i]["data"]["label"] + ' </label></div></div></div>';
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push("boolean");
                                 break;
                             case "form-upload":
-                                output = output + '<form action="' + baseUrl + '/upload" class="dropzone" id="' + json[i]["data"]["id"] + '"></form>';
+                                output = output + '<div class="dropzone" id="' + json[i]["data"]["id"] + '"></div>';
                                 break;
                         }
                     }
@@ -260,14 +271,15 @@ function parse() {
                     for (var i = 0; i < json.length; i++) {
                         var type = json[i]["type"];
                         if (type == 'form-upload') {
+                            console.log(json[i]["data"]["id"]);
+                            console.log(json[i]["data"]["filename"]);
                             $("#" + json[i]["data"]["id"]).dropzone(getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]));
                         }
                     }
-                    // init validation
-                    $.validate({
-                        form: '#formular',
-                        lang: 'de',
-                        modules: 'html5'
+                    $("#formular").submit(function(e){
+                        e.preventDefault();
+                    }).validate({
+                        debug: true
                     });
                 },
                 error: function (result) {
@@ -282,10 +294,10 @@ function parse() {
     });
 }
 
-function saveData() {
+$(document).on('click', '#saveData', function() {
     var form = $('#formular');
 
-    if (form && !form.isValid()) {
+    if (form && !form.valid()) {
         Swal.fire('Bitte füllen sie alle Felder korrekt aus.');
         return;
     }
@@ -340,7 +352,7 @@ function saveData() {
             alert('Ein Fehler ist aufgetreten');
         }
     });
-}
+})
 
 function getData() {
     var keyString = "";
@@ -369,9 +381,14 @@ function getData() {
 
 function getDropzoneOptions(action, fileName) {
     return {
+        url: baseUrl + "/upload",
         acceptedFiles: 'application/pdf',
         maxFilesize: 16,
+        method: "post",
         addRemoveLinks: true,
+        withCredentials: true,
+        uploadMultiple: false,
+
         sending: function (file, xhr, formData) {
             formData.append('action', action);
             formData.append('instance', instanceID);

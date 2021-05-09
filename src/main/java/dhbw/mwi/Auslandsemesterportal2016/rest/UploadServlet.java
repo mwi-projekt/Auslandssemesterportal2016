@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.google.gson.JsonObject;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.variable.Variables;
@@ -25,6 +27,8 @@ public class UploadServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Util.addResponseHeaders(request,response);
+
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle < 1) {
@@ -40,6 +44,7 @@ public class UploadServlet extends HttpServlet {
 				out.print("Error: can not find process id");
 				out.flush();
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				out.close();
 				return;
 			}
 
@@ -47,6 +52,7 @@ public class UploadServlet extends HttpServlet {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				out.print("Error: wrong action");
 				out.flush();
+				out.close();
 				return;
 			}
 
@@ -59,10 +65,12 @@ public class UploadServlet extends HttpServlet {
 					processEngine.getRuntimeService().setVariable(id, action, typedFileValue);
 					out.print("jop");
 					out.flush();
+					out.close();
 				} else {
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 					out.print("Error: wrong file");
 					out.flush();
+					out.close();
 				}
 
 			} catch (Exception e) {
@@ -70,9 +78,14 @@ public class UploadServlet extends HttpServlet {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				out.print("Error: wrong file");
 				out.flush();
+				out.close();
 			}
 		}
-
 	}
 
+	@Override
+	protected void doOptions(HttpServletRequest request, HttpServletResponse response) {
+		Util.addResponseHeaders(request,response);
+		Util.writeJson(response, new JsonObject());
+	}
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DHBW Auslandsportal</title>
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/InfoBox.css">
+    <link rel="stylesheet" href="css/admin/admin-main.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css">
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/solid.min.css">
+    <link rel="stylesheet" href="css/admin-process.css">
+	<link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="node_modules/cookieconsent/build/cookieconsent.min.css">
+
+    <script src="js/admin/admin-process.js"></script>
+</head>
+
+<body>
+    <module href="./layout.html">
+        <div class="verwaltung-container">
+            <div class="table-header-container">
+                <span class="big-text float-left">Bearbeiten der Bewerbungsschritte für
+                    <span id="dianame"></span>
+                </span>
+                <span class="big-text float-right">
+                    <a class="admin-landingpage-link" href="prozess.html">&larr; Zurück</a>
+                </span>
+            </div>
+            <div id="diagram"></div>
+            <table class="table table-striped" id="processSteps">
+                <thead>
+                <tr>
+                    <th colspan="2">Prozessschritte</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </module>
+</body>
+</html>

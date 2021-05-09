@@ -1,3 +1,11 @@
+import $ from "jquery";
+import _,{baseUrl} from "../config.js";
+var dt = require( 'datatables.net' )(window, $);
+import "datatables.net-bs4";
+require("jquery-validation")($);
+require("jquery-validation/dist/localization/messages_de.min");
+import Swal from "sweetalert2";
+
 $.validator.setDefaults({
     errorElement: "span",
     errorPlacement: function (error, element) {
@@ -24,7 +32,7 @@ $(document).ready(function () {
     let isEdit = false;
 
     // Erstelle die DataTable
-    myTable = $('#example').DataTable({
+    let myTable = $('#example').DataTable({
         dom: '<"top"fB> rt <"bottom"lp>',
         language: {
             processing: "Bitte warten ...",
@@ -57,7 +65,7 @@ $(document).ready(function () {
                     clearModal();
                 }
             }],
-        ajax: '/getUser?rolle=2',
+        ajax: baseUrl + '/getUser?rolle=2',
         columns: [
             {data: 'vorname'},
             {data: 'nachname'},
@@ -92,7 +100,9 @@ $(document).ready(function () {
     });
 
     // Submit-Button
-   $("#myForm").validate({
+   $("#myForm").submit(function(e){
+        e.preventDefault();
+    }).validate({
            rules: {
                vorname: "required",
                nachname: "required",
