@@ -4,6 +4,7 @@ var dt = require( 'datatables.net' )(window, $);
 import "datatables.net-bs4";
 require("jquery-validation")($);
 require("jquery-validation/dist/localization/messages_de.min");
+import Swal from "sweetalert2";
 
 
 $.validator.setDefaults({
@@ -104,7 +105,9 @@ $(document).ready(function () {
     });
 
     // Submit-Button
-    $("#myForm").validate({
+    $("#myForm").submit(function(e){
+        e.preventDefault();
+    }).validate({
                rules: {
                    vorname: "required",
                    nachname: "required",
