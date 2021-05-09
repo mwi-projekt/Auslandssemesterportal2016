@@ -9,7 +9,7 @@ $(document).ready(function () {
     $('.navEl').on('click', function (event) {
         $('.navEl').removeClass('current');
         $(this).addClass('current');
-        $('.inhalt').hide();
+        $('.aufgaben .inhalt').hide();
         var id = $(this).attr('id');
         id = id.substring(3, 4);
         $('#in' + id).show();
@@ -196,27 +196,23 @@ function loadAuslandsangeboteInhalt() {
             $('#angebote-wrapper').html(htmlText);
             for (var i = 0; i < result.length; i++) {
                 for (var j = 1; j <= 4; j++) {
-                    document
-                        .getElementById('n' + i + j)
-                        .addEventListener(
-                            'click',
-                            function (event) {
-                                var id = $(this).parent()
-                                    .parent().parent()
-                                    .attr('id');
-                                $('#' + id).children()
-                                    .children().children(
-                                        '.navelAng')
-                                    .removeClass('active');
-                                $(this).addClass('active');
-                                $('#' + id)
-                                    .children()
-                                    .children('.contentAng')
-                                    .removeClass('active');
-                                id = $(this).attr('id')
-                                    .replace('n', '');
-                                $('#c' + id).addClass('active');
-                            });
+                    $('#n'+i+j).on('click', function (event) {
+                        var id = $(this).parent()
+                            .parent().parent()
+                            .attr('id');
+                        $('#' + id).children()
+                            .children().children(
+                                '.navelAng')
+                            .removeClass('active');
+                        $(this).addClass('active');
+                        $('#' + id)
+                            .children()
+                            .children('.contentAng')
+                            .removeClass('active');
+                        id = $(this).attr('id')
+                            .replace('n', '');
+                        $('#c' + id).addClass('active');
+                    });
                 }
             }
         }

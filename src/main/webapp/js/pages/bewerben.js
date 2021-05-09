@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import "dropzone";
 require("jquery-validation")($);
 require("jquery-validation/dist/localization/messages_de.min");
+import "jquery-ui-dist";
 
 var instanceID;
 var uni;
@@ -177,6 +178,8 @@ $(document).on('keyup change', '#untPLZ', function (e) {
     }
 });
 
+var json;
+
 function parse() {
     $.ajax({
         type: "GET",
@@ -219,7 +222,7 @@ function parse() {
                                 if (json[i]["data"]["required"] == true) {
                                     req = ' required="required"';
                                 }
-                                output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + '</label><div class="col-sm-10"><select class="form-control" id="' + json[i]["data"]["id"] + '"' + req + '>';
+                                output = output + '<div class="form-group"><label class="col-sm-2 control-label">' + json[i]["data"]["label"] + '</label><div class="col-sm-10"><select class="form-control" name="' + json[i]["data"]["id"] + '" id="' + json[i]["data"]["id"] + '"' + req + '>';
                                 for (var j = 0; j < json[i]["data"]["values"].length; j++) {
                                     output = output + '<option>' + json[i]["data"]["values"][j] + '</option>';
                                 }
@@ -237,7 +240,7 @@ function parse() {
                                 if (json[i]["data"]["numchars"]) {
                                     output += 'maxlength="' + json[i]["data"]["numchars"] + '" ';
                                 }
-                                output += 'id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
+                                output += 'name="' + json[i]["data"]["id"] + '" id="' + json[i]["data"]["id"] + '"' + req + '></div></div>';
 
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push(json[i]["data"]["type"]);
@@ -247,7 +250,7 @@ function parse() {
                                 if (json[i]["data"]["required"] == true) {
                                     req = ' required="required"';
                                 }
-                                output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input type="checkbox" id="' + json[i]["data"]["id"] + '"' + req + '>' + json[i]["data"]["label"] + ' </label></div></div></div>';
+                                output = output + '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input name="' + json[i]["data"]["id"] + '" type="checkbox" id="' + json[i]["data"]["id"] + '"' + req + '>' + json[i]["data"]["label"] + ' </label></div></div></div>';
                                 idList.push(json[i]["data"]["id"]);
                                 typeList.push("boolean");
                                 break;
@@ -273,7 +276,9 @@ function parse() {
                             $("#" + json[i]["data"]["id"]).dropzone(getDropzoneOptions(json[i]["data"]["id"], json[i]["data"]["filename"]));
                         }
                     }
-                    $("#formular").validate({
+                    $("#formular").submit(function(e){
+                        e.preventDefault();
+                    }).validate({
                         debug: true
                     });
                 },
@@ -289,7 +294,7 @@ function parse() {
     });
 }
 
-function saveData() {
+$(document).on('click', '#saveData', function() {
     var form = $('#formular');
 
     if (form && !form.valid()) {
@@ -347,7 +352,7 @@ function saveData() {
             alert('Ein Fehler ist aufgetreten');
         }
     });
-}
+})
 
 function getData() {
     var keyString = "";

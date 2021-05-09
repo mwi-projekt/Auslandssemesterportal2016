@@ -107,7 +107,9 @@ $(document).ready(function () {
         isEdit = true;
     });
 
-    $("#myForm").validate({
+    $("#myForm").submit(function(e){
+        e.preventDefault();
+    }).validate({
         rules: {
             vorname: "required",
             nachname: "required",

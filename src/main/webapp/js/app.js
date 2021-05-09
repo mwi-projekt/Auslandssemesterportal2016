@@ -224,7 +224,7 @@ function logout() {
         url: baseUrl + "/logout",
         complete: function () {
             sessionStorage.clear();
-            document.location.href = '/';
+            document.location.href = '/index.html';
         }
     });
 }
