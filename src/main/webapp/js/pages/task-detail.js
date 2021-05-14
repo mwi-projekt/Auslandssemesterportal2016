@@ -60,6 +60,143 @@ $(document).ready(function () {
         }
     });
 
+
+    $('#saveChanges').on('click', function() {
+        var keyString = "";
+        var valString = "";
+        var typeString = "";
+        for (var j = 0; j < idList.length; j++) {
+            if ($('#' + idList[j]).attr('type') == 'checkbox') {
+                var checkedString = (document.getElementById(idList[j]).checked) ? 'true' :
+                    'false';
+                keyString = keyString + idList[j] + "|";
+                valString = valString + checkedString + "|";
+                typeString = typeString + typeList[j] + "|";
+            } else {
+                keyString = keyString + idList[j] + "|";
+                valString = valString + document.getElementById(idList[j]).value + "|";
+                typeString = typeString + typeList[j] + "|";
+            }
+        }
+        keyString = keyString.substr(0, keyString.length - 1);
+        valString = valString.substr(0, valString.length - 1);
+        typeString = typeString.substr(0, typeString.length - 1);
+        Swal.fire({
+                title: "Bewerbung absenden",
+                text: "Wenn Du die Bewerbung abschickst, kannst Du keine Änderungen mehr vornehmen. Fortfahren?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Bewerbung absenden",
+                cancelButtonText: "Abbrechen"
+            }).then(function(result) {
+                if (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl + "/sendNewApplicationMail",
+                        data: {
+                            instance_id: instanceID
+                        },
+                        success: function (result) {
+                            $.ajax({
+                                type: "POST",
+                                url: baseUrl + "/setVariable",
+                                data: {
+                                    instance_id: instanceID,
+                                    key: keyString,
+                                    value: valString,
+                                    type: typeString
+                                },
+                                xhrFields: {
+                                    withCredentials: true
+                                },
+                                crossDomain: true,
+                                success: function (result) {
+                                    Swal.fire({
+                                        title: "Bewerbung eingereicht",
+                                        text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
+                                        icon: "success",
+                                        confirmButtonText: "Ok"
+                                    }).then( function (result) {
+                                        location.href = 'bewerbungsportal.html';
+                                    });
+                                },
+                                error: function (result) {
+                                    sweetAlert("Fehler", "Ein Fehler ist aufgetreten", "error");
+                                }
+                            });
+                        },
+                        error: function (result) {
+                            console.error(result);
+                        }
+                    });
+                }
+            });
+    });
+
+    $('#validateBtn').on('click', function () {
+        validateString = $('#validierungErfolgreich').val();
+        grund = $('#reason').text();
+        resultString = "";
+        if (validateString === "true") {
+            resultString = "bestätigen"
+        } else if (validateString === "false"){
+            resultString = "ablehnen"
+        } else if (validateString === "edit"){
+            resultString = "zur Bearbeitung freigeben"
+        }
+        if (grund.indexOf("Platzhalter") < 0 ||
+            grund.indexOf("--") < 0) {
+            Swal.fire({
+                title: "Platzhalter",
+                text: "Mögliche Platzhalter im Email Text gefunden.",
+                icon: warning,
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ignorieren",
+                cancelButtonText: "Abbrechen"
+            });
+        } else {
+            console.log('In der Nachricht wurden keine Platzhalter gefunden');
+        }
+    
+        Swal.fire({
+            title: "Bewerbung " + resultString,
+            text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Bewerbung " + resultString,
+            cancelButtonText: "Abbrechen"
+        }).then(function (result) {
+            // hier mail einfügen -> neue Ajax
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "/setVariable",
+                data: {
+                    instance_id: instanceID,
+                    key: 'validierungErfolgreich|mailText',
+                    value: validateString + '|' + grund,
+                    type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
+                },
+                success: function (result) {
+                    Swal.fire({
+                        title: "Bewerbung " + resultString,
+                        text: "Gespeichert",
+                        icon: "success",
+                        confirmButtonText: "Ok"
+                    }).then(function (result) {
+                        location.href = 'task_overview.html';
+                    });
+                },
+                error: function (result) {
+                    alert('Ein Fehler ist aufgetreten');
+                }
+            });
+        });
+    
+    });
+
 });
 
 function manipulateDOM() {
@@ -82,7 +219,7 @@ function parse() {
             output = output +
                 '<div class="" id="accordion">';
             for (var k = 0; k < steps.length; k++) {
-                data = steps[k].data;
+                var data = steps[k].data;
                 stepName = steps[k].activity;
 
                 if (data.search("id") != -1) {
@@ -94,6 +231,7 @@ function parse() {
                         switch (type) {
                             case "form-select":
                                 var req = "";
+                                var dis = "";
                                 if (json[i]["data"]["required"] == true) {
                                     req = ' required="required"';
                                     dis = ' disabled ="disabled"';
@@ -259,142 +397,6 @@ function variableEnglishAndSemesteranschrift(key, value){
 	}else if(key === 'semesteradresseAnders' && value === false){
 		document.getElementById("Semesteranschrift").remove();
 	}
-
-}
-
-function saveChanges() {
-    var keyString = "";
-    var valString = "";
-    var typeString = "";
-    for (var j = 0; j < idList.length; j++) {
-        if ($('#' + idList[j]).attr('type') == 'checkbox') {
-            var checkedString = (document.getElementById(idList[j]).checked) ? 'true' :
-                'false';
-            keyString = keyString + idList[j] + "|";
-            valString = valString + checkedString + "|";
-            typeString = typeString + typeList[j] + "|";
-        } else {
-            keyString = keyString + idList[j] + "|";
-            valString = valString + document.getElementById(idList[j]).value + "|";
-            typeString = typeString + typeList[j] + "|";
-        }
-    }
-    keyString = keyString.substr(0, keyString.length - 1);
-    valString = valString.substr(0, valString.length - 1);
-    typeString = typeString.substr(0, typeString.length - 1);
-    Swal.fire({
-            title: "Bewerbung absenden",
-            text: "Wenn Du die Bewerbung abschickst, kannst Du keine Änderungen mehr vornehmen. Fortfahren?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Bewerbung absenden",
-            cancelButtonText: "Abbrechen"
-        }).then(function(result) {
-            if (result) {
-                $.ajax({
-                    type: "POST",
-                    url: baseUrl + "/sendNewApplicationMail",
-                    data: {
-                        instance_id: instanceID
-                    },
-                    success: function (result) {
-                        $.ajax({
-                            type: "POST",
-                            url: baseUrl + "/setVariable",
-                            data: {
-                                instance_id: instanceID,
-                                key: keyString,
-                                value: valString,
-                                type: typeString
-                            },
-							xhrFields: {
-								withCredentials: true
-							},
-							crossDomain: true,
-                            success: function (result) {
-                                Swal.fire({
-                                    title: "Bewerbung eingereicht",
-                                    text: "Deine Bewerbung wurde eingereicht. Du erhältst möglichst Zeitnah eine Rückmeldung per Email",
-                                    icon: "success",
-                                    confirmButtonText: "Ok"
-                                }).then( function (result) {
-                                    location.href = 'bewerbungsportal.html';
-                                });
-                            },
-                            error: function (result) {
-                                sweetAlert("Fehler", "Ein Fehler ist aufgetreten", "error");
-                            }
-                        });
-                    },
-                    error: function (result) {
-                        console.error(result);
-                    }
-                });
-            }
-        });
-}
-
-function validateBew() {
-    validateString = $('#validierungErfolgreich').val();
-    grund = $('#reason').text();
-    resultString = "";
-    if (validateString === "true") {
-        resultString = "bestätigen"
-    } else if (validateString === "false"){
-        resultString = "ablehnen"
-    } else if (validateString === "edit"){
-    	resultString = "zur Bearbeitung freigeben"
-    }
-    if (grund.indexOf("Platzhalter") < 0 ||
-        grund.indexOf("--") < 0) {
-        Swal.fire({
-            title: "Platzhalter",
-            text: "Mögliche Platzhalter im Email Text gefunden.",
-            icon: warning,
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Ignorieren",
-            cancelButtonText: "Abbrechen"
-        });
-    } else {
-        console.log('In der Nachricht wurden keine Platzhalter gefunden');
-    }
-
-    Swal.fire({
-        title: "Bewerbung " + resultString,
-        text: "Sind Sie sicher? Diese Aktion kann nicht rückgängig gemacht werden.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Bewerbung " + resultString,
-        cancelButtonText: "Abbrechen"
-    }).then(function (result) {
-    	// hier mail einfügen -> neue Ajax
-        $.ajax({
-            type: "POST",
-            url: baseUrl + "/setVariable",
-            data: {
-                instance_id: instanceID,
-                key: 'validierungErfolgreich|mailText',
-                value: validateString + '|' + grund,
-                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
-            },
-            success: function (result) {
-                Swal.fire({
-                    title: "Bewerbung " + resultString,
-                    text: "Gespeichert",
-                    icon: "success",
-                    confirmButtonText: "Ok"
-                }).then(function (result) {
-                    location.href = 'task_overview.html';
-                });
-            },
-            error: function (result) {
-                alert('Ein Fehler ist aufgetreten');
-            }
-        });
-    });
 
 }
 
