@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 
 		String salt = "";
 		String mail = "";

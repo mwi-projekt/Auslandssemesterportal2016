@@ -1,12 +1,12 @@
-version: '3.1'
+version: "3.1"
 services:
   mwi_mysql:
     build: ./docker/mysql
     restart: always
     ports:
-      - '3306:3306'
+      - "3308:3306"
     environment:
-      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_HOST: "%"
       MYSQL_ROOT_PASSWORD: ${DB_PW}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PW}
@@ -24,9 +24,9 @@ services:
     environment:
       PMA_HOST: mwi_mysql
       PMA_PORT: 3306
-      PMA_ABSOLUTE_URI: '${SERVER_URL}/phpmyadmin/'
+      PMA_ABSOLUTE_URI: "${SERVER_URL}/phpmyadmin/"
     ports:
-      - '8083:80'
+      - "8083:80"
     networks:
       - mwi-network
     depends_on:
@@ -36,7 +36,7 @@ services:
     image: mwi/app
     restart: always
     ports:
-      - '8082:8080'
+      - "8082:8080"
     environment:
       DB_DRIVER: com.mysql.jdbc.Driver
       DB_USERNAME: ${DB_USER}
@@ -45,7 +45,7 @@ services:
       DB_URL: jdbc:mysql://mwi_mysql:3306/camunda_db?autoReconnect=true
       MWI_URL: ${SERVER_URL}
       PARCEL_URL: ${PARCEL_SERVER_URL}
-      MWI_DB_URL: 'jdbc:mysql://mwi_mysql:3306/mwi?autoReconnect=true&user=${DB_USER}&password=${DB_PW}&serverTimezone=UTC'
+      MWI_DB_URL: "jdbc:mysql://mwi_mysql:3306/mwi?autoReconnect=true&user=${DB_USER}&password=${DB_PW}&serverTimezone=UTC"
     depends_on: [mwi_mysql]
     volumes:
       - ${VOLUME_UPLOAD}:/camunda/upload
@@ -56,7 +56,7 @@ services:
     build: ./docker/web
     restart: always
     ports:
-      - '80:80'
+      - "80:80"
     networks:
       - mwi-network
     volumes:
