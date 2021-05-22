@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+package dhbw.mwi.Auslandsemesterportal2016.test.FrameworkTests;
 
 import static org.junit.Assert.assertEquals;
 

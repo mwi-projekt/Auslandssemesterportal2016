@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+package dhbw.mwi.Auslandsemesterportal2016.test.FrameworkTests;
 
 import org.junit.Test;
 import io.restassured.*;
