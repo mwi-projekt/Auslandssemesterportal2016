@@ -1,9 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 
@@ -13,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.testng.annotations.Test;
 import dhbw.mwi.Auslandsemesterportal2016.rest.LoginServlet;
 
-public class LoginTest {
+public class LoginServletTest {
       
     /*
     *   method verifies that doPost() is called
@@ -27,7 +24,6 @@ public class LoginTest {
         HttpServletResponse response = mock(HttpServletResponse.class);
         LoginServlet loginServlet = mock(LoginServlet.class);
 
-        doNothing().when(loginServlet).doPost(request, response);
         loginServlet.doPost(request, response);
         verify(loginServlet,times(1)).doPost(request, response);
     }
