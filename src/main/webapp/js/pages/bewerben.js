@@ -7,6 +7,20 @@ require("jquery-validation")($);
 require("jquery-validation/dist/localization/messages_de.min");
 import "jquery-ui-dist";
 
+$.validator.setDefaults({
+    errorElement: "span",
+    errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+    }
+});
+
 var instanceID;
 var uni;
 var idList = [];

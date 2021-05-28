@@ -17,7 +17,7 @@ html {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-
+    padding: 1em;
 }
 
 header {
@@ -420,19 +420,10 @@ header {
 
 .logoutFenster {
     display: none;
-    /* background: #AFEEEE; */
-    /* border: 1px solid white; */
-    /* border-radius: 5px; */
     border-top: none;
-    /* border-top-right-radius: 0px; */
-    /* border-top-left-radius: 0px; */
-    /* top: 0%; */
-    /* margin-top: 57px; */
     color: #777;
     padding: 0px;
-    position: absolute;
-    /* -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
-    /* box-shadow: 0 3px 3px rgba(0, 0, 0, .5); */
+    position: relative;
     z-index: 102;
     padding-left: 4px;
     right: 1em;
@@ -608,7 +599,7 @@ header {
 }
 
 .sticky-footer-padding {
-    padding-bottom: 395.47px;
+    padding-bottom: 367.47px;
 }
 
 
@@ -1009,6 +1000,10 @@ i {
 .logFenster {
     text-algin: center;
     visibility: visible;
+}
+
+.logFenster .btn:last-child {
+	margin-right: 0;
 }
 
 .logoFenster {

@@ -57,7 +57,7 @@ import "ckeditor4/ckeditor";
             // init sorting
             $el.sortable({
                 items: ".item:not(.ui-state-disabled)",
-                handle: ".actions .fa-arrows",
+                handle: ".actions .fa-arrows-alt-v",
             });
 
             // get output
