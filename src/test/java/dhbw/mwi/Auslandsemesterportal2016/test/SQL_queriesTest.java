@@ -4,6 +4,8 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
@@ -20,6 +22,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 public class SQL_queriesTest {
+  MockedStatic<SQL_queries> mockedStatic = Mockito.mockStatic(SQL_queries.class);
 
   /*
    * Testing static getSalt()-Method using Mockito mocking result-response
@@ -28,11 +31,11 @@ public class SQL_queriesTest {
    */
   @Test
   public void testGetSalt() {
-    try (MockedStatic<SQL_queries> mockedStatic = Mockito.mockStatic(SQL_queries.class)) {
-      mockedStatic.when(() -> SQL_queries.getSalt("testusermwi@dhbw.de")).thenReturn("SH5E9Z7P5J6Z5G2BV0");
 
-      assertEquals("SH5E9Z7P5J6Z5G2BV0", SQL_queries.getSalt("testusermwi@dhbw.de"));
-    }
+    mockedStatic.when(() -> SQL_queries.getSalt("testusermwi@dhbw.de")).thenReturn("SH5E9Z7P5J6Z5G2BV0");
+
+    assertEquals("SH5E9Z7P5J6Z5G2BV0", SQL_queries.getSalt("testusermwi@dhbw.de"));
+
   }
 
   /*
@@ -44,13 +47,12 @@ public class SQL_queriesTest {
   public void testUserLogin() {
     String[] stringArr = { "1", "Wirtschaftsinformatik", "12345678", "Admin", "1478523697412" };
 
-    try (MockedStatic<SQL_queries> mockedStatic = Mockito.mockStatic(SQL_queries.class)) {
-      mockedStatic.when(() -> SQL_queries.userLogin("testusermwi@dhbw.de", "SH5E9Z7P5J6Z5G2BV0", "Password1234"))
-          .thenReturn(stringArr);
+    mockedStatic.when(() -> SQL_queries.userLogin("testusermwi@dhbw.de", "SH5E9Z7P5J6Z5G2BV0", "Password1234"))
+        .thenReturn(stringArr);
 
-      String[] result = SQL_queries.userLogin("testusermwi@dhbw.de", "SH5E9Z7P5J6Z5G2BV0", "Password1234");
-      assertArrayEquals(stringArr, result);
-    }
+    String[] result = SQL_queries.userLogin("testusermwi@dhbw.de", "SH5E9Z7P5J6Z5G2BV0", "Password1234");
+    assertArrayEquals(stringArr, result);
+
   }
 
   /*
@@ -64,12 +66,11 @@ public class SQL_queriesTest {
   @Test
   public void testIsEmailUsedWithNotUsedEMail() {
     ResultSet resultSet = mock(ResultSet.class);
-    try (MockedStatic<SQL_queries> mockedStatic = Mockito.mockStatic(SQL_queries.class)) {
-      mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
-      when(SQL_queries.isEmailUsed("test@dhbw.de")).thenCallRealMethod();
 
-      assertEquals(false, SQL_queries.isEmailUsed("test@dhbw.de"));
-    }
+    mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
+    when(SQL_queries.isEmailUsed("test@dhbw.de")).thenCallRealMethod();
+
+    assertEquals(false, SQL_queries.isEmailUsed("test@dhbw.de"));
   }
 
   /*
@@ -83,13 +84,13 @@ public class SQL_queriesTest {
   @Test
   public void testIsEmailUsedWithUsedEMail() throws SQLException {
     ResultSet resultSet = mock(ResultSet.class);
-    try (MockedStatic<SQL_queries> mockedStatic = Mockito.mockStatic(SQL_queries.class)) {
-      mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
-      when(SQL_queries.isEmailUsed("testusermwi@dhbw.de")).thenCallRealMethod();
-      when(resultSet.next()).thenReturn(true);
 
-      assertEquals(true, SQL_queries.isEmailUsed("testusermwi@dhbw.de"));
-    }
+    mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
+    when(SQL_queries.isEmailUsed("testusermwi@dhbw.de")).thenCallRealMethod();
+    when(resultSet.next()).thenReturn(true);
+
+    assertEquals(true, SQL_queries.isEmailUsed("testusermwi@dhbw.de"));
+
   }
 
   /*
@@ -103,12 +104,12 @@ public class SQL_queriesTest {
   @Test
   public void testIsMatnrUsedWithNotUsedMatnr() {
     ResultSet resultSet = mock(ResultSet.class);
-    try (MockedStatic<SQL_queries> mockedStatic = Mockito.mockStatic(SQL_queries.class)) {
-      mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
-      when(SQL_queries.isMatnrUsed(1234567)).thenCallRealMethod();
 
-      assertEquals(false, SQL_queries.isMatnrUsed(1234567));
-    }
+    mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
+    when(SQL_queries.isMatnrUsed(1234567)).thenCallRealMethod();
+
+    assertEquals(false, SQL_queries.isMatnrUsed(1234567));
+
   }
 
   /*
@@ -122,13 +123,13 @@ public class SQL_queriesTest {
   @Test
   public void testIsMatnrUsedWithUsedMatnr() throws SQLException {
     ResultSet resultSet = mock(ResultSet.class);
-    try (MockedStatic<SQL_queries> mockedStatic = Mockito.mockStatic(SQL_queries.class)) {
-      mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
-      when(SQL_queries.isMatnrUsed(9876543)).thenCallRealMethod();
-      when(resultSet.next()).thenReturn(true);
 
-      assertEquals(true, SQL_queries.isMatnrUsed(9876543));
-    }
+    mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
+    when(SQL_queries.isMatnrUsed(9876543)).thenCallRealMethod();
+    when(resultSet.next()).thenReturn(true);
+
+    assertEquals(true, SQL_queries.isMatnrUsed(9876543));
+
   }
 
   /*
@@ -145,15 +146,15 @@ public class SQL_queriesTest {
     PreparedStatement preparedStatement = mock(PreparedStatement.class);
 
     try (MockedStatic<DB> mockedStaticdb = Mockito.mockStatic(DB.class)) {
-      when(DB.getInstance()).thenReturn(connection);
-      when(connection.prepareStatement(any())).thenReturn(preparedStatement);
-      when(preparedStatement.executeUpdate()).thenReturn(1);
+      mockedStaticdb.when(() -> DB.getInstance()).thenReturn(connection);
+      mockedStatic.when(() -> connection.prepareStatement(any())).thenReturn(preparedStatement);
+      mockedStatic.when(() -> preparedStatement.executeUpdate()).thenReturn(1);
 
       int i = SQL_queries.userRegister("Max", "Mustermann", "Test1234", Util.generateSalt(), 1, "test@dhbw.de",
           "Wirtschaftsinformatik", "18B2", 1234567, "12345", "12345", "Karlsruhe", "verifiziert");
+      // verify(preparedStatement, times(1)).executeUpdate();
       assertEquals(i, 1);
     }
-
   }
 
 }
