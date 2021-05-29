@@ -17,15 +17,15 @@ import dhbw.mwi.Auslandsemesterportal2016.rest.LoginServlet;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 
 public class LoginServletTest {
-      
+
     /*
-    *   method verifies that doPost() is called
-    *   
-    *   method includes database calls in external class (SQL_queries), which are not part of unit-testing
-    *   that's why LoginServlet is mocked
-    */
+     * method verifies that doPost() is called
+     * 
+     * method includes database calls in external class (SQL_queries), which are not
+     * part of unit-testing that's why LoginServlet is mocked
+     */
     @Test
-    public void verifyDoPostMethod () throws IOException {
+    public void verifyDoPostMethod() throws IOException {
         // prepare mocks
         MockedStatic<SQL_queries> sqlMock = Mockito.mockStatic(SQL_queries.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -47,14 +47,15 @@ public class LoginServletTest {
         when(request.getParameter("email")).thenReturn(email);
         when(request.getParameter("pw")).thenReturn(pw);
         sqlMock.when(() -> SQL_queries.getSalt(email)).thenReturn(salt);
-        sqlMock.when(() -> SQL_queries.userLogin(email, salt, pw)).thenReturn(new String[]{
-            "1", studiengang, matrikelnummer, rolle, accessToken
-        });
+        sqlMock.when(() -> SQL_queries.userLogin(email, salt, pw))
+                .thenReturn(new String[] { "1", studiengang, matrikelnummer, rolle, accessToken });
 
         // run test
         loginServlet.doPost(request, response);
         String result = stringWriter.toString();
-        assertEquals(result, "{\"resultCode\":\"1\",\"studiengang\":\"" + studiengang + "\",\"matrikelnummer\":\"" + matrikelnummer + "\",\"rolle\":\"" + rolle + "\"}");
+        assertEquals(result, "{\"resultCode\":\"1\",\"studiengang\":\"" + studiengang + "\",\"matrikelnummer\":\""
+                + matrikelnummer + "\",\"rolle\":\"" + rolle + "\"}");
+        sqlMock.close();
     }
 
 }

@@ -15,19 +15,33 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.Mail;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 public class UtilTest {
-    @Mock
-    HttpServletRequest request = mock(HttpServletRequest.class);
-    HttpServletResponse response = mock(HttpServletResponse.class);
+    HttpServletRequest request;
+    HttpServletResponse response;
+    MockedStatic<Util> util;
+
+    @BeforeMethod
+    public void init() {
+        request = mock(HttpServletRequest.class);
+        response = mock(HttpServletResponse.class);
+        util = Mockito.mockStatic(Util.class);
+
+    }
+
+    @AfterMethod
+    public void close() {
+        util.close();
+    }
 
     /*
      * method verifies that addResponseHeaders() is called
@@ -39,14 +53,14 @@ public class UtilTest {
      */
     @Test
     public void verifyAddResponseHeaders() {
-        try (MockedStatic<Util> util = Mockito.mockStatic(Util.class)) {
-            // do nothing when addResponseHeaders() from Util.class is called
-            util.when(() -> Util.addResponseHeaders(any(), any())).thenAnswer((Answer<?>) invocation -> null);
 
-            Util.addResponseHeaders(request, response);
-            // verify static method addResponseHeaders() from Util.class was called
-            util.verify(() -> Util.addResponseHeaders(request, response));
-        }
+        // do nothing when addResponseHeaders() from Util.class is called
+        util.when(() -> Util.addResponseHeaders(any(), any())).thenAnswer((Answer<?>) invocation -> null);
+
+        Util.addResponseHeaders(request, response);
+        // verify static method addResponseHeaders() from Util.class was called
+        util.verify(() -> Util.addResponseHeaders(request, response));
+
     }
 
     /*
