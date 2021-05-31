@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +42,6 @@ public class RegisterServletTest {
     PreparedStatement preparedStatement = mock(PreparedStatement.class);
     
     // initialize all necessary instances
-    RegisterServlet registerServlet = new RegisterServlet();
     StringWriter stringWriter = new StringWriter();
     PrintWriter writer = new PrintWriter(stringWriter);
 
@@ -97,16 +97,11 @@ public class RegisterServletTest {
         when(request.getParameter("tel")).thenReturn(tel);
         when(request.getParameter("mobil")).thenReturn(mobil);
         when(request.getParameter("standort")).thenReturn(standort);
-        
-        //registerDoPost = registerServlet.getClass().getDeclaredMethod("doPost", HttpServletRequest.class, HttpServletResponse.class );
-        //registerDoPost.setAccessible(true);
 
         when(response.getWriter()).thenReturn(writer);
     }
     @AfterMethod
     public void close() {
-        //registerDoPost.setAccessible(false);
-
         // close all static mocks
         util.close();
         sql_queries.close();
@@ -116,9 +111,14 @@ public class RegisterServletTest {
 
     @Test
     public void testDoPost() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
-        // call doPost()-Method of RegisterServlet.class
-        registerServlet.doPost(request, response);
-        
+        // call protected doPost()-Method of RegisterServlet.class
+        RegisterServlet registerServlet = new RegisterServlet() {
+            public RegisterServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException{
+                doPost(request, response);
+                return this;
+            }
+        }.callProtectedMethod(request, response);
+
         String result = stringWriter.toString().trim();
         assertEquals("1", result);
     }
