@@ -196,28 +196,30 @@ function deleteProcessButtons(uni, matrikelnummer) {
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Löschen!"
-    }).then(function () {
-        $.ajax({
-            type: "GET",
-            url: baseUrl + "/process/delete",
-            data: {
-                matrikelnummer: matrikelnummer,
-                uni: uni
-            },
-            success: function (data) {
-                Swal.fire({
-                    title: 'Gelöscht!',
-                    text: 'Der Prozess wurde erfolgreich gelöscht.',
-                    icon: 'success'
-                }).then(function () {
-                    location.reload();
-                });
-            },
-            error: function (error) {
-                console.error(error);
-                Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-            }
-        });
+    }).then(function (result) {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "GET",
+                url: baseUrl + "/process/delete",
+                data: {
+                    matrikelnummer: matrikelnummer,
+                    uni: uni
+                },
+                success: function (data) {
+                    Swal.fire({
+                        title: 'Gelöscht!',
+                        text: 'Der Prozess wurde erfolgreich gelöscht.',
+                        icon: 'success'
+                    }).then(function () {
+                        location.reload();
+                    });
+                },
+                error: function (error) {
+                    console.error(error);
+                    Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+                }
+            });
+        }
     });
 }
 
@@ -232,26 +234,28 @@ function initDeleteProcessButtonsTaskOverview() {
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"
-        }).then(function () {
-            //var id = $('.btn-delete').closest('tr').data('rid');
-            var matrikelnummer = sessionStorage['matrikelnr'];
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                //var id = $('.btn-delete').closest('tr').data('rid');
+                var matrikelnummer = sessionStorage['matrikelnr'];
 
-            $.ajax({
-                type: "GET",
-                url: baseUrl + "/process/delete",
-                data: {
-                    matrikelnummer: matrikelnummer,
-                    uni: uni
-                },
-                success: function (data) {
-                    $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                    Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
-                },
-                error: function (error) {
-                    console.error(error);
-                    Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-                }
-            });
+                $.ajax({
+                    type: "GET",
+                    url: baseUrl + "/process/delete",
+                    data: {
+                        matrikelnummer: matrikelnummer,
+                        uni: uni
+                    },
+                    success: function (data) {
+                        $('#tableBewProzess tr[data-rid=' + id + ']').remove();
+                        Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                    },
+                    error: function (error) {
+                        console.error(error);
+                        Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+                    }
+                });
+            }
         });
     });
 }
