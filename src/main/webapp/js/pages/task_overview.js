@@ -7,6 +7,11 @@ import "jquery-ui-dist/jquery-ui";
 
 $(document).ready(function () {
     getList();
+    $(document).on('click', '.btn-delete', function() {
+        var uni = $(this).data('uni');
+        var matrikelnummer = $(this).data('matrikelnummer');
+        deleteProcessButtons(uni, matrikelnummer);
+    });
 });
 
 function getList() {
@@ -40,7 +45,7 @@ function getList() {
                             "<td>" + '<button class="btn fas fa-list" title="Details" ' +
                             'onclick="location.href=\'task_detail.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&verify=true\'\"> </button>' +
                             "</td>" +
-                            "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('" + singleInstance.uni + "','" + singleInstance.matrikelnummer + "')\"></button>" + "</td>" +
+                            "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" data-uni=\"" + singleInstance.uni + "\" data-matrikelnummer=\"" + singleInstance.matrikelnummer + "\"></button>" + "</td>" +
                             "</tr>";
 
                     } else if (singleInstance.status === 'complete') {
@@ -55,7 +60,7 @@ function getList() {
                             "<td>" + '<button class="btn fas fa-list" title="Details" ' +
                             'onclick="location.href=\'task_detail.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
                             "</td>" +
-                            "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('" + singleInstance.uni + "','" + singleInstance.matrikelnummer + "')\"></button></td>" +
+                            "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" data-uni=\"" + singleInstance.uni + "\" data-matrikelnummer=\"" + singleInstance.matrikelnummer + "\"></button></td>" +
                             "</tr>";
                     } else if (singleInstance.status === 'validateSGL') {
                         validateSGL = validateSGL +
@@ -69,7 +74,7 @@ function getList() {
                             "<td>" + '<button class="btn fas fa-list" title="Details" ' +
                             'onclick="location.href=\'task_detail.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
                             "</td>" +
-                            "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('" + singleInstance.uni + "','" + singleInstance.matrikelnummer + "')\"></button></td>" +
+                            "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" data-uni=\"" + singleInstance.uni + "\" data-matrikelnummer=\"" + singleInstance.matrikelnummer + "\"></button></td>" +
                             "</tr>";
                     } else if (singleInstance.status === 'abgelehnt') {
                         abgelehnt = abgelehnt +
@@ -82,7 +87,7 @@ function getList() {
                             "<td>" + '<button class="btn fas fa-list" title="Details" ' +
                             'onclick="location.href=\'task_detail.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
                             "</td>" +
-                            "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" onclick=\"deleteProcessButtons('" + singleInstance.uni + "','" + singleInstance.matrikelnummer + "')\"></button></td>" +
+                            "<td>" + "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" data-uni=\"" + singleInstance.uni + "\" data-matrikelnummer=\"" + singleInstance.matrikelnummer + "\"></button></td>" +
                             "</tr>";
                     }
                 }
@@ -163,18 +168,20 @@ function deleteProcessButtons(uni, matrikelnummer) {
                 matrikelnummer: matrikelnummer,
                 uni: uni
             },
-        }).done(function (data) {
-            Swal.fire({
-                title: 'Gelöscht!',
-                text: 'Der Prozess wurde erfolgreich gelöscht.',
-                icon: 'success'
-            }).then(function () {
-                location.reload();
-            });
-        }).error(function (error) {
-            console.error(error);
+            success: function (data) {
+                Swal.fire({
+                    title: 'Gelöscht!',
+                    text: 'Der Prozess wurde erfolgreich gelöscht.',
+                    icon: 'success'
+                }).then(function () {
+                    location.reload();
+                });
+            },
+            error: function (error) {
+                console.error(error);
             Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
-        })
+            }
+        });
     });
 }
 
