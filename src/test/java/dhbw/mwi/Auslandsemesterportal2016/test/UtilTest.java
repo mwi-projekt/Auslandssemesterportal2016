@@ -3,6 +3,7 @@ package dhbw.mwi.Auslandsemesterportal2016.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 
 import java.util.Arrays;
@@ -35,7 +36,6 @@ public class UtilTest {
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
         util = Mockito.mockStatic(Util.class);
-
     }
 
     @AfterMethod
@@ -77,6 +77,9 @@ public class UtilTest {
         expectedMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse("testusermwi@dhbw.de"));
         expectedMessage.setSubject("Akademisches Auslandsamt Registrierung");
 
+        util.when(() -> Util.getEmailMessage(anyString(), anyString())).thenCallRealMethod();
+        util.when(() -> Util.getEmailMessage(anyString(), anyString(), anyString())).thenCallRealMethod();
+
         Message actualMessage = Util.getEmailMessage("testusermwi@dhbw.de", "Akademisches Auslandsamt Registrierung");
         assertEquals(expectedMessage.getSubject(), actualMessage.getSubject());
 
@@ -98,6 +101,8 @@ public class UtilTest {
      */
     @Test
     public void testGenerateSalt() {
+        util.when(()->Util.generateSalt()).thenCallRealMethod();
+
         String salt = Util.generateSalt();
         assertNotNull(salt);
         assertEquals(salt.length(), 64);
@@ -105,6 +110,8 @@ public class UtilTest {
 
     @Test
     public void testHashSha256() {
+        util.when(()->Util.HashSha256(anyString())).thenCallRealMethod();
+
         String hashPw = Util.HashSha256("Hallo1234");
         String expectedPw = Util.HashSha256(hashPw + "de3e21dcebe72427883ece");
 

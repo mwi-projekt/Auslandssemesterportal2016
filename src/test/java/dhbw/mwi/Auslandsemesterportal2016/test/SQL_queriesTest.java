@@ -3,7 +3,11 @@ package dhbw.mwi.Auslandsemesterportal2016.test;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
@@ -14,9 +18,7 @@ import java.sql.SQLException;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
@@ -29,7 +31,7 @@ public class SQL_queriesTest {
   @BeforeMethod
   public void init() {
     mockedStatic = Mockito.mockStatic(SQL_queries.class);
-   
+
   }
 
   @AfterMethod
@@ -142,29 +144,38 @@ public class SQL_queriesTest {
     when(resultSet.next()).thenReturn(true);
 
     assertEquals(true, SQL_queries.isMatnrUsed(9876543));
-
   }
 
-  /*
+
+  
+   /*
    * Testing static userRegister()-Method with sample data
    * 
    * mocking the method-calls DB.getInstance(), connection.prepareStatement() and
    * statement.executeUpdate(), because these methods include database connections
    * 
-   * userRegister() is called in RegisterServlet-Class
-   * 
-   * @Test public void testUserRegister() throws SQLException { Connection
-   * connection = mock(Connection.class); PreparedStatement preparedStatement =
-   * mock(PreparedStatement.class);
-   * 
-   * when(DB.getInstance()).thenReturn(connection);
-   * when(connection.prepareStatement(any())).thenReturn(preparedStatement);
-   * when(preparedStatement.executeUpdate()).thenReturn(1);
-   * 
-   * int i = SQL_queries.userRegister("Max", "Mustermann", "Test1234",
-   * Util.generateSalt(), 1, "test@dhbw.de", "Wirtschaftsinformatik", "18B2",
-   * 1234567, "12345", "12345", "Karlsruhe", "verifiziert"); assertEquals(i, 1);
-   * 
-   * }
    */
+   @Test
+  public void testUserRegister() throws SQLException {
+    Connection connection = mock(Connection.class);
+    PreparedStatement preparedStatement = mock(PreparedStatement.class);
+    MockedStatic<DB> mockedStaticDb = Mockito.mockStatic(DB.class);
+
+    mockedStatic
+        .when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(), anyString(),
+            anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
+        .thenCallRealMethod();
+
+    mockedStatic.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenCallRealMethod();
+    mockedStaticDb.when(() -> DB.getInstance()).thenReturn(connection);
+    mockedStatic.when(() -> connection.prepareStatement(any())).thenReturn(preparedStatement);
+    mockedStatic.when(() -> preparedStatement.executeUpdate()).thenReturn(1);
+
+    int i = SQL_queries.userRegister("Max", "Mustermann", "Test1234", Util.generateSalt(), 1, "test@dhbw.de", "Wirtschaftsinformatik", "18B2", 1234567, "12345", "12345", "Karlsruhe", "verifiziert");
+    verify(preparedStatement, times(1)).executeUpdate();
+    assertEquals(i, 1);
+
+    mockedStaticDb.close();
+  }
+   
 }
