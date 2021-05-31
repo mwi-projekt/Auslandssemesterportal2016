@@ -1,7 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,8 +32,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.rest.RegisterServlet;
 
 public class RegisterServletTest {
-    //Method registerDoPost;
-    RegisterServlet registerServlet = new RegisterServlet();
+    // initalize all necessary mocks
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
     ResultSet resultSet = mock(ResultSet.class);
@@ -43,9 +40,12 @@ public class RegisterServletTest {
     Connection connection = mock(Connection.class);
     PreparedStatement preparedStatement = mock(PreparedStatement.class);
     
+    // initialize all necessary instances
+    RegisterServlet registerServlet = new RegisterServlet();
     StringWriter stringWriter = new StringWriter();
     PrintWriter writer = new PrintWriter(stringWriter);
 
+    // initialize all necessary static mocks
     MockedStatic<Util> util;
     MockedStatic<SQL_queries> sql_queries;
     MockedStatic<Transport> transport;
@@ -66,13 +66,13 @@ public class RegisterServletTest {
 
     @BeforeMethod
     public void init() throws NoSuchMethodException, SecurityException, IOException {
+        // define all necessary static mock instances
         util = Mockito.mockStatic(Util.class);
         sql_queries = Mockito.mockStatic(SQL_queries.class);
         transport = Mockito.mockStatic(Transport.class);
         db = Mockito.mockStatic(DB.class);
 
-        //when(registerServlet.doPost(request, response)).thenCallRealMethod();
-
+        // define what happens when a mocked method is called
         sql_queries.when(()->SQL_queries.isEmailUsed(email)).thenReturn(false);
         sql_queries.when(()->SQL_queries.isMatnrUsed(Integer.parseInt(matNr))).thenReturn(false);
         sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(), anyString(),
@@ -83,7 +83,8 @@ public class RegisterServletTest {
         sql_queries.when(() -> preparedStatement.executeUpdate()).thenReturn(1);
 
         util.when(()->Util.getEmailMessage(any(), any())).thenReturn(message);
-        //transport.when(()->Transport.send(any()));
+        util.when(()-> Util.generateSalt()).thenCallRealMethod();
+        util.when(()->Util.HashSha256(any())).thenCallRealMethod();
         
         when(request.getParameter("rolle")).thenReturn(rolle);
         when(request.getParameter("email")).thenReturn(email);
@@ -106,6 +107,7 @@ public class RegisterServletTest {
     public void close() {
         //registerDoPost.setAccessible(false);
 
+        // close all static mocks
         util.close();
         sql_queries.close();
         transport.close();
@@ -114,11 +116,10 @@ public class RegisterServletTest {
 
     @Test
     public void testDoPost() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
-        
-        System.out.println("test");
+        // call doPost()-Method of RegisterServlet.class
         registerServlet.doPost(request, response);
+        
         String result = stringWriter.toString().trim();
-        // change to 1 because mocked method above
-        assertEquals("0", result);
+        assertEquals("1", result);
     }
 }
