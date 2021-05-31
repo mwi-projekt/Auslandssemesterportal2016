@@ -134,10 +134,14 @@ $(document).ready(function () {
             });
     });
 
+    $('#validierungErfolgreich').on('change', function() {
+        change(this);
+    });
+
     $('#validateBtn').on('click', function () {
-        validateString = $('#validierungErfolgreich').val();
-        grund = $('#reason').text();
-        resultString = "";
+        var validateString = $('#validierungErfolgreich').val();
+        var grund = $('#reason').text();
+        var resultString = "";
         if (validateString === "true") {
             resultString = "bestätigen"
         } else if (validateString === "false"){
