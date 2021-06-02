@@ -80,10 +80,7 @@ public class RegisterServlet extends HttpServlet {
 			} catch (MessagingException e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);
-				// } catch (SQLException e) {
-				// e.printStackTrace();
-				// }
-
+			
 			}
 		}
 
