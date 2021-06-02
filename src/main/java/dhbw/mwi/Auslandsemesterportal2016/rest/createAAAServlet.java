@@ -20,7 +20,7 @@ public class createAAAServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 
 		PrintWriter out = response.getWriter();
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
@@ -57,6 +57,7 @@ public class createAAAServlet extends HttpServlet {
 					} else {
 						RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
 						rd.forward(request, response);
+						out.print("registerSuccessful");
 						out.close();
 					}
 				} catch (Exception e) {
