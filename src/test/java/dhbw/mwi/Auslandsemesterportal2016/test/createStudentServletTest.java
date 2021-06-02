@@ -28,9 +28,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import dhbw.mwi.Auslandsemesterportal2016.rest.createAAAServlet;
+import dhbw.mwi.Auslandsemesterportal2016.rest.CreateStudentServlet;
 
-public class createAAAServletTest {
+public class createStudentServletTest {
     // initalize all necessary mocks
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
@@ -43,9 +43,11 @@ public class createAAAServletTest {
     // set up request data
     String email = "testusermwi@dhbw.de";
     String vorname = "Test";
-    String nachname = "Admin";
-    String tel = "0987654321";
-    String mobil = "1234567890";
+    String nachname = "Student";
+    String studgang = "Wirtschaftsinformatik";
+    String kurs = "WWI18B1";
+    String matnr = "1234567";
+    String standort = "Karlsruhe";
 
     // initialize all necessary instances
     StringWriter stringWriter;
@@ -53,7 +55,7 @@ public class createAAAServletTest {
     Cookie c1 = new Cookie("email", email);
     Cookie c2 = new Cookie("sessionID", "s1e5f2ge8gvs694g8vedsg");
     Cookie[] cookies = { c1, c2 };
-    createAAAServlet aaaServlet = new createAAAServlet();
+    CreateStudentServlet studentServlet = new CreateStudentServlet();
 
     @BeforeMethod
     public void init() throws IOException, SQLException {
@@ -76,8 +78,10 @@ public class createAAAServletTest {
         when(request.getParameter("email")).thenReturn(email);
         when(request.getParameter("vorname")).thenReturn(vorname);
         when(request.getParameter("nachname")).thenReturn(nachname);
-        when(request.getParameter("tel")).thenReturn(tel);
-        when(request.getParameter("mobil")).thenReturn(mobil);
+        when(request.getParameter("studgang")).thenReturn(studgang);
+        when(request.getParameter("kurs")).thenReturn(kurs);
+        when(request.getParameter("matnr")).thenReturn(matnr);
+        when(request.getParameter("standort")).thenReturn(standort);
         when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
     }
 
@@ -94,16 +98,16 @@ public class createAAAServletTest {
         Mockito.doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print("Create AAA successfully");
+                writer.print("Create Student successfully");
                 return null;
             }
         }).when(requestDispatcher).forward(any(), any());
 
-        aaaServlet.doPost(request, response);
+        studentServlet.doPost(request, response);
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Create AAA successfully", result);
+        assertEquals("Create Student successfully", result);
     }
 
     @Test
@@ -113,16 +117,16 @@ public class createAAAServletTest {
         Mockito.doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print("Create AAA successfully");
+                writer.print("Create Student successfully");
                 return null;
             }
         }).when(requestDispatcher).forward(any(), any());
 
-        aaaServlet.doPost(request, response);
+        studentServlet.doPost(request, response);
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Create AAA successfully", result);
+        assertEquals("Create Student successfully", result);
     }
 
     @Test
@@ -132,17 +136,17 @@ public class createAAAServletTest {
         Mockito.doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print("Error 401: Rolle 3 - Student - not allowed to create AAA");
+                writer.print("Error 401: Rolle 3 - Student - not allowed to create Student");
                 return null;
             }
         }).when(response).sendError(anyInt(), anyString());
 
-        aaaServlet.doPost(request, response);
+        studentServlet.doPost(request, response);
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
         System.out.println(result);
-        assertEquals("Error 401: Rolle 3 - Student - not allowed to create AAA", result);
+        assertEquals("Error 401: Rolle 3 - Student - not allowed to create Student", result);
     }
 
 }
