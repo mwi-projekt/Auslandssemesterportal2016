@@ -1,56 +1,129 @@
 .help-block {
-	margin-top: -5px;
-	font-size: 12px;
-	margin-left: 16.66666667%;
-	padding-left: 22px;
-	padding-top: 5px;
-	clear: left;
-	margin-bottom: 0;
+  margin-top: -5px;
+  font-size: 12px;
+  margin-left: 16.66666667%;
+  padding-left: 22px;
+  padding-top: 5px;
+  clear: left;
+  margin-bottom: 0;
 }
 
 .dropzone {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-h1,h2 {
-	color: black; 
-	text-align: center;
+h1,
+h2 {
+  color: black;
+  text-align: center;
 }
 
 p {
-	font-size: 20px;
+  font-size: 20px;
 }
 
 .warning {
-	background-color: #FF0000;
+  background-color: #ff0000;
 }
 
 .line {
-/* 	border-bottom: 1px solid #aaa; */
+  /* 	border-bottom: 1px solid #aaa; */
 }
 
 table td {
-	vertical-align: top;
+  vertical-align: top;
 }
 
 .input-group td .form-control {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.col-sm-2 {
+  max-width: fit-content;
+}
+
+label {
+  padding-left: 1.2%;
+  font-size: 1.2em;
+}
+
+p {
+  padding-left: 2.1%;
+}
+
+div#zustimmungsFormular {
+  margin-left: 2.1%;
 }
 
 .container {
-	border-style: solid;
-	border-radius: 10px;
-	border-color: #F0F0F0;
-	margin-top: 50px;
-	margin-bottom: 30px;
-/* 	background-color: #F0F0F0; */
-	background-color: white;
-	margin-left: -15px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: #f0f0f0;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  /* 	background-color: #F0F0F0; */
+  background-color: white;
+  margin-left: -15px;
 }
 
 #boxx {
-	border-radius: 5px;
+  border-radius: 5px;
 }
 /* #checkbox1 { */
 /* 	overflow: auto; */
 /* } */
+
+.invalid-feedback {
+  padding-left: 2.1%;
+}
+input#gdprCompliance {
+  font-size: 20px;
+}
+label.col-sm-2.control-label {
+  padding-left: 2.2%;
+}
+
+/*#stepProgressBar {
+  display: flex;
+  width: 300px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.step {
+  text-align: center;
+}
+
+.step-text {
+  margin-bottom: 10px;
+  color: red;
+}
+
+.bullet {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 1px solid red;
+  color: red;
+  display: inline-block;
+  position: relative;
+  transition: backround-color 500ms;
+  line-height: 50px;
+}
+
+.bullet.completed {
+  color: white;
+  background-color: red;
+}
+
+.bullet.completed::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 30px;
+  background-color: red;
+  right: -32px;
+  bottom: 20px;
+}*/
