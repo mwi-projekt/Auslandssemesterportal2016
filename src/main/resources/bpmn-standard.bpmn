@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1">
   <bpmn:collaboration id="Collaboration_1cl2lu7">
-    <bpmn:participant id="Participant_00ci3jw" name="Bulgarien" processRef="bulgarien" />
+    <bpmn:participant id="Participant_00ci3jw" name="Standard" processRef="standard" />
   </bpmn:collaboration>
-  <bpmn:process id="bulgarien" name="Bewerbungen Bulgarien" isExecutable="true">
+  <bpmn:process id="standard" name="Bewerbungen Standard" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_05ro1a0" name="Studiengangsleiter">
         <bpmn:flowNodeRef>studentBenachrichtigenSGL</bpmn:flowNodeRef>
