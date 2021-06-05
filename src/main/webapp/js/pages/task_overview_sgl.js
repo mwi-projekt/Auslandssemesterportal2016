@@ -197,7 +197,7 @@ function deleteProcessButtons(uni, matrikelnummer) {
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Löschen!"
     }).then(function (result) {
-        if (result.isConfirmed) {
+        if (result.value) {
             $.ajax({
                 type: "GET",
                 url: baseUrl + "/process/delete",
@@ -235,7 +235,7 @@ function initDeleteProcessButtonsTaskOverview() {
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Löschen!"
         }).then(function (result) {
-            if (result.isConfirmed) {
+            if (result.value) {
                 //var id = $('.btn-delete').closest('tr').data('rid');
                 var matrikelnummer = sessionStorage['matrikelnr'];
 
