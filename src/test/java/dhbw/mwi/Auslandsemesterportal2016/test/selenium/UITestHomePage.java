@@ -19,7 +19,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class UITestHomePage {
 	WebDriver driver;
-	private String browser = "FIREFOX";
+	private String browser = "CHROME";
 	private StringBuffer verificationErrors = new StringBuffer();
 	private WebElement universityElement;
 	private String baseUrl = "http://10.3.15.45/";
