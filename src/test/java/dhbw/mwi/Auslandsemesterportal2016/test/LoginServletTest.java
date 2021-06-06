@@ -1,102 +1,61 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
-import org.junit.*;
-import static org.junit.Assert.*;
-import dhbw.mwi.Auslandsemesterportal2016.db.*;
-import dhbw.mwi.Auslandsemesterportal2016.rest.LoginServlet;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static org.mockito.Mockito.*;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+import org.testng.annotations.Test;
+import dhbw.mwi.Auslandsemesterportal2016.rest.LoginServlet;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 
 public class LoginServletTest {
-    String[] testUser = TestUser.getUser();
-    String[] testAAMA = TestUser.getAAMA();
-    String[] testAdmin = TestUser.getAdmin();
-    
-    HttpServletRequest req = mock(HttpServletRequest.class);
-    HttpServletResponse res = mock(HttpServletResponse.class);
-    
+
     /*
+     * method verifies that doPost() is called
+     * 
+     * method includes database calls in external class (SQL_queries), which are not
+     * part of unit-testing that's why LoginServlet is mocked
+     */
     @Test
-    public void testWrongCredentials() {
-        try {
-            when(req.getParameter("email")).thenReturn(testUser[0]);
-            when(req.getParameter("pw")).thenReturn("123456789");
-            StringWriter sW = new StringWriter();
-            when(res.getWriter()).thenReturn(new PrintWriter(sW));
-            
-            (new LoginServlet()).doPost(req, res);
-            String[] result = sW.toString().split(";", -1);
-            assertEquals(4, result.length);
-            assertEquals("2", result[0]);
-        } catch (IOException ex) {
-            fail();
-        }
-     
+    public void verifyDoPostMethod() throws IOException {
+        // prepare mocks
+        MockedStatic<SQL_queries> sqlMock = Mockito.mockStatic(SQL_queries.class);
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter);
+        when(response.getWriter()).thenReturn(writer);
+
+        // prepare test
+        String email = "testusermwi@dhbw.de";
+        String pw = "12345";
+        String salt = "SH5E9Z7P5J6Z5G2BV0";
+        String studiengang = "WI";
+        String matrikelnummer = "0001";
+        String rolle = "1";
+        String accessToken = "abc123";
+
+        LoginServlet loginServlet = new LoginServlet();
+        when(request.getParameter("email")).thenReturn(email);
+        when(request.getParameter("pw")).thenReturn(pw);
+        sqlMock.when(() -> SQL_queries.getSalt(email)).thenReturn(salt);
+        sqlMock.when(() -> SQL_queries.userLogin(email, salt, pw))
+                .thenReturn(new String[] { "1", studiengang, matrikelnummer, rolle, accessToken });
+
+        // run test
+        loginServlet.doPost(request, response);
+        String result = stringWriter.toString();
+        assertEquals(result, "{\"resultCode\":\"1\",\"studiengang\":\"" + studiengang + "\",\"matrikelnummer\":\""
+                + matrikelnummer + "\",\"rolle\":\"" + rolle + "\"}");
+        sqlMock.close();
     }
-    
-    @Test
-    public void testCorrectUser() {
-        try {
-            when(req.getParameter("email")).thenReturn(testUser[0]);
-            when(req.getParameter("pw")).thenReturn(testUser[1]);
-            StringWriter sW = new StringWriter();
-            when(res.getWriter()).thenReturn(new PrintWriter(sW));
-            
-            (new LoginServlet()).doPost(req, res);
-            String[] result = sW.toString().split(";");
-            assertEquals(4, result.length);
-            assertEquals("1", result[0]);
-            assertEquals("3", result[3]);
-        } catch (IOException ex) {
-            fail();
-        }
-     
-    }
-    
-    @Test
-    public void testCorrectAAMA() {
-        try {
-            when(req.getParameter("email")).thenReturn(testAAMA[0]);
-            when(req.getParameter("pw")).thenReturn(testAAMA[1]);
-            StringWriter sW = new StringWriter();
-            when(res.getWriter()).thenReturn(new PrintWriter(sW));
-            
-            (new LoginServlet()).doPost(req, res);
-            String[] result = sW.toString().split(";");
-            assertEquals(4, result.length);
-            assertEquals("1", result[0]);
-            assertEquals("2", result[3]);
-        } catch (IOException ex) {
-            fail();
-        }
-     
-    }
-    
-    @Test
-    public void testCorrectAdmin() {
-        try {
-            when(req.getParameter("email")).thenReturn(testAdmin[0]);
-            when(req.getParameter("pw")).thenReturn(testAdmin[1]);
-            StringWriter sW = new StringWriter();
-            when(res.getWriter()).thenReturn(new PrintWriter(sW));
-            
-            (new LoginServlet()).doPost(req, res);
-            String[] result = sW.toString().split(";");
-            assertEquals(4, result.length);
-            assertEquals("1", result[0]);
-            assertEquals("1", result[3]);
-        } catch (IOException ex) {
-            fail();
-        }
-     
-    }*/
-    
 
 }
