@@ -17,7 +17,7 @@ public class UserDeleteServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
@@ -31,7 +31,12 @@ public class UserDeleteServlet extends HttpServlet {
 				String query = "DELETE FROM user WHERE matrikelnummer = ?";
 				String[] args = new String[] { matrikelnummer };
 				String[] types = new String[] { "int" };
-				SQL_queries.executeUpdate(query, args, types);
+				int result = SQL_queries.executeUpdate(query, args, types);
+
+				if (result == 1) {
+					toClient.println("Delete User successfully");
+				}
+
 			} else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				toClient.println("Error: parameter are missing");

@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.rest.CreateStudentServlet;
 
-public class createStudentServletTest {
+public class CreateStudentServletTest {
     // initalize all necessary mocks
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
