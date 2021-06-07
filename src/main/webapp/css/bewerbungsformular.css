@@ -21,7 +21,9 @@ h2 {
 p {
   font-size: medium;
   padding-left: 1.9%;
-  margin-left: 10%;}
+  margin-left: 10%;
+  text-align: justify;
+}
 
 
 .warning {
@@ -38,9 +40,6 @@ table td {
 
 .col-sm-2 {
   max-width: fit-content;
-}
-.col-sm-offset-2.col-sm-10{
-  margin-left: 10%;
 }
 
 label {
