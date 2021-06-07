@@ -21,6 +21,12 @@ h2 {
 p {
   font-size: 120%;
   padding-left: 1.9%;
+  width: 900px;
+  margin: auto;
+}
+label#gdprCompliance{
+  width: 900px;
+  margin: auto;
 }
 
 .warning {
@@ -73,10 +79,7 @@ div#zustimmungsFormular {
 label.col-sm-2.control-label {
   padding-left: 2%;
 }
-form#formular {
-  width: 900px;
-  margin: auto;
-}
+
 
 button#saveData {
   margin-left: 2%;
