@@ -88,7 +88,6 @@ public class UserUpdateServletTest {
                 .thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.updateUser(any(), any(), any(), any(), any(), any(), any()))
                 .thenCallRealMethod();
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         when(response.getWriter()).thenReturn(writer);
     }
@@ -114,6 +113,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -138,9 +138,10 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+        UserUpdateServlet userUpdateServlet = new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -162,6 +163,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -186,6 +188,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -210,6 +213,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -234,6 +238,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -261,6 +266,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(2);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -285,6 +291,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(2);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -309,6 +316,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(2);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -333,6 +341,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(2);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -357,6 +366,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(2);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -381,6 +391,7 @@ public class UserUpdateServletTest {
         when(resultSet.getInt(1)).thenReturn(2);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -423,5 +434,71 @@ public class UserUpdateServletTest {
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
         assertEquals("Error 401 - Rolle: Student", result);
+    }
+
+    @Test
+    public void testDoPostWithOldmail0AndUpdateError() throws SQLException, IOException {
+        // set up request data
+        String oldmail = "0";
+        String role = "6";
+
+        when(resultSet.getInt(1)).thenReturn(2);
+        when(request.getParameter("oldmail")).thenReturn(oldmail);
+        when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
+
+        Mockito.doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                writer.print("Update Error");
+                return null;
+            }
+        }).when(response).sendError(anyInt(), any());
+
+        // call protected doPost()-Method of RegisterServlet.class
+        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
+                doPost(request, response);
+                return this;
+            }
+        }.callProtectedMethod(request, response);
+
+        // get the value of stringWriter
+        String result = stringWriter.toString().trim();
+        assertEquals("Update Error", result);
+    }
+
+    @Test
+    public void testDoPostWithOldmail2AndUpdateError() throws SQLException, IOException {
+        // set up request data
+        String oldmail = "2";
+        String role = "6";
+
+        when(resultSet.getInt(1)).thenReturn(2);
+        when(request.getParameter("oldmail")).thenReturn(oldmail);
+        when(request.getParameter("role")).thenReturn(role);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
+
+        Mockito.doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                writer.print("Update Error");
+                return null;
+            }
+        }).when(response).sendError(anyInt(), any());
+
+        // call protected doPost()-Method of RegisterServlet.class
+        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
+                doPost(request, response);
+                return this;
+            }
+        }.callProtectedMethod(request, response);
+
+        // get the value of stringWriter
+        String result = stringWriter.toString().trim();
+        assertEquals("Update Error", result);
     }
 }

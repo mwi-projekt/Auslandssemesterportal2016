@@ -17,7 +17,7 @@ public class UserDeleteServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
