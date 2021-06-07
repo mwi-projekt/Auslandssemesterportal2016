@@ -73,9 +73,9 @@ div#zustimmungsFormular {
 label.col-sm-2.control-label {
   padding-left: 2%;
 }
-#formular{
-  width:900px;
-   margin:auto;
+form#formular {
+  width: 900px;
+  margin: auto;
 }
 
 button#saveData {
