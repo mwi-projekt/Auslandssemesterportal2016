@@ -19,7 +19,8 @@ h2 {
 }
 
 p {
-  font-size: 20px;
+  font-size: 120%;
+  padding-left: 1.9%;
 }
 
 .warning {
@@ -40,13 +41,11 @@ table td {
 
 label {
   padding-left: 1.2%;
-  font-size: 120%;
+  font-size: 100%;
 }
-
-p {
-  padding-left: 2.1%;
+#downloadAnmeldeformular {
+  font-size: 100%;
 }
-
 div#zustimmungsFormular {
   margin-left: 2.1%;
 }
@@ -68,11 +67,15 @@ div#zustimmungsFormular {
 .invalid-feedback {
   padding-left: 2.1%;
 }
-input#gdprCompliance {
-  font-size: 20px;
+.checkbox {
+  font-size: 120%;
 }
 label.col-sm-2.control-label {
   padding-left: 2%;
+}
+#formular{
+  width:900px;
+   margin:auto;
 }
 
 button#saveData {
@@ -122,4 +125,4 @@ button#saveData {
   background-color: red;
   right: -32px;
   bottom: 20px;
-}*/
+}
