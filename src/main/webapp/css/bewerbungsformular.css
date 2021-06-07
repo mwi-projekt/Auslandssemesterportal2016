@@ -26,10 +26,6 @@ p {
   background-color: #ff0000;
 }
 
-.line {
-  /* 	border-bottom: 1px solid #aaa; */
-}
-
 table td {
   vertical-align: top;
 }
@@ -44,7 +40,7 @@ table td {
 
 label {
   padding-left: 1.2%;
-  font-size: 1.2em;
+  font-size: 120%;
 }
 
 p {
@@ -61,7 +57,6 @@ div#zustimmungsFormular {
   border-color: #f0f0f0;
   margin-top: 50px;
   margin-bottom: 30px;
-  /* 	background-color: #F0F0F0; */
   background-color: white;
   margin-left: -15px;
 }
@@ -69,9 +64,6 @@ div#zustimmungsFormular {
 #boxx {
   border-radius: 5px;
 }
-/* #checkbox1 { */
-/* 	overflow: auto; */
-/* } */
 
 .invalid-feedback {
   padding-left: 2.1%;
@@ -80,7 +72,11 @@ input#gdprCompliance {
   font-size: 20px;
 }
 label.col-sm-2.control-label {
-  padding-left: 2.2%;
+  padding-left: 2%;
+}
+
+button#saveData {
+  margin-left: 2%;
 }
 
 /*#stepProgressBar {
