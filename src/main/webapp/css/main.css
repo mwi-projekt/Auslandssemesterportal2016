@@ -82,6 +82,10 @@ header {
   vertical-align: middle;
   margin-top: 16px;
 }
+li {
+  font-size: medium;
+  margin-left: 12%;
+}
 
 .auslandsangebote-text-left-image-right img {
   margin-top: 80px;
