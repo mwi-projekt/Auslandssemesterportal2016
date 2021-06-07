@@ -19,15 +19,9 @@ h2 {
 }
 
 p {
-  font-size: 120%;
+  font-size: medium;
   padding-left: 1.9%;
   margin-left: 10%;}
-
-[name=gdprCpmliance] {
-  font-size: 100%;
-  margin-left: 20%;
-  
-}
 
 
 .warning {
@@ -45,10 +39,13 @@ table td {
 .col-sm-2 {
   max-width: fit-content;
 }
+.col-sm-offset-2.col-sm-10{
+  margin-left: 10%;
+}
 
 label {
   padding-left: 1.2%;
-  font-size: 100%;
+  font-size: medium;
 }
 #downloadAnmeldeformular {
   font-size: 100%;
@@ -75,7 +72,7 @@ div#zustimmungsFormular {
   padding-left: 2.1%;
 }
 .checkbox {
-  font-size: 120%;
+  font-size: medium;
 }
 label.col-sm-2.control-label {
   padding-left: 2%;
