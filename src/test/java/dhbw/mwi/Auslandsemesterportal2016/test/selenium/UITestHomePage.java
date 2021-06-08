@@ -3,9 +3,6 @@ package dhbw.mwi.Auslandsemesterportal2016.test.selenium;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +14,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class UITestHomePage {
 	WebDriver driver;
@@ -38,15 +38,17 @@ public class UITestHomePage {
 	private static final String IMPRESSUM_ELEMENT_XPATH = "/html/body/div[5]/div/footer/div[2]/div/div/div[2]/nav/a";
 	private static final String ERFAHRUNGSBERICHT_ELEMENT_XPATH = "/html/body/div[5]/div/div[1]/div/div/a[2]";
 	
-	@Before
+	@BeforeMethod
 	public void getDriver() throws InterruptedException {
 
 		switch (browser) {
 		case "CHROME":
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("headless");
+			options.addArguments("start-maximized");
 			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver(options);
+			driver.manage().window().maximize();
 			
 			break;
 		case "IE":
@@ -69,7 +71,7 @@ public class UITestHomePage {
 		Thread.sleep(2000);
 	}
 
-	@After
+	@AfterMethod
 	public void tearDown() throws Exception {
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();
