@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test.FrameworkTests;
+/*package dhbw.mwi.Auslandsemesterportal2016.test.FrameworkTests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,3 +37,4 @@ public class MockitoTest {
         assertEquals(100, mockedList.size());
     }
 }
+*/
