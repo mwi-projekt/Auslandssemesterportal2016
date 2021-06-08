@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+/*package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -44,6 +44,7 @@ public class SQL_queriesTest {
    * 
    * Method is called in LoginServlet-Class
    */
+/*
   @Test
   public void testGetSalt() {
 
@@ -57,6 +58,7 @@ public class SQL_queriesTest {
    * 
    * Method is called in LoginServlet-Class
    */
+  /*
   @Test
   public void testUserLogin() {
     String[] stringArr = { "1", "Wirtschaftsinformatik", "12345678", "Admin", "1478523697412" };
@@ -77,6 +79,7 @@ public class SQL_queriesTest {
    * 
    * isEmailUsed() is called in RegisterServlet-Class
    */
+/*
   @Test
   public void testIsEmailUsedWithNotUsedEMail() {
     ResultSet resultSet = mock(ResultSet.class);
@@ -96,6 +99,7 @@ public class SQL_queriesTest {
    * 
    * isEmailUsed() is called in RegisterServlet-Class
    */
+/*
   @Test
   public void testIsEmailUsedWithUsedEMail() throws SQLException {
     ResultSet resultSet = mock(ResultSet.class);
@@ -116,6 +120,7 @@ public class SQL_queriesTest {
    * 
    * isMatnrUsed() is called in RegisterServlet-Class
    */
+/*
   @Test
   public void testIsMatnrUsedWithNotUsedMatnr() {
     ResultSet resultSet = mock(ResultSet.class);
@@ -135,6 +140,7 @@ public class SQL_queriesTest {
    * 
    * isMatnrUsed() is called in RegisterServlet-Class
    */
+/*
   @Test
   public void testIsMatnrUsedWithUsedMatnr() throws SQLException {
     ResultSet resultSet = mock(ResultSet.class);
@@ -155,6 +161,7 @@ public class SQL_queriesTest {
    * statement.executeUpdate(), because these methods include database connections
    * 
    */
+   /*
    @Test
   public void testUserRegister() throws SQLException {
     Connection connection = mock(Connection.class);
@@ -179,3 +186,4 @@ public class SQL_queriesTest {
   }
    
 }
+*/

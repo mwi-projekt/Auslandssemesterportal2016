@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test.FrameworkTests;
+/*package dhbw.mwi.Auslandsemesterportal2016.test.FrameworkTests;
 
 import org.testng.annotations.*;
 
@@ -21,3 +21,4 @@ public class TestNgTest {
     }
 
 }
+*/

@@ -13,15 +13,9 @@ pipeline {
                 sh 'cp target/Auslandssemesterportal.war docker/mwi/'
             }
         }
-        stage('Build Docker') {
+        stage('Run Selenium') {
             steps {
-                sh 'cp testserver.env .env'
-                sh 'docker-compose build'
-            }
-        }
-        stage('Deploy Docker') {
-            steps {
-                sh 'docker-compose up -d'
+                sh 'mvn test -Dtest=dhbw.mwi.Auslandsemesterportal2016.test.selenium.UITestHomePage'
             }
         }
     }
