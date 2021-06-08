@@ -8,20 +8,28 @@
   margin-bottom: 0;
 }
 
+
+
+#formular{
+  padding-left: 25%;
+}
+
 .dropzone {
   margin-bottom: 20px;
 }
 
-h1,
+
 h2 {
   color: black;
   text-align: center;
 }
-
+h1{
+  color:black;
+  padding-left: 15%;
+}
 p {
   font-size: medium;
   padding-left: 1.9%;
-  margin-left: 10%;
   text-align: justify;
 }
 
@@ -39,12 +47,22 @@ table td {
 }
 
 .col-sm-2 {
-  max-width: fit-content;
+  max-width: 100%;
 }
 
+#gdprCompliance {
+  margin-left: 38%;
+  
+}
+
+#saveData{
+  float: right;
+}
+ 
 label {
   padding-left: 1.2%;
   font-size: medium;
+  width:100%
 }
 #downloadAnmeldeformular {
   font-size: 100%;
