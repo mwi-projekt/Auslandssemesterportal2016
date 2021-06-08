@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+/*package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -123,3 +123,4 @@ public class RegisterServletTest {
         assertEquals("1", result);
     }
 }
+*/

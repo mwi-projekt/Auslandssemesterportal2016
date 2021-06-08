@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+/*package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -25,7 +25,7 @@ import org.testng.annotations.Test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.Mail;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-
+/*
 public class UtilTest {
     HttpServletRequest request;
     HttpServletResponse response;
@@ -51,7 +51,8 @@ public class UtilTest {
      *
      * method is called in RegisterServlet-Class
      */
-    @Test
+   /*
+@Test
     public void verifyAddResponseHeaders() {
 
         // do nothing when addResponseHeaders() from Util.class is called
@@ -63,13 +64,7 @@ public class UtilTest {
 
     }
 
-    /*
-     * Testing static getEmailMessage()
-     * 
-     * checks if subject, recipients and sender are equal
-     *
-     * method is called in RegisterServlet-Class
-     */
+  
     @Test
     public void testGetEmailMessage() throws AddressException, MessagingException {
         Message expectedMessage = new MimeMessage(Mail.getInstance());
@@ -99,6 +94,7 @@ public class UtilTest {
      *
      * method is called in RegisterServlet-Class
      */
+/*
     @Test
     public void testGenerateSalt() {
         util.when(()->Util.generateSalt()).thenCallRealMethod();
@@ -123,3 +119,4 @@ public class UtilTest {
     }
 
 }
+*/
