@@ -508,7 +508,10 @@ $(document).on('click', '#saveData', function () {
   var form = $('#formular');
 
   if (form && !form.valid()) {
-    Swal.fire('Bitte füllen sie alle Felder korrekt aus.');
+    Swal.fire({
+      title: 'Bitte fülle alle Felder korrekt aus.',
+      icon: 'warning'
+    });
     return;
   }
 
@@ -521,7 +524,10 @@ $(document).on('click', '#saveData', function () {
           !dropzoneForm.getAcceptedFiles() ||
           dropzoneForm.getAcceptedFiles().length <= 0
         ) {
-          Swal.fire('Bitte laden Sie zunächst eine Datei hoch');
+          Swal.fire({
+            title: 'Bitte lade zunächst eine Datei hoch.',
+            icon: 'warning'
+          });
           return;
         }
     }
@@ -567,6 +573,21 @@ $(document).on('click', '#saveData', function () {
     },
   });
 });
+
+// warnung bzgl. Datenverlust bei Nutzung des Zurück-Buttons im Browser
+
+/*$(window).addEventListener("beforeunload", function (event) {
+  debugger;
+  event.alert("hilfe");
+  Swal.fire({
+    icon: 'warning',
+    title: 'Deine Dateien werden nicht gespeichert!',
+    text: 'Zur Zeit können wir leider keine Daten zwischenspeichern, aber wir arbeiten daran. Danke für Dein Verständnis!',
+    reverseButtons: true,
+    showCancelButton: true,
+  });
+});*/
+
 
 function getData() {
   var keyString = '';
