@@ -93,7 +93,7 @@ public class createSGLServletTest {
 
     @Test
     public void testDoPostForRoleAdmin() throws SQLException, ServletException, IOException {
-        // 1 = Admin, 2 = Mitarbeiter, 3 = Student
+        // 1 = Admin
         when(resultSet.getInt(anyInt())).thenReturn(1);
         Mockito.doAnswer(new Answer<Object>() {
             @Override
@@ -110,41 +110,4 @@ public class createSGLServletTest {
         assertEquals("Create SGL successfully", result);
     }
 
-    @Test
-    public void testDoPostForRoleMitarbeiter() throws SQLException, ServletException, IOException {
-        // 1 = Admin, 2 = Mitarbeiter, 3 = Student
-        when(resultSet.getInt(anyInt())).thenReturn(2);
-        Mockito.doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print("Create SGL successfully");
-                return null;
-            }
-        }).when(requestDispatcher).forward(any(), any());
-
-        sglServlet.doPost(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals("Create SGL successfully", result);
-    }
-
-    @Test
-    public void testDoPostForRoleStudent() throws SQLException, IOException {
-        // 1 = Admin, 2 = Mitarbeiter, 3 = Student
-        when(resultSet.getInt(anyInt())).thenReturn(3);
-        Mockito.doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print("Error 401: Rolle 3 - Student - not allowed to create SGL");
-                return null;
-            }
-        }).when(response).sendError(anyInt(), anyString());
-
-        sglServlet.doPost(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals("Error 401: Rolle 3 - Student - not allowed to create SGL", result);
-    }
 }
