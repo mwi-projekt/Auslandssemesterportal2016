@@ -8,9 +8,7 @@
   margin-bottom: 0;
 }
 
-
-
-#formular{
+#formular {
   padding-left: 25%;
 }
 
@@ -18,21 +16,19 @@
   margin-bottom: 20px;
 }
 
-
 h2 {
   color: black;
   text-align: center;
 }
-h1{
-  color:black;
+h1 {
+  color: black;
   padding-left: 15%;
 }
 p {
   font-size: medium;
-  padding-left: 1.9%;
-  text-align: justify;
+  /*padding-left: 1.9%;*/
+  text-align: center;
 }
-
 
 .warning {
   background-color: #ff0000;
@@ -52,17 +48,16 @@ table td {
 
 #gdprCompliance {
   margin-left: 38%;
-  
 }
 
-#saveData{
+#saveData {
   float: right;
 }
- 
+
 label {
   padding-left: 1.2%;
   font-size: medium;
-  width:100%
+  width: 100%;
 }
 #downloadAnmeldeformular {
   font-size: 100%;
@@ -94,7 +89,6 @@ div#zustimmungsFormular {
 label.col-sm-2.control-label {
   padding-left: 2%;
 }
-
 
 button#saveData {
   margin-left: 2%;
