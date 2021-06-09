@@ -14,10 +14,10 @@ $.validator.setDefaults({
     element.closest('.form-group').append(error);
   },
   highlight: function (element, errorClass, validClass) {
-    $(element).addClass('is-invalid');
+    $(element).addClass('is-invalid').removeClass('is-valid');
   },
   unhighlight: function (element, errorClass, validClass) {
-    $(element).removeClass('is-invalid');
+    $(element).removeClass('is-invalid').addClass('is-valid');
   },
 });
 
@@ -482,6 +482,7 @@ function parse() {
               );
             }
           }
+
           $('#formular')
             .submit(function (e) {
               e.preventDefault();
