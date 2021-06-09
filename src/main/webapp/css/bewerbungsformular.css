@@ -16,14 +16,11 @@
   margin-bottom: 20px;
 }
 
-h2 {
+h1 {
   color: black;
   text-align: center;
 }
-h1 {
-  color: black;
-  padding-left: 15%;
-}
+
 p {
   font-size: medium;
   /*padding-left: 1.9%;*/
