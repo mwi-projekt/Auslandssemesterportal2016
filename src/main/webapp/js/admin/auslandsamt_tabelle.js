@@ -1,10 +1,12 @@
 import $ from "jquery";
 import _,{baseUrl} from "../config.js";
-var dt = require( 'datatables.net' )(window, $);
-import "datatables.net-bs4";
+require( 'datatables.net' )(window, $);
+require( 'datatables.net-bs4' )(window, $);
+require( 'datatables.net-buttons' )(window, $);
 require("jquery-validation")($);
 require("jquery-validation/dist/localization/messages_de.min");
 import Swal from "sweetalert2";
+import "bootstrap";
 
 $.validator.setDefaults({
     errorElement: "span",
@@ -13,10 +15,10 @@ $.validator.setDefaults({
         element.closest('.form-group').append(error);
     },
     highlight: function (element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
+        $(element).addClass('is-invalid').removeClass('is-valid');
     },
     unhighlight: function (element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
+        $(element).removeClass('is-invalid').addClass('is-valid');
     }
 });
 
