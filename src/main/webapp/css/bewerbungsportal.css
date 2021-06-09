@@ -40,9 +40,9 @@ th {
   color: white;
 }
 
-.navEl:hover {
-  background: #dc3945;
-  color: white;
+.navEl:hover{
+  text-decoration: none;
+  background-color: #c82333;
 }
 
 .current {
@@ -311,7 +311,7 @@ td {
 }
 
 #closeBewerber {
-  background-color: red;
+  background-color: #d60000;
 }
 
 .keininhalt {
@@ -335,16 +335,7 @@ select#selectPrio {
 .btn-success {
   margin: auto;
 }
-button.swal2-confirm.swal2-styled {
-  background-color: red;
-  font-size: 1.2rem;
-  margin: auto;
-}
 
-h2#swal2-title {
-  font-size: 120%;
-  margin-bottom: 3%;
-}
 /*
 #gdprCompliance {
 	min-height: 40px;
