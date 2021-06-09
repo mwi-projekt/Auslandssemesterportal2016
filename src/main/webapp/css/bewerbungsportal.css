@@ -320,17 +320,17 @@ td {
 
 /*Pop-Up Fenster beim Bewerben auf Uni*/
 select#selectUni {
-  width: 100%;
+  width: 70%;
   font-size: medium;
 }
 select#selectZeit {
   font-size: medium;
-  width: 100%;
+  width: 70%;
 }
 
 select#selectPrio {
   font-size: medium;
-  width: 100%;
+  width: 70%;
 }
 .btn-success {
   margin: auto;

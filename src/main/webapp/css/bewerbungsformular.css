@@ -21,6 +21,32 @@ h1 {
   text-align: center;
 }
 
+#newBewProzess {
+  width: 50%;
+  margin-left: 100%;
+}
+
+table.table.table-bordered.table-hover {
+  width: 150%;
+}
+
+button.swal2-cancel.swal2-styled {
+  font-size: 1.2rem;
+  align-items: center;
+}
+
+.swal2-actions {
+  /* display: -webkit-box; */
+  display: flex;
+  /* z-index: 1; */
+  /* flex-wrap: wrap; */
+  /* -webkit-box-align: center; */
+  /* align-items: center; */
+  /* -webkit-box-pack: center; */
+  /* justify-content: center; */
+  /* width: 100%; */
+  margin: 1.25em auto 0;
+}
 p {
   font-size: medium;
   /*padding-left: 1.9%;*/
