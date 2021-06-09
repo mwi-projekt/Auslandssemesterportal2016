@@ -35,18 +35,6 @@ button.swal2-cancel.swal2-styled {
   align-items: center;
 }
 
-.swal2-actions {
-  /* display: -webkit-box; */
-  display: flex;
-  /* z-index: 1; */
-  /* flex-wrap: wrap; */
-  /* -webkit-box-align: center; */
-  /* align-items: center; */
-  /* -webkit-box-pack: center; */
-  /* justify-content: center; */
-  /* width: 100%; */
-  margin: 1.25em auto 0;
-}
 p {
   font-size: medium;
   /*padding-left: 1.9%;*/
@@ -70,7 +58,7 @@ table td {
 }
 
 #gdprCompliance {
-  margin-left: 38%;
+  margin-left: 50%;
 }
 
 #saveData {
