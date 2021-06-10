@@ -336,6 +336,9 @@ select#selectPrio {
   margin: auto;
 }
 
+#saveChanges{
+  margin-right: 2%;
+}
 /*
 #gdprCompliance {
 	min-height: 40px;

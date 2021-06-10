@@ -510,7 +510,8 @@ $(document).on('click', '#saveData', function () {
   if (form && !form.valid()) {
     Swal.fire({
       title: 'Bitte fülle alle Felder korrekt aus.',
-      icon: 'warning'
+      icon: 'warning',
+      confirmButtonColor: '#28a745'
     });
     return;
   }
@@ -526,7 +527,8 @@ $(document).on('click', '#saveData', function () {
         ) {
           Swal.fire({
             title: 'Bitte lade zunächst eine Datei hoch.',
-            icon: 'warning'
+            icon: 'warning',
+            confirmButtonColor: '#28a745'
           });
           return;
         }
@@ -630,11 +632,12 @@ function getDropzoneOptions(action, fileName) {
     },
     accept: function (file, done) {
       if (file.name != fileName) {
-        Swal.fire(
-          'Fehler',
-          'Bitte beachte die Syntax zur Benennung des Dokuments: ' + fileName,
-          'error'
-        );
+        Swal.fire({
+          title: 'Fehler',
+          text: 'Bitte beachte die Syntax zur Benennung des Dokuments: ' + fileName,
+          icon: 'error',
+          confirmButtonColor: '#28a745'
+        });
         this.removeFile(file);
       } else {
         done();
@@ -647,7 +650,12 @@ function getDropzoneOptions(action, fileName) {
         var message = response.message;
       }
 
-      Swal.fire('Fehler', message, 'error');
+      Swal.fire({
+        title: 'Fehler',
+        text: message,
+        icon: 'error',
+        confirmButtonColor: '#28a745'
+      });
       this.removeFile(file);
     },
   };

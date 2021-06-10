@@ -79,6 +79,7 @@ $(document).ready(function () {
                     showCancelButton: true,
                     cancelButtonText: "Abbrechen!",
                     reverseButtons: true,
+                    confirmButtonColor: '#28a745'
                 }).then(function (result) {
                     if (result.value) {
                         sessionStorage['uni'] = $('#selectUni').val();
@@ -264,7 +265,12 @@ function initBewerben() {
             }
         },
         error: function (result) {
-            Swal.fire("Fehler", "Beim Abrufen der laufenden Prozesse ist ein Fehler aufgetreten", "error");
+            Swal.fire({
+                title: "Fehler",
+                text: "Beim Abrufen der laufenden Prozesse ist ein Fehler aufgetreten",
+                icon: "error",
+                confirmButtonColor: '#28a745'
+            });
         }
     });
 }
@@ -283,6 +289,7 @@ function initEditProcessButtons() {
         Swal.fire({
             title: 'Bitte wählen Sie eine neue Priorität aus',
             html: popUpHtml,
+            confirmButtonColor: '#28a745'
         }).then(function (result) {
             $.ajax({
                 type: "GET",
@@ -309,7 +316,7 @@ function initDeleteProcessButtons() {
             icon: "warning",
             showCancelButton: true,
             cancelButtonText: "Abbrechen!",
-            confirmButtonColor: "#DD6B55",
+            confirmButtonColor: "#dc3545",
             confirmButtonText: "Löschen!",
             reverseButtons: true
         }).then(function (result) {
@@ -327,14 +334,21 @@ function initDeleteProcessButtons() {
                     },
                     success: function (data) {
                         $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                        Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                        Swal.fire({
+                            title: 'Gelöscht!',
+                            text: 'Der Prozess wurde erfolgreich gelöscht.',
+                            icon: 'success',
+                            confirmButtonColor: '#28a745'
+                        });
                     },
                 }).done(function (data) {
                     $('#tableBewProzess tr[data-rid=' + id + ']').remove();
-                    Swal.fire('Gelöscht!', 'Der Prozess wurde erfolgreich gelöscht.', 'success');
+                    Swal.fire({
+                        title: 'Gelöscht!', text: 'Der Prozess wurde erfolgreich gelöscht.', icon: 'success', confirmButtonColor: '#28a745'
+                    });
                 }).error(function (error) {
                     console.error(error);
-                    Swal.fire('Fehler', 'Der Prozess konnte nicht gelöscht werden', 'error');
+                    Swal.fire({ title: 'Fehler', text: 'Der Prozess konnte nicht gelöscht werden', icon: 'error', confirmButtonColor: '#28a745' });
                 })
             }
         });
