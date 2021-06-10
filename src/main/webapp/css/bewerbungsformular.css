@@ -103,8 +103,17 @@ div#zustimmungsFormular {
 }
 
 /*Zentrieren des Formulars*/
-label.col-sm-2.control-label {
-  padding-left: 22%;
+label.col-sm-2.control-label,
+span#untName-error,
+span#bewVorname-error,
+span#bewNachname-error,
+span#bewTelefon-error,
+span#bewStrasse-error,
+span#bewPLZ-error,
+span#bewOrt-error,
+span#bewLand-error,
+span#bewEmail-error {
+  padding-left: 21.5%;
 }
 
 input#bewVorname,
