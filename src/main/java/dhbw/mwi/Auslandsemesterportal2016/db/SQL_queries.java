@@ -46,8 +46,8 @@ public class SQL_queries {
         return rs;
     }
 
-    public static int executeUpdate(String query, String[] data, String[] types) {// Führt UPDATE mit Hilfe von
-        // PreparedStatements aus
+    public static int executeUpdate(String query, String[] data, String[] types) {
+        // Führt UPDATE mit Hilfe von PreparedStatements aus
         Connection connection = DB.getInstance();
         int parCount = data.length;
         int result = 0;
@@ -289,7 +289,8 @@ public class SQL_queries {
                 "" + matrikelnummer, tel, mobil, standort, verifiziert, "" };
         String[] types = new String[] { "String", "String", "String", "String", "int", "String", "String", "String",
                 "int", "String", "String", "String", "String", "String" };
-        return executeUpdate(query, args, types);
+        int test = executeUpdate(query, args, types);
+        return test;
     }
 
     public static int updateUser(String vorname, String nachname, String email, String studiengang, String kurs,

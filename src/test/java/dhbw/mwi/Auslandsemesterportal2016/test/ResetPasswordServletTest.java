@@ -25,6 +25,8 @@ import org.testng.annotations.Test;
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.ResetPasswordServlet;
 
 public class ResetPasswordServletTest {
@@ -45,9 +47,6 @@ public class ResetPasswordServletTest {
     StringWriter stringWriter = new StringWriter();
     PrintWriter writer = new PrintWriter(stringWriter);
 
-    // set up request data
-    String email = "testusermwi@dhbw.de";
-
     @BeforeMethod
     public void init() throws IOException {
         // define all necessary static mock instances
@@ -61,7 +60,7 @@ public class ResetPasswordServletTest {
         sql_queries.when(() -> SQL_queries.forgetPassword(any())).thenCallRealMethod();
         util.when(() -> Util.getEmailMessage(any(), any())).thenReturn(message);
 
-        when(request.getParameter("email")).thenReturn(email);
+        when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
         when(response.getWriter()).thenReturn(writer);
     }
 
@@ -87,7 +86,7 @@ public class ResetPasswordServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Done resetting account " + email, result);
+        assertEquals(SuccessEnum.RESETACC.toString() + TestEnum.TESTEMAIL.toString(), result);
     }
 
 }

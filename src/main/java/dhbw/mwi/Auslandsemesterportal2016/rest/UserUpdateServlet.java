@@ -14,15 +14,17 @@ import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 
-@WebServlet(name = "UserUpdateServlet", urlPatterns = {"/user/update"})
+@WebServlet(name = "UserUpdateServlet", urlPatterns = { "/user/update" })
 public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Util.addResponseHeaders(request,response);
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
-        if (rolle != 1 && rolle != 2) {
+        Util.addResponseHeaders(request, response);
+        int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+        if (rolle != 1) {
             response.sendError(401, "Rolle: " + rolle);
         } else {
             PrintWriter toClient = response.getWriter();
@@ -51,9 +53,9 @@ public class UserUpdateServlet extends HttpServlet {
                         result = SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, standort);
                     }
                     if (result == 1) {
-                        toClient.println("success");
+                        toClient.println(SuccessEnum.UPDATEUSER.toString());
                     } else {
-                        response.sendError(500, "UpdateError");
+                        response.sendError(500, ErrorEnum.USERUPDATE.toString());
                     }
                 } else {
                     int result;
@@ -71,23 +73,23 @@ public class UserUpdateServlet extends HttpServlet {
                         String kurs = request.getParameter("kurs");
                         String matnr = request.getParameter("matnr");
                         String standort = request.getParameter("standort");
-                        result = SQL_queries.updateUser(vorname, nachname, oldmail, studgang, kurs, matnr, mail, standort);
+                        result = SQL_queries.updateUser(vorname, nachname, oldmail, studgang, kurs, matnr, mail,
+                                standort);
                     }
                     if (result == 1) {
-                        String link = Config.MWI_URL + "/?confirm="
-                                + SQL_queries.deactivateUser(mail);
+                        String link = Config.MWI_URL + "/?confirm=" + SQL_queries.deactivateUser(mail);
                         Message message = Util.getEmailMessage(mail,
                                 "Bestätigen: Geänderte E-Mail-Adresse Auslandssemesterportal");
                         message.setContent("<h2>Hallo"
-                                        + ",</h2> Die E-Mail-Adresse deines Accounts für das Auslandssemesterportal wurde erfolgreich ge&auml;ndert.<br>"
-                                        + "Um Deine neue Adresse zu best&auml;tigen, klicke bitte auf folgenden Link. Danach kannst du dich mit deiner neuen Adresse und deinem Passwort wie gewohn einloggen.<br><br> "
-                                        + "<a href=\"" + link + "\" target=\"new\">E-Mail-Adresse best&auml;tigen</a>",
+                                + ",</h2> Die E-Mail-Adresse deines Accounts für das Auslandssemesterportal wurde erfolgreich ge&auml;ndert.<br>"
+                                + "Um Deine neue Adresse zu best&auml;tigen, klicke bitte auf folgenden Link. Danach kannst du dich mit deiner neuen Adresse und deinem Passwort wie gewohn einloggen.<br><br> "
+                                + "<a href=\"" + link + "\" target=\"new\">E-Mail-Adresse best&auml;tigen</a>",
                                 "text/html; charset=UTF-8");
 
                         Transport.send(message);
-                        toClient.println("Success");
+                        toClient.println(SuccessEnum.UPDATEUSER.toString());
                     } else {
-                        response.sendError(500, "UpdateError");
+                        response.sendError(500, ErrorEnum.USERUPDATE.toString());
                     }
                 }
             } catch (Exception e) {

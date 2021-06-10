@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import org.testng.annotations.Test;
 import dhbw.mwi.Auslandsemesterportal2016.rest.LoginServlet;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 
 public class LoginServletTest {
 
@@ -35,26 +36,24 @@ public class LoginServletTest {
         when(response.getWriter()).thenReturn(writer);
 
         // prepare test
-        String email = "testusermwi@dhbw.de";
-        String pw = "12345";
         String salt = "SH5E9Z7P5J6Z5G2BV0";
-        String studiengang = "WI";
-        String matrikelnummer = "0001";
-        String rolle = "1";
         String accessToken = "abc123";
 
         LoginServlet loginServlet = new LoginServlet();
-        when(request.getParameter("email")).thenReturn(email);
-        when(request.getParameter("pw")).thenReturn(pw);
-        sqlMock.when(() -> SQL_queries.getSalt(email)).thenReturn(salt);
-        sqlMock.when(() -> SQL_queries.userLogin(email, salt, pw))
-                .thenReturn(new String[] { "1", studiengang, matrikelnummer, rolle, accessToken });
+        when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
+        when(request.getParameter("pw")).thenReturn(TestEnum.TESTPW.toString());
+        sqlMock.when(() -> SQL_queries.getSalt(TestEnum.TESTEMAIL.toString())).thenReturn(salt);
+        sqlMock.when(() -> SQL_queries.userLogin(TestEnum.TESTEMAIL.toString(), salt, TestEnum.TESTPW.toString()))
+                .thenReturn(new String[] { "1", TestEnum.TESTMATRNR.toString(), TestEnum.TESTMATRNR.toString(),
+                        TestEnum.TESTROLLEINT.toString(), accessToken });
 
         // run test
         loginServlet.doPost(request, response);
         String result = stringWriter.toString();
-        assertEquals(result, "{\"resultCode\":\"1\",\"studiengang\":\"" + studiengang + "\",\"matrikelnummer\":\""
-                + matrikelnummer + "\",\"rolle\":\"" + rolle + "\"}");
+        assertEquals(result,
+                "{\"resultCode\":\"1\",\"studiengang\":\"" + TestEnum.TESTMATRNR.toString() + "\",\"matrikelnummer\":\""
+                        + TestEnum.TESTMATRNR.toString() + "\",\"rolle\":\"" + TestEnum.TESTROLLEINT.toString()
+                        + "\"}");
         sqlMock.close();
     }
 

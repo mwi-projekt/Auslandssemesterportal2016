@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.*;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
+
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 
@@ -17,17 +19,17 @@ import org.camunda.bpm.engine.ProcessEngines;
 public class TaskDeleteServlet extends HttpServlet {
 
 	ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle !=2) {
+		if (rolle != 2) {
 			response.sendError(401, "Rolle: " + rolle);
 		} else {
-			
+
 			String matrikelnummer = request.getParameter("matrikelnummer");
 			String uni = request.getParameter("uni");
 			PrintWriter toClient = response.getWriter();
@@ -45,12 +47,12 @@ public class TaskDeleteServlet extends HttpServlet {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-				
-			} else {
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				toClient.println("Error: parameter are missing");
+
+				} else {
+					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					toClient.println(ErrorEnum.PARAMMISSING.toString());
+				}
 			}
 		}
-	}
 	}
 }

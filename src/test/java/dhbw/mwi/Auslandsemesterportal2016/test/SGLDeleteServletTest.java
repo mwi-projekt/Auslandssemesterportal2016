@@ -1,5 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
+import dhbw.mwi.Auslandsemesterportal2016.enums.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -33,13 +34,10 @@ public class SGLDeleteServletTest {
     // initialize all necessary static mocks
     MockedStatic<SQL_queries> sql_queries;
 
-    // set up request data
-    String email = "testusermwi@dhbw.de";
-
     // initialize all necessary instances
     StringWriter stringWriter;
     PrintWriter writer;
-    Cookie c1 = new Cookie("email", email);
+    Cookie c1 = new Cookie("email", TestEnum.TESTEMAIL.toString());
     Cookie c2 = new Cookie("sessionID", "s1e5f2ge8gvs694g8vedsg");
     Cookie[] cookies = { c1, c2 };
 
@@ -57,6 +55,7 @@ public class SGLDeleteServletTest {
 
         when(resultSet.next()).thenReturn(true);
         when(response.getWriter()).thenReturn(writer);
+        when(resultSet.getInt(1)).thenReturn(1);
     }
 
     @AfterMethod
@@ -67,8 +66,8 @@ public class SGLDeleteServletTest {
 
     @Test
     public void testDoPostForRoleAdmin() throws SQLException, IOException {
-        when(request.getParameter("mail")).thenReturn(email);
-        when(resultSet.getInt(1)).thenReturn(1);
+        when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
+
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
@@ -82,52 +81,12 @@ public class SGLDeleteServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("User Deleted", result);
-    }
-
-    @Test
-    public void testDoPostForRoleAAA() throws SQLException, IOException {
-        when(request.getParameter("mail")).thenReturn(email);
-        when(resultSet.getInt(1)).thenReturn(2);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
-
-        // call protected doPost()-Method of RegisterServlet.class
-        SGLDeleteServlet sglDeleteServlet = new SGLDeleteServlet() {
-            public SGLDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                doPost(request, response);
-                return this;
-            }
-        }.callProtectedMethod(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals("User Deleted", result);
-    }
-
-    @Test
-    public void testDoPostForRoleStudent() throws SQLException, IOException {
-        when(request.getParameter("mail")).thenReturn(email);
-        when(resultSet.getInt(1)).thenReturn(3);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
-
-        // call protected doPost()-Method of RegisterServlet.class
-        SGLDeleteServlet sglDeleteServlet = new SGLDeleteServlet() {
-            public SGLDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                doPost(request, response);
-                return this;
-            }
-        }.callProtectedMethod(request, response);
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals("User Deleted", result);
+        assertEquals(SuccessEnum.USERDELETE.toString(), result);
     }
 
     @Test
     public void testDoPostWithoutMail() throws SQLException, IOException {
         when(request.getParameter("mail")).thenReturn(null);
-        when(resultSet.getInt(1)).thenReturn(1);
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
@@ -141,13 +100,12 @@ public class SGLDeleteServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Error: parameter are missing", result);
+        assertEquals(ErrorEnum.PARAMMISSING.toString(), result);
     }
 
     @Test
     public void testDoPostWithoutResult() throws SQLException, IOException {
-        when(request.getParameter("mail")).thenReturn(email);
-        when(resultSet.getInt(1)).thenReturn(1);
+        when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
 
         // call protected doPost()-Method of RegisterServlet.class
@@ -161,7 +119,7 @@ public class SGLDeleteServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("User not found or could not be deleted", result);
+        assertEquals(ErrorEnum.USERNOTDELETED.toString(), result);
     }
 
 }

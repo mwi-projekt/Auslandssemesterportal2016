@@ -22,6 +22,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.UserDeleteServlet;
 
 public class UserDeleteServletTest {
@@ -36,7 +38,7 @@ public class UserDeleteServletTest {
     // initialize all necessary instances
     StringWriter stringWriter;
     PrintWriter writer;
-    Cookie c1 = new Cookie("email", "testusermwi@dhbw.de");
+    Cookie c1 = new Cookie("email", TestEnum.TESTEMAIL.toString());
     Cookie c2 = new Cookie("sessionID", "s1e5f2ge8gvs694g8vedsg");
     Cookie[] cookies = { c1, c2 };
 
@@ -49,7 +51,7 @@ public class UserDeleteServletTest {
 
         when(request.getCookies()).thenReturn(cookies);
 
-        when(request.getParameter("matrikelnummer")).thenReturn("7654321");
+        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRNR.toString());
         sql_queries.when(() -> SQL_queries.checkUserSession(any(), any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.getRoleForUser(any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
@@ -57,6 +59,7 @@ public class UserDeleteServletTest {
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
         when(resultSet.next()).thenReturn(true);
         when(response.getWriter()).thenReturn(writer);
+        when(resultSet.getInt(1)).thenReturn(1);
     }
 
     @AfterMethod
@@ -67,8 +70,6 @@ public class UserDeleteServletTest {
 
     @Test
     public void testDoGetForRoleAdmin() throws SQLException, IOException {
-        when(resultSet.getInt(1)).thenReturn(1);
-
         // call protected doPost()-Method of RegisterServlet.class
         UserDeleteServlet userDeleteServlet = new UserDeleteServlet() {
             public UserDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -80,43 +81,7 @@ public class UserDeleteServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Delete User successfully", result);
-    }
-
-    @Test
-    public void testDoGetForRoleMitarbeiter() throws SQLException, IOException {
-        when(resultSet.getInt(1)).thenReturn(2);
-
-        // call protected doPost()-Method of RegisterServlet.class
-        UserDeleteServlet userDeleteServlet = new UserDeleteServlet() {
-            public UserDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                doGet(request, response);
-                return this;
-            }
-        }.callProtectedMethod(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals("Delete User successfully", result);
-    }
-
-    @Test
-    public void testDoGetForRoleStudent() throws SQLException, IOException {
-        when(resultSet.getInt(1)).thenReturn(3);
-
-        // call protected doPost()-Method of RegisterServlet.class
-        UserDeleteServlet userDeleteServlet = new UserDeleteServlet() {
-            public UserDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                doGet(request, response);
-                return this;
-            }
-        }.callProtectedMethod(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals("Delete User successfully", result);
+        assertEquals(SuccessEnum.USERDELETE.toString(), result);
     }
 
 }

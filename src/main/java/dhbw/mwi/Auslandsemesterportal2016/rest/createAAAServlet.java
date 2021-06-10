@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
 
 @WebServlet(name = "createAAAServlet", urlPatterns = { "/createAAA" })
 public class createAAAServlet extends HttpServlet {
@@ -25,19 +27,19 @@ public class createAAAServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if (rolle != 1 && rolle != 2) {
+		if (rolle != 1) {
 			response.sendError(401, "Rolle: " + rolle);
 		} else {
 			int role = 2;
 
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
-				out.print("mailError");
+				out.print(ErrorEnum.MAILERROR.toString());
 				out.flush();
 				out.close();
 			} else {
 				try {
 					Message message = Util.getEmailMessage(request.getParameter("email"),
-							"Akademisches Auslandsamt Registrierung");
+							MessageEnum.AAAREGISTR.toString());
 					// Random initial Password
 					UUID id = UUID.randomUUID();
 
@@ -51,7 +53,7 @@ public class createAAAServlet extends HttpServlet {
 							request.getParameter("tel"), request.getParameter("mobil"), aa, "1");
 
 					if (rsupd == 0) {
-						out.print("registerError");
+						out.print(ErrorEnum.USERREGISTER.toString());
 						out.flush();
 						out.close();
 					} else {
@@ -60,7 +62,7 @@ public class createAAAServlet extends HttpServlet {
 						out.close();
 					}
 				} catch (Exception e) {
-					response.sendError(500, "Fehler beim Anlegen: " + e.getMessage());
+					response.sendError(500, ErrorEnum.USERCREATE.toString() + e.getMessage());
 					e.printStackTrace();
 					throw new RuntimeException(e);
 				}

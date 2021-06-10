@@ -28,6 +28,7 @@ import org.testng.annotations.Test;
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.RegisterServlet;
 
 public class RegisterServletTest {
@@ -49,19 +50,6 @@ public class RegisterServletTest {
     MockedStatic<Transport> transport;
     MockedStatic<DB> db;
 
-    // set up request data
-    String email = "testusermwi@dhbw.de";
-    String matNr = "1234567";
-    String rolle = "Studierender";
-    String pw = "Test1234";
-    String vorname = "Test";
-    String nachname = "Test";
-    String studiengang = "Wirtschaftsinformatik";
-    String kurs = "WWI18B5";
-    String tel = "01524875618";
-    String mobil = "01524875618";
-    String standort = "Karlsruhe";
-
     @BeforeMethod
     public void init() throws IOException {
         // define all necessary static mock instances
@@ -71,8 +59,22 @@ public class RegisterServletTest {
         db = Mockito.mockStatic(DB.class);
 
         // define what happens when a mocked method is called
-        sql_queries.when(() -> SQL_queries.isEmailUsed(email)).thenReturn(false);
-        sql_queries.when(() -> SQL_queries.isMatnrUsed(Integer.parseInt(matNr))).thenReturn(false);
+        when(request.getParameter("rolle")).thenReturn(TestEnum.TESTROLLESTRING.toString());
+        when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
+        when(request.getParameter("passwort")).thenReturn(TestEnum.TESTPW.toString());
+        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
+        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
+        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUGANG.toString());
+        when(request.getParameter("kurs")).thenReturn(TestEnum.TESTKURS.toString());
+        when(request.getParameter("matnr")).thenReturn(TestEnum.TESTMATRNR.toString());
+        when(request.getParameter("standort")).thenReturn(TestEnum.TESTSTANDORT.toString());
+        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRNR.toString());
+        when(request.getParameter("tel")).thenReturn(TestEnum.TESTTELNR.toString());
+        when(request.getParameter("mobil")).thenReturn(TestEnum.TESTMOBILNR.toString());
+
+        sql_queries.when(() -> SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenReturn(false);
+        sql_queries.when(() -> SQL_queries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
+                .thenReturn(false);
         sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
                 anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
                 .thenCallRealMethod();
@@ -84,18 +86,6 @@ public class RegisterServletTest {
         util.when(() -> Util.getEmailMessage(any(), any())).thenReturn(message);
         util.when(() -> Util.generateSalt()).thenCallRealMethod();
         util.when(() -> Util.HashSha256(any())).thenCallRealMethod();
-
-        when(request.getParameter("rolle")).thenReturn(rolle);
-        when(request.getParameter("email")).thenReturn(email);
-        when(request.getParameter("passwort")).thenReturn(pw);
-        when(request.getParameter("vorname")).thenReturn(vorname);
-        when(request.getParameter("nachname")).thenReturn(nachname);
-        when(request.getParameter("studiengang")).thenReturn(studiengang);
-        when(request.getParameter("kurs")).thenReturn(kurs);
-        when(request.getParameter("matrikelnummer")).thenReturn(matNr);
-        when(request.getParameter("tel")).thenReturn(tel);
-        when(request.getParameter("mobil")).thenReturn(mobil);
-        when(request.getParameter("standort")).thenReturn(standort);
 
         when(response.getWriter()).thenReturn(writer);
     }

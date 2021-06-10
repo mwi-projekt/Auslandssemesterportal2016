@@ -28,6 +28,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.createSGLServlet;
 
 public class createSGLServletTest {
@@ -40,18 +42,10 @@ public class createSGLServletTest {
     // initialize all necessary static mocks
     MockedStatic<SQL_queries> sql_queries;
 
-    // set up request data
-    String email = "testusermwi@dhbw.de";
-    String vorname = "Test";
-    String nachname = "SGL";
-    String studgang = "Wirtschaftsinformatik";
-    String kurs = "WWI15B2";
-    String standort = "Karlsruhe";
-
     // initialize all necessary instances
     StringWriter stringWriter;
     PrintWriter writer;
-    Cookie c1 = new Cookie("email", email);
+    Cookie c1 = new Cookie("email", TestEnum.TESTEMAIL.toString());
     Cookie c2 = new Cookie("sessionID", "s1e5f2ge8gvs694g8vedsg");
     Cookie[] cookies = { c1, c2 };
     createSGLServlet sglServlet = new createSGLServlet();
@@ -76,13 +70,15 @@ public class createSGLServletTest {
         when(resultSet.next()).thenReturn(true);
 
         when(request.getCookies()).thenReturn(cookies);
-        when(request.getParameter("email")).thenReturn(email);
-        when(request.getParameter("vorname")).thenReturn(vorname);
-        when(request.getParameter("nachname")).thenReturn(nachname);
-        when(request.getParameter("studgang")).thenReturn(studgang);
-        when(request.getParameter("kurs")).thenReturn(kurs);
-        when(request.getParameter("standort")).thenReturn(standort);
+        when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
+        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
+        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
+        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUGANG.toString());
+        when(request.getParameter("kurs")).thenReturn(TestEnum.TESTKURS.toString());
+        when(request.getParameter("standort")).thenReturn(TestEnum.TESTSTANDORT.toString());
         when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
+        // 1 = Admin
+        when(resultSet.getInt(anyInt())).thenReturn(1);
     }
 
     @AfterMethod
@@ -93,12 +89,10 @@ public class createSGLServletTest {
 
     @Test
     public void testDoPostForRoleAdmin() throws SQLException, ServletException, IOException {
-        // 1 = Admin
-        when(resultSet.getInt(anyInt())).thenReturn(1);
         Mockito.doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print("Create SGL successfully");
+                writer.print(SuccessEnum.CREATEUSER.toString());
                 return null;
             }
         }).when(requestDispatcher).forward(any(), any());
@@ -107,7 +101,7 @@ public class createSGLServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Create SGL successfully", result);
+        assertEquals(SuccessEnum.CREATEUSER.toString(), result);
     }
 
 }
