@@ -289,8 +289,7 @@ public class SQL_queries {
                 "" + matrikelnummer, tel, mobil, standort, verifiziert, "" };
         String[] types = new String[] { "String", "String", "String", "String", "int", "String", "String", "String",
                 "int", "String", "String", "String", "String", "String" };
-        int test = executeUpdate(query, args, types);
-        return test;
+        return executeUpdate(query, args, types);
     }
 
     public static int updateUser(String vorname, String nachname, String email, String studiengang, String kurs,
