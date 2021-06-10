@@ -33,7 +33,6 @@ button.swal2-cancel.swal2-styled {
 
 p {
   font-size: medium;
-  /*padding-left: 1.9%;*/
   text-align: center;
 }
 
@@ -59,9 +58,11 @@ table td {
 
 #saveData {
   float: right;
-  margin-right: 20%;
+  margin-right: -40%;
 }
-
+#saveChanges {
+  float: right;
+}
 label {
   padding-left: 1.2%;
   font-size: medium;
@@ -70,8 +71,14 @@ label {
 #downloadAnmeldeformular {
   font-size: 100%;
 }
+
+/*DropDowns formatieren*/
+div#motivationsSchreiben,
+div#abiturZeugnis,
+div#dualisAuszug,
 div#zustimmungsFormular {
-  margin-left: 2.1%;
+  width: 60%;
+  margin-left: 20%;
 }
 
 .container {
@@ -94,12 +101,35 @@ div#zustimmungsFormular {
 .checkbox {
   font-size: medium;
 }
+
+/*Zentrieren des Formulars*/
 label.col-sm-2.control-label {
-  padding-left: 2%;
+  padding-left: 22%;
 }
 
-button#saveData {
-  margin-right: 10%;
+input#bewVorname,
+input#bewNachname,
+input#bewTelefon,
+input#bewStrasse,
+input#bewPLZ,
+select#bewLand,
+input#bewOrt,
+select#aktuelleUni,
+input#matrikelnummer,
+select#bewStudiengang,
+input#bewEmail,
+input#muttersprache {
+  margin-left: 25%;
+}
+
+input#untAnsprechpartner,
+select#untLand,
+input#untOrt,
+input#untPLZ,
+input#untStrasse,
+input#untName,
+input#untEMail {
+  margin-left: 25%;
 }
 
 /*#stepProgressBar {
