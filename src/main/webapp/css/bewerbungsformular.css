@@ -112,7 +112,12 @@ span#bewStrasse-error,
 span#bewPLZ-error,
 span#bewOrt-error,
 span#bewLand-error,
-span#bewEmail-error {
+span#bewEmail-error,
+span#untStrasse-error,
+span#untPLZ-error,
+span#untOrt-error,
+span#untAnsprechpartner-error,
+span#untEMail-error {
   padding-left: 21.5%;
 }
 
@@ -127,7 +132,8 @@ select#aktuelleUni,
 input#matrikelnummer,
 select#bewStudiengang,
 input#bewEmail,
-input#muttersprache {
+input#muttersprache,
+select#muttersprache {
   margin-left: 25%;
 }
 
