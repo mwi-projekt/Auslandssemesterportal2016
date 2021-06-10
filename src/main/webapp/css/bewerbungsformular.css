@@ -12,14 +12,29 @@
   margin-bottom: 20px;
 }
 
-h1,
-h2 {
+h1 {
   color: black;
   text-align: center;
 }
 
+#newBewProzess {
+  width: 50%;
+  margin-left: 100%;
+}
+
+table.table.table-bordered.table-hover {
+  width: 150%;
+}
+
+button.swal2-cancel.swal2-styled {
+  font-size: 1.2rem;
+  align-items: center;
+}
+
 p {
-  font-size: 20px;
+  font-size: medium;
+  /*padding-left: 1.9%;*/
+  text-align: center;
 }
 
 .warning {
@@ -35,18 +50,26 @@ table td {
 }
 
 .col-sm-2 {
-  max-width: fit-content;
+  max-width: 100%;
+}
+
+#gdprCompliance {
+  margin-left: 50%;
+}
+
+#saveData {
+  float: right;
+  margin-right: 20%;
 }
 
 label {
   padding-left: 1.2%;
-  font-size: 120%;
+  font-size: medium;
+  width: 100%;
 }
-
-p {
-  padding-left: 2.1%;
+#downloadAnmeldeformular {
+  font-size: 100%;
 }
-
 div#zustimmungsFormular {
   margin-left: 2.1%;
 }
@@ -68,15 +91,15 @@ div#zustimmungsFormular {
 .invalid-feedback {
   padding-left: 2.1%;
 }
-input#gdprCompliance {
-  font-size: 20px;
+.checkbox {
+  font-size: medium;
 }
 label.col-sm-2.control-label {
   padding-left: 2%;
 }
 
 button#saveData {
-  margin-left: 2%;
+  margin-right: 10%;
 }
 
 /*#stepProgressBar {

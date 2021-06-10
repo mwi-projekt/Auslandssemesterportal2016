@@ -1,9 +1,11 @@
 import {$,baseUrl} from "../config";
 import "../app";
-var dt = require( 'datatables.net' )(window, $);
-import "datatables.net-bs4";
+require( 'datatables.net' )(window, $);
+require( 'datatables.net-bs4' )(window, $);
+require( 'datatables.net-buttons' )(window, $);
 import Swal from "sweetalert2";
 import "jquery-ui-dist/jquery-ui";
+import "bootstrap";
 
 $(document).ready(function () {
     getList();
