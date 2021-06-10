@@ -3,7 +3,6 @@ package dhbw.mwi.Auslandsemesterportal2016.test;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -37,8 +36,6 @@ public class RegisterServletTest {
     HttpServletResponse response = mock(HttpServletResponse.class);
     ResultSet resultSet = mock(ResultSet.class);
     Message message = mock(Message.class);
-    Connection connection = mock(Connection.class);
-    PreparedStatement preparedStatement = mock(PreparedStatement.class);
 
     // initialize all necessary instances
     StringWriter stringWriter = new StringWriter();
@@ -48,7 +45,6 @@ public class RegisterServletTest {
     MockedStatic<Util> util;
     MockedStatic<SQL_queries> sql_queries;
     MockedStatic<Transport> transport;
-    MockedStatic<DB> db;
 
     @BeforeMethod
     public void init() throws IOException {
@@ -56,7 +52,6 @@ public class RegisterServletTest {
         util = Mockito.mockStatic(Util.class);
         sql_queries = Mockito.mockStatic(SQL_queries.class);
         transport = Mockito.mockStatic(Transport.class);
-        db = Mockito.mockStatic(DB.class);
 
         // define what happens when a mocked method is called
         when(request.getParameter("rolle")).thenReturn(TestEnum.TESTROLLESTRING.toString());
@@ -75,13 +70,9 @@ public class RegisterServletTest {
         sql_queries.when(() -> SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenReturn(false);
         sql_queries.when(() -> SQL_queries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
                 .thenReturn(false);
-        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
-                anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
-                .thenCallRealMethod();
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenCallRealMethod();
-        db.when(() -> DB.getInstance()).thenReturn(connection);
-        sql_queries.when(() -> connection.prepareStatement(any())).thenReturn(preparedStatement);
-        sql_queries.when(() -> preparedStatement.executeUpdate()).thenReturn(1);
+        sql_queries.when(() -> SQL_queries.userRegister(any(), any(), any(), any(), anyInt(), any(), any(), any(),
+                anyInt(), any(), any(), any(), any())).thenCallRealMethod();
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         util.when(() -> Util.getEmailMessage(any(), any())).thenReturn(message);
         util.when(() -> Util.generateSalt()).thenCallRealMethod();
@@ -96,7 +87,6 @@ public class RegisterServletTest {
         util.close();
         sql_queries.close();
         transport.close();
-        db.close();
     }
 
     @Test
