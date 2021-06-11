@@ -40,9 +40,9 @@ th {
   color: white;
 }
 
-.navEl:hover{
-  text-decoration: none;
-  background-color: #c82333;
+.navEl:hover {
+  background: #dc3945;
+  color: white;
 }
 
 .current {
@@ -311,7 +311,7 @@ td {
 }
 
 #closeBewerber {
-  background-color: #d60000;
+  background-color: red;
 }
 
 .keininhalt {
@@ -335,9 +335,15 @@ select#selectPrio {
 .btn-success {
   margin: auto;
 }
+button.swal2-confirm.swal2-styled {
+  background-color: red;
+  font-size: 1.2rem;
+  margin: auto;
+}
 
-#saveChanges{
-  margin-right: 2%;
+h2#swal2-title {
+  font-size: 120%;
+  margin-bottom: 3%;
 }
 /*
 #gdprCompliance {
