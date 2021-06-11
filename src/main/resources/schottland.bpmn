@@ -190,7 +190,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache == "Englisch"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_12my7xt" name="Nein" sourceRef="ExclusiveGateway_EnglischMutter" targetRef="englischNotePruefen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache != Englisch}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache != "Englisch"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1p3sxt6" sourceRef="englischNotePruefen" targetRef="ExclusiveGateway_EnglischStart" />
     <bpmn:sequenceFlow id="SequenceFlow_1d0ul03" name="Nein" sourceRef="ExclusiveGateway_EnglischStart" targetRef="daadHochladen">
