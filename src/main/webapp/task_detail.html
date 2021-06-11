@@ -23,21 +23,18 @@
             <div class="col-md-2"></div>
             <div class="col-md-8">
                 <div class="nav2">
-                    <div class="navEl nonCms current" id="nav2">
-                        <a style="color:white" href="task_overview.html">Zurück zur Übersicht</a>
-                    </div>
-                    <div class="navEl nonCms current" id="nav3">
-                        <a style="color:white" href="bewerbungsportal.html">Bewerben</a>
-                        <a style="color:white" href="bewerbungsportal.html#nav2">Übersicht</a>
-                    </div>
+                    <a href="bewerbungsportal.html" class="navEl current">Bewerben</a>
+                    <a href="bewerbungsportal.html#nav2" class="navEl">Zurück zur
+                        Übersicht</a>
+
                 </div>
                 <form id="taskDetails"></form>
-                <div id="validate" class="form-group">
+                <div id="validate" class="form-group row">
                     <form>
                         <br>
                         <label for="validierungErfolgreich">Aktion wählen</label>
                         <select style="margin-left: 0px; margin-bottom: 40px" class="selectpicker form-control"
-                                id="validierungErfolgreich">
+                            id="validierungErfolgreich">
                             <option value="" disabled selected style="display:none;">Aktion</option>
                             <option value="edit">Zur Bearbeitung</option>
                             <option value="true">Bestätigen</option>
@@ -47,13 +44,16 @@
                             <h4>Beachten Sie bitte den automatisch eingefügten Platzhalter in der E-Mail Vorlage!</h4>
                         </label>
                         <br>
-                        <textarea style="margin-left: 0px; margin-bottom: 40px" class="form-control" rows="16" id="reason"></textarea>
+                        <textarea style="margin-left: 0px; margin-bottom: 40px" class="form-control" rows="16"
+                            id="reason"></textarea>
                         <br>
-                        <button type="button" style="margin:0px; margin-bottom:50px; float:right;" class="btn btn-success" id="validateBtn">Absenden
+                        <button type="button" style="margin:0px; margin-bottom:50px; float:right;"
+                            class="btn btn-success" id="validateBtn">Absenden
                         </button>
                     </form>
                 </div>
-                <div id="">
+                <div class="row" id="">
+                    <div class="col-md-9"></div>
                     <button type="button" class="btn btn-success" id="saveChanges">
                         Bewerbung absenden
                     </button>
