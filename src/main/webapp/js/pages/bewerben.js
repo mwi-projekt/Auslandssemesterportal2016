@@ -6,8 +6,8 @@ import 'dropzone';
 require('jquery-validation')($);
 require('jquery-validation/dist/localization/messages_de.min');
 import 'jquery-ui-dist';
-import imagePage1 from '../../images/DHBW.jpg';
-import imagePage2 from '../../images/noimg.jpg';
+import imagePage1 from '../../images/Anmeldeformular_1.jpg';
+import imagePage2 from '../../images/Anmeldeformular_2.jpg';
 
 $.validator.setDefaults({
   errorElement: 'span',
