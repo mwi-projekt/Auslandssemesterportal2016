@@ -33,6 +33,7 @@ button.swal2-cancel.swal2-styled {
 
 p {
   font-size: medium;
+  /*padding-left: 1.9%;*/
   text-align: center;
 }
 
@@ -58,11 +59,9 @@ table td {
 
 #saveData {
   float: right;
-  margin-right: -40%;
+  margin-right: 20%;
 }
-#saveChanges {
-  float: right;
-}
+
 label {
   padding-left: 1.2%;
   font-size: medium;
@@ -71,14 +70,8 @@ label {
 #downloadAnmeldeformular {
   font-size: 100%;
 }
-
-/*DropDowns formatieren*/
-div#motivationsSchreiben,
-div#abiturZeugnis,
-div#dualisAuszug,
 div#zustimmungsFormular {
-  width: 60%;
-  margin-left: 20%;
+  margin-left: 2.1%;
 }
 
 .container {
@@ -101,50 +94,12 @@ div#zustimmungsFormular {
 .checkbox {
   font-size: medium;
 }
-
-/*Zentrieren des Formulars*/
-label.col-sm-2.control-label,
-span#untName-error,
-span#bewVorname-error,
-span#bewNachname-error,
-span#bewTelefon-error,
-span#bewStrasse-error,
-span#bewPLZ-error,
-span#bewOrt-error,
-span#bewLand-error,
-span#bewEmail-error,
-span#untStrasse-error,
-span#untPLZ-error,
-span#untOrt-error,
-span#untAnsprechpartner-error,
-span#untEMail-error {
-  padding-left: 21.5%;
+label.col-sm-2.control-label {
+  padding-left: 2%;
 }
 
-input#bewVorname,
-input#bewNachname,
-input#bewTelefon,
-input#bewStrasse,
-input#bewPLZ,
-select#bewLand,
-input#bewOrt,
-select#aktuelleUni,
-input#matrikelnummer,
-select#bewStudiengang,
-input#bewEmail,
-input#muttersprache,
-select#muttersprache {
-  margin-left: 25%;
-}
-
-input#untAnsprechpartner,
-select#untLand,
-input#untOrt,
-input#untPLZ,
-input#untStrasse,
-input#untName,
-input#untEMail {
-  margin-left: 25%;
+button#saveData {
+  margin-left: 2%;
 }
 
 /*#stepProgressBar {

@@ -1036,6 +1036,10 @@ i {
   display: none;
 }
 
+.swal2-popup {
+  font-size: 1.6rem !important;
+}
+
 .team-member {
   margin-bottom: 50px;
   text-align: center;

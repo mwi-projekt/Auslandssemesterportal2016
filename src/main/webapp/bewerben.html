@@ -1,70 +1,46 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="utf-8" />
+
+<head>
+    <meta charset="utf-8">
     <title>DHBW Auslandsportal</title>
 
-    <link
-      rel="stylesheet"
-      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="node_modules/jquery-ui-dist/jquery-ui.min.css"
-    />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/bewerbungsportal.css" />
-    <link rel="stylesheet" href="css/bewerbungsformular.css" />
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="stylesheet" href="css/InfoBox.css" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="node_modules/sweetalert2/dist/sweetalert2.min.css"
-    />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/jquery-ui-dist/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/bewerbungsportal.css">
+    <link rel="stylesheet" href="css/bewerbungsformular.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" href="css/InfoBox.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/sweetalert2/dist/sweetalert2.min.css">
 
-    <link
-      rel="stylesheet"
-      href="node_modules/dropzone/dist/min/dropzone.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="node_modules/cookieconsent/build/cookieconsent.min.css"
-    />
+    <link rel="stylesheet" href="node_modules/dropzone/dist/min/dropzone.min.css">
+    <link rel="stylesheet" href="node_modules/cookieconsent/build/cookieconsent.min.css">
 
     <script src="js/pages/bewerben.js"></script>
-  </head>
 
-  <body>
+
+</head>
+
+<body>
     <module href="./layout.html">
-      <!-- Mittlerer Teil -->
-      <div class="row aufgaben">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-          <div class="nav2">
-            <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
-            <a href="bewerbungsportal.html" class="navEl current" id="nav2"
-              >Bewerben</a
-            >
-            <a href="bewerbungsportal.html#nav2" class="navEl" id="nav2"
-              >Zurück zur Übersicht</a
-            >
-            <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
-          </div>
-          <form id="formular" class="form-horizontal"></form>
+        <!-- Mittlerer Teil -->
+        <div class="row aufgaben">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="nav2">
+                    <!-- <div class="navEl current nonCms" id="nav1">Home</div> -->
+                    <div class="navEl nonCms current" id="nav2"><a style="color:white" href="bewerbungsportal.html">Bewerben</a></div>
+                    <div class="navEl nonCms current" id="nav2"><a style="color:white" href="bewerbungsportal.html#nav2">Zurück zur Übersicht</a></div>
+                    <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
+                </div>
+                <form id="formular" class="form-horizontal"></form>
+                <div id="nextStep">
+                <button id="saveData" class="btn btn-success navMargin logoutButton">Weiter</button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-2">
-          <div id="nextStep">
-            <button id="saveData" class="btn btn-success navMargin">
-              Weiter
-            </button>
-          </div>
-        </div>
-      </div>
     </module>
-  </body>
+</body>
 </html>
