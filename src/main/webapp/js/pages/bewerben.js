@@ -517,7 +517,11 @@ $(document).on('click', '#saveData', function () {
   var form = $('#formular');
 
   if (form && !form.valid()) {
-    Swal.fire('Bitte füllen sie alle Felder korrekt aus.');
+    Swal.fire({
+      title: 'Bitte fülle alle Felder korrekt aus.',
+      icon: 'warning',
+      confirmButtonColor: '#28a745'
+    });
     return;
   }
 
@@ -530,7 +534,11 @@ $(document).on('click', '#saveData', function () {
           !dropzoneForm.getAcceptedFiles() ||
           dropzoneForm.getAcceptedFiles().length <= 0
         ) {
-          Swal.fire('Bitte laden Sie zunächst eine Datei hoch');
+          Swal.fire({
+            title: 'Bitte lade zunächst eine Datei hoch.',
+            icon: 'warning',
+            confirmButtonColor: '#28a745'
+          });
           return;
         }
     }
@@ -577,6 +585,21 @@ $(document).on('click', '#saveData', function () {
   });
 });
 
+// warnung bzgl. Datenverlust bei Nutzung des Zurück-Buttons im Browser
+
+/*$(window).addEventListener("beforeunload", function (event) {
+  debugger;
+  event.alert("hilfe");
+  Swal.fire({
+    icon: 'warning',
+    title: 'Deine Dateien werden nicht gespeichert!',
+    text: 'Zur Zeit können wir leider keine Daten zwischenspeichern, aber wir arbeiten daran. Danke für Dein Verständnis!',
+    reverseButtons: true,
+    showCancelButton: true,
+  });
+});*/
+
+
 function getData() {
   var keyString = '';
   for (var l = 0; l < idList.length; l++) {
@@ -618,11 +641,12 @@ function getDropzoneOptions(action, fileName) {
     },
     accept: function (file, done) {
       if (file.name != fileName) {
-        Swal.fire(
-          'Fehler',
-          'Bitte beachte die Syntax zur Benennung des Dokuments: ' + fileName,
-          'error'
-        );
+        Swal.fire({
+          title: 'Fehler',
+          text: 'Bitte beachte die Syntax zur Benennung des Dokuments: ' + fileName,
+          icon: 'error',
+          confirmButtonColor: '#28a745'
+        });
         this.removeFile(file);
       } else {
         done();
@@ -635,7 +659,12 @@ function getDropzoneOptions(action, fileName) {
         var message = response.message;
       }
 
-      Swal.fire('Fehler', message, 'error');
+      Swal.fire({
+        title: 'Fehler',
+        text: message,
+        icon: 'error',
+        confirmButtonColor: '#28a745'
+      });
       this.removeFile(file);
     },
   };
