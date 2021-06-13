@@ -8,26 +8,34 @@
   margin-bottom: 0;
 }
 
+
+
+#formular{
+  padding-left: 25%;
+}
+
 .dropzone {
   margin-bottom: 20px;
 }
 
-h1,
+
 h2 {
   color: black;
   text-align: center;
 }
-
-p {
-  font-size: 20px;
+h1{
+  color:black;
+  padding-left: 15%;
 }
+p {
+  font-size: medium;
+  padding-left: 1.9%;
+  text-align: justify;
+}
+
 
 .warning {
   background-color: #ff0000;
-}
-
-.line {
-  /* 	border-bottom: 1px solid #aaa; */
 }
 
 table td {
@@ -39,18 +47,26 @@ table td {
 }
 
 .col-sm-2 {
-  max-width: fit-content;
+  max-width: 100%;
 }
 
+#gdprCompliance {
+  margin-left: 38%;
+  
+}
+
+#saveData{
+  float: right;
+}
+ 
 label {
   padding-left: 1.2%;
-  font-size: 1.2em;
+  font-size: medium;
+  width:100%
 }
-
-p {
-  padding-left: 2.1%;
+#downloadAnmeldeformular {
+  font-size: 100%;
 }
-
 div#zustimmungsFormular {
   margin-left: 2.1%;
 }
@@ -61,7 +77,6 @@ div#zustimmungsFormular {
   border-color: #f0f0f0;
   margin-top: 50px;
   margin-bottom: 30px;
-  /* 	background-color: #F0F0F0; */
   background-color: white;
   margin-left: -15px;
 }
@@ -69,18 +84,20 @@ div#zustimmungsFormular {
 #boxx {
   border-radius: 5px;
 }
-/* #checkbox1 { */
-/* 	overflow: auto; */
-/* } */
 
 .invalid-feedback {
   padding-left: 2.1%;
 }
-input#gdprCompliance {
-  font-size: 20px;
+.checkbox {
+  font-size: medium;
 }
 label.col-sm-2.control-label {
-  padding-left: 2.2%;
+  padding-left: 2%;
+}
+
+
+button#saveData {
+  margin-left: 2%;
 }
 
 /*#stepProgressBar {

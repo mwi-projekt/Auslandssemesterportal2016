@@ -10,8 +10,6 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,7 +38,7 @@ public class RegisterServletTest {
     Message message = mock(Message.class);
     Connection connection = mock(Connection.class);
     PreparedStatement preparedStatement = mock(PreparedStatement.class);
-    
+
     // initialize all necessary instances
     StringWriter stringWriter = new StringWriter();
     PrintWriter writer = new PrintWriter(stringWriter);
@@ -65,7 +63,7 @@ public class RegisterServletTest {
     String standort = "Karlsruhe";
 
     @BeforeMethod
-    public void init() throws NoSuchMethodException, SecurityException, IOException {
+    public void init() throws IOException {
         // define all necessary static mock instances
         util = Mockito.mockStatic(Util.class);
         sql_queries = Mockito.mockStatic(SQL_queries.class);
@@ -73,19 +71,20 @@ public class RegisterServletTest {
         db = Mockito.mockStatic(DB.class);
 
         // define what happens when a mocked method is called
-        sql_queries.when(()->SQL_queries.isEmailUsed(email)).thenReturn(false);
-        sql_queries.when(()->SQL_queries.isMatnrUsed(Integer.parseInt(matNr))).thenReturn(false);
-        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(), anyString(),
-            anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString())).thenCallRealMethod();
+        sql_queries.when(() -> SQL_queries.isEmailUsed(email)).thenReturn(false);
+        sql_queries.when(() -> SQL_queries.isMatnrUsed(Integer.parseInt(matNr))).thenReturn(false);
+        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
+                anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
+                .thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenCallRealMethod();
         db.when(() -> DB.getInstance()).thenReturn(connection);
         sql_queries.when(() -> connection.prepareStatement(any())).thenReturn(preparedStatement);
         sql_queries.when(() -> preparedStatement.executeUpdate()).thenReturn(1);
 
-        util.when(()->Util.getEmailMessage(any(), any())).thenReturn(message);
-        util.when(()-> Util.generateSalt()).thenCallRealMethod();
-        util.when(()->Util.HashSha256(any())).thenCallRealMethod();
-        
+        util.when(() -> Util.getEmailMessage(any(), any())).thenReturn(message);
+        util.when(() -> Util.generateSalt()).thenCallRealMethod();
+        util.when(() -> Util.HashSha256(any())).thenCallRealMethod();
+
         when(request.getParameter("rolle")).thenReturn(rolle);
         when(request.getParameter("email")).thenReturn(email);
         when(request.getParameter("passwort")).thenReturn(pw);
@@ -100,6 +99,7 @@ public class RegisterServletTest {
 
         when(response.getWriter()).thenReturn(writer);
     }
+
     @AfterMethod
     public void close() {
         // close all static mocks
@@ -110,15 +110,17 @@ public class RegisterServletTest {
     }
 
     @Test
-    public void testDoPost() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, IOException {
+    public void testDoPost() throws IOException {
         // call protected doPost()-Method of RegisterServlet.class
         RegisterServlet registerServlet = new RegisterServlet() {
-            public RegisterServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException{
+            public RegisterServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
                 doPost(request, response);
                 return this;
             }
         }.callProtectedMethod(request, response);
 
+        // get the value of stringWriter
         String result = stringWriter.toString().trim();
         assertEquals("1", result);
     }

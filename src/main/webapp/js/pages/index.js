@@ -37,7 +37,19 @@ $(document).ready(function () {
     loadPortalInfo();
     loadAuslandsangebote();
     loadInfoMaterial();
+    clearModalOnDismiss();
 });
+
+// Laden der Daten der PortalInfo Box
+function clearModalOnDismiss() {
+    $('#login').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+    })
+
+    $('#register').on('hidden.bs.modal', function () {
+        $(this).find('form').trigger('reset');
+    })
+}
 
 // Laden der Daten der PortalInfo Box
 function loadPortalInfo() {
