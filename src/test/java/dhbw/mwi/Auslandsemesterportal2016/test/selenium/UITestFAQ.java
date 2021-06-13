@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -18,7 +19,7 @@ import org.testng.annotations.*;
 
 public class UITestFAQ {
 	WebDriver driver;
-	private String browser = "FIREFOX";
+	private String browser = "CHROME";
 	private StringBuffer verificationErrors = new StringBuffer();
 	private WebElement universityElement;
 	private WebElement cookiesElement;
@@ -37,8 +38,13 @@ public class UITestFAQ {
 
 		switch (browser) {
 		case "CHROME":
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("headless");
+			options.addArguments("start-maximized");
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(options);
+			driver.manage().window().maximize();
+			
 			break;
 		case "IE":
 			WebDriverManager.iedriver().setup();
@@ -144,11 +150,11 @@ public class UITestFAQ {
 		FAQElement = driver.findElement(By.xpath("/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a"));
 		Thread.sleep(2000);
 		FAQElement.click();
-		Thread.sleep(2000);
-		
+		Thread.sleep(3000);	
 		registerElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div/div/div[1]/button[2]"));
 		Thread.sleep(2000);
 		registerElement.click();
+		Thread.sleep(2000);
 		cancelElement = driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div[1]/button"));
 		cancelElement.click();
 		assertEquals(driver.getCurrentUrl(), "http://10.3.15.45/faq.html");
