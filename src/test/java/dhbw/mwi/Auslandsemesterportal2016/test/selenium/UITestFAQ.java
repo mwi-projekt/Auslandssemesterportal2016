@@ -3,11 +3,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,8 +13,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import static org.junit.Assert.assertEquals;
-
+import org.testng.annotations.*;
 
 
 public class UITestFAQ {
@@ -37,7 +32,7 @@ public class UITestFAQ {
 	private WebElement impressumElement; 
 	
 	
-	@Before
+	@BeforeMethod
 	public void getDriver() throws InterruptedException {
 
 		switch (browser) {
@@ -64,7 +59,7 @@ public class UITestFAQ {
 		cookiesElement.click();
 	}
 
-	@After
+	@AfterMethod
 	public void tearDown() throws Exception {
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();
@@ -122,7 +117,7 @@ public class UITestFAQ {
 		Thread.sleep(2000);
 		FAQElement.click();
 		Thread.sleep(2000);
-		loginElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div[2]/div/div[1]/button[1]"));
+		loginElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div/div/div[1]/button[1]"));
 		loginElement.click();
 		Thread.sleep(2000);
 		cancelElement = driver.findElement(By.xpath("/html/body/div[3]/div/div/form/div[3]/button[1]"));
@@ -151,7 +146,7 @@ public class UITestFAQ {
 		FAQElement.click();
 		Thread.sleep(2000);
 		
-		registerElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div[2]/div/div[1]/button[2]"));
+		registerElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div/div/div[1]/button[2]"));
 		Thread.sleep(2000);
 		registerElement.click();
 		cancelElement = driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div[1]/button"));
