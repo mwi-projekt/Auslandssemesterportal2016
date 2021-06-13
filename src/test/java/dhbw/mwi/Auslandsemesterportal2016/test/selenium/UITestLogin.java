@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -32,8 +33,12 @@ public class UITestLogin {
 
 		switch (browser) {
 		case "CHROME":
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("headless");
+			options.addArguments("start-maximized");
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(options);
+			driver.manage().window().maximize();
 			break;
 		case "IE":
 			WebDriverManager.iedriver().setup();

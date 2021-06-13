@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -26,8 +27,12 @@ public class UITestAdmin {
 
 		switch (browser) {
 		case "CHROME":
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("headless");
+			options.addArguments("start-maximized");
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(options);
+			driver.manage().window().maximize();
 			break;
 		case "IE":
 			WebDriverManager.iedriver().setup();
@@ -156,4 +161,14 @@ public class UITestAdmin {
 		Thread.sleep(2000);
 		AssertJUnit.assertEquals( baseUrl + "index.html", driver.getCurrentUrl());
 	}
+	/*
+	@Test
+	public void testThatChecksIfAdminPageIsVisibleIfUserIsNotLogin() throws InterruptedException {
+		Thread.sleep(2000);
+		driver.findElement(By.id("logout")).click();
+		Thread.sleep(2000);
+		driver.get("http://10.3.15.45/cms.html");
+		AssertJUnit.assertEquals( baseUrl + "index.html", driver.getCurrentUrl());
+	}
+	*/
 }
