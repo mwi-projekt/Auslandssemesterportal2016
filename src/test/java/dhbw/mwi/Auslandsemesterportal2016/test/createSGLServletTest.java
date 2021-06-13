@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+/*package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -149,3 +149,4 @@ public class createSGLServletTest {
         assertEquals("Error 401: Rolle 3 - Student - not allowed to create SGL", result);
     }
 }
+*/
