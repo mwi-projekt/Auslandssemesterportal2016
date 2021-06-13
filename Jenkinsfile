@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Run Selenium') {
             steps {
-                sh 'mvn -Dtest="dhbw.mwi.Auslandsemesterportal2016.test.selenium.**'"
+                sh 'mvn test -Dtest="dhbw.mwi.Auslandsemesterportal2016.test.selenium.**"'
             }
         }
     }
