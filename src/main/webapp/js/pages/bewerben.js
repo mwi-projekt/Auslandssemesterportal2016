@@ -479,7 +479,10 @@ function parse() {
               console.log(json[i]['data']['id']);
               console.log(json[i]['data']['filename']);
               $('#' + json[i]['data']['id']).dropzone(
-                getDropzoneOptions()
+                getDropzoneOptions(
+                  json[i]['data']['id'],
+                  json[i]['data']['filename']
+                )
               );
             }
           }
@@ -617,7 +620,7 @@ function getData() {
   });
 }
 
-function getDropzoneOptions() {
+function getDropzoneOptions(action, fileName) {
   return {
     url: baseUrl + '/upload',
     acceptedFiles: 'application/pdf',
@@ -640,6 +643,14 @@ function getDropzoneOptions() {
       } else {
         var message = response.message;
       }
+
+      Swal.fire({
+        title: 'Fehler',
+        text: message,
+        icon: 'error',
+        confirmButtonColor: '#28a745'
+      });
+      this.removeFile(file);
     },
   };
 }
