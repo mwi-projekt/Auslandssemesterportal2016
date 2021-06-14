@@ -479,10 +479,7 @@ function parse() {
               console.log(json[i]['data']['id']);
               console.log(json[i]['data']['filename']);
               $('#' + json[i]['data']['id']).dropzone(
-                getDropzoneOptions(
-                  json[i]['data']['id'],
-                  json[i]['data']['filename']
-                )
+                getDropzoneOptions()
               );
             }
           }
@@ -620,7 +617,7 @@ function getData() {
   });
 }
 
-function getDropzoneOptions(action, fileName) {
+function getDropzoneOptions() {
   return {
     url: baseUrl + '/upload',
     acceptedFiles: 'application/pdf',
@@ -635,17 +632,7 @@ function getDropzoneOptions(action, fileName) {
       formData.append('instance', instanceID);
     },
     accept: function (file, done) {
-      if (file.name != fileName) {
-        Swal.fire({
-          title: 'Fehler',
-          text: 'Bitte beachte die Syntax zur Benennung des Dokuments: ' + fileName,
-          icon: 'error',
-          confirmButtonColor: '#28a745'
-        });
-        this.removeFile(file);
-      } else {
         done();
-      }
     },
     error: function (file, response) {
       if ($.type(response) === 'string') {
@@ -653,14 +640,6 @@ function getDropzoneOptions(action, fileName) {
       } else {
         var message = response.message;
       }
-
-      Swal.fire({
-        title: 'Fehler',
-        text: message,
-        icon: 'error',
-        confirmButtonColor: '#28a745'
-      });
-      this.removeFile(file);
     },
   };
 }
