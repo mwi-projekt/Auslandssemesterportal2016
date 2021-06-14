@@ -133,7 +133,10 @@ input#matrikelnummer,
 select#bewStudiengang,
 input#bewEmail,
 input#muttersprache,
-select#muttersprache {
+select#muttersprache,
+select#uni1,
+select#uni2,
+select#uni3 {
   margin-left: 25%;
 }
 
