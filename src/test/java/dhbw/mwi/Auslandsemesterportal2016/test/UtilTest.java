@@ -29,19 +29,22 @@ import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 
 public class UtilTest {
-    HttpServletRequest request;
-    HttpServletResponse response;
+    // Initialization of necessary mock objects for mocking static methods
     MockedStatic<Util> util;
+
+    // Initialization of necessary mock objects for mocking instance methods
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
 
     @BeforeMethod
     public void init() {
-        request = mock(HttpServletRequest.class);
-        response = mock(HttpServletResponse.class);
+        // Define necessary mock objects for mocking static methods
         util = Mockito.mockStatic(Util.class);
     }
 
     @AfterMethod
     public void close() {
+        // Close mock objects for mocking static methods
         util.close();
     }
 
@@ -62,7 +65,6 @@ public class UtilTest {
         Util.addResponseHeaders(request, response);
         // verify static method addResponseHeaders() from Util.class was called
         util.verify(() -> Util.addResponseHeaders(request, response));
-
     }
 
     /*

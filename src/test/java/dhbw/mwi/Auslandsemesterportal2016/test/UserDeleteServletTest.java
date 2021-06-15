@@ -27,15 +27,15 @@ import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.UserDeleteServlet;
 
 public class UserDeleteServletTest {
-    // initalize all necessary mocks
+    // Initialization of necessary mock objects for mocking instance methods
+    ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
-    ResultSet resultSet = mock(ResultSet.class);
 
-    // initialize all necessary static mocks
+    // Initialization of necessary mock objects for mocking static methods
     MockedStatic<SQL_queries> sql_queries;
 
-    // initialize all necessary instances
+    // Initialization of necessary instances
     StringWriter stringWriter;
     PrintWriter writer;
     Cookie c1 = new Cookie("email", TestEnum.TESTEMAIL.toString());
@@ -44,27 +44,34 @@ public class UserDeleteServletTest {
 
     @BeforeMethod
     public void init() throws SQLException, IOException {
-        // define all necessary static mock instances
+        // Define necessary mock objects for mocking static methods
         sql_queries = Mockito.mockStatic(SQL_queries.class);
+
+        // Define necessary instances
         stringWriter = new StringWriter();
         writer = new PrintWriter(stringWriter);
 
-        when(request.getCookies()).thenReturn(cookies);
-
-        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRNR.toString());
+        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.checkUserSession(any(), any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.getRoleForUser(any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
-
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
-        when(resultSet.next()).thenReturn(true);
+
         when(response.getWriter()).thenReturn(writer);
+
+        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRNR.toString());
+        when(request.getCookies()).thenReturn(cookies);
+
+        when(resultSet.next()).thenReturn(true);
         when(resultSet.getInt(1)).thenReturn(1);
     }
 
     @AfterMethod
     public void close() {
+        // Close mock objects for mocking static methods
         sql_queries.close();
+
+        // Close instances
         writer.close();
     }
 

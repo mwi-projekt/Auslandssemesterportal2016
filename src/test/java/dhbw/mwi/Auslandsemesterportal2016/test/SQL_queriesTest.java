@@ -69,7 +69,6 @@ public class SQL_queriesTest {
 
     String[] result = SQL_queries.userLogin(TestEnum.TESTEMAIL.toString(), "SH5E9Z7P5J6Z5G2BV0", "Password1234");
     assertArrayEquals(stringArr, result);
-
   }
 
   /*
@@ -88,7 +87,6 @@ public class SQL_queriesTest {
     when(SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenCallRealMethod();
 
     assertEquals(false, SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString()));
-
   }
 
   /*
@@ -108,7 +106,6 @@ public class SQL_queriesTest {
     when(resultSet.next()).thenReturn(true);
 
     assertEquals(true, SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString()));
-
   }
 
   /*
@@ -127,7 +124,6 @@ public class SQL_queriesTest {
     when(SQL_queries.isMatnrUsed(1234567)).thenCallRealMethod();
 
     assertEquals(false, SQL_queries.isMatnrUsed(1234567));
-
   }
 
   /*

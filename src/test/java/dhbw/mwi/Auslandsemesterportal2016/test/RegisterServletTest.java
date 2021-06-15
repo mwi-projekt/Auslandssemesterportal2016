@@ -9,8 +9,6 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.mail.Message;
@@ -24,49 +22,35 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.RegisterServlet;
 
 public class RegisterServletTest {
-    // initalize all necessary mocks
+    // Initialization of necessary mock objects for mocking instance methods
+    Message message = mock(Message.class);
+    ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
-    ResultSet resultSet = mock(ResultSet.class);
-    Message message = mock(Message.class);
 
-    // initialize all necessary instances
-    StringWriter stringWriter = new StringWriter();
-    PrintWriter writer = new PrintWriter(stringWriter);
-
-    // initialize all necessary static mocks
+    // Initialization of necessary mock objects for mocking static methods
     MockedStatic<Util> util;
     MockedStatic<SQL_queries> sql_queries;
     MockedStatic<Transport> transport;
 
+    // Initialization of necessary instances
+    StringWriter stringWriter = new StringWriter();
+    PrintWriter writer = new PrintWriter(stringWriter);
+
     @BeforeMethod
     public void init() throws IOException {
-        // define all necessary static mock instances
+        // Define necessary mock objects for mocking static methods
         util = Mockito.mockStatic(Util.class);
         sql_queries = Mockito.mockStatic(SQL_queries.class);
         transport = Mockito.mockStatic(Transport.class);
 
-        // define what happens when a mocked method is called
-        when(request.getParameter("rolle")).thenReturn(TestEnum.TESTROLLESTRING.toString());
-        when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
-        when(request.getParameter("passwort")).thenReturn(TestEnum.TESTPW.toString());
-        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
-        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
-        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUGANG.toString());
-        when(request.getParameter("kurs")).thenReturn(TestEnum.TESTKURS.toString());
-        when(request.getParameter("matnr")).thenReturn(TestEnum.TESTMATRNR.toString());
-        when(request.getParameter("standort")).thenReturn(TestEnum.TESTSTANDORT.toString());
-        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRNR.toString());
-        when(request.getParameter("tel")).thenReturn(TestEnum.TESTTELNR.toString());
-        when(request.getParameter("mobil")).thenReturn(TestEnum.TESTMOBILNR.toString());
-
+        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenReturn(false);
         sql_queries.when(() -> SQL_queries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
                 .thenReturn(false);
@@ -79,11 +63,24 @@ public class RegisterServletTest {
         util.when(() -> Util.HashSha256(any())).thenCallRealMethod();
 
         when(response.getWriter()).thenReturn(writer);
+
+        when(request.getParameter("rolle")).thenReturn(TestEnum.TESTROLLESTRING.toString());
+        when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
+        when(request.getParameter("passwort")).thenReturn(TestEnum.TESTPW.toString());
+        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
+        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
+        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUGANG.toString());
+        when(request.getParameter("kurs")).thenReturn(TestEnum.TESTKURS.toString());
+        when(request.getParameter("matnr")).thenReturn(TestEnum.TESTMATRNR.toString());
+        when(request.getParameter("standort")).thenReturn(TestEnum.TESTSTANDORT.toString());
+        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRNR.toString());
+        when(request.getParameter("tel")).thenReturn(TestEnum.TESTTELNR.toString());
+        when(request.getParameter("mobil")).thenReturn(TestEnum.TESTMOBILNR.toString());
     }
 
     @AfterMethod
     public void close() {
-        // close all static mocks
+        // Close mock objects for mocking static methods
         util.close();
         sql_queries.close();
         transport.close();

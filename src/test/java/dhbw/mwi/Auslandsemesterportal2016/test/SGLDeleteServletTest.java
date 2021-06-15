@@ -26,15 +26,15 @@ import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.rest.SGLDeleteServlet;
 
 public class SGLDeleteServletTest {
-    // initalize all necessary mocks
+    // Initialization of necessary mock objects for mocking instance methods
+    ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
-    ResultSet resultSet = mock(ResultSet.class);
 
-    // initialize all necessary static mocks
+    // Initialization of necessary mock objects for mocking static methods
     MockedStatic<SQL_queries> sql_queries;
 
-    // initialize all necessary instances
+    // Initialization of necessary instances
     StringWriter stringWriter;
     PrintWriter writer;
     Cookie c1 = new Cookie("email", TestEnum.TESTEMAIL.toString());
@@ -43,32 +43,40 @@ public class SGLDeleteServletTest {
 
     @BeforeMethod
     public void init() throws SQLException, IOException {
-        // define all necessary static mock instances
+        // Define necessary mock objects for mocking static methods
         sql_queries = Mockito.mockStatic(SQL_queries.class);
+
+        // Define necessary instances
         stringWriter = new StringWriter();
         writer = new PrintWriter(stringWriter);
 
-        when(request.getCookies()).thenReturn(cookies);
+        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.checkUserSession(any(), any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.getRoleForUser(any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
 
-        when(resultSet.next()).thenReturn(true);
         when(response.getWriter()).thenReturn(writer);
+
+        when(request.getCookies()).thenReturn(cookies);
+
         when(resultSet.getInt(1)).thenReturn(1);
+        when(resultSet.next()).thenReturn(true);
     }
 
     @AfterMethod
     public void close() {
+        // Close mock objects for mocking static methods
         sql_queries.close();
+
+        // Close instances
         writer.close();
     }
 
     @Test
     public void testDoPostForRoleAdmin() throws SQLException, IOException {
-        when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
-
+        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
+        when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
 
         // call protected doPost()-Method of RegisterServlet.class
         SGLDeleteServlet sglDeleteServlet = new SGLDeleteServlet() {
@@ -86,8 +94,9 @@ public class SGLDeleteServletTest {
 
     @Test
     public void testDoPostWithoutMail() throws SQLException, IOException {
-        when(request.getParameter("mail")).thenReturn(null);
+        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
+        when(request.getParameter("mail")).thenReturn(null);
 
         // call protected doPost()-Method of RegisterServlet.class
         SGLDeleteServlet sglDeleteServlet = new SGLDeleteServlet() {
@@ -105,8 +114,9 @@ public class SGLDeleteServletTest {
 
     @Test
     public void testDoPostWithoutResult() throws SQLException, IOException {
-        when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
+        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
+        when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
 
         // call protected doPost()-Method of RegisterServlet.class
         SGLDeleteServlet sglDeleteServlet = new SGLDeleteServlet() {
