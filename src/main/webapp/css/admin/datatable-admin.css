@@ -41,8 +41,7 @@
 }
 
 .dataTables_paginate {
-    cursor: pointer;
-    margin-right: 5px
+    margin-left: auto !important;
 }
 
 .bottom {
