@@ -287,14 +287,18 @@ function parse() {
                     //console.log(idList);
 
                     if (innerOutput != '') {
-                        if (stepName === "datenEingeben") {
+                        if( stepName === "universitaetAuswaehlen"){
+                            visibleStepName = "Universitätenauswahl und Zeitraum";
+                        }else if (stepName === "datenEingeben") {
                             visibleStepName = "Persönliche Daten";
                         } else if (stepName === "datenEingebenUnt") {
                             visibleStepName = "Partnerunternehmen";
                         } else if (stepName === "Task_1jq3nab") {
                             visibleStepName = "Semesteranschrift";
-                        } else if (stepName === "englischNotePruefen") {
-                            visibleStepName = "Notenpunkte im Abitur";
+                        } else if(stepName === "spanischNotePruefen"){
+                            visibleStepName = "Notenpunkte in Spanisch im Abitur"
+                        }else if (stepName === "englischNotePruefen") {
+                            visibleStepName = "Notenpunkte in Englisch im Abitur";
                         } else {
                             visibleStepName = "Sonstige Angaben";
                         }
