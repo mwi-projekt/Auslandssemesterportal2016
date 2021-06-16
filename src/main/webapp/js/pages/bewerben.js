@@ -182,7 +182,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 
 
 
-      doc.setFontSize(11);
+    /*   doc.setFontSize(11);
       doc.setTextColor(92, 76, 76);
 
       doc.text(20, 66, name);
@@ -196,7 +196,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
       doc.text(20, 116, kurs);
       doc.text(107, 116, semester);
       doc.text(20, 128, studiengang);
-      doc.text(107, 128, zeitraum);
+      doc.text(107, 128, zeitraum); */
       
 
      // doc.text(36, 153, uni1); 
