@@ -283,7 +283,8 @@ $(document).ready(function () {
                     }],
                     "drawCallback": function (settings) {
                         setClickListeners();
-                    }
+                    },
+                    buttons: []
                 });
             },
             error: function (result) {
