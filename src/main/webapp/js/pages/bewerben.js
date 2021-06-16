@@ -24,14 +24,16 @@ $.validator.setDefaults({
 });
 
 var instanceID;
-var uni;
+var uni1;
 var idList = [];
 var typeList = [];
 
 $(document).ready(function () {
   var url = new URL(window.location.href);
   instanceID = url.searchParams.get('instance_id');
-  uni = url.searchParams.get('uni');
+  uni1 = url.searchParams.get('uni1');
+  uni2 = url.searchParams.get('uni2');
+  uni3 = url.searchParams.get('uni3');
 
   parse();
 });
@@ -108,58 +110,60 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
       //Hochschule aus URL
       var url_string = window.location.href;
       var url = new URL(url_string);
-      var uni = url.searchParams.get('uni');
+      var uni1 = url.searchParams.get('uni1');
+      var uni2 = url.searchParams.get('uni2');
+      var uni3 = url.searchParams.get('uni3');
       //Bulgarien
-      if (uni == 'American University in Bulgaria (Bulgarien)') {
-        var klammer = uni.indexOf('(');
+      if (uni1 == 'American University in Bulgaria (Bulgarien)') {
+        var klammer = uni1.indexOf('(');
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni1.slice(0, klammer - 1) + '\n' + uni1.slice(klammer, uni1.length);
         //Schottland
-      } else if (uni == 'Abertay University of Dundee (Schottland)') {
-        var klammer = uni.indexOf('(');
+      } else if (uni1 == 'Abertay University of Dundee (Schottland)') {
+        var klammer = uni1.indexOf('(');
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni1.slice(0, klammer - 1) + '\n' + uni1.slice(klammer, uni1.length);
         //San Marcos
-      } else if (uni == 'California State University San Marcos (USA)') {
-        var absatz = uni.indexOf('San');
+      } else if (uni1 == 'California State University San Marcos (USA)') {
+        var absatz = uni1.indexOf('San');
         var stringUni =
-          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+          uni1.slice(0, absatz - 1) + '\n' + uni1.slice(absatz - 1, uni1.length);
         //Channel Islands
-      } else if (uni == 'California State University Channel Islands (USA)') {
-        var absatz = uni.indexOf('Channel');
+      } else if (uni1 == 'California State University Channel Islands (USA)') {
+        var absatz = uni1.indexOf('Channel');
         var stringUni =
-          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+          uni1.slice(0, absatz - 1) + '\n' + uni1.slice(absatz - 1, uni1.length);
         //Costa Rica
-      } else if (uni == 'Costa Rica Institute of Technology (Costa Rica)') {
-        var absatz = uni.indexOf('Technology');
+      } else if (uni1 == 'Costa Rica Institute of Technology (Costa Rica)') {
+        var absatz = uni1.indexOf('Technology');
         var stringUni =
-          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+          uni1.slice(0, absatz - 1) + '\n' + uni1.slice(absatz - 1, uni1.length);
         //Suedarfika
-      } else if (uni == 'Durban University of Technology (Suedafrika)') {
-        var klammer = uni.indexOf('(');
+      } else if (uni1 == 'Durban University of Technology (Suedafrika)') {
+        var klammer = uni1.indexOf('(');
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni1.slice(0, klammer - 1) + '\n' + uni1.slice(klammer, uni1.length);
         //Finnland
       } else if (
-        uni == 'South-Eastern Finland University of Applied Sciences (Finnland)'
+        uni1 == 'South-Eastern Finland University of Applied Sciences (Finnland)'
       ) {
-        var absatz1 = uni.indexOf('of');
-        var absatz2 = uni.indexOf('(');
+        var absatz1 = uni1.indexOf('of');
+        var absatz2 = uni1.indexOf('(');
         var stringUni =
-          uni.slice(0, absatz1 - 1) +
+          uni1.slice(0, absatz1 - 1) +
           '\n' +
-          uni.slice(absatz1 - 1, absatz2 - 1) +
+          uni1.slice(absatz1 - 1, absatz2 - 1) +
           '\n' +
-          uni.slice(absatz2 - 1, uni.length);
+          uni1.slice(absatz2 - 1, uni1.length);
         //Polen
-      } else if (uni == 'Technischen Universität Lodz (Polen)') {
-        var klammer = uni.indexOf('(');
+      } else if (uni1 == 'Technischen Universität Lodz (Polen)') {
+        var klammer = uni1.indexOf('(');
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni1.slice(0, klammer - 1) + '\n' + uni1.slice(klammer, uni1.length);
       } else {
-        var klammer = uni.indexOf('(');
+        var klammer = uni1.indexOf('(');
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni1.slice(0, klammer - 1) + '\n' + uni1.slice(klammer, uni1.length);
       }
 
       var land = stringUni.split('(')[1].trim().replace(')', '');
@@ -231,7 +235,7 @@ function parse() {
     url: baseUrl + '/currentActivity',
     data: {
       instance_id: instanceID,
-      uni: uni,
+      uni1: uni1,
     },
     success: function (result) {
       var output = '';
@@ -241,8 +245,8 @@ function parse() {
         location.href =
           'task_detail.html?instance_id=' +
           instanceID +
-          '&uni=' +
-          uni +
+          '&uni1=' +
+          uni1 +
           '&send_bew=true';
       }
       $.ajax({
