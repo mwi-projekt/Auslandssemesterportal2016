@@ -187,7 +187,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 
       doc.text(20, 66, name);
       doc.text(107, 66, vorname);
-      doc.text(20, 79, name);
+      doc.text(20, 79, geburtsdatum);
       doc.text(107, 79, nationalität);
       doc.text(20, 91, result.bewStrasse);
       doc.text(107, 91, result.bewPLZ + ' ' + result.bewOrt);
@@ -199,11 +199,11 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
       doc.text(107, 128, zeitraum);
       
 
-      doc.text(36, 153, uni1); // uni
+     // doc.text(36, 153, uni1); 
 
-      doc.text(36, 200, uni2); // uni
+    //  doc.text(36, 200, uni2); 
 
-      doc.text(36, 250, uni3); // uni
+    //  doc.text(36, 250, uni3); 
 
 
 
