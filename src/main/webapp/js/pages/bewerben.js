@@ -173,26 +173,29 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
       var kurs = result.bewKurs;
       var mail = result.bewEmail;
 
+
       doc.setFontSize(11);
       doc.setTextColor(92, 76, 76);
 
-      /*doc.text(20, 68, name);
-      doc.text(110, 68, vorname);
-      doc.text(110, 80, nationalität);
-      doc.text(20, 92, result.bewStrasse);
-      doc.text(110, 92, result.bewPLZ + ' ' + result.bewOrt);
+      doc.text(20, 66, name);
+      doc.text(107, 66, vorname);
+      doc.text(107, 79, nationalität);
+      doc.text(20, 91, result.bewStrasse);
+      doc.text(107, 91, result.bewPLZ + ' ' + result.bewOrt);
       doc.text(20, 104, mail);
       doc.text(20, 116, kurs);
-      doc.text(110, 116, semester);
+      doc.text(107, 116, semester);
       doc.text(20, 128, studiengang);
-      doc.text(110, 128, zeitraum);
-      doc.text(36, 146, hochschule);
-      doc.text(150, 148, land);
-      doc.text(20, 270, result.bewOrt);
-      doc.text(74, 270, new Date().toDateString());*/
+      doc.text(107, 128, zeitraum);
+      doc.text(36, 153, hochschule); // uni
+      doc.text(150, 153, land);
+
 
       doc.addPage();
       doc.addImage(image2, 'JPEG', 0, 0, 210, 297);
+
+      doc.text(19, 29, result.bewOrt);
+      doc.text(74, 29, new Date().toDateString());
       doc.save('Anmeldeformular.pdf');
     },
     error: function (result) {
