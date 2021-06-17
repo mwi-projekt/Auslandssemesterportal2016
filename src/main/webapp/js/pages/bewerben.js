@@ -515,7 +515,7 @@ $(document).on('click', '#saveData', function () {
     Swal.fire({
       title: 'Bitte fülle alle Felder korrekt aus.',
       icon: 'warning',
-      confirmButtonColor: '#28a745'
+      confirmButtonColor: '#28a745',
     });
     return;
   }
@@ -532,7 +532,7 @@ $(document).on('click', '#saveData', function () {
           Swal.fire({
             title: 'Bitte lade zunächst eine Datei hoch.',
             icon: 'warning',
-            confirmButtonColor: '#28a745'
+            confirmButtonColor: '#28a745',
           });
           return;
         }
@@ -594,7 +594,6 @@ $(document).on('click', '#saveData', function () {
   });
 });*/
 
-
 function getData() {
   var keyString = '';
   for (var l = 0; l < idList.length; l++) {
@@ -604,7 +603,7 @@ function getData() {
 
   $.ajax({
     type: 'GET',
-    url: baseUrl + '/getVariables',
+    url: baseUrl + 'getVariables',
     data: {
       instance_id: instanceID,
       key: keyString,
@@ -635,7 +634,7 @@ function getDropzoneOptions(action, fileName) {
       formData.append('instance', instanceID);
     },
     accept: function (file, done) {
-        done();
+      done();
     },
     error: function (file, response) {
       if ($.type(response) === 'string') {
@@ -648,7 +647,7 @@ function getDropzoneOptions(action, fileName) {
         title: 'Fehler',
         text: message,
         icon: 'error',
-        confirmButtonColor: '#28a745'
+        confirmButtonColor: '#28a745',
       });
       this.removeFile(file);
     },
