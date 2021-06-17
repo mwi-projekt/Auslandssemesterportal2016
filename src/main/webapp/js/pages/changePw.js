@@ -2,10 +2,10 @@ import {$,baseUrl} from "../config";
 import "../app";
 import Swal from "sweetalert2";
 import "cookieconsent";
-
+var uuid_var;
 $(document).ready(function() {
 	var url = new URL(window.location.href);
-	var uuid_var = url.searchParams.get("uuid");
+	uuid_var = url.searchParams.get("uuid");
 	$(document).on('click', '#savePassword', function() {
 		setpw();
 	})
