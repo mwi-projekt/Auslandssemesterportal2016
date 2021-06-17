@@ -26,7 +26,7 @@ public class createAAAServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
-
+		// Rolle Admin = 1
 		if (rolle != 1) {
 			response.sendError(401, "Rolle: " + rolle);
 		} else {

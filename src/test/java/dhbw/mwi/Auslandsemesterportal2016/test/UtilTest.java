@@ -58,7 +58,7 @@ public class UtilTest {
      */
     @Test
     public void verifyAddResponseHeaders() {
-
+        // ...
         // do nothing when addResponseHeaders() from Util.class is called
         util.when(() -> Util.addResponseHeaders(any(), any())).thenAnswer((Answer<?>) invocation -> null);
 
