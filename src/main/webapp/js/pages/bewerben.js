@@ -104,7 +104,7 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
       image2.src = imagePage2;
       var doc = new jsPDF();
       doc.addImage(image1, 'JPEG', 0, 0, 210, 297);
-
+      /*
       //Hochschule aus URL
       var url_string = window.location.href;
       var url = new URL(url_string);
@@ -160,9 +160,9 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
         var klammer = uni.indexOf('(');
         var stringUni =
           uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
-      }
+      }*/
 
-      var land = stringUni.split('(')[1].trim().replace(')', '');
+      //var land = stringUni.split('(')[1].trim().replace(')', '');
       var nationalität = result.bewLand;
       var zeitraum = 'Sommersemester 2020'; //Fehlt
       var semester = '3. Semester';
