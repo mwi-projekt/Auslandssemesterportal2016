@@ -164,8 +164,8 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 
       var land = stringUni.split('(')[1].trim().replace(')', '');
       var nationalität = result.bewLand;
-      var zeitraum = result.bewZeitraum;
-      var semester = result.bewSemster;
+      var zeitraum = result.zeitraum;
+      var semester = result.bewSemester;
       var vorname = result.bewVorname;
       var name = result.bewNachname;
       var studiengang = result.bewStudiengang;
