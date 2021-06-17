@@ -142,7 +142,8 @@ function getList() {
                                 sortAscending: ": aktivieren, um Spalte aufsteigend zu sortieren",
                                 sortDescending: ": aktivieren, um Spalte absteigend zu sortieren"
                             }
-                        }
+                        },
+                        buttons: []
                     });
                 });
             }

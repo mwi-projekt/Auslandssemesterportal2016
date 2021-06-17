@@ -40,7 +40,7 @@ th {
   color: white;
 }
 
-.navEl:hover{
+.navEl:hover {
   text-decoration: none;
   background-color: #c82333;
 }
@@ -336,6 +336,13 @@ select#selectPrio {
   margin: auto;
 }
 
+#saveChanges {
+  margin-right: 2%;
+}
+
+.list-group-item {
+  margin-left: 0%;
+}
 /*
 #gdprCompliance {
 	min-height: 40px;
