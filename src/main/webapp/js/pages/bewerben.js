@@ -163,7 +163,6 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
       }
 
       var land = stringUni.split('(')[1].trim().replace(')', '');
-      var hochschule = stringUni.split('(')[0].trim().replace('(', '');
       var nationalität = result.bewLand;
       var zeitraum = 'Sommersemester 2020'; //Fehlt
       var semester = '3. Semester';
@@ -172,27 +171,48 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
       var studiengang = result.bewStudiengang;
       var kurs = result.bewKurs;
       var mail = result.bewEmail;
+      var uni1 = result.uni1;
+      var uni2 = result.uni2;
+      var uni3 = result.uni3;
+      var geburtsdatum = result.bewGeburtsdatum;
+      var erasmus = result.bewErasmus;
+      var SGL = result.bewSGL;
+      var learningAgreement = result.bewLA;
+      var telefon = result.bewTelefon;
 
-      doc.setFontSize(11);
+
+
+    /*   doc.setFontSize(11);
       doc.setTextColor(92, 76, 76);
 
-      /*doc.text(20, 68, name);
-      doc.text(110, 68, vorname);
-      doc.text(110, 80, nationalität);
-      doc.text(20, 92, result.bewStrasse);
-      doc.text(110, 92, result.bewPLZ + ' ' + result.bewOrt);
+      doc.text(20, 66, name);
+      doc.text(107, 66, vorname);
+      doc.text(20, 79, geburtsdatum);
+      doc.text(107, 79, nationalität);
+      doc.text(20, 91, result.bewStrasse);
+      doc.text(107, 91, result.bewPLZ + ' ' + result.bewOrt);
       doc.text(20, 104, mail);
+      doc.text(107, 104, telefon);
       doc.text(20, 116, kurs);
-      doc.text(110, 116, semester);
+      doc.text(107, 116, semester);
       doc.text(20, 128, studiengang);
-      doc.text(110, 128, zeitraum);
-      doc.text(36, 146, hochschule);
-      doc.text(150, 148, land);
-      doc.text(20, 270, result.bewOrt);
-      doc.text(74, 270, new Date().toDateString());*/
+      doc.text(107, 128, zeitraum); */
+      
+
+     // doc.text(36, 153, uni1); 
+
+    //  doc.text(36, 200, uni2); 
+
+    //  doc.text(36, 250, uni3); 
+
+
+
 
       doc.addPage();
       doc.addImage(image2, 'JPEG', 0, 0, 210, 297);
+
+      doc.text(19, 29, result.bewOrt);
+      doc.text(74, 29, new Date().toDateString());
       doc.save('Anmeldeformular.pdf');
     },
     error: function (result) {
