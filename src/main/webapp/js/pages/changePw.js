@@ -5,7 +5,7 @@ import "cookieconsent";
 
 $(document).ready(function() {
 	var url = new URL(window.location.href);
-	uuid_var = url.searchParams.get("uuid");
+	var uuid_var = url.searchParams.get("uuid");
 	$(document).on('click', '#savePassword', function() {
 		setpw();
 	})
