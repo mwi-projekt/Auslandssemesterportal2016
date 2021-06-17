@@ -164,8 +164,8 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
 
       var land = stringUni.split('(')[1].trim().replace(')', '');
       var nationalität = result.bewLand;
-      var zeitraum = 'Sommersemester 2020'; //Fehlt
-      var semester = '3. Semester';
+      var zeitraum = result.bewZeitraum;
+      var semester = result.bewSemster;
       var vorname = result.bewVorname;
       var name = result.bewNachname;
       var studiengang = result.bewStudiengang;
