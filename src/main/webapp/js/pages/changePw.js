@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import "cookieconsent";
 
 $(document).ready(function() {
-	url = new URL(window.location.href);
+	var url = new URL(window.location.href);
 	uuid_var = url.searchParams.get("uuid");
 	$(document).on('click', '#savePassword', function() {
 		setpw();
