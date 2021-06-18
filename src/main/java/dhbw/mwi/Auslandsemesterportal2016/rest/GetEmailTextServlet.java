@@ -20,7 +20,7 @@ public class GetEmailTextServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
@@ -38,6 +38,8 @@ public class GetEmailTextServlet extends HttpServlet {
 			String student_name = runtime.getVariable(instanceID, "bewNachname").toString();
 			String uni = runtime.getVariable(instanceID, "uni").toString();
 			String output = "";
+			String vpnDHBW = "\n" + "\n" + "************" + "\n"
+					+ "Um das Auslandssemesterportal zu erreichen, müssen Sie sich im VPN der DHBW Karlsruhe befinden.";
 
 			if (rolle == 2) {
 
@@ -47,70 +49,70 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
 							+ uni + " wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n" + "\n"
 							+ "-- Platzhalter für Anmerkungen des Auslandsamts --" + "\n" + "\n"
-							+ "Im nächsten Schritt wird sich ein Mitarbeiter zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und	entscheiden, ob Sie in die engere Auswahl potentieller Bewerber kommen."
-							+ "\n"
-							+ "Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de."
+							+ "Im nächsten Schritt wird sich ein/e Mitarbeiter/in zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und	entscheiden, ob Sie in die engere Auswahl potentieller Bewerber/innen kommen."
+							+ "\n" + "Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de."
 							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
-							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt";
+							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt"
+							+ "\n" + "\n" + vpnDHBW;
 				} else if (validation_result.equals("false")) {
 					// Text für abgelehnte Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 							+ "Leider konnte Ihre Bewerbung nicht berücksichtigt werden." + "\n" + "\n"
-							+ "Folgende Problem hat sich ergeben: " + "\n " + "\n"
+							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
-							+ "Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de."
-							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
-							+ "\n" + "Ihr Akademisches Auslandsamt";
-				} else if (validation_result.equals("edit")){
+							+ "Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de." + "\n"
+							+ "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n"
+							+ "Ihr Akademisches Auslandsamt" + vpnDHBW;
+				} else if (validation_result.equals("edit")) {
 					// Text für Bewerbung zur Bearbeitung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 							+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
-							+ "Folgende Problem hat sich ergeben: " + "\n " + "\n"
+							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
 							+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können."
-							+ "Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de."
-							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
-							+ "\n" + "Ihr Akademisches Auslandsamt";
+							+ "Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de." + "\n"
+							+ "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n"
+							+ "Ihr Akademisches Auslandsamt" + vpnDHBW;
 				}
 
-			} else if (rolle == 3){
-				//Hier muss eine Mail an den SGL generiert werden, wenn der Student die Bewerbung abschickt
-			}
-		      else if (rolle == 4) {
+			} else if (rolle == 3) {
+				// Hier muss eine Mail an den SGL generiert werden, wenn der Student die
+				// Bewerbung abschickt
+			} else if (rolle == 4) {
 				if (validation_result.equals("true")) {
 					// Text für erfolgreiche Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot an der Universität: "
-							+ uni + " wurde erfolgreich durch ihren Studiengangsleiter validiert." + "\n" + "\n"
+							+ uni + " wurde erfolgreich durch ihre/n Studiengangsleiter/in validiert." + "\n" + "\n"
 							+ "-- Platzhalter für Anmerkungen des Studiengangsleiters --" + "\n" + "\n" + "\n"
-							+ "Im nächsten Schritt wird ihre Bewerbung an einen Mitarbeiter des Akademischen Auslandsamtes für einen weiteren Validierungsprozess übergeben."
+							+ "Im nächsten Schritt wird ihre Bewerbung an ein/e Mitarbeiter/in des Akademischen Auslandsamtes für einen weiteren Validierungsprozess übergeben."
 							+ "\n"
 							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
-							+ "Bei Rückfragen melden Sie sich gerne unter thomas.freytag@dhbw-karlsruhe.de."
-							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Studiengangsleiter/in";;
+							+ "Bei Rückfragen melden Sie sich gerne unter thomas.freytag@dhbw-karlsruhe.de." + "\n"
+							+ "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Studiengangsleiter/in" + vpnDHBW;
 				} else if (validation_result.equals("false")) {
 					// Text für abgelehnte Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 							+ "Leider konnte Ihre Bewerbung nicht berücksichtigt werden." + "\n" + "\n"
-							+ "Folgende Problem hat sich ergeben: " + "\n " + "\n"
+							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
-							+ "Bei Rückfragen melden Sie sich gerne unter thomas.freytag@dhbw-karlsruhe.de."
-							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
-							+ "\n" + "Ihr Studiengangsleiter/in";
+							+ "Bei Rückfragen melden Sie sich gerne unter thomas.freytag@dhbw-karlsruhe.de." + "\n"
+							+ "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n"
+							+ "Ihr Studiengangsleiter/in" + vpnDHBW;
 				} else {
 					// Text für Bewerbung zur Bearbeitung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Vielen Dank für Ihre eingereichte Bewerbung an der Universität: " + uni + "\n"
 							+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
-							+ "Folgende Problem hat sich ergeben: " + "\n " + "\n"
+							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
 							+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können."
-						 	+ "Bei Rückfragen melden Sie sich gerne unter thomas.freytag@dhbw-karlsruhe.de."
-							+ "\n" + "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n"
-							+ "\n" + "Ihr Studiengangsleiter/in";
+							+ "Bei Rückfragen melden Sie sich gerne unter thomas.freytag@dhbw-karlsruhe.de." + "\n"
+							+ "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n"
+							+ "Ihr Studiengangsleiter/in" + vpnDHBW;
 				}
 			}
 			toClient.print(output);
