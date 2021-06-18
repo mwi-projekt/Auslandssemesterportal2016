@@ -154,65 +154,148 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
           uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
       }
 
-    //__ Bringt das Datum in ein schönes Format 
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    today = dd + '.' + mm + '.' + yyyy;
-  //_______________________________________________
+//Hochschule aus URL
+      var url_string = window.location.href;
+      var url = new URL(url_string);
+      var uni = url.searchParams.get('uni');
+      //Bulgarien
+      if (uni == 'American University in Bulgaria (Bulgarien)') {
+        var klammer = uni.indexOf('(');
+        var stringUni =
+          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+        //Schottland
+      } else if (uni == 'Abertay University of Dundee (Schottland)') {
+        var klammer = uni.indexOf('(');
+        var stringUni =
+          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+        //San Marcos
+      } else if (uni == 'California State University San Marcos (USA)') {
+        var absatz = uni.indexOf('San');
+        var stringUni =
+          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+        //Channel Islands
+      } else if (uni == 'California State University Channel Islands (USA)') {
+        var absatz = uni.indexOf('Channel');
+        var stringUni =
+          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+        //Costa Rica
+      } else if (uni == 'Costa Rica Institute of Technology (Costa Rica)') {
+        var absatz = uni.indexOf('Technology');
+        var stringUni =
+          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+        //Suedarfika
+      } else if (uni == 'Durban University of Technology (Suedafrika)') {
+        var klammer = uni.indexOf('(');
+        var stringUni =
+          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+        //Finnland
+      } else if (
+        uni == 'South-Eastern Finland University of Applied Sciences (Finnland)'
+      ) {
+        var absatz1 = uni.indexOf('of');
+        var absatz2 = uni.indexOf('(');
+        var stringUni =
+          uni.slice(0, absatz1 - 1) +
+          '\n' +
+          uni.slice(absatz1 - 1, absatz2 - 1) +
+          '\n' +
+          uni.slice(absatz2 - 1, uni.length);
+        //Polen
+      } else if (uni == 'Technischen Universität Lodz (Polen)') {
+        var klammer = uni.indexOf('(');
+        var stringUni =
+          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+      } else {
+        var klammer = uni.indexOf('(');
+        var stringUni =
+          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+      }
 
        var nationalität = result.bewLand;
-//       var zeitraum = result.zeitraum;
-//       var semester = result.bewSemester;
+       var zeitraum = result.zeitraum;
+       var semester = result.bewSemester;
        var vorname = result.bewVorname;
+       var strasse = result.bewStrasse;
        var name = result.bewNachname;
        var studiengang = result.bewStudiengang;
        var kurs = result.bewKurs;
        var mail = result.bewEmail;
-      //  var uni1 = result.uni1;
-      //  var uni2 = result.uni2;
-      //  var uni3 = result.uni3;
+       var uni1 = result.uni1;;
+       var uni2 = result.uni2;
+       var uni3 = result.uni3;
+       var bewGeburtsdatum = result.bewGeburtsdatum;
+       var erasmus = result.bewErasmus;
+     
 
-     // var bewGeburtsdatum = result.bewGeburtsdatum;
-     // var erasmus = result.bewErasmus;
-     // var SGL = result.bewSGL;
-     // var learningAgreement = result.bewLA;
-
-
-
+      var SGL = result.bewSGL;
+      var learningAgreement = result.bewLA;
        doc.setFontSize(11);
        doc.setTextColor(92, 76, 76);
-
        doc.text(20, 66, name);
        doc.text(107, 66, vorname);
-//     doc.text(20, 79, bewGeburtsdatum);
-     doc.text(107, 79, nationalität);
-
-       doc.text(20, 91, result.bewStrasse);
-       doc.text(107, 91, result.bewPLZ + ' ' + result.bewOrt);
+       doc.text(20, 79, bewGeburtsdatum);
+       doc.text(107, 79, nationalität);
+       doc.text(20, 91, strasse);
+       doc.text(107, 91, result.bewPLZ + ', ' + result.bewOrt);
        doc.text(20, 104, mail);
        doc.text(107, 104, result.bewTelefon);
        doc.text(20, 116, kurs);
-
-//     doc.text(107, 116, semester);
-
+       doc.text(107, 116, semester);
        doc.text(20, 128, studiengang);
-//     doc.text(107, 128, zeitraum); 
-       
+       doc.text(107, 128, zeitraum); 
+
+       if (erasmus == "Nein"){
+        doc.text(174, 200, "X");
+       } else if (erasmus == "Ja"){
+        doc.text(152, 200, "X");
+       }
+       // Abstimmung Semesterzeit
+       doc.text(152, 206, "X"); 
+
+       if (SGL == "Nein"){
+        doc.text(174, 212, "X");
+       } else if (SGL == "Ja"){
+        doc.text(152, 212, "X");
+       }
+
+       if (learningAgreement == "Nein"){
+        doc.text(174, 218, "X");
+       } else if (learningAgreement == "Ja"){
+        doc.text(152, 218, "X");
+       }
+  
 
 
-    doc.text(36, 167, result.uni1); 
-    doc.text(36, 167, result.uni2); 
-    doc.text(36, 167, result.uni3); 
+    var uni1kurz = uni1.split("("); 
+    doc.text(36, 153, uni1kurz[0]); 
+    var land1 = uni1.split('(')[1].trim().replace(')', '');
+    doc.text(147, 153, land1);
 
-//    doc.text(36, 167, result.uni1); //LAND DER UNI -- TODO
-//    doc.text(36, 167, result.uni2); //LAND DER UNI -- TODO
-//    doc.text(36, 167, result.uni3); //LAND DER UNI -- TODO
+    try {
+    if (uni2 != "" || uni2 != null){
+    var uni2kurz = uni2.split("(");
+    doc.text(36, 168, uni2kurz[0]); 
+    var land2 = uni2.split('(')[1].trim().replace(')', '');
+    doc.text(147, 168, land2);
+    }
+    if (uni3 != "" || uni3 != null){
+      var uni3kurz = uni3.split("(");
+      doc.text(36, 183, uni3kurz[0]); 
+      var land3 = uni3.split('(')[1].trim().replace(')', '');
+      doc.text(147, 183, land3);
+    }
+  }
+  catch (e){
+    console.log(e);
+  }
 
-
-
-
+      //__ Bringt das Datum in ein schönes Format 
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      today = dd + '.' + mm + '.' + yyyy;
+    //_______________________________________________
 
       doc.addPage();
       doc.addImage(image2, 'JPEG', 0, 0, 210, 297);
@@ -671,3 +754,6 @@ function getDropzoneOptions(action, fileName) {
     },
   };
 }
+
+
+
