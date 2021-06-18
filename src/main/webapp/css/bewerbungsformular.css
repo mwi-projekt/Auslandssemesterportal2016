@@ -137,7 +137,8 @@ select#muttersprache,
 select#uni1,
 select#uni2,
 select#uni3,
-select#spanischNote {
+select#spanischNote,
+select#englischNote {
   margin-left: 25%;
 }
 
