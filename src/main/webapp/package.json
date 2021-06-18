@@ -25,6 +25,14 @@
     "staticPath": [
       {
         "staticPath": "./node_modules/ckeditor4"
+      },
+      {
+        "staticPath": "./docs",
+        "staticOutDir": "docs"
+      },
+      {
+        "staticPath": "./videos",
+        "staticOutDir": "videos"
       }
     ]
   },
