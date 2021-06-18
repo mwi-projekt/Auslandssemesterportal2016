@@ -79,20 +79,11 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
   e.preventDefault();
   console.log('Download');
 
-  //var keyFix = "gdprCompliance%7CbewVorname%7CbewNachname%7CbewTelefon%7CbewStrasse%7CbewPLZ%7CbewOrt%7CbewLand%7CsemesteradresseAnders%7CaktuelleUni%7CbewStudiengang%7CbewKurs%7Cmatrikelnummer%7CbewEmail%7Cmuttersprache%7CuntName%7CuntStrasse%7CuntPLZ%7CuntOrt%7CuntLand%7CuntAnsprechpartner%7CuntEMail%7CsemStrasse%7CsemPLZ%7CsemOrt%7CsemLand%7CenglischNote";
-  var keyFix =
-    'bewVorname|bewNachname|uni|bewTelefon|bewStrasse|bewPLZ|bewOrt|bewLand|semesteradresseAnders|aktuelleUni|bewStudiengang|bewKurs|matrikelnummer|bewEmail|muttersprache|untName|untStrasse|untPLZ|untOrt|untLand|untAnsprechpartner|untEMail|semStrasse|semPLZ|semOrt|semLand|englischNote';
-  /*for (var l = 0; l < idList.length; l++) {
-        keyString = keyString + idList[l] + "|";
-    }
-    keyString = keyString.substr(0, keyString.length - 1);*/
-
   $.ajax({
     type: 'GET',
     url: baseUrl + '/getVariables',
     data: {
-      instance_id: instanceID,
-      key: keyFix,
+      instance_id: instanceID
     },
     success: function (result) {
       console.log('neueVersionOnline');
@@ -629,18 +620,11 @@ $(document).on('click', '#saveData', function () {
 });*/
 
 function getData() {
-  var keyString = '';
-  for (var l = 0; l < idList.length; l++) {
-    keyString = keyString + idList[l] + '|';
-  }
-  keyString = keyString.substr(0, keyString.length - 1);
-
   $.ajax({
     type: 'GET',
     url: baseUrl + '/getVariables',
     data: {
-      instance_id: instanceID,
-      key: keyString,
+      instance_id: instanceID
     },
     success: function (result) {
       $.each(result, function (key, value) {
