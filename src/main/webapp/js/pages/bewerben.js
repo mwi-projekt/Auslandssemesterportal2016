@@ -81,7 +81,7 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
 
   //var keyFix = "gdprCompliance%7CbewVorname%7CbewNachname%7CbewTelefon%7CbewStrasse%7CbewPLZ%7CbewOrt%7CbewLand%7CsemesteradresseAnders%7CaktuelleUni%7CbewStudiengang%7CbewKurs%7Cmatrikelnummer%7CbewEmail%7Cmuttersprache%7CuntName%7CuntStrasse%7CuntPLZ%7CuntOrt%7CuntLand%7CuntAnsprechpartner%7CuntEMail%7CsemStrasse%7CsemPLZ%7CsemOrt%7CsemLand%7CenglischNote";
   var keyFix =
-    'bewVorname|bewNachname|bewTelefon|bewStrasse|bewPLZ|bewOrt|bewLand|semesteradresseAnders|aktuelleUni|bewStudiengang|bewKurs|matrikelnummer|bewEmail|muttersprache|untName|untStrasse|untPLZ|untOrt|untLand|untAnsprechpartner|untEMail|semStrasse|semPLZ|semOrt|semLand|englischNote';
+    'bewVorname|bewNachname|uni1|uni2|uni3|bewTelefon|bewStrasse|bewPLZ|bewOrt|bewLand|semesteradresseAnders|aktuelleUni|bewStudiengang|bewKurs|matrikelnummer|bewEmail|muttersprache|untName|untStrasse|untPLZ|untOrt|untLand|untAnsprechpartner|untEMail|semStrasse|semPLZ|semOrt|semLand|englischNote';
   /*for (var l = 0; l < idList.length; l++) {
         keyString = keyString + idList[l] + "|";
     }
@@ -97,6 +97,7 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
     success: function (result) {
       console.log('neueVersionOnline');
       console.log('result');
+      console.log(result);
 
       const image1 = new Image();
       image1.src = imagePage1;
@@ -200,11 +201,11 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
     // doc.text(107, 128, zeitraum); 
        
 
-  //     doc.text(36, 152, result.uni1); 
+      doc.text(36, 152, result.uni1); 
 
-      // doc.text(36, 167, result); 
+      doc.text(36, 167, result.uni2); 
 
-      // doc.text(36, 181, stringUni); 
+     doc.text(36, 181, result.uni3); 
 
 
 
