@@ -182,7 +182,7 @@
       <bpmn:outgoing>Flow_0pixbq5</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0nhtml8" name="Ja" sourceRef="Gateway_1i3uw8o" targetRef="ExclusiveGateway_EnglischMutter">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${uni1 || uni2 || uni3 != "Costa Rica Institute of Technology (Costa Rica)"}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${uni1 | uni2 | uni3 != "Costa Rica Institute of Technology (Costa Rica)"}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0pixbq5" name="Nein" sourceRef="Gateway_1i3uw8o" targetRef="ExclusiveGateway_EnglischEnd">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${uni2 == "" || uni2 == null}</bpmn:conditionExpression>
