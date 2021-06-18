@@ -162,7 +162,8 @@ $(document).on('click', '#downloadAnmeldeformular', function (e) {
           uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
       }
 
-      var land = stringUni.split('(')[1].trim().replace(')', '');
+      //var land = stringUni.split('(')[1].trim().replace(')', '');
+      var land = "Standard";
       var nationalität = result.bewLand;
       var zeitraum = result.zeitraum;
       var semester = result.bewSemester;
