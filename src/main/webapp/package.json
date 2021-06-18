@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "parcel": "parcel *.html",
+    "parcel": "rimraf dist && rimraf .cache && parcel *.html",
     "build": "tsc && parcel build *.html",
     "clean:dist": "rimraf dist",
     "clean:full": "rimraf dist && rimraf .cache && rimraf node_modules",

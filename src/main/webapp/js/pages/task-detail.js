@@ -409,6 +409,12 @@ function getData() {
         if (!(sendBew === 'true')) {
           $('#' + key).prop('readonly', true);
           $('#' + key).prop('disabled', true);
+        } else {
+          var disabledFields = ['matrikelnummer'];
+          disabledFields.map(value => {
+            $('#' + value).prop('readonly', true);
+            $('#' + value).prop('disabled', true);
+          });
         }
       });
     },
