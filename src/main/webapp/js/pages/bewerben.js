@@ -202,9 +202,9 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
        
 
 
-    doc.text(36, 167, result.uni1); 
-    doc.text(36, 167, result.uni2); 
-    doc.text(36, 167, result.uni3); 
+//    doc.text(36, 167, result.uni1); 
+//    doc.text(36, 167, result.uni2); 
+//    doc.text(36, 167, result.uni3); 
 
 //    doc.text(36, 167, result.uni1); //LAND DER UNI -- TODO
 //    doc.text(36, 167, result.uni2); //LAND DER UNI -- TODO
