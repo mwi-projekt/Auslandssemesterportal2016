@@ -162,49 +162,49 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
           uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
       }
 
-      //var land = stringUni.split('(')[1].trim().replace(')', '');
-      var land = "Standard";
-      var nationalität = result.bewLand;
-      var zeitraum = result.zeitraum;
-      var semester = result.bewSemester;
-      var vorname = result.bewVorname;
-      var name = result.bewNachname;
-      var studiengang = result.bewStudiengang;
-      var kurs = result.bewKurs;
-      var mail = result.bewEmail;
-      var uni1 = result.uni1;
-      var uni2 = result.uni2;
-      var uni3 = result.uni3;
-      var geburtsdatum = result.bewGeburtsdatum;
-      var erasmus = result.bewErasmus;
-      var SGL = result.bewSGL;
-      var learningAgreement = result.bewLA;
-      var telefon = result.bewTelefon;
+
+//       var nationalität = result.bewLand;
+//       var zeitraum = result.zeitraum;
+// //      var semester = result.bewSemester;
+       var vorname = result.bewVorname;
+       var name = result.bewNachname;
+       var studiengang = result.bewStudiengang;
+       var kurs = result.bewKurs;
+       var mail = result.bewEmail;
+      //  var uni1 = result.uni1;
+      //  var uni2 = result.uni2;
+      //  var uni3 = result.uni3;
+
+     // var bewGeburtsdatum = result.bewGeburtsdatum;
+     // var erasmus = result.bewErasmus;
+     // var SGL = result.bewSGL;
+     // var learningAgreement = result.bewLA;
+     // var telefon = result.bewTelefon;
 
 
 
-      doc.setFontSize(11);
-      doc.setTextColor(92, 76, 76);
+       doc.setFontSize(11);
+       doc.setTextColor(92, 76, 76);
 
-      doc.text(20, 66, name);
-      doc.text(107, 66, vorname);
-      doc.text(20, 79, geburtsdatum);
-      doc.text(107, 79, nationalität);
-      doc.text(20, 91, result.bewStrasse);
-      doc.text(107, 91, result.bewPLZ + ' ' + result.bewOrt);
-      doc.text(20, 104, mail);
-      doc.text(107, 104, bewTelefon);
-      doc.text(20, 116, kurs);
-      doc.text(107, 116, semester);
-      doc.text(20, 128, studiengang);
-      doc.text(107, 128, zeitraum); 
+       doc.text(20, 66, name);
+       doc.text(107, 66, vorname);
+//     doc.text(20, 79, bewGeburtsdatum);
+//     doc.text(107, 79, nationalität);
+       doc.text(20, 91, result.bewStrasse);
+       doc.text(107, 91, result.bewPLZ + ' ' + result.bewOrt);
+       doc.text(20, 104, mail);
+//     doc.text(107, 104, bewTelefon);
+       doc.text(20, 116, kurs);
+    // doc.text(107, 116, semester);
+       doc.text(20, 128, studiengang);
+    // doc.text(107, 128, zeitraum); 
        
 
-     doc.text(36, 153, uni1); 
+  //     doc.text(36, 152, result.uni1); 
 
-     doc.text(36, 200, uni2); 
+      // doc.text(36, 167, result); 
 
-     doc.text(36, 250, uni3); 
+      // doc.text(36, 181, stringUni); 
 
 
 
