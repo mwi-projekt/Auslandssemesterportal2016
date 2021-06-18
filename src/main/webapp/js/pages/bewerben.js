@@ -623,7 +623,7 @@ function getData() {
 
   $.ajax({
     type: 'GET',
-    url: baseUrl + 'getVariables',
+    url: baseUrl + '/getVariables',
     data: {
       instance_id: instanceID,
       key: keyString,
