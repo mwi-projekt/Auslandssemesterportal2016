@@ -81,7 +81,7 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
 
   //var keyFix = "gdprCompliance%7CbewVorname%7CbewNachname%7CbewTelefon%7CbewStrasse%7CbewPLZ%7CbewOrt%7CbewLand%7CsemesteradresseAnders%7CaktuelleUni%7CbewStudiengang%7CbewKurs%7Cmatrikelnummer%7CbewEmail%7Cmuttersprache%7CuntName%7CuntStrasse%7CuntPLZ%7CuntOrt%7CuntLand%7CuntAnsprechpartner%7CuntEMail%7CsemStrasse%7CsemPLZ%7CsemOrt%7CsemLand%7CenglischNote";
   var keyFix =
-    'bewVorname|bewNachname|bewTelefon|bewStrasse|bewPLZ|bewOrt|bewLand|semesteradresseAnders|aktuelleUni|bewStudiengang|bewKurs|matrikelnummer|bewEmail|muttersprache|untName|untStrasse|untPLZ|untOrt|untLand|untAnsprechpartner|untEMail|semStrasse|semPLZ|semOrt|semLand|englischNote';
+    'bewVorname|bewNachname|uni|bewTelefon|bewStrasse|bewPLZ|bewOrt|bewLand|semesteradresseAnders|aktuelleUni|bewStudiengang|bewKurs|matrikelnummer|bewEmail|muttersprache|untName|untStrasse|untPLZ|untOrt|untLand|untAnsprechpartner|untEMail|semStrasse|semPLZ|semOrt|semLand|englischNote';
   /*for (var l = 0; l < idList.length; l++) {
         keyString = keyString + idList[l] + "|";
     }
@@ -97,6 +97,7 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
     success: function (result) {
       console.log('neueVersionOnline');
       console.log('result');
+      console.log(result);
 
       const image1 = new Image();
       image1.src = imagePage1;
@@ -162,10 +163,17 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
           uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
       }
 
+    //__ Bringt das Datum in ein schönes Format 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = dd + '.' + mm + '.' + yyyy;
+  //_______________________________________________
 
-//       var nationalität = result.bewLand;
+       var nationalität = result.bewLand;
 //       var zeitraum = result.zeitraum;
-// //      var semester = result.bewSemester;
+//       var semester = result.bewSemester;
        var vorname = result.bewVorname;
        var name = result.bewNachname;
        var studiengang = result.bewStudiengang;
@@ -179,7 +187,6 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
      // var erasmus = result.bewErasmus;
      // var SGL = result.bewSGL;
      // var learningAgreement = result.bewLA;
-     // var telefon = result.bewTelefon;
 
 
 
@@ -189,31 +196,37 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
        doc.text(20, 66, name);
        doc.text(107, 66, vorname);
 //     doc.text(20, 79, bewGeburtsdatum);
-//     doc.text(107, 79, nationalität);
+     doc.text(107, 79, nationalität);
+
        doc.text(20, 91, result.bewStrasse);
        doc.text(107, 91, result.bewPLZ + ' ' + result.bewOrt);
        doc.text(20, 104, mail);
-//     doc.text(107, 104, bewTelefon);
+       doc.text(107, 104, result.bewTelefon);
        doc.text(20, 116, kurs);
-    // doc.text(107, 116, semester);
+
+//     doc.text(107, 116, semester);
+
        doc.text(20, 128, studiengang);
-    // doc.text(107, 128, zeitraum); 
+//     doc.text(107, 128, zeitraum); 
        
 
-  //     doc.text(36, 152, result.uni1); 
 
-      // doc.text(36, 167, result); 
+//    doc.text(36, 167, result.uni1); 
+//    doc.text(36, 167, result.uni2); 
+//    doc.text(36, 167, result.uni3); 
 
-      // doc.text(36, 181, stringUni); 
+//    doc.text(36, 167, result.uni1); //LAND DER UNI -- TODO
+//    doc.text(36, 167, result.uni2); //LAND DER UNI -- TODO
+//    doc.text(36, 167, result.uni3); //LAND DER UNI -- TODO
+
 
 
 
 
       doc.addPage();
       doc.addImage(image2, 'JPEG', 0, 0, 210, 297);
-
       doc.text(19, 29, result.bewOrt);
-      doc.text(74, 29, new Date().toDateString());
+      doc.text(74, 29, today);
       doc.save('Anmeldeformular.pdf');
     },
     error: function (result) {
