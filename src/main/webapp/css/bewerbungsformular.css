@@ -136,7 +136,8 @@ input#muttersprache,
 select#muttersprache,
 select#uni1,
 select#uni2,
-select#uni3 {
+select#uni3,
+select#spanischNote {
   margin-left: 25%;
 }
 
