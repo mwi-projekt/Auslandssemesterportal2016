@@ -397,7 +397,7 @@ function getData() {
     type: 'GET',
     url: baseUrl + '/getVariables',
     data: {
-      instance_id: instanceID
+      instance_id: instanceID,
     },
     success: function (result) {
       $.each(result, function (key, value) {
@@ -410,8 +410,16 @@ function getData() {
           $('#' + key).prop('readonly', true);
           $('#' + key).prop('disabled', true);
         } else {
-          var disabledFields = ['matrikelnummer'];
-          disabledFields.map(value => {
+          var disabledFields = [
+            'matrikelnummer',
+            'uni1',
+            'uni2',
+            'uni3',
+            'zeitraum',
+            'englischNote',
+            'spanischNote',
+          ];
+          disabledFields.map((value) => {
             $('#' + value).prop('readonly', true);
             $('#' + value).prop('disabled', true);
           });
