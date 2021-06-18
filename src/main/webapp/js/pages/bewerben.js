@@ -193,7 +193,7 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
       doc.text(20, 91, result.bewStrasse);
       doc.text(107, 91, result.bewPLZ + ' ' + result.bewOrt);
       doc.text(20, 104, mail);
-      doc.text(107, 104, telefon);
+      doc.text(107, 104, bewTelefon);
       doc.text(20, 116, kurs);
       doc.text(107, 116, semester);
       doc.text(20, 128, studiengang);
