@@ -1,6 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,17 +28,16 @@ public class GetVariablesServlet extends HttpServlet {
 			response.sendError(401);
 		} else {
 			String instanceID = request.getParameter("instance_id");
-			String key = request.getParameter("key");
-			String[] keys = key.split("\\|", -1);
 			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
 			RuntimeService runtime = engine.getRuntimeService();
 
 			JsonObject json = new JsonObject();
 
-			for (int i = 0; i < keys.length; i++) {
-				Object obj = runtime.getVariable(instanceID, keys[i]);
+			Map<String, Object> variables = runtime.getVariables(instanceID);
+			for (Map.Entry<String, Object> entry : variables.entrySet()) {
+				Object obj = entry.getValue();
 				if (obj != null) {
-					json.addProperty(keys[i], obj.toString());
+					json.addProperty(entry.getKey(), obj.toString());
 				}
 			}
 			Util.writeJson(response, json);

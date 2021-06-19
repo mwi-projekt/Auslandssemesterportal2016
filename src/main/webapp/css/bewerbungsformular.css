@@ -136,7 +136,9 @@ input#muttersprache,
 select#muttersprache,
 select#uni1,
 select#uni2,
-select#uni3 {
+select#uni3,
+select#spanischNote,
+select#englischNote {
   margin-left: 25%;
 }
 
@@ -146,7 +148,13 @@ input#untOrt,
 input#untPLZ,
 input#untStrasse,
 input#untName,
-input#untEMail {
+input#untEMail,
+select#zeitraum,
+input#bewGeburtsdatum,
+select#bewSemester,
+select#bewErasmus,
+select#bewLA,
+select#bewSGL {
   margin-left: 25%;
 }
 
