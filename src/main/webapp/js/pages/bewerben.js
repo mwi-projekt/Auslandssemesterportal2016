@@ -339,6 +339,8 @@ function parse() {
     },
     success: function (result) {
       var output = "";
+      var fileID = "";
+      var fileName = "";
       var step_id = result.active;
       var model = result.data;
       if (step_id === "datenPruefen") {
@@ -446,6 +448,8 @@ function parse() {
                 typeList.push("boolean");
                 break;
               case "form-upload":
+                fileID = json[i]["data"]["id"];
+                fileName = json[i]["data"]["filename"];
                 output =
                   output +
                   '<div class="dropzone" id="' +
@@ -569,21 +573,22 @@ function parse() {
               }
             });
           });
-
-          output = output + "TINAUNDTIM";
+          
           // set content
           document.getElementById("formular").innerHTML = output;
           if (idList.length > 0) {
             getData();
             manipulateDOM();
           }
+
+          var $dropzone;
           // init upload
           for (var i = 0; i < json.length; i++) {
             var type = json[i]["type"];
             if (type == "form-upload") {
               console.log(json[i]["data"]["id"]);
               console.log(json[i]["data"]["filename"]);
-              $("#" + json[i]["data"]["id"]).dropzone(
+              $dropzone = $("#" + json[i]["data"]["id"]).dropzone(
                 getDropzoneOptions(
                   json[i]["data"]["id"],
                   json[i]["data"]["filename"]
@@ -591,6 +596,29 @@ function parse() {
               );
             }
           }
+
+          /*
+          * Wenn eine Bewerbung vom SGL an den Student zurückgeschickt (zur Überarbeitung), werden mit dieser Funktionen neu hochgeladen (ein Student muss die Dokumente nicht erneut hochladen)
+          */
+          $.ajax({
+            type: "GET",
+            url: baseUrl + "/getProcessFile",
+            data: {
+                instance_id: instanceID,
+                key: fileID
+            },
+            success: function (result) {
+              result;
+              var byteNumbers = new Array(result.length);
+              for (var i = 0; i < result.length; i++) {
+                  byteNumbers[i] = result.charCodeAt(i);
+              }
+              var byteArray = new Uint8Array(byteNumbers);
+              var blob = new Blob([byteArray], {type: "application/pdf"});
+              var file = new File([blob], fileName, {type: "application/pdf"});
+              $dropzone[0].dropzone.addFile(file);
+            }
+          });
 
           $("#formular")
             .submit(function (e) {
