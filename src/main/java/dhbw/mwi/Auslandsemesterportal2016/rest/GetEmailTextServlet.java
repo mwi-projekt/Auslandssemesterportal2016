@@ -50,7 +50,7 @@ public class GetEmailTextServlet extends HttpServlet {
 					// Text für erfolgreiche Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot für die Universitäten: "
-							+ "\n"+"- "+ uni1 + "\n"+"- "+uni2 + "\n"+"- "+ uni3 + " + "\n"+ wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n" + "\n"
+							+ "\n"+"- "+ uni1 + "\n"+"- "+uni2 + "\n"+"- "+ uni3 + "\n"+ "wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n" + "\n"
 							+ "-- Platzhalter für Anmerkungen des Auslandsamts --" + "\n" + "\n"
 							+ "Im nächsten Schritt wird sich ein/e Mitarbeiter/in zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und	entscheiden, ob Sie in die engere Auswahl potentieller Bewerber/innen kommen."
 							+ "\n"
