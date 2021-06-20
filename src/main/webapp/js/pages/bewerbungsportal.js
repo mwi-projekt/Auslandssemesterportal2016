@@ -77,7 +77,7 @@ $(document).ready(function () {
                     showCancelButton: true,
                     cancelButtonText: "Nein",
                     reverseButtons: true,
-                    reverseButtonText: "Ja",
+                    confirmButtonText: "Ja",
                     confirmButtonColor: '#28a745'
                 }).then(function (result) {
                     if (result.value) {
