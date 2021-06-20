@@ -50,7 +50,7 @@ public class GetEmailTextServlet extends HttpServlet {
 					// Text für erfolgreiche Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
 							+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot für die Universitäten: "
-							+ "\n"+ uni1 + "\n"+uni2 + "\n"+uni3 + " wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n" + "\n"
+							+ "\n"+"- "+ uni1 + "\n"+"- "+uni2 + "\n"+"- "+ uni3 + " + "\n"+ wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n" + "\n"
 							+ "-- Platzhalter für Anmerkungen des Auslandsamts --" + "\n" + "\n"
 							+ "Im nächsten Schritt wird sich ein/e Mitarbeiter/in zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und	entscheiden, ob Sie in die engere Auswahl potentieller Bewerber/innen kommen."
 							+ "\n"
@@ -61,8 +61,8 @@ public class GetEmailTextServlet extends HttpServlet {
 				} else if (validation_result.equals("false")) {
 					// Text für abgelehnte Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
-							+ "Vielen Dank für Ihre eingereichte Bewerbung für die Universitäten: " + "\n"+ uni1 + "\n"+uni2 + "\n"+uni3 + "\n"
-							+ "Leider konnte Ihre Bewerbung nicht berücksichtigt werden." + "\n" + "\n"
+							+ "Vielen Dank für Ihre eingereichte Bewerbung für die Universitäten: " + "\n"+"- "+ uni1 + "\n"+"- "+uni2 + "\n"+"- "+uni3 + "\n"
+							+ "\n"+ "Leider konnte Ihre Bewerbung nicht berücksichtigt werden." + "\n" + "\n"
 							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
 							+ "Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de." + "\n"
@@ -71,7 +71,7 @@ public class GetEmailTextServlet extends HttpServlet {
 				} else if (validation_result.equals("edit")) {
 					// Text für Bewerbung zur Bearbeitung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
-							+ "Vielen Dank für Ihre eingereichte Bewerbung für die Universitäten: " + "\n"+ uni1 + "\n"+uni2 + "\n"+uni3 + "\n"
+							+ "Vielen Dank für Ihre eingereichte Bewerbung für die Universitäten: " + "\n"+ "- "+uni1 + "\n"+"- "+uni2 + "\n"+"- "+uni3 + "\n"+ "\n"
 							+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
 							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
@@ -99,7 +99,7 @@ public class GetEmailTextServlet extends HttpServlet {
 				} else if (validation_result.equals("false")) {
 					// Text für abgelehnte Bewerbung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
-							+ "Vielen Dank für Ihre eingereichte Bewerbung für die Universitäten: " + "\n"+ uni1 + "\n"+uni2 + "\n"+uni3 + "\n"
+							+ "Vielen Dank für Ihre eingereichte Bewerbung für die Universitäten: " + "\n"+"- "+ uni1 + "\n"+"- "+uni2 + "\n"+"- "+uni3 + "\n"+ "\n"
 							+ "Leider konnte Ihre Bewerbung nicht berücksichtigt werden." + "\n" + "\n"
 							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
@@ -109,7 +109,7 @@ public class GetEmailTextServlet extends HttpServlet {
 				} else {
 					// Text für Bewerbung zur Bearbeitung
 					output = "Sehr geehrte/r Herr/Frau " + student_name + (",") + "\n" + "\n"
-							+ "Vielen Dank für Ihre eingereichte Bewerbung für die Universitäten: " + "\n"+ uni1 + "\n"+uni2 + "\n"+uni3 + "\n"
+							+ "Vielen Dank für Ihre eingereichte Bewerbung für die Universitäten: " + "\n"+ "- "+uni1 + "\n"+"- "+uni2 + "\n"+"- "+uni3 + "\n"+ "\n"
 							+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
 							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
