@@ -608,7 +608,6 @@ function parse() {
                 key: fileID
             },
             success: function (result) {
-              result;
               var byteNumbers = new Array(result.length);
               for (var i = 0; i < result.length; i++) {
                   byteNumbers[i] = result.charCodeAt(i);

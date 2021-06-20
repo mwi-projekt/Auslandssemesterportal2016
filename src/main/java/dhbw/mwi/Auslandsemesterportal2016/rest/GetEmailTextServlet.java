@@ -50,7 +50,8 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ uni + " wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n" + "\n"
 							+ "-- Platzhalter für Anmerkungen des Auslandsamts --" + "\n" + "\n"
 							+ "Im nächsten Schritt wird sich ein/e Mitarbeiter/in zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und	entscheiden, ob Sie in die engere Auswahl potentieller Bewerber/innen kommen."
-							+ "\n" + "Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de."
+							+ "\n"
+							+ " Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de."
 							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
 							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt"
 							+ "\n" + "\n" + vpnDHBW;
@@ -71,7 +72,7 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
 							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
-							+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können."
+							+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können. "
 							+ "Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de." + "\n"
 							+ "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n"
 							+ "Ihr Akademisches Auslandsamt" + vpnDHBW;
@@ -89,7 +90,7 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "-- Platzhalter für Anmerkungen des Studiengangsleiters --" + "\n" + "\n" + "\n"
 							+ "Im nächsten Schritt wird ihre Bewerbung an ein/e Mitarbeiter/in des Akademischen Auslandsamtes für einen weiteren Validierungsprozess übergeben."
 							+ "\n"
-							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
+							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren. "
 							+ "Bei Rückfragen melden Sie sich gerne unter thomas.freytag@dhbw-karlsruhe.de." + "\n"
 							+ "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Studiengangsleiter/in" + vpnDHBW;
 				} else if (validation_result.equals("false")) {
@@ -109,7 +110,7 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "Leider wurden nicht alle Daten vollständig und/oder korrekt eingegeben." + "\n" + "\n"
 							+ "Folgendes Problem hat sich ergeben: " + "\n " + "\n"
 							+ " -- Platzhalter für Erläuterung des Problems -- " + "\n" + "\n"
-							+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können."
+							+ "Ihr Bewerbungsprozess wurde auf Anfang zurückgesetzt, damit Sie den Fehler beheben können. "
 							+ "Bei Rückfragen melden Sie sich gerne unter thomas.freytag@dhbw-karlsruhe.de." + "\n"
 							+ "Wir bitten um Ihr Verständnis." + "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n"
 							+ "Ihr Studiengangsleiter/in" + vpnDHBW;
