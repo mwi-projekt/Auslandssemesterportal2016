@@ -156,6 +156,9 @@ iframe {
   float: none !important;
   margin-left: 7px;
 }
+.sollWeg {
+visibility: hidden;
+}
 
 .navVer {
   text-align: center;
