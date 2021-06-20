@@ -25,17 +25,16 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.delegate.TaskListener;
 
 import dhbw.mwi.Auslandsemesterportal2016.Config;
+import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
 
 /**
  * Servlet implementation class prozess_db
  */
 @MultipartConfig(maxFileSize = 16177215) // file size up to 16MB
-@WebServlet(name = "login_db", description = "connection to DB for the prozess.jsp", urlPatterns = {
-		"/login_db" })
+@WebServlet(name = "login_db", description = "connection to DB for the prozess.jsp", urlPatterns = { "/login_db" })
 
 public class login_db extends HttpServlet implements TaskListener, JavaDelegate {
 	private static final long serialVersionUID = 1L;
-
 
 	Connection conn;
 	java.sql.Statement stmt;
@@ -152,7 +151,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 					+ "' , link6 = '" + request.getParameter("link6") + "' , listelement7 = '"
 					+ request.getParameter("listelement7") + "' , link7 = '" + request.getParameter("link7") + "' ";
 
-		} 
+		}
 		try {
 			// Open a connection
 			conn = DB.getInstance();
@@ -340,13 +339,12 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 		try {
 			// TODO: Automatisch den zuständigen AAMitarbeiter ermitteln
-			Message message = Util.getEmailMessage("mwiausland@gmail.com", "Akademisches Auslandsamt Registrierung");
+			Message message = Util.getEmailMessage("mwiausland@gmail.com", MessageEnum.AAAREGISTR.toString());
 
 			message.setContent("Sehr geehrte Frau Dreischer," + "\n" + "\n"
 					+ "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n"
 					+ "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n"
-					+ Config.CAMUNDA_URL
-					+ "/app/tasklist/default/#/?task=" + delegateTask.getId(),
+					+ Config.CAMUNDA_URL + "/app/tasklist/default/#/?task=" + delegateTask.getId(),
 					"text/plain; charset=UTF-8");
 
 			// Send message

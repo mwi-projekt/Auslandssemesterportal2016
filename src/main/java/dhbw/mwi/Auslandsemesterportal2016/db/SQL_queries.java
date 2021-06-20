@@ -46,8 +46,8 @@ public class SQL_queries {
         return rs;
     }
 
-    public static int executeUpdate(String query, String[] data, String[] types) {// Führt UPDATE mit Hilfe von
-        // PreparedStatements aus
+    public static int executeUpdate(String query, String[] data, String[] types) {
+        // Führt UPDATE mit Hilfe von PreparedStatements aus
         Connection connection = DB.getInstance();
         int parCount = data.length;
         int result = 0;

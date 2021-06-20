@@ -25,21 +25,26 @@ import org.testng.annotations.Test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.Mail;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 
 public class UtilTest {
-    HttpServletRequest request;
-    HttpServletResponse response;
+    // Initialization of necessary mock objects for mocking static methods
     MockedStatic<Util> util;
+
+    // Initialization of necessary mock objects for mocking instance methods
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
 
     @BeforeMethod
     public void init() {
-        request = mock(HttpServletRequest.class);
-        response = mock(HttpServletResponse.class);
+        // Define necessary mock objects for mocking static methods
         util = Mockito.mockStatic(Util.class);
     }
 
     @AfterMethod
     public void close() {
+        // Close mock objects for mocking static methods
         util.close();
     }
 
@@ -53,14 +58,13 @@ public class UtilTest {
      */
     @Test
     public void verifyAddResponseHeaders() {
-
+        // ...
         // do nothing when addResponseHeaders() from Util.class is called
         util.when(() -> Util.addResponseHeaders(any(), any())).thenAnswer((Answer<?>) invocation -> null);
 
         Util.addResponseHeaders(request, response);
         // verify static method addResponseHeaders() from Util.class was called
         util.verify(() -> Util.addResponseHeaders(request, response));
-
     }
 
     /*
@@ -74,13 +78,13 @@ public class UtilTest {
     public void testGetEmailMessage() throws AddressException, MessagingException {
         Message expectedMessage = new MimeMessage(Mail.getInstance());
         expectedMessage.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
-        expectedMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse("testusermwi@dhbw.de"));
-        expectedMessage.setSubject("Akademisches Auslandsamt Registrierung");
+        expectedMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(TestEnum.TESTEMAIL.toString()));
+        expectedMessage.setSubject(MessageEnum.AAAREGISTR.toString());
 
         util.when(() -> Util.getEmailMessage(anyString(), anyString())).thenCallRealMethod();
         util.when(() -> Util.getEmailMessage(anyString(), anyString(), anyString())).thenCallRealMethod();
 
-        Message actualMessage = Util.getEmailMessage("testusermwi@dhbw.de", "Akademisches Auslandsamt Registrierung");
+        Message actualMessage = Util.getEmailMessage(TestEnum.TESTEMAIL.toString(), MessageEnum.AAAREGISTR.toString());
         assertEquals(expectedMessage.getSubject(), actualMessage.getSubject());
 
         String expectedFromMail = Arrays.asList(expectedMessage.getFrom()).toString();
@@ -101,7 +105,7 @@ public class UtilTest {
      */
     @Test
     public void testGenerateSalt() {
-        util.when(()->Util.generateSalt()).thenCallRealMethod();
+        util.when(() -> Util.generateSalt()).thenCallRealMethod();
 
         String salt = Util.generateSalt();
         assertNotNull(salt);
@@ -110,7 +114,7 @@ public class UtilTest {
 
     @Test
     public void testHashSha256() {
-        util.when(()->Util.HashSha256(anyString())).thenCallRealMethod();
+        util.when(() -> Util.HashSha256(anyString())).thenCallRealMethod();
 
         String hashPw = Util.HashSha256("Hallo1234");
         String expectedPw = Util.HashSha256(hashPw + "de3e21dcebe72427883ece");

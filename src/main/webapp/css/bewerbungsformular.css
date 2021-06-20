@@ -26,11 +26,6 @@ table.table.table-bordered.table-hover {
   width: 150%;
 }
 
-button.swal2-cancel.swal2-styled {
-  font-size: 1.2rem;
-  align-items: center;
-}
-
 p {
   font-size: medium;
   text-align: center;

@@ -1,5 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
+import dhbw.mwi.Auslandsemesterportal2016.enums.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
@@ -20,26 +22,26 @@ public class createSGLServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 
 		PrintWriter out = response.getWriter();
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
-		
-		if (rolle != 1 && rolle != 2) {
+
+		if (rolle != 1) {
 			response.sendError(401, "Rolle: " + rolle);
 		} else {
-		
-			//Rolle SGL Eintragen
+
+			// Rolle SGL Eintragen
 			int role = 4;
 
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
-				out.print("mailError");
+				out.print(ErrorEnum.MAILERROR.toString());
 				out.flush();
 				out.close();
 			} else {
 				try {
 					Message message = Util.getEmailMessage(request.getParameter("email"),
-							"Akademisches Auslandsamt Registrierung");
+							MessageEnum.AAAREGISTR.toString());
 					// Random initial Password
 					UUID id = UUID.randomUUID();
 
@@ -48,13 +50,14 @@ public class createSGLServlet extends HttpServlet {
 					String pw = Util.HashSha256(Util.HashSha256(id.toString()) + salt);
 					String help = "--";
 					// Verbindung zur DB um neuen Nutzer zu speichern
-					//Hier fehlt noch die Übergabe des Studiengangs
+					// Hier fehlt noch die Übergabe des Studiengangs
 					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
-							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), request.getParameter("studgang"),
-							request.getParameter("kurs"), -1, help, help, request.getParameter("standort"), "1");
+							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"),
+							request.getParameter("studgang"), request.getParameter("kurs"), -1, help, help,
+							request.getParameter("standort"), "1");
 
 					if (rsupd == 0) {
-						out.print("registerError");
+						out.print(ErrorEnum.USERREGISTER.toString());
 						out.flush();
 						out.close();
 					} else {
@@ -64,7 +67,7 @@ public class createSGLServlet extends HttpServlet {
 					}
 
 				} catch (Exception e) {
-					response.sendError(500, "Fehler beim Anlegen: " + e.getMessage());
+					response.sendError(500, ErrorEnum.USERCREATE.toString() + e.getMessage());
 					e.printStackTrace();
 					throw new RuntimeException(e);
 

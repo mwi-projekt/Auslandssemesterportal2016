@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 
 @WebServlet(name = "ModelProcessSaveServlet", urlPatterns = { "/processmodel/save" })
 public class ModelProcessSaveServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
@@ -54,13 +55,13 @@ public class ModelProcessSaveServlet extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					toClient.println("Error: db error");
+					toClient.println(ErrorEnum.DBERROR.toString());
 					toClient.println(e.getMessage());
 				}
 
 			} else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				toClient.println("Error: missing parameters");
+				toClient.println(ErrorEnum.PARAMMISSING.toString());
 			}
 		}
 	}

@@ -418,6 +418,7 @@ function getData() {
             'zeitraum',
             'englischNote',
             'spanischNote',
+            'muttersprache',
           ];
           disabledFields.map((value) => {
             $('#' + value).prop('readonly', true);

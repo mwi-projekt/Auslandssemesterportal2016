@@ -26,59 +26,42 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.UserUpdateServlet;
 
 public class UserUpdateServletTest {
-    // initalize all necessary mocks
+    // Initialization of necessary mock objects for mocking instance methods
+    ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
-    ResultSet resultSet = mock(ResultSet.class);
 
-    // initialize all necessary static mocks
-    MockedStatic<SQL_queries> sql_queries;
+    // Initialization of necessary mock objects for mocking static methods
     MockedStatic<Transport> transport;
+    MockedStatic<SQL_queries> sql_queries;
 
-    // set up request data
-    String email = "testusermwi@dhbw.de";
-    String vorname = "Test";
-    String nachname = "Test";
-    String studgang = "Wirtschaftsinformatik";
-    String kurs = "WWI18B5";
-    String standort = "Karlsruhe";
-    String tel = "1234567890";
-    String mobil = "0987654321";
-    String matnr = "1234567";
-
-    // initialize all necessary instances
+    // Initialization of necessary instances
     StringWriter stringWriter;
     PrintWriter writer;
-    Cookie c1 = new Cookie("email", email);
+    Cookie c1 = new Cookie("email", TestEnum.TESTEMAIL.toString());
     Cookie c2 = new Cookie("sessionID", "s1e5f2ge8gvs694g8vedsg");
     Cookie[] cookies = { c1, c2 };
 
     @BeforeMethod
     public void init() throws SQLException, IOException {
-        // define all necessary static mock instances
-        sql_queries = Mockito.mockStatic(SQL_queries.class);
+        // Define necessary mock objects for mocking static methods
         transport = Mockito.mockStatic(Transport.class);
+        sql_queries = Mockito.mockStatic(SQL_queries.class);
 
+        // Define necessary instances
         stringWriter = new StringWriter();
         writer = new PrintWriter(stringWriter);
 
+        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.checkUserSession(any(), any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
         sql_queries.when(() -> SQL_queries.getRoleForUser(any())).thenCallRealMethod();
-
-        when(resultSet.next()).thenReturn(true);
-
-        when(request.getCookies()).thenReturn(cookies);
-        when(request.getParameter("email")).thenReturn(email);
-        when(request.getParameter("vorname")).thenReturn(vorname);
-        when(request.getParameter("nachname")).thenReturn(nachname);
-        when(request.getParameter("standort")).thenReturn(standort);
-        when(request.getParameter("studgang")).thenReturn(studgang);
-        when(request.getParameter("kurs")).thenReturn(kurs);
-
         sql_queries.when(() -> SQL_queries.updateMA(any(), any(), any(), any(), any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.updateMA(any(), any(), any(), any(), any(), any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.updateStud(any(), any(), any(), any(), any(), any())).thenCallRealMethod();
@@ -90,14 +73,25 @@ public class UserUpdateServletTest {
                 .thenCallRealMethod();
 
         when(response.getWriter()).thenReturn(writer);
+
+        when(request.getCookies()).thenReturn(cookies);
+        when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
+        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
+        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
+        when(request.getParameter("standort")).thenReturn(TestEnum.TESTSTANDORT.toString());
+        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUGANG.toString());
+        when(request.getParameter("kurs")).thenReturn(TestEnum.TESTKURS.toString());
+
+        when(resultSet.next()).thenReturn(true);
     }
 
     @AfterMethod
     public void close() {
-        // close all static mocks
-        sql_queries.close();
+        // Close mock objects for mocking static methods
         transport.close();
-        // close writer instance
+        sql_queries.close();
+
+        // Close instances
         writer.close();
     }
 
@@ -110,10 +104,11 @@ public class UserUpdateServletTest {
         String oldmail = "0";
         String role = "2";
 
+        // Define what happens when mocked method is called
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -126,7 +121,7 @@ public class UserUpdateServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("success", result);
+        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
     }
 
     @Test
@@ -135,10 +130,11 @@ public class UserUpdateServletTest {
         String oldmail = "0";
         String role = "4";
 
+        // Define what happens when mocked method is called
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet userUpdateServlet = new UserUpdateServlet() {
@@ -151,7 +147,7 @@ public class UserUpdateServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("success", result);
+        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
     }
 
     @Test
@@ -160,10 +156,11 @@ public class UserUpdateServletTest {
         String oldmail = "0";
         String role = "6";
 
+        // Define what happens when mocked method is called
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -176,7 +173,7 @@ public class UserUpdateServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("success", result);
+        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
     }
 
     @Test
@@ -185,10 +182,11 @@ public class UserUpdateServletTest {
         String oldmail = "2";
         String role = "2";
 
+        // Define what happens when mocked method is called
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -201,7 +199,7 @@ public class UserUpdateServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Success", result);
+        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
     }
 
     @Test
@@ -210,10 +208,11 @@ public class UserUpdateServletTest {
         String oldmail = "2";
         String role = "4";
 
+        // Define what happens when mocked method is called
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -226,7 +225,7 @@ public class UserUpdateServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Success", result);
+        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
     }
 
     @Test
@@ -235,10 +234,11 @@ public class UserUpdateServletTest {
         String oldmail = "2";
         String role = "6";
 
+        // Define what happens when mocked method is called
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         UserUpdateServlet registerServlet = new UserUpdateServlet() {
@@ -251,7 +251,7 @@ public class UserUpdateServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Success", result);
+        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
     }
 
     /*
@@ -259,6 +259,7 @@ public class UserUpdateServletTest {
      */
     @Test
     public void testDoPostForStudent() throws IOException, SQLException {
+        // Define what happens when mocked method is called
         when(resultSet.getInt(1)).thenReturn(3);
 
         Mockito.doAnswer(new Answer<Object>() {
@@ -289,15 +290,16 @@ public class UserUpdateServletTest {
         String oldmail = "0";
         String role = "6";
 
+        // Define what happens when mocked method is called
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
         when(resultSet.getInt(1)).thenReturn(2);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
 
         Mockito.doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print("Update Error");
+                writer.print(ErrorEnum.USERUPDATE.toString());
                 return null;
             }
         }).when(response).sendError(anyInt(), any());
@@ -313,7 +315,7 @@ public class UserUpdateServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Update Error", result);
+        assertEquals(ErrorEnum.USERUPDATE.toString(), result);
     }
 
     @Test
@@ -322,15 +324,16 @@ public class UserUpdateServletTest {
         String oldmail = "2";
         String role = "6";
 
+        // Define what happens when mocked method is called
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
         when(resultSet.getInt(1)).thenReturn(2);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
         when(request.getParameter("role")).thenReturn(role);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
 
         Mockito.doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print("Update Error");
+                writer.print(ErrorEnum.USERUPDATE.toString());
                 return null;
             }
         }).when(response).sendError(anyInt(), any());
@@ -346,6 +349,6 @@ public class UserUpdateServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals("Update Error", result);
+        assertEquals(ErrorEnum.USERUPDATE.toString(), result);
     }
 }
