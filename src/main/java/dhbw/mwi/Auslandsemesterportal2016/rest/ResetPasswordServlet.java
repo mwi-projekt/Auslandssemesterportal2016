@@ -14,13 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 
 @WebServlet(name = "ResetPasswordServlet", urlPatterns = { "/resetPassword" })
 public class ResetPasswordServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 		// NO AUTHENTIFICATION NEEDED
 		PrintWriter out = response.getWriter();
 		String to = request.getParameter("email");
@@ -49,7 +50,7 @@ public class ResetPasswordServlet extends HttpServlet {
 			// Statement statement = connection.createStatement();
 			// int rsupd = statement.executeUpdate(sqlupd);
 			// statement.close();
-			out.print("Done resetting account " + to);
+			out.print(SuccessEnum.RESETACC.toString() + to);
 			out.close();
 		} catch (MessagingException e) {
 			e.printStackTrace();

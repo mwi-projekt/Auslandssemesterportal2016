@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = { "/register" })
 public class RegisterServlet extends HttpServlet {
@@ -26,14 +28,14 @@ public class RegisterServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 		// NO AUTHENTIFICATION NEEDED
 		PrintWriter out = response.getWriter();
 
 		int rolle = 0;
 
 		if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
-			out.print("mailError");
+			out.print(ErrorEnum.MAILERROR.toString());
 			out.flush();
 		} else if (SQL_queries.isMatnrUsed(Integer.parseInt(request.getParameter("matrikelnummer")))) {
 			out.print("matnrError");
@@ -48,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
 
 			try {
 				Message message = Util.getEmailMessage(request.getParameter("email"),
-						"Akademisches Auslandsamt Registrierung");
+						MessageEnum.AAAREGISTR.toString());
 				UUID id = UUID.randomUUID();
 				System.out.println(id);
 
@@ -80,7 +82,7 @@ public class RegisterServlet extends HttpServlet {
 			} catch (MessagingException e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);
-			
+
 			}
 		}
 

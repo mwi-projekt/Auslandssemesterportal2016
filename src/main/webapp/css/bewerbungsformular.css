@@ -8,31 +8,28 @@
   margin-bottom: 0;
 }
 
-
-
-#formular{
-  padding-left: 25%;
-}
-
 .dropzone {
   margin-bottom: 20px;
 }
 
-
-h2 {
+h1 {
   color: black;
   text-align: center;
 }
-h1{
-  color:black;
-  padding-left: 15%;
-}
-p {
-  font-size: medium;
-  padding-left: 1.9%;
-  text-align: justify;
+
+#newBewProzess {
+  width: 50%;
+  margin-left: 100%;
 }
 
+table.table.table-bordered.table-hover {
+  width: 150%;
+}
+
+p {
+  font-size: medium;
+  text-align: center;
+}
 
 .warning {
   background-color: #ff0000;
@@ -51,24 +48,32 @@ table td {
 }
 
 #gdprCompliance {
-  margin-left: 38%;
-  
+  margin-left: 50%;
 }
 
-#saveData{
+#saveData {
+  float: right;
+  margin-right: -40%;
+}
+#saveChanges {
   float: right;
 }
- 
 label {
   padding-left: 1.2%;
   font-size: medium;
-  width:100%
+  width: 100%;
 }
 #downloadAnmeldeformular {
   font-size: 100%;
 }
+
+/*DropDowns formatieren*/
+div#motivationsSchreiben,
+div#abiturZeugnis,
+div#dualisAuszug,
 div#zustimmungsFormular {
-  margin-left: 2.1%;
+  width: 60%;
+  margin-left: 20%;
 }
 
 .container {
@@ -91,13 +96,61 @@ div#zustimmungsFormular {
 .checkbox {
   font-size: medium;
 }
-label.col-sm-2.control-label {
-  padding-left: 2%;
+
+/*Zentrieren des Formulars*/
+label.col-sm-2.control-label,
+span#untName-error,
+span#bewVorname-error,
+span#bewNachname-error,
+span#bewTelefon-error,
+span#bewStrasse-error,
+span#bewPLZ-error,
+span#bewOrt-error,
+span#bewLand-error,
+span#bewEmail-error,
+span#untStrasse-error,
+span#untPLZ-error,
+span#untOrt-error,
+span#untAnsprechpartner-error,
+span#untEMail-error {
+  padding-left: 21.5%;
 }
 
+input#bewVorname,
+input#bewNachname,
+input#bewTelefon,
+input#bewStrasse,
+input#bewPLZ,
+select#bewLand,
+input#bewOrt,
+select#aktuelleUni,
+input#matrikelnummer,
+select#bewStudiengang,
+input#bewEmail,
+input#muttersprache,
+select#muttersprache,
+select#uni1,
+select#uni2,
+select#uni3,
+select#spanischNote,
+select#englischNote {
+  margin-left: 25%;
+}
 
-button#saveData {
-  margin-left: 2%;
+input#untAnsprechpartner,
+select#untLand,
+input#untOrt,
+input#untPLZ,
+input#untStrasse,
+input#untName,
+input#untEMail,
+select#zeitraum,
+input#bewGeburtsdatum,
+select#bewSemester,
+select#bewErasmus,
+select#bewLA,
+select#bewSGL {
+  margin-left: 25%;
 }
 
 /*#stepProgressBar {

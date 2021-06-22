@@ -1,7 +1,8 @@
 import {$,baseUrl} from "../config";
 import "../app";
-var dt = require( 'datatables.net' )(window, $);
-import "datatables.net-bs4";
+require( 'datatables.net' )(window, $);
+require( 'datatables.net-bs4' )(window, $);
+require( 'datatables.net-buttons' )(window, $);
 import Swal from "sweetalert2";
 import "bootstrap";
 import "jquery-ui-dist/jquery-ui";
@@ -282,7 +283,8 @@ $(document).ready(function () {
                     }],
                     "drawCallback": function (settings) {
                         setClickListeners();
-                    }
+                    },
+                    buttons: []
                 });
             },
             error: function (result) {

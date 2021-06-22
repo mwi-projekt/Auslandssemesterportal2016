@@ -106,7 +106,7 @@ li {
 /* Erfahrungsberichte*/
 
 h4 {
-  margin-left: 12%;
+  text-align: center;
 }
 
 .erfahrungsBerichte-grid-container {
@@ -629,7 +629,7 @@ h4 {
   /* box-shadow: 0 2px 6px rgba(0, 0, 0, .5); */
   padding: 10px;
   margin-bottom: 20px;
-  border-bottom: 2px solid #005353;
+  /*border-bottom: 2px solid #005353;*/
   border-radius: 2px;
 }
 
@@ -1033,10 +1033,6 @@ i {
 
 #register .nutzerBearbeiten {
   display: none;
-}
-
-.swal2-popup {
-  font-size: 1.6rem !important;
 }
 
 .team-member {

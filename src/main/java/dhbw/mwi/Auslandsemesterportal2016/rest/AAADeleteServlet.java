@@ -11,18 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.enums.*;
 
 @WebServlet(name = "AAADeleteServlet", urlPatterns = { "/user/deleteAAA" })
 public class AAADeleteServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
-		Util.addResponseHeaders(request,response);
+
+		Util.addResponseHeaders(request, response);
 
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
 
-		if ((rolle != 1 && rolle != 2) && rolle != 4) {
+		if (rolle != 1) {
 			response.sendError(401, "Rolle: " + rolle);
 		} else {
 			String mail = request.getParameter("mail");
@@ -35,14 +36,14 @@ public class AAADeleteServlet extends HttpServlet {
 				int result = SQL_queries.executeUpdate(query, args, types);
 
 				if (result == 1) {
-					toClient.println("User Deleted");
+					toClient.println(SuccessEnum.USERDELETE.toString());
 				} else {
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					toClient.println("User not found or could not be deleted");
+					toClient.println(ErrorEnum.USERNOTDELETED.toString());
 				}
 			} else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				toClient.println("Error: parameter are missing");
+				toClient.println(ErrorEnum.PARAMMISSING.toString());
 			}
 		}
 	}

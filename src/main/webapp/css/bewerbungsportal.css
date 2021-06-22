@@ -41,8 +41,8 @@ th {
 }
 
 .navEl:hover {
-  background: #dc3945;
-  color: white;
+  text-decoration: none;
+  background-color: #c82333;
 }
 
 .current {
@@ -155,6 +155,9 @@ iframe {
   max-width: 100%;
   float: none !important;
   margin-left: 7px;
+}
+.sollWeg {
+visibility: hidden;
 }
 
 .navVer {
@@ -311,7 +314,7 @@ td {
 }
 
 #closeBewerber {
-  background-color: red;
+  background-color: #d60000;
 }
 
 .keininhalt {
@@ -320,30 +323,24 @@ td {
 
 /*Pop-Up Fenster beim Bewerben auf Uni*/
 select#selectUni {
-  width: 100%;
+  width: 70%;
   font-size: medium;
 }
 select#selectZeit {
   font-size: medium;
-  width: 100%;
+  width: 70%;
 }
 
 select#selectPrio {
   font-size: medium;
-  width: 100%;
+  width: 70%;
 }
 .btn-success {
   margin: auto;
 }
-button.swal2-confirm.swal2-styled {
-  background-color: red;
-  font-size: 1.2rem;
-  margin: auto;
-}
 
-h2#swal2-title {
-  font-size: 120%;
-  margin-bottom: 3%;
+#saveChanges {
+  margin-right: 2%;
 }
 /*
 #gdprCompliance {

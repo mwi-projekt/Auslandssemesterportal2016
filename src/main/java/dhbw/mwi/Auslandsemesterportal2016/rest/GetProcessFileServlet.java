@@ -22,7 +22,7 @@ public class GetProcessFileServlet extends HttpServlet {
 
 	@Override
 	protected void doHead(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Util.addResponseHeaders(request,response);
+		Util.addResponseHeaders(request, response);
 		// checks if the file exists
 		String instanceID = request.getParameter("instance_id");
 		String key = request.getParameter("key");
@@ -54,7 +54,6 @@ public class GetProcessFileServlet extends HttpServlet {
 
 			try {
 				response.setContentType(typedFileValue.getMimeType());
-				int nRead;
 				byte[] buf = new byte[1024];
 
 				for (int nChunk = is.read(buf); nChunk != -1; nChunk = is.read(buf)) {

@@ -40,7 +40,7 @@ $(document).ready(function () {
     clearModalOnDismiss();
 });
 
-// Laden der Daten der PortalInfo Box
+// Zurücksetzen der Modals, wenn diese geschlossen werden
 function clearModalOnDismiss() {
     $('#login').on('hidden.bs.modal', function () {
         $(this).find('form').trigger('reset');
