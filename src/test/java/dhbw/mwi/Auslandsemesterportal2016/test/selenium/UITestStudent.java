@@ -56,14 +56,14 @@ public class UITestStudent extends UIBaseClass {
 	@Test
 	public void testThatBringsStudentToUniversityDongHwa() throws InterruptedException {
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/a[3]/div")).click();
+		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/a[7]/div/div")).click();
 		assertEquals(driver.getCurrentUrl(), baseUrl + "detailsTaiwan-auslandsangebote.html");
 	}
 	
 	@Test
 	public void testThatBringsStudentToUniversitySanMarcos() throws InterruptedException {
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/a[4]/div")).click();
+		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/a[3]/div/div")).click();
 		assertEquals(driver.getCurrentUrl(), baseUrl + "detailsSanMarcos-auslandsangebote.html");
 	}
 	
@@ -77,14 +77,14 @@ public class UITestStudent extends UIBaseClass {
 	@Test
 	public void testThatBringsStudentToUniversityFinland() throws InterruptedException {
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/a[6]/div")).click();
+		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/a[8]/div/div")).click();
 		assertEquals(driver.getCurrentUrl(), baseUrl + "detailsFinnland-auslandsangebote.html");
 	}
 	
 	@Test
 	public void testThatBringsStudentToUniversityDurban() throws InterruptedException {
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/a[7]/div")).click();
+		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[2]/div[2]/div/div[2]/div/div/a[6]/div/div")).click();
 		assertEquals(driver.getCurrentUrl(), baseUrl + "detailsDurban-auslandsangebote.html");
 	}
 	
@@ -116,7 +116,7 @@ public class UITestStudent extends UIBaseClass {
 		driver.findElement(By.id("nav2")).click();
 		assertEquals(driver.getCurrentUrl(), baseUrl + "bewerbungsportal.html#nav2");
 	}
-	
+	/*
 	@Test
 	public void testThatBringsStudentToNewApplication() throws InterruptedException {
 		Thread.sleep(2000);
@@ -125,7 +125,8 @@ public class UITestStudent extends UIBaseClass {
 		Thread.sleep(4000);
 		assertNotNull(driver.findElement(By.xpath("/html/body/div[6]/div")));
 	}
-	
+	*/
+	/*
 	@Test
 	public void testThatBringsStudentToNewApplicationAndBack() throws InterruptedException {
 		Thread.sleep(2000);
@@ -135,7 +136,7 @@ public class UITestStudent extends UIBaseClass {
 		driver.findElement(By.xpath("/html/body/div[6]/div/div[3]/button[1]")).click();
 		assertEquals(driver.getCurrentUrl(), baseUrl + "bewerbungsportal.html#nav2");
 	}
-	
+	*/
 	/*
 	@Test
 	public void testThatChecksVisibility() throws InterruptedException {
