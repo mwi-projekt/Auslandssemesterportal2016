@@ -79,7 +79,7 @@ public class AAADeleteServletTest {
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
-        AAADeleteServlet aaaDeleteServlet = new AAADeleteServlet() {
+        new AAADeleteServlet() {
             public AAADeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -99,7 +99,7 @@ public class AAADeleteServletTest {
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
-        AAADeleteServlet aaaDeleteServlet = new AAADeleteServlet() {
+        new AAADeleteServlet() {
             public AAADeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -119,7 +119,7 @@ public class AAADeleteServletTest {
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
 
         // call protected doPost-Method of AAADeleteServlet.class
-        AAADeleteServlet aaaDeleteServlet = new AAADeleteServlet() {
+        new AAADeleteServlet() {
             public AAADeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);

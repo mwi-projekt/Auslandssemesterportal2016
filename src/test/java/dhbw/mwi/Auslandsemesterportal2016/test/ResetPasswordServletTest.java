@@ -77,7 +77,7 @@ public class ResetPasswordServletTest {
     @Test
     public void testDoPost() throws IOException {
         // call protected doPost()-Method of RegisterServlet.class
-        ResetPasswordServlet resetPasswordServlet = new ResetPasswordServlet() {
+        new ResetPasswordServlet() {
             public ResetPasswordServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);

@@ -2,7 +2,7 @@ package dhbw.mwi.Auslandsemesterportal2016.enums;
 
 public enum SuccessEnum {
     USERDELETE("Deleted User successfully"), CREATEUSER("Created User successfully"),
-    RESETACC("Done resetting account "), UPDATEUSER("Updated user successfully");
+    RESETACC("Done resetting account "), UPDATEUSER("Updated user successfully"), UPDATEINSTANCE("Saved");
 
     private final String text;
 

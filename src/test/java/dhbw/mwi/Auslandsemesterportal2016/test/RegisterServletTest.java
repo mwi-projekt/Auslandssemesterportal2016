@@ -89,7 +89,7 @@ public class RegisterServletTest {
     @Test
     public void testDoPost() throws IOException {
         // call protected doPost()-Method of RegisterServlet.class
-        RegisterServlet registerServlet = new RegisterServlet() {
+        new RegisterServlet() {
             public RegisterServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);

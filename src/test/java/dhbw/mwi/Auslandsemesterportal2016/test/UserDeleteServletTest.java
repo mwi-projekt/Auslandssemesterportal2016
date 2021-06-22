@@ -78,7 +78,7 @@ public class UserDeleteServletTest {
     @Test
     public void testDoGetForRoleAdmin() throws SQLException, IOException {
         // call protected doPost()-Method of RegisterServlet.class
-        UserDeleteServlet userDeleteServlet = new UserDeleteServlet() {
+        new UserDeleteServlet() {
             public UserDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doGet(request, response);

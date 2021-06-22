@@ -15,6 +15,7 @@ import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 
 @WebServlet(name = "UpdateInstanceServlet", urlPatterns = { "/setVariable" })
 public class UpdateInstanceServlet extends HttpServlet {
@@ -59,7 +60,7 @@ public class UpdateInstanceServlet extends HttpServlet {
 				engine.getTaskService().complete(
 						engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(),
 						vars);
-				toClient.println("Saved");
+				toClient.println(SuccessEnum.UPDATEINSTANCE.toString());
 			} else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				toClient.print("Variables not set");

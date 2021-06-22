@@ -79,7 +79,7 @@ public class SGLDeleteServletTest {
         when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
 
         // call protected doPost()-Method of RegisterServlet.class
-        SGLDeleteServlet sglDeleteServlet = new SGLDeleteServlet() {
+        new SGLDeleteServlet() {
             public SGLDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -99,7 +99,7 @@ public class SGLDeleteServletTest {
         when(request.getParameter("mail")).thenReturn(null);
 
         // call protected doPost()-Method of RegisterServlet.class
-        SGLDeleteServlet sglDeleteServlet = new SGLDeleteServlet() {
+        new SGLDeleteServlet() {
             public SGLDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -119,7 +119,7 @@ public class SGLDeleteServletTest {
         when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
 
         // call protected doPost()-Method of RegisterServlet.class
-        SGLDeleteServlet sglDeleteServlet = new SGLDeleteServlet() {
+        new SGLDeleteServlet() {
             public SGLDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);

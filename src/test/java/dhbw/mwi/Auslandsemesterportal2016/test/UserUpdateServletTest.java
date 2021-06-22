@@ -111,7 +111,7 @@ public class UserUpdateServletTest {
         when(request.getParameter("role")).thenReturn(role);
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+        new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -137,7 +137,7 @@ public class UserUpdateServletTest {
         when(request.getParameter("role")).thenReturn(role);
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet userUpdateServlet = new UserUpdateServlet() {
+        new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -163,7 +163,7 @@ public class UserUpdateServletTest {
         when(request.getParameter("role")).thenReturn(role);
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+        new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -189,7 +189,7 @@ public class UserUpdateServletTest {
         when(request.getParameter("role")).thenReturn(role);
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+        new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -215,7 +215,7 @@ public class UserUpdateServletTest {
         when(request.getParameter("role")).thenReturn(role);
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+        new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -241,7 +241,7 @@ public class UserUpdateServletTest {
         when(request.getParameter("role")).thenReturn(role);
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+        new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -271,7 +271,7 @@ public class UserUpdateServletTest {
         }).when(response).sendError(anyInt(), any());
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+        new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -305,7 +305,7 @@ public class UserUpdateServletTest {
         }).when(response).sendError(anyInt(), any());
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+        new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
@@ -339,7 +339,7 @@ public class UserUpdateServletTest {
         }).when(response).sendError(anyInt(), any());
 
         // call protected doPost()-Method of RegisterServlet.class
-        UserUpdateServlet registerServlet = new UserUpdateServlet() {
+        new UserUpdateServlet() {
             public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
