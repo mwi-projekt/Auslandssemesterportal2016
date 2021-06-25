@@ -1,4 +1,4 @@
-import {$,baseUrl} from "./config";
+import { $, baseUrl } from "./config";
 import Swal from "sweetalert2";
 import "jquery-ui-dist/jquery-ui";
 import "cookieconsent";
@@ -14,9 +14,9 @@ $(document).ready(function () {
         },
         theme: "classic",
         palette: {
-            popup: {background: '#E8E8E8', text: '#000', link: '#fff', border: '#000'},
-            button: {background: 'transparent', border: '#D60000', text: '#D60000'},
-            highlight: {background: '#D60000', border: '#000000', text: '#000000'},
+            popup: { background: '#E8E8E8', text: '#000', link: '#fff', border: '#000' },
+            button: { background: 'transparent', border: '#D60000', text: '#D60000' },
+            highlight: { background: '#D60000', border: '#000000', text: '#000000' },
         }
     });
 
@@ -30,16 +30,21 @@ $(document).ready(function () {
         $('.logFenster').hide();
         $('.portalInfo').hide();
         $('.logoutFenster').show();
-        $('.nutzerName').text(sessionStorage['User']);
+        var username = sessionStorage['User'].substring(
+            sessionStorage['User'].indexOf(".") + 1,
+            sessionStorage['User'].indexOf("@")
+        );
+        var usernameCapitalized = username.charAt(0).toUpperCase() + username.slice(1);
+        $('.nutzerName').text("Hallo " + usernameCapitalized + "!");
     }
 });
 
 //Check ob Passwörter übereinstimmen
-$(document).on('keyup', '#inPwSt2', function(){
+$(document).on('keyup', '#inPwSt2', function () {
     var inPwSt1 = document.getElementById("inPwSt1")
-      , inPwSt2 = document.getElementById("inPwSt2");
+        , inPwSt2 = document.getElementById("inPwSt2");
 
-    if(inPwSt1.value != inPwSt2.value) {
+    if (inPwSt1.value != inPwSt2.value) {
         inPwSt2.setCustomValidity("Die Passwörter stimmen nicht überein");
     } else {
         inPwSt2.setCustomValidity('');
@@ -173,7 +178,7 @@ $(document).on('submit', '#loginForm', function (e) {
                 } else if (sessionStorage['rolle'] == 3) {
                     window.location.href = 'bewerbungsportal.html';
                 } else if (sessionStorage['rolle'] == 4) {
-                	window.location.href = 'task_overview_sgl.html';
+                    window.location.href = 'task_overview_sgl.html';
                 } else {
                     window.location.href = 'cms.html';
                 }
