@@ -41,7 +41,7 @@ function getList() {
                             "<td>" + singleInstance.name + "</td>" +
                             "<td>" + singleInstance.vname + "</td>" +
                             "<td>" + singleInstance.kurs + "</td>" +
-                            //"<td>" + singleInstance.prioritaet + "</td>" + Priorität in Standardprozess raus
+                            "<td>" + singleInstance.prioritaet + "</td>" +
                             "<td>" + singleInstance.aktuelleUni + "</td>" +
                             "<td>" + singleInstance.uni + "</td>" +
                             "<td>" + '<button class="btn fas fa-list" title="Details" ' +
@@ -56,7 +56,7 @@ function getList() {
                             "<td>" + singleInstance.name + "</td>" +
                             "<td>" + singleInstance.vname + "</td>" +
                             "<td>" + singleInstance.aktuelleUni + "</td>" +
-                            //"<td>" + singleInstance.prioritaet + "</td>" + Priorität in Standardprozess raus
+                            "<td>" + singleInstance.prioritaet + "</td>" +
                             "<td>" + singleInstance.kurs + "</td>" +
                             "<td>" + singleInstance.uni + "</td>" +
                             "<td>" + '<button class="btn fas fa-list" title="Details" ' +
@@ -70,7 +70,7 @@ function getList() {
                             "<td>" + singleInstance.name + "</td>" +
                             "<td>" + singleInstance.vname + "</td>" +
                             "<td>" + singleInstance.aktuelleUni + "</td>" +
-                            //"<td>" + singleInstance.prioritaet + "</td>" + Priorität in Standardprozess raus
+                            "<td>" + singleInstance.prioritaet + "</td>" + 
                             "<td>" + singleInstance.kurs + "</td>" +
                             "<td>" + singleInstance.uni + "</td>" +
                             "<td>" + '<button class="btn fas fa-list" title="Details" ' +
