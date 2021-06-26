@@ -44,8 +44,8 @@ function getList() {
                             singleInstance.vname +
                             "</td><td>" +
                             singleInstance.kurs +
-                            "</td><td>" +
-                            singleInstance.prioritaet +
+                            //"</td><td>" +
+                            //singleInstance.prioritaet + Priorität in Standardprozess raus
                             "</td><td>" +
                             singleInstance.aktuelleUni +
                             "</td><td>" +
@@ -61,7 +61,7 @@ function getList() {
                             "<td>" + singleInstance.name + "</td>" +
                             "<td>" + singleInstance.vname + "</td>" +
                             "<td>" + singleInstance.kurs + "</td>" +
-                            "<td>" + singleInstance.prioritaet + "</td>" +
+                            //"<td>" + singleInstance.prioritaet + "</td>" + Priorität in Standardprozess raus
                             "<td>" + singleInstance.aktuelleUni + "</td>" +
                             "<td>" + singleInstance.uni + "</td>" +
                             "<td>" +
@@ -77,8 +77,8 @@ function getList() {
                             singleInstance.vname +
                             "</td><td>" +
                             singleInstance.aktuelleUni +
-                            "</td><td>" +
-                            singleInstance.prioritaet +
+                            //"</td><td>" +
+                            //singleInstance.prioritaet +
                             "</td><td>" +
                             singleInstance.kurs +
                             "</td><td>" +
@@ -109,8 +109,8 @@ function getList() {
                             singleInstance.vname +
                             "</td><td>" +
                             singleInstance.aktuelleUni +
-                            "</td><td>" +
-                            singleInstance.prioritaet +
+                            //"</td><td>" +
+                            //singleInstance.prioritaet + Priorität in Standardprozess raus
                             "</td><td>" +
                             singleInstance.kurs +
                             "</td><td>" +
