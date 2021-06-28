@@ -486,6 +486,8 @@ function parse() {
                 if (
                   (this.value.includes("/") && e.keyCode == 47) ||
                   (this.value.includes(" ") && e.keyCode == 32) ||
+                  (this.value.includes(" ") && e.keyCode == 47) ||
+                  (this.value.includes("/") && e.keyCode == 32) ||
                   !(
                     e.keyCode == 49 ||
                     e.keyCode == 50 ||
@@ -510,39 +512,40 @@ function parse() {
 
             $("#bewGeburtsdatum").keydown(function (e) {
               try {
-                // check if key is number or .
-                // if (
-                //   !(e.keyCode == 46 || (e.keyCode >= 48 && e.keyCode <= 57))
-                // ) {
-                //   e.preventDefault();
-                // } else {
-                // check input
-                var code = e.keyCode;
-                var leng = this.value.length;
-                var allowedCharacters = [
-                  49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 190, 8, 32,
-                ];
-                var isValidInput = false;
-                for (var i = allowedCharacters.length - 1; i >= 0; i--) {
-                  if (allowedCharacters[i] == code) {
-                    isValidInput = true;
+                if (
+                  !(
+                    e.keyCode == 37 ||
+                    e.keyCode == 39 ||
+                    e.keyCode == 8 ||
+                    e.keyCode == 9
+                  )
+                ) {
+                  var code = e.keyCode;
+                  var leng = this.value.length;
+                  var allowedCharacters = [
+                    49, 50, 51, 52, 53, 54, 55, 56, 57, 48,
+                  ];
+                  var isValidInput = false;
+                  for (var i = allowedCharacters.length - 1; i >= 0; i--) {
+                    if (allowedCharacters[i] == code) {
+                      isValidInput = true;
+                    }
+                  }
+
+                  if (
+                    isValidInput ===
+                      false /* Can only input 1,2,3,4,5,6,7,8,9 or . */ ||
+                    (code == 190 &&
+                      (leng < 2 || leng > 5 || leng == 3 || leng == 4)) ||
+                    ((leng == 2 || leng == 5) &&
+                      code !== 190) /* only can hit a . for 3rd pos. */ ||
+                    leng == 10
+                  ) {
+                    /* only want 10 characters "12.45.7890" */
+                    event.preventDefault();
+                    return;
                   }
                 }
-
-                if (
-                  isValidInput ===
-                    false /* Can only input 1,2,3,4,5,6,7,8,9 or . */ ||
-                  (code == 190 &&
-                    (leng < 2 || leng > 5 || leng == 3 || leng == 4)) ||
-                  ((leng == 2 || leng == 5) &&
-                    code !== 190) /* only can hit a . for 3rd pos. */ ||
-                  leng == 10
-                ) {
-                  /* only want 10 characters "12.45.7890" */
-                  event.preventDefault();
-                  return;
-                }
-                //}
               } catch (error) {}
             });
 
