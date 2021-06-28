@@ -482,10 +482,20 @@ function parse() {
 
             $("#bewTelefon").keydown(function (e) {
               try {
+                if (
+                  (this.value.includes("/") && e.keyCode == 191) ||
+                  (this.value.includes(" ") && e.keyCode == 32)
+                ) {
+                  e.preventDefault();
+                }
+              } catch (error) {}
+            });
+
+            $("#bewGeburtsdatum").keydown(function (e) {
+              try {
                 var key = String.fromCharCode(e.keyCode);
                 if (
-                  (this.value.includes("/") && key == "/") ||
-                  (this.value.includes(" ") && key == " ")
+                  !(e.keyCod == 190 || (e.keyCode >= 48 && e.keyCode <= 57))
                 ) {
                   e.preventDefault();
                 }
