@@ -1,25 +1,25 @@
-import { $, baseUrl } from '../config';
-import '../app';
-const jsPDF = require('jspdf');
-import Swal from 'sweetalert2';
-import 'dropzone';
-require('jquery-validation')($);
-require('jquery-validation/dist/localization/messages_de.min');
-import 'jquery-ui-dist';
-import imagePage1 from '../../images/Anmeldeformular_1.jpg';
-import imagePage2 from '../../images/Anmeldeformular_2.jpg';
+import { $, baseUrl } from "../config";
+import "../app";
+const jsPDF = require("jspdf");
+import Swal from "sweetalert2";
+import "dropzone";
+require("jquery-validation")($);
+require("jquery-validation/dist/localization/messages_de.min");
+import "jquery-ui-dist";
+import imagePage1 from "../../images/Anmeldeformular_1.jpg";
+import imagePage2 from "../../images/Anmeldeformular_2.jpg";
 
 $.validator.setDefaults({
-  errorElement: 'span',
+  errorElement: "span",
   errorPlacement: function (error, element) {
-    error.addClass('invalid-feedback');
-    element.closest('.form-group').append(error);
+    error.addClass("invalid-feedback");
+    element.closest(".form-group").append(error);
   },
   highlight: function (element, errorClass, validClass) {
-    $(element).addClass('is-invalid').removeClass('is-valid');
+    $(element).addClass("is-invalid").removeClass("is-valid");
   },
   unhighlight: function (element, errorClass, validClass) {
-    $(element).removeClass('is-invalid').addClass('is-valid');
+    $(element).removeClass("is-invalid").addClass("is-valid");
   },
 });
 
@@ -30,34 +30,34 @@ var typeList = [];
 
 $(document).ready(function () {
   var url = new URL(window.location.href);
-  instanceID = url.searchParams.get('instance_id');
-  uni = url.searchParams.get('uni');
+  instanceID = url.searchParams.get("instance_id");
+  uni = url.searchParams.get("uni");
 
   parse();
 });
 
 function manipulateDOM() {
-  $('#matrikelnummer').attr('readonly', true);
+  $("#matrikelnummer").attr("readonly", true);
 
-  if ($('#gdprCompliance').length === 1) {
-    $('#gdprCompliance').change(function () {
-      if ($('#gdprCompliance').prop('checked')) {
-        $('#saveData').attr('disabled', false);
+  if ($("#gdprCompliance").length === 1) {
+    $("#gdprCompliance").change(function () {
+      if ($("#gdprCompliance").prop("checked")) {
+        $("#saveData").attr("disabled", false);
       } else {
-        $('#saveData').attr('disabled', true);
+        $("#saveData").attr("disabled", true);
       }
     });
 
-    $('#saveData').attr('disabled', true);
+    $("#saveData").attr("disabled", true);
   }
 }
 
 // Automatische Ortserkennung bei PLZ-Eingabe in den persönlichen Daten
-$(document).on('keyup change', '#bewPLZ', function (e) {
+$(document).on("keyup change", "#bewPLZ", function (e) {
   if ($(this).val().length > 4) {
-    var ort = $('#bewOrt');
+    var ort = $("#bewOrt");
     $.getJSON(
-      'https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?',
+      "https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?",
       { postalcode: this.value },
       function (response) {
         if (
@@ -70,24 +70,24 @@ $(document).on('keyup change', '#bewPLZ', function (e) {
       }
     );
   } else {
-    $('#bewOrt').val('');
+    $("#bewOrt").val("");
   }
 });
 
 //Automatische Download des ausgefüllten Anmeldeformulars
-$(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
+$(document).on("click", '[href="#downloadAnmeldeformular"]', function (e) {
   e.preventDefault();
-  console.log('Download');
+  console.log("Download");
 
   $.ajax({
-    type: 'GET',
-    url: baseUrl + '/getVariables',
+    type: "GET",
+    url: baseUrl + "/getVariables",
     data: {
       instance_id: instanceID,
     },
     success: function (result) {
-      console.log('neueVersionOnline');
-      console.log('result');
+      console.log("neueVersionOnline");
+      console.log("result");
       console.log(result);
 
       const image1 = new Image();
@@ -95,120 +95,120 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
       const image2 = new Image();
       image2.src = imagePage2;
       var doc = new jsPDF();
-      doc.addImage(image1, 'JPEG', 0, 0, 210, 297);
+      doc.addImage(image1, "JPEG", 0, 0, 210, 297);
 
       //Hochschule aus URL
       var url_string = window.location.href;
       var url = new URL(url_string);
-      var uni = url.searchParams.get('uni');
+      var uni = url.searchParams.get("uni");
       //Bulgarien
-      if (uni == 'American University in Bulgaria (Bulgarien)') {
-        var klammer = uni.indexOf('(');
+      if (uni == "American University in Bulgaria (Bulgarien)") {
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
         //Schottland
-      } else if (uni == 'Abertay University of Dundee (Schottland)') {
-        var klammer = uni.indexOf('(');
+      } else if (uni == "Abertay University of Dundee (Schottland)") {
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
         //San Marcos
-      } else if (uni == 'California State University San Marcos (USA)') {
-        var absatz = uni.indexOf('San');
+      } else if (uni == "California State University San Marcos (USA)") {
+        var absatz = uni.indexOf("San");
         var stringUni =
-          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+          uni.slice(0, absatz - 1) + "\n" + uni.slice(absatz - 1, uni.length);
         //Channel Islands
-      } else if (uni == 'California State University Channel Islands (USA)') {
-        var absatz = uni.indexOf('Channel');
+      } else if (uni == "California State University Channel Islands (USA)") {
+        var absatz = uni.indexOf("Channel");
         var stringUni =
-          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+          uni.slice(0, absatz - 1) + "\n" + uni.slice(absatz - 1, uni.length);
         //Costa Rica
-      } else if (uni == 'Costa Rica Institute of Technology (Costa Rica)') {
-        var absatz = uni.indexOf('Technology');
+      } else if (uni == "Costa Rica Institute of Technology (Costa Rica)") {
+        var absatz = uni.indexOf("Technology");
         var stringUni =
-          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+          uni.slice(0, absatz - 1) + "\n" + uni.slice(absatz - 1, uni.length);
         //Suedarfika
-      } else if (uni == 'Durban University of Technology (Suedafrika)') {
-        var klammer = uni.indexOf('(');
+      } else if (uni == "Durban University of Technology (Suedafrika)") {
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
         //Finnland
       } else if (
-        uni == 'South-Eastern Finland University of Applied Sciences (Finnland)'
+        uni == "South-Eastern Finland University of Applied Sciences (Finnland)"
       ) {
-        var absatz1 = uni.indexOf('of');
-        var absatz2 = uni.indexOf('(');
+        var absatz1 = uni.indexOf("of");
+        var absatz2 = uni.indexOf("(");
         var stringUni =
           uni.slice(0, absatz1 - 1) +
-          '\n' +
+          "\n" +
           uni.slice(absatz1 - 1, absatz2 - 1) +
-          '\n' +
+          "\n" +
           uni.slice(absatz2 - 1, uni.length);
         //Polen
-      } else if (uni == 'Technischen Universität Lodz (Polen)') {
-        var klammer = uni.indexOf('(');
+      } else if (uni == "Technischen Universität Lodz (Polen)") {
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
       } else {
-        var klammer = uni.indexOf('(');
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
       }
 
       //Hochschule aus URL
       var url_string = window.location.href;
       var url = new URL(url_string);
-      var uni = url.searchParams.get('uni');
+      var uni = url.searchParams.get("uni");
       //Bulgarien
-      if (uni == 'American University in Bulgaria (Bulgarien)') {
-        var klammer = uni.indexOf('(');
+      if (uni == "American University in Bulgaria (Bulgarien)") {
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
         //Schottland
-      } else if (uni == 'Abertay University of Dundee (Schottland)') {
-        var klammer = uni.indexOf('(');
+      } else if (uni == "Abertay University of Dundee (Schottland)") {
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
         //San Marcos
-      } else if (uni == 'California State University San Marcos (USA)') {
-        var absatz = uni.indexOf('San');
+      } else if (uni == "California State University San Marcos (USA)") {
+        var absatz = uni.indexOf("San");
         var stringUni =
-          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+          uni.slice(0, absatz - 1) + "\n" + uni.slice(absatz - 1, uni.length);
         //Channel Islands
-      } else if (uni == 'California State University Channel Islands (USA)') {
-        var absatz = uni.indexOf('Channel');
+      } else if (uni == "California State University Channel Islands (USA)") {
+        var absatz = uni.indexOf("Channel");
         var stringUni =
-          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+          uni.slice(0, absatz - 1) + "\n" + uni.slice(absatz - 1, uni.length);
         //Costa Rica
-      } else if (uni == 'Costa Rica Institute of Technology (Costa Rica)') {
-        var absatz = uni.indexOf('Technology');
+      } else if (uni == "Costa Rica Institute of Technology (Costa Rica)") {
+        var absatz = uni.indexOf("Technology");
         var stringUni =
-          uni.slice(0, absatz - 1) + '\n' + uni.slice(absatz - 1, uni.length);
+          uni.slice(0, absatz - 1) + "\n" + uni.slice(absatz - 1, uni.length);
         //Suedarfika
-      } else if (uni == 'Durban University of Technology (Suedafrika)') {
-        var klammer = uni.indexOf('(');
+      } else if (uni == "Durban University of Technology (Suedafrika)") {
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
         //Finnland
       } else if (
-        uni == 'South-Eastern Finland University of Applied Sciences (Finnland)'
+        uni == "South-Eastern Finland University of Applied Sciences (Finnland)"
       ) {
-        var absatz1 = uni.indexOf('of');
-        var absatz2 = uni.indexOf('(');
+        var absatz1 = uni.indexOf("of");
+        var absatz2 = uni.indexOf("(");
         var stringUni =
           uni.slice(0, absatz1 - 1) +
-          '\n' +
+          "\n" +
           uni.slice(absatz1 - 1, absatz2 - 1) +
-          '\n' +
+          "\n" +
           uni.slice(absatz2 - 1, uni.length);
         //Polen
-      } else if (uni == 'Technischen Universität Lodz (Polen)') {
-        var klammer = uni.indexOf('(');
+      } else if (uni == "Technischen Universität Lodz (Polen)") {
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
       } else {
-        var klammer = uni.indexOf('(');
+        var klammer = uni.indexOf("(");
         var stringUni =
-          uni.slice(0, klammer - 1) + '\n' + uni.slice(klammer, uni.length);
+          uni.slice(0, klammer - 1) + "\n" + uni.slice(klammer, uni.length);
       }
 
       var nationalität = result.bewLand;
@@ -235,7 +235,7 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
       doc.text(20, 79, bewGeburtsdatum);
       doc.text(107, 79, nationalität);
       doc.text(20, 91, strasse);
-      doc.text(107, 91, result.bewPLZ + ', ' + result.bewOrt);
+      doc.text(107, 91, result.bewPLZ + ", " + result.bewOrt);
       doc.text(20, 104, mail);
       doc.text(107, 104, result.bewTelefon);
       doc.text(20, 116, kurs);
@@ -243,42 +243,42 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
       doc.text(20, 128, studiengang);
       doc.text(107, 128, zeitraum);
 
-      if (erasmus == 'Nein') {
-        doc.text(174, 200, 'X');
-      } else if (erasmus == 'Ja') {
-        doc.text(152, 200, 'X');
+      if (erasmus == "Nein") {
+        doc.text(174, 200, "X");
+      } else if (erasmus == "Ja") {
+        doc.text(152, 200, "X");
       }
       // Abstimmung Semesterzeit
-      doc.text(152, 206, 'X');
+      doc.text(152, 206, "X");
 
-      if (SGL == 'Nein') {
-        doc.text(174, 212, 'X');
-      } else if (SGL == 'Ja') {
-        doc.text(152, 212, 'X');
+      if (SGL == "Nein") {
+        doc.text(174, 212, "X");
+      } else if (SGL == "Ja") {
+        doc.text(152, 212, "X");
       }
 
-      if (learningAgreement == 'Nein') {
-        doc.text(174, 218, 'X');
-      } else if (learningAgreement == 'Ja') {
-        doc.text(152, 218, 'X');
+      if (learningAgreement == "Nein") {
+        doc.text(174, 218, "X");
+      } else if (learningAgreement == "Ja") {
+        doc.text(152, 218, "X");
       }
 
-      var uni1kurz = uni1.split('(');
+      var uni1kurz = uni1.split("(");
       doc.text(36, 153, uni1kurz[0]);
-      var land1 = uni1.split('(')[1].trim().replace(')', '');
+      var land1 = uni1.split("(")[1].trim().replace(")", "");
       doc.text(147, 153, land1);
 
       try {
-        if (uni2 != '' || uni2 != null) {
-          var uni2kurz = uni2.split('(');
+        if (uni2 != "" || uni2 != null) {
+          var uni2kurz = uni2.split("(");
           doc.text(36, 168, uni2kurz[0]);
-          var land2 = uni2.split('(')[1].trim().replace(')', '');
+          var land2 = uni2.split("(")[1].trim().replace(")", "");
           doc.text(147, 168, land2);
         }
-        if (uni3 != '' || uni3 != null) {
-          var uni3kurz = uni3.split('(');
+        if (uni3 != "" || uni3 != null) {
+          var uni3kurz = uni3.split("(");
           doc.text(36, 183, uni3kurz[0]);
-          var land3 = uni3.split('(')[1].trim().replace(')', '');
+          var land3 = uni3.split("(")[1].trim().replace(")", "");
           doc.text(147, 183, land3);
         }
       } catch (e) {
@@ -287,30 +287,30 @@ $(document).on('click', '[href="#downloadAnmeldeformular"]', function (e) {
 
       //__ Bringt das Datum in ein schönes Format
       var today = new Date();
-      var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var dd = String(today.getDate()).padStart(2, "0");
+      var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
       var yyyy = today.getFullYear();
-      today = dd + '.' + mm + '.' + yyyy;
+      today = dd + "." + mm + "." + yyyy;
       //_______________________________________________
 
       doc.addPage();
-      doc.addImage(image2, 'JPEG', 0, 0, 210, 297);
+      doc.addImage(image2, "JPEG", 0, 0, 210, 297);
       doc.text(19, 29, result.bewOrt);
       doc.text(74, 29, today);
-      doc.save('Anmeldeformular.pdf');
+      doc.save("Anmeldeformular.pdf");
     },
     error: function (result) {
-      alert('Ein Fehler ist aufgetreten');
+      alert("Ein Fehler ist aufgetreten");
     },
   });
 });
 
 // Automatische Ortserkennung bei PLZ-Eingabe in Unternehmensdaten
-$(document).on('keyup change', '#untPLZ', function (e) {
+$(document).on("keyup change", "#untPLZ", function (e) {
   if ($(this).val().length > 4) {
-    var ort = $('#untOrt');
+    var ort = $("#untOrt");
     $.getJSON(
-      'https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?',
+      "https://secure.geonames.org/postalCodeLookupJSON?&country=DE&username=mwidhbw&callback=?",
       { postalcode: this.value },
       function (response) {
         if (
@@ -323,7 +323,7 @@ $(document).on('keyup change', '#untPLZ', function (e) {
       }
     );
   } else {
-    $('#untOrt').val('');
+    $("#untOrt").val("");
   }
 });
 
@@ -331,29 +331,29 @@ var json;
 
 function parse() {
   $.ajax({
-    type: 'GET',
-    url: baseUrl + '/currentActivity',
+    type: "GET",
+    url: baseUrl + "/currentActivity",
     data: {
       instance_id: instanceID,
       uni: uni,
     },
     success: function (result) {
-      var output = '';
-      var fileID = '';
-      var fileName = '';
+      var output = "";
+      var fileID = "";
+      var fileName = "";
       var step_id = result.active;
       var model = result.data;
-      if (step_id === 'datenPruefen') {
+      if (step_id === "datenPruefen") {
         location.href =
-          'task_detail.html?instance_id=' +
+          "task_detail.html?instance_id=" +
           instanceID +
-          '&uni=' +
+          "&uni=" +
           uni +
-          '&send_bew=true';
+          "&send_bew=true";
       }
       $.ajax({
-        type: 'GET',
-        url: baseUrl + '/processmodel/get',
+        type: "GET",
+        url: baseUrl + "/processmodel/get",
         data: {
           model: model,
           step: step_id,
@@ -362,98 +362,98 @@ function parse() {
           // generate html output
           json = JSON.parse(decodeURI(result));
           for (var i = 0; i < json.length; i++) {
-            var type = json[i]['type'];
+            var type = json[i]["type"];
             switch (type) {
-              case 'title':
-                output = output + '<h1>' + json[i]['content'] + '</h1><br>';
+              case "title":
+                output = output + "<h1>" + json[i]["content"] + "</h1><br>";
                 break;
-              case 'subtitle':
-                output = output + '<h3>' + json[i]['content'] + '</h3><br>';
+              case "subtitle":
+                output = output + "<h3>" + json[i]["content"] + "</h3><br>";
                 break;
-              case 'paragraph':
-                output = output + '<p>' + json[i]['content'] + '</p><br>';
+              case "paragraph":
+                output = output + "<p>" + json[i]["content"] + "</p><br>";
                 break;
-              case 'form-select':
-                var req = '';
-                if (json[i]['data']['required'] == true) {
+              case "form-select":
+                var req = "";
+                if (json[i]["data"]["required"] == true) {
                   req = ' required="required"';
                 }
                 output =
                   output +
                   '<div class="form-group"><label class="col-sm-2 control-label">' +
-                  json[i]['data']['label'] +
+                  json[i]["data"]["label"] +
                   '</label><div class="col-sm-10"><select class="form-control" name="' +
-                  json[i]['data']['id'] +
+                  json[i]["data"]["id"] +
                   '" id="' +
-                  json[i]['data']['id'] +
+                  json[i]["data"]["id"] +
                   '"' +
                   req +
-                  '>';
-                for (var j = 0; j < json[i]['data']['values'].length; j++) {
+                  ">";
+                for (var j = 0; j < json[i]["data"]["values"].length; j++) {
                   output =
                     output +
-                    '<option>' +
-                    json[i]['data']['values'][j] +
-                    '</option>';
+                    "<option>" +
+                    json[i]["data"]["values"][j] +
+                    "</option>";
                 }
-                output = output + '</select></div></div>';
-                idList.push(json[i]['data']['id']);
-                typeList.push('text');
+                output = output + "</select></div></div>";
+                idList.push(json[i]["data"]["id"]);
+                typeList.push("text");
                 break;
-              case 'form-text':
-                var req = '';
-                if (json[i]['data']['required'] == true) {
+              case "form-text":
+                var req = "";
+                if (json[i]["data"]["required"] == true) {
                   req = ' required="required"';
                 }
                 output =
                   output +
                   '<div class="form-group"><label class="col-sm-2 control-label">' +
-                  json[i]['data']['label'] +
+                  json[i]["data"]["label"] +
                   ' </label><div class="col-sm-10"><input class="form-control" type="' +
-                  json[i]['data']['type'] +
+                  json[i]["data"]["type"] +
                   '" ';
 
-                if (json[i]['data']['numchars']) {
-                  output += 'maxlength="' + json[i]['data']['numchars'] + '" ';
+                if (json[i]["data"]["numchars"]) {
+                  output += 'maxlength="' + json[i]["data"]["numchars"] + '" ';
                 }
                 output +=
                   'name="' +
-                  json[i]['data']['id'] +
+                  json[i]["data"]["id"] +
                   '" id="' +
-                  json[i]['data']['id'] +
+                  json[i]["data"]["id"] +
                   '"' +
                   req +
-                  '></div></div>';
+                  "></div></div>";
 
-                idList.push(json[i]['data']['id']);
-                typeList.push(json[i]['data']['type']);
+                idList.push(json[i]["data"]["id"]);
+                typeList.push(json[i]["data"]["type"]);
                 break;
-              case 'form-checkbox':
-                var req = '';
-                if (json[i]['data']['required'] == true) {
+              case "form-checkbox":
+                var req = "";
+                if (json[i]["data"]["required"] == true) {
                   req = ' required="required"';
                 }
                 output =
                   output +
                   '<div class="form-group"><div class="col-sm-offset-2 col-sm-10"><div class="checkbox"><label><input name="' +
-                  json[i]['data']['id'] +
+                  json[i]["data"]["id"] +
                   '" type="checkbox" id="' +
-                  json[i]['data']['id'] +
+                  json[i]["data"]["id"] +
                   '"' +
                   req +
-                  '>' +
-                  json[i]['data']['label'] +
-                  ' </label></div></div></div>';
-                idList.push(json[i]['data']['id']);
-                typeList.push('boolean');
+                  ">" +
+                  json[i]["data"]["label"] +
+                  " </label></div></div></div>";
+                idList.push(json[i]["data"]["id"]);
+                typeList.push("boolean");
                 break;
-              case 'form-upload':
-                fileID = json[i]['data']['id'];
-                fileName = json[i]['data']['filename'];
+              case "form-upload":
+                fileID = json[i]["data"]["id"];
+                fileName = json[i]["data"]["filename"];
                 output =
                   output +
                   '<div class="dropzone" id="' +
-                  json[i]['data']['id'] +
+                  json[i]["data"]["id"] +
                   '"></div>';
                 break;
             }
@@ -461,7 +461,7 @@ function parse() {
 
           //Doesn't allow to write numbers in input fields with type='text
           $(function () {
-            $('#bewVorname').keydown(function (e) {
+            $("#bewVorname").keydown(function (e) {
               if (e.ctrlKey || e.altKey) {
                 e.preventDefault();
               } else {
@@ -480,7 +480,27 @@ function parse() {
               }
             });
 
-            $('#bewNachname').keydown(function (e) {
+            $("#bewTelefon").keydown(function (e) {
+              if (e.ctrlKey || e.altKey) {
+                e.preventDefault();
+              } else {
+                var key = e.keyCode;
+                console.log(key);
+                if (
+                  !(
+                    key == 8 ||
+                    key == 32 ||
+                    key == 46 ||
+                    (key >= 35 && key <= 40) ||
+                    (key >= 65 && key <= 90)
+                  )
+                ) {
+                  e.preventDefault();
+                }
+              }
+            });
+
+            $("#bewNachname").keydown(function (e) {
               if (e.ctrlKey || e.altKey) {
                 e.preventDefault();
               } else {
@@ -498,7 +518,7 @@ function parse() {
                 }
               }
             });
-            $('#bewOrt').keydown(function (e) {
+            $("#bewOrt").keydown(function (e) {
               if (e.ctrlKey || e.altKey) {
                 e.preventDefault();
               } else {
@@ -517,7 +537,7 @@ function parse() {
               }
             });
 
-            $('#untOrt').keydown(function (e) {
+            $("#untOrt").keydown(function (e) {
               if (e.ctrlKey || e.altKey) {
                 e.preventDefault();
               } else {
@@ -538,7 +558,7 @@ function parse() {
           });
 
           // set content
-          document.getElementById('formular').innerHTML = output;
+          document.getElementById("formular").innerHTML = output;
           if (idList.length > 0) {
             getData();
             manipulateDOM();
@@ -547,14 +567,14 @@ function parse() {
           var $dropzone;
           // init upload
           for (var i = 0; i < json.length; i++) {
-            var type = json[i]['type'];
-            if (type == 'form-upload') {
-              console.log(json[i]['data']['id']);
-              console.log(json[i]['data']['filename']);
-              $dropzone = $('#' + json[i]['data']['id']).dropzone(
+            var type = json[i]["type"];
+            if (type == "form-upload") {
+              console.log(json[i]["data"]["id"]);
+              console.log(json[i]["data"]["filename"]);
+              $dropzone = $("#" + json[i]["data"]["id"]).dropzone(
                 getDropzoneOptions(
-                  json[i]['data']['id'],
-                  json[i]['data']['filename']
+                  json[i]["data"]["id"],
+                  json[i]["data"]["filename"]
                 )
               );
             }
@@ -564,8 +584,8 @@ function parse() {
            * Wenn eine Bewerbung vom SGL an den Student zurückgeschickt (zur Überarbeitung), werden mit dieser Funktionen neu hochgeladen (ein Student muss die Dokumente nicht erneut hochladen)
            */
           $.ajax({
-            type: 'GET',
-            url: baseUrl + '/getProcessFile',
+            type: "GET",
+            url: baseUrl + "/getProcessFile",
             data: {
               instance_id: instanceID,
               key: fileID,
@@ -576,15 +596,15 @@ function parse() {
                 byteNumbers[i] = result.charCodeAt(i);
               }
               var byteArray = new Uint8Array(byteNumbers);
-              var blob = new Blob([byteArray], { type: 'application/pdf' });
+              var blob = new Blob([byteArray], { type: "application/pdf" });
               var file = new File([blob], fileName, {
-                type: 'application/pdf',
+                type: "application/pdf",
               });
               $dropzone[0].dropzone.addFile(file);
             },
           });
 
-          $('#formular')
+          $("#formular")
             .submit(function (e) {
               e.preventDefault();
             })
@@ -593,65 +613,65 @@ function parse() {
             });
         },
         error: function (result) {
-          alert('Ein Fehler ist aufgetreten: ' + result);
+          alert("Ein Fehler ist aufgetreten: " + result);
         },
       });
     },
     error: function (result) {
       alert(
-        'Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden.'
+        "Ein Fehler ist aufgetreten. Aktiver Schritt konnte nicht abgerufen werden."
       );
     },
   });
 }
 
-$(document).on('click', '#saveData', function () {
-  var form = $('#formular');
+$(document).on("click", "#saveData", function () {
+  var form = $("#formular");
 
   if (form && !form.valid()) {
     Swal.fire({
-      title: 'Bitte fülle alle Felder korrekt aus.',
-      icon: 'warning',
-      confirmButtonColor: '#28a745',
+      title: "Bitte fülle alle Felder korrekt aus.",
+      icon: "warning",
+      confirmButtonColor: "#28a745",
     });
     return;
   }
 
   for (var i = 0; i < json.length; i++) {
-    var type = json[i]['type'];
+    var type = json[i]["type"];
     switch (type) {
-      case 'form-upload':
-        var dropzoneForm = $('#' + json[i]['data']['id'])[0].dropzone;
+      case "form-upload":
+        var dropzoneForm = $("#" + json[i]["data"]["id"])[0].dropzone;
         if (
           !dropzoneForm.getAcceptedFiles() ||
           dropzoneForm.getAcceptedFiles().length <= 0
         ) {
           Swal.fire({
-            title: 'Bitte lade zunächst eine Datei hoch.',
-            icon: 'warning',
-            confirmButtonColor: '#28a745',
+            title: "Bitte lade zunächst eine Datei hoch.",
+            icon: "warning",
+            confirmButtonColor: "#28a745",
           });
           return;
         }
     }
   }
 
-  var keyString = '';
-  var valString = '';
-  var typeString = '';
+  var keyString = "";
+  var valString = "";
+  var typeString = "";
   console.log(idList);
   for (var j = 0; j < idList.length; j++) {
-    if ($('#' + idList[j]).attr('type') == 'checkbox') {
+    if ($("#" + idList[j]).attr("type") == "checkbox") {
       var checkedString = document.getElementById(idList[j]).checked
-        ? 'true'
-        : 'false';
-      keyString = keyString + idList[j] + '|';
-      valString = valString + checkedString + '|';
-      typeString = typeString + typeList[j] + '|';
+        ? "true"
+        : "false";
+      keyString = keyString + idList[j] + "|";
+      valString = valString + checkedString + "|";
+      typeString = typeString + typeList[j] + "|";
     } else {
-      keyString = keyString + idList[j] + '|';
-      valString = valString + document.getElementById(idList[j]).value + '|';
-      typeString = typeString + typeList[j] + '|';
+      keyString = keyString + idList[j] + "|";
+      valString = valString + document.getElementById(idList[j]).value + "|";
+      typeString = typeString + typeList[j] + "|";
     }
   }
   keyString = keyString.substr(0, keyString.length - 1);
@@ -660,8 +680,8 @@ $(document).on('click', '#saveData', function () {
   console.log(keyString);
   console.log(valString);
   $.ajax({
-    type: 'POST',
-    url: baseUrl + '/setVariable',
+    type: "POST",
+    url: baseUrl + "/setVariable",
     data: {
       instance_id: instanceID,
       key: keyString,
@@ -672,7 +692,7 @@ $(document).on('click', '#saveData', function () {
       location.reload();
     },
     error: function (result) {
-      alert('Ein Fehler ist aufgetreten');
+      alert("Ein Fehler ist aufgetreten");
     },
   });
 });
@@ -692,58 +712,58 @@ $(document).on('click', '#saveData', function () {
 });*/
 
 function getData() {
-  var keyString = '';
+  var keyString = "";
   for (var l = 0; l < idList.length; l++) {
-    keyString = keyString + idList[l] + '|';
+    keyString = keyString + idList[l] + "|";
   }
   keyString = keyString.substr(0, keyString.length - 1);
 
   $.ajax({
-    type: 'GET',
-    url: baseUrl + '/getVariables',
+    type: "GET",
+    url: baseUrl + "/getVariables",
     data: {
       instance_id: instanceID,
     },
     success: function (result) {
       $.each(result, function (key, value) {
-        $('#' + key).val(value);
+        $("#" + key).val(value);
       });
     },
     error: function (result) {
-      alert('Ein Fehler ist aufgetreten');
+      alert("Ein Fehler ist aufgetreten");
     },
   });
 }
 
 function getDropzoneOptions(action, fileName) {
   return {
-    url: baseUrl + '/upload',
-    acceptedFiles: 'application/pdf',
+    url: baseUrl + "/upload",
+    acceptedFiles: "application/pdf",
     maxFilesize: 16,
-    method: 'post',
+    method: "post",
     addRemoveLinks: true,
     withCredentials: true,
     uploadMultiple: false,
 
     sending: function (file, xhr, formData) {
-      formData.append('action', action);
-      formData.append('instance', instanceID);
+      formData.append("action", action);
+      formData.append("instance", instanceID);
     },
     accept: function (file, done) {
       done();
     },
     error: function (file, response) {
-      if ($.type(response) === 'string') {
+      if ($.type(response) === "string") {
         var message = response;
       } else {
         var message = response.message;
       }
 
       Swal.fire({
-        title: 'Fehler',
+        title: "Fehler",
         text: message,
-        icon: 'error',
-        confirmButtonColor: '#28a745',
+        icon: "error",
+        confirmButtonColor: "#28a745",
       });
       this.removeFile(file);
     },
