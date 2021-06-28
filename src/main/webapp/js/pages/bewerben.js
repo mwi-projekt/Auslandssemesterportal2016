@@ -482,10 +482,11 @@ function parse() {
 
             $("#bewTelefon").keypress(function (e) {
               try {
-                console.log(e.keyCode);
+                // telefonnummer validation
                 if (
                   (this.value.includes("/") && e.keyCode == 47) ||
-                  (this.value.includes(" ") && e.keyCode == 32)
+                  (this.value.includes(" ") && e.keyCode == 32) ||
+                  !(e.keyCode >= 48 && e.keyCode <= 57)
                 ) {
                   e.preventDefault();
                 }
@@ -494,11 +495,37 @@ function parse() {
 
             $("#bewGeburtsdatum").keydown(function (e) {
               try {
-                if (
-                  !(e.keyCode == 190 || (e.keyCode >= 48 && e.keyCode <= 57))
-                ) {
-                  e.preventDefault();
+                // check if key is number or .
+                // if (
+                //   !(e.keyCode == 46 || (e.keyCode >= 48 && e.keyCode <= 57))
+                // ) {
+                //   e.preventDefault();
+                // } else {
+                // check input
+                var allowedCharacters = [
+                  49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 46,
+                ];
+                var isValidInput = false;
+                for (var i = allowedCharacters.length - 1; i >= 0; i--) {
+                  if (allowedCharacters[i] == code) {
+                    isValidInput = true;
+                  }
                 }
+
+                if (
+                  isValidInput ===
+                    false /* Can only input 1,2,3,4,5,6,7,8,9 or . */ ||
+                  (code == 45 &&
+                    (leng < 2 || leng > 5 || leng == 3 || leng == 4)) ||
+                  ((leng == 2 || leng == 5) &&
+                    code !== 46) /* only can hit a . for 3rd pos. */ ||
+                  leng == 10
+                ) {
+                  /* only want 10 characters "12.45.7890" */
+                  event.preventDefault();
+                  return;
+                }
+                //}
               } catch (error) {}
             });
 
