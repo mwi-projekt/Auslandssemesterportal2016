@@ -480,7 +480,7 @@ function parse() {
               }
             });
 
-            $("#bewTelefon").keydown(function (e) {
+            $("#bewTelefon").keypress(function (e) {
               try {
                 console.log(e.keyCode);
                 if (
