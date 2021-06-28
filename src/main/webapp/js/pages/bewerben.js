@@ -482,8 +482,9 @@ function parse() {
 
             $("#bewTelefon").keydown(function (e) {
               try {
+                console.log(e.keyCode);
                 if (
-                  (e.shiftKey &&
+                  (!e.shiftKey &&
                     this.value.includes("/") &&
                     e.keyCode == 191) ||
                   (this.value.includes(" ") && e.keyCode == 32)
