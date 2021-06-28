@@ -480,10 +480,12 @@ function parse() {
               }
             });
 
-            $("#bewTelefon").keydown(function (e) {
+            $("#bewTelefon").on(function (e) {
               try {
                 if (
-                  (this.value.includes("/") && e.keyCode == 191) ||
+                  (e.shiftKey &&
+                    this.value.includes("/") &&
+                    e.keyCode == 191) ||
                   (this.value.includes(" ") && e.keyCode == 32)
                 ) {
                   e.preventDefault();
