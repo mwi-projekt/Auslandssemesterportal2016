@@ -493,9 +493,8 @@ function parse() {
 
             $("#bewGeburtsdatum").keydown(function (e) {
               try {
-                var key = String.fromCharCode(e.keyCode);
                 if (
-                  !(e.keyCod == 190 || (e.keyCode >= 48 && e.keyCode <= 57))
+                  !(e.keyCode == 190 || (e.keyCode >= 48 && e.keyCode <= 57))
                 ) {
                   e.preventDefault();
                 }
