@@ -20,6 +20,10 @@ public class UITestStudent extends UIBaseClass {
 	@BeforeMethod
 	public void getDriver() throws InterruptedException {
 		getDriver("CHROME");
+		loginAsStudent();
+	}
+
+	private void loginAsStudent() throws InterruptedException {
 		Thread.sleep(4000);
 		loginElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div/div/div[1]/button[1]"));
 		loginElement.click();

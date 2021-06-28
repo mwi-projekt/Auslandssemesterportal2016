@@ -20,7 +20,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class UITestLogin {
+public class UITestLogin extends UIBaseClass {
 	WebDriver driver;
 	private String browser = "CHROME";
 	private StringBuffer verificationErrors = new StringBuffer();
@@ -28,36 +28,14 @@ public class UITestLogin {
 	private String baseUrl = "http://10.3.15.45/";
 	private WebElement loginElement;
 	private WebElement failedLoginElement;
+	
 	@BeforeMethod
 	public void setUp() throws InterruptedException {
+		getDriver("CHROME");
+		findLoginButton();
+	}
 
-		switch (browser) {
-		case "CHROME":
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("headless");
-			options.addArguments("start-maximized");
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver(options);
-			driver.manage().window().maximize();
-			break;
-		case "IE":
-			WebDriverManager.iedriver().setup();
-			driver = new InternetExplorerDriver();
-			break;
-        case "EDGE":
-            WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();
-            break;
-		case "FIREFOX":
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-			break;
-		}
-		driver.get(baseUrl);
-		cookiesElement = driver.findElement(By.className("cc-dismiss"));
-		Thread.sleep(2000);
-		cookiesElement.click();
-		Thread.sleep(2000);
+	private void findLoginButton() throws InterruptedException {
 		loginElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div/div/div[1]/button[1]"));
 		Thread.sleep(2000);
 		loginElement.click();

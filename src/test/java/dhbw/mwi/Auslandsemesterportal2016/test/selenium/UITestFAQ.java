@@ -17,52 +17,24 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.*;
 
 
-public class UITestFAQ {
+public class UITestFAQ extends UIBaseClass {
 	WebDriver driver;
-	private String browser = "CHROME";
 	private StringBuffer verificationErrors = new StringBuffer();
 	private WebElement universityElement;
-	private WebElement cookiesElement;
 	private String baseUrl = "http://10.3.15.45/";
-	private WebElement FAQElement;
 	private WebElement loginElement; 
 	private WebElement answerTextElement;
 	private WebElement questionTextElement;
 	private WebElement cancelElement; 
-	private WebElement registerElement;
-	private WebElement impressumElement; 
-	
+	private static final String FAQ_ELEMENT = "/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a";
+	private static final String IMPRESSUM_ELEMENT = "/html/body/div[5]/div/footer/div[2]/div/div/div[2]/nav/a";
+	private static final String CANCEL_ELEMENT = "/html/body/div[2]/div/div/form/div[1]/button";
+	private static final String REGISTER_ELEMENT = "/html/body/div[4]/div/header/div/div/div[1]/button[2]";
 	
 	@BeforeMethod
 	public void getDriver() throws InterruptedException {
-
-		switch (browser) {
-		case "CHROME":
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("headless");
-			options.addArguments("start-maximized");
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver(options);
-			driver.manage().window().maximize();
-			
-			break;
-		case "IE":
-			WebDriverManager.iedriver().setup();
-			driver = new InternetExplorerDriver();
-			break;
-        case "EDGE":
-            WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();
-            break;
-		case "FIREFOX":
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-			break;
-		}
-		driver.get(baseUrl);
-		cookiesElement = driver.findElement(By.className("cc-dismiss"));
-		Thread.sleep(2000);
-		cookiesElement.click();
+		getDriver("CHROME");
+		
 	}
 
 	@AfterMethod
@@ -75,53 +47,42 @@ public class UITestFAQ {
 	}
 	@Test
 	public void testThatClickingFAQFromUniversityScotlandLinkBringsUserToFAQ() throws InterruptedException {
-	
 		assertUniversityToFAQ("/html/body/div[5]/div/div[3]/div/div/a[1]/div/div[2]");
 	}
 	
 	@Test
 	public void testThatClickingFAQFromBulgariaLinkBringsUserToFAQ() throws InterruptedException {
-	
 		assertUniversityToFAQ("/html/body/div[5]/div/div[3]/div/div/a[2]/div/div[1]");
 	}
 	
 	@Test
 	public void testThatClickingFAQFromDongHwaLinkBringsUserToFAQ() throws InterruptedException {
-	
 		assertUniversityToFAQ("/html/body/div[5]/div/div[3]/div/div/a[3]/div/div[2]");
 	}
 	
 	@Test
 	public void testThatClickingFAQFromSanMarcosLinkBringsUserToFAQ() throws InterruptedException {
-	
 		assertUniversityToFAQ("/html/body/div[5]/div/div[3]/div/div/a[4]/div/div[1]");
 	}
 	
 	@Test
 	public void testThatClickingFAQFromCostaRicaLinkBringsUserToFAQ() throws InterruptedException {
-	
 		assertUniversityToFAQ("/html/body/div[5]/div/div[3]/div/div/a[5]/div/div[2]");
 	}
 	
 	@Test
 	public void testThatClickingFAQFromFinlandLinkBringsUserToFAQ() throws InterruptedException {
-	
 		assertUniversityToFAQ("/html/body/div[5]/div/div[3]/div/div/a[6]/div/div[1]");
 	}
 	
 	@Test
 	public void testThatClickingFAQFromDurbanLinkBringsUserToFAQ() throws InterruptedException {
-	
 		assertUniversityToFAQ("/html/body/div[5]/div/div[3]/div/div/a[7]/div/div[2]");
 	}
 	
 	@Test
 	public void testThatClickingLoginFromFAQBringsUserToLogin() throws InterruptedException {
-		driver.get(baseUrl);
-		Thread.sleep(2000);
-		FAQElement = driver.findElement(By.xpath("/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a"));
-		Thread.sleep(2000);
-		FAQElement.click();
+		driver.findElement(By.xpath(FAQ_ELEMENT)).click();
 		Thread.sleep(2000);
 		loginElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div/div/div[1]/button[1]"));
 		loginElement.click();
@@ -133,9 +94,7 @@ public class UITestFAQ {
 	
 	@Test
 	public void testThatClickingQuestionFromFAQBringsUserToAnswer() throws InterruptedException {
-		driver.get(baseUrl);
-		FAQElement = driver.findElement(By.xpath("/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a"));
-		FAQElement.click();
+		driver.findElement(By.xpath(FAQ_ELEMENT)).click();
 		Thread.sleep(2000);
 		questionTextElement = driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[1]/h3"));
 		questionTextElement.click();
@@ -145,54 +104,38 @@ public class UITestFAQ {
 	
 	@Test
 	public void testThatClickingRegistrierungFromFAQBringsUserToRegistrierung() throws InterruptedException {
-		driver.get(baseUrl);
+		driver.findElement(By.xpath(FAQ_ELEMENT)).click();
 		Thread.sleep(2000);
-		FAQElement = driver.findElement(By.xpath("/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a"));
+		driver.findElement(By.xpath(REGISTER_ELEMENT)).click();
 		Thread.sleep(2000);
-		FAQElement.click();
-		Thread.sleep(3000);	
-		registerElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div/div/div[1]/button[2]"));
-		Thread.sleep(2000);
-		registerElement.click();
-		Thread.sleep(2000);
-		cancelElement = driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div[1]/button"));
-		cancelElement.click();
+		driver.findElement(By.xpath(CANCEL_ELEMENT)).click();
 		assertEquals(driver.getCurrentUrl(), "http://10.3.15.45/faq.html");
 	}
 	
 	@Test
 	public void testThatClickingImpressumFromFAQBringsUserToImpressum() throws InterruptedException {
-		driver.get(baseUrl);
-		Thread.sleep(6000);
-		FAQElement = driver.findElement(By.xpath("/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a"));
-		FAQElement.click();
+		driver.findElement(By.xpath(FAQ_ELEMENT)).click();
 		Thread.sleep(3000);
-		impressumElement = driver.findElement(By.xpath("/html/body/div[5]/div/footer/div[2]/div/div/div[2]/nav/a"));
-		impressumElement.click();
+		driver.findElement(By.xpath(IMPRESSUM_ELEMENT)).click();
 		assertEquals(driver.getCurrentUrl(), baseUrl + "impressum.html");
 	}
 	
 	@Test
 	public void testThatClickingFAQFromFAQBringsUserToFAQ() throws InterruptedException {
-		driver.get(baseUrl);
+		driver.findElement(By.xpath(FAQ_ELEMENT)).click();
 		Thread.sleep(3000);
-		FAQElement = driver.findElement(By.xpath("/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a"));
-		FAQElement.click();
-		Thread.sleep(3000);
-		FAQElement = driver.findElement(By.xpath("/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a"));
-		FAQElement.click();
+	    driver.findElement(By.xpath(FAQ_ELEMENT)).click();
 		assertEquals(driver.getCurrentUrl(), baseUrl + "faq.html");
 	}
 	
 	
 	private void assertUniversityToFAQ(String xPath) throws InterruptedException {
-		driver.get(baseUrl);
 		universityElement = driver.findElement(By.xpath(xPath));	
 		Thread.sleep(3000);
 		universityElement.click();
 		Thread.sleep(3000);
-		FAQElement = driver.findElement(By.xpath("/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a")); 
-		FAQElement.click();
+	    driver.findElement(By.xpath(FAQ_ELEMENT)).click(); 
+	    Thread.sleep(2000);
 		assertEquals(driver.getCurrentUrl(), baseUrl + "faq.html");
 	}
 }

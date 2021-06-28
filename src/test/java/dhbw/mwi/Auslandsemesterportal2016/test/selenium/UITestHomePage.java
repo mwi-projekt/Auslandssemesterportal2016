@@ -18,14 +18,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class UITestHomePage {
+public class UITestHomePage extends UIBaseClass{
 	WebDriver driver;
-	private String browser = "CHROME";
 	private StringBuffer verificationErrors = new StringBuffer();
 	private WebElement universityElement;
 	private String baseUrl = "http://10.3.15.45/";
 	private WebElement navigationElement;
-	private WebElement cookiesElement;
 	private WebElement erfahrungsberichtElement; 
 	private static final String BULGARIA_ELEMENT_XPATH = "/html/body/div[5]/div/div[3]/div/div/a[2]/div/div[1]";
 	private static final String SCOTLAND_ELEMENT_XPATH = "/html/body/div[5]/div/div[3]/div/div/a[1]/div/div[2]";
@@ -40,35 +38,7 @@ public class UITestHomePage {
 	
 	@BeforeMethod
 	public void getDriver() throws InterruptedException {
-
-		switch (browser) {
-		case "CHROME":
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("headless");
-			options.addArguments("start-maximized");
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver(options);
-			driver.manage().window().maximize();
-			
-			break;
-		case "IE":
-			WebDriverManager.iedriver().setup();
-			driver = new InternetExplorerDriver();
-			break;
-        case "EDGE":
-            WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();
-            break;
-		case "FIREFOX":
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-			break;
-		}
-		driver.get(baseUrl);
-		cookiesElement = driver.findElement(By.className("cc-dismiss"));
-		Thread.sleep(2000);
-		cookiesElement.click();
-		Thread.sleep(2000);
+		getDriver("CHROME");
 	}
 
 	@AfterMethod

@@ -13,45 +13,21 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.annotations.*;
-public class UITestAdmin {
+public class UITestAdmin extends UIBaseClass {
 	
 	WebDriver driver;
-	private String browser = "CHROME";
 	private StringBuffer verificationErrors = new StringBuffer();
-	private WebElement cookiesElement;
 	private WebElement loginElement;
 	private String baseUrl = "http://10.3.15.45/";
 	
 	@BeforeMethod
 	public void setUp() throws InterruptedException {
-
-		switch (browser) {
-		case "CHROME":
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("headless");
-			options.addArguments("start-maximized");
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver(options);
-			driver.manage().window().maximize();
-			break;
-		case "IE":
-			WebDriverManager.iedriver().setup();
-			driver = new InternetExplorerDriver();
-			break;
-        case "EDGE":
-            WebDriverManager.edgedriver().setup();
-            driver = new EdgeDriver();
-            break;
-		case "FIREFOX":
-			WebDriverManager.firefoxdriver().setup();
-			driver = new FirefoxDriver();
-			break;
-		}
+		getDriver("CHROME");
 		driver.get(baseUrl);
-		cookiesElement = driver.findElement(By.className("cc-dismiss"));
-		Thread.sleep(2000);
-		cookiesElement.click();
-		Thread.sleep(2000);
+		loginAsAdmin();
+	}
+	
+	private void loginAsAdmin() throws InterruptedException {
 		loginElement = driver.findElement(By.xpath("/html/body/div[4]/div/header/div/div/div[1]/button[1]"));
 		loginElement.click();
 		Thread.sleep(2000);
@@ -60,6 +36,7 @@ public class UITestAdmin {
 		driver.findElement(By.id("btnLogin")).click();
 		Thread.sleep(2000);
 	}
+	
 	@AfterMethod
 	public void tearDown() throws Exception {
 		driver.quit();
@@ -68,40 +45,47 @@ public class UITestAdmin {
 			Assert.fail(verificationErrorString);
 		}
 	}
+	
 	@Test
 	public void testThatChecksIfAdminCanLogin() throws InterruptedException {
 			AssertJUnit.assertEquals( baseUrl + "cms.html", driver.getCurrentUrl());
 		}
+	
 	@Test
 	public void testThatClickingApplicationBringsUserToEditPage() throws InterruptedException {
 			Thread.sleep(2000);
 			driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[1]/div[2]")).click();
 			AssertJUnit.assertEquals( baseUrl + "prozess.html", driver.getCurrentUrl());
 		}
+	
 	@Test
 	public void testThatClickingEditStudentBringsUserToEditPage() throws InterruptedException {
 			Thread.sleep(2000);
 			driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[1]")).click();
 			AssertJUnit.assertEquals( baseUrl + "verwaltung_student.html", driver.getCurrentUrl());
 		}
+	
 	@Test
 	public void testThatClickingEditStudentLeiterBringsUserToEditPage() throws InterruptedException {
 			Thread.sleep(2000);
 			driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[2]")).click();
 			AssertJUnit.assertEquals( baseUrl + "verwaltung_studiengangsleitung.html", driver.getCurrentUrl());
 		}
+	
 	@Test
 	public void testThatClickingEditEmployeeBringsUserToEditPage() throws InterruptedException {
 			Thread.sleep(2000);
 			driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[3]")).click();
 			AssertJUnit.assertEquals( baseUrl + "verwaltung_auslandsamt.html", driver.getCurrentUrl());
 		}
+	
 	@Test
 	public void testThatClickingBackButtonFromApplicationEditBringsUserBackToMainPage() {
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[1]/div[2]")).click();
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/span[2]/a")).click();
 		AssertJUnit.assertEquals( baseUrl + "cms.html", driver.getCurrentUrl());
 	}
+	
 	@Test
 	public void testThatClickingBackButtonFromEditStudentBringsUserToMainPage() throws InterruptedException {
 			driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[1]")).click();
