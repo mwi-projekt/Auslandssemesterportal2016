@@ -483,6 +483,12 @@ function parse() {
             $("#bewTelefon").keydown(function (e) {
               try {
                 var key = String.fromCharCode(e.keyCode);
+                if (
+                  (this.value.includes("/") && key == "/") ||
+                  (this.value.includes(" ") && key == " ")
+                ) {
+                  e.preventDefault();
+                }
               } catch (error) {}
             });
 
