@@ -520,7 +520,7 @@ function parse() {
                 var code = e.keyCode;
                 var leng = this.value.length;
                 var allowedCharacters = [
-                  49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 46,
+                  49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 190, 8, 32,
                 ];
                 var isValidInput = false;
                 for (var i = allowedCharacters.length - 1; i >= 0; i--) {
@@ -532,10 +532,10 @@ function parse() {
                 if (
                   isValidInput ===
                     false /* Can only input 1,2,3,4,5,6,7,8,9 or . */ ||
-                  (code == 45 &&
+                  (code == 190 &&
                     (leng < 2 || leng > 5 || leng == 3 || leng == 4)) ||
                   ((leng == 2 || leng == 5) &&
-                    code !== 46) /* only can hit a . for 3rd pos. */ ||
+                    code !== 190) /* only can hit a . for 3rd pos. */ ||
                   leng == 10
                 ) {
                   /* only want 10 characters "12.45.7890" */
