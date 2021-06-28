@@ -482,7 +482,7 @@ function parse() {
 
             $("#bewTelefon").keydown(function (e) {
               try {
-                var key = e.keyCode;
+                var key = String.fromCharCode(e.keyCode);
               } catch (error) {}
             });
 
