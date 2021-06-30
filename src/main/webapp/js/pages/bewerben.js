@@ -514,7 +514,7 @@ function parse() {
                   var code = e.keyCode;
                   var leng = this.value.length;
                   var allowedCharacters = [
-                    48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 190,
+                    46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 190,
                   ];
                   var isValidInput = false;
                   for (var i = allowedCharacters.length - 1; i >= 0; i--) {
