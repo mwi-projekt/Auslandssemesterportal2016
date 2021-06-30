@@ -480,6 +480,66 @@ function parse() {
               }
             });
 
+            $("#bewTelefon").keypress(function (e) {
+              try {
+                // telefonnummer validation
+                if (
+                  (this.value.includes("/") && e.keyCode == 47) ||
+                  (this.value.includes(" ") && e.keyCode == 32) ||
+                  (this.value.includes(" ") && e.keyCode == 47) ||
+                  (this.value.includes("/") && e.keyCode == 32) ||
+                  !((e.keyCode>=49 && e.keyCode<=57)||
+                    (e.keyCode>=96 && e.keyCode<=105)||
+                    e.keyCode == 47 ||
+                    e.keyCode == 32 ||
+                    e.keyCode == 8 ||
+                    e.keyCode == 46
+                  )
+                ) {
+                  e.preventDefault();
+                }
+              } catch (error) {}
+            });
+
+            $("#bewGeburtsdatum").keydown(function (e) {
+              try {
+                if (
+                  !(
+                    e.keyCode == 37 ||
+                    e.keyCode == 39 ||
+                    e.keyCode == 8 ||
+                    e.keyCode == 9
+                  )
+                ) {
+                  var code = e.keyCode;
+                  var leng = this.value.length;
+                  var allowedCharacters = [
+                    46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 190,
+                  ];
+                  var isValidInput = false;
+                  for (var i = allowedCharacters.length - 1; i >= 0; i--) {
+                    if (allowedCharacters[i] == code) {
+                      isValidInput = true;
+                    }
+                  }
+
+                  if (
+                    isValidInput ===
+                      false /* Can only input 1,2,3,4,5,6,7,8,9 or . */ ||
+                    (code == 190 &&
+                      (leng < 2 || leng > 5 || leng == 3 || leng == 4)) ||
+                    ((leng == 2 || leng == 5) &&
+                      code !== 190) /* only can hit a . for 3rd pos. */ ||
+                    leng == 10
+                  ) {
+                    /* only want 10 characters "12.45.7890" */
+                    event.preventDefault();
+                    return;
+                  }
+                }
+              } catch (error) {}
+            });
+
             $("#bewNachname").keydown(function (e) {
               if (e.ctrlKey || e.altKey) {
                 e.preventDefault();
@@ -517,25 +577,6 @@ function parse() {
               }
             });
 
-            $("#untName").keydown(function (e) {
-              if (e.ctrlKey || e.altKey) {
-                e.preventDefault();
-              } else {
-                var key = e.keyCode;
-                if (
-                  !(
-                    key == 8 ||
-                    key == 32 ||
-                    key == 46 ||
-                    (key >= 35 && key <= 40) ||
-                    (key >= 65 && key <= 90)
-                  )
-                ) {
-                  e.preventDefault();
-                }
-              }
-            });
-
             $("#untOrt").keydown(function (e) {
               if (e.ctrlKey || e.altKey) {
                 e.preventDefault();
@@ -554,26 +595,8 @@ function parse() {
                 }
               }
             });
-            $("#untAnsprechpartner").keydown(function (e) {
-              if (e.ctrlKey || e.altKey) {
-                e.preventDefault();
-              } else {
-                var key = e.keyCode;
-                if (
-                  !(
-                    key == 8 ||
-                    key == 32 ||
-                    key == 46 ||
-                    (key >= 35 && key <= 40) ||
-                    (key >= 65 && key <= 90)
-                  )
-                ) {
-                  e.preventDefault();
-                }
-              }
-            });
           });
-          
+
           // set content
           document.getElementById("formular").innerHTML = output;
           if (idList.length > 0) {
@@ -598,25 +621,27 @@ function parse() {
           }
 
           /*
-          * Wenn eine Bewerbung vom SGL an den Student zurückgeschickt (zur Überarbeitung), werden mit dieser Funktionen neu hochgeladen (ein Student muss die Dokumente nicht erneut hochladen)
-          */
+           * Wenn eine Bewerbung vom SGL an den Student zurückgeschickt (zur Überarbeitung), werden mit dieser Funktionen neu hochgeladen (ein Student muss die Dokumente nicht erneut hochladen)
+           */
           $.ajax({
             type: "GET",
             url: baseUrl + "/getProcessFile",
             data: {
-                instance_id: instanceID,
-                key: fileID
+              instance_id: instanceID,
+              key: fileID,
             },
             success: function (result) {
               var byteNumbers = new Array(result.length);
               for (var i = 0; i < result.length; i++) {
-                  byteNumbers[i] = result.charCodeAt(i);
+                byteNumbers[i] = result.charCodeAt(i);
               }
               var byteArray = new Uint8Array(byteNumbers);
-              var blob = new Blob([byteArray], {type: "application/pdf"});
-              var file = new File([blob], fileName, {type: "application/pdf"});
+              var blob = new Blob([byteArray], { type: "application/pdf" });
+              var file = new File([blob], fileName, {
+                type: "application/pdf",
+              });
               $dropzone[0].dropzone.addFile(file);
-            }
+            },
           });
 
           $("#formular")
