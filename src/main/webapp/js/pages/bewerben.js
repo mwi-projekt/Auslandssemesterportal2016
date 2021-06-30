@@ -488,13 +488,7 @@ function parse() {
                   (this.value.includes(" ") && e.keyCode == 32) ||
                   (this.value.includes(" ") && e.keyCode == 47) ||
                   (this.value.includes("/") && e.keyCode == 32) ||
-                  !((e.keyCode>=49 && e.keyCode<=57)||
-                    (e.keyCode>=96 && e.keyCode<=105)||
-                    e.keyCode == 47 ||
-                    e.keyCode == 32 ||
-                    e.keyCode == 8 ||
-                    e.keyCode == 46
-                  )
+                  !((e.keyCode <= 57 && e.keyCode >= 46) || e.keyCode == 32)
                 ) {
                   e.preventDefault();
                 }
@@ -514,7 +508,8 @@ function parse() {
                   var code = e.keyCode;
                   var leng = this.value.length;
                   var allowedCharacters = [
-                    46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 190,
+                    46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 190,
                   ];
                   var isValidInput = false;
                   for (var i = allowedCharacters.length - 1; i >= 0; i--) {
@@ -533,7 +528,7 @@ function parse() {
                     leng == 10
                   ) {
                     /* only want 10 characters "12.45.7890" */
-                    event.preventDefault();
+                    e.preventDefault();
                     return;
                   }
                 }
