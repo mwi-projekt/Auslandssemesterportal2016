@@ -12,7 +12,7 @@
   margin-bottom: 20px;
 }
 
-h1, h3 {
+h1 {
   color: black;
   text-align: center;
 }
@@ -152,3 +152,48 @@ select#bewLA,
 select#bewSGL {
   margin-left: 25%;
 }
+
+/*#stepProgressBar {
+  display: flex;
+  width: 300px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.step {
+  text-align: center;
+}
+
+.step-text {
+  margin-bottom: 10px;
+  color: red;
+}
+
+.bullet {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 1px solid red;
+  color: red;
+  display: inline-block;
+  position: relative;
+  transition: backround-color 500ms;
+  line-height: 50px;
+}
+
+.bullet.completed {
+  color: white;
+  background-color: red;
+}
+
+.bullet.completed::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 30px;
+  background-color: red;
+  right: -32px;
+  bottom: 20px;
+}*/

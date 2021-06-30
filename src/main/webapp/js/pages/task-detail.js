@@ -88,9 +88,8 @@ $(document).ready(function () {
       confirmButtonColor: '#DD6B55',
       confirmButtonText: 'Bewerbung absenden',
       cancelButtonText: 'Abbrechen',
-      reverseButtons: true
     }).then(function (result) {
-      if (result.value) {
+      if (result) {
         $.ajax({
           type: 'POST',
           url: baseUrl + '/sendNewApplicationMail',
@@ -380,14 +379,14 @@ function getAccordionFile(file) {
     success: function (result) {
       $('#downloadsBody').append(
         '<a href="' +
-        baseUrl +
-        '/getProcessFile?instance_id=' +
-        instanceID +
-        '&key=' +
-        file['data']['id'] +
-        '" target="blank">' +
-        file['data']['filename'] +
-        '</a><br />'
+          baseUrl +
+          '/getProcessFile?instance_id=' +
+          instanceID +
+          '&key=' +
+          file['data']['id'] +
+          '" target="blank">' +
+          file['data']['filename'] +
+          '</a><br />'
       );
     },
   });

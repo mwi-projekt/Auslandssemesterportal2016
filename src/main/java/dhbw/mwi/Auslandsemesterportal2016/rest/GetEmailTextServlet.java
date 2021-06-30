@@ -52,9 +52,9 @@ public class GetEmailTextServlet extends HttpServlet {
 							+ "Herzlichen Glückwunsch! Ihre Bewerbung für das von Ihnen ausgewählte Auslandssemesterangebot für die Universitäten: "
 							+ "\n"+"- "+ uni1 + "\n"+"- "+uni2 + "\n"+"- "+ uni3 + "\n"+ "wurde erfolgreich an das Akademisches Auslandsamt versendet." + "\n" + "\n"
 							+ "-- Platzhalter für Anmerkungen des Auslandsamts --" + "\n" + "\n"
-							+ "Zeitnah nach der Anmeldefrist werden alle Bewerbungen gesichtet und entschieden, ob Sie in die engere Auswahl potentieller Bewerber kommen. Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per E-Mail über das Ergebnis informieren."
+							+ "Im nächsten Schritt wird sich ein/e Mitarbeiter/in zeitnah um die Bearbeitung Ihrer Bewerbung kümmern und	entscheiden, ob Sie in die engere Auswahl potentieller Bewerber/innen kommen."
 							+ "\n"
-							+ " Bei Fragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de."
+							+ " Bei Rückfragen melden Sie sich gerne unter internationaloffice@dhbw-karlsruhe.de."
 							+ "Sobald dieser Prozess abgeschlossen ist, werden wir Sie schnellstmöglich per Email über das Ergebnis informieren."
 							+ "\n" + "\n" + "Mit freundlichen Grüßen," + "\n" + "\n" + "Ihr Akademisches Auslandsamt"
 							+ "\n" + "\n" + vpnDHBW;
