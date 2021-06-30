@@ -37,6 +37,16 @@ $(document).ready(function () {
     $('.logoutFenster').show();
     $('.nutzerName').text(sessionStorage['User']);
   }
+
+  // Show correct menu based on the role
+  $('#navbarToggleExternalContent .bg-dark').hide();
+  if (sessionStorage['rolle'] == 1) {
+    $('#menu-admin').show();
+  } else if (sessionStorage['rolle'] == 3) {
+    $('#menu-student').show();
+  } else {
+    $('#menu-not-logged-in').show();
+  }
 });
 
 //Check ob Passwörter übereinstimmen
