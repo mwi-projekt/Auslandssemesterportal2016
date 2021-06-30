@@ -110,7 +110,7 @@ function getList() {
                             "</td><td>" +
                             singleInstance.aktuelleUni +
                             "</td><td>" +
-                            singleInstance.prioritaet +
+                            singleInstance.prioritaet + 
                             "</td><td>" +
                             singleInstance.kurs +
                             "</td><td>" +
