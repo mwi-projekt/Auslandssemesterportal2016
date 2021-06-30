@@ -5,26 +5,13 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.assertNotNull;
-import org.testng.annotations.*;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class UITestLogin extends UIBaseClass {
-	WebDriver driver;
-	private String browser = "CHROME";
+
+	
 	private StringBuffer verificationErrors = new StringBuffer();
-	private WebElement cookiesElement;
 	private String baseUrl = "http://10.3.15.45/";
 	private WebElement loginElement;
 	private WebElement failedLoginElement;
