@@ -3,7 +3,6 @@ package dhbw.mwi.Auslandsemesterportal2016.test.selenium;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -46,7 +45,8 @@ public class UITestChatbot extends UIBaseClass {
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(OPEN_CHATBOT_ELEMENT_XPATH)).click();
 		String text = driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div[1]/div[1]")).getText();
-		assertEquals(text, "Auslandsbot");
+		System.out.println(text);
+		assertEquals("Auslandsbot", text);
 		driver.findElement(By.xpath(ENTER_TEXT_ELEMENT_XPATH)).sendKeys("Test");
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(CLOSE_CHATBOT_ELEMENT_XPATH)).click();
@@ -60,7 +60,8 @@ public class UITestChatbot extends UIBaseClass {
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(OPEN_CHATBOT_ELEMENT_XPATH)).click();
 		String text = driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div[1]/div[1]")).getText();
-		assertEquals(text, "Auslandsbot");
+		System.out.println(text);
+		assertEquals("Auslandsbot", text);
 		driver.findElement(By.xpath(ENTER_TEXT_ELEMENT_XPATH)).sendKeys("<kjfhkjd");
 		Thread.sleep(3000);
 		driver.findElement(By.xpath(CLOSE_CHATBOT_ELEMENT_XPATH)).click();

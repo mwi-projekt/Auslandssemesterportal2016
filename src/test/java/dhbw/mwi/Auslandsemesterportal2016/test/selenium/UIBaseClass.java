@@ -57,6 +57,6 @@ public class UIBaseClass {
 		Thread.sleep(3000);
 		myElement.click();
 		Thread.sleep(3000);
-		assertEquals(driver.getCurrentUrl(), baseUrl + expectedReasultPage);
+		assertEquals(baseUrl + expectedReasultPage, driver.getCurrentUrl());
 	}
 }
