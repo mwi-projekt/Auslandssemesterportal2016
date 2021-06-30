@@ -483,12 +483,13 @@ function parse() {
             $("#bewTelefon").keypress(function (e) {
               try {
                 // telefonnummer validation
+                //keypress besitzt andere Values für Keydown!!
                 if (
                   (this.value.includes("/") && e.keyCode == 47) ||
                   (this.value.includes(" ") && e.keyCode == 32) ||
                   (this.value.includes(" ") && e.keyCode == 47) ||
                   (this.value.includes("/") && e.keyCode == 32) ||
-                  !((e.keyCode <= 57 && e.keyCode >= 46) || e.keyCode == 32)
+                  !((e.keyCode <= 57 && e.keyCode >= 47) || e.keyCode == 32)
                 ) {
                   e.preventDefault();
                 }
@@ -502,14 +503,15 @@ function parse() {
                     e.keyCode == 37 ||
                     e.keyCode == 39 ||
                     e.keyCode == 8 ||
-                    e.keyCode == 9
+                    e.keyCode == 9 ||
+                    e.keyCode == 46
                   )
                 ) {
                   var code = e.keyCode;
                   var leng = this.value.length;
                   var allowedCharacters = [
-                    46, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99,
-                    100, 101, 102, 103, 104, 105, 190,
+                    48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100,
+                    101, 102, 103, 104, 105, 190,
                   ];
                   var isValidInput = false;
                   for (var i = allowedCharacters.length - 1; i >= 0; i--) {
