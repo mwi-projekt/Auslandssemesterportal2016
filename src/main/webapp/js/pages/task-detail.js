@@ -401,7 +401,11 @@ function getData() {
       instance_id: instanceID,
     },
     success: function (result) {
+      console.log(result);
       $.each(result, function (key, value) {
+        if (key == 'validierungErfolgreich') {
+          return;
+        }
         $('#' + key).val(value);
         if (key === 'muttersprache' || key === 'semesteradresseAnders') {
           $('#' + key).prop('checked', value);
