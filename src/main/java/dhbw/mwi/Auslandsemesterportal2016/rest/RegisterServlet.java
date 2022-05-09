@@ -35,7 +35,7 @@ public class RegisterServlet extends HttpServlet {
 		int rolle = 0;
 
 		if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
-			out.print(ErrorEnum.MAILERROR.toString());
+			out.print(ErrorEnum.MAILERROR);
 			out.flush();
 		} else if (SQL_queries.isMatnrUsed(Integer.parseInt(request.getParameter("matrikelnummer")))) {
 			out.print("matnrError");

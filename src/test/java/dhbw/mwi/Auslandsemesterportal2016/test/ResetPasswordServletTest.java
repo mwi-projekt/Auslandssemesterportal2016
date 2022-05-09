@@ -3,6 +3,7 @@ package dhbw.mwi.Auslandsemesterportal2016.test;
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.ResetPasswordServlet;
@@ -23,9 +24,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ResetPasswordServletTest {
     // Initialization of necessary mock objects for mocking instance methods
@@ -54,7 +55,6 @@ public class ResetPasswordServletTest {
         sql_queries = Mockito.mockStatic(SQL_queries.class);
 
         // Define what happens when mocked method is called
-        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(true);
         sql_queries.when(() -> SQL_queries.forgetPassword(any())).thenCallRealMethod();
 
         util.when(() -> Util.getEmailMessage(any(), any())).thenReturn(message);
@@ -73,7 +73,8 @@ public class ResetPasswordServletTest {
     }
 
     @Test
-    public void testDoPost() throws IOException {
+    public void doPost() throws IOException {
+        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(true);
         // call protected doPost()-Method of RegisterServlet.class
         new ResetPasswordServlet() {
             public ResetPasswordServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -85,7 +86,22 @@ public class ResetPasswordServletTest {
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
-        assertEquals(SuccessEnum.RESETACC.toString() + TestEnum.TESTEMAIL.toString(), result);
+        assertEquals(SuccessEnum.RESETACC + TestEnum.TESTEMAIL.toString(), result);
     }
 
+    @Test
+    void doPostEmailUnused() {
+        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(false);
+
+        new ResetPasswordServlet() {
+            public ResetPasswordServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response) {
+                assertThrows(RuntimeException.class, () ->doPost(request, response));
+                return this;
+            }
+        }.callProtectedMethod(request, response);
+
+        String result = stringWriter.toString().trim();
+        assertEquals("No account registered for this email adress", result);
+        verify(response, times(1)).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+    }
 }

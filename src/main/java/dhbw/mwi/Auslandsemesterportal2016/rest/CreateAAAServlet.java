@@ -33,7 +33,7 @@ public class CreateAAAServlet extends HttpServlet {
 			int role = 2;
 
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
-				out.print(ErrorEnum.MAILERROR.toString());
+				out.print(ErrorEnum.MAILERROR);
 				out.flush();
 				out.close();
 			} else {
@@ -53,7 +53,7 @@ public class CreateAAAServlet extends HttpServlet {
 							request.getParameter("tel"), request.getParameter("mobil"), aa, "1");
 
 					if (rsupd == 0) {
-						out.print(ErrorEnum.USERREGISTER.toString());
+						out.print(ErrorEnum.USERREGISTER);
 						out.flush();
 						out.close();
 					} else {
@@ -62,7 +62,7 @@ public class CreateAAAServlet extends HttpServlet {
 						out.close();
 					}
 				} catch (Exception e) {
-					response.sendError(500, ErrorEnum.USERCREATE.toString() + e.getMessage());
+					response.sendError(500, ErrorEnum.USERCREATE + e.getMessage());
 					e.printStackTrace();
 					throw new RuntimeException(e);
 				}

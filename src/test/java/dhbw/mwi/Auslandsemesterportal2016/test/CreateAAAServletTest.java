@@ -2,6 +2,7 @@ package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.CreateAAAServlet;
@@ -25,6 +26,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -59,10 +61,6 @@ public class CreateAAAServletTest {
         sql_queries.when(() -> SQL_queries.checkUserSession(any(), any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.getRoleForUser(any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
-        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(false);
-        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
-                anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
-                .thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         when(response.getWriter()).thenReturn(writer);
@@ -73,7 +71,7 @@ public class CreateAAAServletTest {
         when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
         when(request.getParameter("tel")).thenReturn(TestEnum.TESTTELNR.toString());
         when(request.getParameter("mobil")).thenReturn(TestEnum.TESTMOBILNR.toString());
-        when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
+
         // 1 = Admin
         when(resultSet.getInt(anyInt())).thenReturn(1);
         when(resultSet.next()).thenReturn(true);
@@ -89,7 +87,13 @@ public class CreateAAAServletTest {
     }
 
     @Test
-    public void doPostForRoleAdmin() throws SQLException, IOException, ServletException {
+    public void doPostForRoleAdmin() throws IOException, ServletException {
+        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(false);
+        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
+                        anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
+                .thenCallRealMethod();
+        when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
+
         Mockito.doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
@@ -111,11 +115,47 @@ public class CreateAAAServletTest {
         MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
         userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
 
-        new CreateAAAServlet().doPost(request, response);
+        aaaServlet.doPost(request, response);
 
         verify(response, times(1)).sendError(401, "Rolle: " + rolle);
 
         userAuthentificationMock.close();
     }
 
+    @Test
+    void doPostEmailAlreadyUsed() throws IOException {
+        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(true);
+
+        aaaServlet.doPost(request, response);
+
+        String result = stringWriter.toString().trim();
+        assertEquals(ErrorEnum.MAILERROR.toString(), result);
+    }
+
+    @Test
+    void doPostRegistrationFails() throws IOException {
+        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
+                        anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
+                .thenReturn(0);
+
+        aaaServlet.doPost(request, response);
+
+        String result = stringWriter.toString().trim();
+        assertEquals(ErrorEnum.USERREGISTER.toString(), result);
+    }
+
+    @Test
+    void doPostInterruptedByException() throws IOException {
+        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
+                        anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
+                .thenCallRealMethod();
+        // throw any Exception in try-Block
+        when(request.getRequestDispatcher(anyString())).thenThrow(RuntimeException.class);
+
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            aaaServlet.doPost(request, response);
+        });
+        //TODO check why e.getMessage() is always null
+        verify(response, times(1)).sendError(500, ErrorEnum.USERCREATE + "null");
+    }
 }

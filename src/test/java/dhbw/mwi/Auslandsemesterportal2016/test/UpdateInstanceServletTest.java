@@ -81,7 +81,6 @@ public class UpdateInstanceServletTest {
 
         when(request.getCookies()).thenReturn(cookies);
         when(request.getParameter("instance_id")).thenReturn(TestEnum.TESTINSTANCEID.toString());
-        when(request.getParameter("key")).thenReturn(TestEnum.TESTKEYSTRING.toString());
         when(request.getParameter("value")).thenReturn(TestEnum.TESTVALSTRING.toString());
         when(request.getParameter("type")).thenReturn(TestEnum.TESTTYPESTRING.toString());
 
@@ -103,6 +102,7 @@ public class UpdateInstanceServletTest {
 
     @Test
     public void doPost() throws IOException, ServletException {
+        when(request.getParameter("key")).thenReturn(TestEnum.TESTKEYSTRING.toString());
 
         new UpdateInstanceServlet() {
             public UpdateInstanceServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -134,5 +134,22 @@ public class UpdateInstanceServletTest {
         verify(response, times(1)).sendError(401);
 
         userAuthentificationMock.close();
+    }
+
+    @Test
+    void doPostKeyOrValueNull() throws IOException {
+        when(request.getParameter("key")).thenReturn(null);
+
+        new UpdateInstanceServlet() {
+            public UpdateInstanceServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
+                doPost(request, response);
+                return this;
+            }
+        }.callProtectedMethod(request, response);
+
+        String result = stringWriter.toString().trim();
+        assertEquals("Variables not set", result);
+        verify(response, times(1)).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 }

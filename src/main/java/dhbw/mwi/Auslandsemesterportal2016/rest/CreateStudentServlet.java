@@ -31,7 +31,7 @@ public class CreateStudentServlet extends HttpServlet {
             int role = 3;
 
             if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
-                out.print(ErrorEnum.MAILERROR.toString());
+                out.print(ErrorEnum.MAILERROR);
                 out.flush();
             } else {
                 try {
@@ -53,7 +53,7 @@ public class CreateStudentServlet extends HttpServlet {
                             "1");
 
                     if (rsupd == 0) {
-                        out.print(ErrorEnum.USERREGISTER.toString());
+                        out.print(ErrorEnum.USERREGISTER);
                         out.flush();
                     } else {
                         RequestDispatcher rd = request.getRequestDispatcher("resetPassword");
