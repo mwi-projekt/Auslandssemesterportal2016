@@ -1,12 +1,13 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.selenium;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class UITestRegister extends UIBaseClass {
 
@@ -25,12 +26,12 @@ public class UITestRegister extends UIBaseClass {
 	private static final String MESSAGE_ELEMENT_XPATH = "//*[@id=\"swal2-title\"]";
 	private StringBuffer verificationErrors = new StringBuffer();
 
-	@BeforeEach
+	@BeforeMethod
 	public void getDriver() throws InterruptedException {
 		getDriver("CHROME");
 	}
 
-	@AfterEach
+	@AfterMethod
 	public void tearDown() throws Exception {
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();

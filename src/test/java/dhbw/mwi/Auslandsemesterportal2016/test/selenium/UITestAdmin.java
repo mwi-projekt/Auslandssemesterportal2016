@@ -1,13 +1,11 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.selenium;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.testng.Assert;
+import org.testng.AssertJUnit;
+import org.testng.annotations.*;
 
 public class UITestAdmin extends UIBaseClass {
 
@@ -15,7 +13,7 @@ public class UITestAdmin extends UIBaseClass {
 	private WebElement loginElement;
 	private String baseUrl = "http://10.3.15.45/";
 
-	@BeforeEach
+	@BeforeMethod
 	public void setUp() throws InterruptedException {
 		getDriver("CHROME");
 		driver.get(baseUrl);
@@ -32,74 +30,74 @@ public class UITestAdmin extends UIBaseClass {
 		Thread.sleep(2000);
 	}
 
-	@AfterEach
+	@AfterMethod
 	public void tearDown() throws Exception {
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
-			fail(verificationErrorString);
+			Assert.fail(verificationErrorString);
 		}
 	}
 
 	@Test
 	public void testThatChecksIfAdminCanLogin() throws InterruptedException {
-		assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
 	}
 
 	@Test
 	public void testThatClickingApplicationBringsUserToEditPage() throws InterruptedException {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[1]/div[2]")).click();
-		assertEquals(baseUrl + "prozess.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "prozess.html", driver.getCurrentUrl());
 	}
 
 	@Test
 	public void testThatClickingEditStudentBringsUserToEditPage() throws InterruptedException {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[1]")).click();
-		assertEquals(baseUrl + "verwaltung_student.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "verwaltung_student.html", driver.getCurrentUrl());
 	}
 
 	@Test
 	public void testThatClickingEditStudentLeiterBringsUserToEditPage() throws InterruptedException {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[2]")).click();
-		assertEquals(baseUrl + "verwaltung_studiengangsleitung.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "verwaltung_studiengangsleitung.html", driver.getCurrentUrl());
 	}
 
 	@Test
 	public void testThatClickingEditEmployeeBringsUserToEditPage() throws InterruptedException {
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[3]")).click();
-		assertEquals(baseUrl + "verwaltung_auslandsamt.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "verwaltung_auslandsamt.html", driver.getCurrentUrl());
 	}
 
 	@Test
 	public void testThatClickingBackButtonFromApplicationEditBringsUserBackToMainPage() {
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[1]/div[2]")).click();
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/span[2]/a")).click();
-		assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
 	}
 
 	@Test
 	public void testThatClickingBackButtonFromEditStudentBringsUserToMainPage() throws InterruptedException {
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[1]")).click();
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div[1]/span[2]/a")).click();
-		assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
 	}
 
 	@Test
 	public void testThatClickingBackButtonFromEditStudentLeiterBringsUserToMainPage() throws InterruptedException {
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[2]")).click();
 		driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div[1]/span[2]/a")).click();
-		assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
 	}
 
 	@Test
 	public void testThatClickingBackButtonFromEditEmployeeBringsUserToMainPage() throws InterruptedException {
 		driver.findElement(By.xpath("/html/body/div[5]/div/div[2]/div/div[2]/div[3]")).click();
 		driver.findElement(By.xpath("/html/body/div[6]/div/div[2]/div[1]/span[2]/a")).click();
-		assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "cms.html", driver.getCurrentUrl());
 	}
 
 	@Test
@@ -108,7 +106,7 @@ public class UITestAdmin extends UIBaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("logout")).click();
 		Thread.sleep(2000);
-		assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
 	}
 
 	@Test
@@ -117,7 +115,7 @@ public class UITestAdmin extends UIBaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("logout")).click();
 		Thread.sleep(2000);
-		assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
 	}
 
 	@Test
@@ -126,7 +124,7 @@ public class UITestAdmin extends UIBaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("logout")).click();
 		Thread.sleep(2000);
-		assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
 	}
 
 	@Test
@@ -135,7 +133,7 @@ public class UITestAdmin extends UIBaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("logout")).click();
 		Thread.sleep(2000);
-		assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
 	}
 
 	@Test
@@ -143,7 +141,7 @@ public class UITestAdmin extends UIBaseClass {
 		Thread.sleep(2000);
 		driver.findElement(By.id("logout")).click();
 		Thread.sleep(2000);
-		assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
+		AssertJUnit.assertEquals(baseUrl + "index.html", driver.getCurrentUrl());
 	}
 	/*
 	 * @Test public void testThatChecksIfAdminPageIsVisibleIfUserIsNotLogin() throws
