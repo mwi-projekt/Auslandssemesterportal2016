@@ -1,12 +1,15 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-
-import java.util.Arrays;
+import dhbw.mwi.Auslandsemesterportal2016.db.Mail;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+import org.mockito.stubbing.Answer;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -15,18 +18,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
-import org.mockito.stubbing.Answer;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import dhbw.mwi.Auslandsemesterportal2016.db.Mail;
-import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
-import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 
 public class UtilTest {
     // Initialization of necessary mock objects for mocking static methods
@@ -36,13 +34,13 @@ public class UtilTest {
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
 
-    @BeforeMethod
+    @BeforeEach
     public void init() {
         // Define necessary mock objects for mocking static methods
         util = Mockito.mockStatic(Util.class);
     }
 
-    @AfterMethod
+    @AfterEach
     public void close() {
         // Close mock objects for mocking static methods
         util.close();

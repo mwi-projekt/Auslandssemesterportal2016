@@ -1,21 +1,21 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
+import dhbw.mwi.Auslandsemesterportal2016.rest.LoginServlet;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
-import org.testng.annotations.Test;
-import dhbw.mwi.Auslandsemesterportal2016.rest.LoginServlet;
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LoginServletTest {
 

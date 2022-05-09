@@ -1,30 +1,28 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
+import dhbw.mwi.Auslandsemesterportal2016.rest.UserDeleteServlet;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.testng.annotations.Test;
-import org.mockito.MockedStatic;
-import org.mockito.Mockito;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
-import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
-import dhbw.mwi.Auslandsemesterportal2016.rest.UserDeleteServlet;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class UserDeleteServletTest {
     // Initialization of necessary mock objects for mocking instance methods
@@ -42,7 +40,7 @@ public class UserDeleteServletTest {
     Cookie c2 = new Cookie("sessionID", "s1e5f2ge8gvs694g8vedsg");
     Cookie[] cookies = { c1, c2 };
 
-    @BeforeMethod
+    @BeforeEach
     public void init() throws SQLException, IOException {
         // Define necessary mock objects for mocking static methods
         sql_queries = Mockito.mockStatic(SQL_queries.class);
@@ -66,7 +64,7 @@ public class UserDeleteServletTest {
         when(resultSet.getInt(1)).thenReturn(1);
     }
 
-    @AfterMethod
+    @AfterEach
     public void close() {
         // Close mock objects for mocking static methods
         sql_queries.close();

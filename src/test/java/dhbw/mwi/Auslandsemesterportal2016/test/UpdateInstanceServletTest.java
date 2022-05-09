@@ -1,38 +1,36 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
+import dhbw.mwi.Auslandsemesterportal2016.rest.UpdateInstanceServlet;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngineServices;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.task.TaskQuery;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
-import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
-import dhbw.mwi.Auslandsemesterportal2016.rest.UpdateInstanceServlet;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class UpdateInstanceServletTest {
     // Initialization of necessary mock objects for mocking instance methods
@@ -56,7 +54,7 @@ public class UpdateInstanceServletTest {
     Cookie c2 = new Cookie("sessionID", TestEnum.TESTSESSIONID.toString());
     Cookie[] cookies = { c1, c2 };
 
-    @BeforeMethod
+    @BeforeEach
     public void init() throws SQLException, IOException {
         // Define necessary mock objects for mocking static methods
         sql_queries = Mockito.mockStatic(SQL_queries.class);
@@ -92,7 +90,7 @@ public class UpdateInstanceServletTest {
         when(resultSet.next()).thenReturn(true);
     }
 
-    @AfterMethod
+    @AfterEach
     public void close() {
         // Close mock objects for mocking static methods
         sql_queries.close();
