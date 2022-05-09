@@ -1,6 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.UserDeleteServlet;
@@ -21,8 +22,7 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class UserDeleteServletTest {
     // Initialization of necessary mock objects for mocking instance methods
@@ -74,7 +74,7 @@ public class UserDeleteServletTest {
     }
 
     @Test
-    public void testDoGetForRoleAdmin() throws SQLException, IOException {
+    public void doGetForRoleAdmin() throws SQLException, IOException {
         // call protected doPost()-Method of RegisterServlet.class
         new UserDeleteServlet() {
             public UserDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -89,4 +89,22 @@ public class UserDeleteServletTest {
         assertEquals(SuccessEnum.USERDELETE.toString(), result);
     }
 
+    @Test
+    void doPostUnauthorizedRoll() throws IOException {
+        int rolle = 2;
+        MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
+        userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
+
+        new UserDeleteServlet() {
+            public UserDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
+                doGet(request, response);
+                return this;
+            }
+        }.callProtectedMethod(request, response);
+
+        verify(response, times(1)).sendError(401, "Rolle: " + rolle);
+
+        userAuthentificationMock.close();
+    }
 }

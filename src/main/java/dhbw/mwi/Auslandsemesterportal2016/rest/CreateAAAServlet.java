@@ -1,7 +1,5 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import dhbw.mwi.Auslandsemesterportal2016.enums.*;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.UUID;
@@ -16,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
+import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
 
-@WebServlet(name = "createSGLServlet", urlPatterns = { "/createSGL" })
-public class createSGLServlet extends HttpServlet {
+@WebServlet(name = "createAAAServlet", urlPatterns = { "/createAAA" })
+public class CreateAAAServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -26,13 +26,11 @@ public class createSGLServlet extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
-
+		// Rolle Admin = 1
 		if (rolle != 1) {
 			response.sendError(401, "Rolle: " + rolle);
 		} else {
-
-			// Rolle SGL Eintragen
-			int role = 4;
+			int role = 2;
 
 			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
 				out.print(ErrorEnum.MAILERROR.toString());
@@ -48,13 +46,11 @@ public class createSGLServlet extends HttpServlet {
 					// Zufälliges Salt generieren und Passwort hashen
 					String salt = Util.generateSalt();
 					String pw = Util.HashSha256(Util.HashSha256(id.toString()) + salt);
-					String help = "--";
+					String aa = "--";
 					// Verbindung zur DB um neuen Nutzer zu speichern
-					// Hier fehlt noch die Übergabe des Studiengangs
 					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
-							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"),
-							request.getParameter("studgang"), request.getParameter("kurs"), -1, help, help,
-							request.getParameter("standort"), "1");
+							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), aa, aa, -1,
+							request.getParameter("tel"), request.getParameter("mobil"), aa, "1");
 
 					if (rsupd == 0) {
 						out.print(ErrorEnum.USERREGISTER.toString());
@@ -65,17 +61,12 @@ public class createSGLServlet extends HttpServlet {
 						rd.forward(request, response);
 						out.close();
 					}
-
 				} catch (Exception e) {
 					response.sendError(500, ErrorEnum.USERCREATE.toString() + e.getMessage());
 					e.printStackTrace();
 					throw new RuntimeException(e);
-
 				}
-
 			}
-
 		}
-
 	}
 }

@@ -1,9 +1,10 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
-import dhbw.mwi.Auslandsemesterportal2016.rest.CreateStudentServlet;
+import dhbw.mwi.Auslandsemesterportal2016.rest.CreateAAAServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,10 +26,9 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-public class createStudentServletTest {
+public class CreateAAAServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
@@ -42,14 +42,15 @@ public class createStudentServletTest {
     StringWriter stringWriter;
     PrintWriter writer;
     Cookie c1 = new Cookie("email", TestEnum.TESTEMAIL.toString());
-    Cookie c2 = new Cookie("sessionID", "s1e5f2ge8gvs694g8vedsg");
+    Cookie c2 = new Cookie("sessionID", TestEnum.TESTSESSIONID.toString());
     Cookie[] cookies = { c1, c2 };
-    CreateStudentServlet studentServlet = new CreateStudentServlet();
+    CreateAAAServlet aaaServlet = new CreateAAAServlet();
 
     @BeforeEach
     public void init() throws IOException, SQLException {
         // Define necessary mock objects for mocking static methods
         sql_queries = Mockito.mockStatic(SQL_queries.class);
+
         // Define necessary instances
         stringWriter = new StringWriter();
         writer = new PrintWriter(stringWriter);
@@ -70,12 +71,9 @@ public class createStudentServletTest {
         when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
         when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
         when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
-        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUGANG.toString());
-        when(request.getParameter("kurs")).thenReturn(TestEnum.TESTKURS.toString());
-        when(request.getParameter("matnr")).thenReturn(TestEnum.TESTMATRNR.toString());
-        when(request.getParameter("standort")).thenReturn(TestEnum.TESTSTANDORT.toString());
+        when(request.getParameter("tel")).thenReturn(TestEnum.TESTTELNR.toString());
+        when(request.getParameter("mobil")).thenReturn(TestEnum.TESTMOBILNR.toString());
         when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
-
         // 1 = Admin
         when(resultSet.getInt(anyInt())).thenReturn(1);
         when(resultSet.next()).thenReturn(true);
@@ -91,7 +89,7 @@ public class createStudentServletTest {
     }
 
     @Test
-    public void testDoPostForRoleAdmin() throws SQLException, IOException, ServletException {
+    public void doPostForRoleAdmin() throws SQLException, IOException, ServletException {
         Mockito.doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
@@ -100,11 +98,24 @@ public class createStudentServletTest {
             }
         }).when(requestDispatcher).forward(any(), any());
 
-        studentServlet.doPost(request, response);
+        aaaServlet.doPost(request, response);
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
         assertEquals(SuccessEnum.CREATEUSER.toString(), result);
+    }
+
+    @Test
+    void doPostUnauthorizedRoll() throws IOException {
+        int rolle = 2;
+        MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
+        userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
+
+        new CreateAAAServlet().doPost(request, response);
+
+        verify(response, times(1)).sendError(401, "Rolle: " + rolle);
+
+        userAuthentificationMock.close();
     }
 
 }

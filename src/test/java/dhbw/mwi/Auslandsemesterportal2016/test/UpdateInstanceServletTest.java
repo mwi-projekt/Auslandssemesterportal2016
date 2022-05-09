@@ -1,6 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.UpdateInstanceServlet;
@@ -29,8 +30,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class UpdateInstanceServletTest {
     // Initialization of necessary mock objects for mocking instance methods
@@ -102,7 +102,7 @@ public class UpdateInstanceServletTest {
     }
 
     @Test
-    public void testDoPost() throws IOException, ServletException {
+    public void doPost() throws IOException, ServletException {
 
         new UpdateInstanceServlet() {
             public UpdateInstanceServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -115,5 +115,24 @@ public class UpdateInstanceServletTest {
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
         assertEquals(SuccessEnum.UPDATEINSTANCE.toString(), result);
+    }
+
+    @Test
+    void doPostUnauthorizedRoll() throws IOException {
+        int rolle = 0;
+        MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
+        userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
+
+        new UpdateInstanceServlet() {
+            public UpdateInstanceServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
+                doPost(request, response);
+                return this;
+            }
+        }.callProtectedMethod(request, response);
+
+        verify(response, times(1)).sendError(401);
+
+        userAuthentificationMock.close();
     }
 }
