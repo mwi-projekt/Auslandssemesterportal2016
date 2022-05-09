@@ -1,14 +1,13 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.selenium;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-import static org.testng.Assert.assertEquals;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class UITestStudent extends UIBaseClass {
 	WebElement myElement;
@@ -34,7 +33,7 @@ public class UITestStudent extends UIBaseClass {
 	private static final String FAQ_ELEMENT_XPATH = "/html/body/div[5]/div/footer/div[1]/div/div/div[1]/nav/nav/ul/li/a";
 	private static final String IMPRESSUM_ELEMENT_XPATH = "//*[@id=\"normalBereich\"]/footer/div[2]/div/div/div[2]/nav/a";
 
-	@BeforeMethod
+	@BeforeEach
 	public void getDriver() throws InterruptedException {
 		getDriver("CHROME");
 		loginAsStudent();
@@ -51,7 +50,7 @@ public class UITestStudent extends UIBaseClass {
 		Thread.sleep(2000);
 	}
 
-	@AfterMethod
+	@AfterEach
 	public void tearDown() throws Exception {
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();

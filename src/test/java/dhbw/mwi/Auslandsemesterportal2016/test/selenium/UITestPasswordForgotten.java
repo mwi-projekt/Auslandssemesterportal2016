@@ -1,12 +1,12 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.selenium;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class UITestPasswordForgotten extends UIBaseClass {
 	private String baseUrl = "http://10.3.15.45/";
@@ -21,12 +21,12 @@ public class UITestPasswordForgotten extends UIBaseClass {
 
 	private StringBuffer verificationErrors = new StringBuffer();
 
-	@BeforeMethod
+	@BeforeEach
 	public void getDriver() throws InterruptedException {
 		getDriver("CHROME");
 	}
 
-	@AfterMethod
+	@AfterEach
 	public void tearDown() throws Exception {
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();

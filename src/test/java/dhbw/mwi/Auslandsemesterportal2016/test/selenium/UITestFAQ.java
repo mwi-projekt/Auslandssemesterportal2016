@@ -1,12 +1,12 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.selenium;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UITestFAQ extends UIBaseClass {
 	private StringBuffer verificationErrors = new StringBuffer();
@@ -21,13 +21,13 @@ public class UITestFAQ extends UIBaseClass {
 	private static final String CANCEL_ELEMENT = "/html/body/div[2]/div/div/form/div[1]/button";
 	private static final String REGISTER_ELEMENT = "/html/body/div[4]/div/header/div/div/div[1]/button[2]";
 
-	@BeforeMethod
+	@BeforeEach
 	public void getDriver() throws InterruptedException {
 		getDriver("CHROME");
 
 	}
 
-	@AfterMethod
+	@AfterEach
 	public void tearDown() throws Exception {
 		driver.quit();
 		String verificationErrorString = verificationErrors.toString();
