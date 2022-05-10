@@ -13,7 +13,6 @@ import org.mockito.stubbing.Answer;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 
-public class UtilTest {
+class UtilTest {
     // Initialization of necessary mock objects for mocking static methods
     MockedStatic<Util> util;
 
@@ -55,7 +54,7 @@ public class UtilTest {
      * method is called in RegisterServlet-Class
      */
     @Test
-    public void verifyAddResponseHeaders() {
+    void verifyAddResponseHeaders() {
         // ...
         // do nothing when addResponseHeaders() from Util.class is called
         util.when(() -> Util.addResponseHeaders(any(), any())).thenAnswer((Answer<?>) invocation -> null);
@@ -73,7 +72,7 @@ public class UtilTest {
      * method is called in RegisterServlet-Class
      */
     @Test
-    public void testGetEmailMessage() throws AddressException, MessagingException {
+    void testGetEmailMessage() throws MessagingException {
         Message expectedMessage = new MimeMessage(Mail.getInstance());
         expectedMessage.setFrom(new InternetAddress("noreply@dhbw-karlsruhe.de"));
         expectedMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(TestEnum.TESTEMAIL.toString()));
@@ -102,16 +101,16 @@ public class UtilTest {
      * method is called in RegisterServlet-Class
      */
     @Test
-    public void testGenerateSalt() {
-        util.when(() -> Util.generateSalt()).thenCallRealMethod();
+    void testGenerateSalt() {
+        util.when(Util::generateSalt).thenCallRealMethod();
 
         String salt = Util.generateSalt();
         assertNotNull(salt);
-        assertEquals(salt.length(), 64);
+        assertEquals(64, salt.length());
     }
 
     @Test
-    public void testHashSha256() {
+    void testHashSha256() {
         util.when(() -> Util.HashSha256(anyString())).thenCallRealMethod();
 
         String hashPw = Util.HashSha256("Hallo1234");

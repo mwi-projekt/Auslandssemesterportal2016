@@ -1,6 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.test;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
@@ -8,9 +9,10 @@ import dhbw.mwi.Auslandsemesterportal2016.rest.UserUpdateServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import javax.mail.Transport;
@@ -26,10 +28,9 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-public class UserUpdateServletTest {
+class UserUpdateServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
@@ -93,16 +94,29 @@ public class UserUpdateServletTest {
         writer.close();
     }
 
-    /*
-     * Test doPost()-Method for rolle=1 (Admin)
-     */
     @Test
-    public void testDoPostForAdminWithOldmail0AndRole2() throws IOException, SQLException {
-        // set up request data
+    void doPostUnauthorizedRole() throws IOException {
+        int rolle = 2;
+        MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
+        userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
+
+        new UserUpdateServlet() {
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
+                doPost(request, response);
+            }
+        }.callProtectedMethod(request, response);
+
+        verify(response, times(1)).sendError(401, "Rolle: " + rolle);
+
+        userAuthentificationMock.close();
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"2", "4", "6"})
+    void doPostWithOldmail0(String role) throws SQLException, IOException {
         String oldmail = "0";
-        String role = "2";
 
-        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
@@ -110,77 +124,21 @@ public class UserUpdateServletTest {
 
         // call protected doPost()-Method of RegisterServlet.class
         new UserUpdateServlet() {
-            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
-        // get the value of stringWriter
         String result = stringWriter.toString().trim();
         assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
     }
 
-    @Test
-    public void testDoPostForAdminWithOldmail0AndRole4() throws IOException, SQLException {
-        // set up request data
-        String oldmail = "0";
-        String role = "4";
-
-        // Define what happens when mocked method is called
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
-        when(resultSet.getInt(1)).thenReturn(1);
-        when(request.getParameter("oldmail")).thenReturn(oldmail);
-        when(request.getParameter("role")).thenReturn(role);
-
-        // call protected doPost()-Method of RegisterServlet.class
-        new UserUpdateServlet() {
-            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                doPost(request, response);
-                return this;
-            }
-        }.callProtectedMethod(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
-    }
-
-    @Test
-    public void testDoPostForAdminWithOldmail0AndRole6() throws IOException, SQLException {
-        // set up request data
-        String oldmail = "0";
-        String role = "6";
-
-        // Define what happens when mocked method is called
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
-        when(resultSet.getInt(1)).thenReturn(1);
-        when(request.getParameter("oldmail")).thenReturn(oldmail);
-        when(request.getParameter("role")).thenReturn(role);
-
-        // call protected doPost()-Method of RegisterServlet.class
-        new UserUpdateServlet() {
-            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                doPost(request, response);
-                return this;
-            }
-        }.callProtectedMethod(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
-    }
-
-    @Test
-    public void testDoPostForAdminWithOldmail2AndRole2() throws IOException, SQLException {
-        // set up request data
+    @ParameterizedTest
+    @ValueSource(strings = {"2", "4", "6"})
+    void doPostWithOldmail2(String role) throws SQLException, IOException {
         String oldmail = "2";
-        String role = "2";
 
-        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
         when(resultSet.getInt(1)).thenReturn(1);
         when(request.getParameter("oldmail")).thenReturn(oldmail);
@@ -188,62 +146,9 @@ public class UserUpdateServletTest {
 
         // call protected doPost()-Method of RegisterServlet.class
         new UserUpdateServlet() {
-            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
-            }
-        }.callProtectedMethod(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
-    }
-
-    @Test
-    public void testDoPostForAdminWithOldmail2AndRole4() throws IOException, SQLException {
-        // set up request data
-        String oldmail = "2";
-        String role = "4";
-
-        // Define what happens when mocked method is called
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
-        when(resultSet.getInt(1)).thenReturn(1);
-        when(request.getParameter("oldmail")).thenReturn(oldmail);
-        when(request.getParameter("role")).thenReturn(role);
-
-        // call protected doPost()-Method of RegisterServlet.class
-        new UserUpdateServlet() {
-            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                doPost(request, response);
-                return this;
-            }
-        }.callProtectedMethod(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals(SuccessEnum.UPDATEUSER.toString(), result);
-    }
-
-    @Test
-    public void testDoPostForAdminWithOldmail2AndRole6() throws IOException, SQLException {
-        // set up request data
-        String oldmail = "2";
-        String role = "6";
-
-        // Define what happens when mocked method is called
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
-        when(resultSet.getInt(1)).thenReturn(1);
-        when(request.getParameter("oldmail")).thenReturn(oldmail);
-        when(request.getParameter("role")).thenReturn(role);
-
-        // call protected doPost()-Method of RegisterServlet.class
-        new UserUpdateServlet() {
-            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -256,24 +161,20 @@ public class UserUpdateServletTest {
      * Test doPost()-Method for rolle=3 (Student)
      */
     @Test
-    public void testDoPostForStudent() throws IOException, SQLException {
+    void doPostForStudent() throws IOException, SQLException {
         // Define what happens when mocked method is called
         when(resultSet.getInt(1)).thenReturn(3);
 
-        Mockito.doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print("Error 401 - Rolle: Student");
-                return null;
-            }
+        Mockito.doAnswer((Answer<Object>) invocation -> {
+            writer.print("Error 401 - Rolle: Student");
+            return null;
         }).when(response).sendError(anyInt(), any());
 
         // call protected doPost()-Method of RegisterServlet.class
         new UserUpdateServlet() {
-            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -282,66 +183,26 @@ public class UserUpdateServletTest {
         assertEquals("Error 401 - Rolle: Student", result);
     }
 
-    @Test
-    public void testDoPostWithOldmail0AndUpdateError() throws SQLException, IOException {
-        // set up request data
-        String oldmail = "0";
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "2"})
+    void doPostUpdateUserFails(String oldMail) throws SQLException, IOException {
         String role = "6";
 
-        // Define what happens when mocked method is called
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
         when(resultSet.getInt(1)).thenReturn(2);
-        when(request.getParameter("oldmail")).thenReturn(oldmail);
+        when(request.getParameter("oldmail")).thenReturn(oldMail);
         when(request.getParameter("role")).thenReturn(role);
 
-        Mockito.doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print(ErrorEnum.USERUPDATE.toString());
-                return null;
-            }
+        Mockito.doAnswer((Answer<Object>) invocation -> {
+            writer.print(ErrorEnum.USERUPDATE);
+            return null;
         }).when(response).sendError(anyInt(), any());
 
         // call protected doPost()-Method of RegisterServlet.class
         new UserUpdateServlet() {
-            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
-            }
-        }.callProtectedMethod(request, response);
-
-        // get the value of stringWriter
-        String result = stringWriter.toString().trim();
-        assertEquals(ErrorEnum.USERUPDATE.toString(), result);
-    }
-
-    @Test
-    public void testDoPostWithOldmail2AndUpdateError() throws SQLException, IOException {
-        // set up request data
-        String oldmail = "2";
-        String role = "6";
-
-        // Define what happens when mocked method is called
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
-        when(resultSet.getInt(1)).thenReturn(2);
-        when(request.getParameter("oldmail")).thenReturn(oldmail);
-        when(request.getParameter("role")).thenReturn(role);
-
-        Mockito.doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print(ErrorEnum.USERUPDATE.toString());
-                return null;
-            }
-        }).when(response).sendError(anyInt(), any());
-
-        // call protected doPost()-Method of RegisterServlet.class
-        new UserUpdateServlet() {
-            public UserUpdateServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException {
-                doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 

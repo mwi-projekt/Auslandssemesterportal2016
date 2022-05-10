@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class LoginServletTest {
+class LoginServletTest {
 
     /*
      * method verifies that doPost() is called
@@ -26,7 +26,7 @@ public class LoginServletTest {
      * part of unit-testing that's why LoginServlet is mocked
      */
     @Test
-    public void verifyDoPostMethod() throws IOException {
+    void verifyDoPostMethod() throws IOException {
         // Initialization of necessary mock objects for mocking instance methods
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
@@ -58,8 +58,8 @@ public class LoginServletTest {
         // get the value of stringWriter
         String result = stringWriter.toString();
         assertEquals(result,
-                "{\"resultCode\":\"1\",\"studiengang\":\"" + TestEnum.TESTMATRNR.toString() + "\",\"matrikelnummer\":\""
-                        + TestEnum.TESTMATRNR.toString() + "\",\"rolle\":\"" + TestEnum.TESTROLLEINT.toString()
+                "{\"resultCode\":\"1\",\"studiengang\":\"" + TestEnum.TESTMATRNR + "\",\"matrikelnummer\":\""
+                        + TestEnum.TESTMATRNR + "\",\"rolle\":\"" + TestEnum.TESTROLLEINT
                         + "\"}");
 
         // Close mock objects for mocking static methods

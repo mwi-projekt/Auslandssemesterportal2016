@@ -15,12 +15,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-public class SQL_queriesTest {
+class SQL_queriesTest {
   private static MockedStatic<SQL_queries> mockedStatic;
 
   @BeforeEach
@@ -40,7 +39,7 @@ public class SQL_queriesTest {
    * Method is called in LoginServlet-Class
    */
   @Test
-  public void testGetSalt() {
+  void testGetSalt() {
 
     mockedStatic.when(() -> SQL_queries.getSalt(TestEnum.TESTEMAIL.toString())).thenReturn("SH5E9Z7P5J6Z5G2BV0");
     assertEquals("SH5E9Z7P5J6Z5G2BV0", SQL_queries.getSalt(TestEnum.TESTEMAIL.toString()));
@@ -53,7 +52,7 @@ public class SQL_queriesTest {
    * Method is called in LoginServlet-Class
    */
   @Test
-  public void testUserLogin() {
+  void testUserLogin() {
     // verifiziert, matrikelnummer, studiengang, rolle, userID
     String[] stringArr = { "1", TestEnum.TESTSTUGANG.toString(), TestEnum.TESTMATRNR.toString(),
         TestEnum.TESTROLLESTRING.toString(), "1478523697412" };
@@ -74,13 +73,13 @@ public class SQL_queriesTest {
    * isEmailUsed() is called in RegisterServlet-Class
    */
   @Test
-  public void testIsEmailUsedWithNotUsedEMail() {
+  void testIsEmailUsedWithNotUsedEMail() {
     ResultSet resultSet = mock(ResultSet.class);
 
     mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
     when(SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenCallRealMethod();
 
-    assertEquals(false, SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString()));
+    assertFalse(SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString()));
   }
 
   /*
@@ -92,14 +91,14 @@ public class SQL_queriesTest {
    * isEmailUsed() is called in RegisterServlet-Class
    */
   @Test
-  public void testIsEmailUsedWithUsedEMail() throws SQLException {
+  void testIsEmailUsedWithUsedEMail() throws SQLException {
     ResultSet resultSet = mock(ResultSet.class);
 
     mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
     when(SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenCallRealMethod();
     when(resultSet.next()).thenReturn(true);
 
-    assertEquals(true, SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString()));
+    assertTrue(SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString()));
   }
 
   /*
@@ -111,13 +110,13 @@ public class SQL_queriesTest {
    * isMatnrUsed() is called in RegisterServlet-Class
    */
   @Test
-  public void testIsMatnrUsedWithNotUsedMatnr() {
+  void testIsMatnrUsedWithNotUsedMatnr() {
     ResultSet resultSet = mock(ResultSet.class);
 
     mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
     when(SQL_queries.isMatnrUsed(1234567)).thenCallRealMethod();
 
-    assertEquals(false, SQL_queries.isMatnrUsed(1234567));
+    assertFalse(SQL_queries.isMatnrUsed(1234567));
   }
 
   /*
@@ -129,14 +128,14 @@ public class SQL_queriesTest {
    * isMatnrUsed() is called in RegisterServlet-Class
    */
   @Test
-  public void testIsMatnrUsedWithUsedMatnr() throws SQLException {
+  void testIsMatnrUsedWithUsedMatnr() throws SQLException {
     ResultSet resultSet = mock(ResultSet.class);
 
     mockedStatic.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
     when(SQL_queries.isMatnrUsed(9876543)).thenCallRealMethod();
     when(resultSet.next()).thenReturn(true);
 
-    assertEquals(true, SQL_queries.isMatnrUsed(9876543));
+    assertTrue(SQL_queries.isMatnrUsed(9876543));
   }
 
   /*
@@ -147,7 +146,7 @@ public class SQL_queriesTest {
    * 
    */
   @Test
-  public void testUserRegister() throws SQLException {
+  void testUserRegister() throws SQLException {
     Connection connection = mock(Connection.class);
     PreparedStatement preparedStatement = mock(PreparedStatement.class);
     MockedStatic<DB> mockedStaticDb = Mockito.mockStatic(DB.class);
@@ -158,9 +157,9 @@ public class SQL_queriesTest {
         .thenCallRealMethod();
 
     mockedStatic.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenCallRealMethod();
-    mockedStaticDb.when(() -> DB.getInstance()).thenReturn(connection);
+    mockedStaticDb.when(DB::getInstance).thenReturn(connection);
     mockedStatic.when(() -> connection.prepareStatement(any())).thenReturn(preparedStatement);
-    mockedStatic.when(() -> preparedStatement.executeUpdate()).thenReturn(1);
+    mockedStatic.when(preparedStatement::executeUpdate).thenReturn(1);
 
     // vorname, nachname, passwort, salt, rolle, email, studiengang, kurs,
     // matrikelnummer, tel, mobil, standort, verifiziert, resetToken
@@ -169,7 +168,7 @@ public class SQL_queriesTest {
         TestEnum.TESTKURS.toString(), 1234567, TestEnum.TESTTELNR.toString(), TestEnum.TESTMOBILNR.toString(),
         TestEnum.TESTSTANDORT.toString(), "verifiziert");
     verify(preparedStatement, times(1)).executeUpdate();
-    assertEquals(i, 1);
+    assertEquals(1, i);
 
     mockedStaticDb.close();
   }

@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class UserDeleteServletTest {
+class UserDeleteServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
@@ -74,13 +74,12 @@ public class UserDeleteServletTest {
     }
 
     @Test
-    public void doGetForRoleAdmin() throws SQLException, IOException {
+    void doGetForRoleAdmin() throws IOException {
         // call protected doPost()-Method of RegisterServlet.class
         new UserDeleteServlet() {
-            public UserDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doGet(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -90,16 +89,15 @@ public class UserDeleteServletTest {
     }
 
     @Test
-    void doPostUnauthorizedRoll() throws IOException {
+    void doPostUnauthorizedRole() throws IOException {
         int rolle = 2;
         MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
         userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
 
         new UserDeleteServlet() {
-            public UserDeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doGet(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 

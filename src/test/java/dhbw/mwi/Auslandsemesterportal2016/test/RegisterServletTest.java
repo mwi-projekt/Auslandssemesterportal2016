@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.sql.ResultSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -26,10 +25,9 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class RegisterServletTest {
+class RegisterServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     Message message = mock(Message.class);
-    ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
 
@@ -55,7 +53,7 @@ public class RegisterServletTest {
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         util.when(() -> Util.getEmailMessage(any(), any())).thenReturn(message);
-        util.when(() -> Util.generateSalt()).thenCallRealMethod();
+        util.when(Util::generateSalt).thenCallRealMethod();
         util.when(() -> Util.HashSha256(any())).thenCallRealMethod();
 
         when(response.getWriter()).thenReturn(writer);
@@ -83,17 +81,16 @@ public class RegisterServletTest {
     }
 
     @Test
-    public void doPost() throws IOException {
+    void doPost() throws IOException {
         sql_queries.when(() -> SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenReturn(false);
         sql_queries.when(() -> SQL_queries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
                 .thenReturn(false);
 
         // call protected doPost()-Method of RegisterServlet.class
         new RegisterServlet() {
-            public RegisterServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -107,10 +104,9 @@ public class RegisterServletTest {
         sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(true);
 
         new RegisterServlet() {
-            public RegisterServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -124,10 +120,9 @@ public class RegisterServletTest {
                 .thenReturn(true);
 
         new RegisterServlet() {
-            public RegisterServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 

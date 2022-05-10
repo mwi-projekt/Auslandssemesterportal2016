@@ -53,7 +53,7 @@ public class UserUpdateServlet extends HttpServlet {
                         result = SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, standort);
                     }
                     if (result == 1) {
-                        toClient.println(SuccessEnum.UPDATEUSER.toString());
+                        toClient.println(SuccessEnum.UPDATEUSER);
                     } else {
                         response.sendError(500, ErrorEnum.USERUPDATE.toString());
                     }
@@ -87,14 +87,14 @@ public class UserUpdateServlet extends HttpServlet {
                                 "text/html; charset=UTF-8");
 
                         Transport.send(message);
-                        toClient.println(SuccessEnum.UPDATEUSER.toString());
+                        toClient.println(SuccessEnum.UPDATEUSER);
                     } else {
                         response.sendError(500, ErrorEnum.USERUPDATE.toString());
                     }
                 }
             } catch (Exception e) {
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                toClient.println(e.toString());
+                toClient.println(e);
             }
         }
     }

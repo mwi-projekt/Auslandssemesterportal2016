@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-public class AAADeleteServletTest {
+class AAADeleteServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
@@ -73,17 +73,16 @@ public class AAADeleteServletTest {
     }
 
     @Test
-    public void doPost() throws SQLException, IOException {
+    void doPost() throws SQLException, IOException {
         // Define what happens when mocked method is called
         when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         new AAADeleteServlet() {
-            public AAADeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -93,16 +92,15 @@ public class AAADeleteServletTest {
     }
 
     @Test
-    void doPostUnauthorizedRoll() throws IOException {
+    void doPostUnauthorizedRole() throws IOException {
         int rolle = 2;
         MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
         userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
 
         new AAADeleteServlet() {
-            public AAADeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -112,17 +110,16 @@ public class AAADeleteServletTest {
     }
 
     @Test
-    public void doPostWithoutMail() throws SQLException, IOException {
+    void doPostWithoutMail() throws IOException {
         // Define what happens when mocked method is called
         when(request.getParameter("mail")).thenReturn(null);
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         // call protected doPost()-Method of RegisterServlet.class
         new AAADeleteServlet() {
-            public AAADeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -132,17 +129,16 @@ public class AAADeleteServletTest {
     }
 
     @Test
-    public void doPostWithoutResult() throws SQLException, IOException {
+    void doPostWithoutResult() throws IOException {
         // Define what happens when mocked method is called
         when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
         sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
 
         // call protected doPost-Method of AAADeleteServlet.class
         new AAADeleteServlet() {
-            public AAADeleteServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 

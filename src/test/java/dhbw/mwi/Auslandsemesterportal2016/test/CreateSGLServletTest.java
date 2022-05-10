@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import javax.servlet.RequestDispatcher;
@@ -29,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-public class CreateSGLServletTest {
+class CreateSGLServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
@@ -89,18 +88,15 @@ public class CreateSGLServletTest {
     }
 
     @Test
-    public void doPostForRoleAdmin() throws ServletException, IOException {
+    void doPostForRoleAdmin() throws ServletException, IOException {
         sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(false);
         sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
                         anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
                 .thenCallRealMethod();
 
-        Mockito.doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print(SuccessEnum.CREATEUSER.toString());
-                return null;
-            }
+        Mockito.doAnswer((Answer<Object>) invocation -> {
+            writer.print(SuccessEnum.CREATEUSER);
+            return null;
         }).when(requestDispatcher).forward(any(), any());
 
         sglServlet.doPost(request, response);
@@ -111,7 +107,7 @@ public class CreateSGLServletTest {
     }
 
     @Test
-    void doPostUnauthorizedRoll() throws IOException {
+    void doPostUnauthorizedRole() throws IOException {
         int rolle = 2;
         MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
         userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);

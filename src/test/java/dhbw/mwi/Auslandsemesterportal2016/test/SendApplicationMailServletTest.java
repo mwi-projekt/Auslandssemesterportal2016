@@ -8,7 +8,6 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 
-import javax.mail.MessagingException;
 import javax.mail.Transport;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 
-public class SendApplicationMailServletTest {
+class SendApplicationMailServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
@@ -44,13 +43,12 @@ public class SendApplicationMailServletTest {
     }
 
     @Test
-    public void testDoPost() throws IOException, MessagingException {
+    void testDoPost() throws IOException {
         // call protected doPost()-Method of RegisterServlet.class
         new SendApplicationMailServlet() {
-            public SendApplicationMailServlet callProtectedMethod(HttpServletRequest request,
-                    HttpServletResponse response) throws IOException {
+            public void callProtectedMethod(HttpServletRequest request,
+                                            HttpServletResponse response) throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 

@@ -32,7 +32,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-public class UpdateInstanceServletTest {
+class UpdateInstanceServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     Task task = mock(Task.class);
     ResultSet resultSet = mock(ResultSet.class);
@@ -70,7 +70,7 @@ public class UpdateInstanceServletTest {
         sql_queries.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
         sql_queries.when(() -> SQL_queries.getRoleForUser(any())).thenCallRealMethod();
 
-        processEngines.when(() -> ProcessEngines.getDefaultProcessEngine()).thenReturn(processEngine);
+        processEngines.when(ProcessEngines::getDefaultProcessEngine).thenReturn(processEngine);
 
         when(processEngine.getTaskService()).thenReturn(taskService);
         when(taskService.createTaskQuery()).thenReturn(taskQuery);
@@ -101,14 +101,13 @@ public class UpdateInstanceServletTest {
     }
 
     @Test
-    public void doPost() throws IOException, ServletException {
+    void doPost() throws IOException, ServletException {
         when(request.getParameter("key")).thenReturn(TestEnum.TESTKEYSTRING.toString());
 
         new UpdateInstanceServlet() {
-            public UpdateInstanceServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
-                    throws IOException, ServletException {
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -118,16 +117,15 @@ public class UpdateInstanceServletTest {
     }
 
     @Test
-    void doPostUnauthorizedRoll() throws IOException {
+    void doPostUnauthorizedRole() throws IOException {
         int rolle = 0;
         MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
         userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
 
         new UpdateInstanceServlet() {
-            public UpdateInstanceServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 
@@ -141,10 +139,9 @@ public class UpdateInstanceServletTest {
         when(request.getParameter("key")).thenReturn(null);
 
         new UpdateInstanceServlet() {
-            public UpdateInstanceServlet callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doPost(request, response);
-                return this;
             }
         }.callProtectedMethod(request, response);
 

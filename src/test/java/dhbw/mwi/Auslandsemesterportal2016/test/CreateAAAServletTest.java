@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import javax.servlet.RequestDispatcher;
@@ -30,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-public class CreateAAAServletTest {
+class CreateAAAServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
@@ -87,19 +86,16 @@ public class CreateAAAServletTest {
     }
 
     @Test
-    public void doPostForRoleAdmin() throws IOException, ServletException {
+    void doPostForRoleAdmin() throws IOException, ServletException {
         sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(false);
         sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
                         anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
                 .thenCallRealMethod();
         when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
 
-        Mockito.doAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                writer.print(SuccessEnum.CREATEUSER.toString());
-                return null;
-            }
+        Mockito.doAnswer((Answer<Object>) invocation -> {
+            writer.print(SuccessEnum.CREATEUSER);
+            return null;
         }).when(requestDispatcher).forward(any(), any());
 
         aaaServlet.doPost(request, response);
@@ -110,7 +106,7 @@ public class CreateAAAServletTest {
     }
 
     @Test
-    void doPostUnauthorizedRoll() throws IOException {
+    void doPostUnauthorizedRole() throws IOException {
         int rolle = 2;
         MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
         userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
@@ -152,9 +148,7 @@ public class CreateAAAServletTest {
         // throw any Exception in try-Block
         when(request.getRequestDispatcher(anyString())).thenThrow(RuntimeException.class);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            aaaServlet.doPost(request, response);
-        });
+        assertThrows(RuntimeException.class, () -> aaaServlet.doPost(request, response));
         //TODO check why e.getMessage() is always null
         verify(response, times(1)).sendError(500, ErrorEnum.USERCREATE + "null");
     }
