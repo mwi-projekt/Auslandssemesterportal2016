@@ -45,7 +45,7 @@ public class CreateAAAServlet extends HttpServlet {
 
 					// Zufälliges Salt generieren und Passwort hashen
 					String salt = Util.generateSalt();
-					String pw = Util.HashSha256(Util.HashSha256(id.toString()) + salt);
+					String pw = Util.hashSha256(Util.hashSha256(id.toString()) + salt);
 					String aa = "--";
 					// Verbindung zur DB um neuen Nutzer zu speichern
 					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),

@@ -56,7 +56,7 @@ public class RegisterServlet extends HttpServlet {
 
 				// Zufälliges Salt generieren und Passwort hashen
 				String salt = Util.generateSalt();
-				String pw = Util.HashSha256(Util.HashSha256(request.getParameter("passwort")) + salt);
+				String pw = Util.hashSha256(Util.hashSha256(request.getParameter("passwort")) + salt);
 
 				String link = Config.MWI_URL + "/?confirm=" + id;
 

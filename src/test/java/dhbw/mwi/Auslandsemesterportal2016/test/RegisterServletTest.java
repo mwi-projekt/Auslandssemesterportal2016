@@ -54,7 +54,7 @@ class RegisterServletTest {
 
         util.when(() -> Util.getEmailMessage(any(), any())).thenReturn(message);
         util.when(Util::generateSalt).thenCallRealMethod();
-        util.when(() -> Util.HashSha256(any())).thenCallRealMethod();
+        util.when(() -> Util.hashSha256(any())).thenCallRealMethod();
 
         when(response.getWriter()).thenReturn(writer);
 

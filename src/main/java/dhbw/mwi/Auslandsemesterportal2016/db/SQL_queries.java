@@ -146,7 +146,7 @@ public class SQL_queries {
         // aktiviert, 4 = Datenbankfehler
         // Stringkette, die zurückgegeben wird: resultCode;Bezeichnung
         // Studiengang;Matrikelnummer;Rolle (Nummer die in der DB steht)
-        String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);
+        String hashedPw = Util.hashSha256(Util.hashSha256(pw) + salt);
         int resultCode = 4;
         String studiengang = "";
         String matrikelnummer = "";
@@ -513,7 +513,7 @@ public class SQL_queries {
 
     public static int setPassword(String uuid, String pwd) {
         String salt = Util.generateSalt();
-        String hashedpw = Util.HashSha256(Util.HashSha256(pwd) + salt);
+        String hashedpw = Util.hashSha256(Util.hashSha256(pwd) + salt);
         String query = "UPDATE user SET passwort = ?, salt = ?, resetToken = ''  WHERE resetToken = ?";
         String[] params = new String[] { hashedpw, salt, uuid };
         String[] types = new String[] { "String", "String", "String" };
