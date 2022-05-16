@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
 
@@ -25,7 +25,7 @@ public class CreateAAAServlet extends HttpServlet {
 		Util.addResponseHeaders(request, response);
 
 		PrintWriter out = response.getWriter();
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 		// Rolle Admin = 1
 		if (rolle != 1) {
 			response.sendError(401, "Rolle: " + rolle);

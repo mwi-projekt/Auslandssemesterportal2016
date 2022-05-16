@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 import dhbw.mwi.Auslandsemesterportal2016.rest.ActivateUserServlet;

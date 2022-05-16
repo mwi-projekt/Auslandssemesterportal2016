@@ -1,7 +1,7 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
@@ -97,8 +97,8 @@ class UserUpdateServletTest {
     @Test
     void doPostUnauthorizedRole() throws IOException {
         int rolle = 2;
-        MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
-        userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
+        MockedStatic<UserAuthentification> userAuthentificationMock = Mockito.mockStatic(UserAuthentification.class);
+        userAuthentificationMock.when(() -> UserAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
 
         new UserUpdateServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)

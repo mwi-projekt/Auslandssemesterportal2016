@@ -14,18 +14,18 @@ import org.camunda.bpm.engine.RuntimeService;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.User;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
 @WebServlet(urlPatterns = { "/changePriority" })
 public class ChangePriorityServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 		if (rolle < 1) {
 			response.sendError(401);
 		} else {
-			User user = userAuthentification.getUserInfo(request);
+			User user = UserAuthentification.getUserInfo(request);
 			int matnr = Integer.parseInt(user.matrikelnummer);
 			String instance_id = request.getParameter("instance");
 			int newPrio = Integer.parseInt(request.getParameter("prio"));

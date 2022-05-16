@@ -3,7 +3,7 @@ package dhbw.mwi.Auslandsemesterportal2016.db;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-public class userAuthentification {
+public class UserAuthentification {
 	// Rolle für User: 1 = Admin ; 2 = Mitarbeiter ; 3 = Student ; 0 = Invalid
 	// Session; -1 = No Session at all
 	public static int isUserAuthentifiedByCookie(HttpServletRequest request) {

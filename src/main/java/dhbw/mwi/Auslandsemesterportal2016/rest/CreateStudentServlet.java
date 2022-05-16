@@ -2,7 +2,7 @@ package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
 
@@ -22,7 +22,7 @@ public class CreateStudentServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
-        int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+        int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
         if (rolle != 1) {
             response.sendError(401, "Rolle: " + rolle);

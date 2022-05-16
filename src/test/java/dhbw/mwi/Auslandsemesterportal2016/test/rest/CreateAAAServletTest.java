@@ -1,11 +1,11 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
-import dhbw.mwi.Auslandsemesterportal2016.rest.CreateSGLServlet;
+import dhbw.mwi.Auslandsemesterportal2016.rest.CreateAAAServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,10 +25,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-class CreateSGLServletTest {
+class CreateAAAServletTest {
     // Initialization of necessary mock objects for mocking instance methods
     ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
@@ -42,9 +43,9 @@ class CreateSGLServletTest {
     StringWriter stringWriter;
     PrintWriter writer;
     Cookie c1 = new Cookie("email", TestEnum.TESTEMAIL.toString());
-    Cookie c2 = new Cookie("sessionID", "s1e5f2ge8gvs694g8vedsg");
+    Cookie c2 = new Cookie("sessionID", TestEnum.TESTSESSIONID.toString());
     Cookie[] cookies = { c1, c2 };
-    CreateSGLServlet sglServlet = new CreateSGLServlet();
+    CreateAAAServlet aaaServlet = new CreateAAAServlet();
 
     @BeforeEach
     public void init() throws IOException, SQLException {
@@ -67,15 +68,12 @@ class CreateSGLServletTest {
         when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
         when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
         when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
-        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUGANG.toString());
-        when(request.getParameter("kurs")).thenReturn(TestEnum.TESTKURS.toString());
-        when(request.getParameter("standort")).thenReturn(TestEnum.TESTSTANDORT.toString());
-        when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
+        when(request.getParameter("tel")).thenReturn(TestEnum.TESTTELNR.toString());
+        when(request.getParameter("mobil")).thenReturn(TestEnum.TESTMOBILNR.toString());
 
-        // 1 = Rolle Admin
+        // 1 = Admin
         when(resultSet.getInt(anyInt())).thenReturn(1);
         when(resultSet.next()).thenReturn(true);
-
     }
 
     @AfterEach
@@ -88,18 +86,19 @@ class CreateSGLServletTest {
     }
 
     @Test
-    void doPostForRoleAdmin() throws ServletException, IOException {
+    void doPostForRoleAdmin() throws IOException, ServletException {
         sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(false);
         sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
                         anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
                 .thenCallRealMethod();
+        when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);
 
         Mockito.doAnswer((Answer<Object>) invocation -> {
             writer.print(SuccessEnum.CREATEUSER);
             return null;
         }).when(requestDispatcher).forward(any(), any());
 
-        sglServlet.doPost(request, response);
+        aaaServlet.doPost(request, response);
 
         // get the value of stringWriter
         String result = stringWriter.toString().trim();
@@ -109,10 +108,10 @@ class CreateSGLServletTest {
     @Test
     void doPostUnauthorizedRole() throws IOException {
         int rolle = 2;
-        MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
-        userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
+        MockedStatic<UserAuthentification> userAuthentificationMock = Mockito.mockStatic(UserAuthentification.class);
+        userAuthentificationMock.when(() -> UserAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
 
-        sglServlet.doPost(request, response);
+        aaaServlet.doPost(request, response);
 
         verify(response, times(1)).sendError(401, "Rolle: " + rolle);
 
@@ -123,7 +122,7 @@ class CreateSGLServletTest {
     void doPostEmailAlreadyUsed() throws IOException {
         sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(true);
 
-        sglServlet.doPost(request, response);
+        aaaServlet.doPost(request, response);
 
         String result = stringWriter.toString().trim();
         assertEquals(ErrorEnum.MAILERROR.toString(), result);
@@ -135,9 +134,22 @@ class CreateSGLServletTest {
                         anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
                 .thenReturn(0);
 
-        sglServlet.doPost(request, response);
+        aaaServlet.doPost(request, response);
 
         String result = stringWriter.toString().trim();
         assertEquals(ErrorEnum.USERREGISTER.toString(), result);
+    }
+
+    @Test
+    void doPostInterruptedByException() throws IOException {
+        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
+                        anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
+                .thenCallRealMethod();
+        // throw any Exception in try-Block
+        when(request.getRequestDispatcher(anyString())).thenThrow(RuntimeException.class);
+
+        assertThrows(RuntimeException.class, () -> aaaServlet.doPost(request, response));
+        //TODO check why e.getMessage() is always null
+        verify(response, times(1)).sendError(500, ErrorEnum.USERCREATE + "null");
     }
 }

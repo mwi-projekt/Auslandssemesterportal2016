@@ -1,10 +1,11 @@
-package dhbw.mwi.Auslandsemesterportal2016.test;
+package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
-import dhbw.mwi.Auslandsemesterportal2016.rest.UserDeleteServlet;
+import dhbw.mwi.Auslandsemesterportal2016.rest.AAADeleteServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,11 +25,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class UserDeleteServletTest {
+class AAADeleteServletTest {
     // Initialization of necessary mock objects for mocking instance methods
-    ResultSet resultSet = mock(ResultSet.class);
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
+    ResultSet resultSet = mock(ResultSet.class);
 
     // Initialization of necessary mock objects for mocking static methods
     MockedStatic<SQL_queries> sql_queries;
@@ -53,11 +54,9 @@ class UserDeleteServletTest {
         sql_queries.when(() -> SQL_queries.checkUserSession(any(), any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.getRoleForUser(any())).thenCallRealMethod();
         sql_queries.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         when(response.getWriter()).thenReturn(writer);
 
-        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRNR.toString());
         when(request.getCookies()).thenReturn(cookies);
 
         when(resultSet.next()).thenReturn(true);
@@ -74,12 +73,16 @@ class UserDeleteServletTest {
     }
 
     @Test
-    void doGetForRoleAdmin() throws IOException {
+    void doPost() throws SQLException, IOException {
+        // Define what happens when mocked method is called
+        when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
+
         // call protected doPost()-Method of RegisterServlet.class
-        new UserDeleteServlet() {
+        new AAADeleteServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
-                doGet(request, response);
+                doPost(request, response);
             }
         }.callProtectedMethod(request, response);
 
@@ -91,18 +94,56 @@ class UserDeleteServletTest {
     @Test
     void doPostUnauthorizedRole() throws IOException {
         int rolle = 2;
-        MockedStatic<userAuthentification> userAuthentificationMock = Mockito.mockStatic(userAuthentification.class);
-        userAuthentificationMock.when(() -> userAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
+        MockedStatic<UserAuthentification> userAuthentificationMock = Mockito.mockStatic(UserAuthentification.class);
+        userAuthentificationMock.when(() -> UserAuthentification.isUserAuthentifiedByCookie(request)).thenReturn(rolle);
 
-        new UserDeleteServlet() {
+        new AAADeleteServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
-                doGet(request, response);
+                doPost(request, response);
             }
         }.callProtectedMethod(request, response);
 
         verify(response, times(1)).sendError(401, "Rolle: " + rolle);
 
         userAuthentificationMock.close();
+    }
+
+    @Test
+    void doPostWithoutMail() throws IOException {
+        // Define what happens when mocked method is called
+        when(request.getParameter("mail")).thenReturn(null);
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
+
+        // call protected doPost()-Method of RegisterServlet.class
+        new AAADeleteServlet() {
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
+                doPost(request, response);
+            }
+        }.callProtectedMethod(request, response);
+
+        // get the value of stringWriter
+        String result = stringWriter.toString().trim();
+        assertEquals(ErrorEnum.PARAMMISSING.toString(), result);
+    }
+
+    @Test
+    void doPostWithoutResult() throws IOException {
+        // Define what happens when mocked method is called
+        when(request.getParameter("mail")).thenReturn(TestEnum.TESTEMAIL.toString());
+        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(0);
+
+        // call protected doPost-Method of AAADeleteServlet.class
+        new AAADeleteServlet() {
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
+                    throws IOException {
+                doPost(request, response);
+            }
+        }.callProtectedMethod(request, response);
+
+        // get the value of stringWriter
+        String result = stringWriter.toString().trim();
+        assertEquals(ErrorEnum.USERNOTDELETED.toString(), result);
     }
 }

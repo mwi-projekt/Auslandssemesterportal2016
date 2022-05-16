@@ -14,7 +14,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 
 @WebServlet(name = "UpdateInstanceServlet", urlPatterns = { "/setVariable" })
@@ -24,7 +24,7 @@ public class UpdateInstanceServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request,response);
 
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle < 1) {
 			response.sendError(401);
