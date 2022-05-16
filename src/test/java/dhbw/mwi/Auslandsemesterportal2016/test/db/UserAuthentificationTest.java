@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.TESTEMAIL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 class UserAuthentificationTest {
 
-    private HttpServletRequest request = mock(HttpServletRequest.class);
+    private final HttpServletRequest request = mock(HttpServletRequest.class);
     MockedStatic<SQL_queries> sql_queriesMockedStatic = mockStatic(SQL_queries.class);
 
     @AfterEach
@@ -67,7 +68,7 @@ class UserAuthentificationTest {
 
         User userInfo = UserAuthentification.getUserInfo(request);
 
-        assertEquals(null, userInfo);
+        assertNull(userInfo);
     }
 
     @Test
@@ -77,7 +78,7 @@ class UserAuthentificationTest {
 
         User userInfo = UserAuthentification.getUserInfo(request);
 
-        assertEquals(null, userInfo);
+        assertNull(userInfo);
     }
 
     @Test
