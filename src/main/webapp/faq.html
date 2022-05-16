@@ -10,10 +10,21 @@
     <link rel="stylesheet" href="node_modules/cookieconsent/build/cookieconsent.min.css">
 
     <script src="js/pages/faq.js"></script>
+
+    <!--Integration von Vue.js mittels CDN-->
+    <script src="https://unpkg.com/vue@3"></script>
 </head>
 
 <body>
+
     <module href="./layout.html">
+        <!--div mit id=app wird von Vue abgefangen und kontrolliert-->
+        <div id="app">
+            <h1>{{message}}</h1>
+        </div>
+
+        <script src="./main.js"></script>
+
         <div class="inhalt">
             <!--
             <div class="row navBar" style="text-align: center">
