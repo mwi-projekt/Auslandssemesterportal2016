@@ -1,6 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
@@ -36,7 +36,7 @@ class CreateSGLServletTest {
     RequestDispatcher requestDispatcher = mock(RequestDispatcher.class);
 
     // Initialization of necessary mock objects for mocking static methods
-    MockedStatic<SQL_queries> sql_queries;
+    MockedStatic<SQLQueries> sql_queries;
 
     // Initialization of necessary instances
     StringWriter stringWriter;
@@ -49,17 +49,17 @@ class CreateSGLServletTest {
     @BeforeEach
     public void init() throws IOException, SQLException {
         // Define necessary mock objects for mocking static methods
-        sql_queries = Mockito.mockStatic(SQL_queries.class);
+        sql_queries = Mockito.mockStatic(SQLQueries.class);
 
         // Define necessary instances
         stringWriter = new StringWriter();
         writer = new PrintWriter(stringWriter);
 
         // Define what happens when mocked method is called
-        sql_queries.when(() -> SQL_queries.checkUserSession(any(), any())).thenCallRealMethod();
-        sql_queries.when(() -> SQL_queries.getRoleForUser(any())).thenCallRealMethod();
-        sql_queries.when(() -> SQL_queries.executeStatement(any(), any(), any())).thenReturn(resultSet);
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
+        sql_queries.when(() -> SQLQueries.checkUserSession(any(), any())).thenCallRealMethod();
+        sql_queries.when(() -> SQLQueries.getRoleForUser(any())).thenCallRealMethod();
+        sql_queries.when(() -> SQLQueries.executeStatement(any(), any(), any())).thenReturn(resultSet);
+        sql_queries.when(() -> SQLQueries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         when(response.getWriter()).thenReturn(writer);
 
@@ -89,8 +89,8 @@ class CreateSGLServletTest {
 
     @Test
     void doPostForRoleAdmin() throws ServletException, IOException {
-        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(false);
-        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
+        sql_queries.when(() -> SQLQueries.isEmailUsed(any())).thenReturn(false);
+        sql_queries.when(() -> SQLQueries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
                         anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
                 .thenCallRealMethod();
 
@@ -121,7 +121,7 @@ class CreateSGLServletTest {
 
     @Test
     void doPostEmailAlreadyUsed() throws IOException {
-        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(true);
+        sql_queries.when(() -> SQLQueries.isEmailUsed(any())).thenReturn(true);
 
         sglServlet.doPost(request, response);
 
@@ -131,7 +131,7 @@ class CreateSGLServletTest {
 
     @Test
     void doPostRegistrationFails() throws IOException {
-        sql_queries.when(() -> SQL_queries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
+        sql_queries.when(() -> SQLQueries.userRegister(anyString(), anyString(), anyString(), anyString(), anyInt(),
                         anyString(), anyString(), anyString(), anyInt(), anyString(), anyString(), anyString(), anyString()))
                 .thenReturn(0);
 

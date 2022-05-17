@@ -1,6 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import dhbw.mwi.Auslandsemesterportal2016.rest.LoginServlet;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ class LoginServletTest {
         HttpServletResponse response = mock(HttpServletResponse.class);
 
         // Initialization of necessary mock objects for mocking static methods
-        MockedStatic<SQL_queries> sqlMock = Mockito.mockStatic(SQL_queries.class);
+        MockedStatic<SQLQueries> sqlMock = Mockito.mockStatic(SQLQueries.class);
 
         // Initialization of necessary instances
         StringWriter stringWriter = new StringWriter();
@@ -42,8 +42,8 @@ class LoginServletTest {
         LoginServlet loginServlet = new LoginServlet();
 
         // Define what happens when mocked method is called
-        sqlMock.when(() -> SQL_queries.getSalt(TestEnum.TESTEMAIL.toString())).thenReturn(salt);
-        sqlMock.when(() -> SQL_queries.userLogin(TestEnum.TESTEMAIL.toString(), salt, TestEnum.TESTPW.toString()))
+        sqlMock.when(() -> SQLQueries.getSalt(TestEnum.TESTEMAIL.toString())).thenReturn(salt);
+        sqlMock.when(() -> SQLQueries.userLogin(TestEnum.TESTEMAIL.toString(), salt, TestEnum.TESTPW.toString()))
                 .thenReturn(new String[] { "1", TestEnum.TESTMATRNR.toString(), TestEnum.TESTMATRNR.toString(),
                         TestEnum.TESTROLLEINT.toString(), accessToken });
 

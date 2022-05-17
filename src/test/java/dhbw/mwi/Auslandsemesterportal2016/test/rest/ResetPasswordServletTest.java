@@ -1,7 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
@@ -35,7 +35,7 @@ class ResetPasswordServletTest {
     MockedStatic<DB> db;
     MockedStatic<Util> util;
     MockedStatic<Transport> transport;
-    MockedStatic<SQL_queries> sql_queries;
+    MockedStatic<SQLQueries> sql_queries;
 
     // Initialization of necessary instances
     StringWriter stringWriter = new StringWriter();
@@ -47,10 +47,10 @@ class ResetPasswordServletTest {
         db = Mockito.mockStatic(DB.class);
         util = Mockito.mockStatic(Util.class);
         transport = Mockito.mockStatic(Transport.class);
-        sql_queries = Mockito.mockStatic(SQL_queries.class);
+        sql_queries = Mockito.mockStatic(SQLQueries.class);
 
         // Define what happens when mocked method is called
-        sql_queries.when(() -> SQL_queries.forgetPassword(any())).thenCallRealMethod();
+        sql_queries.when(() -> SQLQueries.forgetPassword(any())).thenCallRealMethod();
 
         util.when(() -> Util.getEmailMessage(any(), any())).thenReturn(message);
 
@@ -69,7 +69,7 @@ class ResetPasswordServletTest {
 
     @Test
     void doPost() throws IOException {
-        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(true);
+        sql_queries.when(() -> SQLQueries.isEmailUsed(any())).thenReturn(true);
         // call protected doPost()-Method of RegisterServlet.class
         new ResetPasswordServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -85,7 +85,7 @@ class ResetPasswordServletTest {
 
     @Test
     void doPostEmailUnused() {
-        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(false);
+        sql_queries.when(() -> SQLQueries.isEmailUsed(any())).thenReturn(false);
 
         new ResetPasswordServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response) {

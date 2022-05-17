@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
@@ -35,7 +35,7 @@ public class ModelProcessListServlet extends HttpServlet {
 				String query = "SELECT step FROM processModel WHERE model = ?";
 				String[] args = new String[] { model };
 				String[] types = new String[] { "String" };
-				ResultSet rs = SQL_queries.executeStatement(query, args, types);
+				ResultSet rs = SQLQueries.executeStatement(query, args, types);
 				try {
 					while (rs.next()) {
 						toClient.print(rs.getString("step") + ";");

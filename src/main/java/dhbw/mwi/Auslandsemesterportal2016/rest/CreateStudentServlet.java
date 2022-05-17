@@ -1,6 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
@@ -30,7 +30,7 @@ public class CreateStudentServlet extends HttpServlet {
 
             int role = 3;
 
-            if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
+            if (SQLQueries.isEmailUsed(request.getParameter("email"))) {
                 out.print(ErrorEnum.MAILERROR);
                 out.flush();
             } else {
@@ -46,7 +46,7 @@ public class CreateStudentServlet extends HttpServlet {
                     String aa = "--";
                     // Verbindung zur DB um neuen Nutzer zu speichern
                     // Hier fehlt noch die Übergabe des Studiengangs
-                    int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
+                    int rsupd = SQLQueries.userRegister(request.getParameter("vorname"),
                             request.getParameter("nachname"), pw, salt, role, request.getParameter("email"),
                             request.getParameter("studgang"), request.getParameter("kurs"),
                             Integer.parseInt(request.getParameter("matnr")), aa, aa, request.getParameter("standort"),

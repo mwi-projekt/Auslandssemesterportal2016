@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
@@ -38,19 +38,19 @@ public class ModelProcessSaveServlet extends HttpServlet {
 				String query = "SELECT * FROM processModel WHERE model = ? AND step = ?";
 				String[] args = new String[] { model, step };
 				String[] types = new String[] { "String", "String" };
-				ResultSet rs = SQL_queries.executeStatement(query, args, types);
+				ResultSet rs = SQLQueries.executeStatement(query, args, types);
 				try {
 					if (rs.next()) {
 						String id = rs.getString("id");
 						query = "UPDATE processModel SET model = ?, step = ?, json = ?, stepNumber = ? WHERE id = ?";
 						args = new String[] { model, step, json, stepnumber, id };
 						types = new String[] { "String", "String", "String", "int", "int" };
-						SQL_queries.executeUpdate(query, args, types);
+						SQLQueries.executeUpdate(query, args, types);
 					} else {
 						query = "INSERT INTO processModel (model, step, json, stepNumber) VALUES " + "(?,?,?,?)";
 						args = new String[] { model, step, json, stepnumber };
 						types = new String[] { "String", "String", "String", "int" };
-						SQL_queries.executeUpdate(query, args, types);
+						SQLQueries.executeUpdate(query, args, types);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
@@ -34,7 +34,7 @@ public class CreateSGLServlet extends HttpServlet {
 			// Rolle SGL Eintragen
 			int role = 4;
 
-			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
+			if (SQLQueries.isEmailUsed(request.getParameter("email"))) {
 				out.print(ErrorEnum.MAILERROR);
 				out.flush();
 				out.close();
@@ -51,7 +51,7 @@ public class CreateSGLServlet extends HttpServlet {
 					String help = "--";
 					// Verbindung zur DB um neuen Nutzer zu speichern
 					// Hier fehlt noch die Übergabe des Studiengangs
-					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
+					int rsupd = SQLQueries.userRegister(request.getParameter("vorname"),
 							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"),
 							request.getParameter("studgang"), request.getParameter("kurs"), -1, help, help,
 							request.getParameter("standort"), "1");

@@ -1,6 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
@@ -33,7 +33,7 @@ class RegisterServletTest {
 
     // Initialization of necessary mock objects for mocking static methods
     MockedStatic<Util> util;
-    MockedStatic<SQL_queries> sql_queries;
+    MockedStatic<SQLQueries> sql_queries;
     MockedStatic<Transport> transport;
 
     // Initialization of necessary instances
@@ -44,13 +44,13 @@ class RegisterServletTest {
     public void init() throws IOException {
         // Define necessary mock objects for mocking static methods
         util = Mockito.mockStatic(Util.class);
-        sql_queries = Mockito.mockStatic(SQL_queries.class);
+        sql_queries = Mockito.mockStatic(SQLQueries.class);
         transport = Mockito.mockStatic(Transport.class);
 
         // Define what happens when mocked method is called
-        sql_queries.when(() -> SQL_queries.userRegister(any(), any(), any(), any(), anyInt(), any(), any(), any(),
+        sql_queries.when(() -> SQLQueries.userRegister(any(), any(), any(), any(), anyInt(), any(), any(), any(),
                 anyInt(), any(), any(), any(), any())).thenCallRealMethod();
-        sql_queries.when(() -> SQL_queries.executeUpdate(any(), any(), any())).thenReturn(1);
+        sql_queries.when(() -> SQLQueries.executeUpdate(any(), any(), any())).thenReturn(1);
 
         util.when(() -> Util.getEmailMessage(any(), any())).thenReturn(message);
         util.when(Util::generateSalt).thenCallRealMethod();
@@ -82,8 +82,8 @@ class RegisterServletTest {
 
     @Test
     void doPost() throws IOException {
-        sql_queries.when(() -> SQL_queries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenReturn(false);
-        sql_queries.when(() -> SQL_queries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
+        sql_queries.when(() -> SQLQueries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenReturn(false);
+        sql_queries.when(() -> SQLQueries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
                 .thenReturn(false);
 
         // call protected doPost()-Method of RegisterServlet.class
@@ -101,7 +101,7 @@ class RegisterServletTest {
 
     @Test
     void doPostEmailAlreadyUsed() throws IOException {
-        sql_queries.when(() -> SQL_queries.isEmailUsed(any())).thenReturn(true);
+        sql_queries.when(() -> SQLQueries.isEmailUsed(any())).thenReturn(true);
 
         new RegisterServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -116,7 +116,7 @@ class RegisterServletTest {
 
     @Test
     void doPostMatrikelnummerAlreadyUsed() throws IOException {
-        sql_queries.when(() -> SQL_queries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
+        sql_queries.when(() -> SQLQueries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
                 .thenReturn(true);
 
         new RegisterServlet() {

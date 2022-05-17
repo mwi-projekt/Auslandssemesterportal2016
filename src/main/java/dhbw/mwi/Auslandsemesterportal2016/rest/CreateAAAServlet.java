@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
@@ -32,7 +32,7 @@ public class CreateAAAServlet extends HttpServlet {
 		} else {
 			int role = 2;
 
-			if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
+			if (SQLQueries.isEmailUsed(request.getParameter("email"))) {
 				out.print(ErrorEnum.MAILERROR);
 				out.flush();
 				out.close();
@@ -48,7 +48,7 @@ public class CreateAAAServlet extends HttpServlet {
 					String pw = Util.hashSha256(Util.hashSha256(id.toString()) + salt);
 					String aa = "--";
 					// Verbindung zur DB um neuen Nutzer zu speichern
-					int rsupd = SQL_queries.userRegister(request.getParameter("vorname"),
+					int rsupd = SQLQueries.userRegister(request.getParameter("vorname"),
 							request.getParameter("nachname"), pw, salt, role, request.getParameter("email"), aa, aa, -1,
 							request.getParameter("tel"), request.getParameter("mobil"), aa, "1");
 

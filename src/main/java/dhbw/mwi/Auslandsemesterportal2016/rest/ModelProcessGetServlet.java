@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 
@@ -26,7 +26,7 @@ public class ModelProcessGetServlet extends HttpServlet {
 		String step = request.getParameter("step");
 
 		if (model != null && step != null) {
-			ResultSet rs = SQL_queries.getJson(step, model);
+			ResultSet rs = SQLQueries.getJson(step, model);
 
 			try {
 				if (rs.next()) {

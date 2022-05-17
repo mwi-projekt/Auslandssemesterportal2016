@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
@@ -31,7 +31,7 @@ public class Logout extends HttpServlet {
 					c.setMaxAge(0);
 					response.addCookie(c);
 				} else if (c.getName().equals("sessionID")) {
-					SQL_queries.userLogout(c.getValue());
+					SQLQueries.userLogout(c.getValue());
 					c.setValue("");
 					c.setMaxAge(0);
 					response.addCookie(c);

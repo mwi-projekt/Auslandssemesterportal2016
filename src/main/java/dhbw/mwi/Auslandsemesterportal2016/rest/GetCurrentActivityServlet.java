@@ -14,7 +14,7 @@ import org.camunda.bpm.engine.RuntimeService;
 
 import com.google.gson.JsonObject;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
@@ -32,7 +32,7 @@ public class GetCurrentActivityServlet extends HttpServlet {
 		} else {
 			String instanceID = request.getParameter("instance_id");
 			String uni = request.getParameter("uni");
-			String model = SQL_queries.getmodel(uni);
+			String model = SQLQueries.getmodel(uni);
 			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
 			RuntimeService runtime = engine.getRuntimeService();
 

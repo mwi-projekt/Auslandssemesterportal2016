@@ -12,7 +12,7 @@ import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.User;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
@@ -29,7 +29,7 @@ public class ChangePriorityServlet extends HttpServlet {
 			int matnr = Integer.parseInt(user.matrikelnummer);
 			String instance_id = request.getParameter("instance");
 			int newPrio = Integer.parseInt(request.getParameter("prio"));
-			ArrayList<String[]> instances = SQL_queries.getUserInstances(matnr);
+			ArrayList<String[]> instances = SQLQueries.getUserInstances(matnr);
 			String found = null;
 			int oldPrio = 0;
 			for (int i = 0; i < instances.size(); i++) {
@@ -58,7 +58,7 @@ public class ChangePriorityServlet extends HttpServlet {
 		String query_ = "UPDATE MapUserInstanz SET prioritaet = ? WHERE processInstance = ?";
 		String[] params_ = new String[]{"" + prio, id};
 		String[] types_ = new String[]{"int", "String"};
-		return SQL_queries.executeUpdate(query_, params_, types_);
+		return SQLQueries.executeUpdate(query_, params_, types_);
 	}
 
 }

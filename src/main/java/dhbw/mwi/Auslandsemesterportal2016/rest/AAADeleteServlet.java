@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.*;
@@ -33,7 +33,7 @@ public class AAADeleteServlet extends HttpServlet {
 				String query = "DELETE FROM user WHERE email = ?";
 				String[] args = new String[] { mail };
 				String[] types = new String[] { "String" };
-				int result = SQL_queries.executeUpdate(query, args, types);
+				int result = SQLQueries.executeUpdate(query, args, types);
 
 				if (result == 1) {
 					toClient.println(SuccessEnum.USERDELETE.toString());

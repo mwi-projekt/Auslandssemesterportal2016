@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-public class SQL_queries {
+public class SQLQueries {
 
     // Ersetzt durch executeStatement
     /*

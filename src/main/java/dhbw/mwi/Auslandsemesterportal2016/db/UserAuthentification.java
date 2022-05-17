@@ -22,8 +22,8 @@ public class UserAuthentification {
 			// check if session-id was found in cookies
 			if (sessionId != null && mail != null) {
 				// check if a sessionId matching to the mail was found in DB
-				if (SQL_queries.checkUserSession(sessionId, mail)) {
-					rolle = SQL_queries.getRoleForUser(mail);
+				if (SQLQueries.checkUserSession(sessionId, mail)) {
+					rolle = SQLQueries.getRoleForUser(mail);
 				}
 			}
 			return rolle;
@@ -49,8 +49,8 @@ public class UserAuthentification {
 			// check if session-id was found in cookies
 			if (sessionId != null && mail != null) {
 				// check if a sessionId matching to the mail was found in DB
-				if (SQL_queries.checkUserSession(sessionId, mail)) {
-					user = SQL_queries.getUserInfo(mail);
+				if (SQLQueries.checkUserSession(sessionId, mail)) {
+					user = SQLQueries.getUserInfo(mail);
 					return user;
 				}
 			}

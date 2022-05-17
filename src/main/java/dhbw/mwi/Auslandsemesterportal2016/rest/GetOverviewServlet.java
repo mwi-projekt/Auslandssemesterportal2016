@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
@@ -30,7 +30,7 @@ public class GetOverviewServlet extends HttpServlet {
 			response.setCharacterEncoding("UTF-8");
 			String definition = request.getParameter("definition"); // Process Definition Key aus Camunda
 
-			String activityString = SQL_queries.getAllActivities(definition);
+			String activityString = SQLQueries.getAllActivities(definition);
 			if (activityString.length() == 0) {
 				response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 				return;
@@ -41,7 +41,7 @@ public class GetOverviewServlet extends HttpServlet {
 			JsonArray arr = new JsonArray();
 
 			for (int i = 0; i < activities.length; i++) {
-				ResultSet rs = SQL_queries.getJson(activities[i], definition);
+				ResultSet rs = SQLQueries.getJson(activities[i], definition);
 				try {
 					rs.next();
 					JsonObject line = new JsonObject();

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.Config;
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
@@ -39,18 +39,18 @@ public class UserUpdateServlet extends HttpServlet {
                     if (role.equals("2")) {
                         String tel = request.getParameter("tel");
                         String mobil = request.getParameter("mobil");
-                        result = SQL_queries.updateMA(vorname, nachname, mail, tel, mobil);
+                        result = SQLQueries.updateMA(vorname, nachname, mail, tel, mobil);
                     } else if (role.equals("4")) {
                         String standort = request.getParameter("standort");
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");
-                        result = SQL_queries.updateStud(vorname, nachname, mail, standort, studgang, kurs);
+                        result = SQLQueries.updateStud(vorname, nachname, mail, standort, studgang, kurs);
                     } else {
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");
                         String matnr = request.getParameter("matnr");
                         String standort = request.getParameter("standort");
-                        result = SQL_queries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, standort);
+                        result = SQLQueries.updateUser(vorname, nachname, mail, studgang, kurs, matnr, standort);
                     }
                     if (result == 1) {
                         toClient.println(SuccessEnum.UPDATEUSER);
@@ -62,22 +62,22 @@ public class UserUpdateServlet extends HttpServlet {
                     if (role.equals("2")) {
                         String tel = request.getParameter("tel");
                         String mobil = request.getParameter("mobil");
-                        result = SQL_queries.updateMA(vorname, nachname, oldmail, tel, mobil, mail);
+                        result = SQLQueries.updateMA(vorname, nachname, oldmail, tel, mobil, mail);
                     } else if (role.equals("4")) {
                         String standort = request.getParameter("standort");
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");
-                        result = SQL_queries.updateStud(vorname, nachname, mail, standort, studgang, kurs, oldmail);
+                        result = SQLQueries.updateStud(vorname, nachname, mail, standort, studgang, kurs, oldmail);
                     } else {
                         String studgang = request.getParameter("studgang");
                         String kurs = request.getParameter("kurs");
                         String matnr = request.getParameter("matnr");
                         String standort = request.getParameter("standort");
-                        result = SQL_queries.updateUser(vorname, nachname, oldmail, studgang, kurs, matnr, mail,
+                        result = SQLQueries.updateUser(vorname, nachname, oldmail, studgang, kurs, matnr, mail,
                                 standort);
                     }
                     if (result == 1) {
-                        String link = Config.MWI_URL + "/?confirm=" + SQL_queries.deactivateUser(mail);
+                        String link = Config.MWI_URL + "/?confirm=" + SQLQueries.deactivateUser(mail);
                         Message message = Util.getEmailMessage(mail,
                                 "Bestätigen: Geänderte E-Mail-Adresse Auslandssemesterportal");
                         message.setContent("<h2>Hallo"

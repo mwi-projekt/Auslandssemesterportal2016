@@ -14,7 +14,7 @@ import org.camunda.bpm.engine.runtime.ProcessInstance;
 
 import com.google.gson.JsonObject;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
@@ -33,17 +33,17 @@ public class GetInstanceServlet extends HttpServlet {
 			int matnr = Integer.parseInt(request.getParameter("matnr"));
 			String uni = request.getParameter("uni");
 			int prio = Integer.parseInt(request.getParameter("prio"));
-			String model = SQL_queries.getmodel(uni);
+			String model = SQLQueries.getmodel(uni);
 
 			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
 			RuntimeService runtime = engine.getRuntimeService();
 			// Holt instanceId aus DB
-			String instance_id = SQL_queries.getInstanceId(matnr, uni);
+			String instance_id = SQLQueries.getInstanceId(matnr, uni);
 			if (instance_id == "") {
 				// Lege neue Instanz an
 				ProcessInstance instance = runtime.startProcessInstanceByKey(model);
 				instance_id = instance.getId();
-				String[] user = SQL_queries.getUserData(matnr);
+				String[] user = SQLQueries.getUserData(matnr);
 				if (user.length > 0) {
 					runtime.setVariable(instance_id, "bewNachname", user[0]);
 					runtime.setVariable(instance_id, "bewVorname", user[1]);
@@ -55,7 +55,7 @@ public class GetInstanceServlet extends HttpServlet {
 					runtime.setVariable(instance_id, "prioritaet", prio);
 				}
 				runtime.setVariable(instance_id, "uni", uni);
-				SQL_queries.createInstance(instance_id, uni, matnr, prio, 10);
+				SQLQueries.createInstance(instance_id, uni, matnr, prio, 10);
 			}
 
 			JsonObject json = new JsonObject();

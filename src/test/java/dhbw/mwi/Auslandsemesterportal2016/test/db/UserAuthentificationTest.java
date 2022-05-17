@@ -1,6 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.db;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.User;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import org.junit.jupiter.api.AfterEach;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 class UserAuthentificationTest {
 
     private final HttpServletRequest request = mock(HttpServletRequest.class);
-    MockedStatic<SQL_queries> sql_queriesMockedStatic = mockStatic(SQL_queries.class);
+    MockedStatic<SQLQueries> sql_queriesMockedStatic = mockStatic(SQLQueries.class);
 
     @AfterEach
     void tearDown() {
@@ -53,9 +53,9 @@ class UserAuthentificationTest {
         Cookie cookieSessionId = new Cookie("sessionID", "randomString");
         when(request.getCookies()).thenReturn(new Cookie[]{cookieMail, cookieSessionId});
 
-        sql_queriesMockedStatic.when(() -> SQL_queries.checkUserSession(cookieSessionId.getValue(), cookieMail.getValue()))
+        sql_queriesMockedStatic.when(() -> SQLQueries.checkUserSession(cookieSessionId.getValue(), cookieMail.getValue()))
                         .thenReturn(true);
-        sql_queriesMockedStatic.when(() -> SQL_queries.getRoleForUser(cookieMail.getValue())).thenReturn(rolle);
+        sql_queriesMockedStatic.when(() -> SQLQueries.getRoleForUser(cookieMail.getValue())).thenReturn(rolle);
 
         int actualRolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
@@ -91,9 +91,9 @@ class UserAuthentificationTest {
         user.id = 1234;
         user.rolle = 1;
         user.matrikelnummer = "1901901";
-        sql_queriesMockedStatic.when(() -> SQL_queries.checkUserSession(cookieSessionId.getValue(), cookieMail.getValue()))
+        sql_queriesMockedStatic.when(() -> SQLQueries.checkUserSession(cookieSessionId.getValue(), cookieMail.getValue()))
                 .thenReturn(true);
-        sql_queriesMockedStatic.when(() -> SQL_queries.getUserInfo(cookieMail.getValue())).thenReturn(user);
+        sql_queriesMockedStatic.when(() -> SQLQueries.getUserInfo(cookieMail.getValue())).thenReturn(user);
 
         User userInfo = UserAuthentification.getUserInfo(request);
 
