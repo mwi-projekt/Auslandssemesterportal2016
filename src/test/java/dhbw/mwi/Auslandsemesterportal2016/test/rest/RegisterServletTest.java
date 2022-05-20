@@ -60,14 +60,14 @@ class RegisterServletTest {
 
         when(request.getParameter("rolle")).thenReturn(TestEnum.TESTROLLESTRING.toString());
         when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
-        when(request.getParameter("passwort")).thenReturn(TestEnum.TESTPW.toString());
-        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
-        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
-        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUGANG.toString());
+        when(request.getParameter("passwort")).thenReturn(TestEnum.TESTPASSWORT.toString());
+        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVORNAME.toString());
+        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNACHNAME.toString());
+        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUDIENGANG.toString());
         when(request.getParameter("kurs")).thenReturn(TestEnum.TESTKURS.toString());
-        when(request.getParameter("matnr")).thenReturn(TestEnum.TESTMATRNR.toString());
+        when(request.getParameter("matnr")).thenReturn(TestEnum.TESTMATRIKELNUMMER.toString());
         when(request.getParameter("standort")).thenReturn(TestEnum.TESTSTANDORT.toString());
-        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRNR.toString());
+        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRIKELNUMMER.toString());
         when(request.getParameter("tel")).thenReturn(TestEnum.TESTTELNR.toString());
         when(request.getParameter("mobil")).thenReturn(TestEnum.TESTMOBILNR.toString());
     }
@@ -83,7 +83,7 @@ class RegisterServletTest {
     @Test
     void doPost() throws IOException {
         sql_queries.when(() -> SQLQueries.isEmailUsed(TestEnum.TESTEMAIL.toString())).thenReturn(false);
-        sql_queries.when(() -> SQLQueries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
+        sql_queries.when(() -> SQLQueries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRIKELNUMMER.toString())))
                 .thenReturn(false);
 
         // call protected doPost()-Method of RegisterServlet.class
@@ -116,7 +116,7 @@ class RegisterServletTest {
 
     @Test
     void doPostMatrikelnummerAlreadyUsed() throws IOException {
-        sql_queries.when(() -> SQLQueries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRNR.toString())))
+        sql_queries.when(() -> SQLQueries.isMatnrUsed(Integer.parseInt(TestEnum.TESTMATRIKELNUMMER.toString())))
                 .thenReturn(true);
 
         new RegisterServlet() {

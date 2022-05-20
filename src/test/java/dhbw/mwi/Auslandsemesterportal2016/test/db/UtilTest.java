@@ -19,7 +19,7 @@ import java.sql.SQLException;
 
 import static dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum.AAAREGISTR;
 import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.TESTEMAIL;
-import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.TESTPW;
+import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.TESTPASSWORT;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -68,7 +68,7 @@ class UtilTest {
 
     @Test
     void hashSha256() {
-        String result = Util.hashSha256(TESTPW.toString());
+        String result = Util.hashSha256(TESTPASSWORT.toString());
         assertNotNull(result);
     }
 

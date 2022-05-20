@@ -123,7 +123,7 @@ public class SQLQueries {
         return salt;
     }
 
-    public static String createUserSession(int userID) {
+    private static String createUserSession(int userID) {
         String accessToken = Util.generateSalt();
 
         if (userSessionExists(userID)) {
@@ -177,7 +177,7 @@ public class SQLQueries {
         return new String[] { ("" + resultCode), studiengang, matrikelnummer, rolle, accessToken };
     }
 
-    public static boolean userSessionExists(int userID) {
+    private static boolean userSessionExists(int userID) {
         String queryString = "SELECT 1 FROM loginSessions WHERE userID = ?;";
         boolean resultExists = true;
         String[] args = new String[] { "" + userID };
@@ -254,25 +254,27 @@ public class SQLQueries {
     }
 
     // DO NOT USE IN ANY SERVLET. DO NOT GIVE USERIDs TO PUBLIC
-    public static int getUserID(String mail) {
-        String queryString = "SELECT userID FROM user WHERE email = ?;";
-        String[] args = new String[] { mail };
-        String[] types = new String[] { "String" };
-        ResultSet ergebnis = executeStatement(queryString, args, types);
+    // TODO check if needed -> no usages
+//    public static int getUserID(String mail) {
+//        String queryString = "SELECT userID FROM user WHERE email = ?;";
+//        String[] args = new String[] { mail };
+//        String[] types = new String[] { "String" };
+//        ResultSet ergebnis = executeStatement(queryString, args, types);
+//
+//        try {
+//            if (ergebnis.next()) {
+//                return ergebnis.getInt(1);
+//            } else {
+//                return -1;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return -1;
+//        }
+//
+//    }
 
-        try {
-            if (ergebnis.next()) {
-                return ergebnis.getInt(1);
-            } else {
-                return -1;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-
-    }
-
+    // TODO check if signature can be changed to void
     public static int userLogout(String sessionID) {
         String query_ = "DELETE FROM loginSessions WHERE sessionID = ?";
         String[] params_ = new String[] { sessionID };
@@ -340,7 +342,7 @@ public class SQLQueries {
         return executeUpdate(query, args, types);
     }
 
-    public static ResultSet getJson(String step, String model) {
+    public static ResultSet getProcessModelJson(String step, String model) {
         // Gibt JSON-Dokument für die Eingabemaske zurück
         String query = "SELECT json FROM processModel WHERE step = ? AND model = ?;";
         String[] params = new String[] { step, model };
@@ -426,7 +428,7 @@ public class SQLQueries {
         }
     }
 
-    public static String getmodel(String uni) {
+    public static String getModel(String uni) {
         String queryy = "SELECT model FROM cms_auslandsAngeboteInhalt WHERE uniTitel=?";
         String[] args = new String[] { uni };
         String[] types = new String[] { "String" };
@@ -468,6 +470,7 @@ public class SQLQueries {
         String[] types = new String[] { "String" };
         ResultSet result = executeStatement(query, params, types);
         try {
+            // FIXME schmeißt Exception, wenn kein Result
             result.next();
             return result.getInt("max(stepNumber)");
         } catch (Exception e) {

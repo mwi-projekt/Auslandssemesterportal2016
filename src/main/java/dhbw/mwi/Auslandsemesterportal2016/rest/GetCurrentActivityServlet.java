@@ -32,7 +32,7 @@ public class GetCurrentActivityServlet extends HttpServlet {
 		} else {
 			String instanceID = request.getParameter("instance_id");
 			String uni = request.getParameter("uni");
-			String model = SQLQueries.getmodel(uni);
+			String model = SQLQueries.getModel(uni);
 			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
 			RuntimeService runtime = engine.getRuntimeService();
 

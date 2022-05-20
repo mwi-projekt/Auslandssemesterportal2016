@@ -57,7 +57,7 @@ class UserDeleteServletTest {
 
         when(response.getWriter()).thenReturn(writer);
 
-        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRNR.toString());
+        when(request.getParameter("matrikelnummer")).thenReturn(TestEnum.TESTMATRIKELNUMMER.toString());
         when(request.getCookies()).thenReturn(cookies);
 
         when(resultSet.next()).thenReturn(true);

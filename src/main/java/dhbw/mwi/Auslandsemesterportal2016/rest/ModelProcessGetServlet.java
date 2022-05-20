@@ -26,7 +26,7 @@ public class ModelProcessGetServlet extends HttpServlet {
 		String step = request.getParameter("step");
 
 		if (model != null && step != null) {
-			ResultSet rs = SQLQueries.getJson(step, model);
+			ResultSet rs = SQLQueries.getProcessModelJson(step, model);
 
 			try {
 				if (rs.next()) {

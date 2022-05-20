@@ -43,14 +43,14 @@ class LoginServletTest {
 
         // Define what happens when mocked method is called
         sqlMock.when(() -> SQLQueries.getSalt(TestEnum.TESTEMAIL.toString())).thenReturn(salt);
-        sqlMock.when(() -> SQLQueries.userLogin(TestEnum.TESTEMAIL.toString(), salt, TestEnum.TESTPW.toString()))
-                .thenReturn(new String[] { "1", TestEnum.TESTMATRNR.toString(), TestEnum.TESTMATRNR.toString(),
+        sqlMock.when(() -> SQLQueries.userLogin(TestEnum.TESTEMAIL.toString(), salt, TestEnum.TESTPASSWORT.toString()))
+                .thenReturn(new String[] { "1", TestEnum.TESTMATRIKELNUMMER.toString(), TestEnum.TESTMATRIKELNUMMER.toString(),
                         TestEnum.TESTROLLEINT.toString(), accessToken });
 
         when(response.getWriter()).thenReturn(writer);
 
         when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
-        when(request.getParameter("pw")).thenReturn(TestEnum.TESTPW.toString());
+        when(request.getParameter("pw")).thenReturn(TestEnum.TESTPASSWORT.toString());
 
         // run test
         loginServlet.doPost(request, response);
@@ -58,8 +58,8 @@ class LoginServletTest {
         // get the value of stringWriter
         String result = stringWriter.toString();
         assertEquals(result,
-                "{\"resultCode\":\"1\",\"studiengang\":\"" + TestEnum.TESTMATRNR + "\",\"matrikelnummer\":\""
-                        + TestEnum.TESTMATRNR + "\",\"rolle\":\"" + TestEnum.TESTROLLEINT
+                "{\"resultCode\":\"1\",\"studiengang\":\"" + TestEnum.TESTMATRIKELNUMMER + "\",\"matrikelnummer\":\""
+                        + TestEnum.TESTMATRIKELNUMMER + "\",\"rolle\":\"" + TestEnum.TESTROLLEINT
                         + "\"}");
 
         // Close mock objects for mocking static methods

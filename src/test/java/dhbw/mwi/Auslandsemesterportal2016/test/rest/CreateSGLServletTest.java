@@ -65,9 +65,9 @@ class CreateSGLServletTest {
 
         when(request.getCookies()).thenReturn(cookies);
         when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
-        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
-        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
-        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUGANG.toString());
+        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVORNAME.toString());
+        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNACHNAME.toString());
+        when(request.getParameter("studgang")).thenReturn(TestEnum.TESTSTUDIENGANG.toString());
         when(request.getParameter("kurs")).thenReturn(TestEnum.TESTKURS.toString());
         when(request.getParameter("standort")).thenReturn(TestEnum.TESTSTANDORT.toString());
         when(request.getRequestDispatcher(anyString())).thenReturn(requestDispatcher);

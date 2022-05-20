@@ -41,7 +41,7 @@ public class GetOverviewServlet extends HttpServlet {
 			JsonArray arr = new JsonArray();
 
 			for (int i = 0; i < activities.length; i++) {
-				ResultSet rs = SQLQueries.getJson(activities[i], definition);
+				ResultSet rs = SQLQueries.getProcessModelJson(activities[i], definition);
 				try {
 					rs.next();
 					JsonObject line = new JsonObject();

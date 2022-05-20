@@ -66,8 +66,8 @@ class CreateAAAServletTest {
 
         when(request.getCookies()).thenReturn(cookies);
         when(request.getParameter("email")).thenReturn(TestEnum.TESTEMAIL.toString());
-        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVNAME.toString());
-        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNNAME.toString());
+        when(request.getParameter("vorname")).thenReturn(TestEnum.TESTVORNAME.toString());
+        when(request.getParameter("nachname")).thenReturn(TestEnum.TESTNACHNAME.toString());
         when(request.getParameter("tel")).thenReturn(TestEnum.TESTTELNR.toString());
         when(request.getParameter("mobil")).thenReturn(TestEnum.TESTMOBILNR.toString());
 
