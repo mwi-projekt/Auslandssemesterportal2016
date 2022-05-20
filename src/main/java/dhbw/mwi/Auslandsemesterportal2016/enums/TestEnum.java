@@ -1,9 +1,9 @@
 package dhbw.mwi.Auslandsemesterportal2016.enums;
 
 public enum TestEnum {
-    TESTEMAIL("testusermwi@dhbw.de"), TESTMATRNR("1234567"), TESTROLLESTRING("Studierender"), TESTROLLEINT("1"),
-    TESTPW("Test1234"), TESTSTUGANG("Wirtschaftsiformatik"), TESTKURS("WWI18B1"), TESTTELNR("07234512345"),
-    TESTMOBILNR("014773698521"), TESTSTANDORT("Karlsruhe"), TESTVNAME("Test"), TESTNNAME("Admin"),
+    TESTEMAIL("testusermwi@dhbw.de"), TESTMATRIKELNUMMER("1234567"), TESTROLLESTRING("Studierender"), TESTROLLEINT("1"),
+    TESTPASSWORT("Test1234"), TESTSTUDIENGANG("Wirtschaftsiformatik"), TESTKURS("WWI18B1"), TESTTELNR("07234512345"),
+    TESTMOBILNR("014773698521"), TESTSTANDORT("Karlsruhe"), TESTVORNAME("Test"), TESTNACHNAME("Admin"),
     TESTSESSIONID("sessionIDs1e5f2ge8gvs694g8vedsg"), TESTINSTANCEID("instanceIDs1e5f2ge8gvs694g8vedsg"),
     TESTKEYSTRING(
             "gdprCompliance|uni1|uni2|uni3|zeitraum|bewVorname|bewNachname|bewTelefon|bewStrasse|bewPLZ|bewOrt|bewGeburtsdatum|bewLand|aktuelleUni|bewStudiengang|bewSemester|matrikelnummer|bewEmail|muttersprache|bewErasmus|bewLA|bewSGL|untName|untStrasse|untPLZ|untOrt|untLand|untAnsprechpartner|untEMail|englischNote"),

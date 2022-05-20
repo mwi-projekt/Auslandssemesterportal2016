@@ -24,7 +24,7 @@ public class TaskDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request, response);
 
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 2) {
 			response.sendError(401, "Rolle: " + rolle);

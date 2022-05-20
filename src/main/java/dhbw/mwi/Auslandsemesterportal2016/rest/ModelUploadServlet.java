@@ -16,7 +16,7 @@ import javax.servlet.http.Part;
 
 import dhbw.mwi.Auslandsemesterportal2016.Config;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
 @WebServlet(name = "ModelUploadServlet", urlPatterns = { "/model/upload" })
 @MultipartConfig(maxFileSize = 16177215) // 16MB
@@ -26,7 +26,7 @@ public class ModelUploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request,response);
 
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 1) {
 			response.sendError(401);

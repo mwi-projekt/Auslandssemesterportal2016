@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 
@@ -21,7 +21,7 @@ public class UserDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request, response);
 
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 1) {
 			response.sendError(401, "Rolle: " + rolle);
@@ -33,7 +33,7 @@ public class UserDeleteServlet extends HttpServlet {
 				String query = "DELETE FROM user WHERE matrikelnummer = ?";
 				String[] args = new String[] { matrikelnummer };
 				String[] types = new String[] { "int" };
-				int result = SQL_queries.executeUpdate(query, args, types);
+				int result = SQLQueries.executeUpdate(query, args, types);
 
 				if (result == 1) {
 					toClient.println(SuccessEnum.USERDELETE.toString());

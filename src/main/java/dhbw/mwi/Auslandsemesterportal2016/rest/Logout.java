@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
 @WebServlet(urlPatterns = { "/logout" })
 public class Logout extends HttpServlet {
@@ -20,7 +20,7 @@ public class Logout extends HttpServlet {
 		Util.addResponseHeaders(request,response);
 
 		// ONLY VALID SESSIONS CAN LOGOUT
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle > 1) {
 			Cookie[] cookies = request.getCookies();
@@ -31,7 +31,7 @@ public class Logout extends HttpServlet {
 					c.setMaxAge(0);
 					response.addCookie(c);
 				} else if (c.getName().equals("sessionID")) {
-					SQL_queries.userLogout(c.getValue());
+					SQLQueries.userLogout(c.getValue());
 					c.setValue("");
 					c.setMaxAge(0);
 					response.addCookie(c);
