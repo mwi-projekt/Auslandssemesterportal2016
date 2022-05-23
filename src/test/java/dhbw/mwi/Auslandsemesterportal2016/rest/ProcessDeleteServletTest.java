@@ -5,7 +5,6 @@ import dhbw.mwi.Auslandsemesterportal2016.db.ProcessService;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.assertions.ProcessEngineTests;
@@ -42,14 +41,12 @@ class ProcessDeleteServletTest {
     private MockedStatic<UserAuthentification> userAuthentificationMockedStatic;
     private StringWriter writer;
     private MockedStatic<ProcessService> processServiceMockedStatic;
-    private RuntimeService runtimeService;
 
     @BeforeEach
     void setUp() throws IOException {
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
         userAuthentificationMockedStatic = mockStatic(UserAuthentification.class);
-        runtimeService = processEngine.getRuntimeService();
         processServiceMockedStatic = mockStatic(ProcessService.class);
 
         userAuthentificationMockedStatic.when(() -> isUserAuthentifiedByCookie(request))
@@ -62,7 +59,6 @@ class ProcessDeleteServletTest {
     @AfterEach
     void tearDown() throws IOException {
         userAuthentificationMockedStatic.close();
-        processEngine.close();
         processServiceMockedStatic.close();
         writer.close();
     }
@@ -94,7 +90,6 @@ class ProcessDeleteServletTest {
         String result = writer.toString().trim();
         assertEquals(ErrorEnum.PARAMMISSING.toString(), result);
         verify(response, times(1)).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-
     }
 
     @Test
@@ -117,15 +112,11 @@ class ProcessDeleteServletTest {
 
     @Test
     void doGetDeleteProcess() throws IOException, SQLException {
-        ProcessInstance processInstance = runtimeService //
-                .startProcessInstanceByKey("standard");
-
-        ProcessEngineTests.assertThat(processInstance).isStarted();
-
-
         when(request.getParameter("matrikelnummer")).thenReturn(TESTMATRIKELNUMMER.toString());
         when(request.getParameter("uni")).thenReturn(TESTSTANDORT.toString());
 
+        ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey("standard");
+        ProcessEngineTests.assertThat(processInstance).isStarted();
         processServiceMockedStatic.when(() -> getProcessId(TESTMATRIKELNUMMER.toString(), TESTSTANDORT.toString()))
                 .thenReturn("anyId");
 
@@ -133,17 +124,18 @@ class ProcessDeleteServletTest {
         Connection connection = mock(Connection.class);
         dbMockedStatic.when(DB::getInstance).thenReturn(connection);
 
-
         Statement statement = mock(Statement.class);
         when(connection.createStatement()).thenReturn(statement);
         when(statement.executeUpdate(anyString())).thenReturn(1);
 
+        // when
         new ProcessDeleteServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
                 doGet(request, response);
             }
         }.callProtectedMethod(request, response);
 
+        // then
         String result = writer.toString().trim();
         assertEquals("anyId", result);
         String expectedStatement1 = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + TESTMATRIKELNUMMER

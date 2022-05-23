@@ -1,21 +1,18 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
+import dhbw.mwi.Auslandsemesterportal2016.db.User;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.RuntimeService;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngines;
-import org.camunda.bpm.engine.RuntimeService;
-
-import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
-import dhbw.mwi.Auslandsemesterportal2016.db.User;
-import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
+import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(urlPatterns = { "/changePriority" })
 public class ChangePriorityServlet extends HttpServlet {
