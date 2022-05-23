@@ -7,6 +7,7 @@ import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.assertions.ProcessEngineTests;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.AfterEach;
@@ -32,6 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(ProcessEngineExtension.class)
+@Deployment(resources = {"standard.bpmn"})
 class ProcessDeleteServletTest {
 
     public ProcessEngine processEngine;
@@ -121,8 +123,6 @@ class ProcessDeleteServletTest {
         ProcessEngineTests.assertThat(processInstance).isStarted();
 
 
-
-
         when(request.getParameter("matrikelnummer")).thenReturn(TESTMATRIKELNUMMER.toString());
         when(request.getParameter("uni")).thenReturn(TESTSTANDORT.toString());
 
@@ -133,28 +133,24 @@ class ProcessDeleteServletTest {
         Connection connection = mock(Connection.class);
         dbMockedStatic.when(DB::getInstance).thenReturn(connection);
 
-//        runtimeService.startProcessInstanceByKey("anyId");
 
         Statement statement = mock(Statement.class);
         when(connection.createStatement()).thenReturn(statement);
         when(statement.executeUpdate(anyString())).thenReturn(1);
 
-//        new ProcessDeleteServlet() {
-//            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//                doGet(request, response);
-//            }
-//        }.callProtectedMethod(request, response);
+        new ProcessDeleteServlet() {
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
+                doGet(request, response);
+            }
+        }.callProtectedMethod(request, response);
 
-//        String result = writer.toString().trim();
-//        assertEquals("anyId", result);
-//        verify(processEngine, times(1)).getRuntimeService();
-//        verify(runtimeService, times(1))
-//                .deleteProcessInstance("anyId", "Bewerbung wurde von Studenten beendet");
-//        String expectedStatement1 = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + TESTMATRIKELNUMMER
-//                + "' AND uniName = '" + TESTSTANDORT + "' ";
-//        String expectedStatement2 = "DELETE FROM MapUserInstanz WHERE matrikelnummer = '" + TESTMATRIKELNUMMER
-//                + "' AND uni = '" + TESTSTANDORT + "' ";
-//        verify(statement, times(1)).executeUpdate(expectedStatement1);
-//        verify(statement, times(1)).executeUpdate(expectedStatement2);
+        String result = writer.toString().trim();
+        assertEquals("anyId", result);
+        String expectedStatement1 = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + TESTMATRIKELNUMMER
+                + "' AND uniName = '" + TESTSTANDORT + "' ";
+        String expectedStatement2 = "DELETE FROM MapUserInstanz WHERE matrikelnummer = '" + TESTMATRIKELNUMMER
+                + "' AND uni = '" + TESTSTANDORT + "' ";
+        verify(statement, times(1)).executeUpdate(expectedStatement1);
+        verify(statement, times(1)).executeUpdate(expectedStatement2);
     }
 }
