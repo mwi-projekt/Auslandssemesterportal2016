@@ -50,7 +50,7 @@ public class TaskDeleteServlet extends HttpServlet {
 
 				} else {
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					toClient.println(ErrorEnum.PARAMMISSING.toString());
+					toClient.println(ErrorEnum.PARAMMISSING);
 				}
 			}
 		}
