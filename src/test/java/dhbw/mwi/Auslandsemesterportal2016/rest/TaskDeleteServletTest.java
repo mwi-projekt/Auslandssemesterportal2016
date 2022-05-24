@@ -3,9 +3,7 @@ package dhbw.mwi.Auslandsemesterportal2016.rest;
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 import dhbw.mwi.Auslandsemesterportal2016.db.ProcessService;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
-import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
-import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
@@ -14,23 +12,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockedStatic;
-import org.mockito.Spy;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import static dhbw.mwi.Auslandsemesterportal2016.db.ProcessService.*;
-import static dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification.*;
-import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.*;
-import static javax.servlet.http.HttpServletResponse.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dhbw.mwi.Auslandsemesterportal2016.db.ProcessService.getProcessId;
+import static dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification.isUserAuthentifiedByCookie;
+import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.TESTMATRIKELNUMMER;
+import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.TESTSTANDORT;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(ProcessEngineExtension.class)
@@ -45,7 +40,6 @@ class TaskDeleteServletTest {
     private MockedStatic<DB> dbMockedStatic;
     private MockedStatic<UserAuthentification> userAuthentification;
     private MockedStatic<ProcessService> processServiceMockedStatic;
-    private MockedStatic<Util> utilMockedStatic;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -118,7 +112,21 @@ class TaskDeleteServletTest {
     }
 
     @Test
-    void doPostDeleteTask() {
-        fail();
+    void doPostDeleteTask() throws IOException {
+        when(request.getParameter("uni")).thenReturn(TESTSTANDORT.toString());
+        processServiceMockedStatic.when(() -> getProcessId(TESTMATRIKELNUMMER.toString(), TESTSTANDORT.toString()))
+                .thenReturn("standard");
+
+        processEngine.getRuntimeService().startProcessInstanceByKey("standard");
+
+        new TaskDeleteServlet() {
+            public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
+                doPost(request, response);
+            }
+        }.callProtectedMethod(request, response);
+
+        assertEquals("", writer.toString().trim());
+        verify(response, times(0)).sendError(anyInt());
+        verify(response, times(0)).sendError(anyInt(), anyString());
     }
 }
