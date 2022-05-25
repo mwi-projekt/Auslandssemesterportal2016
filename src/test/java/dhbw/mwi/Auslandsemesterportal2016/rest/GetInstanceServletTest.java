@@ -25,7 +25,7 @@ import static dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries.*;
 import static dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification.isUserAuthentifiedByCookie;
 import static dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum.PARAMMISSING;
 import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.*;
-import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
@@ -203,6 +203,6 @@ class GetInstanceServletTest {
             }
         }.callProtectedMethod(request, response);
 
-        verify(response, times(1)).sendError(SC_INTERNAL_SERVER_ERROR, PARAMMISSING.toString());
+        verify(response, times(1)).sendError(SC_BAD_REQUEST, PARAMMISSING.toString());
     }
 }
