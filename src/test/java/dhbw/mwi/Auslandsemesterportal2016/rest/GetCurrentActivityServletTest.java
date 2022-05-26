@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(ProcessEngineExtension.class)
-@Deployment(resources = {"standard.bpmn", "schottland.bpmn"})
+@Deployment(resources = {"standard.bpmn"})
 class GetCurrentActivityServletTest {
 
     private ProcessEngine processEngine;
