@@ -68,5 +68,8 @@ let faqComponent = {
             });
         },
     },
+    mounted: function () {
+        this.expandFAQ ()
+    },
 }
 export {faqComponent};
