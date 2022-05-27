@@ -67,9 +67,6 @@ let faqComponent = {
                 $(this).children('.weg').show();
             });
         },
-    },
-    mounted: function () {
-        this.expandFAQ ()
-    },
+    }
 }
 export {faqComponent};
