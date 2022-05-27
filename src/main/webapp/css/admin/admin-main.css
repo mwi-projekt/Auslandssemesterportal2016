@@ -28,3 +28,7 @@
 .right-float {
     float: right;
 }
+
+#centeredText {
+    text-align: center;
+}
