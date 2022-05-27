@@ -1,3 +1,4 @@
+import {$} from "../js/config";
 
 let faqComponent = {
     template: `
@@ -56,5 +57,19 @@ let faqComponent = {
             answer6_2: "aufgelistet."
             }
     },
+    methods: {
+        expandFAQ: function () {
+            console.log("Test")
+            $('.show').css('cursor', 'pointer');
+            $('.weg').hide();
+            $('.show').on('click', function() {
+                $('.weg').hide();
+                $(this).children('.weg').show();
+            });
+        },
+        mounted() {
+            this.expandFAQ ();
+        }
+    }
 }
 export {faqComponent};
