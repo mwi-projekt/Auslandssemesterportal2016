@@ -1056,3 +1056,8 @@ i {
   bottom: 8px;
   left: 16px;
 }
+
+.burgermenuhideitems{
+  opacity: 0;
+  pointer-events: none;
+}
