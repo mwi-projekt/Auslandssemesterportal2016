@@ -63,7 +63,16 @@ label {
   padding-left: 1.2%;
   font-size: medium;
   width: 100%;
+
 }
+
+#validierungslabel{
+  padding-left: 1.2%;
+  font-size: medium;
+  width: 100%;
+  text-align: center;
+}
+
 #downloadAnmeldeformular {
   font-size: 100%;
 }
