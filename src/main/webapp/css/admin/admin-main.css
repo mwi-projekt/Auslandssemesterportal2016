@@ -32,3 +32,11 @@
 #centeredText {
     text-align: center;
 }
+.processpadding{
+    padding-top: 50px;
+}
+.centeringheader{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
