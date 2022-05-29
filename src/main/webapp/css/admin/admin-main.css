@@ -37,3 +37,7 @@
     flex-direction: column;
     flex-wrap: wrap;
 }
+#paddingboarder{
+    padding-left: 100px;
+    padding-right: 100px;
+}
