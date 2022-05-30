@@ -18,7 +18,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
 
 @WebServlet(name = "createSGLServlet", urlPatterns = { "/createSGL" })
-public class createSGLServlet extends HttpServlet {
+public class CreateSGLServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
