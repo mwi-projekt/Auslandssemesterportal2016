@@ -44,7 +44,10 @@ $(document).ready(function () {
     $('#menu-admin').show();
   } else if (sessionStorage['rolle'] == 3) {
     $('#menu-student').show();
-  } else {
+  } else if(sessionStorage['rolle'] == 4){
+    $('#menu-sgl').show();
+  }
+  else {
     $('#menu-not-logged-in').show();
   }
 });
