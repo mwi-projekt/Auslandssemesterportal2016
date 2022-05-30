@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.Config;
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 
@@ -25,14 +25,14 @@ public class ResetPasswordServlet extends HttpServlet {
 		// NO AUTHENTIFICATION NEEDED
 		PrintWriter out = response.getWriter();
 		String to = request.getParameter("email");
-		if (!(SQL_queries.isEmailUsed(to))) {
+		if (!(SQLQueries.isEmailUsed(to))) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			out.write("No account registered for this email adress");
 			out.close();
 			throw new RuntimeException();
 		}
 
-		String uuid = SQL_queries.forgetPassword(to);
+		String uuid = SQLQueries.forgetPassword(to);
 
 		String link = Config.MWI_URL + "/changePw.html?uuid=" + uuid;
 

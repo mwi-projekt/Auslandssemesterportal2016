@@ -24,7 +24,7 @@ import dhbw.mwi.Auslandsemesterportal2016.Config;
 
 public class Util {
 
-    public static String HashSha256(String input) {
+    public static String hashSha256(String input) {
         String result = null;
 
         if (null == input)
@@ -51,9 +51,7 @@ public class Util {
         byte bytes[] = new byte[32];
         random.nextBytes(bytes);
 
-        String result = DatatypeConverter.printHexBinary(bytes).toLowerCase();
-
-        return result;
+        return DatatypeConverter.printHexBinary(bytes).toLowerCase();
     }
 
     public static Message getEmailMessage(String emailTo, String emailFrom, String subject)

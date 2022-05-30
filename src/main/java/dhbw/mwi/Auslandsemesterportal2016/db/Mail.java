@@ -8,7 +8,10 @@ import javax.mail.Session;
 import dhbw.mwi.Auslandsemesterportal2016.Config;
 
 public class Mail {
-	
+
+	private Mail() {
+	}
+
 	public static Session getInstance() {
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -16,12 +19,12 @@ public class Mail {
 		props.put("mail.smtp.port", "465");
 		props.put("mail.smtp.ssl.enable", "true");
 
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		return Session.getInstance(props, new javax.mail.Authenticator() {
+			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(Config.MAIL_USER, Config.MAIL_PASS);
 			}
 		});
-		return session;
 	}
 
 }

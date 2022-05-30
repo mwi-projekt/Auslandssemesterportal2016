@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dhbw.mwi.Auslandsemesterportal2016.Config;
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
@@ -34,10 +34,10 @@ public class RegisterServlet extends HttpServlet {
 
 		int rolle = 0;
 
-		if (SQL_queries.isEmailUsed(request.getParameter("email"))) {
-			out.print(ErrorEnum.MAILERROR.toString());
+		if (SQLQueries.isEmailUsed(request.getParameter("email"))) {
+			out.print(ErrorEnum.MAILERROR);
 			out.flush();
-		} else if (SQL_queries.isMatnrUsed(Integer.parseInt(request.getParameter("matrikelnummer")))) {
+		} else if (SQLQueries.isMatnrUsed(Integer.parseInt(request.getParameter("matrikelnummer")))) {
 			out.print("matnrError");
 			out.flush();
 		} else {
@@ -56,7 +56,7 @@ public class RegisterServlet extends HttpServlet {
 
 				// Zufälliges Salt generieren und Passwort hashen
 				String salt = Util.generateSalt();
-				String pw = Util.HashSha256(Util.HashSha256(request.getParameter("passwort")) + salt);
+				String pw = Util.hashSha256(Util.hashSha256(request.getParameter("passwort")) + salt);
 
 				String link = Config.MWI_URL + "/?confirm=" + id;
 
@@ -71,7 +71,7 @@ public class RegisterServlet extends HttpServlet {
 				// Verbindung zur DB um neuen Nutzer zu speichern
 				// Statement statement = connection.createStatement();
 				// int rsupd = statement.executeUpdate(sqlupd);
-				int rsupd = SQL_queries.userRegister(request.getParameter("vorname"), request.getParameter("nachname"),
+				int rsupd = SQLQueries.userRegister(request.getParameter("vorname"), request.getParameter("nachname"),
 						pw, salt, rolle, request.getParameter("email"), request.getParameter("studiengang"),
 						request.getParameter("kurs"), Integer.parseInt(request.getParameter("matrikelnummer")),
 						request.getParameter("tel"), request.getParameter("mobil"), request.getParameter("standort"),

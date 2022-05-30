@@ -16,7 +16,7 @@ import org.camunda.bpm.engine.RuntimeService;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 @WebServlet(urlPatterns = { "/getUserInstances" })
@@ -32,7 +32,7 @@ public class UserGetInstanceServlet extends HttpServlet {
 		RuntimeService runtime = engine.getRuntimeService();
 		String reply = "";
 		// Holt instanceId aus DB
-		ArrayList<String[]> instances = SQL_queries.getUserInstances(matnr);
+		ArrayList<String[]> instances = SQLQueries.getUserInstances(matnr);
 		JsonObject json = new JsonObject();
 		JsonArray data = new JsonArray();
 
@@ -59,7 +59,7 @@ public class UserGetInstanceServlet extends HttpServlet {
 						stepCounter = "Bewerbung wurde abgelehnt";
 					} else {
 						// Rufe Schrittzahl aus Tabelle ab
-						stepCounter = SQL_queries.getStepCounter(currentActivity, "studentBewerben");
+						stepCounter = SQLQueries.getStepCounter(currentActivity, "studentBewerben");
 					}
 				}
 				row.addProperty("instanceID", instanceID);

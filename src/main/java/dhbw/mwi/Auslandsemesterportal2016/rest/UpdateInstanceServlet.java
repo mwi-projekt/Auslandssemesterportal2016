@@ -14,7 +14,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 
 @WebServlet(name = "UpdateInstanceServlet", urlPatterns = { "/setVariable" })
@@ -24,7 +24,7 @@ public class UpdateInstanceServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request,response);
 
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle < 1) {
 			response.sendError(401);
@@ -35,13 +35,14 @@ public class UpdateInstanceServlet extends HttpServlet {
 			String key = request.getParameter("key");
 			String val = request.getParameter("value");
 			String type = request.getParameter("type");
-			String[] keys = key.split("\\|", -1);
-			String[] vals = val.split("\\|", -1);
-			String[] types = type.split("\\|", -1);
-			Map<String, Object> vars = new HashMap<String, Object>();
-			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
 
 			if (key != null && val != null) {
+				String[] keys = key.split("\\|", -1);
+				String[] vals = val.split("\\|", -1);
+				String[] types = type.split("\\|", -1);
+				Map<String, Object> vars = new HashMap<String, Object>();
+				ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+
 				for (int i = 0; i < keys.length; i++) {
 					// runtime.setVariable(instance.getId(), keys[i], vals[i]);
 					if (types[i].equals("text")) {
@@ -60,7 +61,7 @@ public class UpdateInstanceServlet extends HttpServlet {
 				engine.getTaskService().complete(
 						engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(),
 						vars);
-				toClient.println(SuccessEnum.UPDATEINSTANCE.toString());
+				toClient.println(SuccessEnum.UPDATEINSTANCE);
 			} else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				toClient.print("Variables not set");

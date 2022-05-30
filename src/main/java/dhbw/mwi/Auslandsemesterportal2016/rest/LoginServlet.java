@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 @WebServlet(name = "LoginServlet", urlPatterns = { "/login" })
@@ -24,8 +24,8 @@ public class LoginServlet extends HttpServlet {
 		String mail = "";
 
 		mail = request.getParameter("email");
-		salt = SQL_queries.getSalt(mail);
-		String[] result = SQL_queries.userLogin(mail, salt, request.getParameter("pw"));
+		salt = SQLQueries.getSalt(mail);
+		String[] result = SQLQueries.userLogin(mail, salt, request.getParameter("pw"));
 		Cookie cookie = new Cookie("sessionID", result[4]);
 		Cookie mailcookie = new Cookie("email", mail);
 		response.addCookie(cookie);
