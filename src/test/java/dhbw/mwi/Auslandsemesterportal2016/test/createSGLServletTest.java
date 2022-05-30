@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
-import dhbw.mwi.Auslandsemesterportal2016.rest.createSGLServlet;
+import dhbw.mwi.Auslandsemesterportal2016.rest.CreateSGLServlet;
 
 public class createSGLServletTest {
     // Initialization of necessary mock objects for mocking instance methods
@@ -48,7 +48,7 @@ public class createSGLServletTest {
     Cookie c1 = new Cookie("email", TestEnum.TESTEMAIL.toString());
     Cookie c2 = new Cookie("sessionID", "s1e5f2ge8gvs694g8vedsg");
     Cookie[] cookies = { c1, c2 };
-    createSGLServlet sglServlet = new createSGLServlet();
+    CreateSGLServlet sglServlet = new CreateSGLServlet();
 
     @BeforeMethod
     public void init() throws IOException, SQLException {
