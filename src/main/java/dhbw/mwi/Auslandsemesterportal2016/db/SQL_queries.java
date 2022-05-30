@@ -144,78 +144,37 @@ public class SQL_queries {
     public static String[] userLogin(String mail, String salt, String pw) {
         // Prüft Logindaten. ResultCodes: 1 = Erfolgreich, 2 = Falsche Daten, 3 = nicht
         // aktiviert, 4 = Datenbankfehler
-        // 5 = Gespert; 6 = ist mit diesem Einlogversuch gespert worden
         // Stringkette, die zurückgegeben wird: resultCode;Bezeichnung
         // Studiengang;Matrikelnummer;Rolle (Nummer die in der DB steht)
-
-        Long aktuelleZeit = System.currentTimeMillis(); // Dient dem setzen der Akutellen Zeit, sowohl für die Abfrage ob er noch gebannt ist als auch zur setzen der Speerzeit
         String hashedPw = Util.HashSha256(Util.HashSha256(pw) + salt);
         int resultCode = 4;
         String studiengang = "";
         String matrikelnummer = "";
         String rolle = "";
         String accessToken = "";
-        int anzahlFehlversuche= 0; // anzahl der vorrangeganenen Fehlversuche des Nutzers
-        String gebanntBis = "0"; // Zeit bis der Nutzer entsperrt wird
-        String query = "SELECT verifiziert, matrikelnummer, studiengang, rolle, anzahlFehlversuche, gebanntBis, userID FROM user WHERE email = ? AND passwort = ?;";
-        String query2 = "SELECT anzahlFehlversuche, gebanntBis FROM user WHERE email = ?;"; //abfrage der wert anzahl Fehlfersuche und gebanntBis aus der DB. Alles Variablen mit "2" dienen der Abfrage ob der Nutzer gespert ist
+        String query = "SELECT verifiziert, matrikelnummer, studiengang, rolle, userID FROM user WHERE email = ? AND passwort = ?;";
         String[] params = new String[] { mail, hashedPw };
-        String[] params2 = new String[] { mail};
         String[] types = new String[] { "String", "String" };
-        String[] types2 = new String[] { "String"};
         ResultSet ergebnis = executeStatement(query, params, types);
-        ResultSet ergebnis2 = executeStatement(query2, params2, types2);
         try {
-            if(ergebnis2.next()){
-                anzahlFehlversuche = ergebnis2.getInt("anzahlFehlversuche");
-                gebanntBis = ergebnis2.getString("gebanntBis");
-
-                if(aktuelleZeit <= Long.parseLong(gebanntBis)) { //wenn die Bannzeit nocht nicht verstrichen ist wird der resultcode 5 in app.js zurückgegeben (noch nicht wieder freigeschaltet).
-                    resultCode = 5;
-                    return new String[] { ("" + resultCode), "", "", "", "" }; //wenn gebannt wurde springt es sofort raus
-                }
-
-            }
             if (ergebnis.next()) {
                 studiengang = ergebnis.getString("studiengang");
                 matrikelnummer = ergebnis.getString("matrikelnummer");
                 rolle = ergebnis.getString("rolle");
-                anzahlFehlversuche = ergebnis.getInt("anzahlFehlversuche");
-                gebanntBis = ergebnis.getString("gebanntBis");
-
                 if (ergebnis.getString("verifiziert").equals("1")) {
                     accessToken = createUserSession(ergebnis.getInt("userID"));
                     resultCode = 1;
-                    anzahlFehlversuche = 0; // anzahl Fehlversuche und gebanntBis werden beim richtigen Login zurückgesetzt
-                    gebanntBis = "0";
                 } else {
                     resultCode = 3;
                 }
             } else {
-                if(anzahlFehlversuche >1){
-                    resultCode = 6;
-                    gebanntBis = ""+(aktuelleZeit + 900000); // setze die gebannt Zeit auf die jetztige Zeit + 15 min in der Zukunft
-                    anzahlFehlversuche=0; // Rücksetzung der Fehlversuche da das Flag gebannt zur Abfrage ausreicht
-                } else {
-                    resultCode = 2;
-                    anzahlFehlversuche++; // Bei falscher Eingabe ohne Bann wird die anzahl der Fehlversuche um eins erhöht
-                }
+                resultCode = 2;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        setBanninfo(anzahlFehlversuche,gebanntBis,mail);
-
         return new String[] { ("" + resultCode), studiengang, matrikelnummer, rolle, accessToken };
-    }
-
-    public static void setBanninfo(int anzahlFehlversuche, String gebanntBis, String email){
-
-        String query = "UPDATE user SET anzahlFehlversuche = ?, gebanntBis= ? WHERE email = ?"; //updated die Einträge anzahl fehlversuche und gebanntBis in der DB wo die Email übereinstimmt
-        String[] params = new String[] { ""+anzahlFehlversuche, gebanntBis, email};
-        String[] types = new String[] { "String","String", "String" };
-        executeUpdate(query, params, types);
     }
 
     public static boolean userSessionExists(int userID) {
@@ -322,8 +281,8 @@ public class SQL_queries {
     }
 
     public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle,
-                                   String email, String studiengang, String kurs, int matrikelnummer, String tel, String mobil,
-                                   String standort, String verifiziert) {
+            String email, String studiengang, String kurs, int matrikelnummer, String tel, String mobil,
+            String standort, String verifiziert) {
         String query = "INSERT INTO user (vorname, nachname, passwort, salt, rolle, email, studiengang, kurs, matrikelnummer, tel, mobil, standort, verifiziert, resetToken) VALUES "
                 + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         String[] args = new String[] { vorname, nachname, passwort, salt, "" + rolle, email, studiengang, kurs,
@@ -334,7 +293,7 @@ public class SQL_queries {
     }
 
     public static int updateUser(String vorname, String nachname, String email, String studiengang, String kurs,
-                                 String matrikelnummer, String standort) {
+            String matrikelnummer, String standort) {
         String query = "UPDATE user SET vorname = ?, nachname = ?, studiengang = ?, kurs = ?, matrikelnummer = ?, standort = ? WHERE email = ?";
         String[] args = new String[] { vorname, nachname, studiengang, kurs, "" + matrikelnummer, standort, email };
         String[] types = new String[] { "String", "String", "String", "String", "int", "String", "String" };
@@ -342,7 +301,7 @@ public class SQL_queries {
     }
 
     public static int updateUser(String vorname, String nachname, String email, String studiengang, String kurs,
-                                 String matrikelnummer, String newmail, String standort) {
+            String matrikelnummer, String newmail, String standort) {
         String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, studiengang = ?, kurs = ?, matrikelnummer = ?, standort = ? WHERE email = ?";
         String[] args = new String[] { vorname, nachname, newmail, studiengang, kurs, "" + matrikelnummer, standort,
                 email };
@@ -351,7 +310,7 @@ public class SQL_queries {
     }
 
     public static int updateStud(String vorname, String nachname, String email, String standort, String studiengang,
-                                 String kurs) {
+            String kurs) {
         String query = "UPDATE user SET vorname = ?, nachname = ?, standort = ?, studiengang = ?, kurs = ? WHERE email = ?";
         String[] args = new String[] { vorname, nachname, standort, studiengang, kurs, email };
         String[] types = new String[] { "String", "String", "String", "String", "String", "String" };
@@ -359,7 +318,7 @@ public class SQL_queries {
     }
 
     public static int updateStud(String vorname, String nachname, String email, String standort, String studiengang,
-                                 String kurs, String newmail) {
+            String kurs, String newmail) {
         String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, standort = ?, studiengang = ?, kurs = ? WHERE email = ?";
         String[] args = new String[] { vorname, nachname, newmail, standort, studiengang, kurs, email };
         String[] types = new String[] { "String", "String", "String", "String", "String", "String", "String" };
@@ -374,7 +333,7 @@ public class SQL_queries {
     }
 
     public static int updateMA(String vorname, String nachname, String email, String tel, String mobil,
-                               String newmail) {
+            String newmail) {
         String query = "UPDATE user SET vorname = ?, nachname = ?, email = ?, tel = ?, mobil = ? WHERE email = ?";
         String[] args = new String[] { vorname, nachname, newmail, tel, mobil, email };
         String[] types = new String[] { "String", "String", "String", "String", "String", "String" };

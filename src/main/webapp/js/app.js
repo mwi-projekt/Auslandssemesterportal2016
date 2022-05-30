@@ -77,7 +77,6 @@ $(document).on('submit', '#regForm', function (e) {
   var nachname = $('#inNachname').val();
   var email = $('#inMail').val();
 
-
   if (pw1 === pw2) {
     if (studiengang === 'Studiengang*') {
       Swal.fire({
@@ -155,13 +154,10 @@ $(document).on('submit', '#regForm', function (e) {
   }
 });
 
-
-
 $(document).on('submit', '#loginForm', function (e) {
   e.preventDefault();
   var email = $('#inEmail').val();
   var pw = $('#inPasswort').val();
-
   $.ajax({
     type: 'POST',
     url: baseUrl + '/login',
@@ -173,10 +169,10 @@ $(document).on('submit', '#loginForm', function (e) {
       if (data.resultCode == 2) {
         Swal.fire({
           title: 'Fehler!',
-          text: 'Nutzername oder Passwort falsch ',
+          text: 'Nutzername oder Passwort falsch',
           icon: 'error',
-           confirmButtonText: 'Erneut versuchen',
-            });
+          confirmButtonText: 'Erneut versuchen',
+        });
       } else if (data.resultCode == 3) {
         Swal.fire({
           title: 'Mailadresse bestätigen',
@@ -191,21 +187,7 @@ $(document).on('submit', '#loginForm', function (e) {
           icon: 'error',
           confirmButtonText: 'OK',
         });
-      } else if(data.resultCode == 5){
-        Swal.fire({
-            title: 'Fehler!',
-            text: 'Der Account ist wegen zu vieler falscher Eingaben gesperrt',
-            icon: 'error',
-            confirmButtonText: 'OK',
-        });
-      } else if(data.resultCode == 6){
-        Swal.fire({
-           title: 'Fehler!',
-           text: 'Der Account wurde wegen zu vieler falscher Eingaben gesperrt',
-           icon: 'error',
-           confirmButtonText: 'OK',
-        });
-      } else{
+      } else {
         sessionStorage['rolle'] = data.rolle;
         sessionStorage['matrikelnr'] = data.matrikelnummer;
         sessionStorage['studiengang'] = data.studiengang;
