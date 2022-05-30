@@ -41,8 +41,10 @@ class AuslandsAngebotsInhalteServletTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void tearDown() throws SQLException, IOException {
+        writer.close();
         sqlQueriesMockedStatic.close();
+        resultSet.close();
     }
 
     @Test

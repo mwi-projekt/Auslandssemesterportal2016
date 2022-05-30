@@ -59,7 +59,8 @@ class GetInstanceServletTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void tearDown() throws IOException {
+        writer.close();
         userAuthentificationMockedStatic.close();
         sqlQueriesMockedStatic.close();
     }

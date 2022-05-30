@@ -52,10 +52,11 @@ class GetUserServletTest {
     }
 
     @AfterEach
-    void tearDown() throws SQLException {
+    void tearDown() throws SQLException, IOException {
         userAuthentificationMockedStatic.close();
         sqlQueriesMockedStatic.close();
         resultSet.close();
+        writer.close();
     }
 
     @Test

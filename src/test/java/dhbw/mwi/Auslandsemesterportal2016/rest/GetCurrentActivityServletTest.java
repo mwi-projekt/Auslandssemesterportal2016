@@ -53,7 +53,8 @@ class GetCurrentActivityServletTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void tearDown() throws IOException {
+        writer.close();
         sqlQueriesMockedStatic.close();
         userAuthentificationMockedStatic.close();
     }

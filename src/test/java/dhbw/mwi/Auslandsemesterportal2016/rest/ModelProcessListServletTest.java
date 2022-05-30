@@ -48,7 +48,8 @@ class ModelProcessListServletTest {
     }
 
     @AfterEach
-    void tearDown() throws SQLException {
+    void tearDown() throws SQLException, IOException {
+        writer.close();
         userAuthentificationMockedStatic.close();
         sqlQueriesMockedStatic.close();
         resultSet.close();

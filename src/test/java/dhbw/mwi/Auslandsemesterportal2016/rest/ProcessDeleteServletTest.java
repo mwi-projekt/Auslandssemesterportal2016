@@ -41,6 +41,9 @@ class ProcessDeleteServletTest {
     private MockedStatic<UserAuthentification> userAuthentificationMockedStatic;
     private StringWriter writer;
     private MockedStatic<ProcessService> processServiceMockedStatic;
+    private Connection connection;
+    private MockedStatic<DB> dbMockedStatic;
+    private Statement statement;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -54,13 +57,20 @@ class ProcessDeleteServletTest {
 
         writer = new StringWriter();
         when(response.getWriter()).thenReturn(new PrintWriter(writer));
+
+        dbMockedStatic = mockStatic(DB.class);
+        connection = mock(Connection.class);
+        statement = mock(Statement.class);
     }
 
     @AfterEach
-    void tearDown() throws IOException {
+    void tearDown() throws IOException, SQLException {
         userAuthentificationMockedStatic.close();
         processServiceMockedStatic.close();
         writer.close();
+        dbMockedStatic.close();
+        connection.close();
+        statement.close();
     }
 
     @Test
@@ -120,11 +130,7 @@ class ProcessDeleteServletTest {
         processServiceMockedStatic.when(() -> getProcessId(TESTMATRIKELNUMMER.toString(), TESTSTANDORT.toString()))
                 .thenReturn("anyId");
 
-        MockedStatic<DB> dbMockedStatic = mockStatic(DB.class);
-        Connection connection = mock(Connection.class);
         dbMockedStatic.when(DB::getInstance).thenReturn(connection);
-
-        Statement statement = mock(Statement.class);
         when(connection.createStatement()).thenReturn(statement);
         when(statement.executeUpdate(anyString())).thenReturn(1);
 

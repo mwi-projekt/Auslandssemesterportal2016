@@ -1,6 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
@@ -38,6 +39,13 @@ class InfoMaterialServletTest {
         sqlQueriesMockedStatic = mockStatic(SQLQueries.class);
         resultSet = mock(ResultSet.class);
         resultSetMetaData = mock(ResultSetMetaData.class);
+    }
+
+    @AfterEach
+    void tearDown() throws IOException, SQLException {
+        writer.close();
+        sqlQueriesMockedStatic.close();
+        resultSet.close();
     }
 
     @Test
