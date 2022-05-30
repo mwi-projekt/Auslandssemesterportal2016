@@ -23,8 +23,11 @@ import java.sql.SQLException;
 
 import static dhbw.mwi.Auslandsemesterportal2016.db.ProcessService.getProcessId;
 import static dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification.isUserAuthentifiedByCookie;
+import static dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum.PARAMMISSING;
 import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.TESTMATRIKELNUMMER;
 import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.TESTSTANDORT;
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -53,19 +56,12 @@ class TaskDeleteServletTest {
         userAuthentification = mockStatic(UserAuthentification.class);
         userAuthentification.when(() -> isUserAuthentifiedByCookie(request)).thenReturn(2);
 
-        // TODO wird im Servlet nicht verwendet
-        dbMockedStatic = mockStatic(DB.class);
-        connection = mock(Connection.class);
-        dbMockedStatic.when(DB::getInstance).thenReturn(connection);
-
         processServiceMockedStatic = mockStatic(ProcessService.class);
     }
 
     @AfterEach
     void tearDown() throws SQLException, IOException {
         writer.close();
-        dbMockedStatic.close();
-        connection.close();
         processServiceMockedStatic.close();
         userAuthentification.close();
     }
@@ -91,8 +87,7 @@ class TaskDeleteServletTest {
             }
         }.callProtectedMethod(request, response);
 
-        String actual = writer.toString().trim();
-        assertEquals("", actual);
+        verify(response, times(1)).sendError(SC_BAD_REQUEST, PARAMMISSING.toString());
     }
 
     @Test
@@ -107,17 +102,17 @@ class TaskDeleteServletTest {
             }
         }.callProtectedMethod(request, response);
 
-        String actual = writer.toString().trim();
-        assertEquals(ErrorEnum.PARAMMISSING.toString(), actual);
+        verify(response, times(1)).setStatus(SC_INTERNAL_SERVER_ERROR);
+        assertEquals(PARAMMISSING.toString(), writer.toString().trim());
     }
 
     @Test
     void doPostDeleteTask() throws IOException {
         when(request.getParameter("uni")).thenReturn(TESTSTANDORT.toString());
-        processServiceMockedStatic.when(() -> getProcessId(TESTMATRIKELNUMMER.toString(), TESTSTANDORT.toString()))
-                .thenReturn("standard");
 
-        processEngine.getRuntimeService().startProcessInstanceByKey("standard");
+        String id = processEngine.getRuntimeService().startProcessInstanceByKey("standard").getId();
+        processServiceMockedStatic.when(() -> getProcessId(TESTMATRIKELNUMMER.toString(), TESTSTANDORT.toString()))
+                .thenReturn(id);
 
         new TaskDeleteServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {

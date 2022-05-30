@@ -15,6 +15,9 @@ import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 
+import static dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum.PARAMMISSING;
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+
 @WebServlet(name = "TaskDeleteServlet", urlPatterns = { "/task/delete" })
 public class TaskDeleteServlet extends HttpServlet {
 
@@ -28,31 +31,32 @@ public class TaskDeleteServlet extends HttpServlet {
 
 		if (rolle != 2) {
 			response.sendError(401, "Rolle: " + rolle);
-		} else {
-
-			String matrikelnummer = request.getParameter("matrikelnummer");
-			String uni = request.getParameter("uni");
-			PrintWriter toClient = response.getWriter();
-
-			if (matrikelnummer != null && uni != null) {
-				String id = ProcessService.getProcessId(matrikelnummer, uni);
-
-				if (id != null && id != "leer") {
-					Connection connection = DB.getInstance();
-
-					// ProzessInstanz löschen
-					try {
-						processEngine.getRuntimeService().deleteProcessInstance(id,
-								"Bewerbung wurde von Studenten beendet");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-
-				} else {
-					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					toClient.println(ErrorEnum.PARAMMISSING);
-				}
-			}
+			return;
 		}
+
+		String matrikelnummer = request.getParameter("matrikelnummer");
+		String uni = request.getParameter("uni");
+		PrintWriter toClient = response.getWriter();
+
+		if (matrikelnummer == null || uni == null) {
+			response.sendError(SC_BAD_REQUEST, PARAMMISSING.toString());
+			return;
+		}
+
+		String id = ProcessService.getProcessId(matrikelnummer, uni);
+		if (id == null || id == "leer") {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			toClient.println(PARAMMISSING);
+			return;
+		}
+
+		// ProzessInstanz löschen
+		try {
+			processEngine.getRuntimeService().deleteProcessInstance(id,
+					"Bewerbung wurde von Studenten beendet");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }

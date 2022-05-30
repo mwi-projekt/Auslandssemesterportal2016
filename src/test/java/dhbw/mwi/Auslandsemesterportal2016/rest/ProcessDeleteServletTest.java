@@ -128,7 +128,7 @@ class ProcessDeleteServletTest {
         ProcessInstance processInstance = processEngine.getRuntimeService().startProcessInstanceByKey("standard");
         ProcessEngineTests.assertThat(processInstance).isStarted();
         processServiceMockedStatic.when(() -> getProcessId(TESTMATRIKELNUMMER.toString(), TESTSTANDORT.toString()))
-                .thenReturn("anyId");
+                .thenReturn(processInstance.getId());
 
         dbMockedStatic.when(DB::getInstance).thenReturn(connection);
         when(connection.createStatement()).thenReturn(statement);
@@ -142,8 +142,7 @@ class ProcessDeleteServletTest {
         }.callProtectedMethod(request, response);
 
         // then
-        String result = writer.toString().trim();
-        assertEquals("anyId", result);
+        assertEquals(processInstance.getId(), writer.toString().trim());
         String expectedStatement1 = "DELETE FROM bewerbungsprozess WHERE matrikelnummer = '" + TESTMATRIKELNUMMER
                 + "' AND uniName = '" + TESTSTANDORT + "' ";
         String expectedStatement2 = "DELETE FROM MapUserInstanz WHERE matrikelnummer = '" + TESTMATRIKELNUMMER
