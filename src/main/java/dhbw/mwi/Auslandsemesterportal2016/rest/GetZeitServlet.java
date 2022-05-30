@@ -25,16 +25,20 @@ public class GetZeitServlet extends HttpServlet {
 		int year = Calendar.getInstance().get(Calendar.YEAR);
 		
 		//Liste enthält WS und SS für das aktuelle und die zwei darauffolgenden Jahre
-		String ls="[";
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("[");
 		for (int i=0; i < 3; i++) {
 			int yearCur = year + i;
-			ls = ls + "{\"zeit\":\"Sommersemester " + yearCur + "\"},";
-			ls = ls + "{\"zeit\":\"Wintersemester " + yearCur + "\"}";
+			stringBuilder.append("{\"zeit\":\"Sommersemester ")
+					.append(yearCur)
+					.append("\"},{\"zeit\":\"Wintersemester ")
+					.append(yearCur)
+					.append("\"}");
 			if (i != 2)
-				ls = ls + ",";
+				stringBuilder.append(",");
 		}
-		ls = ls + "]";				
-		toClient.print(ls);
+		stringBuilder.append("]");
+		toClient.print(stringBuilder);
 	}
 
 }
