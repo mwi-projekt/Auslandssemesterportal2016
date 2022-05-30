@@ -17,7 +17,7 @@ import org.camunda.bpm.engine.ProcessEngines;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.DB;
 import dhbw.mwi.Auslandsemesterportal2016.db.ProcessService;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 
 @WebServlet(name = "ProcessDeleteServlet", urlPatterns = { "/process/delete" })
@@ -29,7 +29,7 @@ public class ProcessDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request, response);
 
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle < 1) {
 			response.sendError(401);

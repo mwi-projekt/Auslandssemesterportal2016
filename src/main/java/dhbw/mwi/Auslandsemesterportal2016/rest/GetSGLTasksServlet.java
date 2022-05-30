@@ -17,7 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
 @WebServlet(name = "GetSGLTasksServlet", urlPatterns = { "/getSGLTasks" })
 public class GetSGLTasksServlet extends HttpServlet {
@@ -26,7 +26,7 @@ public class GetSGLTasksServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request,response);
 
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 1 && rolle != 2 && rolle != 4) {
 			response.sendError(401, "Rolle: " + rolle);

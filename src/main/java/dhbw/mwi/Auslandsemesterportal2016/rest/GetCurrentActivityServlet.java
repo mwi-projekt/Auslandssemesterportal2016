@@ -14,9 +14,9 @@ import org.camunda.bpm.engine.RuntimeService;
 
 import com.google.gson.JsonObject;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 
 @WebServlet(name = "GetCurrentActivityServlet", urlPatterns = { "/currentActivity" })
 public class GetCurrentActivityServlet extends HttpServlet {
@@ -25,14 +25,14 @@ public class GetCurrentActivityServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request,response);
 
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle < 1) {
 			response.sendError(401);
 		} else {
 			String instanceID = request.getParameter("instance_id");
 			String uni = request.getParameter("uni");
-			String model = SQL_queries.getmodel(uni);
+			String model = SQLQueries.getModel(uni);
 			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
 			RuntimeService runtime = engine.getRuntimeService();
 

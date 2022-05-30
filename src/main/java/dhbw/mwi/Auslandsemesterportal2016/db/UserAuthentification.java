@@ -3,7 +3,7 @@ package dhbw.mwi.Auslandsemesterportal2016.db;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-public class userAuthentification {
+public class UserAuthentification {
 	// Rolle für User: 1 = Admin ; 2 = Mitarbeiter ; 3 = Student ; 0 = Invalid
 	// Session; -1 = No Session at all
 	public static int isUserAuthentifiedByCookie(HttpServletRequest request) {
@@ -22,8 +22,8 @@ public class userAuthentification {
 			// check if session-id was found in cookies
 			if (sessionId != null && mail != null) {
 				// check if a sessionId matching to the mail was found in DB
-				if (SQL_queries.checkUserSession(sessionId, mail)) {
-					rolle = SQL_queries.getRoleForUser(mail);
+				if (SQLQueries.checkUserSession(sessionId, mail)) {
+					rolle = SQLQueries.getRoleForUser(mail);
 				}
 			}
 			return rolle;
@@ -49,8 +49,8 @@ public class userAuthentification {
 			// check if session-id was found in cookies
 			if (sessionId != null && mail != null) {
 				// check if a sessionId matching to the mail was found in DB
-				if (SQL_queries.checkUserSession(sessionId, mail)) {
-					user = SQL_queries.getUserInfo(mail);
+				if (SQLQueries.checkUserSession(sessionId, mail)) {
+					user = SQLQueries.getUserInfo(mail);
 					return user;
 				}
 			}

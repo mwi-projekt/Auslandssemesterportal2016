@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQL_queries;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.userAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 
 @WebServlet(name = "ModelProcessListServlet", urlPatterns = { "/processmodel/list" })
@@ -21,7 +21,7 @@ public class ModelProcessListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request, response);
 
-		int rolle = userAuthentification.isUserAuthentifiedByCookie(request);
+		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 1) {
 			response.sendError(401);
@@ -35,7 +35,7 @@ public class ModelProcessListServlet extends HttpServlet {
 				String query = "SELECT step FROM processModel WHERE model = ?";
 				String[] args = new String[] { model };
 				String[] types = new String[] { "String" };
-				ResultSet rs = SQL_queries.executeStatement(query, args, types);
+				ResultSet rs = SQLQueries.executeStatement(query, args, types);
 				try {
 					while (rs.next()) {
 						toClient.print(rs.getString("step") + ";");
