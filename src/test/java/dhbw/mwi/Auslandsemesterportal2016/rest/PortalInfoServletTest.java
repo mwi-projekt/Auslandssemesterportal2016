@@ -8,7 +8,6 @@ import org.mockito.MockedStatic;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -16,11 +15,13 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-import static dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries.*;
+import static dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries.executeStatement;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
-class InfoMaterialServletTest {
+class PortalInfoServletTest {
 
     private HttpServletRequest request;
     private HttpServletResponse response;
