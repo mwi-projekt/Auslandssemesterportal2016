@@ -12,7 +12,7 @@ import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 @WebServlet(urlPatterns = { "/auslandsAngebotsInhalte" })
-public class AuslandsAngebotsInhalte extends HttpServlet {
+public class AuslandsAngebotsInhalteServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
