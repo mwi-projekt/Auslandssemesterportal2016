@@ -697,6 +697,10 @@ CREATE TABLE IF NOT EXISTS `user` (
   KEY `matrikelnummer` (`matrikelnummer`)
 ) ENGINE=InnoDB AUTO_INCREMENT=499 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+ALTER TABLE `user`
+add (`anzahlFehlversuche` varchar(1) COLLATE utf8_bin DEFAULT "0"),
+add (`gebanntBis` varchar(100) COLLATE utf8_bin DEFAULT "0");
+
 --
 -- Daten für Tabelle `user`
 --
