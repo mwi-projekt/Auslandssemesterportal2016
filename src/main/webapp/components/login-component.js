@@ -68,19 +68,6 @@ let loginComponent = {
             </div>
           </div>
         </div>
-    `,
-    data () {
-        return {
-            }
-    },
-    methods: {
-
-    },
-    created: function () {
-
-    },
-    mounted: function () {
-
-    }
+    `
 }
 export {loginComponent};
