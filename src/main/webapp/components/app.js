@@ -1,10 +1,16 @@
 import {faqComponent} from "./faq-component.js";
-import {loginComponent} from "./login-component.js";
+import {layoutComponent} from "./layout-component.js";
 
-const app = Vue.createApp({
+const app1 = Vue.createApp({
     components: {
-        'faq-component': faqComponent,
-        'login-component': loginComponent
+        'faq-component': faqComponent
     }
 })
-.mount('#app')
+app1.mount('#vue-faq')
+
+const app2 = Vue.createApp({
+    components: {
+        'layout-component': layoutComponent,
+    }
+})
+app2.mount('#vue-layout')
