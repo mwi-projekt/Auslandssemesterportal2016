@@ -41,6 +41,7 @@ let faqComponent = {
                 </div>
             </div>
         </div>
+
     `,
     data () {
         return {
