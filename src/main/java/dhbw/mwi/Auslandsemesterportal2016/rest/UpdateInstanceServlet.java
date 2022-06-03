@@ -1,21 +1,22 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngines;
-
-import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
-import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
+import static dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum.UPDATEINSTANCE;
+import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 @WebServlet(name = "UpdateInstanceServlet", urlPatterns = { "/setVariable" })
 public class UpdateInstanceServlet extends HttpServlet {
@@ -25,47 +26,48 @@ public class UpdateInstanceServlet extends HttpServlet {
 		Util.addResponseHeaders(request,response);
 
 		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
-
 		if (rolle < 1) {
-			response.sendError(401);
-		} else {
-			PrintWriter toClient = response.getWriter();
+			response.sendError(SC_UNAUTHORIZED);
+			return;
+		}
 
-			String instanceID = request.getParameter("instance_id");
-			String key = request.getParameter("key");
-			String val = request.getParameter("value");
-			String type = request.getParameter("type");
+		PrintWriter toClient = response.getWriter();
 
-			if (key != null && val != null) {
-				String[] keys = key.split("\\|", -1);
-				String[] vals = val.split("\\|", -1);
-				String[] types = type.split("\\|", -1);
-				Map<String, Object> vars = new HashMap<String, Object>();
-				ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+		String instanceID = request.getParameter("instance_id");
+		String key = request.getParameter("key");
+		String value = request.getParameter("value");
+		String type = request.getParameter("type");
+		if (key == null || value == null) {
+			response.setStatus(SC_INTERNAL_SERVER_ERROR);
+			toClient.print("Variables not set");
+			return;
+		}
 
-				for (int i = 0; i < keys.length; i++) {
-					// runtime.setVariable(instance.getId(), keys[i], vals[i]);
-					if (types[i].equals("text")) {
-						vars.put(keys[i], vals[i]);
-					} else if (types[i].equals("number")) {
-						if (vals[i].equals("")) {
-							vals[i] = "0";
-						}
-						vars.put(keys[i], Integer.parseInt(vals[i]));
-					} else if (types[i].equals("email")) {
-						vars.put(keys[i], vals[i]);
-					} else if (types[i].equals("boolean")) {
-						vars.put(keys[i], Boolean.parseBoolean(vals[i]));
-					}
+		String[] keys = key.split("\\|", -1);
+		String[] values = value.split("\\|", -1);
+		String[] types = type.split("\\|", -1);
+		Map<String, Object> variables = new HashMap<>();
+
+		for (int i = 0; i < keys.length; i++) {
+			// runtime.setVariable(instance.getId(), keys[i], values[i]);
+			if (types[i].equals("text")) {
+				variables.put(keys[i], values[i]);
+			} else if (types[i].equals("number")) {
+				if (values[i].equals("")) {
+					values[i] = "0";
 				}
-				engine.getTaskService().complete(
-						engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(),
-						vars);
-				toClient.println(SuccessEnum.UPDATEINSTANCE);
-			} else {
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				toClient.print("Variables not set");
+				variables.put(keys[i], Integer.parseInt(values[i]));
+			} else if (types[i].equals("email")) {
+				variables.put(keys[i], values[i]);
+			} else if (types[i].equals("boolean")) {
+				variables.put(keys[i], Boolean.parseBoolean(values[i]));
 			}
 		}
+
+		ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
+		engine.getTaskService().complete(
+				engine.getTaskService().createTaskQuery().processInstanceId(instanceID).singleResult().getId(),
+				variables);
+		toClient.println(UPDATEINSTANCE);
 	}
 }

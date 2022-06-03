@@ -33,6 +33,7 @@ class ListFilesServletTest {
     private HttpServletResponse response;
     private StringWriter writer;
     private MockedStatic<UserAuthentification> userAuthentificationMockedStatic;
+    private MockedStatic<FileCreator> fileCreatorMockedStatic;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -42,12 +43,14 @@ class ListFilesServletTest {
         when(response.getWriter()).thenReturn(new PrintWriter(writer));
 
         userAuthentificationMockedStatic = mockStatic(UserAuthentification.class);
+        fileCreatorMockedStatic = mockStatic(FileCreator.class);
     }
 
     @AfterEach
     void tearDown() throws IOException {
         writer.close();
         userAuthentificationMockedStatic.close();
+        fileCreatorMockedStatic.close();
     }
 
     @Test
@@ -72,7 +75,6 @@ class ListFilesServletTest {
         List<String> lines = Arrays.asList("x", "y", "z");
         Files.write(letters.toPath(), lines);
 
-        MockedStatic<FileCreator> fileCreatorMockedStatic = mockStatic(FileCreator.class);
         fileCreatorMockedStatic.when(() -> getUploadFolder()).thenReturn(folder);
 
         new ListFilesServlet() {

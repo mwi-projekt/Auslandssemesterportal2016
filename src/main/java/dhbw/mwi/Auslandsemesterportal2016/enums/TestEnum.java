@@ -8,7 +8,7 @@ public enum TestEnum {
     TESTKEYSTRING(
             "gdprCompliance|uni1|uni2|uni3|zeitraum|bewVorname|bewNachname|bewTelefon|bewStrasse|bewPLZ|bewOrt|bewGeburtsdatum|bewLand|aktuelleUni|bewStudiengang|bewSemester|matrikelnummer|bewEmail|muttersprache|bewErasmus|bewLA|bewSGL|untName|untStrasse|untPLZ|untOrt|untLand|untAnsprechpartner|untEMail|englischNote"),
     TESTVALSTRING(
-            "false|Abertay University of Dundee (Schottland)|California State University San Marcos (USA)|South-Eastern Finland University of Applied Sciences (Finnland)|Frühlings-/Sommersemester 2022|Test|Student|546|fkfk|65465|wcdw|wecwce|Deutsch|DHBW Karlsruhe|Wirtschaftsinformatik|1. Semester|190190190|test@student.dhbw-karlsruhe.de||Nein|Nein|Nein|sx|qws|354|ufufu|Deutschland|wedw|wedw@wde.de|6"),
+            "false|Abertay University of Dundee (Schottland)|California State University San Marcos (USA)|South-Eastern Finland University of Applied Sciences (Finnland)|Frühlings-/Sommersemester 2022|Test|Student|0123456789|Teststraße|65465|Teststadt|01.01.2000|Deutschland|DHBW Karlsruhe|Wirtschaftsinformatik|1. Semester|190190190|test@student.dhbw-karlsruhe.de||Nein|Nein|Nein|Name|TestSemesterStraße|354|SemesterOrt|Deutschland|IrgendEinAnsprechpartner|wedw@wde.de|6"),
     TESTTYPESTRING(
             "boolean|text|text|text|text|text|text|text|text|number|text|text|text|text|text|text|number|email|text|text|text|text|text|text|number|text|text|text|email|text");
 

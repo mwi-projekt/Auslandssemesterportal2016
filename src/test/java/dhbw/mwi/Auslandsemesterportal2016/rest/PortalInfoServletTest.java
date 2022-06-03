@@ -60,7 +60,7 @@ class PortalInfoServletTest {
         when(resultSet.getString(1)).thenReturn("Infomaterial");
         when(resultSet.getString(2)).thenReturn("anyPdf");
 
-        new InfoMaterialServlet() {
+        new PortalInfoServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
                 doGet(request, response);
