@@ -1,6 +1,7 @@
 import {loginComponent} from "./login-component";
 import {registerComponent} from "./register-component";
 import {headerComponent} from "./header-component";
+import {footerComponent} from "./footer-component";
 
 let layoutComponent = {
     template: `
@@ -13,7 +14,8 @@ let layoutComponent = {
     components: {
         'login-component': loginComponent,
         'register-component': registerComponent,
-        'header-component': headerComponent
+        'header-component': headerComponent,
+        'footer-component': footerComponent
     }
 }
 export {layoutComponent};
