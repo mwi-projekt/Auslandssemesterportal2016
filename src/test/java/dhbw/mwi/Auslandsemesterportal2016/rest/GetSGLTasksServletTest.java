@@ -36,14 +36,14 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(ProcessEngineExtension.class)
 @Deployment(resources = {"standard.bpmn"})
-class GetAdminTasksServletTest {
+class GetSGLTasksServletTest {
 
-    private ProcessEngine processEngine;
-    private RuntimeService runtimeService;
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private MockedStatic<UserAuthentification> userAuthentificationMockedStatic;
     private StringWriter writer;
+    private MockedStatic<UserAuthentification> userAuthentificationMockedStatic;
+    private ProcessEngine processEngine;
+    private RuntimeService runtimeService;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -68,7 +68,7 @@ class GetAdminTasksServletTest {
     void doGetUnauthorizedRole(int role) throws IOException {
         userAuthentificationMockedStatic.when(() -> isUserAuthentifiedByCookie(request)).thenReturn(role);
 
-        new GetAdminTasksServlet() {
+        new GetSGLTasksServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
                 doGet(request, response);
             }
@@ -78,8 +78,8 @@ class GetAdminTasksServletTest {
     }
 
     @Test
-    void doGetNoInstances() throws IOException {
-        new GetAdminTasksServlet() {
+    void doGetNoTasks() throws IOException {
+        new GetSGLTasksServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
                 doGet(request, response);
             }
@@ -89,16 +89,23 @@ class GetAdminTasksServletTest {
     }
 
     @Test
-    void doGetSortsStatusCorrectly() throws IOException {
+    void doGetTasksWithDifferentStatus() throws IOException {
         // FIXME "abgelehnt" wird nicht richtig von Camunda gesetzt
         // given
-        runtimeService.startProcessInstanceByKey("standard").getId();
+        runtimeService.startProcessInstanceByKey("standard");
+
+        String editInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
+        prozessInstanzUeberarbeiten(editInstanceId);
+
+        String uniWaehlenInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
+        prozessInstanzUniWaehlen(uniWaehlenInstanceId);
 
         String datenValidierenSGLInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
         prozessInstanzDatenValidierenSGL(datenValidierenSGLInstanceId);
 
         String abgelehnteInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
         prozessInstanzAblehnen(abgelehnteInstanceId);
+        System.out.println(runtimeService.getActiveActivityIds(abgelehnteInstanceId));
 
         String abgeschlosseneInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
         prozessInstanzAbschliessen(abgeschlosseneInstanceId);
@@ -107,7 +114,7 @@ class GetAdminTasksServletTest {
         prozessInstanzAAAValidieren(datenValidierenInstanceId);
 
         // when
-        new GetAdminTasksServlet() {
+        new GetSGLTasksServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
                 doGet(request, response);
             }
@@ -139,7 +146,8 @@ class GetAdminTasksServletTest {
             assertEquals("190190190", object.getAsJsonObject().get("matrikelnummer").getAsString());
         }
 
-        // alle 4 relevanten Status sind enthalten
+        // alle 5 relevanten Status sind enthalten
+        assertEquals(1, getNumberOfObjectsWithStatus(expectedObjectsAsList, "edit"));
         assertEquals(1, getNumberOfObjectsWithStatus(expectedObjectsAsList, "validate"));
         assertEquals(1, getNumberOfObjectsWithStatus(expectedObjectsAsList, "validateSGL"));
         assertEquals(1, getNumberOfObjectsWithStatus(expectedObjectsAsList, "complete"));
@@ -153,11 +161,23 @@ class GetAdminTasksServletTest {
                 .count();
     }
 
+    private void prozessInstanzUniWaehlen(String instanceId) {
+        setVariables(instanceId);
+        for (int i=0; i<1; i++) {
+            updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
+        }
+    }
+
     private void prozessInstanzDatenValidierenSGL(String instanceId) {
         setVariables(instanceId);
         for (int i=0; i<11; i++) {
             updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
         }
+    }
+
+    private void prozessInstanzUeberarbeiten(String instanceId) {
+        prozessInstanzDatenValidierenSGL(instanceId);
+        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONEDITSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
     }
 
     private void prozessInstanzAblehnen(String instanceId) {
