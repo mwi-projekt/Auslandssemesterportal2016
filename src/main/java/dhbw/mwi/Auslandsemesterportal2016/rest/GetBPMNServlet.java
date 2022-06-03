@@ -42,7 +42,8 @@ public class GetBPMNServlet extends HttpServlet {
 			return;
 		}
 
-		File file = FileCreator.getBPMNFile(model);
+		ClassLoader classLoader = getClass().getClassLoader();
+		File file = FileCreator.getBPMNFile(model, classLoader);
 
 		try {
 			if (file.exists() && !file.isDirectory()) {

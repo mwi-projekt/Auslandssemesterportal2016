@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import static dhbw.mwi.Auslandsemesterportal2016.db.FileCreator.getBPMNFile;
 import static dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification.isUserAuthentifiedByCookie;
 import static dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum.PARAMMISSING;
 import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
@@ -25,11 +26,12 @@ import static org.mockito.Mockito.*;
 class GetBPMNServletTest {
 
     @TempDir
-    File mockFile;
+    File mockedEmptyFile;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private StringWriter writer;
     private MockedStatic<UserAuthentification> userAuthentificationMockedStatic;
+    private MockedStatic<FileCreator> fileCreatorMockedStatic;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -42,12 +44,15 @@ class GetBPMNServletTest {
 
         userAuthentificationMockedStatic = mockStatic(UserAuthentification.class);
         userAuthentificationMockedStatic.when(() -> isUserAuthentifiedByCookie(request)).thenReturn(1);
+
+        fileCreatorMockedStatic = mockStatic(FileCreator.class);
     }
 
     @AfterEach
     void tearDown() throws IOException {
         writer.close();
         userAuthentificationMockedStatic.close();
+        fileCreatorMockedStatic.close();
     }
 
     @Test
@@ -81,6 +86,7 @@ class GetBPMNServletTest {
 
     @Test
     void doGetBMPNModel() throws IOException {
+        fileCreatorMockedStatic.when(() -> getBPMNFile(anyString(), any())).thenCallRealMethod();
         new GetBPMNServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
@@ -93,8 +99,7 @@ class GetBPMNServletTest {
 
     @Test
     void doGetFileNotFoundOrIsDirectory() throws IOException {
-        MockedStatic<FileCreator> fileCreator = mockStatic(FileCreator.class);
-        fileCreator.when(() -> FileCreator.getBPMNFile("standard")).thenReturn(mockFile);
+        fileCreatorMockedStatic.when(() -> getBPMNFile(anyString(), any())).thenReturn(mockedEmptyFile);
 
         new GetBPMNServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -103,8 +108,8 @@ class GetBPMNServletTest {
             }
         }.callProtectedMethod(request, response);
 
-        verify(response, times(1)).setStatus(SC_INTERNAL_SERVER_ERROR);
         assertEquals("file not found", writer.toString().trim());
+        verify(response, times(1)).setStatus(SC_INTERNAL_SERVER_ERROR);
     }
 
     private String getStandardModel() {
