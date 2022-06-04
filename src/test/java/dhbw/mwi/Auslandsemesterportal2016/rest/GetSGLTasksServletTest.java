@@ -1,12 +1,10 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.RuntimeService;
-import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.AfterEach;
@@ -22,16 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import static dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification.isUserAuthentifiedByCookie;
-import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.*;
 import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(ProcessEngineExtension.class)
@@ -43,7 +35,7 @@ class GetSGLTasksServletTest {
     private StringWriter writer;
     private MockedStatic<UserAuthentification> userAuthentificationMockedStatic;
     private ProcessEngine processEngine;
-    private RuntimeService runtimeService;
+    private CamundaHelper camundaHelper;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -55,7 +47,8 @@ class GetSGLTasksServletTest {
         userAuthentificationMockedStatic = mockStatic(UserAuthentification.class);
         userAuthentificationMockedStatic.when(() -> isUserAuthentifiedByCookie(request)).thenReturn(1);
 
-        runtimeService = processEngine.getRuntimeService();
+        // kann nicht im Konstruktor (Timing-Problem) oder BeforeClass-Methode (static) initialisiert werden
+        camundaHelper = new CamundaHelper(processEngine);
     }
 
     @AfterEach
@@ -92,26 +85,21 @@ class GetSGLTasksServletTest {
     void doGetTasksWithDifferentStatus() throws IOException {
         // FIXME "abgelehnt" wird nicht richtig von Camunda gesetzt
         // given
-        runtimeService.startProcessInstanceByKey("standard");
+        camundaHelper.startProcess("standard");
+        String editInstanceId = camundaHelper.startProcess("standard");
+        String selectUniInstanceId = camundaHelper.startProcess("standard");
+        String validateSGLInstanceId = camundaHelper.startProcess("standard");
+        String rejectedInstanceId = camundaHelper.startProcess("standard");
+        String completedInstanceId = camundaHelper.startProcess("standard");
+        String validateAAAInstanceId = camundaHelper.startProcess("standard");
 
-        String editInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
-        prozessInstanzUeberarbeiten(editInstanceId);
-
-        String uniWaehlenInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
-        prozessInstanzUniWaehlen(uniWaehlenInstanceId);
-
-        String datenValidierenSGLInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
-        prozessInstanzDatenValidierenSGL(datenValidierenSGLInstanceId);
-
-        String abgelehnteInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
-        prozessInstanzAblehnen(abgelehnteInstanceId);
-        System.out.println(runtimeService.getActiveActivityIds(abgelehnteInstanceId));
-
-        String abgeschlosseneInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
-        prozessInstanzAbschliessen(abgeschlosseneInstanceId);
-
-        String datenValidierenInstanceId = runtimeService.startProcessInstanceByKey("standard").getId();
-        prozessInstanzAAAValidieren(datenValidierenInstanceId);
+        processInstancesToSpecificActivity(editInstanceId,
+                selectUniInstanceId,
+                validateSGLInstanceId,
+                rejectedInstanceId,
+                completedInstanceId,
+                validateAAAInstanceId);
+        System.out.println(processEngine.getRuntimeService().getActiveActivityIds(rejectedInstanceId));
 
         // when
         new GetSGLTasksServlet() {
@@ -121,135 +109,47 @@ class GetSGLTasksServletTest {
         }.callProtectedMethod(request, response);
 
         // then
-        String expectedString = writer.toString().trim();
-        assertNotNull(expectedString); // Array ist nicht leer
+        String expectedEdit = "{\"id\":\"" + editInstanceId + "\",\"name\":\"Student\",\"vname\":\"Test\",\"aktuelleUni" +
+                "\":\"DHBW Karlsruhe\",\"kurs\":\"WWI18B1\",\"uni\":\"USA\",\"prioritaet\":\"1\",\"matrikelnummer\":\"" +
+                "190190190\",\"status\":\"edit\"}";
+        String expectedValidateSGL = "{\"id\":\"" + validateSGLInstanceId + "\",\"name\":\"Student\",\"vname\":\"" +
+                "Test\",\"aktuelleUni\":\"DHBW Karlsruhe\",\"kurs\":\"WWI18B1\",\"uni\":\"USA\",\"prioritaet\":\"1\",\"" +
+                "matrikelnummer\":\"190190190\",\"status\":\"validateSGL\"}";
+        String expectedRejected = "{\"id\":\"" + rejectedInstanceId + "\",\"name\":\"Student\",\"vname\":\"Test\",\"" +
+                "aktuelleUni\":\"DHBW Karlsruhe\",\"kurs\":\"WWI18B1\",\"uni\":\"USA\",\"prioritaet\":\"1\",\"" +
+                "matrikelnummer\":\"190190190\",\"status\":\"abgelehnt\"}";
+        String expectedCompleted = "{\"id\":\"" + completedInstanceId + "\",\"name\":\"Student\",\"vname\":\"Test" +
+                "\",\"aktuelleUni\":\"DHBW Karlsruhe\",\"kurs\":\"WWI18B1\",\"uni\":\"USA\",\"prioritaet\":\"1\",\"" +
+                "matrikelnummer\":\"190190190\",\"status\":\"complete\"}";
+        String expectedValidateAAA = "{\"id\":\"" + validateAAAInstanceId + "\",\"name\":\"Student\",\"vname\":\"" +
+                "Test\",\"aktuelleUni\":\"DHBW Karlsruhe\",\"kurs\":\"WWI18B1\",\"uni\":\"USA\",\"prioritaet\":\"1\",\"" +
+                "matrikelnummer\":\"190190190\",\"status\":\"validate\"}";
 
-        JsonArray expectedAsJsonArray = new JsonParser() //
-                .parse(expectedString) //
+        String actual = writer.toString().trim();
+        assertNotNull(actual); // Array ist nicht leer
+        JsonArray actualAsJsonArray = getJsonElement(actual) //
                 .getAsJsonObject() //
                 .get("data") //
                 .getAsJsonArray();
-        assertEquals(4, expectedAsJsonArray.size()); // Array enthält 4 Einträge
-
-        List<JsonObject> expectedObjectsAsList = Arrays.asList(expectedAsJsonArray.get(0).getAsJsonObject(),
-                expectedAsJsonArray.get(1).getAsJsonObject(),
-                expectedAsJsonArray.get(2).getAsJsonObject(),
-                expectedAsJsonArray.get(3).getAsJsonObject());
-
-        for (JsonObject object : expectedObjectsAsList) { // Alle Einträge enthalten die notwendigen Variablen
-            assertEquals("Student", object.getAsJsonObject().get("name").getAsString());
-            assertEquals("Test", object.getAsJsonObject().get("vname").getAsString());
-            assertEquals("DHBW Karlsruhe", object.getAsJsonObject().get("aktuelleUni").getAsString());
-            assertEquals("WWI18B1", object.getAsJsonObject().get("kurs").getAsString());
-            assertEquals("USA", object.getAsJsonObject().get("uni").getAsString());
-            assertEquals("1", object.getAsJsonObject().get("prioritaet").getAsString());
-            assertEquals("190190190", object.getAsJsonObject().get("matrikelnummer").getAsString());
-        }
-
-        // alle 5 relevanten Status sind enthalten
-        assertEquals(1, getNumberOfObjectsWithStatus(expectedObjectsAsList, "edit"));
-        assertEquals(1, getNumberOfObjectsWithStatus(expectedObjectsAsList, "validate"));
-        assertEquals(1, getNumberOfObjectsWithStatus(expectedObjectsAsList, "validateSGL"));
-        assertEquals(1, getNumberOfObjectsWithStatus(expectedObjectsAsList, "complete"));
-        assertEquals(1, getNumberOfObjectsWithStatus(expectedObjectsAsList, "abgelehnt"));
+        assertEquals(5, actualAsJsonArray.size()); // Array enthält 5 Einträge
+        // Array enthält 5 verschiedene Status
+        assertTrue(actualAsJsonArray.contains(getJsonElement(expectedEdit)));
+        assertTrue(actualAsJsonArray.contains(getJsonElement(expectedValidateSGL)));
+        assertTrue(actualAsJsonArray.contains(getJsonElement(expectedCompleted)));
+        assertTrue(actualAsJsonArray.contains(getJsonElement(expectedValidateAAA)));
+        assertTrue(actualAsJsonArray.contains(getJsonElement(expectedRejected)));
     }
 
-    private long getNumberOfObjectsWithStatus(List<JsonObject> expectedObjectsAsList, String status) {
-        return expectedObjectsAsList //
-                .stream() //
-                .filter(o -> o.get("status").getAsString().equals(status)) //
-                .count();
+    private void processInstancesToSpecificActivity(String editInstanceId, String uniWaehlenInstanceId, String datenValidierenSGLInstanceId, String abgelehnteInstanceId, String abgeschlosseneInstanceId, String datenValidierenInstanceId) {
+        camundaHelper.processUntilAblehnen(abgelehnteInstanceId);
+        camundaHelper.processUntilUeberarbeiten(editInstanceId);
+        camundaHelper.processUntilUniversitaetAuswaehlen(uniWaehlenInstanceId);
+        camundaHelper.processUntilDatenValidierenSGL(datenValidierenSGLInstanceId);
+        camundaHelper.processUntilAbschliessen(abgeschlosseneInstanceId);
+        camundaHelper.processUntilValidierenAAA(datenValidierenInstanceId);
     }
 
-    private void prozessInstanzUniWaehlen(String instanceId) {
-        setVariables(instanceId);
-        for (int i=0; i<1; i++) {
-            updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
-        }
-    }
-
-    private void prozessInstanzDatenValidierenSGL(String instanceId) {
-        setVariables(instanceId);
-        for (int i=0; i<11; i++) {
-            updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
-        }
-    }
-
-    private void prozessInstanzUeberarbeiten(String instanceId) {
-        prozessInstanzDatenValidierenSGL(instanceId);
-        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONEDITSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
-    }
-
-    private void prozessInstanzAblehnen(String instanceId) {
-        prozessInstanzDatenValidierenSGL(instanceId);
-        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONREJECTEDSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
-    }
-
-    private void prozessInstanzAAAValidieren(String instanceId) {
-        prozessInstanzDatenValidierenSGL(instanceId);
-        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
-    }
-
-    private void prozessInstanzAbschliessen(String instanceId) {
-        prozessInstanzAAAValidieren(instanceId);
-        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
-    }
-
-    private void updateInstance(String instanceId, String key, String value, String type) {
-        Map<String, Object> variablesMap = getVariablesMap(key, value, type);
-        completeTask(instanceId, variablesMap);
-    }
-
-    private void completeTask(String instanceId, Map<String, Object> variablesMap) {
-        TaskService taskService = processEngine.getTaskService();
-        taskService.complete(taskService.createTaskQuery().processInstanceId(instanceId).singleResult().getId(),
-                variablesMap);
-    }
-
-    private Map<String, Object> getVariablesMap(String key, String value, String type) {
-        String[] keys = key.split("\\|", -1);
-        String[] values = value.split("\\|", -1);
-        String[] types = type.split("\\|", -1);
-
-        return initHashMap(keys, values, types);
-    }
-
-    private HashMap<String, Object> initHashMap(String[] keys, String[] values, String[] types) {
-        HashMap<String, Object> variablesMap = new HashMap<>();
-        for (int i = 0; i < keys.length; i++) {
-            switch (types[i]) {
-                case "text":
-                    variablesMap.put(keys[i], values[i]);
-                    break;
-                case "number":
-                    if (values[i].equals("")) {
-                        values[i] = "0";
-                    }
-                    variablesMap.put(keys[i], Integer.parseInt(values[i]));
-                    break;
-                case "email":
-                    variablesMap.put(keys[i], values[i]);
-                    break;
-                case "boolean":
-                    variablesMap.put(keys[i], Boolean.parseBoolean(values[i]));
-                    break;
-                default:
-                    break;
-            }
-        }
-        return variablesMap;
-    }
-
-    private void setVariables(String instanceId) {
-        runtimeService.setVariable(instanceId, "bewNachname", TESTNACHNAME.toString());
-        runtimeService.setVariable(instanceId, "bewVorname", TESTVORNAME.toString());
-        runtimeService.setVariable(instanceId, "bewEmail", TESTEMAIL.toString());
-        runtimeService.setVariable(instanceId, "matrikelnummer", Integer.parseInt(TESTMATRIKELNUMMER.toString()));
-        runtimeService.setVariable(instanceId, "aktuelleUni", TESTSTANDORT.toString());
-        runtimeService.setVariable(instanceId, "bewStudiengang", TESTSTUDIENGANG.toString());
-        runtimeService.setVariable(instanceId, "bewKurs", TESTKURS.toString());
-        runtimeService.setVariable(instanceId, "prioritaet", 1);
-        runtimeService.setVariable(instanceId, "uni", "USA");
-        runtimeService.setVariable(instanceId, "uploadformular", "anyData");
+    private JsonElement getJsonElement(String expectedEdit) {
+        return new JsonParser().parse(expectedEdit);
     }
 }
