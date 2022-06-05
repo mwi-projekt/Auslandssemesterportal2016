@@ -1,21 +1,23 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.variable.value.FileValue;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+
+import static dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum.PARAMMISSING;
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
 @WebServlet(name = "GetProcessFileServlet", urlPatterns = { "/getProcessFile" })
 public class GetProcessFileServlet extends HttpServlet {
@@ -26,6 +28,11 @@ public class GetProcessFileServlet extends HttpServlet {
 		// checks if the file exists
 		String instanceID = request.getParameter("instance_id");
 		String key = request.getParameter("key");
+		if (instanceID == null || key == null) {
+			response.sendError(SC_BAD_REQUEST, PARAMMISSING.toString());
+			return;
+		}
+
 		ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
 		RuntimeService runtime = engine.getRuntimeService();
 		FileValue typedFileValue = (FileValue) runtime.getVariableTyped(instanceID, key);
@@ -47,10 +54,20 @@ public class GetProcessFileServlet extends HttpServlet {
 
 			String instanceID = request.getParameter("instance_id");
 			String key = request.getParameter("key");
+			if (instanceID == null || key == null) {
+				response.sendError(SC_BAD_REQUEST, PARAMMISSING.toString());
+				return;
+			}
+
 			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
 			RuntimeService runtime = engine.getRuntimeService();
 			FileValue typedFileValue = (FileValue) runtime.getVariableTyped(instanceID, key);
-			InputStream is = typedFileValue.getValue();
+			InputStream is = null;
+			try {
+				is = typedFileValue.getValue();
+			} catch (NullPointerException e) {
+				response.sendError(SC_NOT_FOUND);
+			}
 
 			try {
 				response.setContentType(typedFileValue.getMimeType());

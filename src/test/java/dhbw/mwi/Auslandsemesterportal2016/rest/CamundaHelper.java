@@ -3,7 +3,14 @@ package dhbw.mwi.Auslandsemesterportal2016.rest;
 import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
+import org.camunda.bpm.engine.variable.Variables;
+import org.camunda.bpm.engine.variable.value.FileValue;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +34,18 @@ public class CamundaHelper {
     public void processUntilUniversitaetAuswaehlen(String instanceId) {
         setVariables(instanceId);
         updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
+    }
+
+    public void processUntilDaadHochladen(String instanceId) throws FileNotFoundException {
+        processUntilUniversitaetAuswaehlen(instanceId);
+        for (int i = 0; i<4; i++) {
+            updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
+        }
+        Path path = Paths.get("src", "test", "resources");
+        FileInputStream fileInputStream = new FileInputStream(path + "/DAAD_Formular_Englisch.pdf");
+        FileValue fileValue = Variables.fileValue("daadHochladen.pdf").file(fileInputStream).create();
+        runtimeService.setVariable(instanceId, "daadHochladen", fileValue);
+        System.out.println(runtimeService.getVariable(instanceId, "daadHochladen"));
     }
 
     public void processUntilDatenPruefen(String instanceId) {
