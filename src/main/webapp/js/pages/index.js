@@ -58,16 +58,18 @@ function loadPortalInfo() {
         url: baseUrl + "/portalInfo",
         success: function (data) {
             var result = data.data[0];
-            if (result.titel) {
-                $('#portalInfo').children().children('.titel').text(result.titel);
-            }
-            if (result.werbesatz) {
-                $('#portalInfo').children().children('.red').text(result.werbesatz);
-            }
-            for (var i = 1; i <= 7; i++) {
-                if (result['listelement' + i] && result['listelement' + i] != 'null') {
-                    $('#portalInfo').children().children('.funktionen')
-                        .append('<li id="li' + i + '">' + result['listelement' + i] + ' </li>');
+            if (result) {
+                if (result.titel) {
+                    $('#portalInfo').children().children('.titel').text(result.titel);
+                }
+                if (result.werbesatz) {
+                    $('#portalInfo').children().children('.red').text(result.werbesatz);
+                }
+                for (var i = 1; i <= 7; i++) {
+                    if (result['listelement' + i] && result['listelement' + i] != 'null') {
+                        $('#portalInfo').children().children('.funktionen')
+                            .append('<li id="li' + i + '">' + result['listelement' + i] + ' </li>');
+                    }
                 }
             }
         },

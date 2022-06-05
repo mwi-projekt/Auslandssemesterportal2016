@@ -19,7 +19,8 @@ h1, h3 {
 
 #newBewProzess {
   width: 50%;
-  margin-left: 100%;
+  margin-left: 50%;
+  margin-top: 3rem;
 }
 
 table.table.table-bordered.table-hover {
@@ -62,7 +63,16 @@ label {
   padding-left: 1.2%;
   font-size: medium;
   width: 100%;
+
 }
+
+#validierungslabel{
+  padding-left: 1.2%;
+  font-size: medium;
+  width: 100%;
+  text-align: center;
+}
+
 #downloadAnmeldeformular {
   font-size: 100%;
 }

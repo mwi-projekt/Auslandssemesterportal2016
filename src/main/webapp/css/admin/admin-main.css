@@ -28,3 +28,16 @@
 .right-float {
     float: right;
 }
+
+.processpadding{
+    padding-top: 50px;
+}
+.centeringheader{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+#paddingboarder{
+    padding-left: 100px;
+    padding-right: 100px;
+}
