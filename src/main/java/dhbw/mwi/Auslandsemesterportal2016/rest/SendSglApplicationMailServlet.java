@@ -20,7 +20,8 @@ public class SendSglApplicationMailServlet extends HttpServlet {
 		Util.addResponseHeaders(request,response);
 
 		try {
-			Transport.send(getMessage());
+			Message message = getMessage();
+//			Transport.send(message);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
