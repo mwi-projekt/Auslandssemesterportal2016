@@ -65,9 +65,10 @@ class UserDeleteServletTest {
     }
 
     @AfterEach
-    public void close() {
+    public void close() throws SQLException {
         // Close mock objects for mocking static methods
         sql_queries.close();
+        resultSet.close();
 
         // Close instances
         writer.close();

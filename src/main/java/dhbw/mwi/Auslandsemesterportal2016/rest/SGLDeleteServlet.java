@@ -36,14 +36,14 @@ public class SGLDeleteServlet extends HttpServlet {
 				int result = SQLQueries.executeUpdate(query, args, types);
 
 				if (result == 1) {
-					toClient.println(SuccessEnum.USERDELETE.toString());
+					toClient.println(SuccessEnum.USERDELETE);
 				} else {
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					toClient.println(ErrorEnum.USERNOTDELETED.toString());
+					toClient.println(ErrorEnum.USERNOTDELETED);
 				}
 			} else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				toClient.println(ErrorEnum.PARAMMISSING.toString());
+				toClient.println(ErrorEnum.PARAMMISSING);
 			}
 		}
 	}

@@ -55,13 +55,13 @@ public class ModelProcessSaveServlet extends HttpServlet {
 				} catch (Exception e) {
 					e.printStackTrace();
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					toClient.println(ErrorEnum.DBERROR.toString());
+					toClient.println(ErrorEnum.DBERROR);
 					toClient.println(e.getMessage());
 				}
 
 			} else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				toClient.println(ErrorEnum.PARAMMISSING.toString());
+				toClient.println(ErrorEnum.PARAMMISSING);
 			}
 		}
 	}
