@@ -1,18 +1,21 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
+import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
+import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
 
-import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
-import dhbw.mwi.Auslandsemesterportal2016.db.Util;
-import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
-import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
+import static dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum.DBERROR;
+import static dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum.PARAMMISSING;
+import static javax.servlet.http.HttpServletResponse.SC_INTERNAL_SERVER_ERROR;
+import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 @WebServlet(name = "ModelProcessListServlet", urlPatterns = { "/processmodel/list" })
 public class ModelProcessListServlet extends HttpServlet {
@@ -24,7 +27,7 @@ public class ModelProcessListServlet extends HttpServlet {
 		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 1) {
-			response.sendError(401);
+			response.sendError(SC_UNAUTHORIZED);
 		} else {
 			PrintWriter toClient = response.getWriter();
 
@@ -43,14 +46,14 @@ public class ModelProcessListServlet extends HttpServlet {
 
 				} catch (Exception e) {
 					e.printStackTrace();
-					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					toClient.println(ErrorEnum.DBERROR.toString());
+					response.setStatus(SC_INTERNAL_SERVER_ERROR);
+					toClient.println(DBERROR);
 					toClient.println(e.getMessage());
 				}
 
 			} else {
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				toClient.println(ErrorEnum.PARAMMISSING.toString());
+				response.setStatus(SC_INTERNAL_SERVER_ERROR);
+				toClient.println(PARAMMISSING);
 			}
 		}
 	}

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.AdditionalMatchers;
 import org.mockito.MockedStatic;
 
 import java.sql.*;
@@ -26,6 +27,10 @@ class SQLQueriesTest {
 
   private ResultSet resultSet;
   private MockedStatic<DB> mockedStaticDb;
+  private ResultSet resultSetCheckBanned;
+  private PreparedStatement preparedStatementCheckBanned;
+  private ResultSet resultSetReadFormUserData;
+  private PreparedStatement preparedStatementReadUserData;
 
   @BeforeEach
   public void init() throws SQLException {
@@ -38,13 +43,29 @@ class SQLQueriesTest {
     when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
     when(preparedStatement.executeQuery()).thenReturn(resultSet);
     when(preparedStatement.executeUpdate()).thenReturn(1);
+
+    // necessary for login-Tests
+    preparedStatementReadUserData = mock(PreparedStatement.class);
+    resultSetReadFormUserData = mock(ResultSet.class);
+    when(connection.prepareStatement("SELECT verifiziert, matrikelnummer, studiengang, rolle, anzahlFehlversuche, gebanntBis, userID FROM user WHERE email = ? AND passwort = ?;"))
+            .thenReturn(preparedStatementReadUserData);
+    when(preparedStatementReadUserData.executeQuery()).thenReturn(resultSetReadFormUserData);
+    preparedStatementCheckBanned = mock(PreparedStatement.class);
+    resultSetCheckBanned = mock(ResultSet.class);
+    when(connection.prepareStatement("SELECT anzahlFehlversuche, gebanntBis FROM user WHERE email = ?;"))
+            .thenReturn(preparedStatementCheckBanned);
+    when(preparedStatementCheckBanned.executeQuery()).thenReturn(resultSetCheckBanned);
   }
 
   @AfterEach
   public void close() throws SQLException {
     connection.close();
     preparedStatement.close();
+    preparedStatementReadUserData.close();
+    preparedStatementCheckBanned.close();
     resultSet.close();
+    resultSetReadFormUserData.close();
+    resultSetCheckBanned.close();
     mockedStaticDb.close();
   }
 
@@ -88,30 +109,23 @@ class SQLQueriesTest {
     String salt = "SH5E9Z7P5J6Z5G2BV0";
 
     // given (Mock Responses)
-    // testet createUserSession() durch unterschiedliche Ergebnisse in userSessionExists()
-    if (userSessionExists) {
-      when(resultSet.next()).thenReturn(true).thenReturn(true);
-    } else {
-      when(resultSet.next()).thenReturn(true).thenReturn(false);
-    }
-    when(resultSet.getString("studiengang")).thenReturn(studiengang);
-    when(resultSet.getString("matrikelnummer")).thenReturn(matrikelnummer);
-    when(resultSet.getString("rolle")).thenReturn(rolle);
-    when(resultSet.getString("verifiziert")).thenReturn("" + resultCode);
-    when(resultSet.getInt("userID")).thenReturn(357);
     MockedStatic<Util> utilMockedStatic = mockStatic(Util.class);
-    utilMockedStatic.when(Util::generateSalt).thenReturn(accessToken);
+    stubbingForLoginWithVerifiedUser(userSessionExists, resultCode, studiengang, matrikelnummer, rolle, accessToken, utilMockedStatic);
 
     // when
     String[] result = SQLQueries.userLogin(TESTEMAIL.toString(), salt, TESTPASSWORT.toString());
 
     // then
     assertArrayEquals(expected, result);
+    // verify DB-Queries were processed as expected
     verify(connection, times(1))
-            .prepareStatement("SELECT verifiziert, matrikelnummer, studiengang, rolle, userID FROM user WHERE email = ? AND passwort = ?;");
-    verify(preparedStatement, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+            .prepareStatement("SELECT verifiziert, matrikelnummer, studiengang, rolle, anzahlFehlversuche, gebanntBis, userID FROM user WHERE email = ? AND passwort = ?;");
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
     String hashedPassword = Util.hashSha256(Util.hashSha256(TESTPASSWORT.toString()) + salt);
-    verify(preparedStatement, times(1)).setString(anyInt(), eq(hashedPassword));
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(hashedPassword));
+    verify(connection, times(1))
+            .prepareStatement("SELECT anzahlFehlversuche, gebanntBis FROM user WHERE email = ?;");
+    verify(preparedStatementCheckBanned, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
     if (userSessionExists) {
       verify(connection, times(1))
               .prepareStatement("UPDATE loginSessions SET sessionID = ? WHERE userID = ?");
@@ -119,9 +133,18 @@ class SQLQueriesTest {
       verify(connection, times(1))
               .prepareStatement("INSERT INTO loginSessions (sessionID, userID) VALUES " + "(?,?)");
     }
+    verify(connection, times(1)).prepareStatement("UPDATE user SET anzahlFehlversuche = ?, gebanntBis= ? WHERE email = ?");
+    verify(preparedStatement, times(2)).setString(anyInt(), eq("0"));
+    verify(preparedStatement, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
 
     // finally
     utilMockedStatic.close();
+  }
+
+  private void stubbingForLoginWithVerifiedUser(boolean userSessionExists, int resultCode, String studiengang, String matrikelnummer, String rolle, String accessToken, MockedStatic<Util> utilMockedStatic) throws SQLException {
+    stubbingForLoginWithUnverifiedUser(resultCode, studiengang, matrikelnummer, rolle);
+    when(resultSet.next()).thenReturn(userSessionExists);
+    utilMockedStatic.when(Util::generateSalt).thenReturn(accessToken);
   }
 
   @Test
@@ -135,12 +158,9 @@ class SQLQueriesTest {
     String salt = "SH5E9Z7P5J6Z5G2BV0";
 
     // given (Mock Responses)
-    when(resultSet.next()).thenReturn(true);
-    when(resultSet.getString("studiengang")).thenReturn(studiengang);
-    when(resultSet.getString("matrikelnummer")).thenReturn(matrikelnummer);
-    when(resultSet.getString("rolle")).thenReturn(rolle);
-    when(resultSet.getString("verifiziert")).thenReturn("" + resultCode);
-    when(resultSet.getInt("userID")).thenReturn(357);
+    stubbingForLoginWithUnverifiedUser(resultCode, studiengang, matrikelnummer, rolle);
+    when(resultSetReadFormUserData.getInt("anzahlFehlversuche")).thenReturn(0);
+    when(resultSetReadFormUserData.getString("gebanntBis")).thenReturn("0");
 
     // when
     String[] result = SQLQueries.userLogin(TESTEMAIL.toString(), salt, TESTPASSWORT.toString());
@@ -148,16 +168,36 @@ class SQLQueriesTest {
     // then
     assertArrayEquals(expected, result);
     verify(connection, times(1))
-            .prepareStatement("SELECT verifiziert, matrikelnummer, studiengang, rolle, userID FROM user WHERE email = ? AND passwort = ?;");
-    verify(preparedStatement, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+            .prepareStatement("SELECT verifiziert, matrikelnummer, studiengang, rolle, anzahlFehlversuche, gebanntBis, userID FROM user WHERE email = ? AND passwort = ?;");
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
     String hashedPassword = Util.hashSha256(Util.hashSha256(TESTPASSWORT.toString()) + salt);
-    verify(preparedStatement, times(1)).setString(anyInt(), eq(hashedPassword));
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(hashedPassword));
+    verify(connection, times(1))
+            .prepareStatement("SELECT anzahlFehlversuche, gebanntBis FROM user WHERE email = ?;");
+    verify(preparedStatementCheckBanned, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+    verify(connection, times(1)).prepareStatement("UPDATE user SET anzahlFehlversuche = ?, gebanntBis= ? WHERE email = ?");
+    verify(preparedStatement, times(2)).setString(anyInt(), eq("0"));
+    verify(preparedStatement, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+  }
+
+  private void stubbingForLoginWithUnverifiedUser(int resultCode, String studiengang, String matrikelnummer, String rolle) throws SQLException {
+    when(resultSetCheckBanned.next()).thenReturn(true);
+    when(resultSetCheckBanned.getInt("anzahlFehlversuche")).thenReturn(0);
+    when(resultSetCheckBanned.getString("gebanntBis")).thenReturn("0");
+
+    when(resultSetReadFormUserData.next()).thenReturn(true);
+    when(resultSetReadFormUserData.getString("studiengang")).thenReturn(studiengang);
+    when(resultSetReadFormUserData.getString("matrikelnummer")).thenReturn(matrikelnummer);
+    when(resultSetReadFormUserData.getString("rolle")).thenReturn(rolle);
+    when(resultSetReadFormUserData.getString("verifiziert")).thenReturn("" + resultCode);
+    when(resultSetReadFormUserData.getInt("userID")).thenReturn(357);
   }
 
   @Test
   void userLoginWrongData() throws SQLException {
     // given
-    when(resultSet.next()).thenReturn(false);
+    when(resultSetCheckBanned.next()).thenReturn(false);
+    when(resultSetReadFormUserData.next()).thenReturn(false);
 
     // when
     String salt = "SH5E9Z7P5J6Z5G2BV0";
@@ -166,12 +206,85 @@ class SQLQueriesTest {
     // then
     String[] expected = {"2", "", "", "", ""};
     assertArrayEquals(expected, result);
+
+    verify(connection, times(1))
+            .prepareStatement("SELECT verifiziert, matrikelnummer, studiengang, rolle, anzahlFehlversuche, gebanntBis, userID FROM user WHERE email = ? AND passwort = ?;");
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+    String hashedPassword = Util.hashSha256(Util.hashSha256(TESTPASSWORT.toString()) + salt);
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(hashedPassword));
+    verify(connection, times(1))
+            .prepareStatement("SELECT anzahlFehlversuche, gebanntBis FROM user WHERE email = ?;");
+    verify(preparedStatementCheckBanned, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+    verify(connection, times(1)).prepareStatement("UPDATE user SET anzahlFehlversuche = ?, gebanntBis= ? WHERE email = ?");
+    verify(preparedStatement, times(1)).setString(anyInt(), eq("0"));
+    verify(preparedStatement, times(1)).setString(anyInt(), eq("1"));
+    verify(preparedStatement, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+  }
+
+  @Test
+  void userLoginWithBannedUser() throws SQLException {
+    // given
+    int resultCode = 5;
+    String[] expected = {("" + resultCode), "", "", "", ""};
+    String salt = "SH5E9Z7P5J6Z5G2BV0";
+
+    when(resultSetCheckBanned.next()).thenReturn(true);
+    when(resultSetCheckBanned.getInt("anzahlFehlversuche")).thenReturn(0);
+    long bannedUntil = System.currentTimeMillis() + 900000;
+    when(resultSetCheckBanned.getString("gebanntBis")).thenReturn("" + bannedUntil);
+
+    // when
+    String[] result = SQLQueries.userLogin(TESTEMAIL.toString(), salt, TESTPASSWORT.toString());
+
+    // then
+    assertArrayEquals(expected, result);
+
+    verify(connection, times(1))
+            .prepareStatement("SELECT verifiziert, matrikelnummer, studiengang, rolle, anzahlFehlversuche, gebanntBis, userID FROM user WHERE email = ? AND passwort = ?;");
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+    String hashedPassword = Util.hashSha256(Util.hashSha256(TESTPASSWORT.toString()) + salt);
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(hashedPassword));
+    verify(connection, times(1))
+            .prepareStatement("SELECT anzahlFehlversuche, gebanntBis FROM user WHERE email = ?;");
+    verify(preparedStatementCheckBanned, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+  }
+
+  @Test
+  void userLoginBannUser() throws SQLException {
+    // given (Data of resultStringArray)
+    int resultCode = 6;
+    String[] expected = {("" + resultCode), "", "", "", ""};
+    String salt = "SH5E9Z7P5J6Z5G2BV0";
+
+    when(resultSetCheckBanned.next()).thenReturn(true);
+    when(resultSetCheckBanned.getInt("anzahlFehlversuche")).thenReturn(2);
+    when(resultSetCheckBanned.getString("gebanntBis")).thenReturn("0");
+
+    when(resultSetReadFormUserData.next()).thenReturn(false);
+
+    // when
+    String[] result = SQLQueries.userLogin(TESTEMAIL.toString(), salt, TESTPASSWORT.toString());
+
+    // then
+    assertArrayEquals(expected, result);
+
+    verify(connection, times(1))
+            .prepareStatement("SELECT verifiziert, matrikelnummer, studiengang, rolle, anzahlFehlversuche, gebanntBis, userID FROM user WHERE email = ? AND passwort = ?;");
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+    String hashedPassword = Util.hashSha256(Util.hashSha256(TESTPASSWORT.toString()) + salt);
+    verify(preparedStatementReadUserData, times(1)).setString(anyInt(), eq(hashedPassword));
+    verify(connection, times(1))
+            .prepareStatement("SELECT anzahlFehlversuche, gebanntBis FROM user WHERE email = ?;");
+    verify(preparedStatementCheckBanned, times(1)).setString(anyInt(), eq(TESTEMAIL.toString()));
+    verify(connection, times(1)).prepareStatement("UPDATE user SET anzahlFehlversuche = ?, gebanntBis= ? WHERE email = ?");
+    verify(preparedStatement, times(1)).setString(anyInt(), eq("0"));
+    verify(preparedStatement, times(2)).setString(anyInt(), AdditionalMatchers.not(eq("0")));
   }
 
   @Test
   void userLoginDbException() throws SQLException {
     // given
-    when(preparedStatement.executeQuery()).thenReturn(null);
+    when(preparedStatementCheckBanned.executeQuery()).thenReturn(null);
 
     // when
     String salt = "SH5E9Z7P5J6Z5G2BV0";
