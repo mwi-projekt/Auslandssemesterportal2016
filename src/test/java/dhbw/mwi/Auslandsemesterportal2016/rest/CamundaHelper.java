@@ -6,7 +6,6 @@ import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.value.FileValue;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -78,6 +77,48 @@ public class CamundaHelper {
     public void processUntilAbschliessen(String instanceId) {
         processUntilValidierenAAA(instanceId);
         updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
+    }
+
+    public void processUntilSendToGoOut(String instanceId) {
+        setVariables(instanceId);
+        Map<String, Object> map = new HashMap<>();
+        // relevant für go out
+        map.put("uni1", "California State University San Marcos (USA)");
+        map.put("uni2", "South-Eastern Finland University of Applied Sciences (Finnland)");
+        map.put("uni3", "Abertay University of Dundee (Schottland)");
+        map.put("bewGeburtsdatum", "01.01.2000");
+        map.put("bewSemester", "2. Semester");
+        //relevant für Camunda-Prozess
+        map.put("gdprCompliance", Boolean.TRUE);
+        map.put("zeitraum", "Frühlings-/Sommersemester 2023");
+        map.put("bewTelefon", TESTTELNR.toString());
+        map.put("bewStrasse", "TestStr. 1");
+        map.put("bewPLZ", 12345);
+        map.put("bewOrt", "Teststadt");
+        map.put("bewLand", "Deutschland");
+        map.put("bewStudiengang", TESTSTUDIENGANG.toString());
+        map.put("bewMuttersprache", "");
+        map.put("bewErasmus", "nein");
+        map.put("bewLA", "nein");
+        map.put("bewSGL", "Frau Wallrath");
+        map.put("untName", "ABC AG");
+        map.put("untStrasse", "Teststr. 2");
+        map.put("untPLZ", 12345);
+        map.put("untOrt", "Teststadt");
+        map.put("untLand", "Deutschland");
+        map.put("untAnsprechpartner", "Frau Holle");
+        map.put("untEmail", "test@unternehmen.de");
+        map.put("englischNote", "10");
+        map.put("semesteradresseAnders", Boolean.FALSE);
+        completeTask(instanceId, map);
+        map.clear();
+        for (int i = 0; i<11; i++) {
+            completeTask(instanceId, map);
+        }
+        System.out.println(runtimeService.getActiveActivityIds(instanceId));
+        map.put("validierungErfolgreich", Boolean.TRUE);
+        map.put("mailText", "any mail text");
+        completeTask(instanceId, map);
     }
 
     private void setVariables(String instanceId) {
