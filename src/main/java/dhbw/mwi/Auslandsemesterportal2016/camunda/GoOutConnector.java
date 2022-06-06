@@ -3,10 +3,13 @@ package dhbw.mwi.Auslandsemesterportal2016.camunda;
 import com.google.common.annotations.VisibleForTesting;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-public class GoOutConnector {
+public class GoOutConnector implements JavaDelegate {
 
-    public void process() {
+    @Override
+    public void execute(DelegateExecution delegateExecution) throws Exception {
         sendDataToGoOutForm(getRelevantProcessData(""));
     }
 
