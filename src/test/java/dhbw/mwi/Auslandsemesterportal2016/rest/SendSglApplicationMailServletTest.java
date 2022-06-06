@@ -2,6 +2,7 @@ package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
@@ -37,6 +38,7 @@ class SendSglApplicationMailServletTest {
         transportMockedStatic.close();
     }
 
+    @Disabled("Mails senden ist abgeklemmt")
     @Test
     void doPostSendsMail() throws IOException {
         when(request.getParameter("instance_id")).thenReturn("anyInstanceId");
