@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GetVariablesServletIntegrationsTest {
     @Test
     void doGetSuccess() {
-        Response loginResponse = post("http://localhost:80/login?email=test@student.dhbw-karlsruhe.de&pw=Hallo1234!");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=Hallo1234!");
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String getInstanceResponse = given()
@@ -23,7 +23,7 @@ class GetVariablesServletIntegrationsTest {
                 .queryParam("prio", "2")
                 .queryParam("uni", "California State University San Marcos (USA)")
                 .when()
-                .get("http://localhost:80/getInstance")
+                .get("http://10.3.15.45/getInstance")
                 .then().statusCode(200).contentType(ContentType.JSON).extract().response().asString();
 
         JsonObject getInstanceResponseAsJson = new JsonParser().parse(getInstanceResponse).getAsJsonObject();
@@ -34,7 +34,7 @@ class GetVariablesServletIntegrationsTest {
                 .cookie("email", "test@student.dhbw-karlsruhe.de")
                 .queryParam("instance_id", instanceId)
                 .when()
-                .get("http://localhost:80/getVariables")
+                .get("http://10.3.15.45/getVariables")
                 .then().statusCode(200)
                 .contentType(ContentType.JSON).extract().response().asString();
 

@@ -13,7 +13,7 @@ public class ChangePriorityServletIntegrationsTest {
 
         @Test
         void doGetSuccess() {
-            Response loginResponse = post("http://localhost:80/login?email=test@student.dhbw-karlsruhe.de&pw=Hallo1234!");
+            Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=Hallo1234!");
             String sessionID = loginResponse.getCookies().get("sessionID");
 
             String getInstanceResponse = given()
@@ -23,7 +23,7 @@ public class ChangePriorityServletIntegrationsTest {
                     .queryParam("prio", "2")
                     .queryParam("uni", "California State University San Marcos (USA)")
                     .when()
-                    .get("http://localhost:80/getInstance")
+                    .get("http://10.3.15.45/getInstance")
                     .then().statusCode(200).contentType(ContentType.JSON).extract().response().asString();
 
             JsonObject getInstanceResponseAsJson = new JsonParser().parse(getInstanceResponse).getAsJsonObject();
@@ -35,7 +35,7 @@ public class ChangePriorityServletIntegrationsTest {
                     .queryParam("instance", instanceId)
                     .queryParam("prio", "2")
                     .when()
-                    .get("http://localhost:80/changePriority")
+                    .get("http://10.3.15.45/changePriority")
                     .then().statusCode(200);
         }
     }

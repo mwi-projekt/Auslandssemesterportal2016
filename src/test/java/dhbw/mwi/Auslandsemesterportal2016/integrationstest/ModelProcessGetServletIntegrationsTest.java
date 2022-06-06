@@ -1,8 +1,5 @@
 package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ModelProcessGetServletIntegrationsTest {
     @Test
     void doGetSuccess() {
-        Response loginResponse = post("http://localhost:80/login?email=test@student.dhbw-karlsruhe.de&pw=Hallo1234!");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=Hallo1234!");
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String returnedText = given()
@@ -22,7 +19,7 @@ class ModelProcessGetServletIntegrationsTest {
                 .queryParam("model", "standard")
                 .queryParam("step", "downloadsAnbieten")
                 .when()
-                .get("http://localhost:80/processmodel/get")
+                .get("http://10.3.15.45/processmodel/get")
                 .then().statusCode(200)
                 .extract().response().asString();
 

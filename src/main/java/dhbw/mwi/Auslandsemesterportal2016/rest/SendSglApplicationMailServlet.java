@@ -31,7 +31,7 @@ public class SendSglApplicationMailServlet extends HttpServlet {
 					+ "<a href= \"" + link + "\" target=\"new\">Auslandssemesterportal</a>", "text/html");
 
 			// Send message
-			Transport.send(message);
+		//	Transport.send(message);
 
 
 		} catch (MessagingException e) {
