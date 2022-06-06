@@ -59,7 +59,7 @@ body, html, .my-container {
 }
 
 .clearfix, .browser-window > .title-bar {
-    zoom: 1;
+    *zoom: 1;
 }
 
 .clearfix:before, .browser-window > .title-bar:before, .clearfix:after, .browser-window > .title-bar:after {

@@ -2,10 +2,14 @@
   "name": "auslandssemesterportal2016",
   "version": "1.0.0",
   "description": "Neuaufsetzung des Projekts Auslandssemesterportal2016",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "parcel": "parcel *.html",
-    "build": "tsc && parcel build *.html"
+    "parcel": "rimraf dist && rimraf .cache && parcel *.html",
+    "build": "tsc && parcel build *.html",
+    "clean:dist": "rimraf dist",
+    "clean:full": "rimraf dist && rimraf .cache && rimraf node_modules",
+    "clean:parcel": "rimraf dist && rimraf .cache"
   },
   "repository": {
     "type": "git",
@@ -41,9 +45,8 @@
     "@types/jquery": "^3.3.31",
     "@types/jqueryui": "^1.12.10",
     "@types/jspdf": "^1.3.3",
-    "parcel": "^2.0.0",
+    "parcel-bundler": "^1.12.4",
     "parcel-plugin-static-files-copy": "^2.3.1",
-    "posthtml": "^0.16.6",
     "posthtml-include": "^1.6.1",
     "posthtml-modules": "^0.7.3",
     "typescript": "^3.7.5"
@@ -53,12 +56,12 @@
     "bootstrap": "^4.4.1",
     "bootstrap-switch": "^3.4.0",
     "bpmn-js": "^6.5.1",
-    "ckeditor4": "^4.19.0",
+    "ckeditor4": "^4.14.0",
     "cookieconsent": "^3.1.1",
-    "datatables.net-bs4": "^1.12.1",
+    "datatables.net-bs4": "^1.10.20",
     "datatables.net-buttons": "^1.6.2",
     "dropzone": "^5.7.0",
-    "jquery": "^3.6.0",
+    "jquery": "^3.4.1",
     "jquery-ui-dist": "^1.12.1",
     "jquery-validation": "^1.19.1",
     "js": "^0.1.0",
