@@ -18,7 +18,7 @@ class UpdatePasswordServletIntegrationsTest {
 
         String response = given()
                 .queryParam("uuid",uuid)
-                .queryParam("password", "Hallo1234!")
+                .queryParam("password", "7sdfyxc/fsdASDFM")
                 .when()
                 .get("http://10.3.15.45/updatePassword")
                 .then().statusCode(200)

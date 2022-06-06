@@ -12,7 +12,7 @@ public class GetInstanceServletIntegrationsTest {
 
     @Test
     void doGetSuccess(){
-        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=Hallo1234!");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM");
         String sessionID = loginResponse.getCookies().get("sessionID");
         String expected = "{\"instanceId\":\"cd747fc6-d51b-11ec-98d5-0242c0a82003\",\"uni\":\"California State University San Marcos (USA)\"}";
 

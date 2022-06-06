@@ -49,12 +49,14 @@ class GetEmailTextServletIntegrationsTest {
 
         // Test-Methode aufrufen
         String content = given()
+                .log().all()
                 .cookie("sessionID", sessionID)
                 .cookie("email", "test@sgl.dhbw-karlsruhe.de")
                 .queryParam("instance_id", instanceId)
                 .queryParam("validate", "true")
                 .when()
                 .get("http://10.3.15.45/getMailText")
+                .peek()
                 .then().statusCode(200).extract().response().asString();
 
         String expectedContent = getExpectedContentSuccess();
@@ -75,9 +77,10 @@ class GetEmailTextServletIntegrationsTest {
 
     private Map<String, String> getRequestBody(String instanceId) {
         Map<String, String> requestBody = new HashMap<>();
-        String keys = "gdprCompliance|uni|semesteradresseAnders|uni1|uni2|uni3|validierungErfolgreich";
-        String values = "true|Standard|false|Abertay University of Dundee (Schottland)|California State University San Marcos (USA)|South-Eastern Finland University of Applied Sciences (Finnland)|true";
-        String types = "boolean|text|boolean|text|text|text|boolean";
+        // FIXME Wo ist der TestStudent hin?!
+        String keys = "gdprCompliance|uni|semesteradresseAnders|uni1|uni2|uni3|validierungErfolgreich|muttersprache|englischNote|bewNachname";
+        String values = "true|Standard|false|Abertay University of Dundee (Schottland)|California State University San Marcos (USA)|South-Eastern Finland University of Applied Sciences (Finnland)|true||13|Student";
+        String types = "boolean|text|boolean|text|text|text|boolean|text|text|text";
         requestBody.put("instance_id", instanceId);
         requestBody.put("key", keys);
         requestBody.put("value", values);

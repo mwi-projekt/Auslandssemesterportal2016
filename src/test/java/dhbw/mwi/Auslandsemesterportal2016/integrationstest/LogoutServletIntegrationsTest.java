@@ -17,7 +17,7 @@ public class LogoutServletIntegrationsTest {
 
     @Test
     void doGetSuccess() {
-        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=Hallo1234!");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM");
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         given()
