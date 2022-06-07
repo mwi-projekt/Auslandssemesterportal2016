@@ -1,52 +1,70 @@
 package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.rest.SendApplicationMailServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Transport;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
+import static dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification.isTestUser;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class SendApplicationMailServletTest {
-    // Initialization of necessary mock objects for mocking instance methods
     HttpServletRequest request = mock(HttpServletRequest.class);
     HttpServletResponse response = mock(HttpServletResponse.class);
-
-    // Initialization of necessary mock objects for mocking static methods
     MockedStatic<Transport> transport;
-
-    // Initialization of necessary instances
-    Boolean reachedSendMethod;
+    private MockedStatic<UserAuthentification> userAuthentification;
 
     @BeforeEach
     public void init() {
-        // Define necessary mock objects for mocking static methods
-        transport = Mockito.mockStatic(Transport.class);
-
-        // Define what happens when mocked method is called
+        transport = mockStatic(Transport.class);
         transport.when(() -> Transport.send(any())).thenAnswer((Answer<Boolean>) invocation -> null);
+        userAuthentification = mockStatic(UserAuthentification.class);
     }
 
     @AfterEach
     public void close() {
-        // Close mock objects for mocking static methods
         transport.close();
+        userAuthentification.close();
     }
 
-    @Disabled("Mails senden ist abgeklemmt")
     @Test
-    void testDoPost() throws IOException {
-        // call protected doPost()-Method of RegisterServlet.class
+    void getMessageHasExpectedData() throws MessagingException, IOException {
+        String expectedRecipient = "thomas.freytag@dhbw-karlsruhe.de";
+        String expectedSubject = "Neue Bewerbung im Auslandssemesterportal";
+        String expectedContent = "<h2>Sehr geehrter Herr Freytag"
+                + ",</h2> es ist eine neue Bewerbung im Auslandssemesterportal."
+                + "<br><br> "
+                + "<a href= \"http://10.3.15.45/\" target=\"new\">Auslandssemesterportal</a>";
+
+        Message actual = new SendApplicationMailServlet().getMessage();
+
+        assertEquals(expectedRecipient, actual.getAllRecipients()[0].toString());
+        assertEquals(expectedSubject, actual.getSubject());
+        assertEquals(expectedContent, actual.getContent());
+    }
+
+    @Test
+    void doPostDoesNotSendMailWhenTestuser() throws IOException {
+        // given
+        userAuthentification.when(() -> isTestUser(any())).thenReturn(true);
+        StringWriter writer = new StringWriter();
+        when(response.getWriter()).thenReturn(new PrintWriter(writer));
+
+        // when
         new SendApplicationMailServlet() {
             public void callProtectedMethod(HttpServletRequest request,
                                             HttpServletResponse response) throws IOException {
@@ -54,7 +72,23 @@ class SendApplicationMailServletTest {
             }
         }.callProtectedMethod(request, response);
 
-        // verify that method Transport.send() was called
-        transport.verify(() -> Transport.send(any()));
+        // then
+        assertEquals("Keine E-Mail im Kontext von Tests versendet", writer.toString().trim());
+        transport.verify(() -> Transport.send(any()), times(0));
+    }
+
+    @Test
+    void testDoPost() throws IOException {
+        // given
+        userAuthentification.when(() -> isTestUser(any())).thenReturn(false);
+
+        new SendApplicationMailServlet() {
+            public void callProtectedMethod(HttpServletRequest request,
+                                            HttpServletResponse response) throws IOException {
+                doPost(request, response);
+            }
+        }.callProtectedMethod(request, response);
+
+        transport.verify(() -> Transport.send(any()), times(1));
     }
 }
