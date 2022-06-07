@@ -97,7 +97,7 @@ public class CamundaHelper {
         map.put("bewOrt", "Teststadt");
         map.put("bewLand", "Deutschland");
         map.put("bewStudiengang", TESTSTUDIENGANG.toString());
-        map.put("bewMuttersprache", "");
+        map.put("muttersprache", "");
         map.put("bewErasmus", "nein");
         map.put("bewLA", "nein");
         map.put("bewSGL", "Frau Wallrath");
@@ -112,13 +112,16 @@ public class CamundaHelper {
         map.put("semesteradresseAnders", Boolean.FALSE);
         completeTask(instanceId, map);
         map.clear();
-        for (int i = 0; i<11; i++) {
+        for (int i = 0; i<10; i++) {
             completeTask(instanceId, map);
         }
         System.out.println(runtimeService.getActiveActivityIds(instanceId));
-        map.put("validierungErfolgreich", Boolean.TRUE);
+        map.put("validierungErfolgreich", true);
         map.put("mailText", "any mail text");
         completeTask(instanceId, map);
+        System.out.println(runtimeService.getActiveActivityIds(instanceId));
+        completeTask(instanceId, map);
+        System.out.println(runtimeService.getActiveActivityIds(instanceId));
     }
 
     private void setVariables(String instanceId) {

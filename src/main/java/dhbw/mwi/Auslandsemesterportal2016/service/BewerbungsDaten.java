@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.camunda;
+package dhbw.mwi.Auslandsemesterportal2016.service;
 
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +12,7 @@ public class BewerbungsDaten {
     private String email;
     private String studiengang;
     private final String studiengangsleitung = "Prof. Dr. Thomas Freytag";
-    private int aktuellesSemester;
+    private String aktuellesSemester;
     private String uniPrio1;
     private String uniPrio2;
     private String uniPrio3;
