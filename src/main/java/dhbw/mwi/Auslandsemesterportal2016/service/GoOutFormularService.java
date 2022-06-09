@@ -3,6 +3,7 @@ package dhbw.mwi.Auslandsemesterportal2016.service;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.*;
 import com.google.common.annotations.VisibleForTesting;
+import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -13,6 +14,12 @@ import java.util.List;
 
 public class GoOutFormularService implements JavaDelegate {
 
+    private ProcessEngine processEngine;
+
+    public GoOutFormularService() {
+        this.processEngine = ProcessEngines.getDefaultProcessEngine();;
+    }
+
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         sendDataToGoOutForm(getRelevantProcessData(""));
@@ -20,7 +27,7 @@ public class GoOutFormularService implements JavaDelegate {
 
     @VisibleForTesting
     public BewerbungsDaten getRelevantProcessData(String instanceId) {
-        RuntimeService runtimeService = ProcessEngines.getDefaultProcessEngine().getRuntimeService();
+        RuntimeService runtimeService = processEngine.getRuntimeService();
 
         String vorname = String.valueOf(runtimeService.getVariable(instanceId, "bewVorname"));
         String nachname = String.valueOf(runtimeService.getVariable(instanceId, "bewNachname"));
