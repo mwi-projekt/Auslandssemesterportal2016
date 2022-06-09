@@ -16,6 +16,8 @@
                 type="text"
                 class="inBox form-control"
                 id="inVorname"
+                pattern="^([a-zA-ZÄÖÜäöüéáÁÉÈèàÀ.'êâÊÂóÓòÒ-]{2,30})$"
+                title="Der Name darf keine Zahlen enthalten"
                 required
               />
             </div>
@@ -25,6 +27,8 @@
                 type="text"
                 class="inBox form-control"
                 id="inNachname"
+                PATTERN="^([a-zA-ZÄÖÜäöüéáÁÉÈèàÀ.'êâÊÂóÓòÒ-]{3,50})$"
+                title="Der Name darf keine Zahlen enthalten"
                 required
               />
             </div>
@@ -46,9 +50,11 @@
             <div class="md-form mb-4">
               <label for="inMatrikel">Matrikelnummer</label>
               <input
-                type="number"
+                type="text"
                 class="inBox form-control"
                 id="inMatrikel"
+                pattern="^([0-9]{7})$"
+                title="Bitte die 7-stellige Matrikelnummer eintragen"
                 required
               />
             </div>
