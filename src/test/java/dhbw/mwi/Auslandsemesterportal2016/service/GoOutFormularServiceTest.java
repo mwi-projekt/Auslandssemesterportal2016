@@ -44,8 +44,7 @@ class GoOutFormularServiceTest {
                 .aktuellesSemester("2. Semester")
                 .uniPrio1("California State University San Marcos (USA)")
                 .uniPrio2("South-Eastern Finland University of Applied Sciences (Finnland)")
-                .uniPrio3("Finnland")
-                .begruendungBenachteiligt("")
+                .uniPrio3("Abertay University of Dundee (Schottland)")
                 .build();
     }
 
@@ -53,8 +52,6 @@ class GoOutFormularServiceTest {
         CamundaHelper camundaHelper = new CamundaHelper(processEngine);
         String instanceId = camundaHelper.startProcess("standard");
         camundaHelper.processUntilSendToGoOut(instanceId);
-        System.out.println(processEngine.getRuntimeService().getActiveActivityIds(instanceId));
-//        assertEquals("datenAnGoOut", processEngine.getRuntimeService().getActiveActivityIds(instanceId));
         return instanceId;
     }
 

@@ -110,18 +110,9 @@ public class CamundaHelper {
         map.put("untEmail", "test@unternehmen.de");
         map.put("englischNote", "10");
         map.put("semesteradresseAnders", Boolean.FALSE);
-        completeTask(instanceId, map);
-        map.clear();
-        for (int i = 0; i<10; i++) {
-            completeTask(instanceId, map);
-        }
-        System.out.println(runtimeService.getActiveActivityIds(instanceId));
         map.put("validierungErfolgreich", true);
         map.put("mailText", "any mail text");
         completeTask(instanceId, map);
-        System.out.println(runtimeService.getActiveActivityIds(instanceId));
-        completeTask(instanceId, map);
-        System.out.println(runtimeService.getActiveActivityIds(instanceId));
     }
 
     private void setVariables(String instanceId) {

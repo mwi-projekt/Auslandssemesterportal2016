@@ -14,19 +14,15 @@ import java.util.List;
 
 public class GoOutFormularService implements JavaDelegate {
 
-    private ProcessEngine processEngine;
-
-    public GoOutFormularService() {
-        this.processEngine = ProcessEngines.getDefaultProcessEngine();;
-    }
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        sendDataToGoOutForm(getRelevantProcessData(""));
+        sendDataToGoOutForm(getRelevantProcessData(delegateExecution.getId()));
     }
 
     @VisibleForTesting
     public BewerbungsDaten getRelevantProcessData(String instanceId) {
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         RuntimeService runtimeService = processEngine.getRuntimeService();
 
         String vorname = String.valueOf(runtimeService.getVariable(instanceId, "bewVorname"));
@@ -34,6 +30,7 @@ public class GoOutFormularService implements JavaDelegate {
 
         return BewerbungsDaten.builder()
                 .name(vorname + " " + nachname)
+                .geburtsdatum(String.valueOf(runtimeService.getVariable(instanceId, "bewGeburtsdatum")))
                 .email(String.valueOf(runtimeService.getVariable(instanceId, "bewEmail")))
                 .studiengang(String.valueOf(runtimeService.getVariable(instanceId, "bewStudiengang")))
                 .aktuellesSemester(String.valueOf(runtimeService.getVariable(instanceId, "bewSemester")))
@@ -47,8 +44,7 @@ public class GoOutFormularService implements JavaDelegate {
         WebClient webClient = new WebClient();
 
         try {
-            String url = "https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html";
-            HtmlPage goOutWebsite = webClient.getPage("");
+            HtmlPage goOutWebsite = webClient.getPage("https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html");
 
             fillForm(bewerbungsDaten, goOutWebsite);
 
@@ -63,7 +59,7 @@ public class GoOutFormularService implements JavaDelegate {
     private void sendData(HtmlPage goOutWebsite) throws IOException {
         List<HtmlSubmitInput> submitButton = goOutWebsite.getByXPath("/html/body/main/div/div[3]/div/div[2]/div[3]/div/div/div/form/fieldset/div[9]/div/div/input");
         if (submitButton.size() == 1) {
-//            submitButton.get(0).click();
+            submitButton.get(0).click();
         } else {
             throw new IOException("Element konnte nicht eindeutig gefunden werden.");
         }
@@ -111,7 +107,7 @@ public class GoOutFormularService implements JavaDelegate {
             fieldEinverstaendnisBerichtNein.setChecked(true);
         }
 
-        HtmlRadioButtonInput fieldEinverstaendnisDatenschutz = goOutWebsite.getHtmlElementById("powermail_field_einverstaendniserklaerungdatenschutz_1");
+        HtmlRadioButtonInput fieldEinverstaendnisDatenschutz = goOutWebsite.getHtmlElementById("powermail_field_einverstaendiserklaerungdatenschutz_1");
         fieldEinverstaendnisDatenschutz.setChecked(true);
     }
 }
