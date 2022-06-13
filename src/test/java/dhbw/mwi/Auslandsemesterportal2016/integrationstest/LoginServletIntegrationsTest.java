@@ -20,7 +20,7 @@ class LoginServletIntegrationsTest {
     @Test
     void doPostFailed(){
         String expected = "{\"resultCode\":\"2\",\"studiengang\":\"\",\"matrikelnummer\":\"\",\"rolle\":\"\"}";
-        String response = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM").then().contentType(ContentType.JSON).extract().response().asString();
+        String response = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=falschesPasswort").then().contentType(ContentType.JSON).extract().response().asString();
         assertEquals(expected, response);
     }
 

@@ -1,5 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -7,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class GetInstanceServletIntegrationsTest {
 
@@ -14,7 +17,6 @@ public class GetInstanceServletIntegrationsTest {
     void doGetSuccess(){
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM");
         String sessionID = loginResponse.getCookies().get("sessionID");
-        String expected = "{\"instanceId\":\"cd747fc6-d51b-11ec-98d5-0242c0a82003\",\"uni\":\"California State University San Marcos (USA)\"}";
 
         String response = given()
                 .cookie("sessionID", sessionID)
@@ -24,7 +26,8 @@ public class GetInstanceServletIntegrationsTest {
                 .then().statusCode(200)
                 .contentType(ContentType.JSON).extract().response().asString();
 
-        assertEquals(expected, response);
+        JsonObject responseAsJsonObject = new JsonParser().parse(response).getAsJsonObject();
+        assertEquals("\"California State University San Marcos (USA)\"", responseAsJsonObject.get("uni").toString());
     }
 
 }

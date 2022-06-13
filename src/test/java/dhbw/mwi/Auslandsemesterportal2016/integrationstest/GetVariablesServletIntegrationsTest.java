@@ -13,7 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class GetVariablesServletIntegrationsTest {
     @Test
     void doGetSuccess() {
-        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
+                .then().statusCode(200).extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String getInstanceResponse = given()

@@ -21,12 +21,12 @@ public class UserGetInstanceServletIntegrationsTest {
                 .cookie("sessionID", sessionID)
                 .cookie("email", "test@student.dhbw-karlsruhe.de")
                 .when()
-                .get("http://10.3.15.45/getUserInstances?email=test@student.dhbw.karlsruhe.de&pw=7sdfyxc/fsdASDFM&matnr=1901901")
+                .get("http://10.3.15.45/getUserInstances?matnr=1901901")
                 .then().statusCode(200)
                 .contentType(ContentType.JSON).extract().response().asString();
 
         assertNotNull(response);
-        assertNotNull(new JsonParser().parse(response).getAsJsonArray());
+        assertNotNull(new JsonParser().parse(response).getAsJsonObject().get("data").getAsJsonArray());
     }
 
 }
