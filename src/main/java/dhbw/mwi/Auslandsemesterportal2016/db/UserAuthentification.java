@@ -81,6 +81,6 @@ public class UserAuthentification {
 		return (emailOfUser.equals("test@student.dhbw-karlsruhe.de")
 				|| emailOfUser.equals("test@sgl.dhbw-karlsruhe.de")
 				|| emailOfUser.equals("auslandsamt@dh-karlsruhe.de")
-				|| emailOfUser.equals("emailOfUser.equals(testadminmwi@dhbw.de"));
+				|| emailOfUser.equals("testadminmwi@dhbw.de"));
 	}
 }
