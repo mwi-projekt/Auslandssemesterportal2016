@@ -1,7 +1,7 @@
 import {$,baseUrl} from "../config";
 import {urlParams} from "../app";
 import Swal from "sweetalert2";
-import "jquery-ui-dist";
+import "jquery-ui-dist/jquery-ui";
 import "ckeditor4/ckeditor";
 import "bootstrap-switch";
 import "../jquery.dynamicdom";
