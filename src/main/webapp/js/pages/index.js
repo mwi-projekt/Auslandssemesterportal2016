@@ -4,15 +4,16 @@ import Swal from "sweetalert2";
 
 $(document).ready(function () {
     // check role and redirect
-    if (sessionStorage['User']) {
+    /*if (sessionStorage['User']) {
         if (sessionStorage['rolle'] == 2) {
             window.location.href = 'task_overview.html'
-        } else if (sessionStorage['rolle'] == 4) {
+        }
+        else if (sessionStorage['rolle'] == 4) {
             window.location.href = 'task_overview_sgl.html';
         } else if (sessionStorage['rolle'] == 1) {
             window.location.href = 'cms.html';
         }
-    }
+    }*/
 
     // init ui
     initSlider();

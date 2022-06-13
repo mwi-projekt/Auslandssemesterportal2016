@@ -16,6 +16,8 @@
                 type="text"
                 class="inBox form-control"
                 id="inVorname"
+                pattern="^([a-zA-ZÄÖÜäöüéáÁÉÈèàÀ.'êâÊÂóÓòÒ-]{2,30})$"
+                title="Der Name darf keine Zahlen enthalten"
                 required
               />
             </div>
@@ -25,6 +27,8 @@
                 type="text"
                 class="inBox form-control"
                 id="inNachname"
+                PATTERN="^([a-zA-ZÄÖÜäöüéáÁÉÈèàÀ.'êâÊÂóÓòÒ-]{3,50})$"
+                title="Der Name darf keine Zahlen enthalten"
                 required
               />
             </div>
@@ -46,9 +50,11 @@
             <div class="md-form mb-4">
               <label for="inMatrikel">Matrikelnummer</label>
               <input
-                type="number"
+                type="text"
                 class="inBox form-control"
                 id="inMatrikel"
+                pattern="^([0-9]{7})$"
+                title="Bitte die 7-stellige Matrikelnummer eintragen"
                 required
               />
             </div>
@@ -112,7 +118,7 @@
           </div>
           <p class="falsch"></p>
         </div>
-        <div class="modal-footer d-flex">
+        <div class="modal-footer d-flex justify-content-between">
           <button
             type="button"
             class="btn btn-outline-secondary"
@@ -176,17 +182,17 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer d-flex">
+        <div class="modal-footer d-flex justify-content-between">
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-outline-secondary "
             data-dismiss="modal"
           >
             Schlie&szlig;en
           </button>
           <button
             type="submit"
-            class="btn btn-outline-primary"
+            class="btn btn-outline-primary "
             form="loginForm"
             id="btnLogin"
           >
@@ -268,11 +274,17 @@
           <br />
           <a class="text-white" href="index.html#erfahrungsBerichte">Erfahrungsberichte</a>
         </div>
-        <div id="menu-admin" class="bg-dark p-4 burgermenuhideitems">
-         <!-- <a class="text-white" href="cms.html">CMS</a>-->
+        <div id="menu-admin" class="bg-dark p-4">
+          <a class="text-white" href="index.html#auslandsAngebote">Auslandsangebote</a>
+          <br />
+          <br />
+          <a class="text-white" href="cms.html">CMS</a>
         </div>
-        <div id="menu-sgl" class="bg-dark p-4 burgermenuhideitems">
-          <!-- Nothing -->
+        <div id="menu-sgl" class="bg-dark p-4">
+          <a class="text-white" href="index.html#auslandsAngebote">Auslandsangebote</a>
+          <br />
+          <br />
+          <a class="text-white" href="task_overview_sgl.html">Übersicht Studiengangsleitung</a>
         </div>
         <div id="menu-student" class="bg-dark p-4">
           <a class="text-white" href="index.html#auslandsAngebote">Auslandsangebote</a>
@@ -283,8 +295,13 @@
           <br />
           <a class="text-white" href="bewerbungsportal.html">Meine Bewerbungen</a>
         </div>
+        <div id="menu-aaa" class="bg-dark p-4">
+          <a class="text-white" href="index.html#auslandsAngebote">Auslandsangebote</a>
+          <br />
+          <br />
+          <a class="text-white" href="task_overview.html">Übersicht Auswärtiges Amt</a>
+        </div>
       </div>
-
     </div>
 
     <!-- CONTENT -->

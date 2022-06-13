@@ -41,7 +41,7 @@
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
-				<version>8.0.16</version>
+				<version>8.0.29</version>
 			</dependency>
 
 		</dependencies>
@@ -73,7 +73,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.16</version> <!--$NO-MVN-MAN-VER$-->
+			<version>8.0.29</version> <!--$NO-MVN-MAN-VER$-->
 		</dependency>
 
 		<!-- Required to use Spin dataformat support in unit tests -->
@@ -197,7 +197,7 @@
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.8.5</version>
+			<version>2.9.0</version>
 		</dependency>
 		
 		<dependency>
@@ -307,8 +307,8 @@
 						</goals>
 						<configuration>
 							<!-- See https://nodejs.org/en/download/ for latest node and npm (lts) versions -->
-							<nodeVersion>v14.16.1</nodeVersion>
-							<npmVersion>6.14.12</npmVersion>
+							<nodeVersion>v14.19.3</nodeVersion>
+							<npmVersion>6.14.17</npmVersion>
 						</configuration>
 					</execution>
 
@@ -320,16 +320,6 @@
 						<!-- Optional configuration which provides for running any npm command -->
 						<configuration>
 							<arguments>install</arguments>
-						</configuration>
-					</execution>
-
-					<execution>
-						<id>npm run clean:parcel</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<configuration>
-							<arguments>run clean:parcel</arguments>
 						</configuration>
 					</execution>
 

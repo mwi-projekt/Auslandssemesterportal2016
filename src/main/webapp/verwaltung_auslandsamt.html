@@ -43,9 +43,9 @@
       rel="stylesheet"
       href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"
     />
-    <script src="js/app.js"></script>
-    <script src="js/pages/nutzer.js"></script>
-    <script src="js/admin/auslandsamt_tabelle.js"></script>
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="js/pages/nutzer.js"></script>
+    <script type="module" src="js/admin/auslandsamt_tabelle.js"></script>
   </head>
   <body>
     <module href="./layout.html">
@@ -150,16 +150,16 @@
                 />
               </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer d-flex justify-content-between">
               <button
                 type="button"
                 class="btn btn-secondary"
                 data-dismiss="modal"
               >
-                Close
+                Schließen
               </button>
               <button id="myFormSubmit" class="btn btn-primary" type="submit">
-                Save changes
+                Speichern
               </button>
             </div>
           </form>

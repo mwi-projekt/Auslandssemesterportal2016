@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="node_modules/cookieconsent/build/cookieconsent.min.css">
 
-    <script src="js/pages/forgot_pw.js"></script>
+    <script type="module" src="js/pages/forgot_pw.js"></script>
 </head>
 <body>
     <module href="./layout.html">
@@ -22,15 +22,17 @@
                 <div class="navEl nonCms current" id="nav2"><a style="color:white" href="index">Passwort-Wiederherstellung</a></div>
                 <!-- <div class="navEl nonCms" id="nav4">Berichte</div> -->
             </div>
-            <div id="formular" class="form-horizontal">
-            <label for="mail">Mailadresse</label>
-            <input type="text" class="form-control" id="mail">
+            <div>
+            <div style="width:100%"id="formular" class="form-horizontal">
+                <label for="mail">Mailadresse</label>
+                <input type="text" class="form-control" id="mail">
             </div>
+            <div style="display:flex; flex-direction: column; text-align:center ">
             <div id="nextStep">
-            <button id="resetPassword" class="btn btn-success navMargin">Passwort zur&uuml;cksetzen</button>
+            <button  id="resetPassword" class="btn btn-success navMargin ">Passwort zur&uuml;cksetzen</button>
             </div>
-
-
+            </div>
+            </div>
 
 
             <!-- <div class="inhalt nonCms" id="in1">
