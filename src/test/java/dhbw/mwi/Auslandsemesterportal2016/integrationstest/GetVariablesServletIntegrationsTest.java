@@ -20,7 +20,7 @@ class GetVariablesServletIntegrationsTest {
         String getInstanceResponse = given()
                 .cookie("sessionID", sessionID)
                 .cookie("email", "test@student.dhbw-karlsruhe.de")
-                .queryParam("matnr", "190190190")
+                .queryParam("matnr", "1901901")
                 .queryParam("prio", "2")
                 .queryParam("uni", "California State University San Marcos (USA)")
                 .when()
@@ -39,7 +39,7 @@ class GetVariablesServletIntegrationsTest {
                 .then().statusCode(200)
                 .contentType(ContentType.JSON).extract().response().asString();
 
-        String expectedVariables = "{\"bewEmail\":\"test@student.dhbw-karlsruhe.de\",\"uni\":\"California State University San Marcos (USA)\",\"aktuelleUni\":\"DHBW Karlsruhe\",\"bewKurs\":\"WWI12B5\",\"bewVorname\":\"Test\",\"matrikelnummer\":\"190190190\",\"prioritaet\":\"2\",\"bewNachname\":\"Student\",\"bewStudiengang\":\"Wirtschaftsinformatik\"}";
+        String expectedVariables = "{\"bewEmail\":\"test@student.dhbw-karlsruhe.de\",\"uni\":\"California State University San Marcos (USA)\",\"aktuelleUni\":\"DHBW Karlsruhe\",\"bewKurs\":\"WWI12B5\",\"bewVorname\":\"Test\",\"matrikelnummer\":\"1901901\",\"prioritaet\":\"2\",\"bewNachname\":\"Student\",\"bewStudiengang\":\"Wirtschaftsinformatik\"}";
         assertEquals(expectedVariables ,returnedVariables.trim());
     }
 }
