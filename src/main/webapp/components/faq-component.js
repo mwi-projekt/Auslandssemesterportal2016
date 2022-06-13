@@ -1,9 +1,10 @@
+import {$} from "../js/config";
 
 let faqComponent = {
     template: `
         <div class="inhalt">
             <div class="container">
-                <div class="inhaltBox show">
+                <div class="inhaltBox show" v-on:click="expandFAQ ()">
                     <h3>{{question1}}<b class="caret"></b></h3>
                     <p class="weg">{{answer2}}</p>
                 </div>
@@ -56,5 +57,16 @@ let faqComponent = {
             answer6_2: "aufgelistet."
             }
     },
+    methods: {
+        expandFAQ: function () {
+            console.log("Test")
+            $('.show').css('cursor', 'pointer');
+            $('.weg').hide();
+            $('.show').on('click', function () {
+                $('.weg').hide();
+                $(this).children('.weg').show();
+            });
+        },
+    }
 }
 export {faqComponent};

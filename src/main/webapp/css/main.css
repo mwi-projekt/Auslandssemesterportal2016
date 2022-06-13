@@ -1,4 +1,4 @@
-/*Allgemeine Settings*/
+/*Common Settings*/
 html,
 body {
   /*width: 100%;*/
@@ -42,7 +42,7 @@ header {
   margin-left: 5px;
 }
 
-/*Auslandsangebote*/
+/*International offers*/
 
 .grid-container {
   display: grid;
@@ -103,7 +103,7 @@ li {
   align-self: center;
 }
 
-/* Erfahrungsberichte*/
+/*Testimonials*/
 
 h4 {
   text-align: center;
@@ -133,7 +133,7 @@ h4 {
   transform: translate(-50%, -50%);
 }
 
-/* Footer*/
+/*Footer*/
 .page-footer {
   -webkit-tap-highlight-color: transparent;
   line-height: 1.42857;
@@ -458,7 +458,7 @@ h4 {
   margin-left: 5px;
 }
 
-/* PopUpFeld */
+/* PopUpField */
 .erfolgreich {
   text-align: center;
   position: fixed;
@@ -539,8 +539,7 @@ h4 {
   /*margin-bottom: 20px;*/
 }
 
-/* Navigationsleiste */
-
+/* Navigationbar */
 .navBar label {
   padding: 10px;
 }
@@ -572,7 +571,7 @@ h4 {
   max-height: 250px;
 }
 
-/* Admin Bereich */
+/* Admin Section */
 #adminBereich .col-md-12 {
   text-align: center;
 }
@@ -623,7 +622,7 @@ h4 {
   background: #c0c0c0;
 }
 
-/* Inhalt Boxen */
+/* Content Boxes */
 .inhaltBox {
   /* -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .5); */
   /* box-shadow: 0 2px 6px rgba(0, 0, 0, .5); */
@@ -665,7 +664,7 @@ h4 {
   font-size: medium;
 }
 
-/* Auslandsangebote */
+/* International offers */
 .studiengang {
   padding-left: 15px;
   cursor: pointer;
@@ -749,7 +748,7 @@ h4 {
   text-decoration: underline;
 }
 
-/* Erfahrungsberichte */
+/* Testimonials */
 .erfahrungsBerichte p {
   font-size: medium;
 }
@@ -800,7 +799,7 @@ i {
   font-size: medium;
 }
 
-/* Nutzerverwaltung */
+/* User administration */
 #nutzerVerwaltung .row {
   padding: 20px;
 }
@@ -846,7 +845,7 @@ i {
   color: rgb(48, 192, 192);
 }
 
-/* CMS zur Auslandsverwaltung */
+/* CMS for international administration */
 .cms {
   display: none;
 }
@@ -1056,4 +1055,9 @@ i {
   position: absolute;
   bottom: 8px;
   left: 16px;
+}
+
+.burgermenuhideitems{
+  opacity: 0;
+  pointer-events: none;
 }
