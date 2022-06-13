@@ -13,8 +13,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.TESTEMAIL;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class UserAuthentificationTest {
@@ -98,5 +97,29 @@ class UserAuthentificationTest {
         User userInfo = UserAuthentification.getUserInfo(request);
 
         assertEquals(user, userInfo);
+    }
+
+    @Test
+    void isTestuserIsTrue() {
+        Cookie[] cookies = new Cookie[] {
+                new Cookie("email", "test@student.dhbw-karlsruhe.de"),
+                new Cookie("sessionID", "anyString")
+        };
+
+        boolean isTestUser = UserAuthentification.isTestUser(cookies);
+
+        assertTrue(isTestUser);
+    }
+
+    @Test
+    void isTestuserIsFalse() {
+        Cookie[] cookies = new Cookie[] {
+                new Cookie("email", "hahn.karen@student.dhbw-karlsruhe.de"),
+                new Cookie("sessionID", "anyString")
+        };
+
+        boolean isTestUser = UserAuthentification.isTestUser(cookies);
+
+        assertFalse(isTestUser);
     }
 }
