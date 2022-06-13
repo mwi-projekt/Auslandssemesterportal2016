@@ -18,5 +18,5 @@ public class BewerbungsDaten {
     private String uniPrio3;
     private final boolean einwilligungUnternehmen = true;
     private final boolean einwilligungStudiengangsleiter = true;
-    private final boolean einverstaendnisBericht = true;
+    private boolean einverstaendnisBericht;
 }

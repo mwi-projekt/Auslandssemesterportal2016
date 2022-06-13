@@ -45,6 +45,7 @@ class GoOutFormularServiceTest {
                 .uniPrio1("California State University San Marcos (USA)")
                 .uniPrio2("South-Eastern Finland University of Applied Sciences (Finnland)")
                 .uniPrio3("Abertay University of Dundee (Schottland)")
+                .einverstaendnisBericht(true)
                 .build();
     }
 

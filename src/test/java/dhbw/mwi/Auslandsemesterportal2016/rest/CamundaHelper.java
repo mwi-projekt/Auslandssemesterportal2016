@@ -88,6 +88,7 @@ public class CamundaHelper {
         map.put("uni3", "Abertay University of Dundee (Schottland)");
         map.put("bewGeburtsdatum", "01.01.2000");
         map.put("bewSemester", "2. Semester");
+        map.put("bewErfahrungsberichtZustimmung", true);
         //relevant für Camunda-Prozess
         map.put("gdprCompliance", Boolean.TRUE);
         map.put("zeitraum", "Frühlings-/Sommersemester 2023");

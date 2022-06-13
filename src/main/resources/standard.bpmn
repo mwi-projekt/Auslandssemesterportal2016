@@ -12,7 +12,6 @@
       </bpmn:lane>
       <bpmn:lane id="Lane_190wn40" name="Mitarbeiter AAA">
         <bpmn:flowNodeRef>EndEvent_true</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>bestaetigungVersenden</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_false</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>abgeschlossen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>abgelehnt</bpmn:flowNodeRef>
@@ -88,16 +87,11 @@
     <bpmn:endEvent id="EndEvent_true" name="Bewerbung erfolgreich abgeschlossen">
       <bpmn:incoming>SequenceFlow_0fihakq</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sendTask id="bestaetigungVersenden" name="Bestätigungs-email versenden" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
-      <bpmn:documentation>Student wird über Annahme bestätigt.</bpmn:documentation>
-      <bpmn:incoming>Flow_1x3as24</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1gd2a3p</bpmn:outgoing>
-    </bpmn:sendTask>
     <bpmn:endEvent id="EndEvent_false" name="Bewerbung erfolglos abgeschlossen">
       <bpmn:incoming>SequenceFlow_1jjp43i</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:userTask id="abgeschlossen" name="Prozess abgeschlossen">
-      <bpmn:incoming>SequenceFlow_1gd2a3p</bpmn:incoming>
+      <bpmn:incoming>Flow_1x3as24</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0fihakq</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="abgelehnt" name="Bewerbung abgelehnt">
@@ -122,7 +116,6 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0fihakq" sourceRef="abgeschlossen" targetRef="EndEvent_true" />
-    <bpmn:sequenceFlow id="SequenceFlow_1gd2a3p" sourceRef="bestaetigungVersenden" targetRef="abgeschlossen" />
     <bpmn:sequenceFlow id="SequenceFlow_1jjp43i" sourceRef="abgelehnt" targetRef="EndEvent_false" />
     <bpmn:sequenceFlow id="SequenceFlow_0ji9cm2" name="Zur Bearbeitung freigeben" sourceRef="ExclusiveGateway_1dolwiq" targetRef="studentBenachrichtigenSGL">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
@@ -234,13 +227,13 @@
       <bpmn:outgoing>Flow_1oc2qvr</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_0596pz2" name="Ablehnen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="abgelehnt" />
-    <bpmn:sequenceFlow id="Flow_1x3as24" sourceRef="goOutUebergeben" targetRef="bestaetigungVersenden" />
+    <bpmn:sequenceFlow id="Flow_1x3as24" sourceRef="goOutUebergeben" targetRef="abgeschlossen" />
     <bpmn:sendTask id="studentBenachrichtigenSGL" name="Student benachrichtigen" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
       <bpmn:documentation>Student wird über Ablehnung informiert.</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_0ji9cm2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0env68s</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:serviceTask id="goOutUebergeben" name="Daten an &#34;Go Out Formular&#34;  übergeben" camunda:class="dhbw.mwi.Auslandsemesterportal2016.service.GoOutFormularService">
+    <bpmn:serviceTask id="goOutUebergeben" name="Daten an &#34;Go Out Formular&#34;  übergeben" camunda:class="dhbw.mwi.Auslandsemesterportal2016.service.GoOutFormularService">
       <bpmn:incoming>SequenceFlow_0trilik</bpmn:incoming>
       <bpmn:outgoing>Flow_1x3as24</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -262,7 +255,7 @@
       <bpmndi:BPMNEdge id="Flow_1x3as24_di" bpmnElement="Flow_1x3as24">
         <di:waypoint x="2930" y="850" />
         <di:waypoint x="2930" y="980" />
-        <di:waypoint x="2973" y="980" />
+        <di:waypoint x="3192" y="980" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0596pz2_di" bpmnElement="Flow_0596pz2">
         <di:waypoint x="2845" y="530" />
@@ -421,10 +414,6 @@
         <di:waypoint x="3292" y="889" />
         <di:waypoint x="3356" y="889" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1gd2a3p_di" bpmnElement="SequenceFlow_1gd2a3p">
-        <di:waypoint x="3073" y="980" />
-        <di:waypoint x="3192" y="980" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0fihakq_di" bpmnElement="SequenceFlow_0fihakq">
         <di:waypoint x="3292" y="980" />
         <di:waypoint x="3356" y="980" />
@@ -524,9 +513,6 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="3337" y="1008" width="74" height="40" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SendTask_14eopq4_di" bpmnElement="bestaetigungVersenden">
-        <dc:Bounds x="2973" y="940" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_18fm4ss_di" bpmnElement="EndEvent_false">
         <dc:Bounds x="3356" y="871" width="36" height="36" />

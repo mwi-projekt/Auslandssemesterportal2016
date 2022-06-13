@@ -14,7 +14,6 @@ import java.util.List;
 
 public class GoOutFormularService implements JavaDelegate {
 
-
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         sendDataToGoOutForm(getRelevantProcessData(delegateExecution.getId()));
@@ -37,6 +36,7 @@ public class GoOutFormularService implements JavaDelegate {
                 .uniPrio1(String.valueOf(runtimeService.getVariable(instanceId, "uni1")))
                 .uniPrio2(String.valueOf(runtimeService.getVariable(instanceId, "uni2")))
                 .uniPrio3(String.valueOf(runtimeService.getVariable(instanceId, "uni3")))
+                .einverstaendnisBericht((Boolean) runtimeService.getVariable(instanceId, "bewErfahrungsberichtZustimmung"))
                 .build();
     }
 
