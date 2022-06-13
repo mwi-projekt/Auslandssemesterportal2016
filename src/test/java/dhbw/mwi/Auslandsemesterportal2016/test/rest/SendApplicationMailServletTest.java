@@ -3,6 +3,7 @@ package dhbw.mwi.Auslandsemesterportal2016.test.rest;
 import dhbw.mwi.Auslandsemesterportal2016.rest.SendApplicationMailServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
@@ -42,6 +43,7 @@ class SendApplicationMailServletTest {
         transport.close();
     }
 
+    @Disabled("Mails senden ist abgeklemmt")
     @Test
     void testDoPost() throws IOException {
         // call protected doPost()-Method of RegisterServlet.class

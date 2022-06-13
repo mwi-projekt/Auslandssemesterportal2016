@@ -12,8 +12,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import dhbw.mwi.Auslandsemesterportal2016.Config;
+import dhbw.mwi.Auslandsemesterportal2016.db.FileCreator;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
+
+import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 
 @WebServlet(name = "ListFilesServlet", urlPatterns = { "/filelist" })
 public class ListFilesServlet extends HttpServlet {
@@ -25,9 +28,9 @@ public class ListFilesServlet extends HttpServlet {
 		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
 
 		if (rolle != 1) {
-			response.sendError(401);
+			response.sendError(SC_UNAUTHORIZED);
 		} else {
-			File folder = new File(Config.UPLOAD_DIR);
+			File folder = FileCreator.getUploadFolder();
 			File[] listOfFiles = folder.listFiles();
 
 			JsonObject json = new JsonObject();

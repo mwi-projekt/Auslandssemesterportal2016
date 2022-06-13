@@ -11,14 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
-@WebServlet(urlPatterns = { "/unis" })
-public class GetUnis extends HttpServlet {
+@WebServlet(urlPatterns = { "/auslandsAngebote" })
+public class AuslandsAngeboteServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request,response);
-		String sql = "SELECT uniTitel FROM cms_auslandsAngeboteInhalt WHERE studiengang ='"
-				+ request.getParameter("studiengang") + "' ";
+		String sql = "SELECT studiengang FROM cms_auslandsAngebote WHERE ID > 0";
 		ResultSet rs = SQLQueries.executeStatement(sql);
 		Util.writeJson(response, rs);
 	}

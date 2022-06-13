@@ -690,10 +690,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `matrikelnummer` int(12) DEFAULT NULL,
   `verifiziert` varchar(65) COLLATE utf8_bin NOT NULL,
   `resetToken` varchar(65) COLLATE utf8_bin NOT NULL,
+  `anzahlFehlversuche` varchar(1) COLLATE utf8_bin DEFAULT "0",
+  `gebanntBis` varchar(100) COLLATE utf8_bin DEFAULT "0",
   PRIMARY KEY (`userID`),
   KEY `rolleID` (`rolle`),
   KEY `matrikelnummer` (`matrikelnummer`)
 ) ENGINE=InnoDB AUTO_INCREMENT=499 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+ALTER TABLE `user`
+add (`anzahlFehlversuche` varchar(1) COLLATE utf8_bin DEFAULT "0"),
+add (`gebanntBis` varchar(100) COLLATE utf8_bin DEFAULT "0");
 
 --
 -- Daten für Tabelle `user`

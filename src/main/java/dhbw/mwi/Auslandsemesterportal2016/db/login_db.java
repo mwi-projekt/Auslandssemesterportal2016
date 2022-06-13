@@ -348,7 +348,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 					"text/plain; charset=UTF-8");
 
 			// Send message
-			Transport.send(message);
+//			Transport.send(message);
 
 		} catch (MessagingException e) {
 			e.printStackTrace();
@@ -378,7 +378,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				message.setContent(mailText, "text/plain; charset=UTF-8");
 			}
 
-			Transport.send(message);
+//			Transport.send(message);
 
 		} catch (MessagingException e) {
 			System.out.print("Could not send email!");
