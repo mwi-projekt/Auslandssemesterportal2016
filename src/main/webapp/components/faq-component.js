@@ -4,7 +4,7 @@ let faqComponent = {
     template: `
         <div class="inhalt">
             <div class="container">
-                <div class="inhaltBox show" v-on:click="expandFAQ ()">
+                <div class="inhaltBox show">
                     <h3>{{question1}}<b class="caret"></b></h3>
                     <p class="weg">{{answer2}}</p>
                 </div>
@@ -18,26 +18,30 @@ let faqComponent = {
                 </div>
                 <div class="inhaltBox show">
                     <h3>{{question4}}<b class="caret"></b></h3>
-                    <p class="weg">{{answer4}}
-                        <a href=\\"https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf\\">\\"Infobroschüre 2020\\"</a>
+                    <p class="weg">
+                        {{answer4}}
+                        <a href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf">"Infobroschüre 2020"</a>
                     </p>
                 </div>
                 <div class="inhaltBox show">
                     <h3>{{question5}}<b class="caret"></b></h3>
-                    <p class="weg">{{answer5}}
-                        <a href=\\"https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf\\">\\"Infobroschüre 2020\\"</a>
-                    {{answer5_2}}
+                    <p class="weg">
+                        {{answer5}}
+                        <a href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf">"Infobroschüre 2020"</a>
+                        {{answer5_2}}
                     </p>
                 </div>
                 <div class="inhaltBox show">
                     <h3>{{question6}}<b class="caret"></b></h3>
-                    <p class="weg">{{answer6}} 
-                        <a href=\\"https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf\\">\\"Infobroschüre 2020\\"</a>
-                    {{answer6_2}}
+                    <p class="weg">
+                        {{answer6}} 
+                        <a href="https://karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf">"Infobroschüre 2020"</a>
+                        {{answer6_2}}
                     </p>
                 </div>
             </div>
         </div>
+
     `,
     data () {
         return {
@@ -55,11 +59,10 @@ let faqComponent = {
             answer5_2: "eingesehen werden. Des Weiteren bieten viele Partnerunternehmen ihren Studierenden weitere Finanzierungsmöglichkeiten an.",
             answer6: "Wir bieten zahlreiche Universitäten in den unterschiedlichsten Ecken der Welt. Das Angebot erstreckt sich von Australien bis USA. Alle Angebote sind in dem Dokument",
             answer6_2: "aufgelistet."
-            }
+        }
     },
     methods: {
         expandFAQ: function () {
-            console.log("Test")
             $('.show').css('cursor', 'pointer');
             $('.weg').hide();
             $('.show').on('click', function () {
@@ -67,6 +70,12 @@ let faqComponent = {
                 $(this).children('.weg').show();
             });
         },
+    },
+    created: function () {
+        this.expandFAQ();
+    },
+    mounted: function () {
+        this.expandFAQ();
     }
 }
 export {faqComponent};
