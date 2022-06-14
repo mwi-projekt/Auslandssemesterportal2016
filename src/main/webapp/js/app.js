@@ -44,7 +44,12 @@ $(document).ready(function () {
     $('#menu-admin').show();
   } else if (sessionStorage['rolle'] == 3) {
     $('#menu-student').show();
-  } else {
+  } else if(sessionStorage['rolle'] == 4){
+    $('#menu-sgl').show();
+  } else if(sessionStorage['rolle'] == 2){
+    $('#menu-aaa').show();
+  }
+  else {
     $('#menu-not-logged-in').show();
   }
 });
@@ -52,7 +57,7 @@ $(document).ready(function () {
 //Check ob Passwörter übereinstimmen
 $(document).on('keyup', '#inPwSt2', function () {
   var inPwSt1 = document.getElementById('inPwSt1'),
-      inPwSt2 = document.getElementById('inPwSt2');
+    inPwSt2 = document.getElementById('inPwSt2');
 
   if (inPwSt1.value != inPwSt2.value) {
     inPwSt2.setCustomValidity('Die Passwörter stimmen nicht überein');
@@ -77,7 +82,6 @@ $(document).on('submit', '#regForm', function (e) {
   var nachname = $('#inNachname').val();
   var email = $('#inMail').val();
 
-
   if (pw1 === pw2) {
     if (studiengang === 'Studiengang*') {
       Swal.fire({
@@ -87,12 +91,12 @@ $(document).on('submit', '#regForm', function (e) {
         confirmButtonText: 'OK',
       });
     } else if (
-        vorname != '' &&
-        nachname != '' &&
-        email != '' &&
-        matrikelnummer != '' &&
-        kurs != '' &&
-        pw1 != ''
+      vorname != '' &&
+      nachname != '' &&
+      email != '' &&
+      matrikelnummer != '' &&
+      kurs != '' &&
+      pw1 != ''
     ) {
       $.ajax({
         type: 'POST',
@@ -129,9 +133,9 @@ $(document).on('submit', '#regForm', function (e) {
             Swal.fire({
               title: 'Registrierung erfolgreich',
               text:
-                  'Bitte bestätigen deine Mailadresse (' +
-                  email +
-                  '), damit du dich im Portal einloggen kannst',
+                'Bitte bestätigen deine Mailadresse (' +
+                email +
+                '), damit du dich im Portal einloggen kannst',
               icon: 'success',
               confirmButtonText: 'OK',
               timer: 8000,
@@ -155,13 +159,10 @@ $(document).on('submit', '#regForm', function (e) {
   }
 });
 
-
-
 $(document).on('submit', '#loginForm', function (e) {
   e.preventDefault();
   var email = $('#inEmail').val();
   var pw = $('#inPasswort').val();
-
   $.ajax({
     type: 'POST',
     url: baseUrl + '/login',
@@ -173,7 +174,7 @@ $(document).on('submit', '#loginForm', function (e) {
       if (data.resultCode == 2) {
         Swal.fire({
           title: 'Fehler!',
-          text: 'Nutzername oder Passwort falsch ',
+          text: 'Nutzername oder Passwort falsch',
           icon: 'error',
           confirmButtonText: 'Erneut versuchen',
         });
@@ -191,21 +192,7 @@ $(document).on('submit', '#loginForm', function (e) {
           icon: 'error',
           confirmButtonText: 'OK',
         });
-      } else if(data.resultCode == 5){
-        Swal.fire({
-          title: 'Fehler!',
-          text: 'Der Account ist wegen zu vieler falscher Eingaben gesperrt',
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
-      } else if(data.resultCode == 6){
-        Swal.fire({
-          title: 'Fehler!',
-          text: 'Der Account wurde wegen zu vieler falscher Eingaben gesperrt',
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
-      } else{
+      } else {
         sessionStorage['rolle'] = data.rolle;
         sessionStorage['matrikelnr'] = data.matrikelnummer;
         sessionStorage['studiengang'] = data.studiengang;
