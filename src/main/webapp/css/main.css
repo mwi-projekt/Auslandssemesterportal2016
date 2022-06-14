@@ -36,6 +36,7 @@ header {
 
 .btn {
   font-size: 0.75rem !important;
+  min-width: 10rem;
 }
 
 #loginButton {
@@ -298,6 +299,7 @@ h4 {
   .btn {
     font-size: 1.2rem !important;
     margin-right: 10px;
+    min-width: 10rem;
   }
 
   #dhbwLogo {
@@ -579,10 +581,12 @@ h4 {
 .btn-red {
   background: #d60000;
   color: #fff;
+  min-width: 10rem;
 }
 
 .btn-red:hover {
   background: #fb2020;
+  min-width: 10rem;
 }
 
 .sticky-footer-container {
@@ -1061,3 +1065,4 @@ i {
   opacity: 0;
   pointer-events: none;
 }
+

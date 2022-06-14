@@ -42,10 +42,10 @@ services:
       DB_USERNAME: ${DB_USER}
       DB_PASSWORD: ${DB_PW}
       WAIT_FOR: mwi_mysql:3306
-      DB_URL: jdbc:mysql://mwi_mysql:3306/camunda_db?autoReconnect=true
+      DB_URL: jdbc:mysql://mwi_mysql:3306/camunda_db?autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true
       MWI_URL: ${SERVER_URL}
       PARCEL_URL: ${PARCEL_SERVER_URL}
-      MWI_DB_URL: "jdbc:mysql://mwi_mysql:3306/mwi?autoReconnect=true&user=${DB_USER}&password=${DB_PW}&serverTimezone=UTC"
+      MWI_DB_URL: "jdbc:mysql://mwi_mysql:3306/mwi?autoReconnect=true&user=${DB_USER}&password=${DB_PW}&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true"
     depends_on: [mwi_mysql]
     volumes:
       - ${VOLUME_UPLOAD}:/camunda/upload

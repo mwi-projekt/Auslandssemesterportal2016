@@ -1,8 +1,8 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
@@ -13,7 +13,10 @@ import javax.mail.Transport;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
+import static dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification.isTestUser;
 import static javax.mail.Transport.send;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -23,24 +26,47 @@ class SendSglApplicationMailServletTest {
 
     private HttpServletRequest request;
     private HttpServletResponse response;
-    private MockedStatic<Transport> transportMockedStatic;
+    private MockedStatic<Transport> transport;
+    private MockedStatic<UserAuthentification> userAuthentification;
 
     @BeforeEach
     void setUp() {
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
 
-        transportMockedStatic = mockStatic(Transport.class);
+        transport = mockStatic(Transport.class);
+        userAuthentification = mockStatic(UserAuthentification.class);
     }
 
     @AfterEach
     void tearDown() {
-        transportMockedStatic.close();
+        transport.close();
+        userAuthentification.close();
     }
 
-    @Disabled("Mails senden ist abgeklemmt")
+    @Test
+    void doPostDoesNotSendMailWhenTestuser() throws IOException {
+        // given
+        userAuthentification.when(() -> isTestUser(any())).thenReturn(true);
+        StringWriter writer = new StringWriter();
+        when(response.getWriter()).thenReturn(new PrintWriter(writer));
+
+        // when
+        new SendApplicationMailServlet() {
+            public void callProtectedMethod(HttpServletRequest request,
+                                            HttpServletResponse response) throws IOException {
+                doPost(request, response);
+            }
+        }.callProtectedMethod(request, response);
+
+        // then
+        assertEquals("Keine E-Mail im Kontext von Tests versendet", writer.toString().trim());
+        transport.verify(() -> Transport.send(any()), times(0));
+    }
+
     @Test
     void doPostSendsMail() throws IOException {
+        userAuthentification.when(() -> isTestUser(any())).thenReturn(false);
         when(request.getParameter("instance_id")).thenReturn("anyInstanceId");
 
         new SendSglApplicationMailServlet() {
@@ -50,7 +76,7 @@ class SendSglApplicationMailServletTest {
             }
         }.callProtectedMethod(request, response);
 
-        transportMockedStatic.verify(() -> send(any()), times(1));
+        transport.verify(() -> send(any()), times(1));
     }
 
     @Test

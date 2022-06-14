@@ -1,6 +1,7 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import com.google.common.annotations.VisibleForTesting;
+import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.db.Util;
 
 import javax.mail.Message;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(name = "SendSglApplicationMailServlet", urlPatterns = { "/sendSqlApplicationMail" })
 public class SendSglApplicationMailServlet extends HttpServlet {
@@ -19,11 +21,16 @@ public class SendSglApplicationMailServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request,response);
 
-		try {
-			Message message = getMessage();
-//			Transport.send(message);
-		} catch (MessagingException e) {
-			e.printStackTrace();
+		// Umgehungslösung: Keine Mails bei Testusern
+		if (UserAuthentification.isTestUser(request.getCookies())) {
+			PrintWriter writer = response.getWriter();
+			writer.print("Keine E-Mail im Kontext von Tests versendet");
+		} else {
+			try {
+				Transport.send(getMessage());
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
