@@ -68,7 +68,7 @@ public class UploadServlet extends HttpServlet {
 					out.close();
 				} else {
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					out.print("Error: wrong file");
+					out.print("Error: wrong file - File is null");
 					out.flush();
 					out.close();
 				}
@@ -76,7 +76,7 @@ public class UploadServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				out.print("Error: wrong file");
+				out.print("Error: wrong file - Exception");
 				out.flush();
 				out.close();
 			}
