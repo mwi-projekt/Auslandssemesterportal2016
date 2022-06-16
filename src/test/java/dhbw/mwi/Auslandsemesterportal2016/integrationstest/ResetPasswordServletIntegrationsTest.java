@@ -1,11 +1,10 @@
 package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
 
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ResetPasswordServletIntegrationsTest {
     @Test

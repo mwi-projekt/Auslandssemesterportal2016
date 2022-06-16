@@ -17,8 +17,11 @@ class GetEmailTextServletIntegrationsTest {
 
     @Test
     void doGetSuccess(){
-        Response loginResponse = post("http://10.3.15.45/login?email=test@sgl.dhbw-karlsruhe.de&pw=8(sdf2aDJiGl,/");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@sgl.dhbw-karlsruhe.de&pw=8(sdf2aDJiGl,/")
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
+
         // instance besorgen
         String getInstanceResponse = given()
                 .cookie("sessionID", sessionID)
@@ -28,9 +31,10 @@ class GetEmailTextServletIntegrationsTest {
                 .queryParam("uni", "California State University San Marcos (USA)")
                 .when()
                 .get("http://10.3.15.45/getInstance")
-                .then().statusCode(200).contentType(ContentType.JSON).extract().response().asString();
+                .then().statusCode(200)
+                .contentType(ContentType.JSON).extract().response().asString();
 
-        JsonObject getInstanceResponseAsJson = new JsonParser().parse(getInstanceResponse).getAsJsonObject();
+        JsonObject getInstanceResponseAsJson = JsonParser.parseString(getInstanceResponse).getAsJsonObject();
         String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();
 
         // notwendige Params setzen
@@ -77,7 +81,6 @@ class GetEmailTextServletIntegrationsTest {
 
     private Map<String, String> getRequestBody(String instanceId) {
         Map<String, String> requestBody = new HashMap<>();
-        // FIXME Wo ist der TestStudent hin?!
         String keys = "gdprCompliance|uni|semesteradresseAnders|uni1|uni2|uni3|validierungErfolgreich|muttersprache|englischNote|bewNachname";
         String values = "true|Standard|false|Abertay University of Dundee (Schottland)|California State University San Marcos (USA)|South-Eastern Finland University of Applied Sciences (Finnland)|true||13|Student";
         String types = "boolean|text|boolean|text|text|text|boolean|text|text|text";

@@ -1,6 +1,5 @@
 package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -8,13 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class UserGetInstanceServletIntegrationsTest {
+class UserGetInstanceServletIntegrationsTest {
     @Test
     void doGetSuccess(){
-        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String response = given()
@@ -26,7 +26,7 @@ public class UserGetInstanceServletIntegrationsTest {
                 .contentType(ContentType.JSON).extract().response().asString();
 
         assertNotNull(response);
-        assertNotNull(new JsonParser().parse(response).getAsJsonObject().get("data").getAsJsonArray());
+        assertNotNull(JsonParser.parseString(response).getAsJsonObject().get("data").getAsJsonArray());
     }
 
 }

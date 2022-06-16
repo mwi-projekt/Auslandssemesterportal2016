@@ -9,34 +9,37 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 
-public class ChangePriorityServletIntegrationsTest {
+class ChangePriorityServletIntegrationsTest {
 
-        @Test
-        void doGetSuccess() {
-            Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM");
-            String sessionID = loginResponse.getCookies().get("sessionID");
+    @Test
+    void doGetSuccess() {
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
+                .then().statusCode(200)
+                .extract().response();
+        String sessionID = loginResponse.getCookies().get("sessionID");
 
-            String getInstanceResponse = given()
-                    .cookie("sessionID", sessionID)
-                    .cookie("email", "test@student.dhbw-karlsruhe.de")
-                    .queryParam("matnr", "190190190")
-                    .queryParam("prio", "2")
-                    .queryParam("uni", "California State University San Marcos (USA)")
-                    .when()
-                    .get("http://10.3.15.45/getInstance")
-                    .then().statusCode(200).contentType(ContentType.JSON).extract().response().asString();
+        String getInstanceResponse = given()
+                .cookie("sessionID", sessionID)
+                .cookie("email", "test@student.dhbw-karlsruhe.de")
+                .queryParam("matnr", "190190190")
+                .queryParam("prio", "2")
+                .queryParam("uni", "California State University San Marcos (USA)")
+                .when()
+                .get("http://10.3.15.45/getInstance")
+                .then().statusCode(200)
+                .contentType(ContentType.JSON).extract().response().asString();
 
-            JsonObject getInstanceResponseAsJson = new JsonParser().parse(getInstanceResponse).getAsJsonObject();
-            String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();
+        JsonObject getInstanceResponseAsJson = JsonParser.parseString(getInstanceResponse).getAsJsonObject();
+        String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();
 
-            given()
-                    .cookie("sessionID", sessionID)
-                    .cookie("email", "test@student.dhbw-karlsruhe.de")
-                    .queryParam("instance", instanceId)
-                    .queryParam("prio", "2")
-                    .when()
-                    .get("http://10.3.15.45/changePriority")
-                    .then().statusCode(200);
-        }
+        given()
+                .cookie("sessionID", sessionID)
+                .cookie("email", "test@student.dhbw-karlsruhe.de")
+                .queryParam("instance", instanceId)
+                .queryParam("prio", "2")
+                .when()
+                .get("http://10.3.15.45/changePriority")
+                .then().statusCode(200);
     }
+}
 

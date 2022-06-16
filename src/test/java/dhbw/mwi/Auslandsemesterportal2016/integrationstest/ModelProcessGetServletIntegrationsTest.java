@@ -5,12 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ModelProcessGetServletIntegrationsTest {
     @Test
     void doGetSuccess() {
-        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String returnedText = given()

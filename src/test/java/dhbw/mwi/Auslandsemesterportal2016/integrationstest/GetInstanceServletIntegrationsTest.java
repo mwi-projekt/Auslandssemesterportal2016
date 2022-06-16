@@ -9,13 +9,14 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class GetInstanceServletIntegrationsTest {
+class GetInstanceServletIntegrationsTest {
 
     @Test
     void doGetSuccess(){
-        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String response = given()
@@ -26,7 +27,7 @@ public class GetInstanceServletIntegrationsTest {
                 .then().statusCode(200)
                 .contentType(ContentType.JSON).extract().response().asString();
 
-        JsonObject responseAsJsonObject = new JsonParser().parse(response).getAsJsonObject();
+        JsonObject responseAsJsonObject = JsonParser.parseString(response).getAsJsonObject();
         assertEquals("\"California State University San Marcos (USA)\"", responseAsJsonObject.get("uni").toString());
     }
 

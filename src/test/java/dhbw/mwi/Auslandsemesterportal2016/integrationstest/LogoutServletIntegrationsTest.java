@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 import static org.hamcrest.Matchers.equalTo;
 
-public class LogoutServletIntegrationsTest {
+class LogoutServletIntegrationsTest {
 
     @Test
     void doGetFailed() {
@@ -17,7 +17,9 @@ public class LogoutServletIntegrationsTest {
 
     @Test
     void doGetSuccess() {
-        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM");
+        Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         given()

@@ -8,13 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SendApplicationMailServletIntegrationsTest {
     @Test
     void doGetSuccess() {
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
-                .then().statusCode(200).extract().response();
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String getInstanceResponse = given()
@@ -25,7 +26,8 @@ class SendApplicationMailServletIntegrationsTest {
                 .queryParam("uni", "California State University San Marcos (USA)")
                 .when()
                 .get("http://10.3.15.45/getInstance")
-                .then().statusCode(200).contentType(ContentType.JSON).extract().response().asString();
+                .then().statusCode(200)
+                .contentType(ContentType.JSON).extract().response().asString();
 
         JsonObject getInstanceResponseAsJson = JsonParser.parseString(getInstanceResponse).getAsJsonObject();
         String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();

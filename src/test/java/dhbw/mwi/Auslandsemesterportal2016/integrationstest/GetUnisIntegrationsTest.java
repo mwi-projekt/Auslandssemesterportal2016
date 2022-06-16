@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.get;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class GetUnisIntegrationsTest {
+class GetUnisIntegrationsTest {
     @Test
     void doGetSuccess(){
 
@@ -15,7 +15,9 @@ public class GetUnisIntegrationsTest {
         "{\"uniTitel\":\"Durban University of Technology (Suedafrika)\"},{\"uniTitel\":\"South-Eastern Finland University of Applied Sciences (Finnland)\"}," +
         "{\"uniTitel\":\"Standard\"}]}";
 
-        String response = get("http://10.3.15.45/unis?studiengang=Wirtschaftsinformatik").then().contentType(ContentType.JSON).extract().response().asString();
+        String response = get("http://10.3.15.45/unis?studiengang=Wirtschaftsinformatik")
+                .then().statusCode(200)
+                .contentType(ContentType.JSON).extract().response().asString();
         assertEquals(expected, response);
     }
 }

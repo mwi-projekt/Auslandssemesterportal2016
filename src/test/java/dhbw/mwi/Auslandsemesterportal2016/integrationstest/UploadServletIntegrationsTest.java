@@ -16,13 +16,14 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UploadServletIntegrationsTest {
     @Test
     void doPostSuccess() throws IOException {
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
-                .then().statusCode(200).extract().response();
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String getInstanceResponse = given()
@@ -33,18 +34,14 @@ class UploadServletIntegrationsTest {
                 .queryParam("uni", "California State University San Marcos (USA)")
                 .when()
                 .get("http://10.3.15.45/getInstance")
-                .then().statusCode(200).contentType(ContentType.JSON).extract().response().asString();
+                .then().statusCode(200)
+                .contentType(ContentType.JSON).extract().response().asString();
 
         JsonObject getInstanceResponseAsJson = JsonParser.parseString(getInstanceResponse).getAsJsonObject();
         String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("instance", instanceId);
-        map.put("action", "daadHochladen");
-
-        File testFile = new File("Test.pdf");
-        List<String> input = Arrays.asList("Test", "Test");
-        Files.write(testFile.toPath(),input);
+        Map<String, Object> map = getMap(instanceId);
+        File testFile = getTestFile();
 
         given()
                 .multiPart(testFile)
@@ -55,6 +52,21 @@ class UploadServletIntegrationsTest {
                 .post("http://10.3.15.45/upload")
                 .then().statusCode(200);
     }
+
+    private File getTestFile() throws IOException {
+        File testFile = new File("Test.pdf");
+        List<String> input = Arrays.asList("Test", "Test");
+        Files.write(testFile.toPath(),input);
+        return testFile;
+    }
+
+    private Map<String, Object> getMap(String instanceId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("instance", instanceId);
+        map.put("action", "daadHochladen");
+        return map;
+    }
+
     @Test
     void doOptionsSuccess(){
         String response = given()

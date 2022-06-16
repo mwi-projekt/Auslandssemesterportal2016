@@ -1,6 +1,5 @@
 package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.restassured.http.ContentType;
@@ -9,13 +8,15 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GetAdminTasksServletIntegrationsTest {
     @Test
     void doGetSuccess() {
         Response loginResponse = post("http://10.3.15.45/login?email=admin@admin.de&pw=khjfjKDdsf254s#!")
-                .then().statusCode(200).extract().response();
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String response = given()
@@ -28,8 +29,7 @@ class GetAdminTasksServletIntegrationsTest {
 
         JsonObject json = JsonParser.parseString(response).getAsJsonObject();
         assertNotNull(json);
-        JsonArray dataJsonArray = json.get("data").getAsJsonArray();
-        assertNotNull(dataJsonArray);
+        assertNotNull(json.get("data").getAsJsonArray());
         assertTrue(response.contains("complete"));
     }
 }

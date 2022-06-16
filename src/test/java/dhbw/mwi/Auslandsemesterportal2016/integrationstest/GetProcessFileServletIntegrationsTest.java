@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -17,13 +16,14 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GetProcessFileServletIntegrationsTest {
     @Test
     void doHeadNotFound() {
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
-                .then().statusCode(200).extract().response();
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String getInstanceResponse = given()
@@ -34,7 +34,8 @@ class GetProcessFileServletIntegrationsTest {
                 .queryParam("uni", "California State University San Marcos (USA)")
                 .when()
                 .get("http://10.3.15.45/getInstance")
-                .then().statusCode(200).contentType(ContentType.JSON).extract().response().asString();
+                .then().statusCode(200)
+                .contentType(ContentType.JSON).extract().response().asString();
 
         JsonObject getInstanceResponseAsJson = JsonParser.parseString(getInstanceResponse).getAsJsonObject();
         String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();
@@ -51,7 +52,8 @@ class GetProcessFileServletIntegrationsTest {
     @Test
     void doGetSuccess() throws IOException {
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
-                .then().statusCode(200).extract().response();
+                .then().statusCode(200)
+                .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String getInstanceResponse = given()
@@ -62,18 +64,15 @@ class GetProcessFileServletIntegrationsTest {
                 .queryParam("uni", "California State University San Marcos (USA)")
                 .when()
                 .get("http://10.3.15.45/getInstance")
-                .then().statusCode(200).contentType(ContentType.JSON).extract().response().asString();
+                .then().statusCode(200)
+                .contentType(ContentType.JSON).extract().response().asString();
 
         JsonObject getInstanceResponseAsJson = JsonParser.parseString(getInstanceResponse).getAsJsonObject();
         String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();
 
-        File testFile = new File("Test.pdf");
-        List<String> input = Arrays.asList("Test", "Test");
-        Files.write(testFile.toPath(),input);
+        File testFile = getTestFile();
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("instance", instanceId);
-        map.put("action", "daadFormularEnglisch");
+        Map<String, Object> map = getMap(instanceId);
 
         given()
                 .multiPart(testFile)
@@ -95,5 +94,19 @@ class GetProcessFileServletIntegrationsTest {
                 .extract().response();
 
         assertEquals("",response.contentType());
+    }
+
+    private Map<String, Object> getMap(String instanceId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("instance", instanceId);
+        map.put("action", "daadFormularEnglisch");
+        return map;
+    }
+
+    private File getTestFile() throws IOException {
+        File testFile = new File("Test.pdf");
+        List<String> input = Arrays.asList("Test", "Test");
+        Files.write(testFile.toPath(),input);
+        return testFile;
     }
 }
