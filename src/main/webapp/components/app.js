@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import {faqComponent} from "./faq-component.js";
 import {footerComponent} from "./footer-component.js";
 import {forgot_pwComponent} from "./forgot_pw-component.js";
+import {change_pwComponent} from "./change_pw-component.js";
 
 const app1 = createApp({
     components: {
@@ -23,3 +24,10 @@ const app3 = createApp({
     },
 });
 app3.mount('#vue-forgotPW');
+
+const app4 = createApp({
+    components: {
+        'change_pw-component': change_pwComponent,
+    },
+});
+app4.mount('#vue-changePW');
