@@ -697,10 +697,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   KEY `matrikelnummer` (`matrikelnummer`)
 ) ENGINE=InnoDB AUTO_INCREMENT=499 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-ALTER TABLE `user`
-add (`anzahlFehlversuche` varchar(1) COLLATE utf8_bin DEFAULT "0"),
-add (`gebanntBis` varchar(100) COLLATE utf8_bin DEFAULT "0");
-
 --
 -- Daten für Tabelle `user`
 --
@@ -761,6 +757,10 @@ INSERT INTO `user` (`userID`, `rolle`, `nachname`, `vorname`, `passwort`, `salt`
 (497, 3, 'graf', 'florian', '3233625e5f03d3c668d386ba49cc9998d52a43eb2395623bf1c90470fb0781c5', '3a1fdfb3c3d165275b76063eade16ea89eb93c5d1bc6c9b92422b01447aa4fb7', 'graf.florian@student.dhbw-karlsruhe.de', NULL, NULL, 'DHBW_Karlsruhe', 'Wirtschaftsinformatik', 'WWI19B5', 3607246, '1', ''),
 (498, 3, 'Westenhoff', 'Marius', '16041628ef4d90e6f3d926617197432f3b41ff4c30e02172357588fc82a2a27d', 'a8347e3608a04f0f85c4c1c07a5307877971078783ff3373a59e29c18a051f1d', 'westenhoff.marius@student.dhbw-karlsruhe.de', NULL, NULL, 'DHBW_Karlsruhe', 'Wirtschaftsinformatik', 'WWI19B5', 7563559, '1', '');
 COMMIT;
+
+ALTER TABLE `user`
+add (`anzahlFehlversuche` varchar(1) COLLATE utf8_bin DEFAULT "0"),
+add (`gebanntBis` varchar(100) COLLATE utf8_bin DEFAULT "0");
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
