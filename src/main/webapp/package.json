@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "parcel": "rimraf dist && rimraf .parcel-cache && parcel *.html",
-    "build": "tsc && parcel build *.html"
+    "build": "rimraf dist && rimraf .parcel-cache && parcel build *.html"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,9 @@
     "url": "https://github.com/mwi-projekt/Auslandssemesterportal2016/issues"
   },
   "homepage": "https://github.com/mwi-projekt/Auslandssemesterportal2016#readme",
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.esm-browser.js"
+  },
   "staticFiles": {
     "staticPath": [
       {
@@ -64,6 +67,7 @@
     "jquery-validation": "^1.19.1",
     "js": "^0.1.0",
     "jspdf": "^1.5.3",
-    "sweetalert2": "^9.6.1"
+    "sweetalert2": "^9.6.1",
+    "vue": "^3.2.37"
   }
 }
