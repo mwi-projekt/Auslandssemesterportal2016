@@ -26,9 +26,10 @@ public class LoginServlet extends HttpServlet {
 		mail = request.getParameter("email");
 		salt = SQLQueries.getSalt(mail);
 		String[] result = SQLQueries.userLogin(mail, salt, request.getParameter("pw"));
-		Cookie cookie = new Cookie("sessionID", result[4]);
+		//Cookie cookie = new Cookie("sessionID", result[4]);
 		Cookie mailcookie = new Cookie("email", mail);
-		response.addCookie(cookie);
+		response.addHeader("Set-Cookie", "sessionID="+result[4]+"; HttpOnly; SameSite=strict");
+		//response.addCookie(cookie);
 		response.addCookie(mailcookie);
 		JsonObject json = new JsonObject();
 		json.addProperty("resultCode", result[0]);
