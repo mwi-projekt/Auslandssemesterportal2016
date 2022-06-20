@@ -1,5 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.service;
 
+import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.*;
 import com.google.common.annotations.VisibleForTesting;
@@ -36,7 +37,8 @@ public class GoOutFormularService implements JavaDelegate {
                 .uniPrio1(String.valueOf(runtimeService.getVariable(instanceId, "uni1")))
                 .uniPrio2(String.valueOf(runtimeService.getVariable(instanceId, "uni2")))
                 .uniPrio3(String.valueOf(runtimeService.getVariable(instanceId, "uni3")))
-                .einverstaendnisBericht((Boolean) runtimeService.getVariable(instanceId, "bewErfahrungsberichtZustimmung"))
+                .einverstaendnisBericht(true) // TODO (Boolean) runtimeService.getVariable(instanceId, "bewErfahrungsberichtZustimmung"), sobald vorhanden
+                .benachteiligung("") // TODO Wert abfragen, sobald vorhanden
                 .build();
     }
 
@@ -49,23 +51,24 @@ public class GoOutFormularService implements JavaDelegate {
             fillForm(bewerbungsDaten, goOutWebsite);
 
             sendData(goOutWebsite);
+            webClient.close();
         } catch (IOException e) {
             // send Mail to Freytag?
         }
-
-        webClient.close();
     }
 
-    private void sendData(HtmlPage goOutWebsite) throws IOException {
+    @VisibleForTesting
+    public HtmlPage sendData(HtmlPage goOutWebsite) throws IOException {
         List<HtmlSubmitInput> submitButton = goOutWebsite.getByXPath("/html/body/main/div/div[3]/div/div[2]/div[3]/div/div/div/form/fieldset/div[9]/div/div/input");
         if (submitButton.size() == 1) {
-            submitButton.get(0).click();
+            return submitButton.get(0).click();
         } else {
             throw new IOException("Element konnte nicht eindeutig gefunden werden.");
         }
     }
 
-    private void fillForm(BewerbungsDaten bewerbungsDaten, HtmlPage goOutWebsite) {
+    @VisibleForTesting
+    public void fillForm(BewerbungsDaten bewerbungsDaten, HtmlPage goOutWebsite) {
         HtmlInput fieldName = goOutWebsite.getHtmlElementById("powermail_field_name");
         fieldName.setValueAttribute(bewerbungsDaten.getName());
 
@@ -98,6 +101,9 @@ public class GoOutFormularService implements JavaDelegate {
 
         HtmlInput fieldGenehmigungStudiengangsleitung = goOutWebsite.getHtmlElementById("powermail_field_hatbereitseineabsprachemitderstudiengangsleitungstattgefunden");
         fieldGenehmigungStudiengangsleitung.setValueAttribute(bewerbungsDaten.isEinwilligungStudiengangsleiter() ? "Ja" : "Nein");
+
+        HtmlTextArea fieldBenachteiligung = goOutWebsite.getHtmlElementById("powermail_field_zaehlensiesichinbezugaufihrebildungschancenzueinerbenachteiligtengruppezberstepersonausderfamiliediestudiertfallsjastellensiediesbittekurzda");
+        fieldBenachteiligung.setText(null == bewerbungsDaten.getBenachteiligung() ? "" : bewerbungsDaten.getBenachteiligung());
 
         HtmlRadioButtonInput fieldEinverstaendnisBerichtJa = goOutWebsite.getHtmlElementById("powermail_field_einverstaendniserklaerungbericht_1");
         HtmlRadioButtonInput fieldEinverstaendnisBerichtNein = goOutWebsite.getHtmlElementById("powermail_field_einverstaendniserklaerungbericht_2");
