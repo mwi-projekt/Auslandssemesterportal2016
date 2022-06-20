@@ -79,6 +79,13 @@ public class CamundaHelper {
         updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
     }
 
+    public void processTestServiceTask(String instanceId) {
+        for (int i = 0; i < 9; i++) {
+            updateInstance(instanceId, "uni1", "California State University San Marcos (USA)", "text");
+        }
+        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
+    }
+
     public void processUntilSendToGoOut(String instanceId) {
         setVariables(instanceId);
         Map<String, Object> map = new HashMap<>();
