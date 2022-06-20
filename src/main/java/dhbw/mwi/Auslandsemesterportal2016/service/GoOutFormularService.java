@@ -1,6 +1,5 @@
 package dhbw.mwi.Auslandsemesterportal2016.service;
 
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.*;
 import com.google.common.annotations.VisibleForTesting;
@@ -45,16 +44,20 @@ public class GoOutFormularService implements JavaDelegate {
     private void sendDataToGoOutForm(BewerbungsDaten bewerbungsDaten) {
         WebClient webClient = new WebClient();
         webClient.getOptions().setJavaScriptEnabled(true);
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setTimeout(10000);
 
         try {
             HtmlPage goOutWebsite = webClient.getPage("https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html");
+            webClient.waitForBackgroundJavaScript(10000);
 
             fillForm(bewerbungsDaten, goOutWebsite);
 
             sendData(goOutWebsite);
-            webClient.close();
         } catch (IOException e) {
             // send Mail to Freytag?
+        } finally {
+            webClient.close();
         }
     }
 
