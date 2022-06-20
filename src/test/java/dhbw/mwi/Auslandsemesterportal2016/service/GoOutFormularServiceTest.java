@@ -66,9 +66,10 @@ class GoOutFormularServiceTest {
     @Test
     void testGoOutWebsiteWithoutSubmitting() {
         WebClient webClient = new WebClient();
+        webClient.getOptions().setTimeout(10000);
         HtmlPage goOutWebsite = null;
         try {
-            goOutWebsite = webClient.getPage("10.3.15.45:8085");
+            goOutWebsite = webClient.getPage("http://10.3.15.45:8085");
         } catch (IOException e) {
             fail();
         }
@@ -82,26 +83,6 @@ class GoOutFormularServiceTest {
             fail();
         }
 
-        System.out.println(result.toString());
-
-//        assertEquals("Test Admin", goOutWebsite.getHtmlElementById("powermail_field_name").getAttribute("value"));
-//        assertEquals("01.01.2000", goOutWebsite.getHtmlElementById("powermail_field_geburtsdatum").getAttribute("value"));
-    }
-
-    @Test
-    void testGetSubmitButton() {
-        WebClient webClient = new WebClient();
-        HtmlPage goOutWebsite = null;
-
-        try {
-            goOutWebsite = webClient.getPage("https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html");
-        } catch (IOException e) {
-            fail();
-        }
-        List<HtmlSubmitInput> submitButton = goOutWebsite.getByXPath("/html/body/main/div/div[3]/div/div[2]/div[3]/div/div/div/form/fieldset/div[9]/div/div/input");
-        assertEquals(1, submitButton.size());
-
-        assertEquals("Absenden", submitButton.get(0).getAttribute("value"));
-        assertEquals("btn btn-primary", submitButton.get(0).getAttribute("class"));
+        System.out.println(result.getBody().getTextContent());
     }
 }

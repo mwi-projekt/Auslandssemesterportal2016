@@ -46,9 +46,7 @@ public class GoOutFormularService implements JavaDelegate {
         WebClient webClient = new WebClient();
 
         try {
-            String url = "https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html";
-            String testUrl = "10.3.15.45:8085";
-            HtmlPage goOutWebsite = webClient.getPage(testUrl);
+            HtmlPage goOutWebsite = webClient.getPage("https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html");
 
             fillForm(bewerbungsDaten, goOutWebsite);
 
@@ -104,8 +102,8 @@ public class GoOutFormularService implements JavaDelegate {
         HtmlInput fieldGenehmigungStudiengangsleitung = goOutWebsite.getHtmlElementById("powermail_field_hatbereitseineabsprachemitderstudiengangsleitungstattgefunden");
         fieldGenehmigungStudiengangsleitung.setValueAttribute(bewerbungsDaten.isEinwilligungStudiengangsleiter() ? "Ja" : "Nein");
 
-        HtmlInput fieldBenachteiligung = goOutWebsite.getHtmlElementById("powermail_field_zaehlensiesichinbezugaufihrebildungschancenzueinerbenachteiligtengruppezberstepersonausderfamiliediestudiertfallsjastellensiediesbittekurzda");
-        fieldBenachteiligung.setValueAttribute(null == bewerbungsDaten.getBenachteiligung() ? "" : bewerbungsDaten.getBenachteiligung());
+        HtmlTextArea fieldBenachteiligung = goOutWebsite.getHtmlElementById("powermail_field_zaehlensiesichinbezugaufihrebildungschancenzueinerbenachteiligtengruppezberstepersonausderfamiliediestudiertfallsjastellensiediesbittekurzda");
+        fieldBenachteiligung.setText(null == bewerbungsDaten.getBenachteiligung() ? "" : bewerbungsDaten.getBenachteiligung());
 
         HtmlRadioButtonInput fieldEinverstaendnisBerichtJa = goOutWebsite.getHtmlElementById("powermail_field_einverstaendniserklaerungbericht_1");
         HtmlRadioButtonInput fieldEinverstaendnisBerichtNein = goOutWebsite.getHtmlElementById("powermail_field_einverstaendniserklaerungbericht_2");
