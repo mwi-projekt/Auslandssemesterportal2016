@@ -44,6 +44,7 @@ public class GoOutFormularService implements JavaDelegate {
 
     private void sendDataToGoOutForm(BewerbungsDaten bewerbungsDaten) {
         WebClient webClient = new WebClient();
+        webClient.getOptions().setJavaScriptEnabled(true);
 
         try {
             HtmlPage goOutWebsite = webClient.getPage("https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html");
