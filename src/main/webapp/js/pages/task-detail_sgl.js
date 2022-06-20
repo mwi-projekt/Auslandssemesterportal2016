@@ -280,8 +280,8 @@ function parse() {
                             visibleStepName = "Partnerunternehmen";
                         } else if (stepName === "Task_1jq3nab") {
                             visibleStepName = "Semesteranschrift";
-                        } else if (stepName === "englischNotePruefen") {
-                            visibleStepName = "Notenpunkte im Abitur";
+                        // } else if (stepName === "englischNotePruefen") {
+                        //     visibleStepName = "Notenpunkte im Abitur";
                         } else {
                             visibleStepName = "Sonstige Angaben";
                         }
