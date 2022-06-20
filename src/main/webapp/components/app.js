@@ -1,12 +1,12 @@
 import { createApp } from 'vue'
-import {faqComponent} from "./faq-component.js";
-import {footerComponent} from "./footer-component.js";
-import {forgot_pwComponent} from "./forgot_pw-component.js";
-import {change_pwComponent} from "./change_pw-component.js";
+import faqComponent from "./faq-component.vue";
+import footerComponent from "./footer-component.vue";
+import forgot_pwComponent from "./forgot_pw-component.vue";
+import change_pwComponent from "./change_pw-component.vue";
 
 const app1 = createApp({
     components: {
-        'faq-component': faqComponent
+        'faq-component': faqComponent,
     },
 });
 app1.mount('#vue-faq');
