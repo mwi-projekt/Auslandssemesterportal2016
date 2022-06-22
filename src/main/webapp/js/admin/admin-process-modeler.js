@@ -5,10 +5,17 @@ import "jquery-ui-dist/jquery-ui";
 import "ckeditor4/ckeditor";
 import "bootstrap-switch";
 import "../jquery.dynamicdom";
-import selectForm from "../../modals/select-form.html";
-import textForm from "../../modals/text-form.html";
-import checkboxForm from "../../modals/checkbox-form.html";
-import uploadForm from "../../modals/upload-form.html";
+import selectFormUrl from "../../modals/select-form.html";
+import textFormUrl from "../../modals/text-form.html";
+import checkboxFormUrl from "../../modals/checkbox-form.html";
+import uploadFormUrl from "../../modals/upload-form.html";
+
+var selectForm, textForm, checkboxForm, uploadForm;
+
+$.get(selectFormUrl, function(response) { selectFormUrl = response; });
+$.get(textFormUrl, function(response) { textForm = response; });
+$.get(checkboxFormUrl, function(response) { checkboxForm = response; });
+$.get(uploadFormUrl, function(response) { uploadForm = response; });
 
 var siteHasUnsavedChanges = false;
 

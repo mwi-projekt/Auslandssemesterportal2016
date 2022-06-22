@@ -4,8 +4,10 @@
   "description": "Neuaufsetzung des Projekts Auslandssemesterportal2016",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "parcel": "rimraf dist && rimraf .parcel-cache && parcel *.html",
-    "build": "rimraf dist && rimraf .parcel-cache && parcel build *.html"
+    "parcel": "rimraf dist && rimraf .parcel-cache && npm run copy && parcel *.html",
+    "copy": "mkdir -p dist && cp -r ./docs dist/docs/ && cp -r ./videos dist/videos/ && npm run copy:ckeditor",
+    "copy:ckeditor": "cp ./node_modules/ckeditor4/config.js dist/config.js && cp ./node_modules/ckeditor4/styles.js dist/styles.js && cp -r ./node_modules/ckeditor4/lang dist/lang/ && cp -r ./node_modules/ckeditor4/skins dist/skins/ && cp -r ./node_modules/ckeditor4/plugins dist/plugins/",
+    "build": "rimraf dist && rimraf .parcel-cache && npm run copy && parcel build *.html"
   },
   "repository": {
     "type": "git",
@@ -19,21 +21,6 @@
   "homepage": "https://github.com/mwi-projekt/Auslandssemesterportal2016#readme",
   "alias": {
     "vue": "./node_modules/vue/dist/vue.esm-browser.js"
-  },
-  "staticFiles": {
-    "staticPath": [
-      {
-        "staticPath": "./node_modules/ckeditor4"
-      },
-      {
-        "staticPath": "./docs",
-        "staticOutDir": "docs"
-      },
-      {
-        "staticPath": "./videos",
-        "staticOutDir": "videos"
-      }
-    ]
   },
   "devDependencies": {
     "@parcel/transformer-vue": "^2.6.0",
