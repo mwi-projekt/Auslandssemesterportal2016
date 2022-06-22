@@ -1,8 +1,8 @@
 import {$,baseUrl} from "../config";
 import "../app";
-require( 'datatables.net' )(window, $);
-require( 'datatables.net-bs4' )(window, $);
-require( 'datatables.net-buttons' )(window, $);
+import 'datatables.net';
+import 'datatables.net-bs4';
+import 'datatables.net-buttons';
 import Swal from "sweetalert2";
 import "jquery-ui-dist/jquery-ui";
 import "bootstrap";

@@ -12,7 +12,7 @@ services:
       MYSQL_PASSWORD: ${DB_PW}
       MYSQL_DATABASE: camunda_db
     volumes:
-      - ${VOLUME_DB}:/var/lib/mysql
+      - db:/var/lib/mysql
     networks:
       - mwi-network
 
@@ -48,23 +48,9 @@ services:
       MWI_DB_URL: "jdbc:mysql://mwi_mysql:3306/mwi?autoReconnect=true&user=${DB_USER}&password=${DB_PW}&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true"
     depends_on: [mwi_mysql]
     volumes:
-      - ${VOLUME_UPLOAD}:/camunda/upload
+      - upload:/camunda/upload
     networks:
       - mwi-network
-
-  web:
-    build: ./docker/web
-    restart: always
-    ports:
-      - "80:80"
-    networks:
-      - mwi-network
-    volumes:
-      - ${VOLUME_UPLOAD}:/etc/nginx/html/files
-    depends_on:
-      - mwi_mysql
-      - mwi
-      - phpmyadmin
 
   go-out:
     build: ./docker/go-out-test
@@ -74,3 +60,7 @@ services:
 
 networks:
   mwi-network:
+
+volumes:
+  upload:
+  db:
