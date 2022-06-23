@@ -282,6 +282,8 @@ function parse() {
                             visibleStepName = "Semesteranschrift";
                         // } else if (stepName === "englischNotePruefen") {
                         //     visibleStepName = "Notenpunkte im Abitur";
+                        } else if (stepName === 'universitaetAuswaehlen') {
+                          visibleStepName = "Universität Prioritäten";
                         } else {
                             visibleStepName = "Sonstige Angaben";
                         }
