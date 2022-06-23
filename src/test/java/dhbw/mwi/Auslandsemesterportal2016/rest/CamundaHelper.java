@@ -15,8 +15,16 @@ import java.util.Map;
 
 import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.*;
 
+/**
+ * Diese Klasse wird von den Unit-Test angesprochen, um Prozesse in einen bestimmten Status zu bringen (Task)
+ * Es gibt folgende UserTasks:
+ * downloadsAnbieten, universitaetAuswaehlen, datenEingeben, datenEingebenUnt, dualisHochladen, datenPruefen,
+ * datenValidierenSGL, abgelehnt, abgeschlossen
+ *
+ * und folgende automatisierte Tasks:
+ * goOutUebergeben, studentBenachrichtigenSGL
+ */
 public class CamundaHelper {
-
 
     private final RuntimeService runtimeService;
     private final TaskService taskService;
@@ -26,16 +34,29 @@ public class CamundaHelper {
         taskService = processEngine.getTaskService();
     }
 
+    /**
+     * Prozess findet sich im Status "downloadsAnbieten"
+     * @param model Name des BPMN-Modells
+     * @return instanceId
+     */
     public String startProcess(String model) {
         return runtimeService.startProcessInstanceByKey(model).getId();
     }
 
+    /**
+     * Prozess befindet sich im Status "downloadsAnbieten"
+     * @param instanceId
+     */
     public void processUntilUniversitaetAuswaehlen(String instanceId) {
         setVariables(instanceId);
         updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
     }
 
-    public void processUntilDaadHochladen(String instanceId) throws FileNotFoundException {
+    /**
+     * Prozess befindet sich im Status "datenPruefen" und es wurde ein Formular hochgeladen
+     * @param instanceId
+     */
+    public void processHasDualisDocument(String instanceId) throws FileNotFoundException {
         processUntilUniversitaetAuswaehlen(instanceId);
         for (int i = 0; i<4; i++) {
             updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
@@ -47,46 +68,45 @@ public class CamundaHelper {
         System.out.println(runtimeService.getVariable(instanceId, "daadHochladen"));
     }
 
+    /**
+     * Prozess befindet sich im Status "datenPruefen"
+     * @param instanceId
+     */
     public void processUntilDatenPruefen(String instanceId) {
         processUntilUniversitaetAuswaehlen(instanceId);
-        for (int i=0; i<9; i++) {
+        for (int i=0; i<4; i++) {
             updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
         }
     }
 
+    /**
+     * Prozess befindet sich im Status "datenValidierenSGL"
+     * @param instanceId
+     */
     public void processUntilDatenValidierenSGL(String instanceId) {
         processUntilDatenPruefen(instanceId);
         updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
     }
 
+    /**
+     * Prozess wird zurückgesetzt und befindet sich im Status "downloadsAnbieten"
+     * @param instanceId
+     */
     public void processUntilUeberarbeiten(String instanceId) {
         processUntilDatenValidierenSGL(instanceId);
         updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONEDITSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
     }
 
+    /**
+     * Prozess befindet sich im Status "abgelehnt"
+     * @param instanceId
+     */
     public void processUntilAblehnen(String instanceId) {
         processUntilDatenValidierenSGL(instanceId);
         updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONREJECTEDSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
     }
 
-    public void processUntilValidierenAAA(String instanceId) {
-        processUntilDatenValidierenSGL(instanceId);
-        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
-    }
-
-    public void processUntilAbschliessen(String instanceId) {
-        processUntilValidierenAAA(instanceId);
-        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
-    }
-
-    public void processTestServiceTask(String instanceId) {
-        for (int i = 0; i < 9; i++) {
-            updateInstance(instanceId, "uni1", "California State University San Marcos (USA)", "text");
-        }
-        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
-    }
-
-    public void processUntilSendToGoOut(String instanceId) {
+    public void prepareProcessForTestGoOut(String instanceId) {
         setVariables(instanceId);
         Map<String, Object> map = new HashMap<>();
         // relevant für go out

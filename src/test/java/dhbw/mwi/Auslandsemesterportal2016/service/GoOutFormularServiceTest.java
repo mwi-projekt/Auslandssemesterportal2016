@@ -7,11 +7,11 @@ import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
-import java.util.List;
 
 import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,10 +59,11 @@ class GoOutFormularServiceTest {
 
     private String prozessInstanzVorbereiten() {
         String instanceId = camundaHelper.startProcess("standard");
-        camundaHelper.processUntilSendToGoOut(instanceId);
+        camundaHelper.prepareProcessForTestGoOut(instanceId);
         return instanceId;
     }
 
+    @Disabled("nur für lokales Testen (Ausführender muss im DH-VPN sein)")
     @Test
     void testGoOutWebsiteWithoutSubmitting() {
         WebClient webClient = new WebClient();

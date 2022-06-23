@@ -64,11 +64,11 @@ class GetProcessFileServletTest {
         verify(response, times(1)).sendError(SC_BAD_REQUEST, PARAMMISSING.toString());
     }
 
-    @Disabled
+    @Disabled("TODO")
     @Test
     void doHeadFileExists() throws IOException {
         String instanceId = camundaHelper.startProcess("standard");
-        camundaHelper.processUntilDaadHochladen(instanceId);
+        camundaHelper.processHasDualisDocument(instanceId);
         when(request.getParameter("instance_id")).thenReturn(instanceId);
 
         new GetProcessFileServlet() {
@@ -137,11 +137,11 @@ class GetProcessFileServletTest {
         verify(response, times(1)).sendError(SC_NOT_FOUND);
     }
 
-    @Disabled
+    @Disabled("TODO")
     @Test
     void doGetFile() throws IOException {
         String instanceId = camundaHelper.startProcess("standard");
-        camundaHelper.processUntilDaadHochladen(instanceId);
+        camundaHelper.processHasDualisDocument(instanceId);
         when(request.getParameter("instance_id")).thenReturn(instanceId);
 
         new GetProcessFileServlet() {
