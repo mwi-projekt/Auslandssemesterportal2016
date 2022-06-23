@@ -12,7 +12,7 @@ import uploadFormUrl from "../../modals/upload-form.html";
 
 var selectForm, textForm, checkboxForm, uploadForm;
 
-$.get(selectFormUrl, function(response) { selectFormUrl = response; });
+$.get(selectFormUrl, function(response) { selectForm = response; });
 $.get(textFormUrl, function(response) { textForm = response; });
 $.get(checkboxFormUrl, function(response) { checkboxForm = response; });
 $.get(uploadFormUrl, function(response) { uploadForm = response; });
