@@ -1,5 +1,4 @@
 import { $, baseUrl } from './config';
-import '../components/app';
 import Swal from 'sweetalert2';
 import 'jquery-ui-dist/jquery-ui';
 import 'cookieconsent';
