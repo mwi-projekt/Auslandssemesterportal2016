@@ -1,8 +1,7 @@
-import $ from "jquery";
-import _,{baseUrl} from "../config.js";
-require( 'datatables.net' )(window, $);
-require( 'datatables.net-bs4' )(window, $);
-require( 'datatables.net-buttons' )(window, $);
+import _,{baseUrl, $} from "../config.js";
+import 'datatables.net';
+import 'datatables.net-bs4';
+import 'datatables.net-buttons';
 require("jquery-validation")($);
 require("jquery-validation/dist/localization/messages_de.min");
 import Swal from "sweetalert2";
