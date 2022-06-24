@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test.rest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
