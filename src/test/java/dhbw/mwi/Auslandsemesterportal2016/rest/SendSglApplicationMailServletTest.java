@@ -10,6 +10,7 @@ import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -47,7 +48,7 @@ class SendSglApplicationMailServletTest {
     @Test
     void doPostDoesNotSendMailWhenTestuser() throws IOException {
         // given
-        userAuthentification.when(() -> isTestUser(any())).thenReturn(true);
+        userAuthentification.when(() -> isTestUser((Cookie[]) any())).thenReturn(true);
         StringWriter writer = new StringWriter();
         when(response.getWriter()).thenReturn(new PrintWriter(writer));
 
@@ -66,7 +67,7 @@ class SendSglApplicationMailServletTest {
 
     @Test
     void doPostSendsMail() throws IOException {
-        userAuthentification.when(() -> isTestUser(any())).thenReturn(false);
+        userAuthentification.when(() -> isTestUser((Cookie[]) any())).thenReturn(false);
         when(request.getParameter("instance_id")).thenReturn("anyInstanceId");
 
         new SendSglApplicationMailServlet() {

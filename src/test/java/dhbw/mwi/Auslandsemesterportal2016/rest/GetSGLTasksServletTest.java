@@ -9,13 +9,13 @@ import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 
+import javax.mail.Transport;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -37,6 +37,7 @@ class GetSGLTasksServletTest {
     private MockedStatic<UserAuthentification> userAuthentificationMockedStatic;
     private ProcessEngine processEngine;
     private CamundaHelper camundaHelper;
+    private MockedStatic<Transport> transport;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -44,6 +45,8 @@ class GetSGLTasksServletTest {
         response = mock(HttpServletResponse.class);
         writer = new StringWriter();
         when(response.getWriter()).thenReturn(new PrintWriter(writer));
+
+        transport = mockStatic(Transport.class); // sicherheitshalber Transport mocken, damit keine Mails versendet werden
 
         userAuthentificationMockedStatic = mockStatic(UserAuthentification.class);
         userAuthentificationMockedStatic.when(() -> isUserAuthentifiedByCookie(request)).thenReturn(1);
@@ -55,6 +58,7 @@ class GetSGLTasksServletTest {
     @AfterEach
     void tearDown() {
         userAuthentificationMockedStatic.close();
+        transport.close();
     }
 
     @ParameterizedTest
@@ -82,7 +86,6 @@ class GetSGLTasksServletTest {
         assertEquals("{\"data\":[]}", writer.toString().trim());
     }
 
-    @Disabled("abgelehnt wird nicht richtig von Camunda gesetzt")
     @Test
     void doGetTasksWithDifferentStatus() throws IOException {
         // given
@@ -122,8 +125,8 @@ class GetSGLTasksServletTest {
                 .getAsJsonObject() //
                 .get("data") //
                 .getAsJsonArray();
-        assertEquals(5, actualAsJsonArray.size()); // Array enthält 5 Einträge
-        // Array enthält 5 verschiedene Status
+        assertEquals(3, actualAsJsonArray.size()); // Array enthält 5 Einträge
+        // Array enthält 3 verschiedene Status
         assertTrue(actualAsJsonArray.contains(getJsonElement(expectedEdit)));
         assertTrue(actualAsJsonArray.contains(getJsonElement(expectedValidateSGL)));
         assertTrue(actualAsJsonArray.contains(getJsonElement(expectedRejected)));

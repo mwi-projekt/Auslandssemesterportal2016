@@ -9,7 +9,6 @@ import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -82,7 +81,6 @@ class GetAdminTasksServletTest {
         assertEquals("{\"data\":[]}", writer.toString().trim());
     }
 
-    @Disabled ("abgelehnt wird nicht richtig von Camunda gesetzt")
     @Test
     void doGetSortsStatusCorrectly() throws IOException {
         // given
@@ -113,7 +111,7 @@ class GetAdminTasksServletTest {
                 .getAsJsonObject() //
                 .get("data") //
                 .getAsJsonArray();
-        assertEquals(4, actualAsJsonArray.size()); // Array enthält 4 Einträge
+        assertEquals(2, actualAsJsonArray.size()); // Array enthält 4 Einträge
         // Array enthält 4 verschiedene Status
         assertTrue(actualAsJsonArray.contains(getJsonElement(expectedValidateSGL)));
         assertTrue(actualAsJsonArray.contains(getJsonElement(expectedRejected)));

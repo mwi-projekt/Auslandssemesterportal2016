@@ -1,7 +1,6 @@
 package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
-import dhbw.mwi.Auslandsemesterportal2016.rest.SendApplicationMailServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +10,7 @@ import org.mockito.stubbing.Answer;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -60,7 +60,7 @@ class SendApplicationMailServletTest {
     @Test
     void doPostDoesNotSendMailWhenTestuser() throws IOException {
         // given
-        userAuthentification.when(() -> isTestUser(any())).thenReturn(true);
+        userAuthentification.when(() -> isTestUser((Cookie[]) any())).thenReturn(true);
         StringWriter writer = new StringWriter();
         when(response.getWriter()).thenReturn(new PrintWriter(writer));
 
@@ -80,7 +80,7 @@ class SendApplicationMailServletTest {
     @Test
     void testDoPost() throws IOException {
         // given
-        userAuthentification.when(() -> isTestUser(any())).thenReturn(false);
+        userAuthentification.when(() -> isTestUser((Cookie[]) any())).thenReturn(false);
 
         new SendApplicationMailServlet() {
             public void callProtectedMethod(HttpServletRequest request,

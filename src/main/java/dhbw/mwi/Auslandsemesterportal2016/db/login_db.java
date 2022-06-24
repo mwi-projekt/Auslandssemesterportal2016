@@ -33,7 +33,7 @@ import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
 @MultipartConfig(maxFileSize = 16177215) // file size up to 16MB
 @WebServlet(name = "login_db", description = "connection to DB for the prozess.jsp", urlPatterns = { "/login_db" })
 
-public class login_db extends HttpServlet implements TaskListener {
+public class login_db extends HttpServlet implements TaskListener, JavaDelegate {
 	private static final long serialVersionUID = 1L;
 
 	Connection conn;
@@ -358,32 +358,34 @@ public class login_db extends HttpServlet implements TaskListener {
 	// SEND TASK
 	// Methode dient zum Versenden von Email an Student nach
 	// Validierung der getätigten Eingaben
-	// FIXME klären, ob löschen in Ordnung (nicht mehr benötigt aufgrund GoOut-Schnittstelle)
-//	@Override
-//	public void execute(DelegateExecution execution) throws Exception {
-//		String email = (String) execution.getVariable("bewEmail");
-//		boolean erfolgreich = (Boolean) execution.getVariable("validierungErfolgreich");
-//		String mailText = (String) execution.getVariable("mailText");
-//
-//		try {
-//			Message message;
-//
-//			// Bei erfolgreicher Validierung
-//			if (erfolgreich) {
-//				message = Util.getEmailMessage(email, "Eingereichte Bewerbung für Auslandssemester validiert");
-//				message.setContent(mailText, "text/plain; charset=UTF-8");
-//			}
-//			// wenn Validierung fehlgeschlagen
-//			else {
-//				message = Util.getEmailMessage(email, "Bei der Validierung Ihrer Bewerbung ist ein Fehler aufgetreten");
-//				message.setContent(mailText, "text/plain; charset=UTF-8");
-//			}
-//
-////			Transport.send(message);
-//
-//		} catch (MessagingException e) {
-//			System.out.print("Could not send email!");
-//			e.printStackTrace();
-//		}
-//	}
+	@Override
+	public void execute(DelegateExecution execution) throws Exception {
+		String email = (String) execution.getVariable("bewEmail");
+		String erfolgreich = (String) execution.getVariable("validierungErfolgreich");
+		String mailText = (String) execution.getVariable("mailText");
+
+		try {
+			Message message = null;
+
+			// Bei erfolgreicher Validierung
+			if ("true".equals(erfolgreich)) {
+				message = Util.getEmailMessage(email, "Eingereichte Bewerbung für Auslandssemester validiert");
+				message.setContent(mailText, "text/plain; charset=UTF-8");
+			}
+			// wenn Validierung fehlgeschlagen
+			else if ("false".equals(erfolgreich)){
+				message = Util.getEmailMessage(email, "Bei der Validierung Ihrer Bewerbung ist ein Fehler aufgetreten");
+				message.setContent(mailText, "text/plain; charset=UTF-8");
+			}
+
+			if (UserAuthentification.isTestUser(email)) {
+				return;
+			}
+			Transport.send(message);
+
+		} catch (MessagingException e) {
+			System.out.print("Could not send email!");
+			e.printStackTrace();
+		}
+	}
 }

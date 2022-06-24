@@ -7,7 +7,6 @@ import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -108,7 +107,6 @@ class UserGetInstanceServletTest {
         assertEquals("{\"data\":[]}", writer.toString().trim());
     }
 
-    @Disabled("abgelehnt wird von Camunda nicht korrekt verarbeitet")
     @Test
     void doGetProcessesWithDifferentStatusAvailable() throws IOException {
         String datenPruefenId = camundaHelper.startProcess("standard");

@@ -122,4 +122,9 @@ class UserAuthentificationTest {
 
         assertFalse(isTestUser);
     }
+
+    @Test
+    void isTestuserByEmail() {
+        assertTrue(UserAuthentification.isTestUser("test@student.dhbw-karlsruhe.de"));
+    }
 }
