@@ -4,10 +4,8 @@
   "description": "Neuaufsetzung des Projekts Auslandssemesterportal2016",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "parcel": "rimraf dist && rimraf .parcel-cache && npm run copy && parcel *.html",
-    "copy": "mkdir -p dist && cp -r ./docs dist/docs/ && cp -r ./videos dist/videos/ && npm run copy:ckeditor",
-    "copy:ckeditor": "cp ./node_modules/ckeditor4/config.js dist/config.js && cp ./node_modules/ckeditor4/styles.js dist/styles.js && cp -r ./node_modules/ckeditor4/lang dist/lang/ && cp -r ./node_modules/ckeditor4/skins dist/skins/ && cp -r ./node_modules/ckeditor4/plugins dist/plugins/",
-    "build": "rimraf dist && rimraf .parcel-cache && npm run copy && parcel build *.html"
+    "start": "webpack serve --open",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -19,11 +17,9 @@
     "url": "https://github.com/mwi-projekt/Auslandssemesterportal2016/issues"
   },
   "homepage": "https://github.com/mwi-projekt/Auslandssemesterportal2016#readme",
-  "alias": {
-    "vue": "./node_modules/vue/dist/vue.esm-browser.js"
-  },
   "devDependencies": {
-    "@parcel/transformer-vue": "^2.6.0",
+    "@babel/core": "^7.18.5",
+    "@babel/preset-env": "^7.18.2",
     "@types/bootstrap": "^4.3.1",
     "@types/bootstrap-switch": "0.0.32",
     "@types/ckeditor": "^4.9.9",
@@ -32,13 +28,25 @@
     "@types/jquery": "^3.3.31",
     "@types/jqueryui": "^1.12.10",
     "@types/jspdf": "^1.3.3",
-    "parcel": "^2.0.0",
-    "parcel-plugin-static-files-copy": "^2.3.1",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "expose-loader": "^4.0.0",
+    "html-loader": "^3.1.2",
+    "html-webpack-plugin": "^5.5.0",
+    "imports-loader": "^4.0.0",
     "posthtml": "^0.16.6",
     "posthtml-include": "^1.6.1",
+    "posthtml-loader": "^2.0.1",
     "posthtml-modules": "^0.7.3",
     "rimraf": "^3.0.2",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "vue-loader": "^17.0.0",
+    "vue-style-loader": "^4.1.3",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
