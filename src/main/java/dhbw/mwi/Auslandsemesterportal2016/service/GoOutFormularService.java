@@ -33,11 +33,12 @@ public class GoOutFormularService implements JavaDelegate {
                 .email(String.valueOf(runtimeService.getVariable(instanceId, "bewEmail")))
                 .studiengang(String.valueOf(runtimeService.getVariable(instanceId, "bewStudiengang")))
                 .aktuellesSemester(String.valueOf(runtimeService.getVariable(instanceId, "bewSemester")))
+                .aktuellesSemester(String.valueOf(runtimeService.getVariable(instanceId, "bewStudienrichtung")))
                 .uniPrio1(String.valueOf(runtimeService.getVariable(instanceId, "uni1")))
                 .uniPrio2(String.valueOf(runtimeService.getVariable(instanceId, "uni2")))
                 .uniPrio3(String.valueOf(runtimeService.getVariable(instanceId, "uni3")))
-                .einverstaendnisBericht(true) // TODO (Boolean) runtimeService.getVariable(instanceId, "bewErfahrungsberichtZustimmung"), sobald vorhanden
-                .benachteiligung("") // TODO Wert abfragen, sobald vorhanden
+                .einverstaendnisBericht(Boolean.valueOf((Boolean) runtimeService.getVariable(instanceId, "bewErfahrungsberichtZustimmung")))
+                .benachteiligung(String.valueOf(runtimeService.getVariable(instanceId,"bewBenachteiligung")))
                 .build();
     }
 
