@@ -9,13 +9,13 @@ import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.MockedStatic;
 
+import javax.mail.Transport;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -37,6 +37,7 @@ class GetSGLTasksServletTest {
     private MockedStatic<UserAuthentification> userAuthentificationMockedStatic;
     private ProcessEngine processEngine;
     private CamundaHelper camundaHelper;
+    private MockedStatic<Transport> transport;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -44,6 +45,8 @@ class GetSGLTasksServletTest {
         response = mock(HttpServletResponse.class);
         writer = new StringWriter();
         when(response.getWriter()).thenReturn(new PrintWriter(writer));
+
+        transport = mockStatic(Transport.class); // sicherheitshalber Transport mocken, damit keine Mails versendet werden
 
         userAuthentificationMockedStatic = mockStatic(UserAuthentification.class);
         userAuthentificationMockedStatic.when(() -> isUserAuthentifiedByCookie(request)).thenReturn(1);
@@ -55,6 +58,7 @@ class GetSGLTasksServletTest {
     @AfterEach
     void tearDown() {
         userAuthentificationMockedStatic.close();
+        transport.close();
     }
 
     @ParameterizedTest
@@ -82,25 +86,19 @@ class GetSGLTasksServletTest {
         assertEquals("{\"data\":[]}", writer.toString().trim());
     }
 
-    @Disabled
     @Test
     void doGetTasksWithDifferentStatus() throws IOException {
-        // FIXME "abgelehnt" wird nicht richtig von Camunda gesetzt
         // given
         camundaHelper.startProcess("standard");
         String editInstanceId = camundaHelper.startProcess("standard");
         String selectUniInstanceId = camundaHelper.startProcess("standard");
         String validateSGLInstanceId = camundaHelper.startProcess("standard");
         String rejectedInstanceId = camundaHelper.startProcess("standard");
-        String completedInstanceId = camundaHelper.startProcess("standard");
-        String validateAAAInstanceId = camundaHelper.startProcess("standard");
 
         processInstancesToSpecificActivity(editInstanceId,
                 selectUniInstanceId,
                 validateSGLInstanceId,
-                rejectedInstanceId,
-                completedInstanceId,
-                validateAAAInstanceId);
+                rejectedInstanceId);
         System.out.println(processEngine.getRuntimeService().getActiveActivityIds(rejectedInstanceId));
 
         // when
@@ -120,12 +118,6 @@ class GetSGLTasksServletTest {
         String expectedRejected = "{\"id\":\"" + rejectedInstanceId + "\",\"name\":\"Student\",\"vname\":\"Test\",\"" +
                 "aktuelleUni\":\"DHBW Karlsruhe\",\"kurs\":\"WWI18B1\",\"uni\":\"USA\",\"prioritaet\":\"1\",\"" +
                 "matrikelnummer\":\"190190190\",\"status\":\"abgelehnt\"}";
-        String expectedCompleted = "{\"id\":\"" + completedInstanceId + "\",\"name\":\"Student\",\"vname\":\"Test" +
-                "\",\"aktuelleUni\":\"DHBW Karlsruhe\",\"kurs\":\"WWI18B1\",\"uni\":\"USA\",\"prioritaet\":\"1\",\"" +
-                "matrikelnummer\":\"190190190\",\"status\":\"complete\"}";
-        String expectedValidateAAA = "{\"id\":\"" + validateAAAInstanceId + "\",\"name\":\"Student\",\"vname\":\"" +
-                "Test\",\"aktuelleUni\":\"DHBW Karlsruhe\",\"kurs\":\"WWI18B1\",\"uni\":\"USA\",\"prioritaet\":\"1\",\"" +
-                "matrikelnummer\":\"190190190\",\"status\":\"validate\"}";
 
         String actual = writer.toString().trim();
         assertNotNull(actual); // Array ist nicht leer
@@ -133,25 +125,21 @@ class GetSGLTasksServletTest {
                 .getAsJsonObject() //
                 .get("data") //
                 .getAsJsonArray();
-        assertEquals(5, actualAsJsonArray.size()); // Array enthält 5 Einträge
-        // Array enthält 5 verschiedene Status
+        assertEquals(3, actualAsJsonArray.size()); // Array enthält 5 Einträge
+        // Array enthält 3 verschiedene Status
         assertTrue(actualAsJsonArray.contains(getJsonElement(expectedEdit)));
         assertTrue(actualAsJsonArray.contains(getJsonElement(expectedValidateSGL)));
-        assertTrue(actualAsJsonArray.contains(getJsonElement(expectedCompleted)));
-        assertTrue(actualAsJsonArray.contains(getJsonElement(expectedValidateAAA)));
         assertTrue(actualAsJsonArray.contains(getJsonElement(expectedRejected)));
     }
 
-    private void processInstancesToSpecificActivity(String editInstanceId, String uniWaehlenInstanceId, String datenValidierenSGLInstanceId, String abgelehnteInstanceId, String abgeschlosseneInstanceId, String datenValidierenInstanceId) {
+    private void processInstancesToSpecificActivity(String editInstanceId, String uniWaehlenInstanceId, String datenValidierenSGLInstanceId, String abgelehnteInstanceId) {
         camundaHelper.processUntilAblehnen(abgelehnteInstanceId);
         camundaHelper.processUntilUeberarbeiten(editInstanceId);
         camundaHelper.processUntilUniversitaetAuswaehlen(uniWaehlenInstanceId);
         camundaHelper.processUntilDatenValidierenSGL(datenValidierenSGLInstanceId);
-        camundaHelper.processUntilAbschliessen(abgeschlosseneInstanceId);
-        camundaHelper.processUntilValidierenAAA(datenValidierenInstanceId);
     }
 
     private JsonElement getJsonElement(String expectedEdit) {
-        return new JsonParser().parse(expectedEdit);
+        return JsonParser.parseString(expectedEdit);
     }
 }

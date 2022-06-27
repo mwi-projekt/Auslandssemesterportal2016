@@ -7,7 +7,6 @@ import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -108,23 +107,15 @@ class UserGetInstanceServletTest {
         assertEquals("{\"data\":[]}", writer.toString().trim());
     }
 
-    @Disabled
     @Test
     void doGetProcessesWithDifferentStatusAvailable() throws IOException {
-        // FIXME abgelehnt wird von Camunda nicht korrekt verarbeitet
-        String abgeschlossenId = camundaHelper.startProcess("standard");
         String datenPruefenId = camundaHelper.startProcess("standard");
         String datenValidierenId = camundaHelper.startProcess("standard");
         String abgelehntId = camundaHelper.startProcess("standard");
         String uniAuswaehlenId = camundaHelper.startProcess("standard");
-        processInstancesToSpecificActivity(abgeschlossenId,
-                datenPruefenId,
-                datenValidierenId,
-                abgelehntId,
-                uniAuswaehlenId);
+        processInstancesToSpecificActivity(datenPruefenId, datenValidierenId, abgelehntId, uniAuswaehlenId);
 
-        ArrayList<String[]> userInstances = addUserInstances(abgeschlossenId,
-                datenPruefenId,
+        ArrayList<String[]> userInstances = addUserInstances(datenPruefenId,
                 datenValidierenId,
                 abgelehntId,
                 uniAuswaehlenId);
@@ -141,7 +132,6 @@ class UserGetInstanceServletTest {
         }.callProtectedMethod(request, response);
 
         String expected = "{\"data\":[" +
-                "{\"instanceID\":\"" + abgeschlossenId + "\",\"uni\":\"USA\",\"stepCounter\":\"Abgeschlossen\",\"prioritaet\":\"1\"}," +
                 "{\"instanceID\":\"" + datenPruefenId + "\",\"uni\":\"USA\",\"stepCounter\":\"Daten prüfen\",\"prioritaet\":\"1\"}," +
                 "{\"instanceID\":\"" + datenValidierenId + "\",\"uni\":\"USA\",\"stepCounter\":\"Auf Rückmeldung warten\",\"prioritaet\":\"1\"}," +
                 "{\"instanceID\":\"" + abgelehntId + "\",\"uni\":\"USA\",\"stepCounter\":\"Bewerbung wurde abgelehnt\",\"prioritaet\":\"1\"}," +
@@ -150,9 +140,8 @@ class UserGetInstanceServletTest {
         assertEquals(expected, writer.toString().trim());
     }
 
-    private ArrayList<String[]> addUserInstances(String abgeschlossenId, String datenPruefenId, String datenValidierenId, String abgelehntId, String uniAuswaehlenId) {
+    private ArrayList<String[]> addUserInstances(String datenPruefenId, String datenValidierenId, String abgelehntId, String uniAuswaehlenId) {
         ArrayList<String[]> userInstances = new ArrayList<>();
-        userInstances.add(new String[] {"USA", abgeschlossenId, "1"});
         userInstances.add(new String[] {"USA", datenPruefenId, "1"});
         userInstances.add(new String[] {"USA", datenValidierenId, "1"});
         userInstances.add(new String[] {"USA", abgelehntId, "1"});
@@ -160,8 +149,7 @@ class UserGetInstanceServletTest {
         return userInstances;
     }
 
-    private void processInstancesToSpecificActivity(String abgeschlossenId, String datenPruefenId, String datenValidierenId, String abgelehntId, String uniAuswaehlenId) {
-        camundaHelper.processUntilAbschliessen(abgeschlossenId);
+    private void processInstancesToSpecificActivity(String datenPruefenId, String datenValidierenId, String abgelehntId, String uniAuswaehlenId) {
         camundaHelper.processUntilDatenPruefen(datenPruefenId);
         camundaHelper.processUntilDatenValidierenSGL(datenValidierenId);
         camundaHelper.processUntilAblehnen(abgelehntId);

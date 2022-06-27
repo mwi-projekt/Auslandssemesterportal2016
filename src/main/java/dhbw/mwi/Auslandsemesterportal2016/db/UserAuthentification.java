@@ -77,6 +77,10 @@ public class UserAuthentification {
 		return emailOfUser != null && isTestEmail(emailOfUser);
 	}
 
+	public static boolean isTestUser(String email) {
+		return isTestEmail(email);
+	}
+
 	private static boolean isTestEmail(String emailOfUser) {
 		return (emailOfUser.equals("test@student.dhbw-karlsruhe.de")
 				|| emailOfUser.equals("test@sgl.dhbw-karlsruhe.de")

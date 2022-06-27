@@ -56,7 +56,7 @@ function clearModalOnDismiss() {
 function loadPortalInfo() {
     $.ajax({
         type: "GET",
-        url: baseUrl + "/portalInfo",
+        url: baseUrl + "/infoMaterial",
         success: function (data) {
             var result = data.data[0];
             if (result) {
