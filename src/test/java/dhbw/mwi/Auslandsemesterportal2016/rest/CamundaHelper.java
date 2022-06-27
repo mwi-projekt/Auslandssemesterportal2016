@@ -155,6 +155,9 @@ public class CamundaHelper {
         runtimeService.setVariable(instanceId, "bewKurs", TESTKURS.toString());
         runtimeService.setVariable(instanceId, "prioritaet", 1);
         runtimeService.setVariable(instanceId, "uni", "USA");
+        runtimeService.setVariable(instanceId, "bewErfahrungsberichtZustimmung", true);
+        runtimeService.setVariable(instanceId, "bewBenachteiligung", "In meiner Familie hat bisher niemand studiert und ich beziehe Bafög.");
+        runtimeService.setVariable(instanceId, "bewStudienrichtung", TESTSTUDIENGANGSRICHTUNG.toString());
         runtimeService.setVariable(instanceId, "uploadformular", "anyData");
     }
 
