@@ -11,7 +11,7 @@
                   <li>
                     <a href="faq.html" title="Zu den am häufigsten gestellten Fragen.">FAQ</a>
                     <a href="https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html" title="Link zum Bewerbungsformular">Bewerben</a>
-                    <a href="https://www.karlsruhe.dhbw.de/international-office/veranstaltungen-und-aktuelles.html#anchor-main-content" title="Weitere Infos">Weitere Informationen</a>
+                    <a href="https://www.karlsruhe.dhbw.de/fileadmin/user_upload/documents/content-de/Auslandsamt/Infobroschuere-Ausland.pdf" title="Weitere Infos">Weitere Informationen</a>
                   </li>
                 </ul>
               </nav>
