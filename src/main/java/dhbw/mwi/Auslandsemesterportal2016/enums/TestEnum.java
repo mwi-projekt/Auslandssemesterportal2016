@@ -2,7 +2,8 @@ package dhbw.mwi.Auslandsemesterportal2016.enums;
 
 public enum TestEnum {
     TESTEMAIL("test@student.dhbw-karlsruhe.de"), TESTMATRIKELNUMMER("1234567"), TESTROLLESTRING("Studierender"), TESTROLLEINT("1"),
-    TESTPASSWORT("Test1234"), TESTSTUDIENGANG("Wirtschaftsinformatik"), TESTKURS("WWI18B1"), TESTTELNR("07234512345"),
+    TESTPASSWORT("Test1234"), TESTSTUDIENGANG("Wirtschaftsinformatik"), TESTSTUDIENGANGSRICHTUNG("Software Engineering"),
+    TESTKURS("WWI18B1"), TESTTELNR("07234512345"),
     TESTMOBILNR("014773698521"), TESTSTANDORT("Karlsruhe"), TESTVORNAME("Test"), TESTNACHNAME("Admin"),
     TESTGEBURTSDATUM("01.01.2000"),
     TESTSESSIONID("sessionIDs1e5f2ge8gvs694g8vedsg"), TESTINSTANCEID("instanceIDs1e5f2ge8gvs694g8vedsg"),

@@ -48,11 +48,12 @@ class GoOutFormularServiceTest {
                 .geburtsdatum(TESTGEBURTSDATUM.toString())
                 .email(TESTEMAIL.toString())
                 .studiengang(TESTSTUDIENGANG.toString())
+                .studiengangsrichtung(TESTSTUDIENGANGSRICHTUNG.toString())
                 .aktuellesSemester("2. Semester")
                 .uniPrio1("California State University San Marcos (USA)")
                 .uniPrio2("South-Eastern Finland University of Applied Sciences (Finnland)")
                 .uniPrio3("Abertay University of Dundee (Schottland)")
-                .benachteiligung("")
+                .benachteiligung("In meiner Familie hat bisher niemand studiert und ich beziehe Bafög.")
                 .einverstaendnisBericht(true)
                 .build();
     }

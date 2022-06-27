@@ -114,8 +114,11 @@ public class CamundaHelper {
         map.put("uni2", "South-Eastern Finland University of Applied Sciences (Finnland)");
         map.put("uni3", "Abertay University of Dundee (Schottland)");
         map.put("bewGeburtsdatum", "01.01.2000");
+        map.put("bewStudiengang", TESTSTUDIENGANG.toString());
+        map.put("bewStudienrichtung", TESTSTUDIENGANGSRICHTUNG.toString());
         map.put("bewSemester", "2. Semester");
         map.put("bewErfahrungsberichtZustimmung", true);
+        map.put("bewBenachteiligung", "In meiner Familie hat bisher niemand studiert und ich beziehe Bafög.");
         //relevant für Camunda-Prozess
         map.put("gdprCompliance", Boolean.TRUE);
         map.put("zeitraum", "Frühlings-/Sommersemester 2023");
@@ -124,7 +127,6 @@ public class CamundaHelper {
         map.put("bewPLZ", 12345);
         map.put("bewOrt", "Teststadt");
         map.put("bewLand", "Deutschland");
-        map.put("bewStudiengang", TESTSTUDIENGANG.toString());
         map.put("muttersprache", "");
         map.put("bewErasmus", "nein");
         map.put("bewLA", "nein");

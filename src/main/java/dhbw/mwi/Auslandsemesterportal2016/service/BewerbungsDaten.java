@@ -11,6 +11,7 @@ public class BewerbungsDaten {
     private String geburtsdatum;
     private String email;
     private String studiengang;
+    private String studiengangsrichtung;
     private final String studiengangsleitung = "Prof. Dr. Thomas Freytag";
     private String aktuellesSemester;
     private String uniPrio1;

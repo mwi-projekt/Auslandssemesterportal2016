@@ -32,8 +32,8 @@ public class GoOutFormularService implements JavaDelegate {
                 .geburtsdatum(String.valueOf(runtimeService.getVariable(instanceId, "bewGeburtsdatum")))
                 .email(String.valueOf(runtimeService.getVariable(instanceId, "bewEmail")))
                 .studiengang(String.valueOf(runtimeService.getVariable(instanceId, "bewStudiengang")))
+                .studiengangsrichtung(String.valueOf(runtimeService.getVariable(instanceId, "bewStudienrichtung")))
                 .aktuellesSemester(String.valueOf(runtimeService.getVariable(instanceId, "bewSemester")))
-                .aktuellesSemester(String.valueOf(runtimeService.getVariable(instanceId, "bewStudienrichtung")))
                 .uniPrio1(String.valueOf(runtimeService.getVariable(instanceId, "uni1")))
                 .uniPrio2(String.valueOf(runtimeService.getVariable(instanceId, "uni2")))
                 .uniPrio3(String.valueOf(runtimeService.getVariable(instanceId, "uni3")))
@@ -42,24 +42,19 @@ public class GoOutFormularService implements JavaDelegate {
                 .build();
     }
 
-    private void sendDataToGoOutForm(BewerbungsDaten bewerbungsDaten) {
+    private void sendDataToGoOutForm(BewerbungsDaten bewerbungsDaten) throws IOException {
         WebClient webClient = new WebClient();
         webClient.getOptions().setJavaScriptEnabled(true);
         webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.getOptions().setTimeout(10000);
 
-        try {
-            HtmlPage goOutWebsite = webClient.getPage("https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html");
-            webClient.waitForBackgroundJavaScript(10000);
+        HtmlPage goOutWebsite = webClient.getPage("https://www.karlsruhe.dhbw.de/international-office/go-out-auslandssemester.html");
+        webClient.waitForBackgroundJavaScript(10000);
 
-            fillForm(bewerbungsDaten, goOutWebsite);
+        fillForm(bewerbungsDaten, goOutWebsite);
 
-            sendData(goOutWebsite);
-        } catch (IOException e) {
-            // send Mail to Freytag?
-        } finally {
-            webClient.close();
-        }
+        sendData(goOutWebsite);
+        webClient.close();
     }
 
     @VisibleForTesting
@@ -85,6 +80,9 @@ public class GoOutFormularService implements JavaDelegate {
 
         HtmlInput fieldStudiengang = goOutWebsite.getHtmlElementById("powermail_field_studiengang");
         fieldStudiengang.setValueAttribute(bewerbungsDaten.getStudiengang());
+
+        HtmlInput fieldStudienrichtung = goOutWebsite.getHtmlElementById("powermail_field_studienrichtung");
+        fieldStudienrichtung.setValueAttribute(bewerbungsDaten.getStudiengangsrichtung());
 
         HtmlInput fieldStudiengangsleitung = goOutWebsite.getHtmlElementById("powermail_field_studiengangsleitung");
         fieldStudiengangsleitung.setValueAttribute(bewerbungsDaten.getStudiengangsleitung());
