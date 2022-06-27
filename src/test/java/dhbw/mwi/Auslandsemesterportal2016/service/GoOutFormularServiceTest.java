@@ -53,6 +53,7 @@ class GoOutFormularServiceTest {
                 .uniPrio1("California State University San Marcos (USA)")
                 .uniPrio2("South-Eastern Finland University of Applied Sciences (Finnland)")
                 .uniPrio3("Abertay University of Dundee (Schottland)")
+                .einwilligungUnternehmen(true)
                 .benachteiligung("In meiner Familie hat bisher niemand studiert und ich beziehe Bafög.")
                 .einverstaendnisBericht(true)
                 .build();

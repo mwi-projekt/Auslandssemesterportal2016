@@ -117,6 +117,7 @@ public class CamundaHelper {
         map.put("bewStudiengang", TESTSTUDIENGANG.toString());
         map.put("bewStudienrichtung", TESTSTUDIENGANGSRICHTUNG.toString());
         map.put("bewSemester", "2. Semester");
+        map.put("untEinwilligung", true);
         map.put("bewErfahrungsberichtZustimmung", true);
         map.put("bewBenachteiligung", "In meiner Familie hat bisher niemand studiert und ich beziehe Bafög.");
         //relevant für Camunda-Prozess
