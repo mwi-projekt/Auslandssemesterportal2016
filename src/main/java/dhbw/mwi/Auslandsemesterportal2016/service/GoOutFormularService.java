@@ -37,6 +37,7 @@ public class GoOutFormularService implements JavaDelegate {
                 .uniPrio1(String.valueOf(runtimeService.getVariable(instanceId, "uni1")))
                 .uniPrio2(String.valueOf(runtimeService.getVariable(instanceId, "uni2")))
                 .uniPrio3(String.valueOf(runtimeService.getVariable(instanceId, "uni3")))
+                .einwilligungUnternehmen(Boolean.valueOf((Boolean) runtimeService.getVariable(instanceId, "untEinwilligung")))
                 .einverstaendnisBericht(Boolean.valueOf((Boolean) runtimeService.getVariable(instanceId, "bewErfahrungsberichtZustimmung")))
                 .benachteiligung(String.valueOf(runtimeService.getVariable(instanceId,"bewBenachteiligung")))
                 .build();
