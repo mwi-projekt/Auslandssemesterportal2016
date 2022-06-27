@@ -14,10 +14,13 @@
               <label for="inVorname">Vorname</label>
               <input
                 type="text"
+                placeholder="Max"
                 class="inBox form-control"
                 id="inVorname"
                 pattern="^([a-zA-ZÄÖÜäöüéáÁÉÈèàÀ.'êâÊÂóÓòÒ-]{2,30})$"
-                title="Der Name darf keine Zahlen enthalten"
+                title="Der Name darf keine Zahlen enthalten."
+                oninvalid="this.setCustomValidity('Der Name darf keine Zahlen enthalten.')"
+                oninput="this.setCustomValidity('')"
                 required
               />
             </div>
@@ -25,10 +28,13 @@
               <label for="inNachname">Nachname</label>
               <input
                 type="text"
+                placeholder="Mustermann"
                 class="inBox form-control"
                 id="inNachname"
                 PATTERN="^([a-zA-ZÄÖÜäöüéáÁÉÈèàÀ.'êâÊÂóÓòÒ-]{3,50})$"
-                title="Der Name darf keine Zahlen enthalten"
+                title="Der Name darf keine Zahlen enthalten."
+                oninvalid="this.setCustomValidity('Der Name darf keine Zahlen enthalten.')"
+                oninput="this.setCustomValidity('')"
                 required
               />
             </div>
@@ -42,6 +48,8 @@
                 required
                 pattern="^[a-zA-Z0-9 -]*(\.){0,1}[a-zA-Z0-9 -]+@(student\.){0,1}dhbw-karlsruhe\.de$"
                 title="Nachname.Vorname@student.dhbw-karlsruhe.de"
+                oninvalid="this.setCustomValidity('Bitte verwenden Sie folgende E-Mail: Nachname.Vorname@student.dhbw-karlsruhe.de')"
+                oninput="this.setCustomValidity('')"
               />
             </div>
           </div>
@@ -51,10 +59,13 @@
               <label for="inMatrikel">Matrikelnummer</label>
               <input
                 type="text"
+                placeholder="1234567"
                 class="inBox form-control"
                 id="inMatrikel"
                 pattern="^([0-9]{7})$"
                 title="Bitte die 7-stellige Matrikelnummer eintragen"
+                oninvalid="this.setCustomValidity('Bitte die 7-stellige Matrikelnummer eintragen')"
+                oninput="this.setCustomValidity('')"
                 required
               />
             </div>
@@ -73,6 +84,7 @@
               <label for="inKurs">Kurs</label>
               <input
                 type="text"
+                placeholder="z.B. WWI19B2"
                 class="inBox form-control"
                 id="inKurs"
                 required
@@ -98,11 +110,14 @@
               <label for="inPwSt1">Passwort</label>
               <input
                 type="password"
+                placeholder="Passwort"
                 class="inBox form-control"
                 id="inPwSt1"
                 required
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                title="Das Passwort muss mindestens 8 Zeichen lang sein und eine Nummer sowie einen Groß- und Kleinbuchstaben beinhalten"
+                title="Das Passwort muss mindestens 8 Zeichen lang sein und eine Nummer sowie einen Groß- und Kleinbuchstaben beinhalten."
+                oninvalid="this.setCustomValidity('Das Passwort muss mindestens 8 Zeichen lang sein und eine Nummer sowie einen Groß- und Kleinbuchstaben beinhalten.')"
+                oninput="this.setCustomValidity('')"
               />
             </div>
 
@@ -110,6 +125,7 @@
               <label for="inPwSt2">Passwort wiederholen</label>
               <input
                 type="password"
+                placeholder="Passwort wiederholen"
                 class="inBox form-control"
                 id="inPwSt2"
                 required
@@ -149,11 +165,11 @@
         <div class="modal-body mx-3">
           <div class="md-form mb-4">
             <label data-error="wrong" data-success="right" for="inEmail"
-              >Deine Email-Adresse</label
+              >Deine E-Mail-Adresse</label
             >
             <input
               type="email"
-              placeholder="E-Mail Adresse"
+              placeholder="E-Mail-Adresse"
               id="inEmail"
               class="inBox form-control"
               required

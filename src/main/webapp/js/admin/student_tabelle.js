@@ -109,39 +109,80 @@ $(document).ready(function () {
         isEdit = true;
     });
 
+$.validator.addMethod("sonderzeichencheck", function (value) {
+     if(/[!@#$%^&*()_=\[\]{};:\\|,.<>\/?+-]/.test(value) == true){
+        return false
+     } else{
+        return true
+     }
+}, );
+
     $("#myForm").submit(function(e){
         e.preventDefault();
     }).validate({
         rules: {
-            vorname: "required",
-            nachname: "required",
+            vorname: {
+                required: true,
+                sonderzeichencheck: true
+            },
+            nachname: {
+                required: true,
+                sonderzeichencheck: true
+                },
             email: {
                 required: true,
                 email: true
             },
-            studiengang: "required",
-            kurs: "required",
+            studiengan: {
+                required: true,
+                sonderzeichencheck: true
+            },
+            kurs: {
+                required: true,
+                sonderzeichencheck: true
+            },
             matrikelnummer: {
                 required: true,
                 digits: true,
                 maxlength: 7,
-                minlength: 7
+                minlength: 7,
+                sonderzeichencheck: true
             },
-            standort: "required"
+            standort: {
+                 required: true,
+                 sonderzeichencheck: true
+            },
         },
         messages: {
-            vorname: "Bitte geben Sie ihren Vornamen ein",
-            nachname: "Bitte geben Sie ihren Nachnamen ein",
-            email: "Bitte geben Sie ihre E-Mail ein",
-            studiengang: "Bitte wählen Sie ihren Studiengang aus",
-            kurs: "Bitte geben Sie ihren Kursnamen ein",
+            vorname: {
+               required: "Bitte geben Sie ihren Vornamen ein",
+               sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+           },
+           nachname: {
+               required: "Bitte geben Sie ihren Nachnamen ein",
+               sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+           },
+
+           email: "Bitte geben Sie ihre E-Mail ein",
+           studiengang: {
+               required: "Bitte geben Sie ihren Studiengang ein",
+               sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+           },
+           kurs: {
+               required: "Bitte geben sie ihren Kurs ein",
+               sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+           },
             matrikelnummer: {
                 required: "Bitte geben Sie ihre Matrikelnummer ein",
                 digits: "Bitte geben Sie nur Zahlen ein",
                 maxlength: jQuery.validator.format("Die Matrikelnummer muss genau {0} Zeichen haben"),
                 minlength: jQuery.validator.format("Die Matrikelnummer muss genau {0} Zeichen haben"),
+                sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
             },
-            standort: "Bitte wählen Sie ihren Standort aus"
+            standort: {
+               required: "Bitte geben sie ihren Standort ein",
+               sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+           }
         },
         submitHandler: function () {
             var vorname = inputVorname.val();

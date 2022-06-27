@@ -100,13 +100,27 @@ $(document).ready(function () {
         isEdit = true;
     });
 
+$.validator.addMethod("sonderzeichencheck", function (value) {
+     if(/[!@#$%^&*()_=\[\]{};:\\|,.<>\/?+-]/.test(value) == true){
+        return false
+     } else{
+        return true
+     }
+}, );
+
     // Submit-Button
    $("#myForm").submit(function(e){
         e.preventDefault();
     }).validate({
            rules: {
-               vorname: "required",
-               nachname: "required",
+               vorname: {
+                   required: true,
+                   sonderzeichencheck: true
+               },
+               nachname: {
+                   required: true,
+                   sonderzeichencheck: true
+               },
                email: {
                    required: true,
                    email: true
@@ -121,8 +135,14 @@ $(document).ready(function () {
                },
            },
            messages: {
-               vorname: "Bitte geben Sie ihren Vornamen ein",
-               nachname: "Bitte geben Sie ihren Nachnamen ein",
+              vorname: {
+                 required: "Bitte geben Sie ihren Vornamen ein",
+                 sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+              },
+              nachname: {
+                 required: "Bitte geben Sie ihren Nachnamen ein",
+                 sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+              },
                email: "Bitte geben Sie ihre E-Mail ein",
                telefonnummer: {
                    required: "Bitte geben Sie ihre Telefonnummer ein",
