@@ -55,6 +55,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Deprecated
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -104,6 +105,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Deprecated
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -196,6 +198,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 
 	}
 
+	@Deprecated
 	public void updateProcess(String sqlStatement) {
 		Connection connection = null;
 		java.sql.Statement statement = null;
@@ -229,6 +232,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 	}
 
 	/** Diese Methode komplettiert den jeweiligen Task */
+	@Deprecated
 	public void completeTask(String instanceId) {
 		processEngine.getTaskService().complete(
 				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId());
@@ -238,16 +242,19 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 	 * Diese Methode komplettiert den jeweiligen Task und setzt entsprechende
 	 * Variablen
 	 */
+	@Deprecated
 	public void completeTask(String instanceId, Map<String, Object> variables) {
 		processEngine.getTaskService().complete(
 				processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getId(),
 				variables);
 	}
 
+	@Deprecated
 	public String getTaskName(String instanceId) {
 		return processEngine.getTaskService().createTaskQuery().processInstanceId(instanceId).singleResult().getName();
 	}
 
+	@Deprecated
 	public boolean getEnglischBoolean(String matrikelnummer) {
 		Connection connection = null;
 		java.sql.Statement statement = null;
@@ -291,6 +298,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 		return result;
 	}
 
+	@Deprecated
 	public String getEnglischNote(String matrikelnummer) {
 		Connection connection = null;
 		java.sql.Statement statement = null;
