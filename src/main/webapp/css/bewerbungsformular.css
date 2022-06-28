@@ -145,6 +145,7 @@ select#uni1,
 select#uni2,
 select#uni3,
 select#bewErfahrungsberichtZustimmung,
+input#bewErfahrungsberichtZustimmung,
 input#bewBenachteiligung,
 select#spanischNote,
 select#englischNote{
