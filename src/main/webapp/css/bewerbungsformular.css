@@ -144,7 +144,6 @@ select#muttersprache,
 select#uni1,
 select#uni2,
 select#uni3,
-select#bewErfahrungsberichtZustimmung,
 input#bewErfahrungsberichtZustimmung,
 input#bewBenachteiligung,
 select#spanischNote,
@@ -164,6 +163,12 @@ input#bewGeburtsdatum,
 select#bewSemester,
 select#bewErasmus,
 select#bewLA,
-select#bewSGL {
+select#bewSGL,
+input#untEinwilligung {
   margin-left: 25%;
+}
+
+input#bewErfahrungsberichtZustimmung,
+input#untEinwilligung {
+  margin-right: 1ex;
 }
