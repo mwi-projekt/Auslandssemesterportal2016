@@ -125,6 +125,56 @@ module.exports = {
       template: 'verwaltung_studiengangsleitung.html',
       chunks: ['nutzer', 'studiengangsleitung_tabelle', 'vue'],
     }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsBulgarien-auslandsangebote.html',
+      template: 'detailsBulgarien-auslandsangebote.html',
+      chunks: ['app', 'bewerbungsportal', 'nutzer', 'vue'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsChannelIsland-auslandsangebote.html',
+      template: 'detailsChannelIsland-auslandsangebote.html',
+      chunks: ['app', 'bewerbungsportal', 'nutzer', 'vue'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsCostaRica-auslandsangebote.html',
+      template: 'detailsCostaRica-auslandsangebote.html',
+      chunks: ['app', 'bewerbungsportal', 'nutzer', 'vue'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsDurban-auslandsangebote.html',
+      template: 'detailsDurban-auslandsangebote.html',
+      chunks: ['vue'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsFinnland-auslandsangebote.html',
+      template: 'detailsFinnland-auslandsangebote.html',
+      chunks: ['app', 'bewerbungsportal', 'nutzer', 'vue'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsLiverpool-auslandsangebote.html',
+      template: 'detailsLiverpool-auslandsangebote.html',
+      chunks: ['app', 'bewerbungsportal', 'nutzer', 'vue'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsLodz-auslandsangebote.html',
+      template: 'detailsLodz-auslandsangebote.html',
+      chunks: ['app', 'bewerbungsportal', 'nutzer', 'vue'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsSanMarcos-auslandsangebote.html',
+      template: 'detailsSanMarcos-auslandsangebote.html',
+      chunks: ['app', 'bewerbungsportal', 'nutzer', 'vue'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsSchottland-auslandsangebote.html',
+      template: 'detailsSchottland-auslandsangebote.html',
+      chunks: ['app', 'bewerbungsportal', 'nutzer', 'vue'],
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'detailsTaiwan-auslandsangebote.html',
+      template: 'detailsTaiwan-auslandsangebote.html',
+      chunks: ['app', 'bewerbungsportal', 'nutzer', 'vue'],
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
