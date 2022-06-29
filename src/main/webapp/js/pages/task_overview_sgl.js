@@ -27,7 +27,6 @@ function getList() {
             var output = ""; 		//zu validierende Bewerbungen
             var edit = ""; 		    //zur Bearbeitung zurückgesendet
             var completed = "";		//angenommene Bewerbungen
-            var validateAAA = "";	//Bewerbungen, die vom Auslansdamt bearbeitet werden müssen
             var abgelehnt = "";		//abgelehnte Bewerbungen
             if (!result || result.data.length == 0) {
                 // substring bilden nicht möglich bei leerem String
@@ -69,7 +68,7 @@ function getList() {
                             "</td>" +
                             "<td>" + '<button class="btn fas fa-redo" disabled></button' + "</td>" +
                             "</tr>";
-                    } else if (singleInstance.status === 'complete') {
+                    } else if (singleInstance.status === 'complete' || singleInstance.status === 'abgeschlossen'|| singleInstance.status === 'goOutUebergeben') {
                         completed = completed +
                             "<tr><td>" +
                             singleInstance.name +
@@ -101,23 +100,6 @@ function getList() {
                             "</td><td>" +
                             '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
                             "</td></tr>";
-                    } else if (singleInstance.status === 'validate') {
-                        validateAAA = validateAAA +
-                            "<tr><td>" +
-                            singleInstance.name +
-                            "</td><td>" +
-                            singleInstance.vname +
-                            "</td><td>" +
-                            singleInstance.aktuelleUni +
-                            "</td><td>" +
-                            singleInstance.prioritaet + 
-                            "</td><td>" +
-                            singleInstance.kurs +
-                            "</td><td>" +
-                            singleInstance.uni +
-                            "</td><td>" +
-                            '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
-                            "</td></tr>";
                     }
                 }
             }
@@ -141,12 +123,6 @@ function getList() {
                     completed + "</tbody></table>";
             }
 
-            if (validateAAA === "") {
-                validateAAA = "<p>Aktuell gibt es keine Bewerbungen, die von einem AAA überprüft werden müssen</p>";
-            } else {
-                validateAAA = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th></tr></thead><tbody>' +
-                    validateAAA + "</tbody></table>";
-            }
             if (abgelehnt === "") {
                 abgelehnt = "<p>Bisher wurden keine Bewerbungen abgelehnt</p>";
             } else {
@@ -183,7 +159,7 @@ function getList() {
                 });
             });
 
-            document.getElementById("resultList").innerHTML = '<br><h4>Zu validierende Bewerbungen</h4>' + output + '<br><h4>Zur Bearbeitung geschickte Bewerbungen</h4>' + edit + '<br><h4>Bewerbungen beim Auslandsamt</h4>' + validateAAA + '<br><h4>Angenommene Bewerbungen</h4>' + completed + '<br><h4>Abgelehnte Bewerbungen</h4>' + abgelehnt;
+            document.getElementById("resultList").innerHTML = '<br><h4>Zu validierende Bewerbungen</h4>' + output + '<br><h4>Zur Bearbeitung geschickte Bewerbungen</h4>' + edit + '<br><h4>Angenommene Bewerbungen</h4>' + completed + '<br><h4>Abgelehnte Bewerbungen</h4>' + abgelehnt;
         },
         error: function (result) {
             Swal.fire("Ein Fehler ist aufgetreten", "error");
