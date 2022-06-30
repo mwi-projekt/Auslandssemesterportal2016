@@ -94,6 +94,18 @@ class GetProcessFileServletIT {
                 .extract().response();
 
         assertEquals("",response.contentType());
+
+        // aufräumen (Prozessinstanz löschen)
+        String returnedId = given()
+                .cookie("sessionID", sessionID)
+                .cookie("email", "test@student.dhbw-karlsruhe.de")
+                .queryParam("matrikelnummer", "1901901")
+                .queryParam("uni","California State University San Marcos (USA)")
+                .when()
+                .get("http://10.3.15.45/process/delete")
+                .then().statusCode(200)
+                .extract().response().asString();
+        assertEquals(instanceId ,returnedId.trim());
     }
 
     private Map<String, Object> getMap(String instanceId) {
