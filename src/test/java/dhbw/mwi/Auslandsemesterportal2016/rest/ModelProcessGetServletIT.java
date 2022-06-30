@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ModelProcessGetServletIntegrationsTest {
+class ModelProcessGetServletIT {
     @Test
     void doGetSuccess() {
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")

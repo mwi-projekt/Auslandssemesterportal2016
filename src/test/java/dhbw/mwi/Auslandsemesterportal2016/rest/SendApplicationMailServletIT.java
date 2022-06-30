@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -6,21 +6,13 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class UploadServletIntegrationsTest {
+class SendApplicationMailServletIT {
     @Test
-    void doPostSuccess() throws IOException {
+    void doGetSuccess() {
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
                 .then().statusCode(200)
                 .extract().response();
@@ -40,41 +32,15 @@ class UploadServletIntegrationsTest {
         JsonObject getInstanceResponseAsJson = JsonParser.parseString(getInstanceResponse).getAsJsonObject();
         String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();
 
-        Map<String, Object> map = getMap(instanceId);
-        File testFile = getTestFile();
-
-        given()
-                .multiPart(testFile)
+        String response = given()
                 .cookie("sessionID", sessionID)
                 .cookie("email", "test@student.dhbw-karlsruhe.de")
-                .formParams(map)
+                .queryParam("instance_id", instanceId)
                 .when()
-                .post("http://10.3.15.45/upload")
-                .then().statusCode(200);
-    }
-
-    private File getTestFile() throws IOException {
-        File testFile = new File("Test.pdf");
-        List<String> input = Arrays.asList("Test", "Test");
-        Files.write(testFile.toPath(),input);
-        return testFile;
-    }
-
-    private Map<String, Object> getMap(String instanceId) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("instance", instanceId);
-        map.put("action", "daadHochladen");
-        return map;
-    }
-
-    @Test
-    void doOptionsSuccess(){
-        String response = given()
-                .cookie("email", "test@student.dhbw-karlsruhe.de")
-                .when()
-                .options("http://10.3.15.45/upload")
+                .post("http://10.3.15.45/sendNewApplicationMail")
                 .then().statusCode(200)
-                .contentType(ContentType.JSON).extract().response().asString();
-        assertEquals("{}", response);
+                .extract().response().asString();
+
+        assertEquals("Keine E-Mail im Kontext von Tests versendet",response);
     }
 }

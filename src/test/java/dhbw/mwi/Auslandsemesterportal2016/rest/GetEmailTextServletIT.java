@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GetEmailTextServletIntegrationsTest {
+class GetEmailTextServletIT {
 
     @Test
     void doGetSuccess(){

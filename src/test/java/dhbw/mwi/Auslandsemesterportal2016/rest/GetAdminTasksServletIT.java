@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -11,19 +11,19 @@ import static io.restassured.RestAssured.post;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class GetSGLTasksServletIntegrationsTest {
+class GetAdminTasksServletIT {
     @Test
     void doGetSuccess() {
-        Response loginResponse = post("http://10.3.15.45/login?email=test@sgl.dhbw-karlsruhe.de&pw=8(sdf2aDJiGl,/")
+        Response loginResponse = post("http://10.3.15.45/login?email=admin@admin.de&pw=khjfjKDdsf254s#!")
                 .then().statusCode(200)
                 .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
         String response = given()
                 .cookie("sessionID", sessionID)
-                .cookie("email", "test@sgl.dhbw-karlsruhe.de")
+                .cookie("email", "admin@admin.de")
                 .when()
-                .get("http://10.3.15.45/getSGLTasks")
+                .get("http://10.3.15.45/getTasks")
                 .then().statusCode(200)
                 .contentType(ContentType.JSON).extract().response().asString();
 

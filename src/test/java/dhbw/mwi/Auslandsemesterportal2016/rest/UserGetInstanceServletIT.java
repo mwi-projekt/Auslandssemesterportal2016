@@ -1,34 +1,32 @@
-package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
-
+import com.google.gson.JsonParser;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
-import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class LogoutServletIntegrationsTest {
-
+class UserGetInstanceServletIT {
     @Test
-    void doGetFailed() {
-        post("http://10.3.15.45/logout").then().statusCode(400);
-    }
-
-    @Test
-    void doGetSuccess() {
+    void doGetSuccess(){
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
                 .then().statusCode(200)
                 .extract().response();
         String sessionID = loginResponse.getCookies().get("sessionID");
 
-        given()
+        String response = given()
                 .cookie("sessionID", sessionID)
                 .cookie("email", "test@student.dhbw-karlsruhe.de")
                 .when()
-                .get("http://10.3.15.45/logout")
+                .get("http://10.3.15.45/getUserInstances?matnr=1901901")
                 .then().statusCode(200)
-                .cookie("email", equalTo(""))
-                .cookie("sessionID", equalTo(""));
+                .contentType(ContentType.JSON).extract().response().asString();
+
+        assertNotNull(response);
+        assertNotNull(JsonParser.parseString(response).getAsJsonObject().get("data").getAsJsonArray());
     }
+
 }

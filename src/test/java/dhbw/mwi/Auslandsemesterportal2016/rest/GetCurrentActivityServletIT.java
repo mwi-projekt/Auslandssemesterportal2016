@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ProcessDeleteServletIntegrationsTest {
+class GetCurrentActivityServletIT {
     @Test
     void doGetSuccess() {
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
@@ -32,15 +32,16 @@ class ProcessDeleteServletIntegrationsTest {
         JsonObject getInstanceResponseAsJson = JsonParser.parseString(getInstanceResponse).getAsJsonObject();
         String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();
 
-        String returnedId = given()
+        String returnedJSON = given()
                 .cookie("sessionID", sessionID)
                 .cookie("email", "test@student.dhbw-karlsruhe.de")
-                .queryParam("matrikelnummer", "190190190")
-                .queryParam("uni","California State University San Marcos (USA)")
+                .queryParam("instance_id", instanceId)
+                .queryParam("uni", "California State University San Marcos (USA)")
                 .when()
-                .get("http://10.3.15.45/process/delete")
+                .get("http://10.3.15.45/currentActivity")
                 .then().statusCode(200)
-                .extract().response().asString();
-        assertEquals(instanceId ,returnedId.trim());
+                .contentType(ContentType.JSON).extract().response().asString();
+
+        assertEquals("{\"active\":\"downloadsAnbieten\",\"data\":\"usasm\"}",returnedJSON.trim());
     }
 }

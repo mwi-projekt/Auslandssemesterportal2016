@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SendApplicationMailServletIntegrationsTest {
+class GetVariablesServletIT {
     @Test
     void doGetSuccess() {
         Response loginResponse = post("http://10.3.15.45/login?email=test@student.dhbw-karlsruhe.de&pw=7sdfyxc/fsdASDFM")
@@ -32,15 +32,16 @@ class SendApplicationMailServletIntegrationsTest {
         JsonObject getInstanceResponseAsJson = JsonParser.parseString(getInstanceResponse).getAsJsonObject();
         String instanceId = getInstanceResponseAsJson.get("instanceId").toString().replace('\"', ' ').trim();
 
-        String response = given()
+        String returnedVariables = given()
                 .cookie("sessionID", sessionID)
                 .cookie("email", "test@student.dhbw-karlsruhe.de")
                 .queryParam("instance_id", instanceId)
                 .when()
-                .post("http://10.3.15.45/sendNewApplicationMail")
+                .get("http://10.3.15.45/getVariables")
                 .then().statusCode(200)
-                .extract().response().asString();
+                .contentType(ContentType.JSON).extract().response().asString();
 
-        assertEquals("Keine E-Mail im Kontext von Tests versendet",response);
+        String expectedVariables = "{\"bewEmail\":\"test@student.dhbw-karlsruhe.de\",\"uni\":\"California State University San Marcos (USA)\",\"aktuelleUni\":\"DHBW Karlsruhe\",\"bewKurs\":\"WWI12B5\",\"bewVorname\":\"Test\",\"matrikelnummer\":\"1901901\",\"prioritaet\":\"2\",\"bewNachname\":\"Student\",\"bewStudiengang\":\"Wirtschaftsinformatik\"}";
+        assertEquals(expectedVariables ,returnedVariables.trim());
     }
 }

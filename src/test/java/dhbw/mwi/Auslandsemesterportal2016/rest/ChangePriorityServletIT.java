@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.post;
 
-class ChangePriorityServletIntegrationsTest {
+class ChangePriorityServletIT {
 
     @Test
     void doGetSuccess() {
@@ -36,7 +36,7 @@ class ChangePriorityServletIntegrationsTest {
                 .cookie("sessionID", sessionID)
                 .cookie("email", "test@student.dhbw-karlsruhe.de")
                 .queryParam("instance", instanceId)
-                .queryParam("prio", "2")
+                .queryParam("prio", "1")
                 .when()
                 .get("http://10.3.15.45/changePriority")
                 .then().statusCode(200);

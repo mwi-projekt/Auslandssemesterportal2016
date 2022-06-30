@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.integrationstest;
+package dhbw.mwi.Auslandsemesterportal2016.rest;
 
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import org.junit.jupiter.api.Test;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ResetPasswordServletIntegrationsTest {
+class ResetPasswordServletIT {
     @Test
     void doPostSuccess() {
         String testEMail = "test@student.dhbw-karlsruhe.de";
