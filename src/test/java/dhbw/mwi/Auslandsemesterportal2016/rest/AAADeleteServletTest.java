@@ -5,7 +5,6 @@ import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 import dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.SuccessEnum;
 import dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum;
-import dhbw.mwi.Auslandsemesterportal2016.rest.AAADeleteServlet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

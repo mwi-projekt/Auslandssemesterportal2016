@@ -404,5 +404,32 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>integrationsTests</id>
+			<properties>
+				<skip.unit.tests>true</skip.unit.tests>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.22.2</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+								<configuration>
+									<includes>
+										<include>**/*IntegrationsTest</include>
+									</includes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 </project>
