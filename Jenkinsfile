@@ -24,5 +24,16 @@ pipeline {
                 sh 'docker-compose up -d'
             }
         }
+        stage('Wait until fully deployed') {
+            steps {
+                sleep 90
+            }
+        }
+        stage('Run Integration Tests') {
+            steps {
+                sh 'mvn failsafe:integration-test -PintegrationsTests'
+            }
+            post {always {junit 'target/failsafe-reports/*.xml'}}
+        }
     }
 }
