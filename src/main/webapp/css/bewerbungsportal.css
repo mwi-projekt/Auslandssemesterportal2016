@@ -5,6 +5,15 @@ th {
 .header {
 }
 
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: medium;
+}
+.textinhalt{
+  font-size: large;
+  text-align: left;
+}
+
 .nav2 {
   border-bottom: 1px solid #d60000;
   padding-bottom: 47px;
@@ -190,7 +199,7 @@ visibility: hidden;
 .inhaltBox {
   margin-left: 10px;
   margin-top: 10px;
-  color: #bdbdbd;
+  color: #212529;
   background: white;
 }
 

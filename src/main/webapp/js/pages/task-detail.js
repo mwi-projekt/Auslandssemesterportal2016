@@ -180,7 +180,7 @@ $(document).ready(function () {
           instance_id: instanceID,
           key: 'validierungErfolgreich|mailText',
           value: validateString + '|' + grund,
-          type: 'boolean|text', //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
+          type: 'text|text', //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
         },
         success: function (result) {
           Swal.fire({
@@ -301,10 +301,10 @@ function parse() {
               visibleStepName = 'Partnerunternehmen';
             } else if (stepName === 'Task_1jq3nab') {
               visibleStepName = 'Semesteranschrift';
-            } else if (stepName === 'spanischNotePruefen') {
-              visibleStepName = 'Notenpunkte in Spanisch im Abitur';
-            } else if (stepName === 'englischNotePruefen') {
-              visibleStepName = 'Notenpunkte in Englisch im Abitur';
+            // } else if (stepName === 'spanischNotePruefen') {
+            //   visibleStepName = 'Notenpunkte in Spanisch im Abitur';
+            // } else if (stepName === 'englischNotePruefen') {
+            //   visibleStepName = 'Notenpunkte in Englisch im Abitur';
             } else {
               visibleStepName = 'Sonstige Angaben';
             }
@@ -421,8 +421,8 @@ function getData() {
             'uni2',
             'uni3',
             'zeitraum',
-            'englischNote',
-            'spanischNote',
+            // 'englischNote',
+            // 'spanischNote',
             'muttersprache',
           ];
           disabledFields.map((value) => {

@@ -45,7 +45,7 @@ table td {
 }
 
 .col-sm-2 {
-  max-width: 100%;
+  max-width: 80%;
 }
 
 #gdprCompliance {
@@ -119,6 +119,7 @@ span#bewOrt-error,
 span#bewLand-error,
 span#bewEmail-error,
 span#untStrasse-error,
+span#bewGeburtsdatum-error,
 span#untPLZ-error,
 span#untOrt-error,
 span#untAnsprechpartner-error,
@@ -136,14 +137,17 @@ input#bewOrt,
 select#aktuelleUni,
 input#matrikelnummer,
 select#bewStudiengang,
+select#bewStudienrichtung,
 input#bewEmail,
 input#muttersprache,
 select#muttersprache,
 select#uni1,
 select#uni2,
 select#uni3,
+input#bewErfahrungsberichtZustimmung,
+input#bewBenachteiligung,
 select#spanischNote,
-select#englischNote {
+select#englischNote{
   margin-left: 25%;
 }
 
@@ -159,6 +163,12 @@ input#bewGeburtsdatum,
 select#bewSemester,
 select#bewErasmus,
 select#bewLA,
-select#bewSGL {
+select#bewSGL,
+input#untEinwilligung {
   margin-left: 25%;
+}
+
+input#bewErfahrungsberichtZustimmung,
+input#untEinwilligung {
+  margin-right: 1ex;
 }

@@ -6,39 +6,25 @@
   <bpmn:process id="standard" name="Bewerbungen Standard" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_05ro1a0" name="Studiengangsleiter">
-        <bpmn:flowNodeRef>datenValidierenSGL</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1dolwiq</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>datenValidierenSGL</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>studentBenachrichtigenSGL</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_190wn40" name="Mitarbeiter AAA">
-        <bpmn:flowNodeRef>EndEvent_true</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>EndEvent_false</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>abgeschlossen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>abgelehnt</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>goOutUebergeben</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abgelehnt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>abgeschlossen</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_false</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_true</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_07n76w6" name="Student">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>downloadsAnbieten</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>datenPruefen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>universitaetAuswaehlen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>datenEingeben</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>datenEingebenUnt</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_CostaRicaUni</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_SpanischMutter</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_1i3uw8o</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>spanischNotePruefen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Gateway_0gik51m</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_EnglischStart</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>englischNotePruefen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_EnglischMutter</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>ExclusiveGateway_EnglischEnd</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>daadHochladen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>zustimmungHochladen</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>dualisHochladen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>motivationHochladen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>abiturHochladen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>datenPruefen</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0kzd76q</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_1" name="Bewerbung starten" camunda:formKey="app:start-form.html">
@@ -55,13 +41,50 @@
     <bpmn:sequenceFlow id="SequenceFlow_1g3gfo6" sourceRef="datenEingeben" targetRef="datenEingebenUnt" />
     <bpmn:sequenceFlow id="Flow_1qjobkf" sourceRef="downloadsAnbieten" targetRef="universitaetAuswaehlen" />
     <bpmn:sequenceFlow id="Flow_13o42g1" sourceRef="universitaetAuswaehlen" targetRef="datenEingeben" />
-    <bpmn:sequenceFlow id="Flow_1xa0u93" sourceRef="datenEingebenUnt" targetRef="ExclusiveGateway_CostaRicaUni" />
-    <bpmn:sequenceFlow id="Flow_10tw9l0" name="Nein" sourceRef="ExclusiveGateway_CostaRicaUni" targetRef="ExclusiveGateway_EnglischMutter">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${uni1 != "Costa Rica Institute of Technology (Costa Rica)" &amp;&amp; uni2 != "Costa Rica Institute of Technology (Costa Rica)" &amp;&amp; uni3 != "Costa Rica Institute of Technology (Costa Rica)"}</bpmn:conditionExpression>
+    <bpmn:sequenceFlow id="SequenceFlow_06b7u3b" sourceRef="dualisHochladen" targetRef="datenPruefen" />
+    <bpmn:sequenceFlow id="Flow_0fx55je" sourceRef="datenEingebenUnt" targetRef="dualisHochladen" />
+    <bpmn:serviceTask id="goOutUebergeben" name="Daten an &#34;Go Out Formular&#34;  übergeben" camunda:class="dhbw.mwi.Auslandsemesterportal2016.service.GoOutFormularService">
+      <bpmn:incoming>SequenceFlow_0trilik</bpmn:incoming>
+      <bpmn:outgoing>Flow_1x3as24</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="abgelehnt" name="Bewerbung abgelehnt">
+      <bpmn:incoming>Flow_0596pz2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1jjp43i</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="abgeschlossen" name="Prozess abgeschlossen">
+      <bpmn:incoming>Flow_1x3as24</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0fihakq</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_false" name="Bewerbung erfolglos abgeschlossen">
+      <bpmn:incoming>SequenceFlow_1jjp43i</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_true" name="Bewerbung erfolgreich abgeschlossen">
+      <bpmn:incoming>SequenceFlow_0fihakq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1dolwiq" name="Bewerbungs-prüfung Ergebnis?">
+      <bpmn:incoming>SequenceFlow_1dff142</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0ji9cm2</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0trilik</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0596pz2</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0cmmyvv" sourceRef="datenPruefen" targetRef="datenValidierenSGL" />
+    <bpmn:sequenceFlow id="SequenceFlow_1dff142" sourceRef="datenValidierenSGL" targetRef="ExclusiveGateway_1dolwiq" />
+    <bpmn:sequenceFlow id="SequenceFlow_0ji9cm2" name="Zur Bearbeitung freigeben" sourceRef="ExclusiveGateway_1dolwiq" targetRef="studentBenachrichtigenSGL">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich == 'edit'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1scm3ub" name="Ja" sourceRef="ExclusiveGateway_CostaRicaUni" targetRef="ExclusiveGateway_SpanischMutter">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${uni1 == "Costa Rica Institute of Technology (Costa Rica)" || uni2 == "Costa Rica Institute of Technology (Costa Rica)" || uni3 == "Costa Rica Institute of Technology (Costa Rica)"}</bpmn:conditionExpression>
+    <bpmn:sequenceFlow id="SequenceFlow_0trilik" name="Annehmen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="goOutUebergeben">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich == 'true'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1x3as24" sourceRef="goOutUebergeben" targetRef="abgeschlossen" />
+    <bpmn:sequenceFlow id="Flow_0596pz2" name="Ablehnen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="abgelehnt">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich == 'false'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1jjp43i" sourceRef="abgelehnt" targetRef="EndEvent_false" />
+    <bpmn:sequenceFlow id="SequenceFlow_0fihakq" sourceRef="abgeschlossen" targetRef="EndEvent_true" />
+    <bpmn:userTask id="datenPruefen" name="Daten prüfen">
+      <bpmn:incoming>SequenceFlow_06b7u3b</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0cmmyvv</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:userTask id="universitaetAuswaehlen" name="Auswahl Universitäten">
       <bpmn:incoming>Flow_1qjobkf</bpmn:incoming>
       <bpmn:outgoing>Flow_13o42g1</bpmn:outgoing>
@@ -72,31 +95,11 @@
     </bpmn:userTask>
     <bpmn:userTask id="datenEingebenUnt" name="Daten eingeben Unternehmen">
       <bpmn:incoming>SequenceFlow_1g3gfo6</bpmn:incoming>
-      <bpmn:outgoing>Flow_1xa0u93</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0fx55je</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_CostaRicaUni" name="Costa Rica">
-      <bpmn:incoming>Flow_1xa0u93</bpmn:incoming>
-      <bpmn:outgoing>Flow_10tw9l0</bpmn:outgoing>
-      <bpmn:outgoing>Flow_1scm3ub</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_SpanischMutter" name="Spanisch = Muttersprache?">
-      <bpmn:incoming>Flow_1scm3ub</bpmn:incoming>
-      <bpmn:outgoing>Flow_1wdddko</bpmn:outgoing>
-      <bpmn:outgoing>Flow_1wyjrtr</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="EndEvent_true" name="Bewerbung erfolgreich abgeschlossen">
-      <bpmn:incoming>SequenceFlow_0fihakq</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:endEvent id="EndEvent_false" name="Bewerbung erfolglos abgeschlossen">
-      <bpmn:incoming>SequenceFlow_1jjp43i</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:userTask id="abgeschlossen" name="Prozess abgeschlossen">
-      <bpmn:incoming>Flow_1x3as24</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0fihakq</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="abgelehnt" name="Bewerbung abgelehnt">
-      <bpmn:incoming>Flow_0596pz2</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1jjp43i</bpmn:outgoing>
+    <bpmn:userTask id="dualisHochladen" name="Dualisauszug hochladen">
+      <bpmn:incoming>Flow_0fx55je</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_06b7u3b</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="datenValidierenSGL" name="Daten validieren" camunda:formKey="embedded:app:forms/task-form.html" camunda:assignee="mitarbeiterAAA">
       <bpmn:extensionElements>
@@ -105,363 +108,96 @@
       <bpmn:incoming>SequenceFlow_0cmmyvv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1dff142</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_1dolwiq" name="Bewerbungs-prüfung Ergebnis?">
-      <bpmn:incoming>SequenceFlow_1dff142</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0ji9cm2</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_0trilik</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0596pz2</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_0cmmyvv" sourceRef="datenPruefen" targetRef="datenValidierenSGL" />
-    <bpmn:sequenceFlow id="SequenceFlow_0trilik" name="Annehmen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="goOutUebergeben">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${validierungErfolgreich}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0fihakq" sourceRef="abgeschlossen" targetRef="EndEvent_true" />
-    <bpmn:sequenceFlow id="SequenceFlow_1jjp43i" sourceRef="abgelehnt" targetRef="EndEvent_false" />
-    <bpmn:sequenceFlow id="SequenceFlow_0ji9cm2" name="Zur Bearbeitung freigeben" sourceRef="ExclusiveGateway_1dolwiq" targetRef="studentBenachrichtigenSGL">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!validierungErfolgreich}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_1dff142" sourceRef="datenValidierenSGL" targetRef="ExclusiveGateway_1dolwiq" />
-    <bpmn:sequenceFlow id="Flow_1wdddko" name="Nein" sourceRef="ExclusiveGateway_SpanischMutter" targetRef="spanischNotePruefen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache != "Spanisch"}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:exclusiveGateway id="Gateway_1i3uw8o" name="Unis außer Costa-Rica">
-      <bpmn:incoming>Flow_1oc2qvr</bpmn:incoming>
-      <bpmn:incoming>Flow_1wyjrtr</bpmn:incoming>
-      <bpmn:incoming>Flow_0j8t8es</bpmn:incoming>
-      <bpmn:outgoing>Flow_0nhtml8</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0pixbq5</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0nhtml8" name="Ja" sourceRef="Gateway_1i3uw8o" targetRef="ExclusiveGateway_EnglischMutter">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${uni1 != "Costa Rica Institute of Technology (Costa Rica)" || uni2 != "Costa Rica Institute of Technology (Costa Rica)" || uni3 != "Costa Rica Institute of Technology (Costa Rica)"}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0pixbq5" name="Nein" sourceRef="Gateway_1i3uw8o" targetRef="ExclusiveGateway_EnglischEnd">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${uni2 == "" || uni2 == null}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1oc2qvr" sourceRef="Activity_0kzd76q" targetRef="Gateway_1i3uw8o" />
-    <bpmn:sequenceFlow id="Flow_1wyjrtr" name="Ja" sourceRef="ExclusiveGateway_SpanischMutter" targetRef="Gateway_1i3uw8o">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache == "Spanisch"}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:userTask id="spanischNotePruefen" name="Spanischnote eintragen">
-      <bpmn:incoming>Flow_1wdddko</bpmn:incoming>
-      <bpmn:outgoing>Flow_0qf2hjf</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:exclusiveGateway id="Gateway_0gik51m" name="Spanischnote &#62;= 11 Punkte?">
-      <bpmn:incoming>Flow_0qf2hjf</bpmn:incoming>
-      <bpmn:outgoing>Flow_0p0p42q</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0j8t8es</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0qf2hjf" sourceRef="spanischNotePruefen" targetRef="Gateway_0gik51m" />
-    <bpmn:sequenceFlow id="Flow_0p0p42q" name="Nein" sourceRef="Gateway_0gik51m" targetRef="Activity_0kzd76q">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${spanischNote&lt;11}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischStart" name="Englischnote &#62;= 11 Punkte?">
-      <bpmn:incoming>SequenceFlow_1p3sxt6</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1d0ul03</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_0d39a82</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:userTask id="englischNotePruefen" name="Englischnote eintragen">
-      <bpmn:incoming>SequenceFlow_12my7xt</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1p3sxt6</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischMutter" name="Englisch = Muttersprache?">
-      <bpmn:incoming>Flow_10tw9l0</bpmn:incoming>
-      <bpmn:incoming>Flow_0nhtml8</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_06jsa12</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_12my7xt</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_1p3sxt6" sourceRef="englischNotePruefen" targetRef="ExclusiveGateway_EnglischStart" />
-    <bpmn:sequenceFlow id="SequenceFlow_1d0ul03" name="Nein" sourceRef="ExclusiveGateway_EnglischStart" targetRef="daadHochladen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englischNote&lt;11}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0d39a82" name="Ja" sourceRef="ExclusiveGateway_EnglischStart" targetRef="ExclusiveGateway_EnglischEnd">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${englischNote&gt;=11}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_06jsa12" name="Ja" sourceRef="ExclusiveGateway_EnglischMutter" targetRef="ExclusiveGateway_EnglischEnd">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache == "Englisch"}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_1tpgdb5" sourceRef="daadHochladen" targetRef="ExclusiveGateway_EnglischEnd" />
-    <bpmn:sequenceFlow id="SequenceFlow_0tdd3mj" sourceRef="ExclusiveGateway_EnglischEnd" targetRef="zustimmungHochladen" />
-    <bpmn:sequenceFlow id="SequenceFlow_12my7xt" name="Nein" sourceRef="ExclusiveGateway_EnglischMutter" targetRef="englischNotePruefen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${muttersprache != "Englisch"}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_EnglischEnd">
-      <bpmn:incoming>SequenceFlow_0d39a82</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_1tpgdb5</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_06jsa12</bpmn:incoming>
-      <bpmn:incoming>Flow_0pixbq5</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0tdd3mj</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:userTask id="daadHochladen" name="Englisch DAAD-Formular hochladen">
-      <bpmn:incoming>SequenceFlow_1d0ul03</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1tpgdb5</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="zustimmungHochladen" name="Anmeldeformular hochladen">
-      <bpmn:incoming>SequenceFlow_0tdd3mj</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0yksv3e</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="dualisHochladen" name="Dualisauszug hochladen">
-      <bpmn:incoming>SequenceFlow_0yksv3e</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_06b7u3b</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="motivationHochladen" name="Motivations-schreiben hochladen">
-      <bpmn:incoming>SequenceFlow_06b7u3b</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0r1y3rt</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="abiturHochladen" name="Abiturzeugnis hochladen">
-      <bpmn:incoming>SequenceFlow_0r1y3rt</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0h9aw8k</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="datenPruefen" name="Daten prüfen">
-      <bpmn:incoming>SequenceFlow_0h9aw8k</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0cmmyvv</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0yksv3e" sourceRef="zustimmungHochladen" targetRef="dualisHochladen" />
-    <bpmn:sequenceFlow id="SequenceFlow_06b7u3b" sourceRef="dualisHochladen" targetRef="motivationHochladen" />
-    <bpmn:sequenceFlow id="SequenceFlow_0r1y3rt" sourceRef="motivationHochladen" targetRef="abiturHochladen" />
-    <bpmn:sequenceFlow id="SequenceFlow_0h9aw8k" sourceRef="abiturHochladen" targetRef="datenPruefen" />
-    <bpmn:sequenceFlow id="Flow_0j8t8es" sourceRef="Gateway_0gik51m" targetRef="Gateway_1i3uw8o">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${spanischNote&gt;=11}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:userTask id="Activity_0kzd76q" name="Spanisch DAAD-Formular hochladen">
-      <bpmn:incoming>Flow_0p0p42q</bpmn:incoming>
-      <bpmn:outgoing>Flow_1oc2qvr</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0596pz2" name="Ablehnen" sourceRef="ExclusiveGateway_1dolwiq" targetRef="abgelehnt" />
-    <bpmn:sequenceFlow id="Flow_1x3as24" sourceRef="goOutUebergeben" targetRef="abgeschlossen" />
     <bpmn:sendTask id="studentBenachrichtigenSGL" name="Student benachrichtigen" camunda:class="dhbw.mwi.Auslandsemesterportal2016.db.login_db">
       <bpmn:documentation>Student wird über Ablehnung informiert.</bpmn:documentation>
       <bpmn:incoming>SequenceFlow_0ji9cm2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0env68s</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:serviceTask id="goOutUebergeben" name="Daten an &#34;Go Out Formular&#34;  übergeben" camunda:class="dhbw.mwi.Auslandsemesterportal2016.service.GoOutFormularService">
-      <bpmn:incoming>SequenceFlow_0trilik</bpmn:incoming>
-      <bpmn:outgoing>Flow_1x3as24</bpmn:outgoing>
-    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cl2lu7">
       <bpmndi:BPMNShape id="Participant_00ci3jw_di" bpmnElement="Participant_00ci3jw" isHorizontal="true">
-        <dc:Bounds x="156" y="80" width="3336" height="1000" />
+        <dc:Bounds x="156" y="80" width="2084" height="1000" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_07n76w6_di" bpmnElement="Lane_07n76w6" isHorizontal="true">
-        <dc:Bounds x="186" y="80" width="3306" height="382" />
+        <dc:Bounds x="186" y="80" width="2054" height="382" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_190wn40_di" bpmnElement="Lane_190wn40" isHorizontal="true">
-        <dc:Bounds x="186" y="697" width="3306" height="383" />
+        <dc:Bounds x="186" y="697" width="2054" height="383" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_05ro1a0_di" bpmnElement="Lane_05ro1a0" isHorizontal="true">
-        <dc:Bounds x="186" y="462" width="3306" height="235" />
+        <dc:Bounds x="186" y="462" width="2054" height="235" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1x3as24_di" bpmnElement="Flow_1x3as24">
-        <di:waypoint x="2930" y="850" />
-        <di:waypoint x="2930" y="980" />
-        <di:waypoint x="3192" y="980" />
+      <bpmndi:BPMNEdge id="SequenceFlow_0fihakq_di" bpmnElement="SequenceFlow_0fihakq">
+        <di:waypoint x="2040" y="980" />
+        <di:waypoint x="2104" y="980" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1jjp43i_di" bpmnElement="SequenceFlow_1jjp43i">
+        <di:waypoint x="2040" y="889" />
+        <di:waypoint x="2104" y="889" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0596pz2_di" bpmnElement="Flow_0596pz2">
-        <di:waypoint x="2845" y="530" />
-        <di:waypoint x="2845" y="520" />
-        <di:waypoint x="3000" y="520" />
-        <di:waypoint x="3000" y="889" />
-        <di:waypoint x="3192" y="889" />
+        <di:waypoint x="1593" y="530" />
+        <di:waypoint x="1593" y="520" />
+        <di:waypoint x="1748" y="520" />
+        <di:waypoint x="1748" y="889" />
+        <di:waypoint x="1940" y="889" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="3007" y="602" width="46" height="14" />
+          <dc:Bounds x="1755" y="602" width="47" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0j8t8es_di" bpmnElement="Flow_0j8t8es">
-        <di:waypoint x="1240" y="405" />
-        <di:waypoint x="1240" y="450" />
-        <di:waypoint x="1540" y="450" />
-        <di:waypoint x="1540" y="405" />
+      <bpmndi:BPMNEdge id="Flow_1x3as24_di" bpmnElement="Flow_1x3as24">
+        <di:waypoint x="1678" y="850" />
+        <di:waypoint x="1678" y="980" />
+        <di:waypoint x="1940" y="980" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0h9aw8k_di" bpmnElement="SequenceFlow_0h9aw8k">
-        <di:waypoint x="2857" y="360" />
-        <di:waypoint x="2908" y="360" />
+      <bpmndi:BPMNEdge id="SequenceFlow_0trilik_di" bpmnElement="SequenceFlow_0trilik">
+        <di:waypoint x="1618" y="560" />
+        <di:waypoint x="1678" y="560" />
+        <di:waypoint x="1678" y="770" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="3448" y="103" width="90" height="20" />
+          <dc:Bounds x="1682" y="643" width="54" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0r1y3rt_di" bpmnElement="SequenceFlow_0r1y3rt">
-        <di:waypoint x="2702" y="360" />
-        <di:waypoint x="2757" y="360" />
+      <bpmndi:BPMNEdge id="SequenceFlow_0ji9cm2_di" bpmnElement="SequenceFlow_0ji9cm2">
+        <di:waypoint x="1593" y="585" />
+        <di:waypoint x="1593" y="640" />
+        <di:waypoint x="1300" y="640" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="3270" y="118" width="90" height="20" />
+          <dc:Bounds x="1481" y="606" width="79" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1dff142_di" bpmnElement="SequenceFlow_1dff142">
+        <di:waypoint x="1518" y="560" />
+        <di:waypoint x="1568" y="560" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0cmmyvv_di" bpmnElement="SequenceFlow_0cmmyvv">
+        <di:waypoint x="1300" y="269" />
+        <di:waypoint x="1468" y="271" />
+        <di:waypoint x="1468" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fx55je_di" bpmnElement="Flow_0fx55je">
+        <di:waypoint x="930" y="268" />
+        <di:waypoint x="1020" y="268" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_06b7u3b_di" bpmnElement="SequenceFlow_06b7u3b">
-        <di:waypoint x="2551" y="360" />
-        <di:waypoint x="2602" y="360" />
+        <di:waypoint x="1120" y="268" />
+        <di:waypoint x="1200" y="268" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="3180" y="118" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0yksv3e_di" bpmnElement="SequenceFlow_0yksv3e">
-        <di:waypoint x="2384" y="360" />
-        <di:waypoint x="2451" y="360" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2593" y="118" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_12my7xt_di" bpmnElement="SequenceFlow_12my7xt">
-        <di:waypoint x="1793" y="268" />
-        <di:waypoint x="1856" y="268" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1814" y="247" width="23" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0tdd3mj_di" bpmnElement="SequenceFlow_0tdd3mj">
-        <di:waypoint x="2231" y="360" />
-        <di:waypoint x="2284" y="360" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2730" y="139" width="90" height="12" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1tpgdb5_di" bpmnElement="SequenceFlow_1tpgdb5">
-        <di:waypoint x="2206" y="308" />
-        <di:waypoint x="2206" y="335" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2578" y="123" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_06jsa12_di" bpmnElement="SequenceFlow_06jsa12">
-        <di:waypoint x="1768" y="293" />
-        <di:waypoint x="1768" y="360" />
-        <di:waypoint x="2181" y="360" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1779" y="337" width="12" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0d39a82_di" bpmnElement="SequenceFlow_0d39a82">
-        <di:waypoint x="2043" y="293" />
-        <di:waypoint x="2043" y="360" />
-        <di:waypoint x="2181" y="360" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2053" y="342" width="12" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1d0ul03_di" bpmnElement="SequenceFlow_1d0ul03">
-        <di:waypoint x="2068" y="268" />
-        <di:waypoint x="2156" y="268" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2099" y="245" width="23" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1p3sxt6_di" bpmnElement="SequenceFlow_1p3sxt6">
-        <di:waypoint x="1956" y="268" />
-        <di:waypoint x="2018" y="268" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2374" y="107" width="90" height="12" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0p0p42q_di" bpmnElement="Flow_0p0p42q">
-        <di:waypoint x="1265" y="380" />
-        <di:waypoint x="1340" y="380" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1292" y="362" width="23" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0qf2hjf_di" bpmnElement="Flow_0qf2hjf">
-        <di:waypoint x="1170" y="380" />
-        <di:waypoint x="1215" y="380" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1wyjrtr_di" bpmnElement="Flow_1wyjrtr">
-        <di:waypoint x="970" y="405" />
-        <di:waypoint x="970" y="450" />
-        <di:waypoint x="1540" y="450" />
-        <di:waypoint x="1540" y="405" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1249" y="432" width="12" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1oc2qvr_di" bpmnElement="Flow_1oc2qvr">
-        <di:waypoint x="1440" y="380" />
-        <di:waypoint x="1515" y="380" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0pixbq5_di" bpmnElement="Flow_0pixbq5">
-        <di:waypoint x="1565" y="380" />
-        <di:waypoint x="2160" y="380" />
-        <di:waypoint x="2189" y="368" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2158" y="393" width="23" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0nhtml8_di" bpmnElement="Flow_0nhtml8">
-        <di:waypoint x="1557" y="372" />
-        <di:waypoint x="1751" y="276" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1641" y="337" width="12" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1wdddko_di" bpmnElement="Flow_1wdddko">
-        <di:waypoint x="995" y="380" />
-        <di:waypoint x="1070" y="380" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1035" y="363" width="23" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1dff142_di" bpmnElement="SequenceFlow_1dff142">
-        <di:waypoint x="2770" y="560" />
-        <di:waypoint x="2820" y="560" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0ji9cm2_di" bpmnElement="SequenceFlow_0ji9cm2">
-        <di:waypoint x="2845" y="585" />
-        <di:waypoint x="2845" y="650" />
-        <di:waypoint x="2665" y="650" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2760" y="616" width="80" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1jjp43i_di" bpmnElement="SequenceFlow_1jjp43i">
-        <di:waypoint x="3292" y="889" />
-        <di:waypoint x="3356" y="889" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0fihakq_di" bpmnElement="SequenceFlow_0fihakq">
-        <di:waypoint x="3292" y="980" />
-        <di:waypoint x="3356" y="980" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0trilik_di" bpmnElement="SequenceFlow_0trilik">
-        <di:waypoint x="2870" y="560" />
-        <di:waypoint x="2930" y="560" />
-        <di:waypoint x="2930" y="770" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2933" y="643" width="54" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_0cmmyvv_di" bpmnElement="SequenceFlow_0cmmyvv">
-        <di:waypoint x="2958" y="400" />
-        <di:waypoint x="2958" y="445" />
-        <di:waypoint x="2720" y="445" />
-        <di:waypoint x="2720" y="520" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1scm3ub_di" bpmnElement="Flow_1scm3ub">
-        <di:waypoint x="880" y="293" />
-        <di:waypoint x="880" y="380" />
-        <di:waypoint x="945" y="380" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="889" y="334" width="12" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_10tw9l0_di" bpmnElement="Flow_10tw9l0">
-        <di:waypoint x="905" y="268" />
-        <di:waypoint x="1743" y="268" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1315" y="250" width="23" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1xa0u93_di" bpmnElement="Flow_1xa0u93">
-        <di:waypoint x="820" y="268" />
-        <di:waypoint x="855" y="268" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_13o42g1_di" bpmnElement="Flow_13o42g1">
-        <di:waypoint x="560" y="268" />
         <di:waypoint x="590" y="268" />
+        <di:waypoint x="660" y="268" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1qjobkf_di" bpmnElement="Flow_1qjobkf">
         <di:waypoint x="432" y="268" />
-        <di:waypoint x="460" y="268" />
+        <di:waypoint x="490" y="268" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1g3gfo6_di" bpmnElement="SequenceFlow_1g3gfo6">
-        <di:waypoint x="690" y="268" />
-        <di:waypoint x="720" y="268" />
+        <di:waypoint x="760" y="268" />
+        <di:waypoint x="830" y="268" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1585.5" y="107" width="0" height="12" />
         </bpmndi:BPMNLabel>
@@ -474,9 +210,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0env68s_di" bpmnElement="SequenceFlow_0env68s">
-        <di:waypoint x="2565" y="650" />
-        <di:waypoint x="412" y="650" />
-        <di:waypoint x="412" y="308" />
+        <di:waypoint x="1200" y="640" />
+        <di:waypoint x="382" y="640" />
+        <di:waypoint x="382" y="310" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="246" y="250" width="36" height="36" />
@@ -487,116 +223,53 @@
       <bpmndi:BPMNShape id="UserTask_0ds5skw_di" bpmnElement="downloadsAnbieten">
         <dc:Bounds x="332" y="228" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_14etfl9_di" bpmnElement="universitaetAuswaehlen">
-        <dc:Bounds x="460" y="228" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_05xny7a_di" bpmnElement="goOutUebergeben">
+        <dc:Bounds x="1628" y="770" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_1fwkyh9_di" bpmnElement="datenEingeben">
-        <dc:Bounds x="590" y="228" width="100" height="80" />
+      <bpmndi:BPMNShape id="UserTask_16m5rie_di" bpmnElement="abgelehnt">
+        <dc:Bounds x="1940" y="849" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_138etgs_di" bpmnElement="datenEingebenUnt">
-        <dc:Bounds x="720" y="228" width="100" height="80" />
+      <bpmndi:BPMNShape id="UserTask_1yss45q_di" bpmnElement="abgeschlossen">
+        <dc:Bounds x="1940" y="940" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1fcalg0_di" bpmnElement="ExclusiveGateway_CostaRicaUni" isMarkerVisible="true">
-        <dc:Bounds x="855" y="243" width="50" height="50" />
+      <bpmndi:BPMNShape id="EndEvent_18fm4ss_di" bpmnElement="EndEvent_false">
+        <dc:Bounds x="2104" y="871" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="853" y="219" width="54" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_179nizr_di" bpmnElement="ExclusiveGateway_SpanischMutter" isMarkerVisible="true">
-        <dc:Bounds x="945" y="355" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="931" y="317.5" width="77" height="27" />
+          <dc:Bounds x="2085" y="914" width="74" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_0b01b6y_di" bpmnElement="EndEvent_true">
-        <dc:Bounds x="3356" y="962" width="36" height="36" />
+        <dc:Bounds x="2104" y="962" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="3337" y="1008" width="74" height="40" />
+          <dc:Bounds x="2085" y="1008" width="74" height="40" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_18fm4ss_di" bpmnElement="EndEvent_false">
-        <dc:Bounds x="3356" y="871" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="3337" y="914" width="74" height="40" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_1yss45q_di" bpmnElement="abgeschlossen">
-        <dc:Bounds x="3192" y="940" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_16m5rie_di" bpmnElement="abgelehnt">
-        <dc:Bounds x="3192" y="849" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_12abxr2_di" bpmnElement="datenValidierenSGL">
-        <dc:Bounds x="2670" y="520" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_1dolwiq_di" bpmnElement="ExclusiveGateway_1dolwiq" isMarkerVisible="true">
-        <dc:Bounds x="2820" y="535" width="50" height="50" />
+        <dc:Bounds x="1568" y="535" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="2857" y="576" width="66" height="40" />
+          <dc:Bounds x="1593" y="576" width="90" height="27" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1i3uw8o_di" bpmnElement="Gateway_1i3uw8o" isMarkerVisible="true">
-        <dc:Bounds x="1515" y="355" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1512" y="327" width="56" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0i32dnj_di" bpmnElement="spanischNotePruefen">
-        <dc:Bounds x="1070" y="340" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_0gik51m_di" bpmnElement="Gateway_0gik51m" isMarkerVisible="true">
-        <dc:Bounds x="1215" y="355" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1199" y="327" width="84" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ExclusiveGateway_1prf2rl_di" bpmnElement="ExclusiveGateway_EnglischStart" isMarkerVisible="true">
-        <dc:Bounds x="2018" y="243" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2003" y="205" width="80" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0yw3zji_di" bpmnElement="englischNotePruefen">
-        <dc:Bounds x="1856" y="228" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ExclusiveGateway_175drvz_di" bpmnElement="ExclusiveGateway_EnglischMutter" isMarkerVisible="true">
-        <dc:Bounds x="1743" y="243" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1730" y="206" width="77" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="ExclusiveGateway_0uvn9zu_di" bpmnElement="ExclusiveGateway_EnglischEnd" isMarkerVisible="true">
-        <dc:Bounds x="2181" y="335" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="2673" y="176" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0b7eb4e_di" bpmnElement="daadHochladen">
-        <dc:Bounds x="2156" y="228" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_0tv0gv6_di" bpmnElement="zustimmungHochladen">
-        <dc:Bounds x="2284" y="319" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_08zndvo_di" bpmnElement="dualisHochladen">
-        <dc:Bounds x="2451" y="320" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_1xluwsi_di" bpmnElement="motivationHochladen">
-        <dc:Bounds x="2602" y="320" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_03wdbk0_di" bpmnElement="abiturHochladen">
-        <dc:Bounds x="2757" y="320" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_0dqmp1o_di" bpmnElement="datenPruefen">
-        <dc:Bounds x="2908" y="320" width="100" height="80" />
+        <dc:Bounds x="1200" y="228" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0422r2f_di" bpmnElement="Activity_0kzd76q">
-        <dc:Bounds x="1340" y="340" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_14etfl9_di" bpmnElement="universitaetAuswaehlen">
+        <dc:Bounds x="490" y="228" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1fwkyh9_di" bpmnElement="datenEingeben">
+        <dc:Bounds x="660" y="228" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_138etgs_di" bpmnElement="datenEingebenUnt">
+        <dc:Bounds x="830" y="228" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_08zndvo_di" bpmnElement="dualisHochladen">
+        <dc:Bounds x="1020" y="228" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_12abxr2_di" bpmnElement="datenValidierenSGL">
+        <dc:Bounds x="1418" y="520" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SendTask_026l78y_di" bpmnElement="studentBenachrichtigenSGL">
-        <dc:Bounds x="2565" y="610" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_05xny7a_di" bpmnElement="goOutUebergeben">
-        <dc:Bounds x="2880" y="770" width="100" height="80" />
+        <dc:Bounds x="1200" y="600" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

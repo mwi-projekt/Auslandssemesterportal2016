@@ -15,8 +15,16 @@ import java.util.Map;
 
 import static dhbw.mwi.Auslandsemesterportal2016.enums.TestEnum.*;
 
+/**
+ * Diese Klasse wird von den Unit-Test angesprochen, um Prozesse in einen bestimmten Status zu bringen (Task)
+ * Es gibt folgende UserTasks:
+ * downloadsAnbieten, universitaetAuswaehlen, datenEingeben, datenEingebenUnt, dualisHochladen, datenPruefen,
+ * datenValidierenSGL, abgelehnt, abgeschlossen
+ *
+ * und folgende automatisierte Tasks:
+ * goOutUebergeben, studentBenachrichtigenSGL
+ */
 public class CamundaHelper {
-
 
     private final RuntimeService runtimeService;
     private final TaskService taskService;
@@ -26,16 +34,29 @@ public class CamundaHelper {
         taskService = processEngine.getTaskService();
     }
 
+    /**
+     * Prozess findet sich im Status "downloadsAnbieten"
+     * @param model Name des BPMN-Modells
+     * @return instanceId
+     */
     public String startProcess(String model) {
         return runtimeService.startProcessInstanceByKey(model).getId();
     }
 
+    /**
+     * Prozess befindet sich im Status "downloadsAnbieten"
+     * @param instanceId
+     */
     public void processUntilUniversitaetAuswaehlen(String instanceId) {
         setVariables(instanceId);
         updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
     }
 
-    public void processUntilDaadHochladen(String instanceId) throws FileNotFoundException {
+    /**
+     * Prozess befindet sich im Status "datenPruefen" und es wurde ein Formular hochgeladen
+     * @param instanceId
+     */
+    public void processHasDualisDocument(String instanceId) throws FileNotFoundException {
         processUntilUniversitaetAuswaehlen(instanceId);
         for (int i = 0; i<4; i++) {
             updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
@@ -47,39 +68,45 @@ public class CamundaHelper {
         System.out.println(runtimeService.getVariable(instanceId, "daadHochladen"));
     }
 
+    /**
+     * Prozess befindet sich im Status "datenPruefen"
+     * @param instanceId
+     */
     public void processUntilDatenPruefen(String instanceId) {
         processUntilUniversitaetAuswaehlen(instanceId);
-        for (int i=0; i<9; i++) {
+        for (int i=0; i<4; i++) {
             updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
         }
     }
 
+    /**
+     * Prozess befindet sich im Status "datenValidierenSGL"
+     * @param instanceId
+     */
     public void processUntilDatenValidierenSGL(String instanceId) {
         processUntilDatenPruefen(instanceId);
         updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
     }
 
+    /**
+     * Prozess wird zurückgesetzt und befindet sich im Status "downloadsAnbieten"
+     * @param instanceId
+     */
     public void processUntilUeberarbeiten(String instanceId) {
         processUntilDatenValidierenSGL(instanceId);
         updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONEDITSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
     }
 
+    /**
+     * Prozess befindet sich im Status "abgelehnt"
+     * @param instanceId
+     */
     public void processUntilAblehnen(String instanceId) {
         processUntilDatenValidierenSGL(instanceId);
         updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONREJECTEDSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
     }
 
-    public void processUntilValidierenAAA(String instanceId) {
-        processUntilDatenValidierenSGL(instanceId);
-        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
-    }
-
-    public void processUntilAbschliessen(String instanceId) {
-        processUntilValidierenAAA(instanceId);
-        updateInstance(instanceId, TESTKEYVALIDATESTRING.toString(), TESTVALUEVALIDATIONSTRING.toString(), TESTTYPEVALIDATIONSTRING.toString());
-    }
-
-    public void processUntilSendToGoOut(String instanceId) {
+    public void prepareProcessForTestGoOut(String instanceId) {
         setVariables(instanceId);
         Map<String, Object> map = new HashMap<>();
         // relevant für go out
@@ -87,8 +114,12 @@ public class CamundaHelper {
         map.put("uni2", "South-Eastern Finland University of Applied Sciences (Finnland)");
         map.put("uni3", "Abertay University of Dundee (Schottland)");
         map.put("bewGeburtsdatum", "01.01.2000");
+        map.put("bewStudiengang", TESTSTUDIENGANG.toString());
+        map.put("bewStudienrichtung", TESTSTUDIENGANGSRICHTUNG.toString());
         map.put("bewSemester", "2. Semester");
+        map.put("untEinwilligung", true);
         map.put("bewErfahrungsberichtZustimmung", true);
+        map.put("bewBenachteiligung", "In meiner Familie hat bisher niemand studiert und ich beziehe Bafög.");
         //relevant für Camunda-Prozess
         map.put("gdprCompliance", Boolean.TRUE);
         map.put("zeitraum", "Frühlings-/Sommersemester 2023");
@@ -97,7 +128,6 @@ public class CamundaHelper {
         map.put("bewPLZ", 12345);
         map.put("bewOrt", "Teststadt");
         map.put("bewLand", "Deutschland");
-        map.put("bewStudiengang", TESTSTUDIENGANG.toString());
         map.put("muttersprache", "");
         map.put("bewErasmus", "nein");
         map.put("bewLA", "nein");
@@ -126,6 +156,9 @@ public class CamundaHelper {
         runtimeService.setVariable(instanceId, "bewKurs", TESTKURS.toString());
         runtimeService.setVariable(instanceId, "prioritaet", 1);
         runtimeService.setVariable(instanceId, "uni", "USA");
+        runtimeService.setVariable(instanceId, "bewErfahrungsberichtZustimmung", true);
+        runtimeService.setVariable(instanceId, "bewBenachteiligung", "In meiner Familie hat bisher niemand studiert und ich beziehe Bafög.");
+        runtimeService.setVariable(instanceId, "bewStudienrichtung", TESTSTUDIENGANGSRICHTUNG.toString());
         runtimeService.setVariable(instanceId, "uploadformular", "anyData");
     }
 

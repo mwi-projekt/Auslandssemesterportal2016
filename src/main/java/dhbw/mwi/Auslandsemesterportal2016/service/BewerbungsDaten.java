@@ -11,12 +11,14 @@ public class BewerbungsDaten {
     private String geburtsdatum;
     private String email;
     private String studiengang;
+    private String studiengangsrichtung;
     private final String studiengangsleitung = "Prof. Dr. Thomas Freytag";
     private String aktuellesSemester;
     private String uniPrio1;
     private String uniPrio2;
     private String uniPrio3;
-    private final boolean einwilligungUnternehmen = true;
+    private boolean einwilligungUnternehmen;
     private final boolean einwilligungStudiengangsleiter = true;
+    private String benachteiligung;
     private boolean einverstaendnisBericht;
 }

@@ -1,8 +1,8 @@
 import $ from "jquery";
 import _,{baseUrl} from "../config.js";
-require( 'datatables.net' )(window, $);
-require( 'datatables.net-bs4' )(window, $);
-require( 'datatables.net-buttons' )(window, $);
+import 'datatables.net';
+import 'datatables.net-bs4';
+import 'datatables.net-buttons';
 require("jquery-validation")($);
 require("jquery-validation/dist/localization/messages_de.min");
 import Swal from "sweetalert2";
@@ -35,6 +35,7 @@ $(document).ready(function () {
 
     let currentEmail;
     let isEdit = false;
+
 
     // Erstelle die DataTable
     let myTable = $('#example').DataTable({
@@ -106,37 +107,77 @@ $(document).ready(function () {
         isEdit = true;
     });
 
+$.validator.addMethod("sonderzeichencheck", function (value) {
+     if(/[!@#$%^&*()_=\[\]{};:\\|,.<>\/?+-]/.test(value) == true){
+        return false
+     } else{
+        return true
+     }
+}, );
+
     // Submit-Button
     $("#myForm").submit(function(e){
         e.preventDefault();
     }).validate({
                rules: {
-                   vorname: "required",
-                   nachname: "required",
+                   vorname: {
+                       required: true,
+                       sonderzeichencheck: true
+                    },
+                   nachname: {
+                       required: true,
+                       sonderzeichencheck: true
+                       },
                    email: {
                        required: true,
                        email: true
                    },
-                   studiengang: "required",
-                   kurs: "required",
-                   standort: "required"
+                   studiengan: {
+                       required: true,
+                       sonderzeichencheck: true
+                   },
+                   kurs: {
+                       required: true,
+                       sonderzeichencheck: true
+                   },
+                   standort: {
+                       required: true,
+                       sonderzeichencheck: true
+                   },
                },
                messages: {
-                   vorname: "Bitte geben Sie ihren Vornamen ein",
-                   nachname: "Bitte geben Sie ihren Nachnamen ein",
+                   vorname: {
+                       required: "Bitte geben Sie ihren Vornamen ein",
+                       sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+                   },
+                   nachname: {
+                        required: "Bitte geben Sie ihren Nachnamen ein",
+                        sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+                   },
+
                    email: "Bitte geben Sie ihre E-Mail ein",
-                   studiengang: "Bitte geben Sie ihren Studiengang ein",
-                   kurs: "Bitte geben sie ihren Kurs ein",
-                   standort: "Bitte geben sie ihren Standort ein"
+                   studiengang: {
+                         required: "Bitte geben Sie ihren Studiengang ein",
+                         sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+                   },
+                   kurs: {
+                         required: "Bitte geben sie ihren Kurs ein",
+                         sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+                   },
+                   standort: {
+                         required: "Bitte geben sie ihren Standort ein",
+                         sonderzeichencheck: "Die Eingabe enthält unerlaubte Sonderzeichen"
+                   }
                },
                submitHandler: function () {
-                   var vorname = inputVorname.val();
-                   var nachname = inputNachname.val();
-                   var email = inputEmail.val();
-                   var studiengang = inputStudiengang.val();
-                   var kurs = inputKurs.val();
-                   var standort = inputStandort.val();
-                   var oldMail = "0";
+
+                 var vorname = inputVorname.val();
+                 var nachname = inputNachname.val();
+                 var email = inputEmail.val();
+                 var studiengang = inputStudiengang.val();
+                 var kurs = inputKurs.val();
+                 var standort = inputStandort.val();
+                 var oldMail = "0";
 
         if (isEdit) {
                if (currentEmail != $('#email').val()) {

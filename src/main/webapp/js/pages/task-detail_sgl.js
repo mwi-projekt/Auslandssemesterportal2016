@@ -162,7 +162,7 @@ $(document).ready(function () {
                                 instance_id: instanceID,
                                 key: 'validierungErfolgreich|mailText',
                                 value: validateString + '|' + grund,
-                                type: 'boolean|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
+                                type: 'text|text'  //bei einem Fehler ersteres evtl. wieder zu boolean umändern.
                             },
                             success: function () {
                                 Swal.fire({
@@ -280,8 +280,10 @@ function parse() {
                             visibleStepName = "Partnerunternehmen";
                         } else if (stepName === "Task_1jq3nab") {
                             visibleStepName = "Semesteranschrift";
-                        } else if (stepName === "englischNotePruefen") {
-                            visibleStepName = "Notenpunkte im Abitur";
+                        // } else if (stepName === "englischNotePruefen") {
+                        //     visibleStepName = "Notenpunkte im Abitur";
+                        } else if (stepName === 'universitaetAuswaehlen') {
+                          visibleStepName = "Universität Prioritäten";
                         } else {
                             visibleStepName = "Sonstige Angaben";
                         }

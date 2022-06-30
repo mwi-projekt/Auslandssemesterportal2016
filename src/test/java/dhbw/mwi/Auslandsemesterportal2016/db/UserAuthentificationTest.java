@@ -1,4 +1,4 @@
-package dhbw.mwi.Auslandsemesterportal2016.test.db;
+package dhbw.mwi.Auslandsemesterportal2016.db;
 
 import dhbw.mwi.Auslandsemesterportal2016.db.SQLQueries;
 import dhbw.mwi.Auslandsemesterportal2016.db.User;
@@ -121,5 +121,10 @@ class UserAuthentificationTest {
         boolean isTestUser = UserAuthentification.isTestUser(cookies);
 
         assertFalse(isTestUser);
+    }
+
+    @Test
+    void isTestuserByEmail() {
+        assertTrue(UserAuthentification.isTestUser("test@student.dhbw-karlsruhe.de"));
     }
 }

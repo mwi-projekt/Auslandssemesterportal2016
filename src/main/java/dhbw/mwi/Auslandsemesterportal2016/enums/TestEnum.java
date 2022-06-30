@@ -1,8 +1,9 @@
 package dhbw.mwi.Auslandsemesterportal2016.enums;
 
 public enum TestEnum {
-    TESTEMAIL("testusermwi@dhbw.de"), TESTMATRIKELNUMMER("1234567"), TESTROLLESTRING("Studierender"), TESTROLLEINT("1"),
-    TESTPASSWORT("Test1234"), TESTSTUDIENGANG("Wirtschaftsinformatik"), TESTKURS("WWI18B1"), TESTTELNR("07234512345"),
+    TESTEMAIL("test@student.dhbw-karlsruhe.de"), TESTMATRIKELNUMMER("1234567"), TESTROLLESTRING("Studierender"), TESTROLLEINT("1"),
+    TESTPASSWORT("Test1234"), TESTSTUDIENGANG("Wirtschaftsinformatik"), TESTSTUDIENGANGSRICHTUNG("Software Engineering"),
+    TESTKURS("WWI18B1"), TESTTELNR("07234512345"),
     TESTMOBILNR("014773698521"), TESTSTANDORT("Karlsruhe"), TESTVORNAME("Test"), TESTNACHNAME("Admin"),
     TESTGEBURTSDATUM("01.01.2000"),
     TESTSESSIONID("sessionIDs1e5f2ge8gvs694g8vedsg"), TESTINSTANCEID("instanceIDs1e5f2ge8gvs694g8vedsg"),
@@ -16,7 +17,7 @@ public enum TestEnum {
     TESTVALUEVALIDATIONEDITSTRING("edit|das ist der Inhalt der Mail"),
     TESTTYPESTRING(
             "boolean|text|text|text|text|text|text|text|text|number|text|text|text|text|text|text|number|email|text|text|text|text|text|text|number|text|text|text|email|text"),
-    TESTTYPEVALIDATIONSTRING("boolean|text");
+    TESTTYPEVALIDATIONSTRING("text|text");
 
     private final String text;
 

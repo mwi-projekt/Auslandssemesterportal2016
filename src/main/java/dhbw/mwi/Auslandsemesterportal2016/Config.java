@@ -16,7 +16,7 @@ public class Config {
 	
 	public static final String MAIL_HOST = "smtp.gmail.com";
 	public static final String MAIL_USER = "mwiausland@gmail.com";
-	public static final String MAIL_PASS = "MWIAusland1";
+	public static final String MAIL_PASS = "xrsozqdpanvztqmt";
 	
 	public static final String UPLOAD_DIR = "/camunda/upload";
 	public static final String UPLOAD_URL = URL + "/files/";

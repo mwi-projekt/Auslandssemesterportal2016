@@ -66,5 +66,11 @@ services:
       - mwi
       - phpmyadmin
 
+  go-out:
+    build: ./docker/go-out-test
+    restart: always
+    ports:
+      - "8085:8080"
+
 networks:
   mwi-network:
