@@ -58,14 +58,13 @@ public class CamundaHelper {
      */
     public void processHasDualisDocument(String instanceId) throws FileNotFoundException {
         processUntilUniversitaetAuswaehlen(instanceId);
-        for (int i = 0; i<4; i++) {
+        for (int i = 0; i<3; i++) {
             updateInstance(instanceId, TESTKEYSTRING.toString(), TESTVALSTRING.toString(), TESTTYPESTRING.toString());
         }
         Path path = Paths.get("src", "test", "resources");
-        FileInputStream fileInputStream = new FileInputStream(path + "/DAAD_Formular_Englisch.pdf");
-        FileValue fileValue = Variables.fileValue("daadHochladen.pdf").file(fileInputStream).create();
-        runtimeService.setVariable(instanceId, "daadHochladen", fileValue);
-        System.out.println(runtimeService.getVariable(instanceId, "daadHochladen"));
+        FileInputStream fileInputStream = new FileInputStream(path + "/Dualis_Auszug.pdf");
+        FileValue fileValue = Variables.fileValue("dualisHochladen.pdf").file(fileInputStream).create();
+        runtimeService.setVariable(instanceId, "dualisHochladen", fileValue);
     }
 
     /**

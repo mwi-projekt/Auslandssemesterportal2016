@@ -16,8 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static dhbw.mwi.Auslandsemesterportal2016.enums.ErrorEnum.PARAMMISSING;
-import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
+import static javax.servlet.http.HttpServletResponse.*;
 
 @WebServlet(name = "GetProcessFileServlet", urlPatterns = { "/getProcessFile" })
 public class GetProcessFileServlet extends HttpServlet {
@@ -33,9 +32,8 @@ public class GetProcessFileServlet extends HttpServlet {
 			return;
 		}
 
-		ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-		RuntimeService runtime = engine.getRuntimeService();
-		FileValue typedFileValue = (FileValue) runtime.getVariableTyped(instanceID, key);
+		RuntimeService runtime = ProcessEngines.getDefaultProcessEngine().getRuntimeService();
+		FileValue typedFileValue = runtime.getVariableTyped(instanceID, key);
 		if (typedFileValue != null) {
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
@@ -59,14 +57,14 @@ public class GetProcessFileServlet extends HttpServlet {
 				return;
 			}
 
-			ProcessEngine engine = ProcessEngines.getDefaultProcessEngine();
-			RuntimeService runtime = engine.getRuntimeService();
-			FileValue typedFileValue = (FileValue) runtime.getVariableTyped(instanceID, key);
-			InputStream is = null;
+			RuntimeService runtime = ProcessEngines.getDefaultProcessEngine().getRuntimeService();
+			FileValue typedFileValue = runtime.getVariableTyped(instanceID, key);
+			InputStream is;
 			try {
 				is = typedFileValue.getValue();
 			} catch (NullPointerException e) {
 				response.sendError(SC_NOT_FOUND);
+				return;
 			}
 
 			try {
@@ -80,7 +78,7 @@ public class GetProcessFileServlet extends HttpServlet {
 				toClient.flush();
 
 			} catch (Exception e) {
-
+				response.sendError(SC_INTERNAL_SERVER_ERROR);
 			}
 		}
 	}

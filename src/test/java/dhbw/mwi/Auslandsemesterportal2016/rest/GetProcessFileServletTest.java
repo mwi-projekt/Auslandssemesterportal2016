@@ -6,7 +6,6 @@ import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.extension.junit5.test.ProcessEngineExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockedStatic;
@@ -64,12 +63,13 @@ class GetProcessFileServletTest {
         verify(response, times(1)).sendError(SC_BAD_REQUEST, PARAMMISSING.toString());
     }
 
-    @Disabled("TODO")
     @Test
     void doHeadFileExists() throws IOException {
         String instanceId = camundaHelper.startProcess("standard");
         camundaHelper.processHasDualisDocument(instanceId);
+
         when(request.getParameter("instance_id")).thenReturn(instanceId);
+        when(request.getParameter("key")).thenReturn("dualisHochladen");
 
         new GetProcessFileServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -137,12 +137,13 @@ class GetProcessFileServletTest {
         verify(response, times(1)).sendError(SC_NOT_FOUND);
     }
 
-    @Disabled("TODO")
     @Test
     void doGetFile() throws IOException {
         String instanceId = camundaHelper.startProcess("standard");
         camundaHelper.processHasDualisDocument(instanceId);
+
         when(request.getParameter("instance_id")).thenReturn(instanceId);
+        when(request.getParameter("key")).thenReturn("dualisHochladen");
 
         new GetProcessFileServlet() {
             public void callProtectedMethod(HttpServletRequest request, HttpServletResponse response)
@@ -151,7 +152,8 @@ class GetProcessFileServletTest {
             }
         }.callProtectedMethod(request, response);
 
-        verify(response, times(1)).setContentType(anyString());
-        verify(outputStream, times(1)).write(any(), eq(0), anyInt());
+        verify(response, times(1)).setContentType(null);
+
+        verify(outputStream, times(14)).write(any(), eq(0), anyInt());
     }
 }
