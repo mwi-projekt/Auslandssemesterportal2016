@@ -47,39 +47,39 @@ public class GetProcessFileServlet extends HttpServlet {
 
 		if (rolle < 1) {
 			response.sendError(401);
-		} else {
-			ServletOutputStream toClient = response.getOutputStream();
+			return;
+		}
+		ServletOutputStream toClient = response.getOutputStream();
 
-			String instanceID = request.getParameter("instance_id");
-			String key = request.getParameter("key");
-			if (instanceID == null || key == null) {
-				response.sendError(SC_BAD_REQUEST, PARAMMISSING.toString());
-				return;
+		String instanceID = request.getParameter("instance_id");
+		String key = request.getParameter("key");
+		if (instanceID == null || key == null) {
+			response.sendError(SC_BAD_REQUEST, PARAMMISSING.toString());
+			return;
+		}
+
+		RuntimeService runtime = ProcessEngines.getDefaultProcessEngine().getRuntimeService();
+		FileValue typedFileValue = runtime.getVariableTyped(instanceID, key);
+		InputStream is;
+		try {
+			is = typedFileValue.getValue();
+		} catch (NullPointerException e) {
+			response.sendError(SC_NOT_FOUND);
+			return;
+		}
+
+		try {
+			response.setContentType(typedFileValue.getMimeType());
+			byte[] buf = new byte[1024];
+
+			for (int nChunk = is.read(buf); nChunk != -1; nChunk = is.read(buf)) {
+				toClient.write(buf, 0, nChunk);
 			}
 
-			RuntimeService runtime = ProcessEngines.getDefaultProcessEngine().getRuntimeService();
-			FileValue typedFileValue = runtime.getVariableTyped(instanceID, key);
-			InputStream is;
-			try {
-				is = typedFileValue.getValue();
-			} catch (NullPointerException e) {
-				response.sendError(SC_NOT_FOUND);
-				return;
-			}
+			toClient.flush();
 
-			try {
-				response.setContentType(typedFileValue.getMimeType());
-				byte[] buf = new byte[1024];
-
-				for (int nChunk = is.read(buf); nChunk != -1; nChunk = is.read(buf)) {
-					toClient.write(buf, 0, nChunk);
-				}
-
-				toClient.flush();
-
-			} catch (Exception e) {
-				response.sendError(SC_INTERNAL_SERVER_ERROR);
-			}
+		} catch (Exception e) {
+			response.sendError(SC_INTERNAL_SERVER_ERROR);
 		}
 	}
 }

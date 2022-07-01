@@ -13,6 +13,8 @@ public class FileCreator {
         return new File(Config.UPLOAD_DIR);
     }
 
+    public static File getFileInUploadFolder(String fileName) {return new File(Config.UPLOAD_DIR + "/"  + fileName);}
+
     public static File getBPMNFile(String model, ClassLoader classLoader) {
         return new File(classLoader.getResource(model + ".bpmn").getFile());
     }
