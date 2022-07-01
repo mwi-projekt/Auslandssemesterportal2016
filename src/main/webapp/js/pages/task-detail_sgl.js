@@ -106,7 +106,7 @@ $(document).ready(function () {
                         });
                     },
                     error: function () {
-                        Swal.fire("Fehler", "Ein Fehler ist aufgetreten", "error");
+                        Swal.fire("Nichtverfügbarkeit der Schnittstelle", "Derzeit ist die GoOut-Schnittstelle nicht verfügbar und die Bewerbungsdaten konnten nicht übermittelt werden. Bitte versuchen Sie es in 30 Minuten erneut.", "error");
                     }
                 });
             });
