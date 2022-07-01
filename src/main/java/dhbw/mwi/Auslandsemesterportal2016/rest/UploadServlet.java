@@ -23,63 +23,60 @@ import dhbw.mwi.Auslandsemesterportal2016.db.UserAuthentification;
 @MultipartConfig(maxFileSize = 16177215) // 16MB
 public class UploadServlet extends HttpServlet {
 
-	ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+	final ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Util.addResponseHeaders(request,response);
 
 		int rolle = UserAuthentification.isUserAuthentifiedByCookie(request);
-
 		if (rolle < 1) {
 			response.sendError(401);
-		} else {
-			String action = request.getParameter("action");
-			String id = request.getParameter("instance");
-			PrintWriter out = response.getWriter();
-			Part filePart = null;
+			return;
+		}
 
-			System.out.println("File-Upload Servlet");
-			if (id.equals("leer")) {
-				out.print("Error: can not find process id");
-				out.flush();
+		String action = request.getParameter("action");
+		String id = request.getParameter("instance");
+		PrintWriter out = response.getWriter();
+		Part filePart;
+
+		if (id.equals("leer")) {
+			out.print("Error: can not find process id");
+			out.flush();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			out.close();
+			return;
+		}
+
+		if (action == null || action.equals("")) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			out.print("Error: wrong action");
+			out.flush();
+			out.close();
+			return;
+		}
+
+		try {
+			filePart = request.getPart("file");
+
+			if (filePart == null) {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				out.close();
+				out.print("Error: wrong file - File is null");
 				return;
 			}
 
-			if (action == null || action.equals("")) {
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				out.print("Error: wrong action");
-				out.flush();
-				out.close();
-				return;
-			}
+			FileValue typedFileValue = Variables.fileValue(action + ".pdf").file(filePart.getInputStream())
+					.create();
+			processEngine.getRuntimeService().setVariable(id, action, typedFileValue);
+			out.print("jop");
 
-			try {
-				filePart = request.getPart("file");
-
-				if (filePart != null) {
-					FileValue typedFileValue = Variables.fileValue(action + ".pdf").file(filePart.getInputStream())
-							.create();
-					processEngine.getRuntimeService().setVariable(id, action, typedFileValue);
-					out.print("jop");
-					out.flush();
-					out.close();
-				} else {
-					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-					out.print("Error: wrong file - File is null");
-					out.flush();
-					out.close();
-				}
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				out.print("Error: wrong file - Exception");
-				out.flush();
-				out.close();
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			out.print("Error: wrong file - Exception");
+		} finally {
+			out.flush();
+			out.close();
 		}
 	}
 
