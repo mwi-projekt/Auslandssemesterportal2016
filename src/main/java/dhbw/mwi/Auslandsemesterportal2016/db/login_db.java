@@ -1,11 +1,11 @@
 package dhbw.mwi.Auslandsemesterportal2016.db;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Map;
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.ProcessEngines;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.delegate.DelegateTask;
+import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.engine.delegate.TaskListener;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -16,16 +16,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngines;
-import org.camunda.bpm.engine.delegate.DelegateExecution;
-import org.camunda.bpm.engine.delegate.DelegateTask;
-import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.camunda.bpm.engine.delegate.TaskListener;
-
-import dhbw.mwi.Auslandsemesterportal2016.Config;
-import dhbw.mwi.Auslandsemesterportal2016.enums.MessageEnum;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Map;
 
 /**
  * Servlet implementation class prozess_db
@@ -338,42 +334,43 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 	}
 
 	/**
-	 * TASK LISTENER ASSIGNMENT: Methode dient zum Benachrichtigen des
-	 * Auslandsmitarbeiter
+	 * TASK LISTENER ASSIGNMENT: Methode dient zum Benachrichtigen des Auslandsamtmitarbeiters, dass der SGL den
+	 * Validierungsschritt abgeschlossen hat.
+	 * TODO Task Listener entfernen? Validierung durch IO erfolgt nicht mehr im Portal
 	 */
 	@Override
 	public void notify(DelegateTask delegateTask) {
 		// Automatic Mail Server Properties
-
-		try {
-			// TODO: Automatisch den zuständigen AAMitarbeiter ermitteln
-			Message message = Util.getEmailMessage("mwiausland@gmail.com", MessageEnum.AAAREGISTR.toString());
-
-			message.setContent("Sehr geehrte Frau Dreischer," + "\n" + "\n"
-					+ "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n"
-					+ "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n"
-					+ Config.CAMUNDA_URL + "/app/tasklist/default/#/?task=" + delegateTask.getId(),
-					"text/plain; charset=UTF-8");
+//
+//		try {
+//			Message message = Util.getEmailMessage("mwiausland@gmail.com", MessageEnum.AAAREGISTR.toString());
+//
+//			message.setContent("Sehr geehrte Frau Dreischer," + "\n" + "\n"
+//					+ "ein weiterer Student hat das Bewerbungsfomular für ein Auslandssemester abgeschlossen." + "\n"
+//					+ "Sie können seine Daten in der Camunda Tasklist unter folgendem Link nachvollziehen:" + "\n"
+//					+ Config.CAMUNDA_URL + "/app/tasklist/default/#/?task=" + delegateTask.getId(),
+//					"text/plain; charset=UTF-8");
 
 			// Send message
 //			Transport.send(message);
-
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
+//
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//		}
 	}
 
-	// SEND TASK
-	// Methode dient zum Versenden von Email an Student nach
-	// Validierung der getätigten Eingaben
+	/**
+	 * Sendet eine E-Mail an den Studenten, wenn der SGL seine Bewerbung zur Bearbeitung frei gibt
+	 * @param execution Camunda-Instanz, aus der relevante Daten ausgelesen werden können
+	 */
 	@Override
-	public void execute(DelegateExecution execution) throws Exception {
+	public void execute(DelegateExecution execution) {
 		String email = (String) execution.getVariable("bewEmail");
 		String erfolgreich = (String) execution.getVariable("validierungErfolgreich");
 		String mailText = (String) execution.getVariable("mailText");
 
 		try {
-			Message message = null;
+			Message message;
 
 			// Bei erfolgreicher Validierung
 			if ("true".equals(erfolgreich)) {
@@ -381,7 +378,7 @@ public class login_db extends HttpServlet implements TaskListener, JavaDelegate 
 				message.setContent(mailText, "text/plain; charset=UTF-8");
 			}
 			// wenn Validierung fehlgeschlagen
-			else if ("false".equals(erfolgreich)){
+			else {
 				message = Util.getEmailMessage(email, "Bei der Validierung Ihrer Bewerbung ist ein Fehler aufgetreten");
 				message.setContent(mailText, "text/plain; charset=UTF-8");
 			}
