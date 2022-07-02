@@ -294,33 +294,12 @@ public class SQLQueries {
 
     }
 
-    // DO NOT USE IN ANY SERVLET. DO NOT GIVE USERIDs TO PUBLIC
-    // TODO check if needed -> no usages
-//    public static int getUserID(String mail) {
-//        String queryString = "SELECT userID FROM user WHERE email = ?;";
-//        String[] args = new String[] { mail };
-//        String[] types = new String[] { "String" };
-//        ResultSet ergebnis = executeStatement(queryString, args, types);
-//
-//        try {
-//            if (ergebnis.next()) {
-//                return ergebnis.getInt(1);
-//            } else {
-//                return -1;
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return -1;
-//        }
-//
-//    }
-
     // TODO check if signature can be changed to void
-    public static int userLogout(String sessionID) {
+    public static void userLogout(String sessionID) {
         String query_ = "DELETE FROM loginSessions WHERE sessionID = ?";
         String[] params_ = new String[]{sessionID};
         String[] types_ = new String[]{"String"};
-        return executeUpdate(query_, params_, types_);
+        executeUpdate(query_, params_, types_);
     }
 
     public static int userRegister(String vorname, String nachname, String passwort, String salt, int rolle,
@@ -511,7 +490,6 @@ public class SQLQueries {
         String[] types = new String[]{"String"};
         ResultSet result = executeStatement(query, params, types);
         try {
-            // FIXME schmeißt Exception, wenn kein Result
             result.next();
             return result.getInt("max(stepNumber)");
         } catch (Exception e) {

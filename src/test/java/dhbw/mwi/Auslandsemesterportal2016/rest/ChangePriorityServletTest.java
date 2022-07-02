@@ -60,6 +60,7 @@ class ChangePriorityServletTest {
     void tearDown() {
         userAuthentificationMockedStatic.close();
         sqlQueriesMockedStatic.close();
+        processEngine.close();
     }
 
     @Test

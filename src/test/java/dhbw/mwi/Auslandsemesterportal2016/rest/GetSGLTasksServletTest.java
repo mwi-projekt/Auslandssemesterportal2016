@@ -59,6 +59,7 @@ class GetSGLTasksServletTest {
     void tearDown() {
         userAuthentificationMockedStatic.close();
         transport.close();
+        processEngine.close();
     }
 
     @ParameterizedTest

@@ -64,6 +64,7 @@ class UserGetInstanceServletTest {
         writer.close();
         sqlQueriesMockedStatic.close();
         userAuthentificationMockedStatic.close();
+        processEngine.close();
     }
 
     @ParameterizedTest

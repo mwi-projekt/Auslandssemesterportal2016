@@ -71,6 +71,7 @@ class ProcessDeleteServletTest {
         dbMockedStatic.close();
         connection.close();
         statement.close();
+        processEngine.close();
     }
 
     @Test

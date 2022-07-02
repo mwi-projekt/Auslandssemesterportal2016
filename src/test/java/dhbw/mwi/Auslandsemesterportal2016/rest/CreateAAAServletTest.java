@@ -150,7 +150,6 @@ class CreateAAAServletTest {
         when(request.getRequestDispatcher(anyString())).thenThrow(RuntimeException.class);
 
         assertThrows(RuntimeException.class, () -> aaaServlet.doPost(request, response));
-        //TODO check why e.getMessage() is always null
         verify(response, times(1)).sendError(500, ErrorEnum.USERCREATE + "null");
     }
 }

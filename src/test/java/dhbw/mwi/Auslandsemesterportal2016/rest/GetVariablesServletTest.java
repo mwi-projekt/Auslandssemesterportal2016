@@ -54,6 +54,7 @@ class GetVariablesServletTest {
     void tearDown() throws IOException {
         writer.close();
         userAuthentificationMockedStatic.close();
+        processEngine.close();
     }
 
     @Test

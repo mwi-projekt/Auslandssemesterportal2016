@@ -57,6 +57,7 @@ class GetCurrentActivityServletTest {
         writer.close();
         sqlQueriesMockedStatic.close();
         userAuthentificationMockedStatic.close();
+        processEngine.close();
     }
 
     @Test

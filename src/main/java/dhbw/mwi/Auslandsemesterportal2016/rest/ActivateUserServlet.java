@@ -48,7 +48,6 @@ public class ActivateUserServlet extends HttpServlet {
 
 				}
 				if (userId != "_") {
-					// FIXME fehlen hier die '' um userId?
 					String query = "UPDATE user SET verifiziert = 1 WHERE userID=" + userId;
 					int rsupd = stmt.executeUpdate(query);
 

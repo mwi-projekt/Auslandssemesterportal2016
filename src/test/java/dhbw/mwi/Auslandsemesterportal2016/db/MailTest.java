@@ -17,8 +17,5 @@ class MailTest {
         assertEquals(Config.MAIL_HOST, session.getProperty("mail.smtp.host"));
         assertEquals("465", session.getProperty("mail.smtp.port"));
         assertEquals("true", session.getProperty("mail.smtp.ssl.enable"));
-        // FIXME was ist der URLName?
-//        assertEquals(Config.MAIL_USER, session.getPasswordAuthentication(new URLName("")).getUserName());
-//        assertEquals(Config.MAIL_PASS, session.getPasswordAuthentication(new URLName("")).getPassword());
     }
 }

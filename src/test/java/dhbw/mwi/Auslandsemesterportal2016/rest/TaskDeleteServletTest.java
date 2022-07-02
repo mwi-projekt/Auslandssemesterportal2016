@@ -64,6 +64,7 @@ class TaskDeleteServletTest {
         writer.close();
         processServiceMockedStatic.close();
         userAuthentification.close();
+        processEngine.close();
     }
 
     @Test

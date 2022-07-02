@@ -54,6 +54,7 @@ class GetAdminTasksServletTest {
     @AfterEach
     void tearDown() {
         userAuthentificationMockedStatic.close();
+        processEngine.close();
     }
 
     @ParameterizedTest
