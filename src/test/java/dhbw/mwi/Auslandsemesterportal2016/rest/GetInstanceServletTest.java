@@ -63,7 +63,6 @@ class GetInstanceServletTest {
         writer.close();
         userAuthentificationMockedStatic.close();
         sqlQueriesMockedStatic.close();
-        processEngine.close();
     }
 
     @Test

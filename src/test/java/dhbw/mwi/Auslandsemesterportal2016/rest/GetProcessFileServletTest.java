@@ -49,7 +49,6 @@ class GetProcessFileServletTest {
     @AfterEach
     void tearDown() {
         userAuthentification.close();
-        processEngine.close();
     }
 
     @Test

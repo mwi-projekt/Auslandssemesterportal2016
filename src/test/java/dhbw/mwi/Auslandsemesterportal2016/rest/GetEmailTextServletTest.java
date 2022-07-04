@@ -56,7 +56,6 @@ class GetEmailTextServletTest {
     void tearDown() throws IOException {
         userAuthentificationMockedStatic.close();
         writer.close();
-        processEngine.close();
     }
 
     @ParameterizedTest

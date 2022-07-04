@@ -52,7 +52,6 @@ class UpdateInstanceServletTest {
     public void close() throws IOException {
         userAuthentificationMockedStatic.close();
         writer.close();
-        processEngine.close();
     }
 
     @Test
