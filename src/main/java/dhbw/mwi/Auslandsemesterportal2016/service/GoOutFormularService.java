@@ -26,6 +26,8 @@ public class GoOutFormularService implements JavaDelegate {
 
         String vorname = String.valueOf(runtimeService.getVariable(instanceId, "bewVorname"));
         String nachname = String.valueOf(runtimeService.getVariable(instanceId, "bewNachname"));
+        Object untEinwilligung = runtimeService.getVariable(instanceId, "untEinwilligung");
+        Object bewErfahrungsberichtZustimmung = runtimeService.getVariable(instanceId, "bewErfahrungsberichtZustimmung");
 
         return BewerbungsDaten.builder()
                 .name(vorname + " " + nachname)
@@ -37,8 +39,8 @@ public class GoOutFormularService implements JavaDelegate {
                 .uniPrio1(String.valueOf(runtimeService.getVariable(instanceId, "uni1")))
                 .uniPrio2(String.valueOf(runtimeService.getVariable(instanceId, "uni2")))
                 .uniPrio3(String.valueOf(runtimeService.getVariable(instanceId, "uni3")))
-                .einwilligungUnternehmen(Boolean.valueOf((Boolean) runtimeService.getVariable(instanceId, "untEinwilligung")))
-                .einverstaendnisBericht(Boolean.valueOf((Boolean) runtimeService.getVariable(instanceId, "bewErfahrungsberichtZustimmung")))
+                .einwilligungUnternehmen(untEinwilligung != null && Boolean.valueOf((Boolean) untEinwilligung))
+                .einverstaendnisBericht(bewErfahrungsberichtZustimmung != null && Boolean.valueOf((Boolean) bewErfahrungsberichtZustimmung))
                 .benachteiligung(String.valueOf(runtimeService.getVariable(instanceId,"bewBenachteiligung")))
                 .build();
     }
