@@ -60,7 +60,7 @@
     "dropzone": "^5.7.0",
     "jquery": "^3.6.0",
     "jquery-ui-dist": "^1.12.1",
-    "jquery-validation": "^1.19.1",
+    "jquery-validation": "^1.19.5",
     "js": "^0.1.0",
     "jspdf": "^2.5.1",
     "sweetalert2": "^9.6.1",
