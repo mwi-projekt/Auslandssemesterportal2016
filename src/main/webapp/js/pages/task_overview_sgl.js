@@ -121,6 +121,7 @@ function getList() {
             } else {
                 completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th></tr></thead><tbody>' +
                     completed + "</tbody></table>";
+                completed += '<a style="width: 200px;text-align: center;margin: 20px 0;" href="'+ baseUrl +'/sglExport" target="_blank" class="page-link">Exportieren als zip</a>';
             }
 
             if (abgelehnt === "") {
