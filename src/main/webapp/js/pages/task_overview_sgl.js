@@ -67,7 +67,8 @@ function getList() {
                             '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
                             "</td>" +
                             "<td>" + '<button class="btn fas fa-redo" disabled></button' + "</td>" +
-                            "</tr>";
+                            "<td>" +
+                            "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" data-uni=\"" + singleInstance.uni + "\" data-matrikelnummer=\"" + singleInstance.matrikelnummer + "\"></button></td></tr>";
                     } else if (singleInstance.status === 'complete' || singleInstance.status === 'abgeschlossen'|| singleInstance.status === 'goOutUebergeben') {
                         completed = completed +
                             "<tr><td>" +
@@ -84,7 +85,8 @@ function getList() {
                             singleInstance.uni +
                             "</td><td>" +
                             '<button class="btn fas fa-list" title="Details" onclick="location.href=\'task_detail_sgl.html?instance_id=' + singleInstance.id + '&uni=' + singleInstance.uni + '&read=true\'\"> </button>' +
-                            "</td></tr>";
+                            "</td><td>" +
+                            "<button class=\"btn fas fa-trash btn-delete\" title=\"Delete\" data-uni=\"" + singleInstance.uni + "\" data-matrikelnummer=\"" + singleInstance.matrikelnummer + "\"></button></td></tr>";
                     } else if (singleInstance.status === 'abgelehnt') {
                         abgelehnt = abgelehnt +
                             "<tr><td>" +
@@ -113,13 +115,13 @@ function getList() {
             if (edit === "") {
                 edit = "<p>Aktuell gibt es keine Bewerbungen, die zur erneuten Überprüfung durch den Studenten zurückgesendet wurden</p>";
             } else {
-                edit = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Priorität</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Details</th><th>Erinnerung senden</th></tr></thead><tbody>' +
+                edit = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Kurs</th><th>Priorität</th><th>Heimatuniversität</th><th>Partneruniversität</th><th>Details</th><th>Erinnerung senden</th><th>Löschen</th></tr></thead><tbody>' +
                     edit + "</tbody></table>";
             }
             if (completed === "") {
                 completed = "<p>Es gibt noch keine abgeschlossenen Bewerbungen</p>";
             } else {
-                completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th></tr></thead><tbody>' +
+                completed = '<table id="task" class="table table-striped table-bordered"><thead><tr><th>Name</th><th>Vorname</th><th>Heimatuniversität</th><th>Priorität</th><th>Kurs</th><th>Partneruniversität</th><th>Details</th><th>Löschen</th></tr></thead><tbody>' +
                     completed + "</tbody></table>";
                 completed += '<a style="width: 200px;text-align: center;margin: 20px 0;" href="'+ baseUrl +'/sglExport" target="_blank" class="page-link">Exportieren als zip</a>';
             }
